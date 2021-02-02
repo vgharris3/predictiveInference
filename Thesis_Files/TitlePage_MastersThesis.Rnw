@@ -1,0 +1,53 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage{graphicx}
+\usepackage{changepage}
+\usepackage[tmargin=1.5in, lmargin=0.5in, rmargin=0.5in, bmargin=1.5in]{geometry}
+
+\makeatletter
+\newcommand*{\textoverline}[1]{$\overline{\hbox{#1}}\m@th$}
+\makeatother
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+\begin{titlepage}
+	\centering
+%	\includegraphics[width=0.15\textwidth]{example-image-1x1}\par\vspace{1cm}
+	{\scshape\LARGE Predictive Inference\\Tools for Researchers \par}
+	\vspace{1cm}
+	by\par
+	\vspace{1cm}
+	{\Large Voyze G. Harris III\par}
+	\vspace{1cm}
+	%\hrule width 3in \relax
+	%\begin{center}
+	%  \rule[-5mm]{75mm}{0.5mm}
+	%\end{center}
+	\textoverline{  Copyright \copyright \, Voyze G. Harris III 2021  }\\
+	\vspace{1cm}
+	{\Large A Thesis Submitted to the Faculty of the\par}
+	\vspace{1cm}
+	{\scshape\LARGE Statistics and Data Science\\Graduate Interdisciplinary Program\par}
+  \vspace{1cm}
+	{\Large In Partial Fulfillment of the Requirements\par}
+	{\Large For the Degree of\par}
+	\vspace{1cm}
+	{\scshape\LARGE Master of Science\par}
+	\vspace{1cm}
+	{\Large In the Graduate College\par}
+	\vspace{1cm}
+	{\scshape\LARGE The University of Arizona\par}
+	\vspace{1cm}
+	{\Large 2021\par}
+
+
+%	Committee:\par
+%	Dr.~Dean \textsc{Billheimer}\par
+%	Dr.~Edward \textsc{Bedrick}\par
+%	Dr.~Walter \textsc{Piegorsch}
+
+	\vfill
+
+% Bottom of the page
+%	{\large \today\par}
+\end{titlepage}
+\end{document}

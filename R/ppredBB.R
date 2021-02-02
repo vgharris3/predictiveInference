@@ -1,7 +1,7 @@
 #' Title
 #'
-#' dpredBB returns the predictive probability of x future successes out of M trials, given s observed successes out of a sample of size
-#' N, and user input shape parameters for Beta prior on Pr(success)
+#' ppredBB returns the predictive probability of <= x future successes out of M trials, given s observed successes out of a sample of
+#size N, and user input shape parameters for Beta prior on Pr(success)
 #'
 #' @param x vector of integers
 #' @param N number of observed independent binary variables
@@ -9,22 +9,24 @@
 #' @param M number of future observations for which prediction is desired (note x <= M)
 #' @param alpha shape factors for prior Beta distribution on theta
 #' @param beta rate factor for prior Beta distribution on theta
+#' @param lower logical; if TRUE (default), probabilities are P(R<=q) otherwise P(R>q)
 #'
-#' @return Beta-Binomial predictive probability
+#' @return Beta-Binomial cumulative predictive probability
 #' @export
 #'
 #' @examples 1
-dpredBB <- function(x, N, s, M, alpha = 1, beta=1){
+ppredBB = function(x, N, s, M, alpha = 1, beta=1, lower=TRUE){
 
-  #dpredBB returns the predictive probability of x future successes out of M trials, given s observed successes out of a sample of
+  #ppredBB returns the predictive probability of <= x future successes out of M trials, given s observed successes out of a sample of
   #size N, and user input shape parameters for Beta prior on Pr(success)
 
-  #p+pred+BB
+  #p+pred+BB+FF
   #p = cdf (like R distribution functions)
   #pred = prediction
   #BB = BetaBinomial
+  #FF = Future Fraction
 
-  #x is a vector of integers, for which the function will compute P(X=x)
+  #x is a vector of integers, for which the function will compute P(X<=x)
   #N is the number of observed independent binary variables
   #s is the number of observed successes out of N
   #M is the number of future observations for which prediction is desired (note x <= M)
@@ -62,12 +64,19 @@ dpredBB <- function(x, N, s, M, alpha = 1, beta=1){
 
   #r[] is the number of successes in the M future observations
 
-  r = x;
+  #r = 1:max(x);
 
-  numerator = lgamma(M+1) + lgamma(N+alpha+beta) + lgamma(r+s+alpha) + lgamma(M+N-r-s+beta);
-  denominator = lgamma(r+1) + lgamma(M-r+1) + lgamma(alpha+s) + lgamma(N-s+beta) + lgamma(M+N+alpha+beta);
-  f_x = exp(numerator - denominator)
+  #numerator = lgamma(M+1) + lgamma(N+alpha+beta) + lgamma(r+s+alpha) + lgamma(M+N-r-s+beta)
+  #denominator = lgamma(r+1) + lgamma(M-r+1) + lgamma(alpha+s) + lgamma(N-s+beta) + lgamma(M+N+alpha+beta)
+  #f_x2 = exp(numerator - denominator)
 
-  return(f_x)
+  f_x = dpredBB(1:max(x), N, s, M, alpha, beta)
+
+  F_x = cumsum(f_x)
+
+  if(lower){return(F_x[x])}
+  else {return(1 - F_x[x])}
+
+  #return(sum(F_x - F_x2))
 
 }

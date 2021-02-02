@@ -1,2 +1,2 @@
 # predictiveInference
-GitHub repo for development of predictiveInference tools in R
+GitHub repo for development of predictive Inference tools in R
