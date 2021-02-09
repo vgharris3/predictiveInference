@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  2 FEB 2021 09:22
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  9 FEB 2021 09:21
 entering extended mode
-**./Thesis_Outline.tex
-(Thesis_Outline.tex
+**./Thesis.tex
+(Thesis.tex
 LaTeX2e <2020-10-01> patch level 2
 L3 programming layer <2020-12-07> xparse <2020-03-03>
 ("C:\MiKTeX 2.9\tex/latex/base\article.cls"
@@ -824,8 +824,8 @@ LaTeX Font Info:    Trying to load font information for T1+aer on input line 52
 
 ("C:\MiKTeX 2.9\tex/latex/ae\t1aer.fd"
 File: t1aer.fd 1997/11/16 Font definitions for T1/aer.
-) (Thesis_Outline.aux)
-\openout1 = `Thesis_Outline.aux'.
+) (Thesis.aux)
+\openout1 = `Thesis.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 52.
 LaTeX Font Info:    ... okay on input line 52.
@@ -920,10 +920,10 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 52.
 LaTeX Info: Redefining \pageref on input line 52.
 LaTeX Info: Redefining \nameref on input line 52.
-
-(Thesis_Outline.out) (Thesis_Outline.out)
+ (Thesis.out)
+(Thesis.out)
 \@outlinefile=\write5
-\openout5 = `Thesis_Outline.out'.
+\openout5 = `Thesis.out'.
 
 
 
@@ -1024,10 +1024,10 @@ File: ThesisApprovalPage.pdf Graphic file (type pdf)
 <use ThesisApprovalPage.pdf, page 1>
 Package pdftex.def Info: ThesisApprovalPage.pdf , page1 used on input line 54.
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-[2 <./ThesisApprovalPage.pdf>] (Thesis_Outline-concordance.tex)
-(Thesis_Outline.toc
+[2 <./ThesisApprovalPage.pdf>] (Thesis-concordance.tex) (Thesis.toc
 LaTeX Font Info:    Trying to load font information for U+msa on input line 3.
- ("C:\MiKTeX 2.9\tex/latex/amsfonts\umsa.fd"
+
+("C:\MiKTeX 2.9\tex/latex/amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
 LaTeX Font Info:    Trying to load font information for U+msb on input line 3.
@@ -1042,7 +1042,7 @@ LaTeX Font Info:    Trying to load font information for U+rsfs on input line 3.
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 ))
 \tf@toc=\write6
-\openout6 = `Thesis_Outline.toc'.
+\openout6 = `Thesis.toc'.
 
  [3]
 LaTeX Font Info:    Trying to load font information for TS1+aer on input line 6
@@ -1064,14 +1064,14 @@ Package amsmath Warning: Foreign command \atopwithdelims;
 [6
 
 ]
-<Thesis_Outline-002.pdf, id=331, 433.62pt x 433.62pt>
-File: Thesis_Outline-002.pdf Graphic file (type pdf)
-<use Thesis_Outline-002.pdf>
-Package pdftex.def Info: Thesis_Outline-002.pdf  used on input line 146.
+<Thesis-002.pdf, id=331, 433.62pt x 433.62pt>
+File: Thesis-002.pdf Graphic file (type pdf)
+<use Thesis-002.pdf>
+Package pdftex.def Info: Thesis-002.pdf  used on input line 146.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
  [7
 
- <./Thesis_Outline-002.pdf>]
+ <./Thesis-002.pdf>]
 Underfull \hbox (badness 10000) in paragraph at lines 158--160
 
  []
@@ -1086,12 +1086,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 203--204
 
  []
 
-<Thesis_Outline-003.pdf, id=351, 433.62pt x 433.62pt>
-File: Thesis_Outline-003.pdf Graphic file (type pdf)
-<use Thesis_Outline-003.pdf>
-Package pdftex.def Info: Thesis_Outline-003.pdf  used on input line 217.
+<Thesis-003.pdf, id=351, 433.62pt x 433.62pt>
+File: Thesis-003.pdf Graphic file (type pdf)
+<use Thesis-003.pdf>
+Package pdftex.def Info: Thesis-003.pdf  used on input line 217.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
-[9] [10 <./Thesis_Outline-003.pdf>]
+[9] [10 <./Thesis-003.pdf>]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 233.
@@ -1121,18 +1121,18 @@ Package hyperref Warning: Difference (2) between bookmark levels is greater
 
 ] [13
 
-] (Thesis_Outline.aux)
-Package rerunfilecheck Info: File `Thesis_Outline.out' has not changed.
+] (Thesis.aux)
+Package rerunfilecheck Info: File `Thesis.out' has not changed.
 (rerunfilecheck)             Checksum: FAF2F6CF047A125062D1598F98ED339A;3171.
  ) 
 Here is how much of TeX's memory you used:
  30312 strings out of 479696
- 707639 string characters out of 2881701
- 1152478 words of memory out of 3000000
+ 707359 string characters out of 2881701
+ 1152470 words of memory out of 3000000
  46726 multiletter control sequences out of 15000+200000
  432171 words of font info for 94 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 94i,19n,98p,713b,609s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 94i,19n,98p,705b,609s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\gabe\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\t
 crm1200.pk><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmb10.pfb><C:/MiKTeX 2
 .9/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/MiKTeX 2.9/fonts/type1/public
@@ -1145,7 +1145,7 @@ msfonts/cm/cmr8.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C
 :/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/MiKTeX 2.9/fonts/type
 1/public/amsfonts/cm/cmsy8.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/latxf
 ont/line10.pfb>
-Output written on Thesis_Outline.pdf (13 pages, 313962 bytes).
+Output written on Thesis.pdf (13 pages, 314039 bytes).
 PDF statistics:
  437 PDF objects out of 1000 (max. 8388607)
  55 named destinations out of 1000 (max. 500000)
