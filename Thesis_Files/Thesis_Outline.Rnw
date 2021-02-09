@@ -146,7 +146,6 @@ Suppose $t=5$ successes have been observed out of $N=10$ binary events, $\alpha 
 
 
 <<fig=TRUE, echo=FALSE>>=
-#source('G:/My Drive/Education/STATISTICS/UA_STATS/MASTERS/THESIS/BILLHEIMER/Thesis/Functions/BetBin.R')
 source('C:/Users/gabe/Documents/tmp/predictiveInference/R/dpredBB.R')
 source('C:/Users/gabe/Documents/tmp/predictiveInference/R/ppredBB.R')
 source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredBB.R')
@@ -169,7 +168,7 @@ plot(1:1000,F_1000,type = "l", col = "red", lwd = 2, main = "Beta-Binomial Cumul
 #Random sample
 f_x = dpredBB(1:1000,N,t,M,a,b)
 random_sample = rpredBB(1000,N,t,M,a,b)
-hist(random_sample,prob = T, main = "Histogram of Sample with Density Curve Overlay")
+hist(random_sample,prob = T, main = "Histogram of Sample with Density Curve Overlay",ylim = c(0,max(f_x)*1.1))
 lines(1:1000,f_x)
 @
 
@@ -243,7 +242,6 @@ Suppose $d=800$ out of $N = 1000$ copies have been observed, and the remaining $
 
 
 <<fig=TRUE, echo=FALSE>>=
-#source('G:/My Drive/Education/STATISTICS/UA_STATS/MASTERS/THESIS/BILLHEIMER/Thesis/Functions/ExpGam.R')
 source('C:/Users/gabe/Documents/tmp/predictiveInference/R/dpredEG.R')
 source('C:/Users/gabe/Documents/tmp/predictiveInference/R/ppredEG.R')
 source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredEG.R')
@@ -286,7 +284,7 @@ plot(x[1:plot_length],F_x[1:plot_length],type = "l", lwd = 2, col = "red", main 
 n = 1000
 
 random_sample = rpredEG(n, XNminusd, d, dt, gm)
-hist(random_sample,prob = T,main = "Histogram of Sample with Density Curve Overlay")
+hist(random_sample,prob = T,main = "Histogram of Sample with Density Curve Overlay", ylim = c(0,max(f_x)*1.1))
 lines(1:1000,f_x)
 @
 
