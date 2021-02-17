@@ -83,7 +83,21 @@ setwd("C:/Users/gabe/Documents/tmp/predictiveInference/Thesis_Files")
       [examples, comparisons]
 
   \subsection{The Bayesian Parametric Prediction Format}
-    [Geisser p. 49]
+    [Geisser p. 49]\\
+
+        Let $$f\left(x^{(N)},x_{(M)}|\theta\right) = f\left(x_{(M)}|x^{(N)},\theta\right)f\left(x^{(N)}|\theta\right).$$
+
+    Here $x^{(N)}$ represents observed events and $x_{(M)}$ are future events.  We calculate
+
+    $$f\left(x_{(M)},x^{(N)}\right) = \int f\left(x^{(N)},x_{(M)}|\theta\right)p(\theta)d\theta$$
+
+    where $p(\theta)$ is the prior density and
+
+    $$f\left(x_{(M)}|x^{(N)}\right) = \frac{f\left(x_{(M)},x^{(N)}\right)}{f\left(x^{(N)}\right)} = \int f\left(x_{(M)}|\theta\right)p\left(\theta|x^{(N)}\right)d\theta$$
+
+    where
+
+    $$p\left(\theta|x^{(N)}\right) \propto f\left(x^{(N)}|\theta\right)p(\theta).$$
 
   \subsection{[Maybe] Example of Difference between results from Plug-in estimator and results using Predictive Inference}
 

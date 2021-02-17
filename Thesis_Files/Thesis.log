@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  9 FEB 2021 09:21
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  17 FEB 2021 08:46
 entering extended mode
 **./Thesis.tex
 (Thesis.tex
@@ -1053,13 +1053,18 @@ File: ts1aer.fd
 )
 LaTeX Font Info:    Font shape `TS1/aer/m/n' in size <12> not available
 (Font)              Font shape `TS1/cmr/m/n' tried instead on input line 66.
- [4] [5
+ [4]
+Underfull \hbox (badness 10000) in paragraph at lines 84--85
+
+ []
+
+[5
 
 ]
 
 Package amsmath Warning: Foreign command \atopwithdelims;
 (amsmath)                \frac or \genfrac should be used instead
-(amsmath)                 on input line 101.
+(amsmath)                 on input line 115.
 
 [6
 
@@ -1067,55 +1072,55 @@ Package amsmath Warning: Foreign command \atopwithdelims;
 <Thesis-002.pdf, id=331, 433.62pt x 433.62pt>
 File: Thesis-002.pdf Graphic file (type pdf)
 <use Thesis-002.pdf>
-Package pdftex.def Info: Thesis-002.pdf  used on input line 146.
+Package pdftex.def Info: Thesis-002.pdf  used on input line 160.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
  [7
 
  <./Thesis-002.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 158--160
+Underfull \hbox (badness 10000) in paragraph at lines 172--174
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 186--187
+Underfull \hbox (badness 10000) in paragraph at lines 200--201
 
  []
 
 [8]
-Underfull \hbox (badness 10000) in paragraph at lines 203--204
+Underfull \hbox (badness 10000) in paragraph at lines 217--218
 
  []
 
 <Thesis-003.pdf, id=351, 433.62pt x 433.62pt>
 File: Thesis-003.pdf Graphic file (type pdf)
 <use Thesis-003.pdf>
-Package pdftex.def Info: Thesis-003.pdf  used on input line 217.
+Package pdftex.def Info: Thesis-003.pdf  used on input line 231.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
 [9] [10 <./Thesis-003.pdf>]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 233.
+(hyperref)                removing `math shift' on input line 247.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 233.
+(hyperref)                removing `math shift' on input line 247.
 
 [11]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 242.
+(hyperref)                removing `math shift' on input line 256.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 242.
+(hyperref)                removing `math shift' on input line 256.
 
 
 Package hyperref Warning: Difference (3) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 244.
+(hyperref)                than one, level fixed on input line 258.
 
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 245.
+(hyperref)                than one, level fixed on input line 259.
 
 [12
 
@@ -1145,7 +1150,7 @@ msfonts/cm/cmr8.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C
 :/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/MiKTeX 2.9/fonts/type
 1/public/amsfonts/cm/cmsy8.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/latxf
 ont/line10.pfb>
-Output written on Thesis.pdf (13 pages, 314039 bytes).
+Output written on Thesis.pdf (13 pages, 314695 bytes).
 PDF statistics:
  437 PDF objects out of 1000 (max. 8388607)
  55 named destinations out of 1000 (max. 500000)
