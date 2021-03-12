@@ -302,8 +302,46 @@ hist(random_sample,prob = T,main = "Histogram of Sample with Density Curve Overl
 lines(1:1000,f_x)
 @
 
-  \subsection{Poisson-Gamma Model}
+  \subsection{Poisson-Gamma Model (Hoff p. 43ff)}
     \subsubsection{Derivation}
+    [using Hoff's notation and variable names below.  Should I convert this to Geisser's $x^{(N)},x_{(M)}$ convention for uniformity throughout my thesis?]\\\\
+      Suppose $Y_1,...,Y_n|\theta\overset{i.i.d.}{\sim}\text{Poisson}(\theta)$ with Gamma prior $\theta\sim\text{Gamma}(\alpha,\beta)$.  That is,
+
+      \begin{flalign*}
+        P\left(Y_1 = y_1,...,Y_n = y_n|\theta\right)
+        &= \prod_{i=1}^n p\left(y_i|\theta\right)\\
+        &= \prod_{i=1}^n\frac{1}{y!}\theta^{y_i}e^{-\theta}\\
+        &= \left(\prod_{i=1}^n\frac{1}{y!}\right)\theta^{\sum y_i}e^{-n\theta}\\
+        &= c\left(y_1,...,y_n\right)\theta^{\sum y_i}e^{-n\theta}
+      \end{flalign*}
+
+      and
+
+      $$p(\theta) = \dfrac{\beta^\alpha}{\Gamma(\alpha)}\theta^{\alpha-1}e^{-\beta\theta}, \theta, \alpha, \beta > 0.$$
+
+      Then we have posterior distribution
+
+      \begin{flalign*}
+        p\left(\theta|y_1,...,y_n\right)
+        &= \dfrac{p\left(y_1,...,y_n|\theta\right)p(\theta)}{\sum_\theta p\left(y_1,...,y_n|\theta\right)}\\
+        &= \dfrac{p\left(y_1,...,y_n|\theta\right)p(\theta)}{p\left(y_1,...,y_n\right)}\\
+        &= \dfrac{1}{p\left(y_1,...,y_n\right)}\theta^{\sum y_i}e^{-n\theta}\dfrac{\beta^\alpha}{\Gamma(\alpha)}\theta^{\alpha - 1}e^{-\beta\theta}\\
+        &= C\left(y_1,...,y_n,\alpha,\beta\right)\theta^{\alpha+\sum y_i - 1}e^{-(\beta + n)\theta}\\
+        &\sim \text{Gamma}\left(\alpha+\sum y_i,\beta + n\right).
+      \end{flalign*}
+
+      For future observation $\tilde{y}$, then, we compute predictive distribution
+
+      \begin{flalign*}
+        p\left(\tilde{y}|y_1,...,y_n\right)
+        &= \int_0^\infty p\left(\tilde{y}|\theta,y_1,...,y_n\right)p\left(\theta|y_1,...,y_n\right)d\theta\\
+        &= \int p\left(\tilde{y}|\theta\right)p\left(\theta|y_1,...,y_n\right)d\theta\\
+        &= C\int\left(\dfrac{1}{\tilde{y}!}\theta^{\tilde{y}}e^{-\theta}\right)\theta^{\alpha+\sum y_i - 1}e^{-(\beta+n)\theta}d\theta\\
+        &= \dfrac{C}{\tilde{y}!}\int\theta^{\tilde{y}+\alpha+\sum y_i - 1}e^{-(\beta+n+1)\theta}d\theta\\
+        &= \dfrac{C\Gamma\left(\tilde{y}+\alpha+\sum y_i\right)}{\Gamma\left(\tilde{y}+1\right)(\beta+n+1)^{\tilde{y}+\alpha+\sum y_i}}\int\dfrac{(\beta+n+1)^{\tilde{y}+\alpha+\sum y_i}}{\Gamma\left(\tilde{y}+\alpha+\sum y_i\right)}\theta^{\tilde{y}+\alpha+\sum y_i - 1}e^{-(\beta+n+1)\theta)}d\theta\\
+        &= \dfrac{C\Gamma\left(\tilde{y}+\alpha+\sum y_i\right)}{\Gamma\left(\tilde{y}+1\right)(\beta+n+1)^{\tilde{y}+\alpha+\sum y_i}}
+      \end{flalign*}
+
     \subsubsection{R Implementation}
     \subsubsection{Example}
 
