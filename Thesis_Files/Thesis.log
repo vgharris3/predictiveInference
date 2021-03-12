@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  6 MAR 2021 11:41
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  12 MAR 2021 12:35
 entering extended mode
 **./Thesis.tex
 (Thesis.tex
@@ -1096,63 +1096,74 @@ File: Thesis-003.pdf Graphic file (type pdf)
 <use Thesis-003.pdf>
 Package pdftex.def Info: Thesis-003.pdf  used on input line 231.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
-[9] [10 <./Thesis-003.pdf>]
+[9]
+Underfull \hbox (badness 10000) in paragraph at lines 235--237
+
+ []
+
+[10 <./Thesis-003.pdf>] [11]
+Overfull \hbox (23.23816pt too wide) detected at line 309
+[]
+ []
+
+[12] [13]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 247.
+(hyperref)                removing `math shift' on input line 323.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 247.
+(hyperref)                removing `math shift' on input line 323.
 
-[11]
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 256.
-
+[14]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 256.
+(hyperref)                removing `math shift' on input line 332.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 332.
 
 
 Package hyperref Warning: Difference (3) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 258.
+(hyperref)                than one, level fixed on input line 334.
 
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 259.
+(hyperref)                than one, level fixed on input line 335.
 
-[12
+[15
 
-] [13
+] [16
 
 ] (Thesis.aux)
 Package rerunfilecheck Info: File `Thesis.out' has not changed.
-(rerunfilecheck)             Checksum: FAF2F6CF047A125062D1598F98ED339A;3171.
+(rerunfilecheck)             Checksum: D9057D5A53667B537D1F26179CFB7ACD;3188.
  ) 
 Here is how much of TeX's memory you used:
- 30312 strings out of 479696
- 707359 string characters out of 2881701
+ 30315 strings out of 479696
+ 707380 string characters out of 2881701
  1152470 words of memory out of 3000000
  46726 multiletter control sequences out of 15000+200000
  432171 words of font info for 94 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 94i,19n,98p,705b,609s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 94i,20n,98p,705b,609s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\gabe\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\t
 crm1200.pk><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmb10.pfb><C:/MiKTeX 2
 .9/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/MiKTeX 2.9/fonts/type1/public
-/amsfonts/cm/cmex10.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pf
-b><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/MiKTeX 2.9/fonts/
-type1/public/amsfonts/cm/cmmi8.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/c
-m/cmr12.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/MiKTeX 
-2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/MiKTeX 2.9/fonts/type1/public/a
-msfonts/cm/cmr8.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C
-:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/MiKTeX 2.9/fonts/type
-1/public/amsfonts/cm/cmsy8.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/latxf
-ont/line10.pfb>
-Output written on Thesis.pdf (13 pages, 314677 bytes).
+/amsfonts/cm/cmex10.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cmextra/cmex
+7.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cmextra/cmex8.pfb><C:/MiKTeX 2
+.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/MiKTeX 2.9/fonts/type1/public/
+amsfonts/cm/cmmi6.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><
+C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/MiKTeX 2.9/fonts/typ
+e1/public/amsfonts/cm/cmr17.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
+mr6.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/MiKTeX 2.9/f
+onts/type1/public/amsfonts/cm/cmsy10.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsf
+onts/cm/cmsy6.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/M
+iKTeX 2.9/fonts/type1/public/amsfonts/latxfont/line10.pfb>
+Output written on Thesis.pdf (16 pages, 342079 bytes).
 PDF statistics:
- 437 PDF objects out of 1000 (max. 8388607)
- 55 named destinations out of 1000 (max. 500000)
+ 457 PDF objects out of 1000 (max. 8388607)
+ 58 named destinations out of 1000 (max. 500000)
  387 words of extra memory for PDF output out of 10000 (max. 10000000)
 

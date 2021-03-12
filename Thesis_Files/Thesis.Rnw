@@ -302,8 +302,84 @@ hist(random_sample,prob = T,main = "Histogram of Sample with Density Curve Overl
 lines(1:1000,f_x)
 @
 
-  \subsection{Poisson-Gamma Model}
+  \subsection{Poisson-Gamma Model (Hoff p. 43ff)}
     \subsubsection{Derivation}
+    [using Hoff's notation and variable names below.  Should I convert this to Geisser's $x^{(N)},x_{(M)}$ convention for uniformity throughout my thesis?]\\\\
+      Suppose $Y_1,...,Y_n|\theta\overset{i.i.d.}{\sim}\text{Poisson}(\theta)$ with Gamma prior $\theta\sim\text{Gamma}(\alpha,\beta)$.  That is,
+
+      \begin{flalign*}
+        P\left(Y_1 = y_1,...,Y_n = y_n|\theta\right)
+        &= \prod_{i=1}^n p\left(y_i|\theta\right)\\
+        &\\
+        &= \prod_{i=1}^n\frac{1}{y!}\theta^{y_i}e^{-\theta}\\
+        &\\
+        &= \left(\prod_{i=1}^n\frac{1}{y!}\right)\theta^{\sum y_i}e^{-n\theta}\\
+        &\\
+        &= c\left(y_1,...,y_n\right)\theta^{\sum y_i}e^{-n\theta}
+      \end{flalign*}
+
+      and
+
+      $$p(\theta) = \dfrac{\beta^\alpha}{\Gamma(\alpha)}\theta^{\alpha-1}e^{-\beta\theta}, \theta, \alpha, \beta > 0.$$
+
+\bigskip
+
+      Then we have posterior distribution
+
+      \begin{flalign*}
+        p\left(\theta|y_1,...,y_n\right)
+        &= \dfrac{p\left(y_1,...,y_n|\theta\right)p(\theta)}{\sum_\theta p\left(y_1,...,y_n|\theta\right)}\\
+        &\\
+        &= \dfrac{p\left(y_1,...,y_n|\theta\right)p(\theta)}{p\left(y_1,...,y_n\right)}\\
+        &\\
+        &= \dfrac{1}{p\left(y_1,...,y_n\right)}\theta^{\sum y_i}e^{-n\theta}\dfrac{\beta^\alpha}{\Gamma(\alpha)}\theta^{\alpha - 1}e^{-\beta\theta}\\
+        &\\
+        &= C\left(y_1,...,y_n,\alpha,\beta\right)\theta^{\alpha+\sum y_i - 1}e^{-(\beta + n)\theta}\\
+        &\\
+        &\sim \text{Gamma}\left(\alpha+\sum y_i,\beta + n\right).
+      \end{flalign*}
+
+
+      Here
+
+      \begin{flalign*}
+        C\left(y_1,...,y_n,\alpha,\beta\right)
+        &= dfrac{1}{p\left(y_1,...,y_n\right)}\cdot\dfrac{\beta^\alpha}{\Gamma(\alpha)}\\
+        &\\
+        &= \dfrac{1}{\sum_\theta p\left(y_1,...,y_n|\theta\right)p(\theta)}\cdot\dfrac{\beta^\alpha}{\Gamma(\alpha)}\\
+        &\\
+        &= \dfrac{1}{\sum_\theta\left(\prod\frac{1}{y_i!}\right)\theta^{\sum y_i}e^{-n\theta}\cancel{\left(\frac{\beta^\alpha}{\Gamma(\alpha)}\right)}\theta^{\alpha-1}e^{-\beta\theta}}\cdot\cancel{\left(\frac{\beta^\alpha}{\Gamma(\alpha)}\right)}
+        &\\
+        &= \dfrac{1}{\left(\prod\frac{1}{y_i!}\right)\frac{\Gamma(\alpha + \sum y_i)}{(\beta+n)^{\alpha+\sum y_i}}\sum_\theta \frac{(\beta+n)^{\alpha+\sum y_i}}{\Gamma(\alpha+\sum y_i)}\theta^{\sum y_i+\alpha-1}e^{-(\beta+n)\theta}}\\
+        &\\
+        &= \dfrac{\prod_{i=1}^n y_i!(\beta+n)^{\alpha+\sum y_i}}{\Gamma(\alpha+\sum y_i)}
+      \end{flalign*}
+
+
+
+\bigskip
+
+      For future observation $\tilde{y}$, then, we compute predictive distribution
+
+      \begin{flalign*}
+        p\left(\tilde{y}|y_1,...,y_n\right)
+        &= \int_0^\infty p\left(\tilde{y}|\theta,y_1,...,y_n\right)p\left(\theta|y_1,...,y_n\right)d\theta\\
+        &\\
+        &= \int p\left(\tilde{y}|\theta\right)p\left(\theta|y_1,...,y_n\right)d\theta\\
+        &\\
+        &= C\int\left(\dfrac{1}{\tilde{y}!}\theta^{\tilde{y}}e^{-\theta}\right)\theta^{\alpha+\sum y_i - 1}e^{-(\beta+n)\theta}d\theta\\
+        &\\
+        &= \dfrac{C}{\tilde{y}!}\int\theta^{\tilde{y}+\alpha+\sum y_i - 1}e^{-(\beta+n+1)\theta}d\theta\\
+        &\\
+        &= \dfrac{C\Gamma\left(\tilde{y}+\alpha+\sum y_i\right)}{\Gamma\left(\tilde{y}+1\right)(\beta+n+1)^{\tilde{y}+\alpha+\sum y_i}}\int\dfrac{(\beta+n+1)^{\tilde{y}+\alpha+\sum y_i}}{\Gamma\left(\tilde{y}+\alpha+\sum y_i\right)}\theta^{\tilde{y}+\alpha+\sum y_i - 1}e^{-(\beta+n+1)\theta)}d\theta\\
+        &\\
+        &= C\cdot\dfrac{\Gamma\left(\tilde{y}+\alpha+\sum y_i\right)}{\Gamma\left(\tilde{y}+1\right)(\beta+n+1)^{\tilde{y}+\alpha+\sum y_i}}\\
+        &\\
+        &= \dfrac{\prod_{i=1}^n y_i!(\beta+n)^{\alpha+\sum y_i}}{\Gamma(\alpha+\sum y_i)}\cdot\dfrac{\Gamma\left(\tilde{y}+\alpha+\sum y_i\right)}{\Gamma\left(\tilde{y}+1\right)(\beta+n+1)^{\tilde{y}+\alpha+\sum y_i}}\\
+        &\\
+        &= \prod_{i=1}^n y_i! \cdot \dfrac{\Gamma(\tilde{y}+\alpha+\sum y_i)}{\Gamma(\tilde{y}+1)\Gamma(\alpha+\sum y_i)}\cdot \left(\dfrac{\beta+n}{\beta+n+1}\right)^{\alpha+\sum y_i} \cdot \left(\dfrac{1}{\beta+n+1}\right)^{\tilde{y}}\\
+      \end{flalign*}
+
     \subsubsection{R Implementation}
     \subsubsection{Example}
 
