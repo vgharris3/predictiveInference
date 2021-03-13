@@ -230,6 +230,8 @@ Suppose $d=800$ out of $N = 1000$ copies have been observed, and the remaining $
 
 \includegraphics{Thesis-003}
 
+\clearpage
+
   \subsection{Poisson-Gamma Model (Hoff p. 43ff)}
     \subsubsection{Derivation}
     [using Hoff's notation and variable names below.  Should I convert this to Geisser's $x^{(N)},x_{(M)}$ convention for uniformity throughout my thesis?]\\\\
@@ -256,7 +258,7 @@ Suppose $d=800$ out of $N = 1000$ copies have been observed, and the remaining $
 
       \begin{flalign*}
         p\left(\theta|y_1,...,y_n\right)
-        &= \dfrac{p\left(y_1,...,y_n|\theta\right)p(\theta)}{\sum_\theta p\left(y_1,...,y_n|\theta\right)}\\
+        &= \dfrac{p\left(y_1,...,y_n|\theta\right)p(\theta)}{\sum_\theta p\left(y_1,...,y_n|\theta\right)p(\theta)}\\
         &\\
         &= \dfrac{p\left(y_1,...,y_n|\theta\right)p(\theta)}{p\left(y_1,...,y_n\right)}\\
         &\\
@@ -272,7 +274,7 @@ Suppose $d=800$ out of $N = 1000$ copies have been observed, and the remaining $
 
       \begin{flalign*}
         C\left(y_1,...,y_n,\alpha,\beta\right)
-        &= dfrac{1}{p\left(y_1,...,y_n\right)}\cdot\dfrac{\beta^\alpha}{\Gamma(\alpha)}\\
+        &= \dfrac{1}{p\left(y_1,...,y_n\right)}\cdot\dfrac{\beta^\alpha}{\Gamma(\alpha)}\\
         &\\
         &= \dfrac{1}{\sum_\theta p\left(y_1,...,y_n|\theta\right)p(\theta)}\cdot\dfrac{\beta^\alpha}{\Gamma(\alpha)}\\
         &\\
