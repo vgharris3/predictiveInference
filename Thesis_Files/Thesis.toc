@@ -15,8 +15,8 @@
 \contentsline {subsubsection}{\numberline {3.2.1}Derivation}{7}{subsubsection.3.2.1}%
 \contentsline {subsubsection}{\numberline {3.2.2}R Implementation}{9}{subsubsection.3.2.2}%
 \contentsline {subsubsection}{\numberline {3.2.3}Example}{9}{subsubsection.3.2.3}%
-\contentsline {subsection}{\numberline {3.3}Poisson-Gamma Model (Hoff p. 43ff)}{10}{subsection.3.3}%
-\contentsline {subsubsection}{\numberline {3.3.1}Derivation}{10}{subsubsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3}Poisson-Gamma Model (Hoff p. 43ff)}{11}{subsection.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.1}Derivation}{11}{subsubsection.3.3.1}%
 \contentsline {subsubsection}{\numberline {3.3.2}R Implementation}{13}{subsubsection.3.3.2}%
 \contentsline {subsubsection}{\numberline {3.3.3}Example}{13}{subsubsection.3.3.3}%
 \contentsline {subsection}{\numberline {3.4}Normal Observation with Normal-Inverse Gamma Prior}{13}{subsection.3.4}%

@@ -302,6 +302,8 @@ hist(random_sample,prob = T,main = "Histogram of Sample with Density Curve Overl
 lines(1:1000,f_x)
 @
 
+\clearpage
+
   \subsection{Poisson-Gamma Model (Hoff p. 43ff)}
     \subsubsection{Derivation}
     [using Hoff's notation and variable names below.  Should I convert this to Geisser's $x^{(N)},x_{(M)}$ convention for uniformity throughout my thesis?]\\\\
@@ -328,7 +330,7 @@ lines(1:1000,f_x)
 
       \begin{flalign*}
         p\left(\theta|y_1,...,y_n\right)
-        &= \dfrac{p\left(y_1,...,y_n|\theta\right)p(\theta)}{\sum_\theta p\left(y_1,...,y_n|\theta\right)}\\
+        &= \dfrac{p\left(y_1,...,y_n|\theta\right)p(\theta)}{\sum_\theta p\left(y_1,...,y_n|\theta\right)p(\theta)}\\
         &\\
         &= \dfrac{p\left(y_1,...,y_n|\theta\right)p(\theta)}{p\left(y_1,...,y_n\right)}\\
         &\\
@@ -344,7 +346,7 @@ lines(1:1000,f_x)
 
       \begin{flalign*}
         C\left(y_1,...,y_n,\alpha,\beta\right)
-        &= dfrac{1}{p\left(y_1,...,y_n\right)}\cdot\dfrac{\beta^\alpha}{\Gamma(\alpha)}\\
+        &= \dfrac{1}{p\left(y_1,...,y_n\right)}\cdot\dfrac{\beta^\alpha}{\Gamma(\alpha)}\\
         &\\
         &= \dfrac{1}{\sum_\theta p\left(y_1,...,y_n|\theta\right)p(\theta)}\cdot\dfrac{\beta^\alpha}{\Gamma(\alpha)}\\
         &\\
@@ -355,7 +357,10 @@ lines(1:1000,f_x)
         &= \dfrac{\prod_{i=1}^n y_i!(\beta+n)^{\alpha+\sum y_i}}{\Gamma(\alpha+\sum y_i)}
       \end{flalign*}
 
-
+Making a tiny change to test my ability to commit.\\
+Adding just a little bit more.\\
+Still able to commit?\\
+Yes.  Will try pushing again later.\\
 
 \bigskip
 
