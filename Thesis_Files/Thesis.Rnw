@@ -386,6 +386,8 @@ lines(1:1000,f_x)
         &= \dfrac{\Gamma(\alpha+\sum y_i)+\tilde{y}}{\Gamma(\tilde{y}+1)\Gamma(\alpha+\sum y_i)}\cdot \left(\dfrac{\beta+n}{\beta+n+1}\right)^{\alpha+\sum y_i} \cdot \left(\dfrac{1}{\beta+n+1}\right)^{\tilde{y}}\\
       \end{flalign*}
 
+This is a negative binomial distribution:  $\tilde{y}\sim NB\left(\alpha+\sum y_i,b+n\right)$.
+
       \bigskip
 
 
@@ -413,6 +415,33 @@ lines(1:1000,f_x)
         &= \prod_{i=1}^n y_i! \cdot \dfrac{\Gamma(\tilde{y}+\alpha+\sum y_i)}{\Gamma(\tilde{y}+1)\Gamma(\alpha+\sum y_i)}\cdot \left(\dfrac{\beta+n}{\beta+n+1}\right)^{\alpha+\sum y_i} \cdot \left(\dfrac{1}{\beta+n+1}\right)^{\tilde{y}}\\
       \end{flalign*}
 
+
+<<fig=TRUE, echo=FALSE>>=
+source('C:/Users/gabe/Documents/tmp/predictiveInference/R/dpredBB.R')
+source('C:/Users/gabe/Documents/tmp/predictiveInference/R/ppredBB.R')
+source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredBB.R')
+N = 10
+t = 5
+M = 1000
+a = 2
+b = 8
+
+par(mfrow=c(3,1))
+
+#Predictive density
+f_1000 = dpredBB(1:1000,N,t,M,a,b)
+plot(1:1000,f_1000,type = "l", col = "blue", lwd = 2, main = "Beta-Binomial Predictive Density")
+
+#Cumulative predictive probability
+F_1000 = ppredBB(1:1000,N,t,M,a,b)
+plot(1:1000,F_1000,type = "l", col = "red", lwd = 2, main = "Beta-Binomial Cumulative Predictive Probability")
+
+#Random sample
+f_x = dpredBB(1:1000,N,t,M,a,b)
+random_sample = rpredBB(1000,N,t,M,a,b)
+hist(random_sample,prob = T, main = "Histogram of Sample with Density Curve Overlay",ylim = c(0,max(f_x)*1.1))
+lines(1:1000,f_x)
+@
 
 
     \subsubsection{R Implementation}

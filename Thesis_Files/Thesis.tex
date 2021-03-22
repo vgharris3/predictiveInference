@@ -314,6 +314,8 @@ Suppose $d=800$ out of $N = 1000$ copies have been observed, and the remaining $
         &= \dfrac{\Gamma(\alpha+\sum y_i)+\tilde{y}}{\Gamma(\tilde{y}+1)\Gamma(\alpha+\sum y_i)}\cdot \left(\dfrac{\beta+n}{\beta+n+1}\right)^{\alpha+\sum y_i} \cdot \left(\dfrac{1}{\beta+n+1}\right)^{\tilde{y}}\\
       \end{flalign*}
 
+This is a negative binomial distribution:  $\tilde{y}\sim NB\left(\alpha+\sum y_i,b+n\right)$.
+
       \bigskip
 
 
@@ -341,6 +343,8 @@ Suppose $d=800$ out of $N = 1000$ copies have been observed, and the remaining $
         &= \prod_{i=1}^n y_i! \cdot \dfrac{\Gamma(\tilde{y}+\alpha+\sum y_i)}{\Gamma(\tilde{y}+1)\Gamma(\alpha+\sum y_i)}\cdot \left(\dfrac{\beta+n}{\beta+n+1}\right)^{\alpha+\sum y_i} \cdot \left(\dfrac{1}{\beta+n+1}\right)^{\tilde{y}}\\
       \end{flalign*}
 
+
+\includegraphics{Thesis-004}
 
 
     \subsubsection{R Implementation}

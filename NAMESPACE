@@ -2,6 +2,7 @@
 
 export(dpredBB)
 export(dpredEG)
+export(dpredPG)
 export(ppredBB)
 export(ppredEG)
 export(rpredBB)
