@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  22 MAR 2021 14:11
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  23 MAR 2021 09:01
 entering extended mode
 **./Thesis.tex
 (Thesis.tex
@@ -1104,7 +1104,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 237--239
 [11
 
 ] [12]
-Overfull \hbox (23.23816pt too wide) detected at line 344
+Overfull \hbox (32.85387pt too wide) detected at line 329
+[] \OMS/cmsy/m/n/12  \OML/cmm/m/it/12 NB [] \OMS/cmsy/m/n/12 ) \OML/cmm/m/it/1
+2 p\OT1/cmr/m/n/12 ([]) = [] [][] [][]
+ []
+
+
+Overfull \hbox (23.23816pt too wide) detected at line 362
 []
  []
 
@@ -1112,33 +1118,33 @@ Overfull \hbox (23.23816pt too wide) detected at line 344
 <Thesis-004.pdf, id=381, 433.62pt x 433.62pt>
 File: Thesis-004.pdf Graphic file (type pdf)
 <use Thesis-004.pdf>
-Package pdftex.def Info: Thesis-004.pdf  used on input line 347.
+Package pdftex.def Info: Thesis-004.pdf  used on input line 365.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
  [14]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 362.
+(hyperref)                removing `math shift' on input line 380.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 362.
+(hyperref)                removing `math shift' on input line 380.
 
 [15 <./Thesis-004.pdf>] [16]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 371.
+(hyperref)                removing `math shift' on input line 389.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 371.
+(hyperref)                removing `math shift' on input line 389.
 
 
 Package hyperref Warning: Difference (3) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 373.
+(hyperref)                than one, level fixed on input line 391.
 
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 374.
+(hyperref)                than one, level fixed on input line 392.
 
 [17
 
@@ -1151,7 +1157,7 @@ Package rerunfilecheck Info: File `Thesis.out' has not changed.
 Here is how much of TeX's memory you used:
  30323 strings out of 479696
  707521 string characters out of 2881701
- 1155470 words of memory out of 3000000
+ 1159470 words of memory out of 3000000
  46732 multiletter control sequences out of 15000+200000
  432171 words of font info for 94 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1169,7 +1175,7 @@ mr6.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/MiKTeX 2.9/f
 onts/type1/public/amsfonts/cm/cmsy10.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsf
 onts/cm/cmsy6.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/M
 iKTeX 2.9/fonts/type1/public/amsfonts/latxfont/line10.pfb>
-Output written on Thesis.pdf (18 pages, 365860 bytes).
+Output written on Thesis.pdf (18 pages, 366324 bytes).
 PDF statistics:
  472 PDF objects out of 1000 (max. 8388607)
  60 named destinations out of 1000 (max. 500000)
