@@ -5,7 +5,7 @@
 #'
 #'
 #' @param obs vector of (observed) Poisson-distributed counts
-#' @param xmax maximum integer for which predictive probability
+#' @param xmax maximum integer for which predictive probability is desired
 #' @param alpha sum of counts from beta prior observations for gamma prior distribution on theta
 #' @param beta number of prior observations for gamma prior distribution on theta
 #'
@@ -14,9 +14,6 @@
 #'
 #' @examples 1
 dpredPG <- function(obs, xmax, alpha = 1, beta=1){
-
-  #dpredPG returns the predictive probability of x future successes out of M trials, given s observed successes out of a sample of
-  #size N, and user input shape parameters for Beta prior on Pr(success)
 
   #d+pred+PG
   #d = density (like R distribution functions)
@@ -55,5 +52,16 @@ dpredPG <- function(obs, xmax, alpha = 1, beta=1){
   #f_x = exp(numerator - denominator)
 
   #return(f_x)
-  return(sum(obs));
+
+  a = alpha;
+  b = beta;
+  sobs = sum(obs);
+  n = length(obs);
+  y = 1:xmax;
+
+  f_x = dnbinom(y,size = a + sobs, mu = (a + sobs)/(b + n));
+  return(f_x);
+
+  #Check this with closed formula.
+
 }
