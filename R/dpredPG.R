@@ -41,27 +41,30 @@ dpredPG <- function(obs, xmax, alpha = 1, beta=1){
     stop("All observations must be non-negative")
   }
 
-  #start here.
-
-  #r[] is the number of successes in the M future observations
-
-  #r = x;
-
-  #numerator = lgamma(M+1) + lgamma(N+alpha+beta) + lgamma(r+s+alpha) + lgamma(M+N-r-s+beta);
-  #denominator = lgamma(r+1) + lgamma(M-r+1) + lgamma(alpha+s) + lgamma(N-s+beta) + lgamma(M+N+alpha+beta);
-  #f_x = exp(numerator - denominator)
-
-  #return(f_x)
-
   a = alpha;
   b = beta;
   sobs = sum(obs);
   n = length(obs);
-  y = 1:xmax;
+  ytilde = 1:xmax;
 
-  f_x = dnbinom(y,size = a + sobs, mu = (a + sobs)/(b + n));
-  return(f_x);
+  f_x = dnbinom(ytilde,size = a + sobs, mu = (a + sobs)/(b + n));
 
-  #Check this with closed formula.
+  # checking with formula
+  num1 = lgamma(alpha + sobs + ytilde);
+  den1 = lgamma(alpha + sobs) + lgamma(ytilde+1);
+  fact1 = exp(num1 - den1);
+
+  fact2 = exp((alpha + sobs)*log((beta + n)/(beta+n+1)));
+
+  fact3 = exp(ytilde*log(1/(beta+n+1)));
+
+  f_x2 = fact1*fact2*fact3;
+
+  #print(length(f_x));
+  #print(length(f_x2));
+
+  return(cbind(f_x,f_x2));
+
+  #return(1);
 
 }
