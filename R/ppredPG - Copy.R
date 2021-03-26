@@ -1,19 +1,19 @@
 #' Title
 #'
-#' dpredPG returns the predictive probability of a future observation having value {1,...,xmax} given observations obs~Poi(theta)
-#' and theta~Gamma(alpha,beta)
-#'
+#' ppredBB returns the predictive probability of <= x future successes out of M trials, given s observed successes out of a sample of
+#size N, and user input shape parameters for Beta prior on Pr(success)
 #'
 #' @param obs vector of (observed) Poisson-distributed counts
 #' @param xmax maximum integer for which predictive probability is desired
 #' @param alpha sum of counts from beta prior observations for gamma prior distribution on theta
 #' @param beta number of prior observations for gamma prior distribution on theta
+#' @param lower logical; if TRUE (default), probabilities are P(R<=q) otherwise P(R>q)
 #'
-#' @return Poisson-Gamma predictive probability
+#' @return Poisson-Gamma cumulative predictive probability
 #' @export
 #'
 #' @examples 1
-dpredPG <- function(obs, xmax, alpha = 1, beta=1){
+ppredPG = function(obs, xmax, alpha = 1, beta=1, lower=TRUE){
 
   #d+pred+PG
   #d = density (like R distribution functions)
@@ -41,30 +41,11 @@ dpredPG <- function(obs, xmax, alpha = 1, beta=1){
     stop("All observations must be non-negative")
   }
 
-  a = alpha;
-  b = beta;
-  sobs = sum(obs);
-  n = length(obs);
-  ytilde = 1:xmax;
+  f_x = dpredPG(obs,xmax,alpha,beta)
 
-  f_x = dnbinom(ytilde,size = a + sobs, mu = (a + sobs)/(b + n));
+  F_x = cumsum(f_x)
 
-  # checking with formula
-  num1 = lgamma(alpha + sobs + ytilde);
-  den1 = lgamma(alpha + sobs) + lgamma(ytilde+1);
-  fact1 = exp(num1 - den1);
-
-  fact2 = exp((alpha + sobs)*log((beta + n)/(beta+n+1)));
-
-  fact3 = exp(ytilde*log(1/(beta+n+1)));
-
-  f_x2 = fact1*fact2*fact3;
-
-  #print(length(f_x));
-  #print(length(f_x2));
-
-  #return(cbind(f_x,f_x2));
-
-  return(f_x);
+  if(lower){return(F_x[x])}
+  else {return(1 - F_x[x])}
 
 }

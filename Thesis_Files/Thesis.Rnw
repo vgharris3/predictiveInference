@@ -43,7 +43,6 @@
 \newcommand*\mean[1]{\overline{#1}}
 \newcommand\scalemath[2]{\scalebox{#1}{\mbox{\ensuremath{\displaystyle #2}}}}
 
-
 \setcounter{tocdepth}{5}
 \setcounter{secnumdepth}{5}
 
@@ -449,36 +448,39 @@ $$\theta\sim NB(\alpha,\beta)\Rightarrow p(\theta) = \binom{\theta+\alpha-1}{\al
 
 \textcolor{red}{  Hoff p. 49 (Birth rate example):  $a = 2, b = 1$. }
 
-<<fig=TRUE, echo=FALSE>>=
-source('C:/Users/gabe/Documents/tmp/predictiveInference/R/dpredBB.R')
-source('C:/Users/gabe/Documents/tmp/predictiveInference/R/ppredBB.R')
-source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredBB.R')
-N = 10
-t = 5
-M = 1000
-a = 2
-b = 8
 
+    \subsubsection{R Implementation}
+
+This result has been used to create standard format R functions dpredPG(), ppredPG(), and rpredPG() for the Poisson-Gamma distribtuion for density, cumulative probability, and random sampling, respectively (see appendix).  These functions are exercised in the following example.
+
+    \subsubsection{Example}
+
+<<fig=TRUE, echo=FALSE>>=
+source('C:/Users/gabe/Documents/tmp/predictiveInference/R/dpredPG.R')
+source('C:/Users/gabe/Documents/tmp/predictiveInference/R/ppredPG.R')
+source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredPG.R')
+set.seed(1234)
+obs = sample(0:100,10,replace=T)
+#obs = rep(100,10)
+ytilde = 100
+alpha = 11  #how to pick alpha and beta?
+beta = 3
 par(mfrow=c(3,1))
 
 #Predictive density
-f_1000 = dpredBB(1:1000,N,t,M,a,b)
-plot(1:1000,f_1000,type = "l", col = "blue", lwd = 2, main = "Beta-Binomial Predictive Density")
+f_x = dpredPG(obs, ytilde, alpha, beta)
+plot(1:length(f_x),f_x,type = "l", col = "blue", lwd = 2, main = "Poisson-Gamma Predictive Density")
 
 #Cumulative predictive probability
-F_1000 = ppredBB(1:1000,N,t,M,a,b)
-plot(1:1000,F_1000,type = "l", col = "red", lwd = 2, main = "Beta-Binomial Cumulative Predictive Probability")
+F_x = ppredPG(obs, ytilde, alpha, beta)
+plot(1:length(F_x),F_x,type = "l", col = "red", lwd = 2, main = "Poisson-Gamma Cumulative Predictive Probability")
 
 #Random sample
-f_x = dpredBB(1:1000,N,t,M,a,b)
-random_sample = rpredBB(1000,N,t,M,a,b)
+random_sample = rpredPG(1000,obs, ytilde, alpha, beta)
 hist(random_sample,prob = T, main = "Histogram of Sample with Density Curve Overlay",ylim = c(0,max(f_x)*1.1))
-lines(1:1000,f_x)
+lines(1:length(f_x),f_x)
 @
 
-
-    \subsubsection{R Implementation}
-    \subsubsection{Example}
 
   \subsection{Normal Observation with Normal-Inverse Gamma Prior}
     \subsubsection{One sample}

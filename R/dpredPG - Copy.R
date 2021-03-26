@@ -1,6 +1,6 @@
 #' Title
 #'
-#' dpredPG returns the predictive probability of a future observation having value {1,...,xmax} given observations obs~Poi(theta)
+#' dpredPG returns the predictive probability of a future observation having value {1,...,xmax} give observations obs~Poi(theta)
 #' and theta~Gamma(alpha,beta)
 #'
 #'

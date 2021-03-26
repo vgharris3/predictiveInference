@@ -43,7 +43,6 @@
 \newcommand*\mean[1]{\overline{#1}}
 \newcommand\scalemath[2]{\scalebox{#1}{\mbox{\ensuremath{\displaystyle #2}}}}
 
-
 \setcounter{tocdepth}{5}
 \setcounter{secnumdepth}{5}
 
@@ -377,11 +376,15 @@ $$\theta\sim NB(\alpha,\beta)\Rightarrow p(\theta) = \binom{\theta+\alpha-1}{\al
 
 \textcolor{red}{  Hoff p. 49 (Birth rate example):  $a = 2, b = 1$. }
 
-\includegraphics{Thesis-004}
-
 
     \subsubsection{R Implementation}
+
+This result has been used to create standard format R functions dpredPG(), ppredPG(), and rpredPG() for the Poisson-Gamma distribtuion for density, cumulative probability, and random sampling, respectively (see appendix).  These functions are exercised in the following example.
+
     \subsubsection{Example}
+
+\includegraphics{Thesis-004}
+
 
   \subsection{Normal Observation with Normal-Inverse Gamma Prior}
     \subsubsection{One sample}
