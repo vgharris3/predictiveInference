@@ -455,6 +455,8 @@ This result has been used to create standard format R functions dpredPG(), ppred
 
     \subsubsection{Example}
 
+Suppose $t=5$ successes have been observed out of $N=10$ binary events, $\alpha = 2$ and $\beta = 8$.  For $M = 1000$ future observations, the figures below show the predictive distribution from dpredBB(), the cumulative distribution from ppredBB(), and a histogram of random draws from rpredBB().
+
 <<fig=TRUE, echo=FALSE>>=
 source('C:/Users/gabe/Documents/tmp/predictiveInference/R/dpredPG.R')
 source('C:/Users/gabe/Documents/tmp/predictiveInference/R/ppredPG.R')
@@ -462,8 +464,8 @@ source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredPG.R')
 set.seed(1234)
 obs = sample(0:100,10,replace=T)
 #obs = rep(100,10)
-ytilde = 100
-alpha = 11  #how to pick alpha and beta?
+ytilde = 0:100
+alpha = 11
 beta = 3
 par(mfrow=c(3,1))
 

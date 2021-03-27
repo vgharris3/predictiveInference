@@ -4,7 +4,7 @@
 #' and theta~Gamma(alpha,beta)
 #'
 #' @param obs vector of (observed) Poisson-distributed counts
-#' @param xmax maximum integer for which predictive probability is desired
+#' @param x non-negative integer count for which predictive probability is desired
 #' @param alpha sum of counts from beta prior observations for gamma prior distribution on theta
 #' @param beta number of prior observations for gamma prior distribution on theta
 #' @param lower logical; if TRUE (default), probabilities are P(R<=q) otherwise P(R>q)
@@ -13,7 +13,7 @@
 #' @export
 #'
 #' @examples 1
-ppredPG = function(obs, xmax, alpha = 1, beta=1, lower=TRUE){
+ppredPG = function(obs, x, alpha = 1, beta=1, lower=TRUE){
 
   #d+pred+PG
   #d = density (like R distribution functions)
@@ -22,8 +22,8 @@ ppredPG = function(obs, xmax, alpha = 1, beta=1, lower=TRUE){
 
   #ERROR HANDLING
 
-  if(xmax < 0){
-    stop("xmax < 0:  xmax must be a non-negative integer")
+  if(min(x) < 0){
+    stop("x < 0:  xmax must be a non-negative integer")
     return (1)
   }
 
@@ -41,7 +41,7 @@ ppredPG = function(obs, xmax, alpha = 1, beta=1, lower=TRUE){
     stop("All observations must be non-negative")
   }
 
-  f_x = dpredPG(obs,xmax,alpha,beta)
+  f_x = dpredPG(obs,x,alpha,beta)
 
   F_x = cumsum(f_x)
 

@@ -27,7 +27,7 @@
 \contentsline {subsubsection}{\numberline {3.4.2}Two samples}{15}{subsubsection.3.4.2}%
 \contentsline {paragraph}{\numberline {3.4.2.1}Derivation}{15}{paragraph.3.4.2.1}%
 \contentsline {paragraph}{\numberline {3.4.2.2}R Implementation}{15}{paragraph.3.4.2.2}%
-\contentsline {paragraph}{\numberline {3.4.2.3}Example}{15}{paragraph.3.4.2.3}%
+\contentsline {paragraph}{\numberline {3.4.2.3}Example}{16}{paragraph.3.4.2.3}%
 \contentsline {subsubsection}{\numberline {3.4.3}$k$ samples}{16}{subsubsection.3.4.3}%
 \contentsline {paragraph}{\numberline {3.4.3.1}Derivation}{16}{paragraph.3.4.3.1}%
 \contentsline {paragraph}{\numberline {3.4.3.2}R Implementation}{16}{paragraph.3.4.3.2}%

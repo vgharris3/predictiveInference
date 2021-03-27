@@ -5,7 +5,7 @@
 #'
 #' @param n desired random sample size
 #' @param obs vector of (observed) Poisson-distributed counts
-#' @param xmax maximum integer for which predictive probability is desired
+#' @param x maximum integer for which predictive probability is desired
 #' @param alpha sum of counts from beta prior observations for gamma prior distribution on theta
 #' @param beta number of prior observations for gamma prior distribution on theta
 #'
@@ -13,7 +13,7 @@
 #' @export
 #'
 #' @examples 1
-rpredPG = function(n,obs, xmax, alpha = 1, beta=1){
+rpredPG = function(n,obs, x, alpha = 1, beta=1){
 
   #ERROR HANDLING
 
@@ -23,8 +23,8 @@ rpredPG = function(n,obs, xmax, alpha = 1, beta=1){
   ##########################
   ##########################
 
-  if(xmax < 0){
-    stop("xmax < 0:  xmax must be a non-negative integer")
+  if(min(x) < 0){
+    stop("x < 0:  x must be a non-negative integer")
     return (1)
   }
 
@@ -42,7 +42,7 @@ rpredPG = function(n,obs, xmax, alpha = 1, beta=1){
     stop("All observations must be non-negative")
   }
 
-  F_x = ppredPG(obs, xmax, alpha, beta)
+  F_x = ppredPG(obs, x, alpha, beta)
 
   u = stats::runif(n)
 
