@@ -77,6 +77,5 @@ ppredBB = function(x, N, s, M, alpha = 1, beta=1, lower=TRUE){
   if(lower){return(F_x[x])}
   else {return(1 - F_x[x])}
 
-  #return(sum(F_x - F_x2))
 
 }

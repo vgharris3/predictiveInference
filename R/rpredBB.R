@@ -46,15 +46,6 @@ rpredBB = function(n, N, s, M, alpha = 1, beta = 1){
     return(1)
   }
 
-  #if(min(x) <= 0){
-  #  stop("min(x) <= 0")
-  #}
-
-  #if(max(x) > M){
-  #  stop("max(x) > M:  The number of successes (x) for which P(X<=x) will be computed cannot exceed the number of future observations (M)")
-  #  return (1)
-  #}
-
   #############################################################
   #############################################################
   ##CHANGE THIS TO A CALL TO ppredBB() TO OBTAIN F_x()
@@ -77,14 +68,12 @@ rpredBB = function(n, N, s, M, alpha = 1, beta = 1){
 
   rank_list = numeric(n)
 
-  for(i in 1:n) { rank_list[i] = which(abs(F_x - u[i]) == min(abs(F_x - u[i]))) }
-
   for(i in 1:n) {
-    rank = which(abs(F_x - u[i]) == min(abs(F_x - u[i])))
+    rankF = which(abs(F_x - u[i]) == min(abs(F_x - u[i])))
 
-    if(F_x[rank] > u[i]){ rank = rank - 1 }
+    if(F_x[rankF] > u[i]){ rankF = rankF - 1 }
 
-    rank_list[i] = rank
+    rank_list[i] = rankF
   }
 
   return(rank_list)

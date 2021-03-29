@@ -171,18 +171,18 @@ b = 8
 par(mfrow=c(3,1))
 
 #Predictive density
-f_1000 = dpredBB(1:1000,N,t,M,a,b)
-plot(1:1000,f_1000,type = "l", col = "blue", lwd = 2, main = "Beta-Binomial Predictive Density")
+f_1000 = dpredBB(1:M,N,t,M,a,b)
+plot(1:M,f_1000,type = "l", col = "blue", lwd = 2, main = "Beta-Binomial Predictive Density")
 
 #Cumulative predictive probability
-F_1000 = ppredBB(1:1000,N,t,M,a,b)
-plot(1:1000,F_1000,type = "l", col = "red", lwd = 2, main = "Beta-Binomial Cumulative Predictive Probability")
+F_1000 = ppredBB(1:M,N,t,M,a,b)
+plot(1:M,F_1000,type = "l", col = "red", lwd = 2, main = "Beta-Binomial Cumulative Predictive Probability")
 
 #Random sample
-f_x = dpredBB(1:1000,N,t,M,a,b)
+f_x = dpredBB(1:M,N,t,M,a,b)
 random_sample = rpredBB(1000,N,t,M,a,b)
 hist(random_sample,prob = T, main = "Histogram of Sample with Density Curve Overlay",ylim = c(0,max(f_x)*1.1))
-lines(1:1000,f_x)
+lines(1:M,f_x)
 @
 
 
@@ -464,18 +464,20 @@ source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredPG.R')
 set.seed(1234)
 obs = sample(0:100,10,replace=T)
 #obs = rep(100,10)
-ytilde = 0:100
+ytilde = 1:100
 alpha = 11
 beta = 3
 par(mfrow=c(3,1))
 
 #Predictive density
 f_x = dpredPG(obs, ytilde, alpha, beta)
-plot(1:length(f_x),f_x,type = "l", col = "blue", lwd = 2, main = "Poisson-Gamma Predictive Density")
+plot(1:length(f_x),f_x,type = "l", col = "blue", lwd = 2, main = "Poisson-Gamma Predictive Density",xlab = expression(y[n+1]),
+     ylab = expression(f(y[n+1])))
 
 #Cumulative predictive probability
 F_x = ppredPG(obs, ytilde, alpha, beta)
-plot(1:length(F_x),F_x,type = "l", col = "red", lwd = 2, main = "Poisson-Gamma Cumulative Predictive Probability")
+plot(1:length(F_x),F_x,type = "l", col = "red", lwd = 2, main = "Poisson-Gamma Cumulative Predictive Probability",xlab = expression(y[n+1]),
+     ylab = expression(F(y[n+1])))
 
 #Random sample
 random_sample = rpredPG(1000,obs, ytilde, alpha, beta)

@@ -48,14 +48,12 @@ rpredPG = function(n,obs, x, alpha = 1, beta=1){
 
   rank_list = numeric(n)
 
-  for(i in 1:n) { rank_list[i] = which(abs(F_x - u[i]) == min(abs(F_x - u[i]))) }
-
   for(i in 1:n) {
-    rank = which(abs(F_x - u[i]) == min(abs(F_x - u[i])))
+    rankF = which(abs(F_x - u[i]) == min(abs(F_x - u[i])))
 
-    if(F_x[rank] > u[i]){ rank = rank - 1 }
+    if(F_x[rankF] > u[i]){ rankF = rankF - 1 }
 
-    rank_list[i] = rank
+    rank_list[i] = rankF
   }
 
   return(rank_list)
