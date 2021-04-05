@@ -489,6 +489,41 @@ lines(1:length(f_x),f_x)
   \subsection{Normal Observation with Normal-Inverse Gamma Prior}
     \subsubsection{One sample}
       \paragraph{Derivation}
+      [Hoff p. 69ff]\\
+        Let $\left\{Y_1,...,Y_n|\theta,\sigma^2\right\}\overset{i.i.d.}{\sim}N\left(\theta,\sigma^2\right)$.  Then the joint sampling density is
+
+        \begin{flalign*}
+          p\left(y_1,...,y_n|\theta,\sigma^2\right)
+          &= \prod_{i=1}^n p\left(y_i|\theta,\sigma^2\right)\\
+          &\\
+          &= \prod_{i=1}^n \dfrac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{1}{2}\left(\frac{y_i - \theta}{\sigma}\right)^2}\\
+          &\\
+          &= \left(2\pi\sigma^2\right)^{-\sfrac{n}{2}}e^{-\frac{1}{2}\sum_{i=1}^n\left(\frac{y_i - \theta}{\sigma}\right)^2}.\\
+        \end{flalign*}
+
+        It can be shown that $\left\{\sum{y_i^2},\sum{y_i}\right\}$ and hence $\left\{\bar{y},s^2\right\}$ are sufficient statistics, where $\bar{y} = \sum{y_i}/n$ and $s^2 = \sum\left(y_i - \bar{y}\right)^2/(n-1)$.\\
+
+
+        \vdots
+
+        Skipping ahead
+
+        \vdots
+
+        posteriors:
+
+        $$\left\{1/\sigma^2|y_1,...,y_n\right\}\sim gamma\left(\frac{n}{2},\frac{n}{2}\frac{1}{n}\sum\left(y_i - \bar{y}\right)^2\right)$$
+
+        same as
+
+        $$\left\{1/\sigma^2|y_1,...,y_n\right\}\sim gamma\left(\frac{n}{2},\frac{1}{2}\sum\left(y_i - \bar{y}\right)^2\right)$$
+
+
+
+        $$\left\{\theta|\sigma^2, y_1,...,y_n\right\}\sim normal\left(\bar{y},\frac{\sigma^2}{n}\right)$$
+
+        \textcolor{red}{dig into Bedrick notes and homework for Jeffrey's prior}
+
       \paragraph{R Implementation}
       \paragraph{Example}
     \subsubsection{Two samples}

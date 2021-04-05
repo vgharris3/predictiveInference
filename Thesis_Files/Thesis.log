@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  1 APR 2021 11:23
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  6 APR 2021 15:51
 entering extended mode
 **./Thesis.tex
 (Thesis.tex
@@ -1119,46 +1119,85 @@ File: Thesis-004.pdf Graphic file (type pdf)
 <use Thesis-004.pdf>
 Package pdftex.def Info: Thesis-004.pdf  used on input line 388.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
- [15 <./Thesis-004.pdf>]
+LaTeX Font Info:    Calculating math sizes for size <8.4> on input line 404.
+
+
+LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <4.2> not available
+(Font)              size <5> substituted on input line 404.
+
+
+LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <4.2> not available
+(Font)              size <5> substituted on input line 404.
+
+
+LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <4.2> not available
+(Font)              size <5> substituted on input line 404.
+
+
+LaTeX Font Warning: Font shape `OT1/cmr/bx/n' in size <4.2> not available
+(Font)              size <5> substituted on input line 404.
+
+
+LaTeX Font Warning: Font shape `OML/cmm/b/it' in size <4.2> not available
+(Font)              size <5> substituted on input line 404.
+
+
+LaTeX Font Warning: Font shape `OMS/cmsy/b/n' in size <4.2> not available
+(Font)              size <5> substituted on input line 404.
+
+
+LaTeX Font Warning: Font shape `U/rsfs/m/n' in size <4.2> not available
+(Font)              size <5> substituted on input line 404.
+
+[15 <./Thesis-004.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 406--407
+
+ []
+
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 400.
+(hyperref)                removing `math shift' on input line 435.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 400.
+(hyperref)                removing `math shift' on input line 435.
 
-[16]
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 409.
-
+[16] [17]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 409.
+(hyperref)                removing `math shift' on input line 444.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 444.
 
 
 Package hyperref Warning: Difference (3) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 411.
+(hyperref)                than one, level fixed on input line 446.
 
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 412.
+(hyperref)                than one, level fixed on input line 447.
 
-[17
+[18
 
-] [18
+] [19
 
 ] (Thesis.aux)
 Package rerunfilecheck Info: File `Thesis.out' has not changed.
 (rerunfilecheck)             Checksum: D9057D5A53667B537D1F26179CFB7ACD;3188.
+
+
+LaTeX Font Warning: Size substitutions with differences
+(Font)              up to 2.90001pt have occurred.
+
  ) 
 Here is how much of TeX's memory you used:
- 30323 strings out of 479696
- 707521 string characters out of 2881701
+ 30423 strings out of 479696
+ 709074 string characters out of 2881701
  1164470 words of memory out of 3000000
- 46732 multiletter control sequences out of 15000+200000
- 432171 words of font info for 94 fonts, out of 3000000 for 9000
+ 46825 multiletter control sequences out of 15000+200000
+ 443522 words of font info for 128 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  94i,20n,98p,705b,609s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\gabe\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\t
@@ -1174,9 +1213,9 @@ mr6.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/MiKTeX 2.9/f
 onts/type1/public/amsfonts/cm/cmsy10.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsf
 onts/cm/cmsy6.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/M
 iKTeX 2.9/fonts/type1/public/amsfonts/latxfont/line10.pfb>
-Output written on Thesis.pdf (18 pages, 355730 bytes).
+Output written on Thesis.pdf (19 pages, 362006 bytes).
 PDF statistics:
- 473 PDF objects out of 1000 (max. 8388607)
- 60 named destinations out of 1000 (max. 500000)
+ 479 PDF objects out of 1000 (max. 8388607)
+ 61 named destinations out of 1000 (max. 500000)
  392 words of extra memory for PDF output out of 10000 (max. 10000000)
 
