@@ -53,8 +53,8 @@ ppredBB = function(x, N, s, M, alpha = 1, beta=1, lower=TRUE){
     return(1)
   }
 
-  if(min(x) <= 0){
-    stop("min(x) <= 0")
+  if(min(x) < 0){
+    stop("min(x) < 0")
   }
 
   if(max(x) > M){
@@ -70,12 +70,14 @@ ppredBB = function(x, N, s, M, alpha = 1, beta=1, lower=TRUE){
   #denominator = lgamma(r+1) + lgamma(M-r+1) + lgamma(alpha+s) + lgamma(N-s+beta) + lgamma(M+N+alpha+beta)
   #f_x2 = exp(numerator - denominator)
 
-  f_x = dpredBB(1:max(x), N, s, M, alpha, beta)
+  f_x = dpredBB(0:max(x), N, s, M, alpha, beta)
 
   F_x = cumsum(f_x)
 
-  if(lower){return(F_x[x])}
-  else {return(1 - F_x[x])}
+  return_index = which(x == x)
+
+  if(lower){return(F_x[return_index])}
+  else {return(1 - F_x[return_index])}
 
 
 }

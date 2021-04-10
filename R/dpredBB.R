@@ -51,8 +51,8 @@ dpredBB <- function(x, N, s, M, alpha = 1, beta=1){
     return(1)
   }
 
-  if(min(x) <= 0){
-    stop("min(x) <= 0")
+  if(min(x) < 0){
+    stop("min(x) < 0")
   }
 
   if(max(x) > M){

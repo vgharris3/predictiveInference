@@ -164,25 +164,25 @@ source('C:/Users/gabe/Documents/tmp/predictiveInference/R/ppredBB.R')
 source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredBB.R')
 N = 10
 t = 5
-M = 1000
+M = 10
 a = 2
 b = 8
 
 par(mfrow=c(3,1))
 
 #Predictive density
-f_1000 = dpredBB(1:M,N,t,M,a,b)
-plot(1:M,f_1000,type = "l", col = "blue", lwd = 2, main = "Beta-Binomial Predictive Density")
+f_x = dpredBB(0:M,N,t,M,a,b)
+plot(0:M,f_x,type = "l", col = "blue", lwd = 2, main = "Beta-Binomial Predictive Density")
 
 #Cumulative predictive probability
-F_1000 = ppredBB(1:M,N,t,M,a,b)
-plot(1:M,F_1000,type = "l", col = "red", lwd = 2, main = "Beta-Binomial Cumulative Predictive Probability")
+F_x = ppredBB(0:M,N,t,M,a,b)
+plot(0:M,F_x,type = "l", col = "red", lwd = 2, main = "Beta-Binomial Cumulative Predictive Probability")
 
 #Random sample
-f_x = dpredBB(1:M,N,t,M,a,b)
+f_x = dpredBB(0:M,N,t,M,a,b)
 random_sample = rpredBB(1000,N,t,M,a,b)
-hist(random_sample,prob = T, main = "Histogram of Sample with Density Curve Overlay",ylim = c(0,max(f_x)*1.1))
-lines(1:M,f_x)
+hist(random_sample,prob = T, main = "Histogram of Sample with Density Curve Overlay",ylim = c(0,max(f_x)*1.5),xlim = c(0,M))
+lines(0:M,f_x)
 @
 
 
@@ -464,7 +464,7 @@ source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredPG.R')
 set.seed(1234)
 obs = sample(0:100,10,replace=T)
 #obs = rep(100,10)
-ytilde = 1:100
+ytilde = 50
 alpha = 11
 beta = 3
 par(mfrow=c(3,1))
@@ -510,7 +510,7 @@ lines(1:length(f_x),f_x)
 
         \vdots
 
-        posteriors:
+        posteriors given Jeffrey's Prior:
 
         $$\left\{1/\sigma^2|y_1,...,y_n\right\}\sim gamma\left(\frac{n}{2},\frac{n}{2}\frac{1}{n}\sum\left(y_i - \bar{y}\right)^2\right)$$
 
@@ -523,6 +523,32 @@ lines(1:length(f_x),f_x)
         $$\left\{\theta|\sigma^2, y_1,...,y_n\right\}\sim normal\left(\bar{y},\frac{\sigma^2}{n}\right)$$
 
         \textcolor{red}{dig into Bedrick notes and homework for Jeffrey's prior}
+
+<<fig=TRUE, echo=FALSE>>=
+#y taken from Bedrick's Bayesian Lecture 9 Gibbs Sampler example
+y     <- c(1.64,1.7,1.72,1.74,1.82,1.82,1.82,1.90,2.08)
+n      <- length(y);
+ybar <- mean(y);
+s2    <- var(y);
+S = 1000;
+
+PHI       <- matrix(nrow=S,ncol=2)                # hold samples
+
+sig2inv = rgamma(S,0.5*n,0.5*sum((y - ybar)^2))
+sig2 = 1/sig2inv
+
+for(thInd in 1:S){
+  theta = rnorm(1,ybar,sqrt(sig2[thInd]/n))
+  PHI[thInd,1] = theta
+}
+
+PHI[,2] = sig2inv
+
+plot(PHI[,1],PHI[,2],main="Sample",xlab="mu",ylab="var")
+
+#Now draw a random pair (theta, sig^2) and then use that to draw 1 y-value.
+@
+
 
       \paragraph{R Implementation}
       \paragraph{Example}

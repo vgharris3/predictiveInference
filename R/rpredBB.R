@@ -46,21 +46,6 @@ rpredBB = function(n, N, s, M, alpha = 1, beta = 1){
     return(1)
   }
 
-  #############################################################
-  #############################################################
-  ##CHANGE THIS TO A CALL TO ppredBB() TO OBTAIN F_x()
-
-  #r[] is the number of successes in the M future observations
-
-  r = 1:M
-
-  numerator = lgamma(M+1) + lgamma(N+alpha+beta) + lgamma(r+s+alpha) + lgamma(M+N-r-s+beta)
-  denominator = lgamma(r+1) + lgamma(M-r+1) + lgamma(alpha+s) + lgamma(N-s+beta) + lgamma(M+N+alpha+beta)
-  f_x = exp(numerator - denominator)
-
-  F_x = cumsum(f_x)
-  #############################################################
-  #############################################################
 
   F_x = ppredBB(1:M,N,s,M,alpha,beta)
 
@@ -71,7 +56,7 @@ rpredBB = function(n, N, s, M, alpha = 1, beta = 1){
   for(i in 1:n) {
     rankF = which(abs(F_x - u[i]) == min(abs(F_x - u[i])))
 
-    if(F_x[rankF] > u[i]){ rankF = rankF - 1 }
+    #if(F_x[rankF] > u[i]){ rankF = rankF + 1 }
 
     rank_list[i] = rankF
   }
