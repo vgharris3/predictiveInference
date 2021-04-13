@@ -164,25 +164,39 @@ source('C:/Users/gabe/Documents/tmp/predictiveInference/R/ppredBB.R')
 source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredBB.R')
 N = 10
 t = 5
-M = 10
+M = 1000
 a = 2
 b = 8
 
 par(mfrow=c(3,1))
 
 #Predictive density
+#set.seed(1)
 f_x = dpredBB(0:M,N,t,M,a,b)
 plot(0:M,f_x,type = "l", col = "blue", lwd = 2, main = "Beta-Binomial Predictive Density")
 
 #Cumulative predictive probability
+#set.seed(2)
 F_x = ppredBB(0:M,N,t,M,a,b)
 plot(0:M,F_x,type = "l", col = "red", lwd = 2, main = "Beta-Binomial Cumulative Predictive Probability")
 
 #Random sample
+#set.seed(3)
 f_x = dpredBB(0:M,N,t,M,a,b)
-random_sample = rpredBB(1000,N,t,M,a,b)
-hist(random_sample,prob = T, main = "Histogram of Sample with Density Curve Overlay",ylim = c(0,max(f_x)*1.5),xlim = c(0,M))
+random_sample = rpredBB(10000,N,t,M,a,b)
+breaks = seq(-0.5,M+0.5,1)
+res = hist(random_sample,prob = T, main = "Histogram of Sample with Density Curve Overlay",ylim = c(0,max(f_x)*1.5),xlim = c(0,M))#, breaks = breaks)
 lines(0:M,f_x)
+
+#print("sample counts")
+#res$counts
+#print("sample density")
+#res$density
+#print("predictive probability")
+#f_x
+#print("sum of differences between sample density and predictive probability")
+#sum(f_x - res$density)
+
 @
 
 

@@ -47,7 +47,7 @@ rpredBB = function(n, N, s, M, alpha = 1, beta = 1){
   }
 
 
-  F_x = ppredBB(1:M,N,s,M,alpha,beta)
+  F_x = ppredBB(0:M,N,s,M,alpha,beta)
 
   u = stats::runif(n)
 
@@ -56,7 +56,7 @@ rpredBB = function(n, N, s, M, alpha = 1, beta = 1){
   for(i in 1:n) {
     rankF = which(abs(F_x - u[i]) == min(abs(F_x - u[i])))
 
-    #if(F_x[rankF] > u[i]){ rankF = rankF + 1 }
+    if(F_x[rankF] > u[i]){ rankF = rankF - 1 }
 
     rank_list[i] = rankF
   }
