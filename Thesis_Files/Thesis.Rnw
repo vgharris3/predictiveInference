@@ -172,13 +172,14 @@ par(mfrow=c(3,1))
 
 #Predictive density
 #set.seed(1)
-f_x = dpredBB(0:M,N,t,M,a,b)
-plot(0:M,f_x,type = "l", col = "blue", lwd = 2, main = "Beta-Binomial Predictive Density")
+x = 0:M
+f_x = dpredBB(x,N,t,M,a,b)
+plot(x,f_x,type = "l", col = "blue", lwd = 2, main = "Beta-Binomial Predictive Density")
 
 #Cumulative predictive probability
 #set.seed(2)
-F_x = ppredBB(0:M,N,t,M,a,b)
-plot(0:M,F_x,type = "l", col = "red", lwd = 2, main = "Beta-Binomial Cumulative Predictive Probability")
+F_x = ppredBB(x,N,t,M,a,b)
+plot(x,F_x,type = "l", col = "red", lwd = 2, main = "Beta-Binomial Cumulative Predictive Probability")
 
 #Random sample
 #set.seed(3)
@@ -399,13 +400,25 @@ lines(1:1000,f_x)
         &= \dfrac{\Gamma\left(\alpha+\sum y_i+\tilde{y}\right)}{\Gamma(\tilde{y}+1)\Gamma(\alpha+\sum y_i)}\cdot \left(\dfrac{\beta+n}{\beta+n+1}\right)^{\alpha+\sum y_i} \cdot \left(\dfrac{1}{\beta+n+1}\right)^{\tilde{y}}\\
       \end{flalign*}
 
-This is a negative binomial distribution:  $\tilde{y}\sim NB\left(\alpha+\sum y_i,\beta+n\right)$.
+This is a negative binomial distribution:  $\tilde{y}\sim NB\left(\alpha+\sum y_i,\beta+n\right)$, for which
+
+\begin{flalign*}
+  E\left[\tilde{Y}|y_1,...,y_n\right] &= \dfrac{a+\sum{y_i}}{b+n} = E\left[\theta|y_1,...,y_n\right];\\
+  &\\
+  \text{Var}\left[\tilde{Y}|y_1,...,y_n\right] &= \dfrac{a+\sum{y_i}}{b+n}\dfrac{b+n+1}{b+n}\\
+  &\\
+  &=\text{Var}\left[\theta|y_1,...,y_n\right]\times(b+n+1)\\
+  &\\
+  &=E\left[\theta|y_1,...,y_n\right]\times\dfrac{b+n+1}{b+n}\\
+\end{flalign*}
 
 \vspace{5mm}
 
 \hrule
 
 \vspace{5mm}
+
+[Showing here that it is indeed a NB distribution]
 
 $$\theta\sim NB(\alpha,\beta)\Rightarrow p(\theta) = \binom{\theta+\alpha-1}{\alpha - 1}\left(\dfrac{\beta}{\beta+1}\right)^\alpha\left(\dfrac{1}{\beta+1}\right)^\theta$$
 
@@ -465,40 +478,70 @@ $$\theta\sim NB(\alpha,\beta)\Rightarrow p(\theta) = \binom{\theta+\alpha-1}{\al
 
     \subsubsection{R Implementation}
 
-This result has been used to create standard format R functions dpredPG(), ppredPG(), and rpredPG() for the Poisson-Gamma distribtuion for density, cumulative probability, and random sampling, respectively (see appendix).  These functions are exercised in the following example.
+This result has been used to create standard format R functions dpredPG(), ppredPG(), and rpredPG() for the Poisson-Gamma distribtuion for density, cumulative probability, and random sampling, respectively (see appendix).  These functions are exercised in the following example.\\
+
+    Developing the random sample function rpredPG():  I need to establish the support of the predictive distribution $f_x$ from which to sample.  the uniroot() function is not working because it keeps feeding non-integer values to dnbinom().  Strategy: a modified bisection method as follows:\\
+
+    \begin{enumerate}
+      \item set a desired tolerance $\epsilon$.
+      \item Find the expected value $E_x$ (closed formula, see above).
+      \item Step to the right of $E_x$ by whole integers, in the sequence $E_x + \{1,2,4,...2^n\}$, stopping at $U=f_x\left(E_x + 2^n\right) < 0$.  This is the upper bound for the bisection method.
+      \item Bisect the interval, rounding to the nearest integer.  Call the resulting mid-interval number $B$.
+      \item If B is positive, test whether $0 \leq f_x(B) \leq \epsilon$.  If so, DONE.  If not:
+      \item Establish new interval, choosing endpoints from $E_x$, $B$, and $U$ so that the interval straddles $0$, and repeat the steps until the condition in step 5 is reached.
+    \end{enumerate}
 
     \subsubsection{Example}
 
-Suppose $t=5$ successes have been observed out of $N=10$ binary events, $\alpha = 2$ and $\beta = 8$.  For $M = 1000$ future observations, the figures below show the predictive distribution from dpredBB(), the cumulative distribution from ppredBB(), and a histogram of random draws from rpredBB().
+Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15, 3, 97.  Let $\alpha = 11$ and $\beta = 3$.  For $\tilde{y} = 1:100$ possible future occurrences, the figures below show the predictive distribution from dpredPG(), the cumulative distribution from ppredPG(), and a histogram of random draws from rpredPG().
 
 <<fig=TRUE, echo=FALSE>>=
 source('C:/Users/gabe/Documents/tmp/predictiveInference/R/dpredPG.R')
 source('C:/Users/gabe/Documents/tmp/predictiveInference/R/ppredPG.R')
 source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredPG.R')
+
+#load_all()
+
 set.seed(1234)
-obs = sample(0:100,10,replace=T)
+#obs = sample(0:100,10,replace=T)
+obs = c(27, 79, 21, 100, 8, 4, 37, 15, 3, 97)
 #obs = rep(100,10)
-ytilde = 50
+ytilde = 0:60
 alpha = 11
 beta = 3
 par(mfrow=c(3,1))
 
 #Predictive density
-f_x = dpredPG(obs, ytilde, alpha, beta)
+f_x = dpredPG(ytilde, obs, alpha, beta)
 plot(1:length(f_x),f_x,type = "l", col = "blue", lwd = 2, main = "Poisson-Gamma Predictive Density",xlab = expression(y[n+1]),
      ylab = expression(f(y[n+1])))
 
 #Cumulative predictive probability
-F_x = ppredPG(obs, ytilde, alpha, beta)
+F_x = ppredPG(ytilde, obs, alpha, beta)
 plot(1:length(F_x),F_x,type = "l", col = "red", lwd = 2, main = "Poisson-Gamma Cumulative Predictive Probability",xlab = expression(y[n+1]),
      ylab = expression(F(y[n+1])))
 
 #Random sample
-random_sample = rpredPG(1000,obs, ytilde, alpha, beta)
-hist(random_sample,prob = T, main = "Histogram of Sample with Density Curve Overlay",ylim = c(0,max(f_x)*1.1))
-lines(1:length(f_x),f_x)
-@
+random_sample = rpredPG(100000,obs, alpha, beta)
+range_Rand = min(random_sample):max(random_sample)
+f_Rand = dpredPG(range_Rand,obs,alpha,beta)
+breaks = seq(min(random_sample)-0.5,max(random_sample)+0.5,1)
+res = hist(random_sample,prob = T, main = "Histogram of Sample with Density Curve Overlay",ylim = c(0,max(f_Rand)*1.1),breaks = breaks)
+lines(range_Rand,f_Rand)
 
+if(0){
+  #diagnostics
+  len = length(f_x)
+  f = f_x[1:len]
+  h = res$counts[1:len]
+  d = res$density[1:len]
+  cbind(f,h,d,abs(f-d))
+  sprintf("%10f",max(abs(f-d)))
+  sprintf("%10f",min(abs(f-d)))
+  sprintf("%10f",mean(abs(f-d)))
+  sprintf("%10f",mean(f-d))
+}
+@
 
   \subsection{Normal Observation with Normal-Inverse Gamma Prior}
     \subsubsection{One sample}

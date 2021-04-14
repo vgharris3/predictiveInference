@@ -1,11 +1,11 @@
 #' Title
 #'
-#' dpredPG returns the predictive probability of a future observation having value {1,...,xmax} given observations obs~Poi(theta)
+#' dpredPG returns the predictive probability of a future observation having value {1,...,x} given observations obs~Poi(theta)
 #' and theta~Gamma(alpha,beta)
 #'
 #'
+#' @param x vector of integers for which predictive probability is desired
 #' @param obs vector of (observed) Poisson-distributed counts
-#' @param x maximum integer for which predictive probability is desired
 #' @param alpha sum of counts from beta prior observations for gamma prior distribution on theta
 #' @param beta number of prior observations for gamma prior distribution on theta
 #'
@@ -13,7 +13,7 @@
 #' @export
 #'
 #' @examples 1
-dpredPG <- function(obs, x, alpha = 1, beta=1){
+dpredPG <- function(x, obs, alpha = 1, beta=1){
 
   #d+pred+PG
   #d = density (like R distribution functions)
@@ -37,7 +37,7 @@ dpredPG <- function(obs, x, alpha = 1, beta=1){
     return(1)
   }
 
-  if(min(obs) <= 0){
+  if(min(obs) < 0){
     stop("All observations must be non-negative")
   }
 

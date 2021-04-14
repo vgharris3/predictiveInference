@@ -1,6 +1,7 @@
 #' Title
 #'
-#' rpredBB returns a random sample of size n from the Beta-Binomial predictive probability distribution computed from s observed successes out of a sample of size N, M future observations, and user input shape parameters for Beta prior on Pr(success)
+#' rpredBB returns a random sample of size n from the Beta-Binomial predictive probability distribution computed
+#' from s observed successes out of a sample of size N, M future observations, and user input shape parameters for Beta prior on Pr(success)
 #'
 #' @param n desired random sample size
 #' @param N number of observed independent binary variables
