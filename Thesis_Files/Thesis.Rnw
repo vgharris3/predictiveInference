@@ -563,31 +563,151 @@ if(0){
 
         \vdots
 
+        Following Hoff (p. 74ff), for joint inference on both $\theta$ and $\sigma$, assume priors
+
+        \begin{flalign*}
+          \frac{1}{\sigma^2} &\sim \text{gamma}\left(\sfrac{\nu_0}{2},\sfrac{\nu_0\sigma_0^2}{2}\right)\\
+          &\\
+          \theta|\sigma^2 &\sim \text{normal}\left(\mu_0,\sfrac{\sigma^2}{\kappa_0}\right)\\
+        \end{flalign*}
+
+        where $\left(\sigma_0^2,\nu_0\right)$ are the sample variance and sample size of prior observations, and $\left(\mu_o, \kappa_0\right)$ are the sample mean and sample size of prior observations.\\
+
+        \textcolor{red}{Are there different sets of prior observations for the two different prior distributions?  I.e. does $\nu_0 = \kappa_0$?}\\
+
+        Note:  $\mu_0$, $\kappa_0$, $\nu_0$, and $\sigma_0^2$ come from prior knowledge. [in the Hoff example (Midge Wing Length), $\kappa_0$ and $\nu_0$ are both set to $1$ so that "our prior distributions are only weakly centered around these estimates from other populations."]\\
+
+        From this we derive joint posterior
+
+        \begin{flalign*}
+          \left\{\theta|y_1,...,y_n,\sigma^2\right\} &\sim \text{normal}\left(\mu_n,\sfrac{\sigma^2}{\kappa_n}\right)\\
+          &\\
+          \left\{\sigma^2|y_1,...,y_n\right\} &\sim \text{inverse-gamma}\left(\sfrac{\nu_n}{2},\sfrac{\sigma^2_n\nu_n}{2}\right).
+        \end{flalign*}
+
+        where
+
+        \begin{flalign*}
+          \kappa_n &= \kappa_0 + n\\
+          &\\
+          \mu_n &= \frac{\kappa_0\mu_0+n\bar{y}}{\kappa_n}\\
+          &\\
+          \nu_n &= \nu_0 + n\\
+          &\\
+          \sigma_n^2 &= \frac{1}{\nu_n}\left[\nu_0\sigma_0^2 + (n-1)s^2 + \frac{\kappa_0 n}{\kappa_n}\left(\bar{y}-\mu_0\right)^2\right].\\
+        \end{flalign*}
+
+        Here $\bar{y} = \frac{1}{n}\sum_{i=1}^n y_i$ is the sample mean and $s^2 = \sum_{i=1}^n\frac{\left(y_i - \bar{y}\right)^2}{(n-1)}$ is the sample variance.\\
+
+        From the joint posterior distribution we generate marginal samples by means of the Monte Carlo method (Hoff, p. 77):
+
+        \begin{flalign*}
+          \begin{matrix}
+            \sigma^{2(1)}\sim \text{inverse-gamma}\left(\nu_n/2,\sigma^2_n\nu_n/2\right), & \theta^{(1)}\sim \text{normal}\left(\mu_n,\sigma^{2(1)}/\kappa_n\right) \\
+            \vdots  & \vdots  \\
+            \sigma^{2(S)}\sim \text{inverse-gamma}\left(\nu_n/2,\sigma^2_n\nu_n/2\right), & \theta^{(S)}\sim \text{normal}\left(\mu_n,\sigma^{2(S)}/\kappa_n\right) \\
+          \end{matrix}
+        \end{flalign*}
+
+        For prediction of future $\tilde{y}|y_1,...,y_n,\theta,\sigma^2$, generate $\tilde{y}_i \sim \text{normal}\left(\theta^{(i)},\sigma^{2(i)}\right)$.\\
+
+        \textcolor{red}{WHAT ABOUT BURN-IN?  HOW MANY TO DISCARD?}
+
+        \clearpage
+
+        \textit{Example (Hoff p. 72ff, using data from Grogan and Wirth (1981)):  Midge wing length}\\
+
+        Grogan and Wirth (1981) provide 9 measurements of midge wing length, in millimeters:  $y = \{1.64, 1.7, 1.72, 1.74, 1.82, 1.82, 1.82, 1.90, 2.08\}$. Prior studies suggest values $\mu_0 = 1.9$ and $\sigma_0^2 = 0.01$.  We choose $\kappa_0 = \nu_0 = 1$ ``...so that our prior distributions are only weakly centered around these estimates from other populations" (Hoff p. 76).  We compute
+
+        \begin{flalign*}
+          \bar{y} &= 1.804\\
+          &\\
+          \text{var}(y) &= 0.0169\\
+          &\\
+          \kappa_n &= 1 + 9 = 10\\
+          &\\
+          \mu_n &= \frac{1 \cdot 1.9 + 9 \cdot 1.804}{10} = 1.814\\
+          &\\
+          \nu_n &= 1 + 9 = 10\\
+          &\\
+          \sigma_n^2 &= \frac{1}{10}\left[1 \cdot 0.01 + (9-1) \cdot 0.0169 + \frac{1 \cdot 9}{10}\left(1.804 - 1\right)^2\right] = 0.0153\\
+        \end{flalign*}
+
+        Thus $\sfrac{\nu_n}{2} = 5$ and $\sfrac{nu_n\sigma_n^2}{2} = 0.7662$ and we have posteriors
+
+        \begin{flalign*}
+          \left\{\theta|y_1,...,y_n,\sigma^2\right\} &\sim \text{normal}\left(1.814,\sfrac{\sigma^2}{10}\right)\\
+          &\\
+          \left\{\sigma^2|y_1,...,y_n\right\} &\sim \text{inverse-gamma}(5,0.7662)\\
+        \end{flalign*}
+
+<<fig=TRUE, echo=FALSE>>=
+set.seed(1234)
+
+#prior
+mu0 = 1.9; k0 = 1
+sig20 = 0.010; nu0 = 1
+
+y = c(1.64,1.7,1.72,1.74,1.82,1.82,1.82,1.90,2.08)
+n = length(y);
+ybar = mean(y);
+s2 = var(y);
+
+kn = k0 + n; nun = nu0 + n
+mun = (k0*mu0+n*ybar)/kn
+sig2n = (nu0*sig20 + (n-1)*s2 + k0*n*(ybar-mu0)^2/kn)/nun
+
+rbind(kn,mun,sig2n)
+
+#Monte Carlo for marginal posterior samples of sig2 and theta
+S = 10000
+sig2.postsample = 1/rgamma(S,nun/2,sig2n*nun/2)
+theta.postsample = rnorm(S,mun,sqrt(sig2.postsample/kn))
+
+plot(theta.postsample,sig2.postsample,pch = 20)
+
+for(yInd in 1:S){
+  ytilde[yInd] = rnorm(1,theta.postsample,sqrt(sig2.postsample))
+}
+
+plot(density(ytilde))
+
+@
+
+
+
+        \clearpage
+
         Skipping ahead
 
         \vdots
 
         posteriors given Jeffrey's Prior:
 
-        $$\left\{1/\sigma^2|y_1,...,y_n\right\}\sim gamma\left(\frac{n}{2},\frac{n}{2}\frac{1}{n}\sum\left(y_i - \bar{y}\right)^2\right)$$
+        $$\left\{1/\sigma^2|y_1,...,y_n\right\}\sim \text{gamma}\left(\frac{n}{2},\frac{n}{2}\frac{1}{n}\sum\left(y_i - \bar{y}\right)^2\right)$$
 
         same as
 
-        $$\left\{1/\sigma^2|y_1,...,y_n\right\}\sim gamma\left(\frac{n}{2},\frac{1}{2}\sum\left(y_i - \bar{y}\right)^2\right)$$
+        $$\left\{1/\sigma^2|y_1,...,y_n\right\}\sim \text{gamma}\left(\frac{n}{2},\frac{1}{2}\sum\left(y_i - \bar{y}\right)^2\right)$$
 
 
 
-        $$\left\{\theta|\sigma^2, y_1,...,y_n\right\}\sim normal\left(\bar{y},\frac{\sigma^2}{n}\right)$$
+        $$\left\{\theta|\sigma^2, y_1,...,y_n\right\}\sim \text{normal}\left(\bar{y},\frac{\sigma^2}{n}\right)$$
 
         \textcolor{red}{dig into Bedrick notes and homework for Jeffrey's prior}
 
 <<fig=TRUE, echo=FALSE>>=
-#y taken from Bedrick's Bayesian Lecture 9 Gibbs Sampler example
+#y taken from Hoff p. 76 and Bedrick's Bayesian Lecture 9 Gibbs Sampler example
+
+#prior
+mu0 = 1.9; k0 = 1
+s20 = 0.10; nu0 = 1
+
 y     <- c(1.64,1.7,1.72,1.74,1.82,1.82,1.82,1.90,2.08)
 n      <- length(y);
 ybar <- mean(y);
 s2    <- var(y);
-S = 1000;
+S = 1000;   #Number of monte carlos
 
 PHI       <- matrix(nrow=S,ncol=2)                # hold samples
 
