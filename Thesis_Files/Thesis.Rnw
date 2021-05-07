@@ -186,7 +186,8 @@ plot(x,F_x,type = "l", col = "red", lwd = 2, main = "Beta-Binomial Cumulative Pr
 f_x = dpredBB(0:M,N,t,M,a,b)
 random_sample = rpredBB(10000,N,t,M,a,b)
 breaks = seq(-0.5,M+0.5,1)
-res = hist(random_sample,prob = T, main = "Histogram of Sample with Density Curve Overlay",ylim = c(0,max(f_x)*1.5),xlim = c(0,M))#, breaks = breaks)
+res = hist(random_sample, prob = TRUE, main = "Histogram of Sample with Density Curve Overlay",ylim = c(0,max(f_x)*1.5),xlim = c(0,M))#, breaks = breaks)
+#res = hist(random_sample, main = "Histogram of Sample with Density Curve Overlay",ylim = c(0,max(f_x)*1.5),xlim = c(0,M))#, breaks = breaks)
 lines(0:M,f_x)
 
 #print("sample counts")
@@ -312,7 +313,7 @@ plot(x[1:plot_length],F_x[1:plot_length],type = "l", lwd = 2, col = "red", main 
 n = 1000
 
 random_sample = rpredEG(n, XNminusd, d, dt, gm)
-hist(random_sample,prob = T,main = "Histogram of Sample with Density Curve Overlay", ylim = c(0,max(f_x)*1.1))
+hist(random_sample,prob = TRUE,main = "Histogram of Sample with Density Curve Overlay", ylim = c(0,max(f_x)*1.1))
 lines(1:1000,f_x)
 @
 
@@ -526,7 +527,7 @@ random_sample = rpredPG(100000,obs, alpha, beta)
 range_Rand = min(random_sample):max(random_sample)
 f_Rand = dpredPG(range_Rand,obs,alpha,beta)
 breaks = seq(min(random_sample)-0.5,max(random_sample)+0.5,1)
-res = hist(random_sample,prob = T, main = "Histogram of Sample with Density Curve Overlay",ylim = c(0,max(f_Rand)*1.1),breaks = breaks)
+res = hist(random_sample,prob = TRUE, main = "Histogram of Sample with Density Curve Overlay",ylim = c(0,max(f_Rand)*1.1),breaks = breaks)
 lines(range_Rand,f_Rand)
 
 if(0){
@@ -597,7 +598,7 @@ if(0){
           \sigma_n^2 &= \frac{1}{\nu_n}\left[\nu_0\sigma_0^2 + (n-1)s^2 + \frac{\kappa_0 n}{\kappa_n}\left(\bar{y}-\mu_0\right)^2\right].\\
         \end{flalign*}
 
-        Here $\bar{y} = \frac{1}{n}\sum_{i=1}^n y_i$ is the sample mean and $s^2 = \sum_{i=1}^n\frac{\left(y_i - \bar{y}\right)^2}{(n-1)}$ is the sample variance.\\
+        Here $\bar{y} = \frac{1}{n}\sum_{i=1}^n y_i$ is the sample mean and $s^2 = \frac{1}{n-1}\sum_{i=1}^n\left(y_i - \bar{y}\right)^2$ is the sample variance.\\
 
         From the joint posterior distribution we generate marginal samples by means of the Monte Carlo method (Hoff, p. 77):
 
@@ -642,6 +643,7 @@ if(0){
         \end{flalign*}
 
 <<fig=TRUE, echo=FALSE>>=
+source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredNormIG.R')
 set.seed(1234)
 
 #prior
@@ -657,20 +659,28 @@ kn = k0 + n; nun = nu0 + n
 mun = (k0*mu0+n*ybar)/kn
 sig2n = (nu0*sig20 + (n-1)*s2 + k0*n*(ybar-mu0)^2/kn)/nun
 
-rbind(kn,mun,sig2n)
+rbind(kn,mun,sig2n,nun)
 
 #Monte Carlo for marginal posterior samples of sig2 and theta
 S = 10000
 sig2.postsample = 1/rgamma(S,nun/2,sig2n*nun/2)
 theta.postsample = rnorm(S,mun,sqrt(sig2.postsample/kn))
 
-plot(theta.postsample,sig2.postsample,pch = 20)
+#plot(theta.postsample,sig2.postsample,pch = 20)
 
+set.seed(1234)
 for(yInd in 1:S){
   ytilde[yInd] = rnorm(1,theta.postsample,sqrt(sig2.postsample))
 }
 
-plot(density(ytilde))
+par(mfrow=c(2,1))
+
+hist(ytilde, probability = TRUE)
+lines(density(ytilde))
+
+set.seed(1234)
+random_sample = rpredNormIG(S,y,mu0,k0,sig20,nu0)
+hist(random_sample,probability = TRUE)
 
 @
 

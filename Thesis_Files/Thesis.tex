@@ -464,7 +464,7 @@ Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15,
           \sigma_n^2 &= \frac{1}{\nu_n}\left[\nu_0\sigma_0^2 + (n-1)s^2 + \frac{\kappa_0 n}{\kappa_n}\left(\bar{y}-\mu_0\right)^2\right].\\
         \end{flalign*}
 
-        Here $\bar{y} = \frac{1}{n}\sum_{i=1}^n y_i$ is the sample mean and $s^2 = \sum_{i=1}^n\frac{\left(y_i - \bar{y}\right)^2}{(n-1)}$ is the sample variance.\\
+        Here $\bar{y} = \frac{1}{n}\sum_{i=1}^n y_i$ is the sample mean and $s^2 = \frac{1}{n-1}\sum_{i=1}^n\left(y_i - \bar{y}\right)^2$ is the sample variance.\\
 
         From the joint posterior distribution we generate marginal samples by means of the Monte Carlo method (Hoff, p. 77):
 
@@ -514,6 +514,7 @@ Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15,
 kn    10.000000
 mun    1.814000
 sig2n  0.015324
+nun   10.000000
 \end{Soutput}
 \end{Schunk}
 \includegraphics{Thesis-005}

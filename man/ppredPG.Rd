@@ -4,20 +4,22 @@
 \alias{ppredPG}
 \title{Title}
 \usage{
-ppredPG(obs, xmax, alpha = 1, beta = 1, lower = TRUE)
+ppredPG(x, obs, alpha = 1, beta = 1, lower = TRUE)
 
-ppredPG(obs, xmax, alpha = 1, beta = 1, lower = TRUE)
+ppredPG(x, obs, alpha = 1, beta = 1, lower = TRUE)
 }
 \arguments{
-\item{obs}{vector of (observed) Poisson-distributed counts}
+\item{x}{non-negative integer count for which predictive probability is desired}
 
-\item{xmax}{maximum integer for which predictive probability is desired}
+\item{obs}{vector of (observed) Poisson-distributed counts}
 
 \item{alpha}{sum of counts from beta prior observations for gamma prior distribution on theta}
 
 \item{beta}{number of prior observations for gamma prior distribution on theta}
 
 \item{lower}{logical; if TRUE (default), probabilities are P(R<=q) otherwise P(R>q)}
+
+\item{xmax}{maximum integer for which predictive probability is desired}
 }
 \value{
 Poisson-Gamma cumulative predictive probability

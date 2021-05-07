@@ -4,18 +4,20 @@
 \alias{dpredPG}
 \title{Title}
 \usage{
-dpredPG(obs, xmax, alpha = 1, beta = 1)
+dpredPG(x, obs, alpha = 1, beta = 1)
 
-dpredPG(obs, xmax, alpha = 1, beta = 1)
+dpredPG(x, obs, alpha = 1, beta = 1)
 }
 \arguments{
-\item{obs}{vector of (observed) Poisson-distributed counts}
+\item{x}{vector of integers for which predictive probability is desired}
 
-\item{xmax}{maximum integer for which predictive probability is desired}
+\item{obs}{vector of (observed) Poisson-distributed counts}
 
 \item{alpha}{sum of counts from beta prior observations for gamma prior distribution on theta}
 
 \item{beta}{number of prior observations for gamma prior distribution on theta}
+
+\item{xmax}{maximum integer for which predictive probability is desired}
 }
 \value{
 Poisson-Gamma predictive probability
@@ -26,7 +28,7 @@ Poisson-Gamma predictive probability
 dpredPG returns the predictive probability of a future observation having value {1,...,xmax} give observations obs~Poi(theta)
 and theta~Gamma(alpha,beta)
 
-dpredPG returns the predictive probability of a future observation having value {1,...,xmax} given observations obs~Poi(theta)
+dpredPG returns the predictive probability of a future observation having value {1,...,x} given observations obs~Poi(theta)
 and theta~Gamma(alpha,beta)
 }
 \examples{

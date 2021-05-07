@@ -4,18 +4,18 @@
 \alias{rpredPG}
 \title{Title}
 \usage{
-rpredPG(n, obs, xmax, alpha = 1, beta = 1)
+rpredPG(n, obs, alpha = 1, beta = 1)
 }
 \arguments{
 \item{n}{desired random sample size}
 
 \item{obs}{vector of (observed) Poisson-distributed counts}
 
-\item{xmax}{maximum integer for which predictive probability is desired}
-
 \item{alpha}{sum of counts from beta prior observations for gamma prior distribution on theta}
 
 \item{beta}{number of prior observations for gamma prior distribution on theta}
+
+\item{x}{vector of integers for which predictive probability is desired}
 }
 \value{
 Poisson-Gamma cumulative predictive probability
