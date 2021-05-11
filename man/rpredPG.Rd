@@ -14,8 +14,6 @@ rpredPG(n, obs, alpha = 1, beta = 1)
 \item{alpha}{sum of counts from beta prior observations for gamma prior distribution on theta}
 
 \item{beta}{number of prior observations for gamma prior distribution on theta}
-
-\item{x}{vector of integers for which predictive probability is desired}
 }
 \value{
 Poisson-Gamma cumulative predictive probability

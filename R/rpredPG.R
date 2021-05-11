@@ -5,7 +5,6 @@
 #'
 #' @param n desired random sample size
 #' @param obs vector of (observed) Poisson-distributed counts
-#' @param x vector of integers for which predictive probability is desired
 #' @param alpha sum of counts from beta prior observations for gamma prior distribution on theta
 #' @param beta number of prior observations for gamma prior distribution on theta
 #'
@@ -22,11 +21,6 @@ rpredPG = function(n,obs, alpha = 1, beta=1){
   #NOT ENOUGH / TOO FEW PARAMETERS
   ##########################
   ##########################
-
- # if(min(x) < 0){
- #   stop("x < 0:  x must be a non-negative integer")
- #    return (1)
- #  }
 
   if(alpha <= 0){
     stop("a<=0:  a must be greater than 0")

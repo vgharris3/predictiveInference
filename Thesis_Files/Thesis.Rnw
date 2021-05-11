@@ -479,7 +479,7 @@ $$\theta\sim NB(\alpha,\beta)\Rightarrow p(\theta) = \binom{\theta+\alpha-1}{\al
 
     \subsubsection{R Implementation}
 
-This result has been used to create standard format R functions dpredPG(), ppredPG(), and rpredPG() for the Poisson-Gamma distribtuion for density, cumulative probability, and random sampling, respectively (see appendix).  These functions are exercised in the following example.\\
+This result has been used to create standard format R functions dpredPG(), ppredPG(), and rpredPG() for the Poisson-Gamma distribution for density, cumulative probability, and random sampling, respectively (see appendix).  These functions are exercised in the following example.\\
 
     Developing the random sample function rpredPG():  I need to establish the support of the predictive distribution $f_x$ from which to sample.  the uniroot() function is not working because it keeps feeding non-integer values to dnbinom().  Strategy: a modified bisection method as follows:\\
 
@@ -612,7 +612,25 @@ if(0){
 
         For prediction of future $\tilde{y}|y_1,...,y_n,\theta,\sigma^2$, generate $\tilde{y}_i \sim \text{normal}\left(\theta^{(i)},\sigma^{2(i)}\right)$.\\
 
-        \textcolor{red}{WHAT ABOUT BURN-IN?  HOW MANY TO DISCARD?}
+
+      \paragraph{R Implementation}
+      Standard format R functions dpredNormIG(), ppredNormIG(), and rpredNormIG() have been created for the Normal-Inverse Gamma distribution for density, cumulative probability, and random sampling, respectively (see appendix).  For the random sampler rpredNormIG(), the Monte-Carlo method described above was directly employed.  The predictive density and cumulative density functions depend on the random sample, and utilize Kernel Density Estimation (KDE) and R's built-in density() function.  The KDE is computed by definition, using a normal kernel:
+
+      $$\hat{f}_K(x) = \frac{1}{n}\sum_{i=1}^n\frac{1}{h}K\left(\frac{x-X_i}{h}\right),$$
+
+      where
+
+      \begin{flalign*}
+        X_i & \text{ is the random sample generated using rpredNormIG()}\\
+        &\\
+        K & \text{ is Normal(0,1)}\\
+        &\\
+        h & \text{ is the bandwidth from R's density() function (that is, } h = \text{ density}(X_i)\text{\$bw)}\\
+      \end{flalign*}
+
+
+
+      These functions are exercised in the following example.\\
 
         \clearpage
 
@@ -644,6 +662,7 @@ if(0){
 
 <<fig=TRUE, echo=FALSE>>=
 source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredNormIG.R')
+source('C:/Users/gabe/Documents/tmp/predictiveInference/R/dpredNormIG.R')
 set.seed(1234)
 
 #prior
@@ -668,19 +687,26 @@ theta.postsample = rnorm(S,mun,sqrt(sig2.postsample/kn))
 
 #plot(theta.postsample,sig2.postsample,pch = 20)
 
-set.seed(1234)
-for(yInd in 1:S){
-  ytilde[yInd] = rnorm(1,theta.postsample,sqrt(sig2.postsample))
-}
+#set.seed(1234)
+#for(yInd in 1:S){
+#  ytilde[yInd] = rnorm(1,theta.postsample,sqrt(sig2.postsample))
+#}
 
 par(mfrow=c(2,1))
 
-hist(ytilde, probability = TRUE)
-lines(density(ytilde))
-
 set.seed(1234)
 random_sample = rpredNormIG(S,y,mu0,k0,sig20,nu0)
-hist(random_sample,probability = TRUE)
+H = hist(random_sample,probability = TRUE)
+
+
+
+x = sort(runif(10,min = min(random_sample),max = max(random_sample)))
+#tic()
+xd = dpredNormIG(x,y,mu0,k0,sig20,nu0)
+#toc()
+
+lines(x,xd,col="red")
+
 
 @
 
@@ -737,7 +763,6 @@ plot(PHI[,1],PHI[,2],main="Sample",xlab="mu",ylab="var")
 @
 
 
-      \paragraph{R Implementation}
       \paragraph{Example}
     \subsubsection{Two samples}
       \paragraph{Derivation}

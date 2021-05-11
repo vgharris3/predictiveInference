@@ -1,21 +1,21 @@
-#' Title
+#' The Normal-Inverse Gamma Predictive Distribution
 #'
-#' dpredPG returns a random sample of size n from the Poisson-Gamma predictive probability distribution given observations obs~Poi(theta)
-#' and theta~Gamma(alpha,beta)
+#' dpredNormIG returns the predictive probability of future observations based on
 #'
-#' @param n vector of integers for which predictive probability is desired
-#' @param obs vector of (observed) Poisson-distributed counts
+#' @param x vector of values for which predictive probability is desired
+#' @param obs vector of (observed) Normally-distributed values
 #' @param mu0 mean of prior observations (set default)
 #' @param k0 number of prior observations (default is 1)
 #' @param sig20 variance of prior observations (set default)
 #' @param nu0 number of prior observations (default is 1)
+#' @param S size of random sample used for density approximation (default is 10^6)
 #' @param Jeffreys flag for use of Jeffrey's prior
 #'
 #' @return random sample of size n Normal - Inverse Gamma predictive probability
 #' @export
 #'
 #' @examples 1
-dpredNormIG = function(n,obs,mu0=0,k0=1,sig20=1,nu0=1,Jeffreys=FALSE){
+dpredNormIG = function(x,obs,mu0=0,k0=1,sig20=1,nu0=1,S = 10000,Jeffreys=FALSE){
 
   #ERROR HANDLING
 
@@ -42,7 +42,7 @@ dpredNormIG = function(n,obs,mu0=0,k0=1,sig20=1,nu0=1,Jeffreys=FALSE){
 
   nobs = length(obs);
   meanobs = mean(obs);
-  s2 = var(obs);
+  s2 = stats::var(obs);
 
   if(Jeffreys){
 
@@ -51,13 +51,37 @@ dpredNormIG = function(n,obs,mu0=0,k0=1,sig20=1,nu0=1,Jeffreys=FALSE){
     #Finding t-distribution density for "shifted_scaled"
     #ss = (theta - obs)
 
-    shifted_scaled = dt(obs,df=length(obs)-1)
+    shifted_scaled = stats::dt(obs,df=length(obs)-1)
 
   } else {
 
-    rs = rpredNormIG(n,obs,mu0,k0,sig20,nu0,Jeffreys=FALSE)
+    #Obtain a random sample from which to approximate the density
+    rs = rpredNormIG(S,obs,mu0,k0,sig20,nu0,Jeffreys=FALSE)
+
+    #Estimating density using R's density() function on random sample
+    #(taken from https://stackoverflow.com/questions/28077500/find-the-probability-density-of-a-new-data-point-using-density-function-in-r)
+    d <- stats::density(rs)
+    h = d$bw
+    myKDE <- function(t){
+      kernelValues <- rep(0,length(rs))
+      transformed = (t - rs)/h
+      kernelValues = stats::dnorm(transformed, mean = 0, sd = 1)/h
+      return(sum(kernelValues) / length(rs))
+    }
+
+    myKDE_vec <- function(tvec){
+      kernelValues <- matrix(0, nrow = length(tvec), ncol = length(rs))
+      rsmat_old = do.call("rbind",replicate(length(tvec),rs,simplify=FALSE))
+      rsmat = t(matrix(replicate(length(tvec),rs),ncol = length(tvec)))
+      transformed = (tvec - rsmat)/h
+      kernelValues = stats::dnorm(transformed, mean = 0, sd = 1)/h
+      return(apply(kernelValues,1,sum)/length(rs))
+    }
+
+    xd = myKDE_vec(x)
+    #xd = 1
 
   }
 
-  return(rs)
+  return(xd)
 }

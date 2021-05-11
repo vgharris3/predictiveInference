@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  8 MAY 2021 06:20
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  21 MAY 2021 13:36
 entering extended mode
 **./Thesis.tex
 (Thesis.tex
@@ -1189,20 +1189,31 @@ Underfull \hbox (badness 10000) in paragraph at lines 479--480
 
  []
 
+
+Overfull \hbox (18.08081pt too wide) in paragraph at lines 483--484
+ \T1/aer/b/n/12 3.4.1.2 R Im-ple-men-ta-tion[][] \T1/aer/m/n/12 Stan-dard for-m
+at R func-tions dpred-NormIG(), ppred-NormIG(),
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 499--500
+
+ []
+
 [18]
-Underfull \hbox (badness 10000) in paragraph at lines 485--486
+Underfull \hbox (badness 10000) in paragraph at lines 503--504
 
  []
 
 LaTeX Font Info:    Trying to load font information for T1+aett on input line 5
-12.
+30.
 ("C:\MiKTeX 2.9\tex/latex/ae\t1aett.fd"
 File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
 )
 <Thesis-005.pdf, id=415, 433.62pt x 433.62pt>
 File: Thesis-005.pdf Graphic file (type pdf)
 <use Thesis-005.pdf>
-Package pdftex.def Info: Thesis-005.pdf  used on input line 520.
+Package pdftex.def Info: Thesis-005.pdf  used on input line 538.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
  [19
 
@@ -1210,35 +1221,35 @@ Package pdftex.def Info: Thesis-005.pdf  used on input line 520.
 <Thesis-006.pdf, id=433, 433.62pt x 433.62pt>
 File: Thesis-006.pdf Graphic file (type pdf)
 <use Thesis-006.pdf>
-Package pdftex.def Info: Thesis-006.pdf  used on input line 544.
+Package pdftex.def Info: Thesis-006.pdf  used on input line 562.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
  [21
 
  <./Thesis-006.pdf>]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 553.
+(hyperref)                removing `math shift' on input line 570.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 553.
+(hyperref)                removing `math shift' on input line 570.
 
 [22]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 562.
+(hyperref)                removing `math shift' on input line 579.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 562.
+(hyperref)                removing `math shift' on input line 579.
 
 
 Package hyperref Warning: Difference (3) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 564.
+(hyperref)                than one, level fixed on input line 581.
 
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 565.
+(hyperref)                than one, level fixed on input line 582.
 
 [23
 
@@ -1256,7 +1267,7 @@ LaTeX Font Warning: Size substitutions with differences
 Here is how much of TeX's memory you used:
  30479 strings out of 479696
  709863 string characters out of 2881701
- 1158469 words of memory out of 3000000
+ 1158470 words of memory out of 3000000
  46861 multiletter control sequences out of 15000+200000
  446847 words of font info for 134 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1276,7 +1287,7 @@ onts/cm/cmsy6.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/M
 iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/MiKTeX 2.9/fonts/type1/
 public/amsfonts/cm/cmtt12.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/latxfo
 nt/line10.pfb>
-Output written on Thesis.pdf (24 pages, 467757 bytes).
+Output written on Thesis.pdf (24 pages, 466976 bytes).
 PDF statistics:
  528 PDF objects out of 1000 (max. 8388607)
  72 named destinations out of 1000 (max. 500000)

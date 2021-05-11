@@ -23,7 +23,7 @@ ppredPG = function(x, obs, alpha = 1, beta=1, lower=TRUE){
   #ERROR HANDLING
 
   if(min(x) < 0){
-    stop("x < 0:  xmax must be a non-negative integer")
+    stop("x < 0:  values of x must be non-negative integers")
     return (1)
   }
 
