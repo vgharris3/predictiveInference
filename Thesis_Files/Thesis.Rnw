@@ -707,6 +707,8 @@ xd = dpredNormIG(x,y,mu0,k0,sig20,nu0)
 
 lines(x,xd,col="red")
 
+#making this change just to test git push
+
 
 @
 
