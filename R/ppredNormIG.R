@@ -59,33 +59,14 @@ ppredNormIG = function(x,obs,mu0=0,k0=1,sig20=1,nu0=1,S = 100000,Jeffreys=FALSE)
 
   } else {
 
-    #Obtain a random sample from which to approximate the density
-    rs = rpredNormIG(S,obs,mu0,k0,sig20,nu0,Jeffreys=FALSE)
+  #Obtain a random sample from which to approximate the density
 
-    #Estimating density using R's density() function on random sample
-    #(taken from https://stackoverflow.com/questions/28077500/find-the-probability-density-of-a-new-data-point-using-density-function-in-r)
-    #d <- stats::density(rs)
-    #h = d$bw
+  rsmat = matrix(rpredNormIG(S*length(x),obs,mu0,k0,sig20,nu0,Jeffreys=FALSE),nrow = length(x))
 
-    #myKDE_vec <- function(tvec){
-    #  kernelValues <- matrix(0, nrow = length(tvec), ncol = length(rs))
-    #  rsmat_old = do.call("rbind",replicate(length(tvec),rs,simplify=FALSE))
-    #  rsmat = t(matrix(replicate(length(tvec),rs),ncol = length(tvec)))
-    #  transformed = (tvec - rsmat)/h
-    #  kernelValues = stats::dnorm(transformed, mean = 0, sd = 1)/h
-    #  return(apply(kernelValues,1,sum)/length(rs))
-    #}
-
-    #xd = myKDE_vec(x)
-    #xd = 1
-
-    sample_log = rep(0,length(rs))
-    for(i in 1:length(rs)){
-      if(rs[i]<=x){sample_log[i] = 1}
-    }
-
+  xrsmat = cbind(x,rsmat)
 
   }
 
-  return(sum(sample_log)/length(sample_log))
+  return(apply(xrsmat,1,function(x) length(x[x<=x[1]])-1)/ncol(rsmat))
+
 }

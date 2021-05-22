@@ -663,6 +663,7 @@ if(0){
 <<fig=TRUE, echo=FALSE>>=
 source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredNormIG.R')
 source('C:/Users/gabe/Documents/tmp/predictiveInference/R/dpredNormIG.R')
+source('C:/Users/gabe/Documents/tmp/predictiveInference/R/ppredNormIG.R')
 set.seed(1234)
 
 #prior
@@ -692,33 +693,29 @@ theta.postsample = rnorm(S,mun,sqrt(sig2.postsample/kn))
 #  ytilde[yInd] = rnorm(1,theta.postsample,sqrt(sig2.postsample))
 #}
 
-par(mfrow=c(1,1))
+par(mfrow=c(2,1))
 
 set.seed(1234)
 random_sample = rpredNormIG(S,y,mu0,k0,sig20,nu0)
 H = hist(random_sample,probability = TRUE,ylim = c(0,4))
 
-xn = 1
+xn = 1000
 
 x = sort(runif(xn,min = min(random_sample),max = max(random_sample)))
-tic()
+tictoc::tic()
 xd = dpredNormIG(x,y,mu0,k0,sig20,nu0)
-toc()
+tictoc::toc()
 
-#lines(x,xd,col="red")
-plot(x,xd,,col="red")
+lines(x,xd,col="red")
 
-tic()
+#test ppredNormIG()
+
+x = seq(0,3,0.1)
+tictoc::tic()
 xp = ppredNormIG(x,y,mu0,k0,sig20,nu0)
-toc()
-
-points(x,xp,col="blue")
-
-c(xd,xp)
-
-
-
-#making this change just to test git push
+tictoc::toc()
+plot(x,xp)
+lines(ecdf(random_sample))
 
 
 @
