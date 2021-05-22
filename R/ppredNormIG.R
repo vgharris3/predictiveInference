@@ -1,6 +1,6 @@
 #' The Normal-Inverse Gamma Predictive Distribution
 #'
-#' dpredNormIG returns the predictive probability of future observations based on
+#' ppredNormIG returns the cumulative predictive probability of future observations based on
 #'
 #' @param x vector of values for which predictive probability is desired
 #' @param obs vector of (observed) Normally-distributed values
@@ -15,7 +15,7 @@
 #' @export
 #'
 #' @examples 1
-dpredNormIG = function(x,obs,mu0=0,k0=1,sig20=1,nu0=1,S = 100000,Jeffreys=FALSE){
+ppredNormIG = function(x,obs,mu0=0,k0=1,sig20=1,nu0=1,S = 100000,Jeffreys=FALSE){
 
   #ERROR HANDLING
 
@@ -64,28 +64,28 @@ dpredNormIG = function(x,obs,mu0=0,k0=1,sig20=1,nu0=1,S = 100000,Jeffreys=FALSE)
 
     #Estimating density using R's density() function on random sample
     #(taken from https://stackoverflow.com/questions/28077500/find-the-probability-density-of-a-new-data-point-using-density-function-in-r)
-    d <- stats::density(rs)
-    h = d$bw
-    #myKDE <- function(t){
-    #  kernelValues <- rep(0,length(rs))
-    #  transformed = (t - rs)/h
+    #d <- stats::density(rs)
+    #h = d$bw
+
+    #myKDE_vec <- function(tvec){
+    #  kernelValues <- matrix(0, nrow = length(tvec), ncol = length(rs))
+    #  rsmat_old = do.call("rbind",replicate(length(tvec),rs,simplify=FALSE))
+    #  rsmat = t(matrix(replicate(length(tvec),rs),ncol = length(tvec)))
+    #  transformed = (tvec - rsmat)/h
     #  kernelValues = stats::dnorm(transformed, mean = 0, sd = 1)/h
-    #  return(sum(kernelValues) / length(rs))
+    #  return(apply(kernelValues,1,sum)/length(rs))
     #}
 
-    myKDE_vec <- function(tvec){
-      kernelValues <- matrix(0, nrow = length(tvec), ncol = length(rs))
-      rsmat_old = do.call("rbind",replicate(length(tvec),rs,simplify=FALSE))
-      rsmat = t(matrix(replicate(length(tvec),rs),ncol = length(tvec)))
-      transformed = (tvec - rsmat)/h
-      kernelValues = stats::dnorm(transformed, mean = 0, sd = 1)/h
-      return(apply(kernelValues,1,sum)/length(rs))
+    #xd = myKDE_vec(x)
+    #xd = 1
+
+    sample_log = rep(0,length(rs))
+    for(i in 1:length(rs)){
+      if(rs[i]<=x){sample_log[i] = 1}
     }
 
-    xd = myKDE_vec(x)
-    #xd = 1
 
   }
 
-  return(xd)
+  return(sum(sample_log)/length(sample_log))
 }
