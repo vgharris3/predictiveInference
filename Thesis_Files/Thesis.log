@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  22 MAY 2021 16:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  25 MAY 2021 06:43
 entering extended mode
 **./Thesis.tex
 (Thesis.tex
@@ -1128,44 +1128,39 @@ File: Thesis-004.pdf Graphic file (type pdf)
 <use Thesis-004.pdf>
 Package pdftex.def Info: Thesis-004.pdf  used on input line 411.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
-[15]
-LaTeX Font Info:    Calculating math sizes for size <8.4> on input line 426.
+[15] [16 <./Thesis-004.pdf>]
+LaTeX Font Info:    Calculating math sizes for size <8.4> on input line 428.
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <4.2> not available
-(Font)              size <5> substituted on input line 426.
+(Font)              size <5> substituted on input line 428.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <4.2> not available
-(Font)              size <5> substituted on input line 426.
+(Font)              size <5> substituted on input line 428.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <4.2> not available
-(Font)              size <5> substituted on input line 426.
+(Font)              size <5> substituted on input line 428.
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/bx/n' in size <4.2> not available
-(Font)              size <5> substituted on input line 426.
+(Font)              size <5> substituted on input line 428.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/b/it' in size <4.2> not available
-(Font)              size <5> substituted on input line 426.
+(Font)              size <5> substituted on input line 428.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/b/n' in size <4.2> not available
-(Font)              size <5> substituted on input line 426.
+(Font)              size <5> substituted on input line 428.
 
 
 LaTeX Font Warning: Font shape `U/rsfs/m/n' in size <4.2> not available
-(Font)              size <5> substituted on input line 426.
+(Font)              size <5> substituted on input line 428.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 428--429
-
- []
-
-[16 <./Thesis-004.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 441--442
+Underfull \hbox (badness 10000) in paragraph at lines 430--431
 
  []
 
@@ -1179,12 +1174,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 445--446
 
  []
 
+[17
 
+]
 Underfull \hbox (badness 10000) in paragraph at lines 467--468
 
  []
 
-[17]
+
 Underfull \hbox (badness 10000) in paragraph at lines 479--480
 
  []
@@ -1200,7 +1197,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 499--500
 
  []
 
-[18]
+[18] [19]
 Underfull \hbox (badness 10000) in paragraph at lines 503--504
 
  []
@@ -1210,20 +1207,20 @@ LaTeX Font Info:    Trying to load font information for T1+aett on input line 5
 ("C:\MiKTeX 2.9\tex/latex/ae\t1aett.fd"
 File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
 )
-<Thesis-005.pdf, id=415, 433.62pt x 433.62pt>
+<Thesis-005.pdf, id=420, 433.62pt x 433.62pt>
 File: Thesis-005.pdf Graphic file (type pdf)
 <use Thesis-005.pdf>
 Package pdftex.def Info: Thesis-005.pdf  used on input line 544.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
- [19
+ [20
 
-] [20 <./Thesis-005.pdf>]
-<Thesis-006.pdf, id=433, 433.62pt x 433.62pt>
+] [21 <./Thesis-005.pdf>]
+<Thesis-006.pdf, id=437, 433.62pt x 433.62pt>
 File: Thesis-006.pdf Graphic file (type pdf)
 <use Thesis-006.pdf>
 Package pdftex.def Info: Thesis-006.pdf  used on input line 568.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
- [21
+ [22
 
  <./Thesis-006.pdf>]
 
@@ -1234,7 +1231,7 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 576.
 
-[22]
+[23]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 585.
@@ -1251,9 +1248,9 @@ Package hyperref Warning: Difference (3) between bookmark levels is greater
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
 (hyperref)                than one, level fixed on input line 588.
 
-[23
+[24
 
-] [24
+] [25
 
 ] (Thesis.aux)
 Package rerunfilecheck Info: File `Thesis.out' has not changed.
@@ -1265,9 +1262,9 @@ LaTeX Font Warning: Size substitutions with differences
 
  ) 
 Here is how much of TeX's memory you used:
- 30479 strings out of 479696
- 709863 string characters out of 2881701
- 1158470 words of memory out of 3000000
+ 30480 strings out of 479696
+ 709870 string characters out of 2881701
+ 1158469 words of memory out of 3000000
  46861 multiletter control sequences out of 15000+200000
  446847 words of font info for 134 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1287,9 +1284,9 @@ onts/cm/cmsy6.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/M
 iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/MiKTeX 2.9/fonts/type1/
 public/amsfonts/cm/cmtt12.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/latxfo
 nt/line10.pfb>
-Output written on Thesis.pdf (24 pages, 520643 bytes).
+Output written on Thesis.pdf (25 pages, 525963 bytes).
 PDF statistics:
- 528 PDF objects out of 1000 (max. 8388607)
- 72 named destinations out of 1000 (max. 500000)
+ 535 PDF objects out of 1000 (max. 8388607)
+ 73 named destinations out of 1000 (max. 500000)
  402 words of extra memory for PDF output out of 10000 (max. 10000000)
 

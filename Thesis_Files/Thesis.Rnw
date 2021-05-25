@@ -544,6 +544,8 @@ if(0){
 }
 @
 
+\clearpage
+
   \subsection{Normal Observation with Normal-Inverse Gamma Prior}
     \subsubsection{One sample}
       \paragraph{Derivation}
@@ -573,8 +575,6 @@ if(0){
         \end{flalign*}
 
         where $\left(\sigma_0^2,\nu_0\right)$ are the sample variance and sample size of prior observations, and $\left(\mu_o, \kappa_0\right)$ are the sample mean and sample size of prior observations.\\
-
-        \textcolor{red}{Are there different sets of prior observations for the two different prior distributions?  I.e. does $\nu_0 = \kappa_0$?}\\
 
         Note:  $\mu_0$, $\kappa_0$, $\nu_0$, and $\sigma_0^2$ come from prior knowledge. [in the Hoff example (Midge Wing Length), $\kappa_0$ and $\nu_0$ are both set to $1$ so that "our prior distributions are only weakly centered around these estimates from other populations."]\\
 
@@ -707,6 +707,17 @@ xd = dpredNormIG(x,y,mu0,k0,sig20,nu0)
 tictoc::toc()
 
 lines(x,xd,col="red")
+
+#Jeffrey's
+
+s = var(y)
+ybar = mean(y)
+n = length(y)
+location = ybar
+scale = s*sqrt(1+1/n)
+xt = seq(1,2.5,len=100)
+yt = (1/scale) * dt((xt - location)/scale,df = n-1)
+points(xt,yt)
 
 #test ppredNormIG()
 
