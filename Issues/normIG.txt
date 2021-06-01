@@ -1,0 +1,13 @@
+Trying to sort out Jeffrey's prior version of Norm-IG predictive distribution.
+
+To reproduce plot showing issue:
+
+xt = seq(1,3,0.01)
+yt = matrix(NA,nrow = length(xt),ncol=length(sigma));
+for (i in 1:length(sigma)){ yt[,i] = (1/sigma[i])*dt((xt-location)/sigma[i],df=8) }
+matplot(xt,yt,type="l",lty=1,col=1:6)
+x = seq(min(random_sample),max(random_sample),by=0.1)
+xd = dpredNormIG(x,y,mu0,k0,sig20,nu0)
+points(x,xd)
+lines(xt,(1/scale)*dt((xt-location)/scale,df=8),lwd=2,lty=2,col="red")
+legend("topright",legend=c(sigma,"dpredNormIG()","Jeffrey's"),lty=c(rep(1,6),0,2),lwd=c(rep(1,7),2),pch=c(rep(NA,6),1,NA),col=c(1:6,"black","red"))
