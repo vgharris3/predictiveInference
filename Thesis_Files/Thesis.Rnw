@@ -679,7 +679,7 @@ kn = k0 + n; nun = nu0 + n
 mun = (k0*mu0+n*ybar)/kn
 sig2n = (nu0*sig20 + (n-1)*s2 + k0*n*(ybar-mu0)^2/kn)/nun
 
-rbind(kn,mun,sig2n,nun)
+rbind(kn,mun,sqrt(sig2n),nun)
 
 #Monte Carlo for marginal posterior samples of sig2 and theta
 S = 10000
@@ -688,12 +688,7 @@ theta.postsample = rnorm(S,mun,sqrt(sig2.postsample/kn))
 
 #plot(theta.postsample,sig2.postsample,pch = 20)
 
-#set.seed(1234)
-#for(yInd in 1:S){
-#  ytilde[yInd] = rnorm(1,theta.postsample,sqrt(sig2.postsample))
-#}
-
-par(mfrow=c(2,1))
+par(mfrow=c(1,1))
 
 set.seed(1234)
 random_sample = rpredNormIG(S,y,mu0,k0,sig20,nu0)
@@ -718,6 +713,9 @@ scale = s*sqrt(1+1/n)
 xt = seq(1,2.5,len=100)
 yt = (1/scale) * dt((xt - location)/scale,df = n-1)
 points(xt,yt)
+lines(xt,yt)
+
+legend("topright",legend=c("dpredNormIG()","Jeffrey's"),lty=1,pch=c(NA,1),col=c("red","black"))
 
 #test ppredNormIG()
 
@@ -735,23 +733,33 @@ lines(ecdf(random_sample))
 
         \clearpage
 
-        Skipping ahead
+        Jeffrey's Prior:  $p(\theta,\sigma^2) = 1/\sigma^2$.
 
         \vdots
 
         posteriors given Jeffrey's Prior:
 
-        $$\left\{1/\sigma^2|y_1,...,y_n\right\}\sim \text{gamma}\left(\frac{n}{2},\frac{n}{2}\frac{1}{n}\sum\left(y_i - \bar{y}\right)^2\right)$$
+        $$\left\{1/\sigma^2|y_1,...,y_n\right\}\sim \text{gamma}\left(\frac{n-1}{2},\frac{1}{2}\sum\left(y_i - \bar{y}\right)^2\right)$$
 
-        same as
+       % same as
 
-        $$\left\{1/\sigma^2|y_1,...,y_n\right\}\sim \text{gamma}\left(\frac{n}{2},\frac{1}{2}\sum\left(y_i - \bar{y}\right)^2\right)$$
+        %$$\left\{1/\sigma^2|y_1,...,y_n\right\}\sim \text{gamma}\left(\frac{n}{2},\frac{1}{2}\sum\left(y_i - \bar{y}\right)^2\right)$$
 
 
 
         $$\left\{\theta|\sigma^2, y_1,...,y_n\right\}\sim \text{normal}\left(\bar{y},\frac{\sigma^2}{n}\right)$$
 
-        \textcolor{red}{dig into Bedrick notes and homework for Jeffrey's prior}
+        This leads to
+
+        $$\frac{\theta-\bar{y}}{s/\sqrt{n}}|y_1,...,y_n\sim t_{n-1} \text{ (Hoff p. 79)}$$
+
+        So we have predictive distribution
+
+        $$\tilde{y}\sim t_{n-1} \text{ with location }\bar{y} \text{ and scale }s\sqrt{\left(1+\frac{1}{n}\right)} \text {(Gelman et. al. p. 66)}$$
+
+
+
+        %\textcolor{red}{dig into Bedrick notes and homework for Jeffrey's prior}
 
 <<fig=TRUE, echo=FALSE>>=
 #y taken from Hoff p. 76 and Bedrick's Bayesian Lecture 9 Gibbs Sampler example

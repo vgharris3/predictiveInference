@@ -528,17 +528,17 @@ Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15,
 
 \begin{Schunk}
 \begin{Soutput}
-           [,1]
-kn    10.000000
-mun    1.814000
-sig2n  0.015324
-nun   10.000000
+          [,1]
+kn  10.0000000
+mun  1.8140000
+     0.1237901
+nun 10.0000000
 \end{Soutput}
 \begin{Soutput}
-27.17 sec elapsed
+27.89 sec elapsed
 \end{Soutput}
 \begin{Soutput}
-1.21 sec elapsed
+1.25 sec elapsed
 \end{Soutput}
 \end{Schunk}
 \includegraphics{Thesis-005}
@@ -547,23 +547,33 @@ nun   10.000000
 
         \clearpage
 
-        Skipping ahead
+        Jeffrey's Prior:  $p(\theta,\sigma^2) = 1/\sigma^2$.
 
         \vdots
 
         posteriors given Jeffrey's Prior:
 
-        $$\left\{1/\sigma^2|y_1,...,y_n\right\}\sim \text{gamma}\left(\frac{n}{2},\frac{n}{2}\frac{1}{n}\sum\left(y_i - \bar{y}\right)^2\right)$$
+        $$\left\{1/\sigma^2|y_1,...,y_n\right\}\sim \text{gamma}\left(\frac{n-1}{2},\frac{1}{2}\sum\left(y_i - \bar{y}\right)^2\right)$$
 
-        same as
+       % same as
 
-        $$\left\{1/\sigma^2|y_1,...,y_n\right\}\sim \text{gamma}\left(\frac{n}{2},\frac{1}{2}\sum\left(y_i - \bar{y}\right)^2\right)$$
+        %$$\left\{1/\sigma^2|y_1,...,y_n\right\}\sim \text{gamma}\left(\frac{n}{2},\frac{1}{2}\sum\left(y_i - \bar{y}\right)^2\right)$$
 
 
 
         $$\left\{\theta|\sigma^2, y_1,...,y_n\right\}\sim \text{normal}\left(\bar{y},\frac{\sigma^2}{n}\right)$$
 
-        \textcolor{red}{dig into Bedrick notes and homework for Jeffrey's prior}
+        This leads to
+
+        $$\frac{\theta-\bar{y}}{s/\sqrt{n}}|y_1,...,y_n\sim t_{n-1} \text{ (Hoff p. 79)}$$
+
+        So we have predictive distribution
+
+        $$\tilde{y}\sim t_{n-1} \text{ with location }\bar{y} \text{ and scale }s\sqrt{\left(1+\frac{1}{n}\right)} \text {(Gelman et. al. p. 66)}$$
+
+
+
+        %\textcolor{red}{dig into Bedrick notes and homework for Jeffrey's prior}
 
 \includegraphics{Thesis-006}
 
