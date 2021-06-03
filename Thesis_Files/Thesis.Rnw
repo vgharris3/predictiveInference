@@ -709,7 +709,7 @@ s = var(y)
 ybar = mean(y)
 n = length(y)
 location = ybar
-scale = s*sqrt(1+1/n)
+scale = sqrt(s)*sqrt(1+1/n)
 xt = seq(1,2.5,len=100)
 yt = (1/scale) * dt((xt - location)/scale,df = n-1)
 points(xt,yt)
@@ -726,6 +726,8 @@ tictoc::toc()
 plot(x,xp)
 lines(ecdf(random_sample))
 
+
+#NOTICE THAT MY POSTSAMPLE DISTRIBUTION IS NOT ON TOP OF THE JEFFREY'S RESULTS, AND IS "BIGGER" THAN HOFF'S.  sTILL DOING SOMETHING WRONG?
 
 @
 

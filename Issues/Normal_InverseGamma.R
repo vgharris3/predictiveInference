@@ -38,7 +38,7 @@ lines(density(y.J),lty=2,lwd=2,col="red")
 
 #predictive t-distribution resulting from Jeffrey's
 location = ybar
-scale = s2*sqrt(1+1/n)
+scale = sqrt(s2)*sqrt(1+1/n)
 yt = metRology::rt.scaled(S,n-1,location,scale)
 
 plot(density(y.postsample))
