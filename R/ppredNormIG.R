@@ -60,13 +60,17 @@ ppredNormIG = function(x,obs,mu0=0,k0=1,sig20=1,nu0=1,S = 100000,Jeffreys=FALSE)
   } else {
 
   #Obtain a random sample from which to approximate the density
+  rs = rpredNormIG(S,obs,mu0,k0,sig20,nu0,Jeffreys=FALSE)
+  #rsmat = matrix(rpredNormIG(S*length(x),obs,mu0,k0,sig20,nu0,Jeffreys=FALSE),nrow = length(x))
 
-  rsmat = matrix(rpredNormIG(S*length(x),obs,mu0,k0,sig20,nu0,Jeffreys=FALSE),nrow = length(x))
+  #xrsmat = cbind(x,rsmat)
 
-  xrsmat = cbind(x,rsmat)
+  Frs = ecdf(rs)
 
   }
 
-  return(apply(xrsmat,1,function(x) length(x[x<=x[1]])-1)/ncol(rsmat))
+  #return(apply(xrsmat,1,function(x) length(x[x<=x[1]])-1)/ncol(rsmat))
+
+  return(Frs(x))
 
 }

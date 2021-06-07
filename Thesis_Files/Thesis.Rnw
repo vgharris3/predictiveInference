@@ -666,9 +666,12 @@ source('C:/Users/gabe/Documents/tmp/predictiveInference/R/dpredNormIG.R')
 source('C:/Users/gabe/Documents/tmp/predictiveInference/R/ppredNormIG.R')
 set.seed(1234)
 
+#WITH PRIOR KNOWLEDGE--BETTER PREDICTION
 #prior
 mu0 = 1.9; k0 = 1
+mu0 = 1.8;  #PLAY AROUND WITH THIS.
 sig20 = 0.010; nu0 = 1
+#sig20 = 10;
 
 y = c(1.64,1.7,1.72,1.74,1.82,1.82,1.82,1.90,2.08)
 n = length(y);
@@ -704,6 +707,7 @@ tictoc::toc()
 lines(x,xd,col="red")
 
 #Jeffrey's
+#WITHOUT PRIOR KNOWLEDGE, JUST USING OBSERVATIONS.  STILL PRETTY GOOD PREDICTIONS
 
 s = var(y)
 ybar = mean(y)
@@ -717,17 +721,22 @@ lines(xt,yt)
 
 legend("topright",legend=c("dpredNormIG()","Jeffrey's"),lty=1,pch=c(NA,1),col=c("red","black"))
 
-#test ppredNormIG()
+#ppredNormIG()
 
-x = seq(0,3,0.1)
-tictoc::tic()
-xp = ppredNormIG(x,y,mu0,k0,sig20,nu0)
-tictoc::toc()
-plot(x,xp)
-lines(ecdf(random_sample))
+par(mfrow=c(1,1))
+
+xp = ppredNormIG(x,y,mu0,k0,sig20,nu0,Jeffreys=FALSE)
+plot(x,xp,type="l")
+
+#x = seq(0,3,0.1)
+#tictoc::tic()
+#xp = ppredNormIG(x,y,mu0,k0,sig20,nu0)
+#tictoc::toc()
+#plot(x,xp)
+#lines(ecdf(random_sample))
 
 
-#NOTICE THAT MY POSTSAMPLE DISTRIBUTION IS NOT ON TOP OF THE JEFFREY'S RESULTS, AND IS "BIGGER" THAN HOFF'S.  sTILL DOING SOMETHING WRONG?
+
 
 @
 

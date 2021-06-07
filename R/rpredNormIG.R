@@ -40,26 +40,34 @@ rpredNormIG = function(n,obs,mu0=0,k0=1,sig20=1,nu0=1,Jeffreys=FALSE){
     return(1)
   }
 
-  nobs = length(obs);
-  meanobs = mean(obs);
-  s2 = stats::var(obs);
+  if(Jeffreys){
 
-  kn = k0 + nobs; nun = nu0 + nobs
-  mun = (k0*mu0+nobs*meanobs)/kn
-  sig2n = (nu0*sig20 + (nobs-1)*s2 + k0*nobs*(meanobs-mu0)^2/kn)/nun
+  }
 
-  sig2.postsample = 1/stats::rgamma(n,nun/2,sig2n*nun/2)
-  theta.postsample = stats::rnorm(n,mun,sqrt(sig2.postsample/kn))
+  else{
 
-  #plot(theta.postsample,sig2.postsample,pch = 20)
+    nobs = length(obs);
+    meanobs = mean(obs);
+    s2 = stats::var(obs);
 
-  rs = numeric(n)
+    kn = k0 + nobs; nun = nu0 + nobs
+    mun = (k0*mu0+nobs*meanobs)/kn
+    sig2n = (nu0*sig20 + (nobs-1)*s2 + k0*nobs*(meanobs-mu0)^2/kn)/nun
 
- # for(i in 1:n){
-  #  rs[i] = rnorm(1,theta.postsample,sqrt(sig2.postsample))
-  #}
+    sig2.postsample = 1/stats::rgamma(n,nun/2,sig2n*nun/2)
+    theta.postsample = stats::rnorm(n,mun,sqrt(sig2.postsample/kn))
 
-  rs = stats::rnorm(n,theta.postsample,sqrt(sig2.postsample))
+    #plot(theta.postsample,sig2.postsample,pch = 20)
+
+    rs = numeric(n)
+
+   # for(i in 1:n){
+    #  rs[i] = rnorm(1,theta.postsample,sqrt(sig2.postsample))
+    #}
+
+    rs = stats::rnorm(n,theta.postsample,sqrt(sig2.postsample))
+
+  }
 
   return(rs)
 }
