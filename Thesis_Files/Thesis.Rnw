@@ -684,57 +684,72 @@ sig2n = (nu0*sig20 + (n-1)*s2 + k0*n*(ybar-mu0)^2/kn)/nun
 
 rbind(kn,mun,sqrt(sig2n),nun)
 
-#Monte Carlo for marginal posterior samples of sig2 and theta
-S = 10000
-sig2.postsample = 1/rgamma(S,nun/2,sig2n*nun/2)
-theta.postsample = rnorm(S,mun,sqrt(sig2.postsample/kn))
-
+if(0){
+  #Monte Carlo for marginal posterior samples of sig2 and theta
+  S = 10000
+  sig2.postsample = 1/rgamma(S,nun/2,sig2n*nun/2)
+  theta.postsample = rnorm(S,mun,sqrt(sig2.postsample/kn))
+}
 #plot(theta.postsample,sig2.postsample,pch = 20)
 
-par(mfrow=c(1,1))
+####
+####RANDOM SAMPLE:  rpredNormIG()
+####
+
+S = 10000
+
+#Monte Carlo for marginal posterior samples of sig2 and theta
 
 set.seed(1234)
-random_sample = rpredNormIG(S,y,mu0,k0,sig20,nu0)
-H = hist(random_sample,probability = TRUE,ylim = c(0,4))
+random_sample_MC = rpredNormIG(S,y,mu0,k0,sig20,nu0)
 
-xn = 1000
+#Use Jeffrey's prior
 
-x = sort(runif(xn,min = min(random_sample),max = max(random_sample)))
-tictoc::tic()
-xd = dpredNormIG(x,y,mu0,k0,sig20,nu0)
-tictoc::toc()
+random_sample_J = rpredNormIG(S,y,Jeffreys=TRUE)
 
-lines(x,xd,col="red")
+par(mfrow=c(2,1))
+H = hist(random_sample_MC,probability = TRUE,xlim = c(1,2.5),ylim = c(0,3),breaks=50)
+hist(random_sample_J,probability=TRUE,xlim = c(1,2.5),ylim=c(0,3),breaks=50)
 
-#Jeffrey's
-#WITHOUT PRIOR KNOWLEDGE, JUST USING OBSERVATIONS.  STILL PRETTY GOOD PREDICTIONS
+if(0) {
+  xn = 1000
 
-s = var(y)
-ybar = mean(y)
-n = length(y)
-location = ybar
-scale = sqrt(s)*sqrt(1+1/n)
-xt = seq(1,2.5,len=100)
-yt = (1/scale) * dt((xt - location)/scale,df = n-1)
-points(xt,yt)
-lines(xt,yt)
+  x = sort(runif(xn,min = min(random_sample),max = max(random_sample)))
+  tictoc::tic()
+  xd = dpredNormIG(x,y,mu0,k0,sig20,nu0)
+  tictoc::toc()
 
-legend("topright",legend=c("dpredNormIG()","Jeffrey's"),lty=1,pch=c(NA,1),col=c("red","black"))
+  lines(x,xd,col="red")
 
-#ppredNormIG()
+  #Jeffrey's
+  #WITHOUT PRIOR KNOWLEDGE, JUST USING OBSERVATIONS.  STILL PRETTY GOOD PREDICTIONS
 
-par(mfrow=c(1,1))
+  s = var(y)
+  ybar = mean(y)
+  n = length(y)
+  location = ybar
+  scale = sqrt(s)*sqrt(1+1/n)
+  xt = seq(1,2.5,len=100)
+  yt = (1/scale) * dt((xt - location)/scale,df = n-1)
+  points(xt,yt)
+  lines(xt,yt)
 
-xp = ppredNormIG(x,y,mu0,k0,sig20,nu0,Jeffreys=FALSE)
-plot(x,xp,type="l")
+  legend("topright",legend=c("dpredNormIG()","Jeffrey's"),lty=1,pch=c(NA,1),col=c("red","black"))
 
-#x = seq(0,3,0.1)
-#tictoc::tic()
-#xp = ppredNormIG(x,y,mu0,k0,sig20,nu0)
-#tictoc::toc()
-#plot(x,xp)
-#lines(ecdf(random_sample))
+  #ppredNormIG()
 
+  par(mfrow=c(1,1))
+
+  xp = ppredNormIG(x,y,mu0,k0,sig20,nu0,Jeffreys=FALSE)
+  plot(x,xp,type="l")
+
+  #x = seq(0,3,0.1)
+  #tictoc::tic()
+  #xp = ppredNormIG(x,y,mu0,k0,sig20,nu0)
+  #tictoc::toc()
+  #plot(x,xp)
+  #lines(ecdf(random_sample))
+}
 
 
 

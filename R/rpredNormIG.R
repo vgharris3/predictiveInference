@@ -40,15 +40,28 @@ rpredNormIG = function(n,obs,mu0=0,k0=1,sig20=1,nu0=1,Jeffreys=FALSE){
     return(1)
   }
 
-  if(Jeffreys){
 
+  nobs = length(obs);
+  meanobs = mean(obs);
+  s2 = stats::var(obs);
+
+  if(Jeffreys){
+    #s2 = var(y)
+    #meanobs = mean(obs)
+    #n = length(y)
+    location = meanobs
+    scale = sqrt(s2)*sqrt(1+1/nobs)
+    #xt = seq(1,2.5,len=100)
+    #yt = (1/scale) * dt((xt - location)/scale,df = nobs-1)
+
+    rs = metRology::rt.scaled(n,nobs-1,location,scale)
   }
 
   else{
 
-    nobs = length(obs);
-    meanobs = mean(obs);
-    s2 = stats::var(obs);
+    #nobs = length(obs);
+    #meanobs = mean(obs);
+    #s2 = stats::var(obs);
 
     kn = k0 + nobs; nun = nu0 + nobs
     mun = (k0*mu0+nobs*meanobs)/kn

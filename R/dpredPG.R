@@ -1,4 +1,4 @@
-#' Title The Poisson-Gamma Predictive Distribution
+#' The Poisson-Gamma Predictive Distribution
 #'
 #' dpredPG returns the predictive probability of a future observation having value {1,...,x} given observations obs~Poi(theta)
 #' and theta~Gamma(alpha,beta)
