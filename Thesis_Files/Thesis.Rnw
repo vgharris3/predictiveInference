@@ -711,7 +711,7 @@ par(mfrow=c(2,1))
 H = hist(random_sample_MC,probability = TRUE,xlim = c(1,2.5),ylim = c(0,3),breaks=50)
 hist(random_sample_J,probability=TRUE,xlim = c(1,2.5),ylim=c(0,3),breaks=50)
 
-if(0) {
+if(1) {
   xn = 1000
 
   x = sort(runif(xn,min = min(random_sample),max = max(random_sample)))
@@ -719,22 +719,26 @@ if(0) {
   xd = dpredNormIG(x,y,mu0,k0,sig20,nu0)
   tictoc::toc()
 
-  lines(x,xd,col="red")
+  plot(x,xd,type="l")
 
   #Jeffrey's
   #WITHOUT PRIOR KNOWLEDGE, JUST USING OBSERVATIONS.  STILL PRETTY GOOD PREDICTIONS
 
-  s = var(y)
-  ybar = mean(y)
-  n = length(y)
-  location = ybar
-  scale = sqrt(s)*sqrt(1+1/n)
-  xt = seq(1,2.5,len=100)
-  yt = (1/scale) * dt((xt - location)/scale,df = n-1)
-  points(xt,yt)
-  lines(xt,yt)
+  xd_J = dpredNormIG(x,y,Jeffreys=TRUE)
+  lines(x,xd_J,lty=2,col="red")
 
-  legend("topright",legend=c("dpredNormIG()","Jeffrey's"),lty=1,pch=c(NA,1),col=c("red","black"))
+
+  #s2 = var(y)
+  #ybar = mean(y)
+  #n = length(y)
+  #location = ybar
+  #scale = sqrt(s2)*sqrt(1+1/n)
+  #xt = seq(1,2.5,len=100)
+  #yt = (1/scale) * dt((xt - location)/scale,df = n-1)
+  #points(xt,yt)
+  #lines(xt,yt)
+
+  #legend("topright",legend=c("dpredNormIG()","Jeffrey's"),lty=1,pch=c(NA,1),col=c("red","black"))
 
   #ppredNormIG()
 
@@ -743,6 +747,11 @@ if(0) {
   xp = ppredNormIG(x,y,mu0,k0,sig20,nu0,Jeffreys=FALSE)
   plot(x,xp,type="l")
 
+  xp_J = ppredNormIG(x,y,Jeffreys=TRUE)
+  points(x,xp_J,col="red")
+
+  #xp_J2 = stats::pt((x-location)/scale,df=n-1)
+  #points(x,xp_J,pch=20,col="blue")
   #x = seq(0,3,0.1)
   #tictoc::tic()
   #xp = ppredNormIG(x,y,mu0,k0,sig20,nu0)

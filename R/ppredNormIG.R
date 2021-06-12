@@ -52,10 +52,13 @@ ppredNormIG = function(x,obs,mu0=0,k0=1,sig20=1,nu0=1,S = 100000,Jeffreys=FALSE)
 
     #Using t(n-1) distribution resulting from Jeffrey's prior:
     #(theta - ybar)/(s/sqrt(n))|y1,...,yn ~ t(n-1)
-    #Finding t-distribution density for "shifted_scaled"
-    #ss = (theta - obs)
+    #yields t distribution with location ybar and scale
+    #std(y)*sqrt(1+1/n)
 
-    shifted_scaled = stats::dt(obs,df=length(obs)-1)
+    location = meanobs
+    scale = sqrt(s2)*sqrt(1+1/nobs)
+
+    xp = stats::pt((x-location)/scale,df=n-1)
 
   } else {
 
@@ -66,11 +69,13 @@ ppredNormIG = function(x,obs,mu0=0,k0=1,sig20=1,nu0=1,S = 100000,Jeffreys=FALSE)
   #xrsmat = cbind(x,rsmat)
 
   Frs = ecdf(rs)
+  xp = Frs(x)
 
   }
 
   #return(apply(xrsmat,1,function(x) length(x[x<=x[1]])-1)/ncol(rsmat))
 
-  return(Frs(x))
+  #return(Frs(x))
+  return(xp)
 
 }

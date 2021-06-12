@@ -40,9 +40,17 @@ lines(density(y.J),lty=2,lwd=2,col="red")
 location = ybar
 scale = sqrt(s2)*sqrt(1+1/n)
 yt = metRology::rt.scaled(S,n-1,location,scale)
+myyt = location + scale * stats::rt(S,n-1)
 
 plot(density(y.postsample))
-lines(density(y.J),lty=2,lwd=2,col="red")
+#lines(density(y.J),lty=2,lwd=2,col="red")
 lines(density(yt),col="blue",lty=3,lwd=2)
+points(density(myyt),pch=5,col="green")
 
-legend("topright",legend=c("postsample","Jeffrey's posteriors","Jeffrey's t"),lty=c(1,2,3),col=c("black","red","blue"))
+legend("topright",legend=c("postsample","Jeffrey's posteriors","Jeffrey's t","my Jeffrey's t"),lty=c(1,2,3,NA),col=c("black","red","blue","green"),pch=c(NA,NA,NA,5))
+
+
+###
+
+
+

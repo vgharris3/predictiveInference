@@ -54,7 +54,8 @@ rpredNormIG = function(n,obs,mu0=0,k0=1,sig20=1,nu0=1,Jeffreys=FALSE){
     #xt = seq(1,2.5,len=100)
     #yt = (1/scale) * dt((xt - location)/scale,df = nobs-1)
 
-    rs = metRology::rt.scaled(n,nobs-1,location,scale)
+    #rs = metRology::rt.scaled(n,nobs-1,location,scale)
+    rs = location + scale * stats::rt(n,nobs-1)
   }
 
   else{

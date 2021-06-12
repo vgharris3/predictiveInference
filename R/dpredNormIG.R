@@ -50,23 +50,20 @@ dpredNormIG = function(x,obs,mu0=0,k0=1,sig20=1,nu0=1,S = 100000,Jeffreys=FALSE)
 
   if(Jeffreys){
 
-    s = var(obs)
-    ybar = mean(obs)
-    n = length(obs)
-    location = ybar
-    scale = sqrt(s)*sqrt(1+1/n)
+    location = meanobs
+    scale = sqrt(s2)*sqrt(1+1/nobs)
 
     ####DEVISE A MEANS OF ESTIMATING THE SUPPORT
     ####ROOT FINDER?  LOOK AT rpredPG()
     xt = seq(1,2.5,len=100)
-    yt = (1/scale) * dt((xt - location)/scale,df = n-1)
+    yt = (1/scale) * dt((xt - location)/scale,df = nobs-1)
 
     #Using t(n-1) distribution resulting from Jeffrey's prior:
     #(theta - ybar)/(s/sqrt(n))|y1,...,yn ~ t(n-1)
-    #Finding t-distribution density for "shifted_scaled"
-    #ss = (theta - obs)
+    #yields t distribution with location ybar and scale
+    #std(y)*sqrt(1+1/n)
 
-    #shifted_scaled = stats::dt(obs,df=length(obs)-1)
+    xd = stats::dt((x-location)/scale,df=nobs-1)/scale
 
   } else {
 
