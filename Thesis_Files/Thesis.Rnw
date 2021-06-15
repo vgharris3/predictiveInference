@@ -612,13 +612,13 @@ if(0){
 
         For prediction of future $\tilde{y}|y_1,...,y_n,\theta,\sigma^2$, generate $\tilde{y}_i \sim \text{normal}\left(\theta^{(i)},\sigma^{2(i)}\right)$.\\
 
-        For prediction without the influence of any prior knowledge (Hoff p. 79), we can employ Jeffreys prior $\tilde{p}\left(\theta,\sigma^2\right) = 1/\sigma^2$.  This leads to the same conditional distribution for $\theta$ but a gamma$\left(\frac{n-1}{2},\frac{1}{2}\sum\left(y_i - \bar{y}\right)^2\right)$ distribution for $1/\sigma^2$.  This joint posterior distribution can be used for predict future $\tilde{y}$ by first drawing $\theta,\sigma^2$ and then simulating $\tilde{y}\sim\text{normal}\left(\theta,\sigma^2\right)$.   Alternatively, the joint posterior can be integrated to show that
+        For prediction without the influence of any previous knowledge (Hoff p. 79), we can employ Jeffreys prior $\tilde{p}\left(\theta,\sigma^2\right) = 1/\sigma^2$.  This leads to the same conditional distribution for $\theta$ but a gamma$\left(\frac{n-1}{2},\frac{1}{2}\sum\left(y_i - \bar{y}\right)^2\right)$ distribution for $1/\sigma^2$.  This joint posterior distribution can be used to predict future $\tilde{y}$ by first drawing $\theta,\sigma^2$ and then simulating $\tilde{y}\sim\text{normal}\left(\theta,\sigma^2\right)$.   Alternatively, the joint posterior can be integrated to show that
         $$\dfrac{\theta-\bar{y}}{s/\sqrt{n}}|y_1,...,y_n\sim t_{n-1}.$$
-        The resulting predictive distribution for $\tilde{y}$ is a t-distribution with location $\bar{y}$ and scale $s\sqrt{1+1/n}$ and $n-1$ degrees of freedom.
+        The resulting predictive distribution for $\tilde{y}$ is a t-distribution with location $\bar{y}$ and scale $s\sqrt{1+1/n}$ and $n-1$ degrees of freedom (Gelman et. al. p. 66).
 
 
       \paragraph{R Implementation}
-      Standard format R functions dpredNormIG(), ppredNormIG(), and rpredNormIG() have been created for the Normal-Inverse Gamma distribution for density, cumulative probability, and random sampling, respectively (see appendix).  These functions all include options for use of prior knowledge, or to use Jeffreys prior if desired.  If Jeffreys prior is used, the functions simply implement R's Student's t-distribution functions rt(), dt(), and pt(), applying the location and scale parameters as described above.  For predictions using prior knowledge (if the Jeffreys prior option is not invoked), the functions work as follows.  For the random sampler rpredNormIG(), the Monte-Carlo method described above was directly employed.  The predictive density and cumulative predictive density functions depend on the random sample.  The cumulative predictive density function utilizes the empirical cumulative density function ecdf() from R's stats package.  The predictive density function utilizes a Kernel Density Estimation (KDE) method and R's built-in density() function.  The KDE is computed by definition, using a normal kernel:
+      Standard format R functions dpredNormIG(), ppredNormIG(), and rpredNormIG() have been created for the Normal-Inverse Gamma distribution for density, cumulative probability, and random sampling, respectively (see appendix).  These functions all include options for implementation with or without previous knowledge as desired.  If Jeffreys prior is used, the functions simply implement R's Student's t-distribution functions rt(), dt(), and pt(), applying the location and scale parameters as described above.  For predictions using previous knowledge, the functions work as follows:  For the random sampler rpredNormIG(), the Monte-Carlo method described above is directly employed.  The predictive density and cumulative predictive density functions (dpredNormIG() and ppredNormID(), respectively) depend on the random sample.  ppredNormIG() utilizes the empirical cumulative density function ecdf() from R's stats package.  dpredNormIG() utilizes a Kernel Density Estimation (KDE) method and R's built-in density() function.  The KDE is computed by definition, using a normal kernel:
 
       $$\hat{f}_K(x) = \frac{1}{n}\sum_{i=1}^n\frac{1}{h}K\left(\frac{x-X_i}{h}\right),$$
 
@@ -632,15 +632,11 @@ if(0){
         h & \text{ is the bandwidth from R's density() function (that is, } h = \text{ density}(X_i)\text{\$bw)}\\
       \end{flalign*}
 
-
-
       These functions are exercised in the following example.\\
-
-        \clearpage
 
         \textit{Example (Hoff p. 72ff, using data from Grogan and Wirth (1981)):  Midge wing length}\\
 
-        Grogan and Wirth (1981) provide 9 measurements of midge wing length, in millimeters:  $y = \{1.64, 1.7, 1.72, 1.74, 1.82, 1.82, 1.82, 1.90, 2.08\}$. Prior studies suggest values $\mu_0 = 1.9$ and $\sigma_0^2 = 0.01$.  We choose $\kappa_0 = \nu_0 = 1$ ``...so that our prior distributions are only weakly centered around these estimates from other populations" (Hoff p. 76).  We compute
+        Grogan and Wirth (1981) provide 9 measurements of midge wing length, in millimeters:  $y = \{1.64, 1.7, 1.72, 1.74, 1.82, 1.82, 1.82, 1.90, 2.08\}$. Previous studies suggest values $\mu_0 = 1.9$ and $\sigma_0^2 = 0.01$.  We choose $\kappa_0 = \nu_0 = 1$ ``...so that our prior distributions are only weakly centered around these estimates from other populations" (Hoff p. 76).  We compute
 
         \begin{flalign*}
           \bar{y} &= 1.804\\
@@ -674,6 +670,7 @@ set.seed(1234)
 #prior
 mu0 = 1.9; k0 = 1
 mu0 = 1.8;  #PLAY AROUND WITH THIS.
+#mu0 = seq(1.5,2.5,0.1)
 sig20 = 0.010; nu0 = 1
 #sig20 = 10;
 
@@ -686,11 +683,13 @@ kn = k0 + n; nun = nu0 + n
 mun = (k0*mu0+n*ybar)/kn
 sig2n = (nu0*sig20 + (n-1)*s2 + k0*n*(ybar-mu0)^2/kn)/nun
 
-rbind(kn,mun,sqrt(sig2n),nun)
+#rbind(kn,mun,sqrt(sig2n),nun)
 
-if(0){
+S = 10000
+
+if(1){
+#for(i in 1:length(mu0)){
   #Monte Carlo for marginal posterior samples of sig2 and theta
-  S = 10000
   sig2.postsample = 1/rgamma(S,nun/2,sig2n*nun/2)
   theta.postsample = rnorm(S,mun,sqrt(sig2.postsample/kn))
 }

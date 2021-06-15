@@ -68,7 +68,7 @@ ppredNormIG = function(x,obs,mu0=0,k0=1,sig20=1,nu0=1,S = 100000,Jeffreys=FALSE)
 
   #xrsmat = cbind(x,rsmat)
 
-  Frs = ecdf(rs)
+  Frs = stats::ecdf(rs)
   xp = Frs(x)
 
   }
