@@ -711,8 +711,29 @@ random_sample_MC = rpredNormIG(S,y,mu0,k0,sig20,nu0)
 random_sample_J = rpredNormIG(S,y,Jeffreys=TRUE)
 
 par(mfrow=c(2,1))
-H = hist(random_sample_MC,probability = TRUE,xlim = c(1,2.5),ylim = c(0,3),breaks=50)
-hist(random_sample_J,probability=TRUE,xlim = c(1,2.5),ylim=c(0,3),breaks=50)
+#H_MC = hist(random_sample_MC,probability = TRUE,xlim = c(1,2.5),ylim = c(0,3),breaks=50) plot=FALSE)
+#H_J = hist(random_sample_J,probability=TRUE,xlim = c(1,2.5),ylim=c(0,3),breaks=50) plot=FALSE)
+H_MC = hist(random_sample_MC,probability = TRUE,ylim = c(0,3),breaks=50)#, plot=FALSE)
+H_J = hist(random_sample_J,probability=TRUE,ylim=c(0,3),breaks=50)#, plot=FALSE)
+
+#COMBINE BOTH MIDS THEN TAKE SORT(UNIQUE(MIDS))
+if(length(H_MC$mids) > length(H_J$mids)){
+  mids = H_MC$mids
+}else{
+  mids = H_J$mids
+}
+
+counts_MC = numeric(length(mids))
+counts_J = numeric(length(mids))
+
+for(hmcInd in 1:length(H_MC$mids)){
+  counts_MC[which(mids==H_MC$mids[hmcInd])] = H_MC$counts[hmcInd];
+}
+
+for(hjInd in 1:length(H_J$mids)){
+  counts_J[which(mids==H_J$mids[hjInd])] = H_J$counts[hjInd];
+}
+
 
 if(1) {
   xn = 1000
@@ -762,6 +783,8 @@ if(1) {
   #plot(x,xp)
   #lines(ecdf(random_sample))
 }
+
+
 
 
 
