@@ -500,6 +500,9 @@ Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15,
 
       These functions are exercised in the following example.\\
 
+
+      \paragraph{Example}
+
         \textit{Example (Hoff p. 72ff, using data from Grogan and Wirth (1981)):  Midge wing length}\\
 
         Grogan and Wirth (1981) provide 9 measurements of midge wing length, in millimeters:  $y = \{1.64, 1.7, 1.72, 1.74, 1.82, 1.82, 1.82, 1.90, 2.08\}$. Previous studies suggest values $\mu_0 = 1.9$ and $\sigma_0^2 = 0.01$.  We choose $\kappa_0 = \nu_0 = 1$ ``...so that our prior distributions are only weakly centered around these estimates from other populations" (Hoff p. 76).  We compute
@@ -526,44 +529,12 @@ Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15,
           \left\{\sigma^2|y_1,...,y_n\right\} &\sim \text{inverse-gamma}(5,0.7662)\\
         \end{flalign*}
 
+      The plot below illustrates the influence of previous knowledge of the population mean, and compares to the predictions resulting from Jeffreys prior.
+
 \includegraphics{Thesis-005}
-
-
 
         \clearpage
 
-        Jeffrey's Prior:  $p(\theta,\sigma^2) = 1/\sigma^2$.
-
-        \vdots
-
-        posteriors given Jeffrey's Prior:
-
-        $$\left\{1/\sigma^2|y_1,...,y_n\right\}\sim \text{gamma}\left(\frac{n-1}{2},\frac{1}{2}\sum\left(y_i - \bar{y}\right)^2\right)$$
-
-       % same as
-
-        %$$\left\{1/\sigma^2|y_1,...,y_n\right\}\sim \text{gamma}\left(\frac{n}{2},\frac{1}{2}\sum\left(y_i - \bar{y}\right)^2\right)$$
-
-
-
-        $$\left\{\theta|\sigma^2, y_1,...,y_n\right\}\sim \text{normal}\left(\bar{y},\frac{\sigma^2}{n}\right)$$
-
-        This leads to
-
-        $$\frac{\theta-\bar{y}}{s/\sqrt{n}}|y_1,...,y_n\sim t_{n-1} \text{ (Hoff p. 79)}$$
-
-        So we have predictive distribution
-
-        $$\tilde{y}\sim t_{n-1} \text{ with location }\bar{y} \text{ and scale }s\sqrt{\left(1+\frac{1}{n}\right)} \text {(Gelman et. al. p. 66)}$$
-
-
-
-        %\textcolor{red}{dig into Bedrick notes and homework for Jeffrey's prior}
-
-\includegraphics{Thesis-006}
-
-
-      \paragraph{Example}
     \subsubsection{Two samples}
       \paragraph{Derivation}
       \paragraph{R Implementation}
