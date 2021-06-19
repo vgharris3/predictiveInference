@@ -1,0 +1,97 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[margin=0.5in]{geometry}
+
+\usepackage{color}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    linktoc=all
+}
+
+
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{cancel}
+\usepackage{bm}
+\usepackage{dsfont}
+\usepackage{graphicx}
+\usepackage{graphics}
+\usepackage{xfrac}
+\usepackage{array}
+\setcounter{MaxMatrixCols}{40}
+
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{multirow}
+
+%inclusions carried over from past class homework formats
+\usepackage{units}
+\usepackage{fullpage}
+\usepackage{alltt}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{soul}
+
+\usepackage{pgfplots}
+
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\newcommand*{\fontCourier}{\fontfamily{pcr}\selectfont}
+\newcommand*\mean[1]{\overline{#1}}
+\newcommand\scalemath[2]{\scalebox{#1}{\mbox{\ensuremath{\displaystyle #2}}}}
+
+\setcounter{tocdepth}{5}
+\setcounter{secnumdepth}{5}
+
+\usepackage{pdfpages}
+\begin{document}
+%\includepdf{TitlePage_MastersThesis}
+%\includepdf{ThesisApprovalPage}
+\SweaveOpts{concordance=TRUE}
+
+%\tableofcontents
+%\newpage
+
+<<echo=FALSE>>=
+setwd("C:/Users/gabe/Documents/tmp/predictiveInference/Thesis_Files")
+@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%INTRODUCTION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+        For a Bayesian analysis comparing two groups we use the following sampling model (Hoff p. 127):
+
+        \begin{flalign*}
+          Y_{i,1} &= \mu + \delta + \epsilon_{i,1}\\
+          Y_{i,2} &= \mu + \delta + \epsilon_{i,2}\\
+          \left\{\epsilon_{i,j}\right\} &\sim\text{i.i.d. normal}\left(0,\sigma^2\right).
+        \end{flalign*}
+
+        Letting $\theta_1 = \mu + \delta$ and $\theta_2 = \mu - \delta$ we see that $\delta = \left(\theta_1 - \theta_2\right)/2$ is half the population difference in means, and $\mu = \left(\theta_1 + \theta_2\right)/2$ is the pooled average.  We'll assume conjugate prior distributions
+
+        \begin{flalign*}
+          p\left(\mu,\delta,\sigma^2\right) &= p(\mu) \times p(\delta) \times p\left(\sigma^2\right)\\
+          \mu &\sim \text{normal}\left(\mu_0,\gamma^2_0\right)\\
+          \delta &\sim \text{normal}\left(\delta_0,\tau^2_0\right)\\
+          \sigma^2 &\sim \text{inverse-gamma}\left(\nu_0/2,\nu_0\sigma^2_0/2\right),
+        \end{flalign*}
+
+\noindent from which the full conditional distributions follow:\\
+
+        \indent $\left\{\mu|\mathbf{y}_1,\mathbf{y}_2,\delta,\sigma^2\right\} \sim \text{normal}\left(\mu_n,\gamma^2_n\right)$, where
+
+        \begin{flalign*}
+          \mu_n &= \gamma^2_n \times \left[\dfrac{\mu_0}{\gamma^2_0} + \dfrac{\sum_{i=1}^{n_1}\left(y_{i,1}-\delta\right) + \sum_{i=1}^{n_2}\left(y_{i,2}+\delta\right)}{\sigma^2}\right]\\
+          &\\
+          \gamma^2_n &=\left[\dfrac{1}{\gamma^2_0} + \dfrac{\left(n_1 + n_2\right)}{\sigma^2}\right]^{-1}
+        \end{flalign*}
+
+\clearpage
+
+\end{document}
