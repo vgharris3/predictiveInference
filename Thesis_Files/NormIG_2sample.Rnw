@@ -94,4 +94,53 @@ setwd("C:/Users/gabe/Documents/tmp/predictiveInference/Thesis_Files")
 
 \clearpage
 
+The math scores were based on results of a national exam in the United States, standardized to produce a nationwide mean of 50 and a standard deviation of 10.  Unless these two schools were known in advance to be extremely exceptional, reasonable prior parameters can be based on this information.  For the prior distributions of $\mu$ and $\sigma^2$, we'll take $\mu_0 = 50$ and $\sigma^2_0 = 10^2 = 100$, although this latter value is likely to be an overestimate of the within-school sampling variability.  We'll make these prior distributions somewhat diffuse, with $\gamma^2_0 = 25^2 = 625$ and $\nu_0 = 1$.  For the prior distribution on $\delta$, choosing $\delta_0 = 0$ represents the prior opinion that $\theta_1 > \theta_2$ and $\theta_2 > \theta_1$ are equally probable.  Finally, since the scores are bounded between 0 and 100, half the difference between $\theta_1$ and $\theta_2$ must be less than 50 in absolute value, so a value of $\tau^2_0 = 25^2 = 625$ seems reasonably diffuse.
+
+<<fig=TRUE, echo=FALSE>>=
+#### Two sample comparison
+load('C:/Users/gabe/Documents/tmp/predictiveInference/R/nels.RData')
+data(nels.RData)
+## data
+y1<-y.school1 ; y2<-y.school2
+n1<-length(y1) ; n2<-length(y2)
+
+## prior parameters
+mu0<-50 ; g02<-625
+del0<-0 ; t02<-625
+s20<-100; nu0<-1
+
+## starting values
+mu<- ( mean(y1) + mean(y2) )/2
+del<- ( mean(y1) - mean(y2) )/2
+
+## Gibbs sampler
+MU<-DEL<-S2<-NULL
+Y12<-NULL
+set.seed(1)
+for(s in 1:5000)
+{
+
+  ##update s2
+  s2<-1/rgamma(1,(nu0+n1+n2)/2,
+        (nu0*s20+sum((y1-mu-del)^2)+sum((y2-mu+del)^2) )/2)
+  ##
+
+  ##update mu
+  var.mu<-  1/(1/g02+ (n1+n2)/s2 )
+  mean.mu<- var.mu*( mu0/g02 + sum(y1-del)/s2 + sum(y2+del)/s2 )
+  mu<-rnorm(1,mean.mu,sqrt(var.mu))
+  ##
+
+  ##update del
+  var.del<-  1/(1/t02+ (n1+n2)/s2 )
+  mean.del<- var.del*( del0/t02 + sum(y1-mu)/s2 - sum(y2-mu)/s2 )
+  del<-rnorm(1,mean.del,sqrt(var.del))
+  ##
+
+  ##save parameter values
+  MU<-c(MU,mu) ; DEL<-c(DEL,del) ; S2<-c(S2,s2)
+  Y12<-rbind(Y12,c(rnorm(2,mu+c(1,-1)*del,sqrt(s2) ) ) )
+}
+@
+
 \end{document}
