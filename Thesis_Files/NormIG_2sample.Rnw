@@ -99,48 +99,11 @@ The math scores were based on results of a national exam in the United States, s
 <<fig=TRUE, echo=FALSE>>=
 #### Two sample comparison
 load('C:/Users/gabe/Documents/tmp/predictiveInference/R/nels.RData')
-data(nels.RData)
 ## data
 y1<-y.school1 ; y2<-y.school2
 n1<-length(y1) ; n2<-length(y2)
 
-## prior parameters
-mu0<-50 ; g02<-625
-del0<-0 ; t02<-625
-s20<-100; nu0<-1
-
-## starting values
-mu<- ( mean(y1) + mean(y2) )/2
-del<- ( mean(y1) - mean(y2) )/2
-
-## Gibbs sampler
-MU<-DEL<-S2<-NULL
-Y12<-NULL
-set.seed(1)
-for(s in 1:5000)
-{
-
-  ##update s2
-  s2<-1/rgamma(1,(nu0+n1+n2)/2,
-        (nu0*s20+sum((y1-mu-del)^2)+sum((y2-mu+del)^2) )/2)
-  ##
-
-  ##update mu
-  var.mu<-  1/(1/g02+ (n1+n2)/s2 )
-  mean.mu<- var.mu*( mu0/g02 + sum(y1-del)/s2 + sum(y2+del)/s2 )
-  mu<-rnorm(1,mean.mu,sqrt(var.mu))
-  ##
-
-  ##update del
-  var.del<-  1/(1/t02+ (n1+n2)/s2 )
-  mean.del<- var.del*( del0/t02 + sum(y1-mu)/s2 - sum(y2-mu)/s2 )
-  del<-rnorm(1,mean.del,sqrt(var.del))
-  ##
-
-  ##save parameter values
-  MU<-c(MU,mu) ; DEL<-c(DEL,del) ; S2<-c(S2,s2)
-  Y12<-rbind(Y12,c(rnorm(2,mu+c(1,-1)*del,sqrt(s2) ) ) )
-}
+plot(1:n1,y1)
 @
 
 \end{document}

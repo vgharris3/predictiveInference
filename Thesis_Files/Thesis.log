@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  23 JUN 2021 08:30
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  25 JUN 2021 09:55
 entering extended mode
 **./Thesis.tex
 (Thesis.tex
@@ -1215,6 +1215,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 587--590
 
  []
 
+<Thesis-006.pdf, id=441, 433.62pt x 433.62pt>
+File: Thesis-006.pdf Graphic file (type pdf)
+<use Thesis-006.pdf>
+Package pdftex.def Info: Thesis-006.pdf  used on input line 591.
+(pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 594.
@@ -1223,7 +1228,7 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 594.
 
-[23]
+[23 <./Thesis-006.pdf>] [24]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 603.
@@ -1240,9 +1245,9 @@ Package hyperref Warning: Difference (3) between bookmark levels is greater
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
 (hyperref)                than one, level fixed on input line 606.
 
-[24
+[25
 
-] [25
+] [26
 
 ] (Thesis.aux)
 Package rerunfilecheck Info: File `Thesis.out' has not changed.
@@ -1254,10 +1259,10 @@ LaTeX Font Warning: Size substitutions with differences
 
  ) 
 Here is how much of TeX's memory you used:
- 30447 strings out of 479696
- 709357 string characters out of 2881701
+ 30454 strings out of 479696
+ 709491 string characters out of 2881701
  1158470 words of memory out of 3000000
- 46834 multiletter control sequences out of 15000+200000
+ 46840 multiletter control sequences out of 15000+200000
  445999 words of font info for 131 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  94i,20n,98p,1134b,609s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1276,9 +1281,9 @@ onts/cm/cmsy10.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/
 MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/MiKTeX 2.9/fonts/type1/
 public/amsfonts/cm/cmti12.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/latxfo
 nt/line10.pfb>
-Output written on Thesis.pdf (25 pages, 435896 bytes).
+Output written on Thesis.pdf (26 pages, 442557 bytes).
 PDF statistics:
- 528 PDF objects out of 1000 (max. 8388607)
- 73 named destinations out of 1000 (max. 500000)
- 397 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 538 PDF objects out of 1000 (max. 8388607)
+ 74 named destinations out of 1000 (max. 500000)
+ 402 words of extra memory for PDF output out of 10000 (max. 10000000)
 
