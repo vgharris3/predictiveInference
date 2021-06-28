@@ -842,7 +842,7 @@ legend("bottomright", inset = 0.05, bg="transparent",
         \item Predict $\tilde{y}_1\sim \text{normal}\left(\mu+\delta,\sigma^2\right)$ and $\tilde{y}_2\sim \text{normal}\left(\mu-\delta,\sigma^2\right)$
       \end{enumerate}
 
-      The user provides the two samples $\mathbf{y_1}$ and $\mathbf{y_2}$ along with values for $\mu_0, \delta_0, \tau^2_0, \nu_0$, and desired prediction sample size $N$.  The function returns $N$ predictions for each population and the vectors of generated values for $\mu$, $\delta$, and $\sigma^2$.
+      The user provides the two samples $\mathbf{y_1}$ and $\mathbf{y_2}$ along with values for $\mu_0, \sigma^2_0, \delta_0, \tau^2_0, \nu_0$, and desired prediction sample size $N$.  The function returns $N$ predictions for each population and the vectors of generated values for $\mu$, $\delta$, and $\sigma^2$.
 
       \paragraph{Example}
 
@@ -854,6 +854,7 @@ legend("bottomright", inset = 0.05, bg="transparent",
 
 <<fig=TRUE, echo=FALSE>>=
 #### Two sample comparison
+source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredNormIG2.R')
 load('C:/Users/gabe/Documents/tmp/predictiveInference/R/nels.RData')
 ## data
 y1<-y.school1 ; y2<-y.school2
@@ -897,14 +898,25 @@ for(s in 1:5000)
   Y12<-rbind(Y12,c(rnorm(2,mu+c(1,-1)*del,sqrt(s2) ) ) )
 }
 
-plot(1:n1,y1)
-points(1:n2,y2,col="red")
-abline(h=Y12[,1])
-abline(h=Y12[,2],col="red")
-plot(density(y1))
-lines(density(y2),col="red")
-lines(density(Y12[,1]))
+# plot(1:n1,y1)
+# points(1:n2,y2,col="red")
+# abline(h=Y12[,1])
+# abline(h=Y12[,2],col="red")
+# plot(density(y1))
+# lines(density(y2),col="red")
+plot(density(Y12[,1]),type="l")
 lines(density(Y12[,2]),col="red")
+
+n = 5000
+mu0<-50 ; g20<-625
+d0<-0 ; t20<-625
+s20<-100; nu0<-1
+
+set.seed(1)
+RS = rpredNormIG2(n,y1,y2,mu0,g20,d0,t20,s20,nu0)
+
+points(density(RS[,1]))
+points(density(RS[,2]),col="red")
 @
 
 

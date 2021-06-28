@@ -25,8 +25,7 @@ rpredNormIG(n, obs, mu0 = 0, k0 = 1, sig20 = 1, nu0 = 1, Jeffreys = FALSE)
 random sample of size n Normal - Inverse Gamma predictive probability
 }
 \description{
-rpredPG returns a random sample of size n from the Poisson-Gamma predictive probability distribution given observations obs~Poi(theta)
-and theta~Gamma(alpha,beta)
+rpredNormIG returns a random sample of size n from the Normal-Inverse Gamma predictive probability distribution
 }
 \examples{
 1

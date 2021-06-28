@@ -58,7 +58,7 @@ ppredNormIG = function(x,obs,mu0=0,k0=1,sig20=1,nu0=1,S = 100000,Jeffreys=FALSE)
     location = meanobs
     scale = sqrt(s2)*sqrt(1+1/nobs)
 
-    xp = stats::pt((x-location)/scale,df=n-1)
+    xp = stats::pt((x-location)/scale,df=nobs-1)
 
   } else {
 

@@ -56,7 +56,7 @@ dpredNormIG = function(x,obs,mu0=0,k0=1,sig20=1,nu0=1,S = 100000,Jeffreys=FALSE)
     ####DEVISE A MEANS OF ESTIMATING THE SUPPORT
     ####ROOT FINDER?  LOOK AT rpredPG()
     xt = seq(1,2.5,len=100)
-    yt = (1/scale) * dt((xt - location)/scale,df = nobs-1)
+    yt = (1/scale) * stats::dt((xt - location)/scale,df = nobs-1)
 
     #Using t(n-1) distribution resulting from Jeffrey's prior:
     #(theta - ybar)/(s/sqrt(n))|y1,...,yn ~ t(n-1)

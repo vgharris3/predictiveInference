@@ -1,7 +1,6 @@
 #' The Normal-Inverse Gamma Predictive Distribution
 #'
-#' rpredPG returns a random sample of size n from the Poisson-Gamma predictive probability distribution given observations obs~Poi(theta)
-#' and theta~Gamma(alpha,beta)
+#' rpredNormIG returns a random sample of size n from the Normal-Inverse Gamma predictive probability distribution
 #'
 #' @param n desired random sample size
 #' @param obs vector of (observed) Normally-distributed values
