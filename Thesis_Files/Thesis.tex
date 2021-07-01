@@ -598,14 +598,24 @@ Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15,
 
       Hoff p. 128-129 \textit{Analysis of math score data}\\
       The math scores were based on results of a national exam in the United States, standardized to produce a nationwide mean of 50 and a standard deviation of 10.  Unless these two schools were known in advance to be extremely exceptional, reasonable prior parameters can be based on this information.  For the prior distributions of $\mu$ and $\sigma^2$, we'll take $\mu_0 = 50$ and $\sigma^2_0 = 10^2 = 100$, although this latter value is likely to be an overestimate of the within-school sampling variability.  We'll make these prior distributions somewhat diffuse, with $\gamma^2_0 = 25^2 = 625$ and $\nu_0 = 1$.  For the prior distribution on $\delta$, choosing $\delta_0 = 0$ represents the prior opinion that $\theta_1 > \theta_2$ and $\theta_2 > \theta_1$ are equally probable.  Finally, since the scores are bounded between 0 and 100, half the difference between $\theta_1$ and $\theta_2$ must be less than 50 in absolute value, so a value of $\tau^2_0 = 25^2 = 625$ seems reasonably diffuse.\\\\
-      The results of a call to rpredNormIG2$\left(\mathbf{y}_1,\mathbf{y}_2,\mu_0,\sigma^2_0,\delta_0,\tau^2_0,N\right)$ are summarized in the following plots.\\
-
-      NOW WRITE RPREDNORMIG2()
+      The results of a call to rpredNormIG2$\left(\mathbf{y}_1,\mathbf{y}_2,\mu_0,\sigma^2_0,\delta_0,\tau^2_0,N\right)$ are summarized in the following plot.\\
 
 \includegraphics{Thesis-006}
 
 
-    \subsubsection{$k$ samples}
+    \subsubsection{$k$ samples:  Comparing multiple groups}
+    For two-level data consisting of groups and units within groups, denote $y_{i,j}$ as the data on the $i$th unit in group $j$. We have the hierarchical normal model (Hoff p. 132ff):
+    $$\phi_j = \left\{\theta_j,\sigma^2\right\}, p\left(y|\phi_j\right) = \text{normal}\left(\theta_j,\sigma^2\right) \text{ (within-group model)}$$
+    $$\psi_j = \left\{\mu,\tau^2\right\}, p\left(\theta_j|\psi\right) = \text{normal}\left(\mu,\tau^2\right) \text{ (between-group model)}$$
+    For convenience we will use standard semiconjugate normal and inverse-gamma prior distributions for the fixed but unknown parameters in the model:
+    \begin{flalign*}
+      \sigma^2 &\sim \text{inverse-gamma}\left(\frac{\nu_0}{2},\frac{\nu_0\sigma^2_0}{2}\right)\\
+      &\\
+      \tau^2 &\sim \text{inverse-gamma}\left(\frac{\eta_0}{2},\frac{\eta_0\tau^2_0}{2}\right)\\
+      &\\
+      \mu &\sim \text{normal}\left(\mu_0,\gamma^2_0\right)\\
+    \end{flalign*}
+
       \paragraph{Derivation}
       \paragraph{R Implementation}
       \paragraph{Example}
