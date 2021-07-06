@@ -597,7 +597,7 @@ Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15,
       \paragraph{Example}
 
       Hoff p. 128-129 \textit{Analysis of math score data}\\
-      The math scores were based on results of a national exam in the United States, standardized to produce a nationwide mean of 50 and a standard deviation of 10.  Unless these two schools were known in advance to be extremely exceptional, reasonable prior parameters can be based on this information.  For the prior distributions of $\mu$ and $\sigma^2$, we'll take $\mu_0 = 50$ and $\sigma^2_0 = 10^2 = 100$, although this latter value is likely to be an overestimate of the within-school sampling variability.  We'll make these prior distributions somewhat diffuse, with $\gamma^2_0 = 25^2 = 625$ and $\nu_0 = 1$.  For the prior distribution on $\delta$, choosing $\delta_0 = 0$ represents the prior opinion that $\theta_1 > \theta_2$ and $\theta_2 > \theta_1$ are equally probable.  Finally, since the scores are bounded between 0 and 100, half the difference between $\theta_1$ and $\theta_2$ must be less than 50 in absolute value, so a value of $\tau^2_0 = 25^2 = 625$ seems reasonably diffuse.\\\\
+      Math score data for two schools were based on results of a national exam in the United States, standardized to produce a nationwide mean of 50 and a standard deviation of 10.  Unless the two schools were known in advance to be extremely exceptional, reasonable prior parameters can be based on this information.  For the prior distributions of $\mu$ and $\sigma^2$, we'll take $\mu_0 = 50$ and $\sigma^2_0 = 10^2 = 100$, although this latter value is likely to be an overestimate of the within-school sampling variability.  We'll make these prior distributions somewhat diffuse, with $\gamma^2_0 = 25^2 = 625$ and $\nu_0 = 1$.  For the prior distribution on $\delta$, choosing $\delta_0 = 0$ represents the prior opinion that $\theta_1 > \theta_2$ and $\theta_2 > \theta_1$ are equally probable.  Finally, since the scores are bounded between 0 and 100, half the difference between $\theta_1$ and $\theta_2$ must be less than 50 in absolute value, so a value of $\tau^2_0 = 25^2 = 625$ seems reasonably diffuse.\\\\
       The results of a call to rpredNormIG2$\left(\mathbf{y}_1,\mathbf{y}_2,\mu_0,\sigma^2_0,\delta_0,\tau^2_0,N\right)$ are summarized in the following plot.\\
 
 \includegraphics{Thesis-006}
@@ -607,7 +607,7 @@ Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15,
     For two-level data consisting of groups and units within groups, denote $y_{i,j}$ as the data on the $i$th unit in group $j$. We have the hierarchical normal model (Hoff p. 132ff):
     $$\phi_j = \left\{\theta_j,\sigma^2\right\}, p\left(y|\phi_j\right) = \text{normal}\left(\theta_j,\sigma^2\right) \text{ (within-group model)}$$
     $$\psi_j = \left\{\mu,\tau^2\right\}, p\left(\theta_j|\psi\right) = \text{normal}\left(\mu,\tau^2\right) \text{ (between-group model)}$$
-    For convenience we will use standard semiconjugate normal and inverse-gamma prior distributions for the fixed but unknown parameters in the model:
+    We use standard semiconjugate normal and inverse-gamma prior distributions for the fixed but unknown parameters in the model:
     \begin{flalign*}
       \sigma^2 &\sim \text{inverse-gamma}\left(\frac{\nu_0}{2},\frac{\nu_0\sigma^2_0}{2}\right)\\
       &\\
@@ -617,8 +617,57 @@ Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15,
     \end{flalign*}
 
       \paragraph{Derivation}
+      As with the two-sample problem, joint posterior inferences for the unknown parameters can be made by construction a Gibbs sampler to approximate the posterior distribution $p\left(\theta_1,...,\theta_m,\mu\tau^2,\sigma^2|\mathbf{y}_1,...,\mathbf{y}_m\right)$.  For this we need the full conditional distribution of each parameter (Hoff pp. 134-135):
+      %%$$\left\{\mu|\theta_1,...,\theta_m,\tau^2\right\} \sim \text{normal}\left(\dfrac{m\bar{\theta}/\tau^2 + \mu_0/\gamma^2_0}{m/\tau^2 + 1/\gamma^2_0},\dfrac{1}{m/\tau^2+1/\gamma^2_0}\right)$$
+      $$\left\{\mu|\theta_1,...,\theta_m,\tau^2\right\} \sim \text{normal}\left(\dfrac{\frac{m\bar{\theta}}{\tau^2} + \frac{\mu_0}{\gamma^2_0}}{\frac{m}{\tau^2} + \frac{1}{\gamma^2_0}},\dfrac{1}{\frac{m}{\tau^2}+\frac{1}{\gamma^2_0}}\right)$$
+      $$\left\{\tau^2|\theta_1,...,\theta_m,\mu\right\} \sim \text{inverse-gamma}\left(\dfrac{\eta_0 + m}{2},\dfrac{\eta_0\tau^2_0 + \sum\left(\theta_j-\mu\right)^2}{2}\right)$$
+
+      $$\left\{\theta_j|y_{1,j},...,y_{n,j},\sigma^2\right\} \sim \text{normal}\left(\dfrac{\frac{n_j\bar{y}_j}{\sigma^2} + \frac{1}{\tau^2}}{\frac{n_j}{\sigma^2}+\frac{1}{\tau^2}},\dfrac{1}{\frac{n_j}{\sigma^2}+\frac{1}{\tau^2}}\right)$$
+
+      $$\left\{\sigma^2|\mathbf{\theta,y_1,...,y_n}\right\} \sim \text{inverse-gamma}\left(\dfrac{1}{2}\left[\nu_0 + \sum_{j=1}^m n_j\right],\dfrac{1}{2}\left[\nu_0\sigma^2_0 + \sum_{j=1}^m\sum_{i=1}^{n_j}\left(y_{i,j}-\theta_j\right)^2\right]\right).$$
+
+      Note that $\sum\sum\left(y_{i,j}-\theta_j\right)^2$ is the sum of squared residuals across all groups, conditional on the within-group means, and so the conditional distribution concentrates probability around a pooled-sample estimate of the variance.
+
+
       \paragraph{R Implementation}
+
+      NEXT PUT STEPS 1-4 (HOFF P. 137)
+
       \paragraph{Example}
+      Returning to the math scores example, data for 10th-grade students from 100 large urban schools (each having 10th-grade enrollment of at least 400) is summarized in the following plots.
+
+\includegraphics{Thesis-007}
+
+\includegraphics{Thesis-008}
+
+      The prior parameters that need to be specified are
+
+      % \begin{flalign*}
+      %   \left(\nu_0,\sigma^2_0\right) \text{ for } p\left(\sigma^2\right)\\
+      %   \left(\eta_0,\tau^2_0\right) \text{ for } p\left(\tau^2\right)\\
+      %   \left(\mu_0,\gamma^2_0\right) \text{ for } p\left(\mu\right).
+      % \end{flalign*}
+
+      \begin{flalign*}
+        \nu_0,\sigma^2_0 \text{ for } p\left(\sigma^2\right)\\
+        \eta_0,\tau^2_0 \text{ for } p\left(\tau^2\right)\\
+        \mu_0,\gamma^2_0 \text{ for } p\left(\mu\right).
+      \end{flalign*}
+
+      We'll use the following prior values (Hoff p. 137):
+
+      \begin{flalign*}
+        \sigma^2_0&:  100 \text{ (within-school variance)}\\
+        \nu_0&:  1 \text{ (prior sample size)}\\
+        \tau^2_0&:  100 \text{ (between-school variance)}\\
+        \eta_0&:  1 \text{ (prior sample size)}\\
+        \mu_0&:  50 \text{ (prior mean of school means)}\\
+        \gamma^2_0&:  25 \text{ (prior variance of school means)}
+      \end{flalign*}
+
+
+NEXT PUT STEPS 1-4 (HOFF P. 137) INTO ABOVE R IMPLEMENTATION SECTION
+
       \paragraph{Ranking Treatments}
 
 \clearpage
