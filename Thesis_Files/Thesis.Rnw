@@ -896,7 +896,7 @@ points(density(RS[,2]),col="red")
     \end{flalign*}
 
       \paragraph{Derivation}
-      As with the two-sample problem, joint posterior inferences for the unknown parameters can be made by construction a Gibbs sampler to approximate the posterior distribution $p\left(\theta_1,...,\theta_m,\mu\tau^2,\sigma^2|\mathbf{y}_1,...,\mathbf{y}_m\right)$.  For this we need the full conditional distribution of each parameter (Hoff pp. 134-135):
+      As with the two-sample problem, joint posterior inferences for the unknown parameters can be made by construction a Gibbs sampler to approximate the posterior distribution $p\left(\theta_1,...,\theta_m,\mu,\tau^2,\sigma^2|\mathbf{y}_1,...,\mathbf{y}_m\right)$.  For this we need the full conditional distribution of each parameter (Hoff pp. 134-135):
       %%$$\left\{\mu|\theta_1,...,\theta_m,\tau^2\right\} \sim \text{normal}\left(\dfrac{m\bar{\theta}/\tau^2 + \mu_0/\gamma^2_0}{m/\tau^2 + 1/\gamma^2_0},\dfrac{1}{m/\tau^2+1/\gamma^2_0}\right)$$
       $$\left\{\mu|\theta_1,...,\theta_m,\tau^2\right\} \sim \text{normal}\left(\dfrac{\frac{m\bar{\theta}}{\tau^2} + \frac{\mu_0}{\gamma^2_0}}{\frac{m}{\tau^2} + \frac{1}{\gamma^2_0}},\dfrac{1}{\frac{m}{\tau^2}+\frac{1}{\gamma^2_0}}\right)$$
       $$\left\{\tau^2|\theta_1,...,\theta_m,\mu\right\} \sim \text{inverse-gamma}\left(\dfrac{\eta_0 + m}{2},\dfrac{\eta_0\tau^2_0 + \sum\left(\theta_j-\mu\right)^2}{2}\right)$$
@@ -910,7 +910,32 @@ points(density(RS[,2]),col="red")
 
       \paragraph{R Implementation}
 
-      NEXT PUT STEPS 1-4 (HOFF P. 137)
+      The standard format R function rpredNormIGk() implements a Gibbs sampler for posterior approximation of each unknown quantity by sampling from its full conditional distribution.  From these posteriors, predictions are generated, as follows:
+
+      \begin{enumerate}
+        \item Set prior parameter values:
+          \begin{flalign*}
+            \nu_0,\sigma^2_0 \text{ for } p\left(\sigma^2\right)\\
+            \eta_0,\tau^2_0 \text{ for } p\left(\tau^2\right)\\
+            \mu_0,\gamma^2_0 \text{ for } p\left(\mu\right).
+          \end{flalign*}
+        \item Set initial states for the unknown parameters:
+          \begin{flalign*}
+            \theta_1^{(1)} &= \mathbf{\bar{y}_1},...,\theta_m^{(1)} = \mathbf{\bar{y}_m}\\
+            \mu^{(1)} &= \text{mean}\left(\theta_1^{(1)},...,\theta_m^{(1)}\right)\\
+            \tau^{2(1)} &= \text{var}\left(\theta_1^{(1)},...,\theta_m^{(1)}\right)\\
+            \sigma^{2(1)} &= \text{mean}\left(\text{var}\left(\mathbf{y}_1\right),...,\text{var}\left(\mathbf{y}_m\right)\right))
+          \end{flalign*}
+        \item For $s\in\{1,...,S\}$, sample
+          \begin{enumerate}
+            \item $\mu^{(s+1)} \sim p\left(\mu|\theta_1^{(s)},...,\theta_m^{(s)},\tau^{2(s)}\right)$
+            \item $\tau^{2(s+1)} \sim p\left(\tau^2|\theta_1^{(s)},...,\theta_m^{(s)},\mu^{(s+1)}\right)$
+            \item $\sigma^{2(s+1)} \sim p\left(\sigma^2|\theta_1^{(s)},...,\theta_m^{(s)},\mathbf{y}_1,...,\mathbf{y}_m\right)$
+            \item $\theta_j^{(s+1)} \sim p\left(\theta_j|\mu^{(s+1)},\tau^{2(s+1)},\sigma^{2(s+1)},\mathbf{y}_j\right)$ for $j \in \{1,...,m\}$
+          \end{enumerate}
+        \item For $s\in\{1,...,S\}$, generate prediction $y_j^{(s)} \sim \text{normal}\left(\theta_j^{(s)},\sigma^{2(s)}\right)$
+      \end{enumerate}
+
 
       \paragraph{Example}
       Returning to the math scores example, data for 10th-grade students from 100 large urban schools (each having 10th-grade enrollment of at least 400) is summarized in the following plots.
@@ -964,7 +989,7 @@ plot(n,ybar,xlab="sample size",ylab="sample mean")
 #dev.off()
 @
 
-      The prior parameters that need to be specified are
+      % The prior parameters that need to be specified are
 
       % \begin{flalign*}
       %   \left(\nu_0,\sigma^2_0\right) \text{ for } p\left(\sigma^2\right)\\
@@ -972,11 +997,11 @@ plot(n,ybar,xlab="sample size",ylab="sample mean")
       %   \left(\mu_0,\gamma^2_0\right) \text{ for } p\left(\mu\right).
       % \end{flalign*}
 
-      \begin{flalign*}
-        \nu_0,\sigma^2_0 \text{ for } p\left(\sigma^2\right)\\
-        \eta_0,\tau^2_0 \text{ for } p\left(\tau^2\right)\\
-        \mu_0,\gamma^2_0 \text{ for } p\left(\mu\right).
-      \end{flalign*}
+      % \begin{flalign*}
+      %   \nu_0,\sigma^2_0 \text{ for } p\left(\sigma^2\right)\\
+      %   \eta_0,\tau^2_0 \text{ for } p\left(\tau^2\right)\\
+      %   \mu_0,\gamma^2_0 \text{ for } p\left(\mu\right).
+      % \end{flalign*}
 
       We'll use the following prior values (Hoff p. 137):
 
