@@ -853,7 +853,7 @@ legend("bottomright", inset = 0.05, bg="transparent",
 <<fig=TRUE, echo=FALSE>>=
 #### Two sample comparison
 source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredNormIG2.R')
-load('C:/Users/gabe/Documents/tmp/predictiveInference/R/nels.RData')
+#load('C:/Users/gabe/Documents/tmp/predictiveInference/nels.RData')
 ## data
 y1<-y.school1 ; y2<-y.school2
 n1<-length(y1) ; n2<-length(y2)
@@ -933,7 +933,7 @@ points(density(RS[,2]),col="red")
             \item $\sigma^{2(s+1)} \sim p\left(\sigma^2|\theta_1^{(s)},...,\theta_m^{(s)},\mathbf{y}_1,...,\mathbf{y}_m\right)$
             \item $\theta_j^{(s+1)} \sim p\left(\theta_j|\mu^{(s+1)},\tau^{2(s+1)},\sigma^{2(s+1)},\mathbf{y}_j\right)$ for $j \in \{1,...,m\}$
           \end{enumerate}
-        \item For $s\in\{1,...,S\}$, generate prediction $y_j^{(s)} \sim \text{normal}\left(\theta_j^{(s)},\sigma^{2(s)}\right)$
+        \item For $s\in\{1,...,S\}$, generate prediction $\tilde{y}_j^{(s)} \sim \text{normal}\left(\theta_j^{(s)},\sigma^{2(s)}\right)$
       \end{enumerate}
 
 
