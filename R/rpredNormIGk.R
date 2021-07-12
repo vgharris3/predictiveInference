@@ -2,7 +2,7 @@
 #'
 #' rpredNormIGk returns a random sample of size n from the Normal-Inverse Gamma predictive probability distribution for 2 samples
 #'
-#' @param n desired random sample size
+#' @param N desired random sample size
 #' @param Y 2-column matrix of multiple samples of observed Normally-distributed values.  Column 1:  integer indices identifying the samples.  Column 2:  data values for the sample indicated by the corresponding index in column 1.
 #' @param nu0 number of prior observations
 #' @param s20 within-sample variance from prior knowledge
@@ -15,7 +15,7 @@
 #' @export
 #'
 #' @examples 1
-rpredNormIGk = function(n=1,Y,nu0=1,s20=1,eta0=1,t20=1,mu0=0,g20=1){
+rpredNormIGk = function(N=1,Y,nu0=1,s20=1,eta0=1,t20=1,mu0=0,g20=1){
 
   #ERROR HANDLING
 
@@ -25,14 +25,14 @@ rpredNormIGk = function(n=1,Y,nu0=1,s20=1,eta0=1,t20=1,mu0=0,g20=1){
   ##########################
   ##########################
 
-  if(n <= 0){
-    warning("n <= 0.  Setting n = 1.")
-    n = 1
+  if(N <= 0){
+    warning("N <= 0.  Setting N = 1.")
+    N = 1
   }
 
-  if(n!=round(n)){
-    warning("n is not a whole number.  Setting n = round(n).")
-    n = round(n)
+  if(N!=round(N)){
+    warning("N is not a whole number.  Setting N = round(n).")
+    N = round(N)
   }
 
   if(g20 <= 0){
@@ -105,13 +105,13 @@ rpredNormIGk = function(n=1,Y,nu0=1,s20=1,eta0=1,t20=1,mu0=0,g20=1){
   #### MCMC approximation to posterior for the hierarchical normal model
 
   ## weakly informative priors
-  nu0<-1  ; s20<-100
-  eta0<-1 ; t20<-100
-  mu0<-50 ; g20<-25
+  # nu0<-1  ; s20<-100
+  # eta0<-1 ; t20<-100
+  # mu0<-50 ; g20<-25
 
   ## starting values
   m<-length(Y)
-  n<-sv<-ybar<-rep(NA,m)
+  ytilde<-n<-sv<-ybar<-rep(NA,m)
   for(j in 1:m)
   {
     ybar[j]<-mean(Y[[j]])
@@ -124,8 +124,10 @@ rpredNormIGk = function(n=1,Y,nu0=1,s20=1,eta0=1,t20=1,mu0=0,g20=1){
   tau2<-var(theta)
 
   ## setup MCMC
-  set.seed(1)
-  S<-5000
+  # set.seed(1)
+  #S<-5000
+  S<-N
+  YTILDE<-matrix(nrow=S,ncol=m)
   THETA<-matrix( nrow=S,ncol=m)
   MST<-matrix( nrow=S,ncol=3)
 
@@ -146,6 +148,11 @@ rpredNormIGk = function(n=1,Y,nu0=1,s20=1,eta0=1,t20=1,mu0=0,g20=1){
     ss<-nu0*s20;for(j in 1:m){ss<-ss+sum((Y[[j]]-theta[j])^2)}
     sigma2<-1/rgamma(1,nun/2,ss/2)
 
+    #predict ytilde_j for each theta_j
+    for(j in 1:m){
+      ytilde[j] = rnorm(1,mean=theta[j],sd=sqrt(sigma2))
+    }
+
     #sample a new value of mu
     vmu<- 1/(m/tau2+1/g20)
     emu<- vmu*(m*mean(theta)/tau2 + mu0/g20)
@@ -157,13 +164,14 @@ rpredNormIGk = function(n=1,Y,nu0=1,s20=1,eta0=1,t20=1,mu0=0,g20=1){
     tau2<-1/rgamma(1,etam/2,ss/2)
 
     #store results
+    YTILDE[s,]<-ytilde
     THETA[s,]<-theta
     MST[s,]<-c(mu,sigma2,tau2)
 
   }
 
 
-  mcmc1<-list(THETA=THETA,MST=MST)
+  mcmc1<-list(YTILDE=YTILDE,THETA=THETA,MST=MST)
 
 
 

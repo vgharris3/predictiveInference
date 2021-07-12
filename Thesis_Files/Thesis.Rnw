@@ -854,6 +854,7 @@ legend("bottomright", inset = 0.05, bg="transparent",
 #### Two sample comparison
 source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredNormIG2.R')
 #load('C:/Users/gabe/Documents/tmp/predictiveInference/nels.RData')
+load('C:/Users/gabe/Documents/tmp/predictiveInference/R/sysdata.rda')
 ## data
 y1<-y.school1 ; y2<-y.school2
 n1<-length(y1) ; n2<-length(y2)
@@ -942,7 +943,7 @@ points(density(RS[,2]),col="red")
 
 <<fig=TRUE,echo=FALSE>>=
 
-load('C:/Users/gabe/Documents/tmp/predictiveInference/R/nels.RData')
+#load('C:/Users/gabe/Documents/tmp/predictiveInference/R/nels.RData')
 
 #### Put data into list form. This is different from in the book.
 Y<-list() #list of each individual school's scores
@@ -1014,8 +1015,12 @@ plot(n,ybar,xlab="sample size",ylab="sample mean")
         \gamma^2_0&:  25 \text{ (prior variance of school means)}
       \end{flalign*}
 
-
-NEXT PUT STEPS 1-4 (HOFF P. 137) INTO ABOVE R IMPLEMENTATION SECTION
+<<fig=TRUE,echo=FALSE>>=
+source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredNormIGk.R')
+result = rpredNormIGk(N=2,Y,nu0=1,s20=100,eta0=1,t20=100,mu0=50,g20=25)
+plot(density(result$YTILDE[1,]))
+lines(density(Y[[1]]))
+@
 
       \paragraph{Ranking Treatments}
 

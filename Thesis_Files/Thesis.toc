@@ -32,9 +32,9 @@
 \contentsline {paragraph}{\numberline {3.4.3.1}Derivation}{25}{paragraph.3.4.3.1}%
 \contentsline {paragraph}{\numberline {3.4.3.2}R Implementation}{25}{paragraph.3.4.3.2}%
 \contentsline {paragraph}{\numberline {3.4.3.3}Example}{26}{paragraph.3.4.3.3}%
-\contentsline {paragraph}{\numberline {3.4.3.4}Ranking Treatments}{27}{paragraph.3.4.3.4}%
-\contentsline {section}{\numberline {4}Chapter 2: Normal Regression with Zellner's $g$-prior}{28}{section.4}%
-\contentsline {paragraph}{\numberline {4.0.0.1}Derivation}{28}{paragraph.4.0.0.1}%
-\contentsline {paragraph}{\numberline {4.0.0.2}R Implementation}{28}{paragraph.4.0.0.2}%
-\contentsline {paragraph}{\numberline {4.0.0.3}Example}{28}{paragraph.4.0.0.3}%
-\contentsline {section}{\numberline {5}Conclusion}{29}{section.5}%
+\contentsline {paragraph}{\numberline {3.4.3.4}Ranking Treatments}{28}{paragraph.3.4.3.4}%
+\contentsline {section}{\numberline {4}Chapter 2: Normal Regression with Zellner's $g$-prior}{29}{section.4}%
+\contentsline {paragraph}{\numberline {4.0.0.1}Derivation}{29}{paragraph.4.0.0.1}%
+\contentsline {paragraph}{\numberline {4.0.0.2}R Implementation}{29}{paragraph.4.0.0.2}%
+\contentsline {paragraph}{\numberline {4.0.0.3}Example}{29}{paragraph.4.0.0.3}%
+\contentsline {section}{\numberline {5}Conclusion}{30}{section.5}%
