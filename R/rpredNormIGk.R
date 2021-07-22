@@ -173,7 +173,9 @@ rpredNormIGk = function(N=1,Y,nu0=1,s20=1,eta0=1,t20=1,mu0=0,g20=1){
 
   mcmc1<-list(YTILDE=YTILDE,THETA=THETA,MST=MST)
 
-
+#Note: in mcmc1 each row contains a single prediction for each separate data set.
+#The number of rows is the number of desired predictions (input N).
+#The ith column therefore contains all the predictions for the ith data set.
 
   return(mcmc1)
 }

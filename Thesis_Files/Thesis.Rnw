@@ -873,13 +873,13 @@ plot(density(y1),ylim = c(0,vertMax),
      main="2-samples:  Density of Data and Predictions",
      xlab = "")
 legend("topright", inset = 0.05,bg="transparent",
-       legend=c("y1","y2","Prediction 1", "Prediction 2"),
-       lwd=c(1,1,NA,NA), pch=c(NA,NA,1,1),
+       legend=c("y1","y2",expression(tilde(y)[1]), expression(tilde(y)[2])),
+       lwd=2, lty=c(1,1,2,2),
        col=c("black","red","black","red"),
        cex = 1, box.col="white")
-lines(density(y2),col="red")
-points(density(RS[,1]))
-points(density(RS[,2]),col="red")
+lines(density(y2),lwd=2,col="red")
+lines(density(RS[,1]),lwd=2,lty=2)
+lines(density(RS[,2]),lwd=2,col="red",lty=2)
 @
 
 
@@ -1025,9 +1025,9 @@ maxy = 1.5*max(density(Y[[1]])$y)
 plot(density(Y[[1]]),col="black",main="School 1 Data and Prediction",
      xlab="Grade",ylim=c(0,maxy))
 
-for(i in 1:10){
-  result = rpredNormIGk(N=2,Y,nu0=1,s20=100,eta0=1,t20=100,mu0=50,g20=25)
-  lines(density(result$YTILDE[1,]),col="red")
+for(i in 1:1){
+  result = rpredNormIGk(N=5000,Y,nu0=1,s20=100,eta0=1,t20=100,mu0=50,g20=25)
+  lines(density(result$YTILDE[1001:5000,1]),col="red")
 }
 
 legend("topright", inset = 0.05,bg="transparent",
@@ -1036,11 +1036,9 @@ legend("topright", inset = 0.05,bg="transparent",
        col=c("black","red"),
        box.col="white")
 
-# legend("topright", inset = 0.05,bg="transparent",
-#        legend=c("y1","y2","Prediction 1", "Prediction 2"),
-#        lwd=c(1,1,NA,NA), pch=c(NA,NA,1,1),
-#        col=c("black","red","black","red"),
-#        cex = 1, box.col="white")
+#Note: in result[] each row contains a single prediction for each separate data set.
+#The number of rows is the number of desired predictions (input N).
+#The ith column therefore contains all the predictions for the ith data set.
 @
 
       \paragraph{Ranking Treatments}
