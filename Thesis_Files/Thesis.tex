@@ -617,7 +617,7 @@ Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15,
     \end{flalign*}
 
       \paragraph{Derivation}
-      As with the two-sample problem, joint posterior inferences for the unknown parameters can be made by construction a Gibbs sampler to approximate the posterior distribution $p\left(\theta_1,...,\theta_m,\mu,\tau^2,\sigma^2|\mathbf{y}_1,...,\mathbf{y}_m\right)$.  For this we need the full conditional distribution of each parameter (Hoff pp. 134-135):
+      As with the two-sample problem, joint posterior inferences for the unknown parameters can be made by constructing a Gibbs sampler to approximate the posterior distribution $p\left(\theta_1,...,\theta_m,\mu,\tau^2,\sigma^2|\mathbf{y}_1,...,\mathbf{y}_m\right)$.  For this we need the full conditional distribution of each parameter (Hoff pp. 134-135):
       %%$$\left\{\mu|\theta_1,...,\theta_m,\tau^2\right\} \sim \text{normal}\left(\dfrac{m\bar{\theta}/\tau^2 + \mu_0/\gamma^2_0}{m/\tau^2 + 1/\gamma^2_0},\dfrac{1}{m/\tau^2+1/\gamma^2_0}\right)$$
       $$\left\{\mu|\theta_1,...,\theta_m,\tau^2\right\} \sim \text{normal}\left(\dfrac{\frac{m\bar{\theta}}{\tau^2} + \frac{\mu_0}{\gamma^2_0}}{\frac{m}{\tau^2} + \frac{1}{\gamma^2_0}},\dfrac{1}{\frac{m}{\tau^2}+\frac{1}{\gamma^2_0}}\right)$$
       $$\left\{\tau^2|\theta_1,...,\theta_m,\mu\right\} \sim \text{inverse-gamma}\left(\dfrac{\eta_0 + m}{2},\dfrac{\eta_0\tau^2_0 + \sum\left(\theta_j-\mu\right)^2}{2}\right)$$
@@ -679,7 +679,7 @@ Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15,
       %   \mu_0,\gamma^2_0 \text{ for } p\left(\mu\right).
       % \end{flalign*}
 
-      We'll use the following prior values (Hoff p. 137):
+      For prediction, we'll use the following prior values (Hoff p. 137):
 
       \begin{flalign*}
         \sigma^2_0&:  100 \text{ (within-school variance)}\\
@@ -689,6 +689,8 @@ Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15,
         \mu_0&:  50 \text{ (prior mean of school means)}\\
         \gamma^2_0&:  25 \text{ (prior variance of school means)}
       \end{flalign*}
+
+\textcolor{red}{Below showing original school 1 grades together with prediction for school 1.  Better way to exhibit results?}
 
 \includegraphics{Thesis-009}
 

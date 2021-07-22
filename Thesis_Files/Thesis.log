@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  12 JUL 2021 11:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  21 JUL 2021 16:55
 entering extended mode
 **./Thesis.tex
 (Thesis.tex
@@ -1249,25 +1249,25 @@ Package pdftex.def Info: Thesis-008.pdf  used on input line 666.
 <Thesis-009.pdf, id=486, 433.62pt x 433.62pt>
 File: Thesis-009.pdf Graphic file (type pdf)
 <use Thesis-009.pdf>
-Package pdftex.def Info: Thesis-009.pdf  used on input line 693.
+Package pdftex.def Info: Thesis-009.pdf  used on input line 695.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
  [27 <./Thesis-008.pdf>]
 [28 <./Thesis-009.pdf>]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 700.
+(hyperref)                removing `math shift' on input line 702.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 700.
+(hyperref)                removing `math shift' on input line 702.
 
 
 Package hyperref Warning: Difference (3) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 702.
+(hyperref)                than one, level fixed on input line 704.
 
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 703.
+(hyperref)                than one, level fixed on input line 705.
 
 [29
 
@@ -1305,7 +1305,7 @@ fonts/cm/cmr8.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/
 MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/MiKTeX 2.9/fonts/type1/
 public/amsfonts/cm/cmsy8.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti
 12.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/latxfont/line10.pfb>
-Output written on Thesis.pdf (30 pages, 652056 bytes).
+Output written on Thesis.pdf (30 pages, 678576 bytes).
 PDF statistics:
  594 PDF objects out of 1000 (max. 8388607)
  91 named destinations out of 1000 (max. 500000)
