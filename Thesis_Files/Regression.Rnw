@@ -107,7 +107,44 @@ and
 
 $$\hat{\sigma}^2_{ols} = \frac{SSR\left(\hat{\beta}_{ols}\right)}{(n-p)} = \frac{\sum\left(y_i - \hat{\beta}_{ols}^T x_i\right)^2}{(n-p)}.$$
 
+\textit{Example:  Oxygen uptake (from Kuehl (2000), Hoff p. 149ff)}
 
+Twelve healthy men who did not exercise regularly were recruited to take part in a study of the effects of two different exercise regimens on oxygen uptake.  Six of the twelve men were randomly assigned to a 12-week flat-terrain running program, and the remaining six were assigned to a 12-week step aerobics program.  The maximum oxygen uptake of each subject was measured (in liters per minute) while running on an inclined treadmill, both before and after the 12-week program.  Of interest is how a subject's change in maximal oxygen uptake may depend on which program they were assigned to.  However, other factors, such as age, are expected to affect the change in maximal uptake as well.  The results are shown here:
+
+<<fig=TRUE,echo=FALSE>>=
+#pdf("fig9_1.pdf",family="Times",height=3.5,width=7)
+par(mar=c(3,3,1,1),mgp=c(1.75,.75,0))
+
+x1<-c(0,0,0,0,0,0,1,1,1,1,1,1)
+x2<-c(23,22,22,25,27,20,31,23,27,28,22,24)
+y<-c(-0.87,-10.74,-3.27,-1.97,7.50,-7.25,17.05,4.96,10.40,11.05,0.26,2.51)
+
+par(mfrow=c(1,1))
+plot(y~x2,pch=16,xlab="age",ylab="change in maximal oxygen uptake",
+     col=c("black","gray")[x1+1])
+legend(27,0,legend=c("aerobic","running"),pch=c(16,16),col=c("gray","black"))
+@
+
+Hoff's regression model:
+
+\begin{flalign*}
+    Y_i &= \beta_1x_{i,1} + \beta_2x_{i,2} + \beta_3x_{i,3} + \beta_4x_{i,4} + \epsilon_i, \text{ where}\\
+    x_{i,1} &= 1 \text{ for each subject } i\\
+    x_{i,2} &= 0 \text{ if subject } j \text{ is on the running program, } 1 \text{ if on aerobic}\\
+    x_{i,3} &= \text{ age of subject } i\\
+    x_{i,4} &= x_{i,2} \times x_{i,3}
+\end{flalign*}
+
+Under this model the conditional expectations of $Y$ for the two different levels of $x_{i,1}$ are
+
+\begin{flalign*}
+    E[Y|\mathbf{x}] &= \beta_1 + \beta_3 \times \text{ age if } x_1 = 0, \text{ and}\\
+    E[Y|\mathbf{x}] &= \left(\beta_1 + \beta_2\right) + \left(\beta_3 + \beta_4\right) \times \text{ age if } x_1 = 1
+\end{flalign*}
+
+In other words, the model assumes that the relationship is linear in age for both exercise groups, with the difference in intercepts given by $\beta_2$ and the difference in slopes given by $\beta_4$.  \\\\
+
+The normal linear regression model specifies that, in addition to $E[Y|\mathbf{x}]$ being linear, the sampling variability around the mean is i.i.d. normal:
 
 
 \clearpage
