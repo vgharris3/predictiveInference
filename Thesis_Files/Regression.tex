@@ -61,9 +61,25 @@
 %%INTRODUCTION
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-(Hoff p. 152ff.)\\
+(Hoff p. 149ff.)\\
 
-Let $\mathbf{y}$ be the $n$-dimensional column vector $\left(y_1,...,y_n\right)^T$ and let $\mathbf{X}$ be the $n \times p$ matrix whose $i$th row is $\mathbf{x}_i = \left\{ x_{i,1}, x_{i,2}, ..., x_{i,p} \right\}$.  Then the normal regression model is
+Regression modeling is concerned with describing how the sampling istribution of one random variable $Y$ varies with another variable or set of variables $\mathbf{x} = \left(x_1,...,x_p\right)$.  Specifically, a regression model postulates a form for $p(y|\mathbf{x})$, the conditional distribution of $Y$ given $\mathbf{x}$.  Estimation of $p(y|\mathbf{x})$ is made using data $y_1,...,y_n$ that are gathered under a variety of conditions $\mathbf{x}_1,...,\mathbf{x}_n$.
+
+The normal linear regression model specifies that, in addition to $E[Y|\mathbf{x}]$ being linear, the sampling variability around the mean is i.i.d. normal:
+
+\begin{flalign*}
+    \epsilon_1,...,\epsilon_n &\overset{\text{i.i.d}}{\sim} \text{normal}\left(0,\sigma^2\right)\\
+    Y_i &= \beta^T \mathbf{x}_i + \epsilon_i
+\end{flalign*}
+
+This model provides a complete specification of the joint probability density of observed data $y_1,...,y_n$ conditional upon $\mathbf{x}_1,...,\mathbf{x}_n$ and values of $\beta$ and $\sigma^2$:
+
+\begin{flalign*}
+    p\left(y_1,...y_n|\mathbf{x}_1,...,\mathbf{x}_n,\beta,\sigma^2\right) &= \prod_{i=1}^n p\left(y_i|\mathbf{x}_i,\beta,\sigma^2\right)\\
+    &= \left(2\pi\sigma^2\right)^{-n/2}\text{exp}\left\{-\frac{1}{2\sigma^2}\sum_{i=1}^n\left(y_i - \beta^T\mathbf{x}_i\right)^2\right\}
+\end{flalign*}
+
+Another way to write this joint probability density is in terms of the multivariate normal distribution:  Let $\mathbf{y}$ be the $n$-dimensional column vector $\left(y_1,...,y_n\right)^T$ and let $\mathbf{X}$ be the $n \times p$ matrix whose $i$th row is $\mathbf{x}_i = \left\{ x_{i,1}, x_{i,2}, ..., x_{i,p} \right\}$.  Then the normal regression model is
 
 $$\{\mathbf{y}|\mathbf{X},\beta,\sigma^2\} \sim \text{multivariate normal}\left(\mathbf{X}\beta,\sigma^2\mathbf{I}\right),$$
 
@@ -121,6 +137,27 @@ Hoff's regression model:
     x_{i,4} &= x_{i,2} \times x_{i,3}
 \end{flalign*}
 
+\begin{subequations}
+    \begin{align}
+        Y_i &= \beta_1x_{i,1} + \beta_2x_{i,2} + \beta_3x_{i,3} + \beta_4x_{i,4} + \epsilon_i, \text{ where}\\
+        x_{i,1} &= 1 \text{ for each subject } i\\
+        x_{i,2} &= 0 \text{ if subject } j \text{ is on the running program, } 1 \text{ if on aerobic}\\
+        x_{i,3} &= \text{ age of subject } i\\
+        x_{i,4} &= x_{i,2} \times x_{i,3}
+    \end{align}
+\end{subequations}
+
+\begin{subequations}
+\begin{align}
+\frac{\mathrm{d} x}{\mathrm{d} t} &=\sigma(y-x)\label{eqn:line-1} \\
+\frac{\mathrm{d} y}{\mathrm{d} t} &=x(\rho-z)-y\label{eqn:line-2} \\
+\frac{\mathrm{d} z}{\mathrm{d} t} &=x y-\beta z
+\end{align}
+\label{eqn:all-lines}
+\end{subequations}
+
+Look at the first line \ref{eqn:line-1}, and now look at the second line \ref{eqn:line-2}. They are both part of the whole system \ref{eqn:all-lines}.
+
 Under this model the conditional expectations of $Y$ for the two different levels of $x_{i,1}$ are
 
 \begin{flalign*}
@@ -130,7 +167,8 @@ Under this model the conditional expectations of $Y$ for the two different level
 
 In other words, the model assumes that the relationship is linear in age for both exercise groups, with the difference in intercepts given by $\beta_2$ and the difference in slopes given by $\beta_4$.  \\\\
 
-The normal linear regression model specifies that, in addition to $E[Y|\mathbf{x}]$ being linear, the sampling variability around the mean is i.i.d. normal:
+
+
 
 
 \clearpage
