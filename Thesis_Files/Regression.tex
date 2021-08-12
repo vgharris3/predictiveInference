@@ -75,7 +75,7 @@ The normal linear regression model specifies that, in addition to $E[Y|\mathbf{x
 This model provides a complete specification of the joint probability density of observed data $y_1,...,y_n$ conditional upon $\mathbf{x}_1,...,\mathbf{x}_n$ and values of $\beta$ and $\sigma^2$:
 
 \begin{flalign}
-    p\left(y_1,...y_n|\mathbf{x}_1,...,\mathbf{x}_n,\beta,\sigma^2\right) &= \prod_{i=1}^n p\left(y_i|\mathbf{x}_i,\beta,\sigma^2\right)\\
+    p\left(y_1,...y_n|\mathbf{x}_1,...,\mathbf{x}_n,\beta,\sigma^2\right) &= \prod_{i=1}^n p\left(y_i|\mathbf{x}_i,\beta,\sigma^2\right) \nonumber\\
     &= \left(2\pi\sigma^2\right)^{-n/2}\text{exp}\left\{-\frac{1}{2\sigma^2}\sum_{i=1}^n\left(y_i - \beta^T\mathbf{x}_i\right)^2\right\} \label{conditional_density}
 \end{flalign}
 
@@ -113,7 +113,7 @@ where $\mathbf{I}$ is the $p \times p$ identity matrix and
     \end{pmatrix}
 \end{equation*}
 
-We compute the ordinary least squares estimates
+The density (\ref{conditional_density}) depends on $\beta$ through the residuals $\left(y_i - \beta^T\mathbf{x}_i\right)$.  We compute the ordinary least squares estimates
 
 $$\hat{\beta}_{ols} = \left(\mathbf{X}^T\mathbf{X}\right)^{-1}\mathbf{X}^T\mathbf{y}$$
 
@@ -121,7 +121,7 @@ and
 
 $$\hat{\sigma}^2_{ols} = \frac{SSR\left(\hat{\beta}_{ols}\right)}{(n-p)} = \frac{\sum\left(y_i - \hat{\beta}_{ols}^T x_i\right)^2}{(n-p)}.$$
 
-The density (\ref{conditional_density}) \textcolor{red}{START HERE}\\
+\clearpage
 
 \textit{Example:  Oxygen uptake (from Kuehl (2000), Hoff p. 149ff)}
 
@@ -131,34 +131,34 @@ Twelve healthy men who did not exercise regularly were recruited to take part in
 
 Hoff's regression model:
 
-\begin{flalign*}
-    Y_i &= \beta_1x_{i,1} + \beta_2x_{i,2} + \beta_3x_{i,3} + \beta_4x_{i,4} + \epsilon_i, \text{ where}\\
-    x_{i,1} &= 1 \text{ for each subject } i\\
-    x_{i,2} &= 0 \text{ if subject } j \text{ is on the running program, } 1 \text{ if on aerobic}\\
-    x_{i,3} &= \text{ age of subject } i\\
-    x_{i,4} &= x_{i,2} \times x_{i,3}
-\end{flalign*}
+% \begin{flalign*}
+%     Y_i &= \beta_1x_{i,1} + \beta_2x_{i,2} + \beta_3x_{i,3} + \beta_4x_{i,4} + \epsilon_i, \text{ where}\\
+%     x_{i,1} &= 1 \text{ for each subject } i\\
+%     x_{i,2} &= 0 \text{ if subject } j \text{ is on the running program, } 1 \text{ if on aerobic}\\
+%     x_{i,3} &= \text{ age of subject } i\\
+%     x_{i,4} &= x_{i,2} \times x_{i,3}
+% \end{flalign*}
 
-\begin{subequations}
+%\begin{subequations}
     \begin{align}
-        Y_i &= \beta_1x_{i,1} + \beta_2x_{i,2} + \beta_3x_{i,3} + \beta_4x_{i,4} + \epsilon_i, \text{ where}\\
-        x_{i,1} &= 1 \text{ for each subject } i\\
-        x_{i,2} &= 0 \text{ if subject } j \text{ is on the running program, } 1 \text{ if on aerobic}\\
-        x_{i,3} &= \text{ age of subject } i\\
-        x_{i,4} &= x_{i,2} \times x_{i,3}
+        Y_i &= \beta_1x_{i,1} + \beta_2x_{i,2} + \beta_3x_{i,3} + \beta_4x_{i,4} + \epsilon_i, \text{ where} \label{example_model}\\
+        x_{i,1} &= 1 \text{ for each subject } i \nonumber \\
+        x_{i,2} &= 0 \text{ if subject } j \text{ is on the running program, } 1 \text{ if on aerobic} \nonumber \\
+        x_{i,3} &= \text{ age of subject } i \nonumber \\
+        x_{i,4} &= x_{i,2} \times x_{i,3} \nonumber
     \end{align}
-\end{subequations}
+%\end{subequations}
 
-\begin{subequations}
-\begin{align}
-\frac{\mathrm{d} x}{\mathrm{d} t} &=\sigma(y-x)\label{eqn:line-1} \\
-\frac{\mathrm{d} y}{\mathrm{d} t} &=x(\rho-z)-y\label{eqn:line-2} \\
-\frac{\mathrm{d} z}{\mathrm{d} t} &=x y-\beta z
-\end{align}
-\label{eqn:all-lines}
-\end{subequations}
-
-Look at the first line \ref{eqn:line-1}, and now look at the second line \ref{eqn:line-2}. They are both part of the whole system \ref{eqn:all-lines}.
+% \begin{subequations}
+% \begin{align}
+% \frac{\mathrm{d} x}{\mathrm{d} t} &=\sigma(y-x)\label{eqn:line-1} \\
+% \frac{\mathrm{d} y}{\mathrm{d} t} &=x(\rho-z)-y\label{eqn:line-2} \\
+% \frac{\mathrm{d} z}{\mathrm{d} t} &=x y-\beta z
+% \end{align}
+% \label{eqn:all-lines}
+% \end{subequations}
+%
+% Look at the first line \ref{eqn:line-1}, and now look at the second line \ref{eqn:line-2}. They are both part of the whole system \ref{eqn:all-lines}.
 
 Under this model the conditional expectations of $Y$ for the two different levels of $x_{i,1}$ are
 
@@ -171,8 +171,30 @@ In other words, the model assumes that the relationship is linear in age for bot
 
 \includegraphics{Regression-003}
 
+Let's find the least squares regression estimates for the model in \ref{example_model}, and use the results to evaluate the differences between the two exercise groups.  The ages of the 12 subjects, along with their observed changes in maximal oxygen uptake, are
 
+\begin{flalign*}
+    \mathbf{x}_3 &= (23,22,22,25,27,20,31,23,27,28,22,24)\\
+    \mathbf{y}   &= (-0.87,-10.74,-3.27,-1.97,7.50,-7.25,17.05,4.96,10.40,11.05,0.26,2.51),
+\end{flalign*}
 
+\noindent with the first six elements of each vector corresponding to the subjects in the running group and the latter six corresponding ot sujects in the aerobics group.  After constructing the $12 \time 4$ matrix $\mathbf{X}$ out of the vectors $\mathbf{x}_1,\mathbf{x}_2,\mathbf{x}_3,\mathbf{x}_4$ defined as in (\ref{example_model}), the matrices $\mathbf{X}^T\mathbf{X}$ and $\mathbf{X}^T\mathbf{y}$ can be computed, from which we get $\beta_{ols} = (-51.29,13.11,2.09,-0.32)^T$:\\
+
+\textcolor{red}{NOTE:  in the book Hoff defines $X$ as a matrix whose \textit{rows} are the vectors $x_1,...,X_n$ whereas in the calculation we need the \textit{columns} to be $x_1,...,x_n$.}\\
+
+\begin{Schunk}
+\begin{Sinput}
+> n <- length(y)
+> x1 <- rep(1,n)
+> x4 <- x2*x3
+> X = cbind(x1,x2,x3,x4)
+> beta.ols<- solve(t(X)%*%X)%*%t(X)%*%y
+> SSR.beta.ols = 0 #pick up here
+> sig2.ols = 0
+\end{Sinput}
+\end{Schunk}
+
+This means that the estimated linear relationship between uptake and age has an intercept and slope of -51.29 and 2.09 for the running group, and -51.29 + 13.11 = -38.18 and 2.09 - 0.32 = 1.77 for the aerobics group.  These two lines are plotted in the fourth panel of Figure XX.  We obtain unbiased estimate $\sigma^2 = SSR\left(\hat{\beta}_{ols}\right)/(n-p) = 8.54$.
 
 \clearpage
 
