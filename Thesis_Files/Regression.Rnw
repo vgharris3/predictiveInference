@@ -220,19 +220,27 @@ Let's find the least squares regression estimates for the model in \ref{example_
 
 \noindent with the first six elements of each vector corresponding to the subjects in the running group and the latter six corresponding ot sujects in the aerobics group.  After constructing the $12 \time 4$ matrix $\mathbf{X}$ out of the vectors $\mathbf{x}_1,\mathbf{x}_2,\mathbf{x}_3,\mathbf{x}_4$ defined as in (\ref{example_model}), the matrices $\mathbf{X}^T\mathbf{X}$ and $\mathbf{X}^T\mathbf{y}$ can be computed, from which we get $\beta_{ols} = (-51.29,13.11,2.09,-0.32)^T$:\\
 
-\textcolor{red}{NOTE:  in the book Hoff defines $X$ as a matrix whose \textit{rows} are the vectors $x_1,...,X_n$ whereas in the calculation we need the \textit{columns} to be $x_1,...,x_n$.}\\
+
 
 <<>>=
 n <- length(y)
 x1 <- rep(1,n)
 x4 <- x2*x3
 X = cbind(x1,x2,x3,x4)
+p = ncol(X)
 beta.ols<- solve(t(X)%*%X)%*%t(X)%*%y
-SSR.beta.ols = 0 #pick up here
-sig2.ols = 0
+sig2.ols = (t(y-X%*%beta.ols)%*%(y-X%*%beta.ols)/(n-p))[1]
+sig2.ols
+#sampling variance-covariance matrix of beta.ols:
+SIG2.ols = solve(t(X)%*%X)*sig2.ols
+#standard errors for the components of beta.ols:
+SE.ols = sqrt(diag(SIG2.ols))
+betadata = cbind(beta.ols,SE.ols)
+colnames(betadata) = c("beta.ols","SE.ols")
+betadata
 @
 
-This means that the estimated linear relationship between uptake and age has an intercept and slope of -51.29 and 2.09 for the running group, and -51.29 + 13.11 = -38.18 and 2.09 - 0.32 = 1.77 for the aerobics group.  These two lines are plotted in the fourth panel of Figure XX.  We obtain unbiased estimate $\sigma^2 = SSR\left(\hat{\beta}_{ols}\right)/(n-p) = 8.54$.
+This means that the estimated linear relationship between uptake and age has an intercept and slope of -51.29 and 2.09 for the running group, and -51.29 + 13.11 = -38.18 and 2.09 - 0.32 = 1.77 for the aerobics group.  These two lines are plotted in the fourth panel of Figure XX.  We obtain unbiased estimate $\sigma^2 = SSR(\hat{\beta}_{ols})/(n-p) = 8.54$, and use this to compute the standard error of the components of $\hat{\beta}_{ols}$, which are 12.25, 15.76, 0.53, and 0.65, respectively.  comparing the values of $\hat{\beta}_{ols}$ to their standard errors suggests that the evidence for differences between the two exercise regimens is not very strong.
 
 \clearpage
 
