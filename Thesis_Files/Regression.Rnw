@@ -63,7 +63,7 @@ setwd("C:/Users/gabe/Documents/tmp/predictiveInference/Thesis_Files")
 %%INTRODUCTION
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-(Hoff p. 149ff.)\\
+\section{Least Squares Estimation with Example (Hoff p. 149ff.)}
 
 Regression modeling is concerned with describing how the sampling istribution of one random variable $Y$ varies with another variable or set of variables $\mathbf{x} = \left(x_1,...,x_p\right)$.  Specifically, a regression model postulates a form for $p(y|\mathbf{x})$, the conditional distribution of $Y$ given $\mathbf{x}$.  Estimation of $p(y|\mathbf{x})$ is made using data $y_1,...,y_n$ that are gathered under a variety of conditions $\mathbf{x}_1,...,\mathbf{x}_n$.
 
@@ -244,6 +244,25 @@ This means that the estimated linear relationship between uptake and age has an 
 
 \clearpage
 
+\section{Bayesian Estimation for a Regression Model (Hoff p. 154ff)}
+
+    \subsection{A semiconjugate prior distribution}
+    A semiconjugate prior distribution for $\beta$ and $\sigma^2$ is used when there is information available about the parameters.  The sampling density of the data (Equation \ref{conditional_density}) is
+
+    $$p(\mathbf{y}|\mathbf{X},\beta,\sigma^2) \propto \text{exp}\{-\frac{1}{2\sigma^2}\text{SSR}(\beta)\} = \text{exp}\{-\frac{1}{2\sigma^2}[\mathbf{y}^T\mathbf{y} - 2\beta^T\mathbf{X}^T\mathbf{y}+\beta^T\mathbf{X}^T\mathbf{X}\beta]\}.$$
+
+    The role that $\beta$ plays in the exponent looks very similar to that played by $\mathbf{y}$, and the distribution of $\mathbf{y}$ is multivariate normal.  This suggests that a multivariate normal prior distribution for $\beta$ is conjugate:  if $\beta \sim \text{multivariate normal}(\beta_0,\Sigma_0)$, then
+
+    \begin{flalign*}
+        p&(\beta|\mathbf{y},\mathbf{X},\sigma^2)\\
+        &\propto p(\mathbf{y}|\mathbf{X},\beta, \sigma^2) \times p(\beta)\\
+        &\propto \text{exp}\{-\frac{1}{2}(-2\beta^T\mathbf{X}^T\mathbf{y}/\sigma^2 + \beta^T\mathbf{X}^T\mathbf{X}\beta/\sigma^2) - \frac{1}{2}(-2\beta^T\Sigma_0^{-1}\beta_0 + \beta^T\Sigma_0^{-1}\beta)\}\\
+        &=\text{exp}\{\beta^T(\Sigma_0^{-1}\beta_0 + \mathbf{X}^T\mathbf{y}/\sigma^2) - \frac{1}{2}\beta^T(\Sigma_0^{-1} + \mathbf{X}^T\mathbf{X}/\sigma^2)\beta\}
+    \end{flalign*}
+
+
+    \subsection{Default and weakly informative prior distributions}
+    In situations where prior information is unavailable or difficult to quantify, an alternative ``default" class of prior distributions is given.
 
 
 \end{document}
