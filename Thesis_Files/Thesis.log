@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  11 AUG 2021 06:45
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  26 AUG 2021 05:49
 entering extended mode
 **./Thesis.tex
 (Thesis.tex
@@ -800,7 +800,7 @@ File: pppdftex.def 2020/01/28 v0.5q Pdfpages driver for pdfTeX (AM)
 \c@AM@survey=\count314
 \AM@templatesizebox=\box69
 )
-(C:/PROGRA~1/R/R-40~1.3/share/texmf/tex/latex\Sweave.sty
+(C:/PROGRA~1/R/R-41~1.1/share/texmf/tex/latex\Sweave.sty
 Package: Sweave 
 
 ("C:\MiKTeX 2.9\tex/latex/fancyvrb\fancyvrb.sty"
@@ -1048,7 +1048,7 @@ File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 LaTeX Font Info:    Trying to load font information for TS1+aer on input line 6
 5.
 
-(C:/PROGRA~1/R/R-40~1.3/share/texmf/tex/latex\ts1aer.fd
+(C:/PROGRA~1/R/R-41~1.1/share/texmf/tex/latex\ts1aer.fd
 File: ts1aer.fd 
 )
 LaTeX Font Info:    Font shape `TS1/aer/m/n' in size <12> not available
@@ -1305,7 +1305,7 @@ fonts/cm/cmr8.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/
 MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/MiKTeX 2.9/fonts/type1/
 public/amsfonts/cm/cmsy8.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti
 12.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/latxfont/line10.pfb>
-Output written on Thesis.pdf (30 pages, 601630 bytes).
+Output written on Thesis.pdf (30 pages, 607533 bytes).
 PDF statistics:
  594 PDF objects out of 1000 (max. 8388607)
  91 named destinations out of 1000 (max. 500000)
