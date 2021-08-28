@@ -1015,14 +1015,19 @@ plot(n,ybar,xlab="sample size",ylab="sample mean")
         \gamma^2_0&:  25 \text{ (prior variance of school means)}
       \end{flalign*}
 
-\textcolor{red}{Below showing original school 1 grades together with prediction for school 1.  Better way to exhibit results?}
+\textcolor{red}{Below:  Pick a couple of schools that show different relationships between teh data and the prediction}
 
 <<fig=TRUE,echo=FALSE>>=
 source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredNormIGk.R')
+library(profvis)
 # result = rpredNormIGk(N=2,Y,nu0=1,s20=100,eta0=1,t20=100,mu0=50,g20=25)
 
-maxy = 1.5*max(density(Y[[1]])$y)
-plot(density(Y[[1]]),col="black",main="School 1 Data and Prediction",
+for(dean in 3:4){
+
+toplot=dean
+
+maxy = 1.5*max(density(Y[[toplot]])$y)
+plot(density(Y[[toplot]]),col="black",main="School 1 Data and Prediction",
      xlab="Grade",ylim=c(0,maxy))
 
 for(i in 1:1){
@@ -1031,11 +1036,13 @@ for(i in 1:1){
 }
 
 legend("topright", inset = 0.05,bg="transparent",
-       legend=c(expression(y[1]),expression(tilde(y)[1])),
+       legend=c(expression(y[toplot]),expression(tilde(y)[toplot])),
        lwd=1,
        col=c("black","red"),
        box.col="white")
 
+pause(2)
+}
 #Note: in result[] each row contains a single prediction for each separate data set.
 #The number of rows is the number of desired predictions (input N).
 #The ith column therefore contains all the predictions for the ith data set.
