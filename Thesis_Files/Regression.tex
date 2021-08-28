@@ -234,6 +234,18 @@ This means that the estimated linear relationship between uptake and age has an 
         &=\text{exp}\{\beta^T(\Sigma_0^{-1}\beta_0 + \mathbf{X}^T\mathbf{y}/\sigma^2) - \frac{1}{2}\beta^T(\Sigma_0^{-1} + \mathbf{X}^T\mathbf{X}/\sigma^2)\beta\}
     \end{flalign*}
 
+    This is proportional to a multivariate normal density, with
+
+    \begin{flalign*}
+        Var[\beta|\mathbf{y},\mathbf{X},\sigma^2] &= (\Sigma_0^{-1} + \mathbf{X}^T\mathbf{X}/\sigma^2)^{-1}\\
+        \text{E}[\beta|\mathbf{y},\mathbf{X},\sigma^2] &= (\Sigma_0^{-1} + \mathbf{X}^T\mathbf{X}/\sigma^2)^{-1} (\Sigma_0^{-1}\beta_0 + \mathbf{X}^T\mathbf{y}/\sigma^2).
+    \end{flalign*}
+
+As usual, we can gain some understanding of these formulae by considering some limiting cases.  If the elements of the prior precision matrix $\Sigma_0^{-1}$ are small in magnitude, then the conditional expectation E$[\beta|\mathbf{y},\mathbf{X},\sigma^2]$ is approximately equal to $(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{y}$, the least squares estimate. On the other hand, if the measurement precision is very small ($\sigma^2$ is very large), then the expectation is approximately $\beta_0$, the prior expectation.\\
+
+As in most normal sampling problems, the semiconjugate prior distribution for $\sigma^2$ is an inverse-gamma distriution.  Letting $\gamma = 1/\sigma^2$ be the measurement precision, if $\gamma \sim \text{gamma}(\nu_0/2,\nu_0\sigma^2_0/2)$, then
+
+
 
     \subsection{Default and weakly informative prior distributions}
     In situations where prior information is unavailable or difficult to quantify, an alternative ``default" class of prior distributions is given.

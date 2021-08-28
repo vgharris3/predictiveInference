@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  21 AUG 2021 12:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  28 AUG 2021 16:39
 entering extended mode
 **./Regression.tex
 (Regression.tex
@@ -800,7 +800,7 @@ File: pppdftex.def 2020/01/28 v0.5q Pdfpages driver for pdfTeX (AM)
 \c@AM@survey=\count314
 \AM@templatesizebox=\box69
 )
-(C:/PROGRA~1/R/R-40~1.3/share/texmf/tex/latex\Sweave.sty
+(C:/PROGRA~1/R/R-41~1.1/share/texmf/tex/latex\Sweave.sty
 Package: Sweave 
 
 ("C:\MiKTeX 2.9\tex/latex/fancyvrb\fancyvrb.sty"
@@ -993,6 +993,10 @@ LaTeX Font Info:    Trying to load font information for T1+aett on input line 1
  ("C:\MiKTeX 2.9\tex/latex/ae\t1aett.fd"
 File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
 ) [4]
+Underfull \hbox (badness 10000) in paragraph at lines 244--245
+
+ []
+
 [5
 
 ] (Regression.aux)
@@ -1016,7 +1020,7 @@ ic/amsfonts/cm/cmr12.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb
 s/type1/public/amsfonts/cm/cmsy10.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfont
 s/cm/cmsy8.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/MiK
 TeX 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on Regression.pdf (5 pages, 170355 bytes).
+Output written on Regression.pdf (5 pages, 172401 bytes).
 PDF statistics:
  117 PDF objects out of 1000 (max. 8388607)
  12 named destinations out of 1000 (max. 500000)
