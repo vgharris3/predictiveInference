@@ -4,10 +4,10 @@
 \alias{rpredNormIGk}
 \title{The Normal-Inverse Gamma Predictive Distribution for k Samples}
 \usage{
-rpredNormIGk(n = 1, Y, nu0 = 1, s20 = 1, eta0 = 1, t20 = 1, mu0 = 0, g20 = 1)
+rpredNormIGk(N = 1, Y, nu0 = 1, s20 = 1, eta0 = 1, t20 = 1, mu0 = 0, g20 = 1)
 }
 \arguments{
-\item{n}{desired random sample size}
+\item{N}{desired random sample size}
 
 \item{Y}{2-column matrix of multiple samples of observed Normally-distributed values.  Column 1:  integer indices identifying the samples.  Column 2:  data values for the sample indicated by the corresponding index in column 1.}
 

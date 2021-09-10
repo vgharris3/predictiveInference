@@ -1,40 +1,44 @@
-\contentsline {section}{\numberline {1}Thesis Abstract}{4}{section.1}%
-\contentsline {section}{\numberline {2}Introduction: Predictive Inference}{5}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Why is predictive inference important?}{5}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}Difference between parametric inference and predictive inference}{5}{subsection.2.2}%
-\contentsline {subsubsection}{\numberline {2.2.1}When is predictive inference more useful?}{5}{subsubsection.2.2.1}%
-\contentsline {subsubsection}{\numberline {2.2.2}When is parametric inference more useful?}{5}{subsubsection.2.2.2}%
-\contentsline {subsection}{\numberline {2.3}The Bayesian Parametric Prediction Format}{5}{subsection.2.3}%
-\contentsline {subsection}{\numberline {2.4}[Maybe] Example of Difference between results from Plug-in estimator and results using Predictive Inference}{5}{subsection.2.4}%
-\contentsline {section}{\numberline {3}Chapter 1: Predictive Problems with Conjugate Priors}{6}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Prediction of Future Successes: Beta-Binomial (Geisser p. 73)}{6}{subsection.3.1}%
-\contentsline {subsubsection}{\numberline {3.1.1}Derivation}{6}{subsubsection.3.1.1}%
-\contentsline {subsubsection}{\numberline {3.1.2}R Implementation}{7}{subsubsection.3.1.2}%
-\contentsline {subsubsection}{\numberline {3.1.3}Example}{7}{subsubsection.3.1.3}%
-\contentsline {subsection}{\numberline {3.2}Survival Time: Exponential-Gamma (Geisser p. 74)}{7}{subsection.3.2}%
-\contentsline {subsubsection}{\numberline {3.2.1}Derivation}{7}{subsubsection.3.2.1}%
-\contentsline {subsubsection}{\numberline {3.2.2}R Implementation}{9}{subsubsection.3.2.2}%
-\contentsline {subsubsection}{\numberline {3.2.3}Example}{9}{subsubsection.3.2.3}%
-\contentsline {subsection}{\numberline {3.3}Poisson-Gamma Model (Hoff p. 43ff)}{11}{subsection.3.3}%
-\contentsline {subsubsection}{\numberline {3.3.1}Derivation}{11}{subsubsection.3.3.1}%
-\contentsline {subsubsection}{\numberline {3.3.2}R Implementation}{15}{subsubsection.3.3.2}%
-\contentsline {subsubsection}{\numberline {3.3.3}Example}{15}{subsubsection.3.3.3}%
-\contentsline {subsection}{\numberline {3.4}Normal Observation with Normal-Inverse Gamma Prior}{17}{subsection.3.4}%
-\contentsline {subsubsection}{\numberline {3.4.1}One sample}{17}{subsubsection.3.4.1}%
-\contentsline {paragraph}{\numberline {3.4.1.1}Derivation}{17}{paragraph.3.4.1.1}%
-\contentsline {paragraph}{\numberline {3.4.1.2}R Implementation}{18}{paragraph.3.4.1.2}%
-\contentsline {paragraph}{\numberline {3.4.1.3}Example}{19}{paragraph.3.4.1.3}%
-\contentsline {subsubsection}{\numberline {3.4.2}Two samples}{22}{subsubsection.3.4.2}%
-\contentsline {paragraph}{\numberline {3.4.2.1}Derivation}{22}{paragraph.3.4.2.1}%
-\contentsline {paragraph}{\numberline {3.4.2.2}R Implementation}{23}{paragraph.3.4.2.2}%
-\contentsline {paragraph}{\numberline {3.4.2.3}Example}{23}{paragraph.3.4.2.3}%
-\contentsline {subsubsection}{\numberline {3.4.3}$k$ samples: Comparing multiple groups}{24}{subsubsection.3.4.3}%
-\contentsline {paragraph}{\numberline {3.4.3.1}Derivation}{25}{paragraph.3.4.3.1}%
-\contentsline {paragraph}{\numberline {3.4.3.2}R Implementation}{25}{paragraph.3.4.3.2}%
-\contentsline {paragraph}{\numberline {3.4.3.3}Example}{26}{paragraph.3.4.3.3}%
-\contentsline {paragraph}{\numberline {3.4.3.4}Ranking Treatments}{28}{paragraph.3.4.3.4}%
-\contentsline {section}{\numberline {4}Chapter 2: Normal Regression with Zellner's $g$-prior}{29}{section.4}%
-\contentsline {paragraph}{\numberline {4.0.0.1}Derivation}{29}{paragraph.4.0.0.1}%
-\contentsline {paragraph}{\numberline {4.0.0.2}R Implementation}{29}{paragraph.4.0.0.2}%
-\contentsline {paragraph}{\numberline {4.0.0.3}Example}{29}{paragraph.4.0.0.3}%
-\contentsline {section}{\numberline {5}Conclusion}{30}{section.5}%
+\contentsline {section}{\numberline {1}Thesis Abstract}{5}{section.1}%
+\contentsline {section}{\numberline {2}Introduction: Predictive Inference}{6}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Why is predictive inference important?}{6}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Difference between parametric inference and predictive inference}{6}{subsection.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.1}When is predictive inference more useful?}{6}{subsubsection.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.2}When is parametric inference more useful?}{6}{subsubsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.3}The Bayesian Parametric Prediction Format}{6}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}[Maybe] Example of Difference between results from Plug-in estimator and results using Predictive Inference}{6}{subsection.2.4}%
+\contentsline {section}{\numberline {3}Chapter 1: Predictive Problems with Conjugate Priors}{7}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Prediction of Future Successes: Beta-Binomial (Geisser p. 73)}{7}{subsection.3.1}%
+\contentsline {subsubsection}{\numberline {3.1.1}Derivation}{7}{subsubsection.3.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.2}R Implementation}{8}{subsubsection.3.1.2}%
+\contentsline {subsubsection}{\numberline {3.1.3}Example}{8}{subsubsection.3.1.3}%
+\contentsline {subsection}{\numberline {3.2}Survival Time: Exponential-Gamma (Geisser p. 74)}{8}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Derivation}{8}{subsubsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2}R Implementation}{10}{subsubsection.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.3}Example}{10}{subsubsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.3}Poisson-Gamma Model (Hoff p. 43ff)}{12}{subsection.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.1}Derivation}{12}{subsubsection.3.3.1}%
+\contentsline {subsubsection}{\numberline {3.3.2}R Implementation}{16}{subsubsection.3.3.2}%
+\contentsline {subsubsection}{\numberline {3.3.3}Example}{16}{subsubsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.4}Normal Observation with Normal-Inverse Gamma Prior}{18}{subsection.3.4}%
+\contentsline {subsubsection}{\numberline {3.4.1}One sample}{18}{subsubsection.3.4.1}%
+\contentsline {paragraph}{\numberline {3.4.1.1}Derivation}{18}{paragraph.3.4.1.1}%
+\contentsline {paragraph}{\numberline {3.4.1.2}R Implementation}{19}{paragraph.3.4.1.2}%
+\contentsline {paragraph}{\numberline {3.4.1.3}Example}{20}{paragraph.3.4.1.3}%
+\contentsline {subsubsection}{\numberline {3.4.2}Two samples}{23}{subsubsection.3.4.2}%
+\contentsline {paragraph}{\numberline {3.4.2.1}Derivation}{23}{paragraph.3.4.2.1}%
+\contentsline {paragraph}{\numberline {3.4.2.2}R Implementation}{24}{paragraph.3.4.2.2}%
+\contentsline {paragraph}{\numberline {3.4.2.3}Example}{24}{paragraph.3.4.2.3}%
+\contentsline {subsubsection}{\numberline {3.4.3}$k$ samples: Comparing multiple groups}{25}{subsubsection.3.4.3}%
+\contentsline {paragraph}{\numberline {3.4.3.1}Derivation}{26}{paragraph.3.4.3.1}%
+\contentsline {paragraph}{\numberline {3.4.3.2}R Implementation}{26}{paragraph.3.4.3.2}%
+\contentsline {paragraph}{\numberline {3.4.3.3}Example}{27}{paragraph.3.4.3.3}%
+\contentsline {paragraph}{\numberline {3.4.3.4}Ranking Treatments}{29}{paragraph.3.4.3.4}%
+\contentsline {section}{\numberline {4}Chapter 2: Normal Regression with Zellner's $g$-prior}{30}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Least Squares Estimation with Example (Hoff p. 149ff.)}{30}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Bayesian Estimation for a Regression Model (Hoff p. 154ff)}{34}{subsection.4.2}%
+\contentsline {subsubsection}{\numberline {4.2.1}Derivation}{34}{subsubsection.4.2.1}%
+\contentsline {paragraph}{\numberline {4.2.1.1}A semiconjugate prior distribution}{34}{paragraph.4.2.1.1}%
+\contentsline {paragraph}{\numberline {4.2.1.2}Default and weakly informative prior distributions}{35}{paragraph.4.2.1.2}%
+\contentsline {paragraph}{\numberline {4.2.1.3}R Implementation}{35}{paragraph.4.2.1.3}%
+\contentsline {paragraph}{\numberline {4.2.1.4}Example}{35}{paragraph.4.2.1.4}%
+\contentsline {section}{\numberline {5}Conclusion}{36}{section.5}%
