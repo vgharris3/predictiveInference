@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  10 SEP 2021 10:49
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  11 SEP 2021 14:35
 entering extended mode
 **./Thesis.tex
 (Thesis.tex
@@ -1315,11 +1315,17 @@ Underfull \hbox (badness 10000) in paragraph at lines 936--937
 
  []
 
-[35] [36
+[35]
+<Thesis-013.pdf, id=596, 433.62pt x 433.62pt>
+File: Thesis-013.pdf Graphic file (type pdf)
+<use Thesis-013.pdf>
+Package pdftex.def Info: Thesis-013.pdf  used on input line 961.
+(pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
+ [36 <./Thesis-013.pdf>] [37
 
 ] (Thesis.aux)
 Package rerunfilecheck Info: File `Thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 1F9645FEFB1A6F4D8FC424E3FC7DB7C6;3652.
+(rerunfilecheck)             Checksum: 542B9F2F766D04C76700AD0DF2F1D535;3646.
 
 
 LaTeX Font Warning: Size substitutions with differences
@@ -1327,10 +1333,10 @@ LaTeX Font Warning: Size substitutions with differences
 
  ) 
 Here is how much of TeX's memory you used:
- 30571 strings out of 479696
- 711127 string characters out of 2881701
+ 30580 strings out of 479696
+ 711283 string characters out of 2881701
  1158470 words of memory out of 3000000
- 46904 multiletter control sequences out of 15000+200000
+ 46910 multiletter control sequences out of 15000+200000
  447990 words of font info for 138 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  94i,20n,98p,1134b,609s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1351,9 +1357,9 @@ e1/public/amsfonts/cm/cmsy6.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
 msy8.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/MiKTeX 2.
 9/fonts/type1/public/amsfonts/cm/cmtt12.pfb><C:/MiKTeX 2.9/fonts/type1/public/a
 msfonts/latxfont/line10.pfb>
-Output written on Thesis.pdf (36 pages, 674710 bytes).
+Output written on Thesis.pdf (37 pages, 711803 bytes).
 PDF statistics:
- 691 PDF objects out of 1000 (max. 8388607)
- 117 named destinations out of 1000 (max. 500000)
- 459 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 707 PDF objects out of 1000 (max. 8388607)
+ 120 named destinations out of 1000 (max. 500000)
+ 464 words of extra memory for PDF output out of 10000 (max. 10000000)
 

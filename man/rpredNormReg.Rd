@@ -4,10 +4,12 @@
 \alias{rpredNormReg}
 \title{Normal Regression Predictive Inference}
 \usage{
-rpredNormReg(N = 1, X, y, nu0 = 1, s20 = 1)
+rpredNormReg(N = 1, Xpred, X, y, nu0 = 1, s20 = 1, gprior = TRUE)
 }
 \arguments{
 \item{N}{desired random sample size}
+
+\item{Xpred}{predictor vector(s) for which predictions are desired}
 
 \item{X}{Explanatory variables matrix}
 
@@ -16,6 +18,8 @@ rpredNormReg(N = 1, X, y, nu0 = 1, s20 = 1)
 \item{nu0}{number of prior observations}
 
 \item{s20}{ols estimate of variance \link{perform regression and compute this instead of user input?}}
+
+\item{gprior}{flag to use Zellner's g-prior.  Default to TRUE}
 }
 \value{
 random sample of size ? from ? predictive probability distribution

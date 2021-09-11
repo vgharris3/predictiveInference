@@ -1322,23 +1322,70 @@ Simple Monte Carlo approximation can be used to sample from the joint posterior 
 
   \subsubsection{R Implementation}
 
-The standard format R function rpredNormReg() approximates the joint posterior density $p(\sigma^2,\beta|\mathbf{y,X})$ by means of Monte Carlo sampling, as follows.
+The standard format R function rpredNormReg() approximates the joint posterior density $p(\sigma^2,\beta|\mathbf{y,X})$ using one of the two methods described above, as selected by the user.//
+
+If prior information is known:
+
+
+
+by means of Monte Carlo sampling, as follows.
 
 \begin{enumerate}
     \item sample $\sigma^2 \sim \text{inverse-gamma}([\nu_0 + n]/2,[\nu_0\sigma^2_0 + \text{SSR}_g]/2)$
     \item sample $\beta \sim \text{multivariate normal}\left(\frac{g}{g+1}\hat{\beta}_{ols},\frac{g}{g+1}\sigma^2[\mathbf{X^TX}]^{-1}\right)$.
 \end{enumerate}
 
-<<>>=
-p<-dim(X)[2]
 
-fit.ls<-lm(y~-1+ X)
-beta.0<-rep(0,p) ; Sigma.0<-diag(c(150,30,6,5)^2,p)
-nu.0<-1 ; sigma2.0<- 15^2
+<<fig=TRUE,echo=FALSE>>=
+source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredNormReg.R')
+X = cbind(x1,x2,x3,x4)
+p = ncol(X)
+beta.ols<- solve(t(X)%*%X)%*%t(X)%*%y
+sig2.ols = (t(y-X%*%beta.ols)%*%(y-X%*%beta.ols)/(n-p))[1]
 
-beta.0<-fit.ls$coef
-nu.0<-1  ; sigma2.0<-sum(fit.ls$res^2)/(n-p)
-Sigma.0<- solve(t(X)%*%X)*sigma2.0*n
+nu0 = 1
+
+###
+  n = dim(X)[1] # = length(y)
+  p = dim(X)[2] # = length(beta)
+  g = length(y) #Zellner's g-prior
+
+
+  Hg = (g/(g+1))*X%*%solve(t(X)%*%X)%*%t(X)
+  SSRg = t(y)%*%( diag(1,nrow=n) - Hg)%*%y
+
+  s2 = 1/rgamma(N, (nu0 + n)/2, (nu0*s20 + SSRg)/2 )
+
+  Vb = g*solve(t(X)%*%X)/(g+1)
+  Eb = Vb%*%t(X)%*%y
+
+  E = matrix(rnorm(N*p,0,sqrt(s2)),N,p)
+  beta = t( t(E%*%chol(Vb)) + c(Eb))
+
+
+  Xbeta = X%*%t(beta)
+  S2I = s2%*%diag(N)
+
+par(mfrow = c(2,2))
+
+NSamples = c(1000,10000,100000,1000000)
+for(N in NSamples){
+  first_time = 1
+  for(j in 1:3){
+    result = rpredNormReg(N,X[1,],X,y,nu0,sig2.ols)
+    if(first_time){
+      plot(density(result),ylim=c(0,1.2*max(density(result)$y)),main=bquote(.(N) ~ "Samples, repeated 3 times"))
+      first_time = 0
+    } else {
+      lines(density(result),col=j)
+    }
+  }
+}
+
+
+
+
+
 @
 
 

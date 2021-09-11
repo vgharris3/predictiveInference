@@ -942,8 +942,26 @@ Simple Monte Carlo approximation can be used to sample from the joint posterior 
     \item sample $\beta \sim \text{multivariate normal}\left(\frac{g}{g+1}\hat{\beta}_{ols},\frac{g}{g+1}\sigma^2[\mathbf{X^TX}]^{-1}\right)$.
 \end{enumerate}
 
-  \paragraph{R Implementation}
-  \paragraph{Example}
+  \subsubsection{R Implementation}
+
+The standard format R function rpredNormReg() approximates the joint posterior density $p(\sigma^2,\beta|\mathbf{y,X})$ using one of the two methods described above, as selected by the user.//
+
+If prior information is known:
+
+
+
+by means of Monte Carlo sampling, as follows.
+
+\begin{enumerate}
+    \item sample $\sigma^2 \sim \text{inverse-gamma}([\nu_0 + n]/2,[\nu_0\sigma^2_0 + \text{SSR}_g]/2)$
+    \item sample $\beta \sim \text{multivariate normal}\left(\frac{g}{g+1}\hat{\beta}_{ols},\frac{g}{g+1}\sigma^2[\mathbf{X^TX}]^{-1}\right)$.
+\end{enumerate}
+
+
+\includegraphics{Thesis-013}
+
+
+  \subsubsection{Example}
 
 
 \clearpage
