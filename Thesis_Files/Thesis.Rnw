@@ -1328,12 +1328,40 @@ If prior information is known:
 
 
 
-by means of Monte Carlo sampling, as follows.
+In the absence of prior information, predictions are made by means of Monte Carlo sampling:
 
 \begin{enumerate}
     \item sample $\sigma^2 \sim \text{inverse-gamma}([\nu_0 + n]/2,[\nu_0\sigma^2_0 + \text{SSR}_g]/2)$
     \item sample $\beta \sim \text{multivariate normal}\left(\frac{g}{g+1}\hat{\beta}_{ols},\frac{g}{g+1}\sigma^2[\mathbf{X^TX}]^{-1}\right)$.
 \end{enumerate}
+
+\textcolor{red}{BIG ISSUE NEXT CHUNK IS CAUSING COMPILE TO FAIL.  wORK THROUGH WARNINGS}
+
+%
+% <<fig=TRUE,echo=FALSE>>=
+% source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredNormReg.R')
+% #rpredNormReg = function(S=1,Xpred,X,y,nu0=1,s20=1,gprior = TRUE){
+%
+% S = 100 #desired sample size
+%
+% x1 <- rep(1,n)
+% x2<-c(0,0,0,0,0,0,1,1,1,1,1,1)
+% x3<-c(23,22,22,25,27,20,31,23,27,28,22,24)
+% x4 <- x2*x3
+% X = cbind(x1,x2,x3,x4)  #regression design matrix
+%
+% y<-c(-0.87,-10.74,-3.27,-1.97,7.50,-7.25,17.05,4.96,10.40,11.05,0.26,2.51)  #observed response vector
+%
+% Xpred = X[1,]           #predictor vector(s) for which prediction is desired
+%
+% set.seed(1)
+% result = rpredNormReg(S,Xpred,X,y)
+% result[1]
+%
+% # p = ncol(X)
+% # beta.ols<- solve(t(X)%*%X)%*%t(X)%*%y
+% # sig2.ols = (t(y-X%*%beta.ols)%*%(y-X%*%beta.ols)/(n-p))[1]
+% @
 
 
 <<fig=TRUE,echo=FALSE>>=
@@ -1363,8 +1391,8 @@ nu0 = 1
   beta = t( t(E%*%chol(Vb)) + c(Eb))
 
 
-  Xbeta = X%*%t(beta)
-  S2I = s2%*%diag(N)
+  #Xbeta = X%*%t(beta)
+  #S2I = s2%*%diag(N)
 
 par(mfrow = c(2,2))
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  10 SEP 2021 10:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  15 SEP 2021 07:50
 entering extended mode
 **./Regression.tex
 (Regression.tex
@@ -1006,19 +1006,19 @@ Overfull \hbox (0.55103pt too wide) in paragraph at lines 260--261
 
 [5
 
-]
-Underfull \hbox (badness 10000) in paragraph at lines 294--295
+] [6]
+Underfull \hbox (badness 10000) in paragraph at lines 363--364
 
  []
 
-[6] (Regression.aux)
+[7] [8] (Regression.aux)
 Package rerunfilecheck Info: File `Regression.out' has not changed.
 (rerunfilecheck)             Checksum: 07FA776BD1AC687096DD61E57B518B2C;368.
  ) 
 Here is how much of TeX's memory you used:
- 30226 strings out of 479696
- 705513 string characters out of 2881701
- 1150474 words of memory out of 3000000
+ 30228 strings out of 479696
+ 705525 string characters out of 2881701
+ 1149473 words of memory out of 3000000
  46667 multiletter control sequences out of 15000+200000
  430971 words of font info for 87 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1034,9 +1034,9 @@ cmsltt10.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/MiKTe
 X 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/MiKTeX 2.9/fonts/type1/publi
 c/amsfonts/cm/cmti12.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt12.p
 fb>
-Output written on Regression.pdf (6 pages, 198629 bytes).
+Output written on Regression.pdf (8 pages, 208098 bytes).
 PDF statistics:
- 148 PDF objects out of 1000 (max. 8388607)
- 27 named destinations out of 1000 (max. 500000)
+ 158 PDF objects out of 1000 (max. 8388607)
+ 29 named destinations out of 1000 (max. 500000)
  59 words of extra memory for PDF output out of 10000 (max. 10000000)
 

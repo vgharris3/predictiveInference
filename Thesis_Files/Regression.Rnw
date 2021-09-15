@@ -298,6 +298,81 @@ $$\{\sigma^2|\mathbf{y,X},\beta\} \sim \text{inverse-gamma}([\nu_0 + n]/2,[\nu_0
     \end{enumerate}
 \end{enumerate}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% R FUNCTION FOR CARRYING OUT SEMICONJUGATE PRIOR DISTRIBUTION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+<<>>=
+#### Bayesian estimation via MCMC
+x2<-c(0,0,0,0,0,0,1,1,1,1,1,1)
+x3<-c(23,22,22,25,27,20,31,23,27,28,22,24)
+y<-c(-0.87,-10.74,-3.27,-1.97,7.50,-7.25,17.05,4.96,10.40,11.05,0.26,2.51)
+
+
+x1 <- rep(1,n)
+x4 <- x2*x3
+X = cbind(x1,x2,x3,x4)
+
+n<-length(y)
+#X<-cbind(rep(1,n),x1,x2,x1*x2)
+p<-dim(X)[2]
+
+fit.ls<-lm(y~-1+ X) #linear regression fit omitting intercept term
+beta.0<-rep(0,p) ; Sigma.0<-diag(c(150,30,6,5)^2,p) # SOME INITIAL
+nu.0<-1 ; sigma2.0<- 15^2                           # VALUES
+
+beta.0<-fit.ls$coef                                 # beta.0 is the coefficients of the linear fit
+nu.0<-1  ; sigma2.0<-sum(fit.ls$res^2)/(n-p)        # nu.0 = # prior obs, sigma2.0 = ols estimator for var
+Sigma.0<- solve(t(X)%*%X)*sigma2.0*n                # Sigma.0 is sampling variance of BetaHat_ols TIMES n (why times n?)
+
+
+S<-5000
+
+rmvnorm<-function(n,mu,Sigma)
+{ # samples from the multivariate normal distribution
+  E<-matrix(rnorm(n*length(mu)),n,length(mu))
+  t(  t(E%*%chol(Sigma)) +c(mu))
+}
+
+## some convenient quantites
+n<-length(y)
+p<-length(beta.0)
+iSigma.0<-solve(Sigma.0)                            #iSigma.0 = inverse of Sigma.0
+XtX<-t(X)%*%X
+
+## store mcmc samples in these objects
+beta.post<-matrix(nrow=S,ncol=p)                    #storage for S instances for each coefficient of the p predictors
+sigma2.post<-rep(NA,S)                              #storage for S instances of variance corresponding to the betas
+
+## starting value
+set.seed(1)
+sigma2<- var( residuals(lm(y~0+X)) )                #starting with the variance of the residuals
+
+## MCMC algorithm
+for( scan in 1:S) {
+
+#update beta                                        #Formulas and steps Hoff p. 155
+V.beta<- solve(  iSigma.0 + XtX/sigma2 )            #Conditional variance of the regression coefficients
+E.beta<- V.beta%*%( iSigma.0%*%beta.0 + t(X)%*%y/sigma2 ) #Conditional mean of the variance coefficients
+beta<-t(rmvnorm(1, E.beta,V.beta) )                 #Gibbs sampler step:  update beta
+
+#update sigma2
+nu.n<- nu.0+n                                       #numerator of 1st term of inverse gamma sample
+ss.n<-nu.0*sigma2.0 + sum(  (y-X%*%beta)^2 )        #numerator of 2nd term of inverse gamma sample
+sigma2<-1/rgamma(1,nu.n/2, ss.n/2)                  #Gibbs ampler step:  update sigma^2
+
+#save results of this scan
+beta.post[scan,]<-beta                              #Store updated beta in current row of beta matrix
+sigma2.post[scan]<-sigma2                           #Store updated sigma^2 in current position in sigma^2 vector
+                        }
+
+round( apply(beta.post,2,mean), 3)                  #compute mean of Gibbs sampled betas (for check)
+
+@
+
+
     \subsection{Default and weakly informative prior distributions}
     In situations where prior information is unavailable or difficult to quantify, an alternative ``default" class of prior distributions is given. Specification of the prior parameters $(\beta_0, \Sigma_0)$ and $(\nu_0,\sigma^2_0)$ that represent actual prior information for a Bayesian analysis can be difficult.  For a prior distribution that is not going to represent real prior information about the parameters, we choose one that is as minimally informative as possible.  The resulting posterior distribution, then, will represent the posterior information of someone who began with little knowledge of the population being studied.  Here we will employ Zellner's ``$g$-prior" (Zellner, 1986).  We choose $\beta_0 = \mathbf{0}$ and $\Sigma_0 = k(\mathbf{X}^T\mathbf{X})^{-1}, k = g\sigma^2, g > 0$, which satisfies a desired condition that the regression parameter estimation be invariant to changes in the scale of the regressors.  With this, equations \ref{semiconj_var} and \ref{semiconj_expec} reduce to
 
