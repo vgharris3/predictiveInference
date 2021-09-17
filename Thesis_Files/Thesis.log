@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  17 SEP 2021 11:30
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  17 SEP 2021 12:33
 entering extended mode
 **./Thesis.tex
 (Thesis.tex
@@ -1321,28 +1321,17 @@ Underfull \hbox (badness 10000) in paragraph at lines 947--948
  []
 
 [35]
-LaTeX Font Info:    Trying to load font information for TS1+aett on input line 
-961.
- (C:/PROGRA~1/R/R-41~1.1/share/texmf/tex/latex\ts1aett.fd
-File: ts1aett.fd 
-)
-LaTeX Font Info:    Trying to load font information for TS1+cmtt on input line 
-961.
-
-("C:\MiKTeX 2.9\tex/latex/base\ts1cmtt.fd"
-File: ts1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `TS1/aett/m/sl' in size <12> not available
-(Font)              Font shape `TS1/cmtt/m/sl' tried instead on input line 961.
-
- [36]
-<Thesis-014.pdf, id=602, 433.62pt x 433.62pt>
+<Thesis-013.pdf, id=597, 433.62pt x 433.62pt>
+File: Thesis-013.pdf Graphic file (type pdf)
+<use Thesis-013.pdf>
+Package pdftex.def Info: Thesis-013.pdf  used on input line 959.
+(pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
+<Thesis-014.pdf, id=598, 433.62pt x 433.62pt>
 File: Thesis-014.pdf Graphic file (type pdf)
 <use Thesis-014.pdf>
-Package pdftex.def Info: Thesis-014.pdf  used on input line 1001.
+Package pdftex.def Info: Thesis-014.pdf  used on input line 970.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
- [37 <./Thesis-014.pdf>]
-[38
+ [36 <./Thesis-013.pdf>] [37 <./Thesis-014.pdf>] [38
 
 ] (Thesis.aux)
 Package rerunfilecheck Info: File `Thesis.out' has not changed.
@@ -1354,34 +1343,33 @@ LaTeX Font Warning: Size substitutions with differences
 
  ) 
 Here is how much of TeX's memory you used:
- 30608 strings out of 479696
- 711982 string characters out of 2881701
+ 30587 strings out of 479696
+ 711417 string characters out of 2881701
  1158470 words of memory out of 3000000
- 46930 multiletter control sequences out of 15000+200000
- 448288 words of font info for 139 fonts, out of 3000000 for 9000
+ 46916 multiletter control sequences out of 15000+200000
+ 447990 words of font info for 138 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  94i,20n,98p,1134b,609s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\gabe\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\t
-cst1200.pk> <C:\Users\gabe\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec
-/dpi600\tcrm1200.pk><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmb10.pfb><C:
-/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/MiKTeX 2.9/fonts/type
-1/public/amsfonts/cm/cmbx8.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm
-csc10.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/MiKTeX 2
-.9/fonts/type1/public/amsfonts/cmextra/cmex7.pfb><C:/MiKTeX 2.9/fonts/type1/pub
-lic/amsfonts/cmextra/cmex8.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm
-mi12.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/MiKTeX 2.9
-/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/MiKTeX 2.9/fonts/type1/public/ams
-fonts/cm/cmr12.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/
-MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/MiKTeX 2.9/fonts/type1/p
-ublic/amsfonts/cm/cmr8.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsltt
-10.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/MiKTeX 2.9/
-fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsf
-onts/cm/cmsy8.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/
-MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb><C:/MiKTeX 2.9/fonts/type1
-/public/amsfonts/latxfont/line10.pfb>
-Output written on Thesis.pdf (38 pages, 720335 bytes).
+crm1200.pk><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmb10.pfb><C:/MiKTeX 2
+.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/MiKTeX 2.9/fonts/type1/public/
+amsfonts/cm/cmbx8.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmcsc10.pfb
+><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/MiKTeX 2.9/fonts/
+type1/public/amsfonts/cmextra/cmex7.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfo
+nts/cmextra/cmex8.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb>
+<C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/MiKTeX 2.9/fonts/ty
+pe1/public/amsfonts/cm/cmmi8.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/
+cmr12.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/MiKTeX 2.
+9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/MiKTeX 2.9/fonts/type1/public/ams
+fonts/cm/cmr8.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsltt10.pfb><C
+:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/MiKTeX 2.9/fonts/typ
+e1/public/amsfonts/cm/cmsy6.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
+msy8.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/MiKTeX 2.
+9/fonts/type1/public/amsfonts/cm/cmtt12.pfb><C:/MiKTeX 2.9/fonts/type1/public/a
+msfonts/latxfont/line10.pfb>
+Output written on Thesis.pdf (38 pages, 721042 bytes).
 PDF statistics:
- 718 PDF objects out of 1000 (max. 8388607)
+ 720 PDF objects out of 1000 (max. 8388607)
  121 named destinations out of 1000 (max. 500000)
- 464 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 469 words of extra memory for PDF output out of 10000 (max. 10000000)
 

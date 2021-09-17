@@ -956,38 +956,7 @@ To use the semiconjugate prior, values must be supplied for prior parameters $(\
   \sigma^2_0 &= \frac{\sum e_i}{n-1} \text{ (variance of the residuals)}
 \end{flalign*}
 
-\begin{Schunk}
-\begin{Sinput}
-> source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredNormReg.R')
-> #rpredNormReg = function(S=1,Xpred,X,y,beta0,Sigma0,nu0=1,s20=1,gprior = TRUE)
-> 
-> S = 100 #desired sample size
-> x1 <- rep(1,n)
-> x2<-c(0,0,0,0,0,0,1,1,1,1,1,1)
-> x3<-c(23,22,22,25,27,20,31,23,27,28,22,24)
-> x4 <- x2*x3
-> X = cbind(x1,x2,x3,x4)  #regression design matrix
-> y<-c(-0.87,-10.74,-3.27,-1.97,7.50,-7.25,17.05,4.96,10.40,11.05,0.26,2.51)  #observed response vector
-> # fit.ls<-lm(y~-1+ X) #linear regression fit omitting intercept term
-> # beta.ols<- solve(t(X)%*%X)%*%t(X)%*%y
-> # beta.ols = fit.ls$coefficients
-> # sig2.ols = (t(y-X%*%beta.ols)%*%(y-X%*%beta.ols)/(n-p))[1]
-> # sig2.ols<-sum(fit.ls$res^2)/(n-p)
-> 
-> fit.ls<-lm(y~-1+ X)
-> beta.0<-fit.ls$coef
-> nu.0<-1
-> sigma2.0<-sum(fit.ls$res^2)/(n-p)
-> Sigma.0<- solve(t(X)%*%X)*sigma2.0*n      #WHY TIMES n?
-> sig20<- var( residuals(lm(y~0+X)) )                #starting with the variance of the residuals
-> Xpred = X[1,]           #predictor vector(s) for which prediction is desired
-> set.seed(1)
-> result = rpredNormReg(S,Xpred,X,y,beta.ols,Sigma.0,nu.0,sig20,gprior=FALSE)
-> plot(density(result))
-> 
-> 
-\end{Sinput}
-\end{Schunk}
+\includegraphics{Thesis-013}
 
 
 

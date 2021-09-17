@@ -1334,7 +1334,7 @@ To use the semiconjugate prior, values must be supplied for prior parameters $(\
   \sigma^2_0 &= \frac{\sum e_i}{n-1} \text{ (variance of the residuals)}
 \end{flalign*}
 
-<<>>=
+<<fig=TRUE,echo=FALSE>>=
 source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredNormReg.R')
 #rpredNormReg = function(S=1,Xpred,X,y,beta0,Sigma0,nu0=1,s20=1,gprior = TRUE)
 
