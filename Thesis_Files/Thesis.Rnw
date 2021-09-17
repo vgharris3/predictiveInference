@@ -1322,15 +1322,23 @@ Simple Monte Carlo approximation can be used to sample from the joint posterior 
 
   \subsubsection{R Implementation}
 
-The standard format R function rpredNormReg() approximates the joint posterior density $p(\sigma^2,\beta|\mathbf{y,X})$ using one of the two methods described above, as selected by the user.//
+The standard format R function rpredNormReg() approximates the joint posterior density $p(\sigma^2,\beta|\mathbf{y,X})$ using one of the two methods described above, as selected by the user.\\
 
-If prior information is known:
+To use the semiconjugate prior, values must be supplied for prior parameters $(\beta_0, \Sigma_0)$ and $(\nu_0, \sigma^2_0)$.  In the example below (Hoff data and code found \href{https://pdhoff.github.io/book/}{here}), we use
+
+
+\begin{flalign*}
+  \beta_0 &= \hat{\beta}_{ols} \text{ (ordinary least squares estimator of } \beta \text{)}\\
+  \Sigma_0 &= (X^TX)^{-1}\sigma^2n \text{ (sampling variance of } \hat{\beta}_{ols} \text{)}\text{WHY TIMES n????}\\
+  \nu_0 &= 1 \text{ (prior sample size)}\\
+  \sigma^2_0 &= \frac{\sum e_i}{n-1} \text{ (variance of the residuals)}
+\end{flalign*}
 
 <<>>=
 source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredNormReg.R')
 #rpredNormReg = function(S=1,Xpred,X,y,beta0,Sigma0,nu0=1,s20=1,gprior = TRUE)
 
-S = 100 #desired sample size
+S = 5000 #desired sample size
 
 x1 <- rep(1,n)
 x2<-c(0,0,0,0,0,0,1,1,1,1,1,1)
@@ -1351,7 +1359,7 @@ fit.ls<-lm(y~-1+ X)
 beta.0<-fit.ls$coef
 nu.0<-1
 sigma2.0<-sum(fit.ls$res^2)/(n-p)
-Sigma.0<- solve(t(X)%*%X)*sigma2.0*n      #WHY TIMES n?
+Sigma.0<- solve(t(X)%*%X)*sigma2.0*n      #WHY TIMES n? (also asked in text above)
 sig20<- var( residuals(lm(y~0+X)) )                #starting with the variance of the residuals
 
 
@@ -1359,10 +1367,26 @@ sig20<- var( residuals(lm(y~0+X)) )                #starting with the variance o
 
 Xpred = X[1,]           #predictor vector(s) for which prediction is desired
 
-set.seed(1)
+#set.seed(1)
 result = rpredNormReg(S,Xpred,X,y,beta.ols,Sigma.0,nu.0,sig20,gprior=FALSE)
-
 plot(density(result))
+
+#plot(density(result))
+# NSamples = c(1000,10000,100000,1000000)
+# par(mfrow = c(2,2))
+#
+# for(S in NSamples){
+#   first_time = 1
+#   for(j in 1:3){
+#     result = rpredNormReg(S,X[1,],X,y,beta.ols,Sigma.0,nu.0,sig20,gprior=FALSE)
+#     if(first_time){
+#       plot(density(result),ylim=c(0,1.2*max(density(result)$y)),main=bquote(.(S) ~ "Samples, repeated 3 times"))
+#       first_time = 0
+#     } else {
+#       lines(density(result),col=j)
+#     }
+#   }
+# }
 
 
 @
@@ -1378,7 +1402,7 @@ In the absence of prior information, predictions are made by means of Monte Carl
 
 <<fig=TRUE,echo=FALSE>>=
 source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredNormReg.R')
-#rpredNormReg = function(S=1,Xpred,X,y,nu0=1,s20=1,gprior = TRUE){
+#rpredNormReg = function(S=1,Xpred,X,y,beta0,Sigma0,nu0=1,s20=1,gprior = TRUE)
 
 S = 100000 #desired sample size
 
@@ -1412,7 +1436,8 @@ par(mfrow = c(2,2))
 for(S in NSamples){
   first_time = 1
   for(j in 1:3){
-    result = rpredNormReg(S,X[1,],X,y,nu0,sig2.ols)
+#rpredNormReg = function(S=1,Xpred,X,y,beta0,Sigma0,nu0=1,s20=1,gprior = TRUE)
+    result = rpredNormReg(S,X[1,],X,y,nu0=nu0,s20=sig2.ols)
     if(first_time){
       plot(density(result),ylim=c(0,1.2*max(density(result)$y)),main=bquote(.(S) ~ "Samples, repeated 3 times"))
       first_time = 0

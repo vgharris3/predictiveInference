@@ -113,7 +113,7 @@ rpredNormReg = function(S=1,Xpred,X,y,beta0,Sigma0,nu0=1,s20=1,gprior = TRUE){
 
     round( apply(beta.post,2,mean), 3)                  #compute mean of Gibbs sampled betas (for check)
 
-    result = rnorm(S)
+    result = Xpred%*%t(beta.post)
 
   }
 
