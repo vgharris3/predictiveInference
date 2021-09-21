@@ -52,10 +52,10 @@ rpredNormReg = function(S=1,Xpred,X,y,beta0,Sigma0,nu0=1,s20=1,gprior = TRUE){
 
   n = dim(X)[1] # = length(y)
   p = dim(X)[2] # = length(beta)
-  g = length(y) # Zellner's g-prior
 
   if(gprior){
 
+    g = length(y) # Zellner's g-prior
     Hg = (g/(g+1))*X%*%solve(t(X)%*%X)%*%t(X)
     SSRg = t(y)%*%( diag(1,nrow=n) - Hg)%*%y
 
@@ -67,8 +67,8 @@ rpredNormReg = function(S=1,Xpred,X,y,beta0,Sigma0,nu0=1,s20=1,gprior = TRUE){
     E = matrix(rnorm(S*p,0,sqrt(s2)),S,p)
     beta = t( t(E%*%chol(Vb)) + c(Eb))
 
-    result = Xpred%*%t(beta) # compute y prediction for input X vector for which prediction is desired.
-    #result = Xpred%*%beta # compute y prediction for input X vector for which prediction is desired.
+    result$betas = beta
+    result$predictions = Xpred%*%t(beta) # compute y prediction for input X vector for which prediction is desired.
 
   } else { #DO THIS PART TOO
 
@@ -113,7 +113,10 @@ rpredNormReg = function(S=1,Xpred,X,y,beta0,Sigma0,nu0=1,s20=1,gprior = TRUE){
 
     round( apply(beta.post,2,mean), 3)                  #compute mean of Gibbs sampled betas (for check)
 
-    result = Xpred%*%t(beta.post)
+#    result = list(beta.post, Xpred%*%t(beta.post))
+
+    result$betas = beta.post
+    result$predictions = Xpred%*%t(beta.post)
 
   }
 

@@ -1324,21 +1324,29 @@ Simple Monte Carlo approximation can be used to sample from the joint posterior 
 
 The standard format R function rpredNormReg() approximates the joint posterior density $p(\sigma^2,\beta|\mathbf{y,X})$ using one of the two methods described above, as selected by the user.\\
 
-To use the semiconjugate prior, values must be supplied for prior parameters $(\beta_0, \Sigma_0)$ and $(\nu_0, \sigma^2_0)$.  In the example below (Hoff data and code found \href{https://pdhoff.github.io/book/}{here}), we use
+To use the semiconjugate prior, the user must supply values for prior parameters $(\beta_0, \Sigma_0)$ and $(\nu_0, \sigma^2_0)$.
+
+In the absence of prior information, predictions are made by means of Monte Carlo sampling, using Zellner's g-prior.
+
+\begin{enumerate}
+    \item sample $\sigma^2 \sim \text{inverse-gamma}([\nu_0 + n]/2,[\nu_0\sigma^2_0 + \text{SSR}_g]/2)$
+    \item sample $\beta \sim \text{multivariate normal}\left(\frac{g}{g+1}\hat{\beta}_{ols},\frac{g}{g+1}\sigma^2[\mathbf{X^TX}]^{-1}\right)$.
+\end{enumerate}
+
+Here $g$ is typically set to the number of prior observations.
 
 
-\begin{flalign*}
-  \beta_0 &= \hat{\beta}_{ols} \text{ (ordinary least squares estimator of } \beta \text{)}\\
-  \Sigma_0 &= (X^TX)^{-1}\sigma^2n \text{ (sampling variance of } \hat{\beta}_{ols} \text{)}\text{WHY TIMES n????}\\
-  \nu_0 &= 1 \text{ (prior sample size)}\\
-  \sigma^2_0 &= \frac{\sum e_i}{n-1} \text{ (variance of the residuals)}
-\end{flalign*}
 
-<<fig=TRUE,echo=FALSE>>=
-source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredNormReg.R')
-#rpredNormReg = function(S=1,Xpred,X,y,beta0,Sigma0,nu0=1,s20=1,gprior = TRUE)
+  \subsubsection{Example}
 
-S = 5000 #desired sample size
+In the example below (Hoff data and code found \href{https://pdhoff.github.io/book/}{here}) to employ the semi-conjugate prior we use
+
+<<echo=FALSE>>=
+################
+################
+################
+#THIS CHUNK SETS UP INITIAL VALUES FOR THE REGRESSION PREDICTION, AND SETS DISPLAY VALUES FOR THE LATEX TYPESETTING IMMEDIATELY BELOW
+
 
 x1 <- rep(1,n)
 x2<-c(0,0,0,0,0,0,1,1,1,1,1,1)
@@ -1348,11 +1356,74 @@ X = cbind(x1,x2,x3,x4)  #regression design matrix
 
 y<-c(-0.87,-10.74,-3.27,-1.97,7.50,-7.25,17.05,4.96,10.40,11.05,0.26,2.51)  #observed response vector
 
-# fit.ls<-lm(y~-1+ X) #linear regression fit omitting intercept term
-# beta.ols<- solve(t(X)%*%X)%*%t(X)%*%y
-# beta.ols = fit.ls$coefficients
-# sig2.ols = (t(y-X%*%beta.ols)%*%(y-X%*%beta.ols)/(n-p))[1]
-# sig2.ols<-sum(fit.ls$res^2)/(n-p)
+fit.ls<-lm(y~-1+ X)
+
+beta.0<-fit.ls$coef
+nu.0<-1
+sigma2.0<-sum(fit.ls$res^2)/(n-p)
+Sigma.0<- solve(t(X)%*%X)*sigma2.0*n      #WHY TIMES n? (also asked in text above)
+sig20<- var( residuals(lm(y~0+X)) )       #starting with the variance of the residuals
+
+Xpred = X[1,]           #predictor vector(s) for which prediction is desired
+
+S = 5000 #desired sample size
+
+beta.0.disp = round(beta.0,2)
+Sig.0.disp = round(Sigma.0,2)
+S.0.11 = Sig.0.disp[1,1]
+S.0.12 = Sig.0.disp[1,2]
+S.0.13 = Sig.0.disp[1,3]
+S.0.14 = Sig.0.disp[1,4]
+S.0.21 = Sig.0.disp[2,1]
+S.0.22 = Sig.0.disp[2,2]
+S.0.23 = Sig.0.disp[2,3]
+S.0.24 = Sig.0.disp[2,4]
+S.0.31 = Sig.0.disp[3,1]
+S.0.32 = Sig.0.disp[3,2]
+S.0.33 = Sig.0.disp[3,3]
+S.0.34 = Sig.0.disp[3,4]
+S.0.41 = Sig.0.disp[4,1]
+S.0.42 = Sig.0.disp[4,2]
+S.0.43 = Sig.0.disp[4,3]
+S.0.44 = Sig.0.disp[4,4]
+
+sig20.disp = round(sig20,2)
+
+
+@
+
+
+\begin{flalign*}
+  \beta_0 &= \hat{\beta}_{ols} = (\Sexpr{beta.0.disp}, \Sexpr{beta.0.disp}, \Sexpr{beta.0.disp}, \Sexpr{beta.0.disp})  \text{ (ordinary least squares estimator of } \beta \text{)}\\
+  \Sigma_0 &= (X^TX)^{-1}\sigma^2n =
+    \begin{pmatrix}
+      \Sexpr{S.0.11} & \Sexpr{S.0.12} & \Sexpr{S.0.13} & \Sexpr{S.0.14} \\
+      \Sexpr{S.0.21} & \Sexpr{S.0.22} & \Sexpr{S.0.23} & \Sexpr{S.0.24} \\
+      \Sexpr{S.0.31} & \Sexpr{S.0.32} & \Sexpr{S.0.33} & \Sexpr{S.0.34} \\
+      \Sexpr{S.0.41} & \Sexpr{S.0.42} & \Sexpr{S.0.43} & \Sexpr{S.0.44}
+    \end{pmatrix}
+    \text{ (sampling variance of } \hat{\beta}_{ols} \text{)}\text{WHY TIMES n????}\\
+  \nu_0 &= \Sexpr{nu.0} \text{ (prior sample size)}\\
+  \sigma^2_0 &= \frac{\sum e_i}{n-1} = \Sexpr{sig20.disp} \text{ (variance of the residuals)}\\
+  S &= \Sexpr{S} \text{ (sample size for predictive distribution random draw)}
+\end{flalign*}
+
+<<fig=TRUE,echo=FALSE>>=
+source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredNormReg.R')
+#rpredNormReg = function(S=1,Xpred,X,y,beta0,Sigma0,nu0=1,s20=1,gprior = TRUE)
+
+################
+################
+################
+#THIS BLOCK REPEATS THE SETUP FROM PREVIOUS CHUNK
+
+x1 <- rep(1,n)
+x2<-c(0,0,0,0,0,0,1,1,1,1,1,1)
+x3<-c(23,22,22,25,27,20,31,23,27,28,22,24)
+x4 <- x2*x3
+X = cbind(x1,x2,x3,x4)  #regression design matrix
+
+y<-c(-0.87,-10.74,-3.27,-1.97,7.50,-7.25,17.05,4.96,10.40,11.05,0.26,2.51)  #observed response vector
 
 fit.ls<-lm(y~-1+ X)
 
@@ -1362,43 +1433,34 @@ sigma2.0<-sum(fit.ls$res^2)/(n-p)
 Sigma.0<- solve(t(X)%*%X)*sigma2.0*n      #WHY TIMES n? (also asked in text above)
 sig20<- var( residuals(lm(y~0+X)) )                #starting with the variance of the residuals
 
+Xpred = X[1:2,]           #predictor vector(s) for which prediction is desired
 
+S = 5000 #desired sample size
 
+#END OF REPEATED BLOCK
+################
+################
+################
 
-Xpred = X[1,]           #predictor vector(s) for which prediction is desired
+result = rpredNormReg(S,Xpred,X,y,beta.0,Sigma.0,nu.0,sig20,gprior=FALSE)
 
-#set.seed(1)
-result = rpredNormReg(S,Xpred,X,y,beta.ols,Sigma.0,nu.0,sig20,gprior=FALSE)
-plot(density(result))
+plot(density(result$predictions[1,]), main = bquote("Predictive Density"),col=1)
 
-#plot(density(result))
-# NSamples = c(1000,10000,100000,1000000)
-# par(mfrow = c(2,2))
-#
-# for(S in NSamples){
-#   first_time = 1
-#   for(j in 1:3){
-#     result = rpredNormReg(S,X[1,],X,y,beta.ols,Sigma.0,nu.0,sig20,gprior=FALSE)
-#     if(first_time){
-#       plot(density(result),ylim=c(0,1.2*max(density(result)$y)),main=bquote(.(S) ~ "Samples, repeated 3 times"))
-#       first_time = 0
-#     } else {
-#       lines(density(result),col=j)
-#     }
-#   }
-# }
+for(i in 2:nrow(result$predictions)){
+  lines(density(result$predictions[i,]),col=i)
+  }
+
+# plot(density(result[1,]), main = bquote("Predictive Density of Response for Design Point x ="~"("~.(Xpred[1])~.(Xpred[2])~.(Xpred[3])~.(Xpred[4])~")" ))
+# lines(density(result[2,]))
 
 
 @
 
+\textcolor{red}{MAYBE DO BOTH IN THE SAME BLOCK AND PLOT ON ONE PLOT?}
 
+\clearpage
 
-In the absence of prior information, predictions are made by means of Monte Carlo sampling:
-
-\begin{enumerate}
-    \item sample $\sigma^2 \sim \text{inverse-gamma}([\nu_0 + n]/2,[\nu_0\sigma^2_0 + \text{SSR}_g]/2)$
-    \item sample $\beta \sim \text{multivariate normal}\left(\frac{g}{g+1}\hat{\beta}_{ols},\frac{g}{g+1}\sigma^2[\mathbf{X^TX}]^{-1}\right)$.
-\end{enumerate}
+For the same example without prior information, we use Zellner's g-prior with $g =$ length$(y) =$ \Sexpr{length(y)}.
 
 <<fig=TRUE,echo=FALSE>>=
 source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredNormReg.R')
@@ -1439,10 +1501,10 @@ for(S in NSamples){
 #rpredNormReg = function(S=1,Xpred,X,y,beta0,Sigma0,nu0=1,s20=1,gprior = TRUE)
     result = rpredNormReg(S,X[1,],X,y,nu0=nu0,s20=sig2.ols)
     if(first_time){
-      plot(density(result),ylim=c(0,1.2*max(density(result)$y)),main=bquote(.(S) ~ "Samples, repeated 3 times"))
+      plot(density(result$predictions[1,]),ylim=c(0,1.2*max(density(result$predictions[1,])$y)),main=bquote(.(S) ~ "Samples, repeated 3 times"))
       first_time = 0
     } else {
-      lines(density(result),col=j)
+      lines(density(result$predictions[1,]),col=j)
     }
   }
 }
@@ -1452,7 +1514,6 @@ for(S in NSamples){
 
 
 
-  \subsubsection{Example}
 
 
 \clearpage

@@ -946,33 +946,53 @@ Simple Monte Carlo approximation can be used to sample from the joint posterior 
 
 The standard format R function rpredNormReg() approximates the joint posterior density $p(\sigma^2,\beta|\mathbf{y,X})$ using one of the two methods described above, as selected by the user.\\
 
-To use the semiconjugate prior, values must be supplied for prior parameters $(\beta_0, \Sigma_0)$ and $(\nu_0, \sigma^2_0)$.  In the example below (Hoff data and code found \href{https://pdhoff.github.io/book/}{here}), we use
+To use the semiconjugate prior, the user must supply values for prior parameters $(\beta_0, \Sigma_0)$ and $(\nu_0, \sigma^2_0)$.
 
-
-\begin{flalign*}
-  \beta_0 &= \hat{\beta}_{ols} \text{ (ordinary least squares estimator of } \beta \text{)}\\
-  \Sigma_0 &= (X^TX)^{-1}\sigma^2n \text{ (sampling variance of } \hat{\beta}_{ols} \text{)}\text{WHY TIMES n????}\\
-  \nu_0 &= 1 \text{ (prior sample size)}\\
-  \sigma^2_0 &= \frac{\sum e_i}{n-1} \text{ (variance of the residuals)}
-\end{flalign*}
-
-\includegraphics{Thesis-013}
-
-
-
-In the absence of prior information, predictions are made by means of Monte Carlo sampling:
+In the absence of prior information, predictions are made by means of Monte Carlo sampling, using Zellner's g-prior.
 
 \begin{enumerate}
     \item sample $\sigma^2 \sim \text{inverse-gamma}([\nu_0 + n]/2,[\nu_0\sigma^2_0 + \text{SSR}_g]/2)$
     \item sample $\beta \sim \text{multivariate normal}\left(\frac{g}{g+1}\hat{\beta}_{ols},\frac{g}{g+1}\sigma^2[\mathbf{X^TX}]^{-1}\right)$.
 \end{enumerate}
 
-\includegraphics{Thesis-014}
-
+Here $g$ is typically set to the number of prior observations.
 
 
 
   \subsubsection{Example}
+
+In the example below (Hoff data and code found \href{https://pdhoff.github.io/book/}{here}) to employ the semi-conjugate prior we use
+
+
+
+\begin{flalign*}
+  \beta_0 &= \hat{\beta}_{ols} = (-51.29, -51.29, -51.29, -51.29)  \text{ (ordinary least squares estimator of } \beta \text{)}\\
+  \Sigma_0 &= (X^TX)^{-1}\sigma^2n =
+    \begin{pmatrix}
+      1801.4 & -1801.4 & -77.02 & 77.02 \\
+      -1801.4 & 2981.28 & 77.02 & -122.03 \\
+      -77.02 & 77.02 & 3.32 & -3.32 \\
+      77.02 & -122.03 & -3.32 & 5.07
+    \end{pmatrix}
+    \text{ (sampling variance of } \hat{\beta}_{ols} \text{)}\text{WHY TIMES n????}\\
+  \nu_0 &= 1 \text{ (prior sample size)}\\
+  \sigma^2_0 &= \frac{\sum e_i}{n-1} = 6.21 \text{ (variance of the residuals)}\\
+  S &= 5000 \text{ (sample size for predictive distribution random draw)}
+\end{flalign*}
+
+\includegraphics{Thesis-014}
+
+\textcolor{red}{MAYBE DO BOTH IN THE SAME BLOCK AND PLOT ON ONE PLOT?}
+
+\clearpage
+
+For the same example without prior information, we use Zellner's g-prior with $g =$ length$(y) =$ 12.
+
+\includegraphics{Thesis-015}
+
+
+
+
 
 
 \clearpage

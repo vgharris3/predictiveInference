@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  17 SEP 2021 12:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  20 SEP 2021 18:30
 entering extended mode
 **./Thesis.tex
 (Thesis.tex
@@ -1321,17 +1321,24 @@ Underfull \hbox (badness 10000) in paragraph at lines 947--948
  []
 
 [35]
-<Thesis-013.pdf, id=597, 433.62pt x 433.62pt>
-File: Thesis-013.pdf Graphic file (type pdf)
-<use Thesis-013.pdf>
-Package pdftex.def Info: Thesis-013.pdf  used on input line 959.
-(pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
-<Thesis-014.pdf, id=598, 433.62pt x 433.62pt>
+Overfull \hbox (118.23825pt too wide) detected at line 981
+[]
+ []
+
+<Thesis-014.pdf, id=597, 433.62pt x 433.62pt>
 File: Thesis-014.pdf Graphic file (type pdf)
 <use Thesis-014.pdf>
-Package pdftex.def Info: Thesis-014.pdf  used on input line 970.
+Package pdftex.def Info: Thesis-014.pdf  used on input line 983.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
- [36 <./Thesis-013.pdf>] [37 <./Thesis-014.pdf>] [38
+[36] [37 <./Thesis-014.pdf>]
+<Thesis-015.pdf, id=615, 433.62pt x 433.62pt>
+File: Thesis-015.pdf Graphic file (type pdf)
+<use Thesis-015.pdf>
+Package pdftex.def Info: Thesis-015.pdf  used on input line 991.
+(pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
+ [38
+
+ <./Thesis-015.pdf>] [39
 
 ] (Thesis.aux)
 Package rerunfilecheck Info: File `Thesis.out' has not changed.
@@ -1343,8 +1350,8 @@ LaTeX Font Warning: Size substitutions with differences
 
  ) 
 Here is how much of TeX's memory you used:
- 30587 strings out of 479696
- 711417 string characters out of 2881701
+ 30588 strings out of 479696
+ 711424 string characters out of 2881701
  1158470 words of memory out of 3000000
  46916 multiletter control sequences out of 15000+200000
  447990 words of font info for 138 fonts, out of 3000000 for 9000
@@ -1367,9 +1374,9 @@ e1/public/amsfonts/cm/cmsy6.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
 msy8.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/MiKTeX 2.
 9/fonts/type1/public/amsfonts/cm/cmtt12.pfb><C:/MiKTeX 2.9/fonts/type1/public/a
 msfonts/latxfont/line10.pfb>
-Output written on Thesis.pdf (38 pages, 721042 bytes).
+Output written on Thesis.pdf (39 pages, 725320 bytes).
 PDF statistics:
- 720 PDF objects out of 1000 (max. 8388607)
- 121 named destinations out of 1000 (max. 500000)
+ 724 PDF objects out of 1000 (max. 8388607)
+ 122 named destinations out of 1000 (max. 500000)
  469 words of extra memory for PDF output out of 10000 (max. 10000000)
 
