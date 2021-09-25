@@ -116,7 +116,15 @@ rpredNormReg = function(S=1,Xpred,X,y,beta0,Sigma0,nu0=1,s20=1,gprior = TRUE){
 #    result = list(beta.post, Xpred%*%t(beta.post))
 
     result$betas = beta.post
-    result$predictions = Xpred%*%t(beta.post)
+    result$sigma2 = sigma2.post
+
+    predictions = Xpred%*%t(beta.post)
+
+    for(i in 1:nrow(Xpred)){
+      predictions[i,] = predictions[i,] + rnorm(S,0,sqrt(sigma2.post))
+    }
+
+    result$predictions = predictions
 
   }
 

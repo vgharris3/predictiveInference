@@ -1408,6 +1408,10 @@ sig20.disp = round(sig20,2)
   S &= \Sexpr{S} \text{ (sample size for predictive distribution random draw)}
 \end{flalign*}
 
+\textcolor{red}{To do:  clean up write-up; make plots comparing g-prior and non-g-prior results;  circle back with Dean about appropriate priors for non-g-prior case; why is Hoff looking at the difference between the two cases with prior info very close to the sample characteristics? }
+
+\textcolor{red}{ALSO INCLUDE IN WRITE-UP EXPLICIT PREDICTION STEP, E.G. "Y = ..."}
+
 <<fig=TRUE,echo=FALSE>>=
 source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredNormReg.R')
 #rpredNormReg = function(S=1,Xpred,X,y,beta0,Sigma0,nu0=1,s20=1,gprior = TRUE)
@@ -1433,7 +1437,7 @@ sigma2.0<-sum(fit.ls$res^2)/(n-p)
 Sigma.0<- solve(t(X)%*%X)*sigma2.0*n      #WHY TIMES n? (also asked in text above)
 sig20<- var( residuals(lm(y~0+X)) )                #starting with the variance of the residuals
 
-Xpred = X[1:2,]           #predictor vector(s) for which prediction is desired
+Xpred = X#[1:2,]           #predictor vector(s) for which prediction is desired
 
 S = 5000 #desired sample size
 
@@ -1444,11 +1448,24 @@ S = 5000 #desired sample size
 
 result = rpredNormReg(S,Xpred,X,y,beta.0,Sigma.0,nu.0,sig20,gprior=FALSE)
 
-plot(density(result$predictions[1,]), main = bquote("Predictive Density"),col=1)
+maxx = 0
+minx = 0
+for(i in 1:nrow(result$predictions)){
+  tempmaxx = max(density(result$predictions[i,])$x)
+  if(tempmaxx > maxx) {maxx = tempmaxx}
+  tempminx = min(density(result$predictions[i,])$x)
+  if(tempminx < minx) {minx = tempminx}
+}
+
+plot(density(result$predictions[1,]), main = bquote("Predictive Density"),col=1,xlim = c(minx,maxx))
 
 for(i in 2:nrow(result$predictions)){
   lines(density(result$predictions[i,]),col=i)
-  }
+}
+
+legend("topright",legend=i:nrow(result$predictions),col=i)
+
+
 
 # plot(density(result[1,]), main = bquote("Predictive Density of Response for Design Point x ="~"("~.(Xpred[1])~.(Xpred[2])~.(Xpred[3])~.(Xpred[4])~")" ))
 # lines(density(result[2,]))
@@ -1456,7 +1473,7 @@ for(i in 2:nrow(result$predictions)){
 
 @
 
-\textcolor{red}{MAYBE DO BOTH IN THE SAME BLOCK AND PLOT ON ONE PLOT?}
+%\textcolor{red}{MAYBE DO BOTH IN THE SAME BLOCK AND PLOT ON ONE PLOT?}
 
 \clearpage
 
