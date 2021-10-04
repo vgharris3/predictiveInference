@@ -68,7 +68,7 @@ rpredNormReg = function(S=1,Xpred,X,y,beta0,Sigma0,nu0=1,s20=1,gprior = TRUE){
     beta = t( t(E%*%chol(Vb)) + c(Eb))
 
     result$betas = beta
-    result$predictions = Xpred%*%t(beta) # compute y prediction for input X vector for which prediction is desired.
+    result$predictions = (Xpred%*%t(beta))[1,] + rnorm(1,0,sqrt(s2)) # compute y prediction for input X vector for which prediction is desired.
 
   } else { #DO THIS PART TOO
 

@@ -1450,25 +1450,27 @@ result = rpredNormReg(S,Xpred,X,y,beta.0,Sigma.0,nu.0,sig20,gprior=FALSE)
 
 maxx = 0
 minx = 0
-for(i in 1:nrow(result$predictions)){
+maxy = 0
+numplots = nrow(result$predictions)
+legtxt = vector(mode = "character",length = numplots)
+for(i in 1:numplots){
   tempmaxx = max(density(result$predictions[i,])$x)
   if(tempmaxx > maxx) {maxx = tempmaxx}
   tempminx = min(density(result$predictions[i,])$x)
   if(tempminx < minx) {minx = tempminx}
+  tempmaxy = max(density(result$predictions[i,])$y)
+  if(tempmaxy > maxy) {maxy = tempmaxy}
+  legtxt[i] = toString(X[i,])
 }
 
-plot(density(result$predictions[1,]), main = bquote("Predictive Density"),col=1,xlim = c(minx,maxx))
+plot(density(result$predictions[1,]), main = bquote("Predictive Density"),col=1,xlim = c(minx,maxx),ylim = c(0,1.1*maxy))
 
-for(i in 2:nrow(result$predictions)){
+
+for(i in 2:numplots){
   lines(density(result$predictions[i,]),col=i)
 }
 
-legend("topright",legend=i:nrow(result$predictions),col=i)
-
-
-
-# plot(density(result[1,]), main = bquote("Predictive Density of Response for Design Point x ="~"("~.(Xpred[1])~.(Xpred[2])~.(Xpred[3])~.(Xpred[4])~")" ))
-# lines(density(result[2,]))
+legend("topright",legend = legtxt,lty = 1, col=1:numplots,bty = "n",title=expression("X"[1]*", "*"X"[2]*", "*"X"[3]*", "*"X"[4]))
 
 
 @
@@ -1510,7 +1512,8 @@ Xpred = X[1,]           #predictor vector(s) for which prediction is desired
 
 
 NSamples = c(1000,10000,100000,1000000)
-par(mfrow = c(2,2))
+NSamples = 10000
+#par(mfrow = c(2,2))
 
 for(S in NSamples){
   first_time = 1
@@ -1518,10 +1521,10 @@ for(S in NSamples){
 #rpredNormReg = function(S=1,Xpred,X,y,beta0,Sigma0,nu0=1,s20=1,gprior = TRUE)
     result = rpredNormReg(S,X[1,],X,y,nu0=nu0,s20=sig2.ols)
     if(first_time){
-      plot(density(result$predictions[1,]),ylim=c(0,1.2*max(density(result$predictions[1,])$y)),main=bquote(.(S) ~ "Samples, repeated 3 times"))
+      plot(density(result$predictions),ylim=c(0,1.2*max(density(result$predictions)$y)),main=bquote(.(S) ~ "Samples, repeated 3 times"))
       first_time = 0
     } else {
-      lines(density(result$predictions[1,]),col=j)
+      lines(density(result$predictions),col=j)
     }
   }
 }
