@@ -50,6 +50,10 @@ rpredNormReg = function(S=1,Xpred,X,y,beta0,Sigma0,nu0=1,s20=1,gprior = TRUE){
   ###############################
   ###############################
 
+  if(is.vector(Xpred)){
+    Xpred = t(as.matrix(Xpred))
+  }
+
   n = dim(X)[1] # = length(y)
   p = dim(X)[2] # = length(beta)
 
@@ -60,15 +64,26 @@ rpredNormReg = function(S=1,Xpred,X,y,beta0,Sigma0,nu0=1,s20=1,gprior = TRUE){
     SSRg = t(y)%*%( diag(1,nrow=n) - Hg)%*%y
 
     s2 = 1/rgamma(S, (nu0 + n)/2, (nu0*s20 + SSRg)/2 )
+    result$sigma2 = s2
 
     Vb = g*solve(t(X)%*%X)/(g+1)
-    Eb = Vb%*%t(X)%*%y
+    Eb = Vb%*%t(X)%*%y    #Posterior means of the betas (matches Hoff p. 159 lower half)
+                          #using apply(beta,2,sd) shows sd of these parameters close to Hoff
 
     E = matrix(rnorm(S*p,0,sqrt(s2)),S,p)
     beta = t( t(E%*%chol(Vb)) + c(Eb))
 
     result$betas = beta
-    result$predictions = (Xpred%*%t(beta))[1,] + rnorm(1,0,sqrt(s2)) # compute y prediction for input X vector for which prediction is desired.
+
+    predictions = Xpred%*%t(beta)
+
+    for(i in 1:nrow(Xpred)){
+      predictions[i,] = predictions[i,] + rnorm(S,0,sqrt(s2))
+    }
+
+    result$predictions = predictions
+
+
 
   } else { #DO THIS PART TOO
 

@@ -1447,6 +1447,8 @@ S = 5000 #desired sample size
 ################
 
 result = rpredNormReg(S,Xpred,X,y,beta.0,Sigma.0,nu.0,sig20,gprior=FALSE)
+result2 = rpredNormReg(S,Xpred,X,y,beta.0,Sigma.0,nu.0,sig20,gprior=FALSE)
+result3 = rpredNormReg(S,Xpred,X,y,beta.0,Sigma.0,nu.0,sig20,gprior=FALSE)
 
 maxx = 0
 minx = 0
@@ -1463,7 +1465,7 @@ for(i in 1:numplots){
   legtxt[i] = toString(X[i,])
 }
 
-plot(density(result$predictions[1,]), main = bquote("Predictive Density"),col=1,xlim = c(minx,maxx),ylim = c(0,1.1*maxy))
+plot(density(result$predictions[1,]), main = bquote("Predictive Density Using Semi-Conjugate Prior"),col=1,xlim = c(minx,1.25*maxx),ylim = c(0,1.1*maxy))
 
 
 for(i in 2:numplots){
@@ -1471,6 +1473,14 @@ for(i in 2:numplots){
 }
 
 legend("topright",legend = legtxt,lty = 1, col=1:numplots,bty = "n",title=expression("X"[1]*", "*"X"[2]*", "*"X"[3]*", "*"X"[4]))
+
+for(i in 1:numplots){
+  lines(density(result2$predictions[i,]),lty=2,col=i)
+}
+
+for(i in 1:numplots){
+  lines(density(result3$predictions[i,]),lty=3,col=i)
+}
 
 
 @
@@ -1502,33 +1512,77 @@ beta.ols<- solve(t(X)%*%X)%*%t(X)%*%y
 sig2.ols = (t(y-X%*%beta.ols)%*%(y-X%*%beta.ols)/(n-p))[1]
 nu0=1
 
-Xpred = X[1,]           #predictor vector(s) for which prediction is desired
+Xpred = t(as.matrix(X[1,]))           #predictor vector(s) for which prediction is desired
+Xpred = X
 
-#set.seed(1)
+S = 5000 #desired sample size
 
-# result = rpredNormReg(S,Xpred,X,y,nu0,sig2.ols,gprior=TRUE)
-#
-# plot(density(result))
+#END OF REPEATED BLOCK
+################
+################
+################
 
+#       result = rpredNormReg(S,CurrentX,X,y,nu0=nu0,s20=sig2.ols)
+result = rpredNormReg(S,Xpred,X,y,nu0=nu0,s20=sig2.ols)
+result2 = rpredNormReg(S,Xpred,X,y,nu0=nu0,s20=sig2.ols)
+result3 = rpredNormReg(S,Xpred,X,y,nu0=nu0,s20=sig2.ols)
 
-NSamples = c(1000,10000,100000,1000000)
-NSamples = 10000
-#par(mfrow = c(2,2))
-
-for(S in NSamples){
-  first_time = 1
-  for(j in 1:3){
-#rpredNormReg = function(S=1,Xpred,X,y,beta0,Sigma0,nu0=1,s20=1,gprior = TRUE)
-    result = rpredNormReg(S,X[1,],X,y,nu0=nu0,s20=sig2.ols)
-    if(first_time){
-      plot(density(result$predictions),ylim=c(0,1.2*max(density(result$predictions)$y)),main=bquote(.(S) ~ "Samples, repeated 3 times"))
-      first_time = 0
-    } else {
-      lines(density(result$predictions),col=j)
-    }
-  }
+maxx = 0
+minx = 0
+maxy = 0
+numplots = nrow(result$predictions)
+legtxt = vector(mode = "character",length = numplots)
+for(i in 1:numplots){
+  tempmaxx = max(density(result$predictions[i,])$x)
+  if(tempmaxx > maxx) {maxx = tempmaxx}
+  tempminx = min(density(result$predictions[i,])$x)
+  if(tempminx < minx) {minx = tempminx}
+  tempmaxy = max(density(result$predictions[i,])$y)
+  if(tempmaxy > maxy) {maxy = tempmaxy}
+  legtxt[i] = toString(X[i,])
 }
 
+plot(density(result$predictions[1,]), main = bquote("Predictive Density Using Zellner's g-prior"),col=1,xlim = c(minx,1.25*maxx),ylim = c(0,1.1*maxy))
+
+
+for(i in 2:numplots){
+  lines(density(result$predictions[i,]),col=i)
+}
+
+legend("topright",legend = legtxt,lty = 1, col=1:numplots,bty = "n",title=expression("X"[1]*", "*"X"[2]*", "*"X"[3]*", "*"X"[4]))
+
+for(i in 1:numplots){
+  lines(density(result2$predictions[i,]),lty=2,col=i)
+}
+
+for(i in 1:numplots){
+  lines(density(result3$predictions[i,]),lty=3,col=i)
+}
+
+
+
+
+# NSamples = c(1000,10000,100000,1000000)
+# NSamples = 10000
+# par(mfrow = c(1,2))
+#
+# for(i in 1:nrow(Xpred)){
+#   CurrentX = Xpred[i,]
+#   for(S in NSamples){
+#     first_time = 1
+#     for(j in 1:3){
+#   #rpredNormReg = function(S=1,Xpred,X,y,beta0,Sigma0,nu0=1,s20=1,gprior = TRUE)
+#       result = rpredNormReg(S,CurrentX,X,y,nu0=nu0,s20=sig2.ols)
+#       line_type = j
+#       if(first_time){
+#         plot(density(result$predictions),ylim=c(0,1.2*max(density(result$predictions)$y)),main=bquote(.(S) ~ "Samples, repeated 3 times"))
+#         first_time = 0
+#       } else {
+#         lines(density(result$predictions),lty=j)
+#       }
+#     }
+#   }
+# }
 @
 
 
