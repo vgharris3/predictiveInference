@@ -1640,8 +1640,6 @@ Varying prior data:
 source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredNormReg.R')
 #rpredNormReg = function(S=1,Xpred,X,y,beta0,Sigma0,nu0=1,s20=1,gprior = TRUE)
 
-S = 100000 #desired sample size
-
 x1 <- rep(1,n)
 x2<-c(0,0,0,0,0,0,1,1,1,1,1,1)
 x3<-c(23,22,22,25,27,20,31,23,27,28,22,24)
@@ -1676,38 +1674,72 @@ S = 5000 #desired sample size
 ################
 set.seed(1)
 
-result_scp1 = rpredNormReg(S,Xpred,X,y,beta0=beta.ols,Sigma0=diag(4),nu0=nu0,s20=sig20,gprior=FALSE)
+result_scp1 = rpredNormReg(S,Xpred,X,y,beta0=beta.ols,Sigma0=Sigma.0,nu0=nu0,s20=sig20,gprior=FALSE)
 result_scp2 = rpredNormReg(S,Xpred,X,y,beta0=beta.ols,Sigma0=diag(diag(Sigma.0)),nu0=nu0,s20=sig20,gprior=FALSE)
-result_scp3 = rpredNormReg(S,Xpred,X,y,beta0=beta.ols,Sigma0=diag(rep(1000000,4)),nu0=nu0,s20=sig20,gprior=FALSE)
+result_scp3 = rpredNormReg(S,Xpred,X,y,beta0=beta.ols,Sigma0=diag(4),nu0=nu0,s20=sig20,gprior=FALSE)
+result_scp4 = rpredNormReg(S,Xpred,X,y,beta0=beta.ols,Sigma0=diag(rep(1000000,4)),nu0=nu0,s20=sig20,gprior=FALSE)
+result_scp5 = rpredNormReg(S,Xpred,X,y,beta0=beta.ols,Sigma0=matrix(runif(16),ncol=4),nu0=nu0,s20=sig20,gprior=FALSE)
+result_scp6 = rpredNormReg(S,Xpred,X,y,beta0=beta.ols,Sigma0=matrix(runif(16)*1000000,ncol=4),nu0=nu0,s20=sig20,gprior=FALSE)
 result_zgp = rpredNormReg(S,Xpred,X,y,nu0=nu0,s20=sig2.ols)
+
+lt1 = expression((X^T*X)^-1*sigma^2*n)
+lt2 = expression(paste("diag"((X^T*X)^-1*sigma^2*n)))
+lt3 = expression(I)
+lt4 = expression(I%*%10^6)
+lt5 = expression("Unif(0,1) 4"%*%"4 matrix")
+lt6 = expression(paste("Unif(0,",10^6,") 4"%*%"4 matrix"))
+lt7 = expression("Zellner's g-prior")
+
 
 maxx = 0
 minx = 0
 maxy = 0
-numplots = 3#nrow(result_scp$predictions)
-for(i in 1:numplots){
-  tempmaxx = max(density(result_scp$predictions[i,])$x)
-  if(tempmaxx > maxx) {maxx = tempmaxx}
-  tempminx = min(density(result_scp$predictions[i,])$x)
-  if(tempminx < minx) {minx = tempminx}
-  tempmaxy = max(density(result_scp$predictions[i,])$y)
-  if(tempmaxy > maxy) {maxy = tempmaxy}
-}
+numplots = 7#nrow(result_scp$predictions)
 
-plot(density(result_scp$predictions[1,]), main = bquote("Semi-conjugate prior vs. Zellner's g-prior"),col=1,xlim = c(minx,1.25*maxx),ylim = c(0,1.1*maxy))
+maxx = max(max(density(result_scp1$predictions[1,])$x),max(density(result_scp2$predictions[1,])$x),max(density(result_scp3$predictions[1,])$x),max(density(result_scp4$predictions[1,])$x),max(density(result_scp5$predictions[1,])$x),max(density(result_scp6$predictions[1,])$x),max(density(result_zgp$predictions[1,])$x))
+
+minx = min(min(density(result_scp1$predictions[1,])$x),min(density(result_scp2$predictions[1,])$x),min(density(result_scp3$predictions[1,])$x),min(density(result_scp4$predictions[1,])$x),min(density(result_scp5$predictions[1,])$x),min(density(result_scp6$predictions[1,])$x),min(density(result_zgp$predictions[1,])$x))
+
+maxy = max(max(density(result_scp1$predictions[1,])$y),max(density(result_scp2$predictions[1,])$y),max(density(result_scp3$predictions[1,])$y),max(density(result_scp4$predictions[1,])$y),max(density(result_scp5$predictions[1,])$y),max(density(result_scp6$predictions[1,])$y),max(density(result_zgp$predictions[1,])$y))
+
+miny = min(min(density(result_scp1$predictions[1,])$y),min(density(result_scp2$predictions[1,])$y),min(density(result_scp3$predictions[1,])$y),min(density(result_scp4$predictions[1,])$y),min(density(result_scp5$predictions[1,])$y),min(density(result_scp6$predictions[1,])$y),min(density(result_zgp$predictions[1,])$y))
+
+# tempmaxx = max(density(result_scp1$predictions[1,])$x)
+# if(tempmaxx > maxx){maxx = tempmaxx}
+# tempmaxx = max(density(result_scp2$predictions[1,])$x)
+# if(tempmaxx > maxx){maxx = tempmaxx}
+# tempmaxx = max(density(result_scp3$predictions[1,])$x)
+# if(tempmaxx > maxx){maxx = tempmaxx}
+# tempmaxx = max(density(result_scp4$predictions[1,])$x)
+# if(tempmaxx > maxx){maxx = tempmaxx}
+# tempmaxx = max(density(result_scp5$predictions[1,])$x)
+# if(tempmaxx > maxx){maxx = tempmaxx}
+# tempmaxx = max(density(result_scp6$predictions[1,])$x)
+# if(tempmaxx > maxx){maxx = tempmaxx}
+# tempmaxx = max(density(result_zgp$predictions[1,])$x)
+# if(tempmaxx > maxx){maxx = tempmaxx}
+
+plot(density(result_scp1$predictions[1,]), main = expression(paste("Varying Prior Information:  ", Sigma[0])),col=c(rep(1,6),2),xlim = c(minx,1.25*maxx),ylim = c(0,1.1*maxy))
 
 #PLOT DIFFERENT RESULTS FOR THE DIFFERENT E MATRICES.  THEN DO THIS VARYING THE OTHER PRIOR INFO INPUTS.
-lines(density(result_scp$predictions[1,]),col=i)
+lines(density(result_scp2$predictions[1,]),lty=2)
+lines(density(result_scp3$predictions[1,]),lty=3)
+lines(density(result_scp4$predictions[1,]),lty=4)
+lines(density(result_scp5$predictions[1,]),lty=5)
+lines(density(result_scp6$predictions[1,]),lty=6)
+lines(density(result_zgp$predictions[1,]),col=2,lty=7,lwd=2)
 
 # for(i in 2:numplots){
 #   lines(density(result_scp$predictions[i,]),col=i)
 # }
 #
-# legtxt = c("SCP", "ZGP")
+#legtxt = c(expression((X^T*X)^-1*sigma^2),expression(paste("diag"((X^T*X)^-1*sigma^2)) ))
+legtxt = c(lt1,lt2,lt3,lt4,lt5,lt6,lt7)
+legend(0.4*maxx,maxy,legend = legtxt,col=c(rep(1,6),2),lty = 1:7,lwd=c(rep(1,6),2),bty = "n")
 # legend("topright",legend = legtxt,lty = 1:2,bty = "n")
 
 # for(i in 1:numplots){
-  lines(density(result_zgp$predictions[1,]),lty=2,col=i)
+  # lines(density(result_zgp$predictions[1,]),lty=2,col=i)
 # }
 
 @
