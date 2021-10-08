@@ -41,4 +41,4 @@
 \contentsline {paragraph}{\numberline {4.2.1.2}Default and weakly informative prior distributions}{35}{paragraph.4.2.1.2}%
 \contentsline {subsubsection}{\numberline {4.2.2}R Implementation}{36}{subsubsection.4.2.2}%
 \contentsline {subsubsection}{\numberline {4.2.3}Example}{36}{subsubsection.4.2.3}%
-\contentsline {section}{\numberline {5}Conclusion}{41}{section.5}%
+\contentsline {section}{\numberline {5}Conclusion}{45}{section.5}%

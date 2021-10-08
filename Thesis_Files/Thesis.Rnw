@@ -1487,9 +1487,9 @@ for(i in 1:numplots){
 
 %\textcolor{red}{MAYBE DO BOTH IN THE SAME BLOCK AND PLOT ON ONE PLOT?}
 
-\clearpage
+%\clearpage
 
-For the same example without prior information, we use Zellner's g-prior with $g =$ length$(y) =$ \Sexpr{length(y)}.
+%For the same example without prior information, we use Zellner's g-prior with $g =$ length$(y) =$ \Sexpr{length(y)}.
 
 <<fig=TRUE,echo=FALSE>>=
 source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredNormReg.R')
@@ -1560,6 +1560,8 @@ for(i in 1:numplots){
 
 
 @
+
+\clearpage
 
 Comparing predictions using semi-conjugate prior vs. Zellner's g-prior:
 
@@ -1634,7 +1636,9 @@ for(i in 1:numplots){
 
 @
 
-Varying prior data:
+\clearpage
+
+The following plots exhibit the influence of varying the prior info with the semi-conjugate prior.
 
 <<fig=TRUE,echo=FALSE>>=
 source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredNormReg.R')
@@ -1672,7 +1676,6 @@ S = 5000 #desired sample size
 ################
 ################
 ################
-set.seed(1)
 
 result_scp1 = rpredNormReg(S,Xpred,X,y,beta0=beta.ols,Sigma0=Sigma.0,nu0=nu0,s20=sig20,gprior=FALSE)
 result_scp2 = rpredNormReg(S,Xpred,X,y,beta0=beta.ols,Sigma0=diag(diag(Sigma.0)),nu0=nu0,s20=sig20,gprior=FALSE)
@@ -1689,12 +1692,14 @@ lt4 = expression(I%*%10^6)
 lt5 = expression("Unif(0,1) 4"%*%"4 matrix")
 lt6 = expression(paste("Unif(0,",10^6,") 4"%*%"4 matrix"))
 lt7 = expression("Zellner's g-prior")
+ltitle = expression(Sigma[0])
 
+ptitle = expression(paste("Varying Prior Information:  ", Sigma[0]))
 
 maxx = 0
 minx = 0
 maxy = 0
-numplots = 7#nrow(result_scp$predictions)
+numplots = 7
 
 maxx = max(max(density(result_scp1$predictions[1,])$x),max(density(result_scp2$predictions[1,])$x),max(density(result_scp3$predictions[1,])$x),max(density(result_scp4$predictions[1,])$x),max(density(result_scp5$predictions[1,])$x),max(density(result_scp6$predictions[1,])$x),max(density(result_zgp$predictions[1,])$x))
 
@@ -1704,24 +1709,9 @@ maxy = max(max(density(result_scp1$predictions[1,])$y),max(density(result_scp2$p
 
 miny = min(min(density(result_scp1$predictions[1,])$y),min(density(result_scp2$predictions[1,])$y),min(density(result_scp3$predictions[1,])$y),min(density(result_scp4$predictions[1,])$y),min(density(result_scp5$predictions[1,])$y),min(density(result_scp6$predictions[1,])$y),min(density(result_zgp$predictions[1,])$y))
 
-# tempmaxx = max(density(result_scp1$predictions[1,])$x)
-# if(tempmaxx > maxx){maxx = tempmaxx}
-# tempmaxx = max(density(result_scp2$predictions[1,])$x)
-# if(tempmaxx > maxx){maxx = tempmaxx}
-# tempmaxx = max(density(result_scp3$predictions[1,])$x)
-# if(tempmaxx > maxx){maxx = tempmaxx}
-# tempmaxx = max(density(result_scp4$predictions[1,])$x)
-# if(tempmaxx > maxx){maxx = tempmaxx}
-# tempmaxx = max(density(result_scp5$predictions[1,])$x)
-# if(tempmaxx > maxx){maxx = tempmaxx}
-# tempmaxx = max(density(result_scp6$predictions[1,])$x)
-# if(tempmaxx > maxx){maxx = tempmaxx}
-# tempmaxx = max(density(result_zgp$predictions[1,])$x)
-# if(tempmaxx > maxx){maxx = tempmaxx}
+plot(density(result_scp1$predictions[1,]), main = ptitle,col=c(rep(1,6),2),xlim = c(minx,1.25*maxx),ylim = c(0,1.1*maxy))
 
-plot(density(result_scp1$predictions[1,]), main = expression(paste("Varying Prior Information:  ", Sigma[0])),col=c(rep(1,6),2),xlim = c(minx,1.25*maxx),ylim = c(0,1.1*maxy))
-
-#PLOT DIFFERENT RESULTS FOR THE DIFFERENT E MATRICES.  THEN DO THIS VARYING THE OTHER PRIOR INFO INPUTS.
+#PLOT DIFFERENT RESULTS FOR THE DIFFERENT PRIOR COVARIANCE MATRICES.
 lines(density(result_scp2$predictions[1,]),lty=2)
 lines(density(result_scp3$predictions[1,]),lty=3)
 lines(density(result_scp4$predictions[1,]),lty=4)
@@ -1729,21 +1719,354 @@ lines(density(result_scp5$predictions[1,]),lty=5)
 lines(density(result_scp6$predictions[1,]),lty=6)
 lines(density(result_zgp$predictions[1,]),col=2,lty=7,lwd=2)
 
-# for(i in 2:numplots){
-#   lines(density(result_scp$predictions[i,]),col=i)
-# }
-#
-#legtxt = c(expression((X^T*X)^-1*sigma^2),expression(paste("diag"((X^T*X)^-1*sigma^2)) ))
 legtxt = c(lt1,lt2,lt3,lt4,lt5,lt6,lt7)
-legend(0.4*maxx,maxy,legend = legtxt,col=c(rep(1,6),2),lty = 1:7,lwd=c(rep(1,6),2),bty = "n")
-# legend("topright",legend = legtxt,lty = 1:2,bty = "n")
+legend(0.4*maxx,maxy,legend = legtxt,title = ltitle,col=c(rep(1,6),2),lty = 1:7,lwd=c(rep(1,6),2),bty = "n")
 
-# for(i in 1:numplots){
-  # lines(density(result_zgp$predictions[1,]),lty=2,col=i)
-# }
 
 @
 
+<<fig=TRUE,echo=FALSE>>=
+source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredNormReg.R')
+#rpredNormReg = function(S=1,Xpred,X,y,beta0,Sigma0,nu0=1,s20=1,gprior = TRUE)
+
+x1 <- rep(1,n)
+x2<-c(0,0,0,0,0,0,1,1,1,1,1,1)
+x3<-c(23,22,22,25,27,20,31,23,27,28,22,24)
+x4 <- x2*x3
+X = cbind(x1,x2,x3,x4)  #regression design matrix
+
+y<-c(-0.87,-10.74,-3.27,-1.97,7.50,-7.25,17.05,4.96,10.40,11.05,0.26,2.51)  #observed response vector
+
+n = length(y)
+p = dim(X)[2]
+
+fit.ls<-lm(y~-1+ X)
+beta.0<-fit.ls$coef
+nu0<-1
+
+# prior info for semi-conjugate prior case
+sigma2.0<-sum(fit.ls$res^2)/(n-p)
+sig2.ols<-sum(fit.ls$res^2)/(n-p)
+Sigma.0<- solve(t(X)%*%X)*sig2.ols*n
+sig20<- var( residuals(lm(y~0+X)) )
+
+# starting with ols variance for non-informative g-prior case
+sig2.ols = (t(y-X%*%beta.ols)%*%(y-X%*%beta.0)/(n-p))[1]
+
+Xpred = X[1,]
+
+S = 5000 #desired sample size
+
+#END OF REPEATED BLOCK
+################
+################
+################
+
+result_scp1 = rpredNormReg(S,Xpred,X,y,beta0=beta.ols,Sigma0=Sigma.0,nu0=nu0,s20=sig20,gprior=FALSE)
+result_scp2 = rpredNormReg(S,Xpred,X,y,beta0=2*beta.ols,Sigma0=Sigma.0,nu0=nu0,s20=sig20,gprior=FALSE)
+result_scp3 = rpredNormReg(S,Xpred,X,y,beta0=3*beta.ols,Sigma0=Sigma.0,nu0=nu0,s20=sig20,gprior=FALSE)
+result_scp4 = rpredNormReg(S,Xpred,X,y,beta0=4*beta.ols,Sigma0=Sigma.0,nu0=nu0,s20=sig20,gprior=FALSE)
+result_scp5 = rpredNormReg(S,Xpred,X,y,beta0=5*beta.ols,Sigma0=Sigma.0,nu0=nu0,s20=sig20,gprior=FALSE)
+result_scp6 = rpredNormReg(S,Xpred,X,y,beta0=6*beta.ols,Sigma0=Sigma.0,nu0=nu0,s20=sig20,gprior=FALSE)
+result_zgp = rpredNormReg(S,Xpred,X,y,nu0=nu0,s20=sig2.ols)
+
+lt1 = expression(beta[ols])
+lt2 = expression(2*beta[ols])
+lt3 = expression(3*beta[ols])
+lt4 = expression(4*beta[ols])
+lt5 = expression(5*beta[ols])
+lt6 = expression(6*beta[ols])
+lt7 = expression("Zellner's g-prior")
+ltitle = expression(beta[0])
+
+ptitle = expression(paste("Varying Prior Information:  Scaling ", beta[0]))
+
+maxx = 0
+minx = 0
+maxy = 0
+numplots = 7
+
+maxx = max(max(density(result_scp1$predictions[1,])$x),max(density(result_scp2$predictions[1,])$x),max(density(result_scp3$predictions[1,])$x),max(density(result_scp4$predictions[1,])$x),max(density(result_scp5$predictions[1,])$x),max(density(result_scp6$predictions[1,])$x),max(density(result_zgp$predictions[1,])$x))
+
+minx = min(min(density(result_scp1$predictions[1,])$x),min(density(result_scp2$predictions[1,])$x),min(density(result_scp3$predictions[1,])$x),min(density(result_scp4$predictions[1,])$x),min(density(result_scp5$predictions[1,])$x),min(density(result_scp6$predictions[1,])$x),min(density(result_zgp$predictions[1,])$x))
+
+maxy = max(max(density(result_scp1$predictions[1,])$y),max(density(result_scp2$predictions[1,])$y),max(density(result_scp3$predictions[1,])$y),max(density(result_scp4$predictions[1,])$y),max(density(result_scp5$predictions[1,])$y),max(density(result_scp6$predictions[1,])$y),max(density(result_zgp$predictions[1,])$y))
+
+miny = min(min(density(result_scp1$predictions[1,])$y),min(density(result_scp2$predictions[1,])$y),min(density(result_scp3$predictions[1,])$y),min(density(result_scp4$predictions[1,])$y),min(density(result_scp5$predictions[1,])$y),min(density(result_scp6$predictions[1,])$y),min(density(result_zgp$predictions[1,])$y))
+
+plot(density(result_scp1$predictions[1,]), main = ptitle,col=c(rep(1,6),2),ylim = c(0,1.2*maxy))
+
+#PLOT DIFFERENT RESULTS FOR THE DIFFERENT PRIOR COVARIANCE MATRICES.
+lines(density(result_scp2$predictions[1,]),lty=2)
+lines(density(result_scp3$predictions[1,]),lty=3)
+lines(density(result_scp4$predictions[1,]),lty=4)
+lines(density(result_scp5$predictions[1,]),lty=5)
+lines(density(result_scp6$predictions[1,]),lty=6)
+lines(density(result_zgp$predictions[1,]),col=2,lty=7,lwd=2)
+
+legtxt = c(lt1,lt2,lt3,lt4,lt5,lt6,lt7)
+legend("topright",legend = legtxt,title = ltitle,col=c(rep(1,6),2),lty = 1:7,lwd=c(rep(1,6),2),bty = "n")
+
+
+@
+
+<<fig=TRUE,echo=FALSE>>=
+source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredNormReg.R')
+#rpredNormReg = function(S=1,Xpred,X,y,beta0,Sigma0,nu0=1,s20=1,gprior = TRUE)
+
+x1 <- rep(1,n)
+x2<-c(0,0,0,0,0,0,1,1,1,1,1,1)
+x3<-c(23,22,22,25,27,20,31,23,27,28,22,24)
+x4 <- x2*x3
+X = cbind(x1,x2,x3,x4)  #regression design matrix
+
+y<-c(-0.87,-10.74,-3.27,-1.97,7.50,-7.25,17.05,4.96,10.40,11.05,0.26,2.51)  #observed response vector
+
+n = length(y)
+p = dim(X)[2]
+
+fit.ls<-lm(y~-1+ X)
+beta.0<-fit.ls$coef
+nu0<-1
+
+# prior info for semi-conjugate prior case
+sigma2.0<-sum(fit.ls$res^2)/(n-p)
+sig2.ols<-sum(fit.ls$res^2)/(n-p)
+Sigma.0<- solve(t(X)%*%X)*sig2.ols*n
+sig20<- var( residuals(lm(y~0+X)) )
+
+# starting with ols variance for non-informative g-prior case
+sig2.ols = (t(y-X%*%beta.ols)%*%(y-X%*%beta.0)/(n-p))[1]
+
+Xpred = X[1,]
+
+S = 5000 #desired sample size
+
+#END OF REPEATED BLOCK
+################
+################
+################
+#set.seed(1)
+
+result_scp1 = rpredNormReg(S,Xpred,X,y,beta0=beta.ols,Sigma0=Sigma.0,nu0=nu0,s20=sig20,gprior=FALSE)
+result_scp2 = rpredNormReg(S,Xpred,X,y,beta0=rep(1,4),Sigma0=Sigma.0,nu0=nu0,s20=sig20,gprior=FALSE)
+result_scp3 = rpredNormReg(S,Xpred,X,y,beta0=runif(4),Sigma0=Sigma.0,nu0=nu0,s20=sig20,gprior=FALSE)
+result_scp4 = rpredNormReg(S,Xpred,X,y,beta0=rnorm(4),Sigma0=Sigma.0,nu0=nu0,s20=sig20,gprior=FALSE)
+result_scp5 = rpredNormReg(S,Xpred,X,y,beta0=10*rnorm(4),Sigma0=Sigma.0,nu0=nu0,s20=sig20,gprior=FALSE)
+result_scp6 = rpredNormReg(S,Xpred,X,y,beta0=100*rnorm(4),Sigma0=Sigma.0,nu0=nu0,s20=sig20,gprior=FALSE)
+result_zgp = rpredNormReg(S,Xpred,X,y,nu0=nu0,s20=sig2.ols)
+
+lt1 = expression(beta[ols])
+lt2 = expression("("*1*", "*1*", "*1*", "*1*")")
+lt3 = expression("runif("*4*")")
+lt4 = expression("rnorm("*4*")")
+lt5 = expression(10*"rnorm("*4*")")
+lt6 = expression(100*"rnorm("*4*")")
+lt7 = expression("Zellner's g-prior")
+ltitle = expression(beta[0])
+
+ptitle = expression(paste("Varying Prior Information:  Various ", beta[0]))
+
+maxx = 0
+minx = 0
+maxy = 0
+numplots = 7
+
+maxx = max(max(density(result_scp1$predictions[1,])$x),max(density(result_scp2$predictions[1,])$x),max(density(result_scp3$predictions[1,])$x),max(density(result_scp4$predictions[1,])$x),max(density(result_scp5$predictions[1,])$x),max(density(result_scp6$predictions[1,])$x),max(density(result_zgp$predictions[1,])$x))
+
+minx = min(min(density(result_scp1$predictions[1,])$x),min(density(result_scp2$predictions[1,])$x),min(density(result_scp3$predictions[1,])$x),min(density(result_scp4$predictions[1,])$x),min(density(result_scp5$predictions[1,])$x),min(density(result_scp6$predictions[1,])$x),min(density(result_zgp$predictions[1,])$x))
+
+maxy = max(max(density(result_scp1$predictions[1,])$y),max(density(result_scp2$predictions[1,])$y),max(density(result_scp3$predictions[1,])$y),max(density(result_scp4$predictions[1,])$y),max(density(result_scp5$predictions[1,])$y),max(density(result_scp6$predictions[1,])$y),max(density(result_zgp$predictions[1,])$y))
+
+miny = min(min(density(result_scp1$predictions[1,])$y),min(density(result_scp2$predictions[1,])$y),min(density(result_scp3$predictions[1,])$y),min(density(result_scp4$predictions[1,])$y),min(density(result_scp5$predictions[1,])$y),min(density(result_scp6$predictions[1,])$y),min(density(result_zgp$predictions[1,])$y))
+
+plot(density(result_scp1$predictions[1,]), main = ptitle,col=c(rep(1,6),2),ylim = c(0,1.2*maxy))
+
+#PLOT DIFFERENT RESULTS FOR THE DIFFERENT PRIOR COVARIANCE MATRICES.
+lines(density(result_scp2$predictions[1,]),lty=2)
+lines(density(result_scp3$predictions[1,]),lty=3)
+lines(density(result_scp4$predictions[1,]),lty=4)
+lines(density(result_scp5$predictions[1,]),lty=5)
+lines(density(result_scp6$predictions[1,]),lty=6)
+lines(density(result_zgp$predictions[1,]),col=2,lty=7,lwd=2)
+
+legtxt = c(lt1,lt2,lt3,lt4,lt5,lt6,lt7)
+legend("topright",legend = legtxt,title = ltitle,col=c(rep(1,6),2),lty = 1:7,lwd=c(rep(1,6),2),bty = "n")
+
+
+@
+
+<<fig=TRUE,echo=FALSE>>=
+source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredNormReg.R')
+#rpredNormReg = function(S=1,Xpred,X,y,beta0,Sigma0,nu0=1,s20=1,gprior = TRUE)
+
+x1 <- rep(1,n)
+x2<-c(0,0,0,0,0,0,1,1,1,1,1,1)
+x3<-c(23,22,22,25,27,20,31,23,27,28,22,24)
+x4 <- x2*x3
+X = cbind(x1,x2,x3,x4)  #regression design matrix
+
+y<-c(-0.87,-10.74,-3.27,-1.97,7.50,-7.25,17.05,4.96,10.40,11.05,0.26,2.51)  #observed response vector
+
+n = length(y)
+p = dim(X)[2]
+
+fit.ls<-lm(y~-1+ X)
+beta.0<-fit.ls$coef
+nu0<-1
+
+# prior info for semi-conjugate prior case
+sigma2.0<-sum(fit.ls$res^2)/(n-p)
+sig2.ols<-sum(fit.ls$res^2)/(n-p)
+Sigma.0<- solve(t(X)%*%X)*sig2.ols*n
+sig20<- var( residuals(lm(y~0+X)) )
+
+# starting with ols variance for non-informative g-prior case
+sig2.ols = (t(y-X%*%beta.ols)%*%(y-X%*%beta.0)/(n-p))[1]
+
+Xpred = X[1,]
+
+S = 5000 #desired sample size
+
+#END OF REPEATED BLOCK
+################
+################
+################
+#set.seed(1)
+
+result_scp1 = rpredNormReg(S,Xpred,X,y,beta0=beta.ols,Sigma0=Sigma.0,nu0=nu0,s20=sig20,gprior=FALSE)
+result_scp2 = rpredNormReg(S,Xpred,X,y,beta0=beta.ols,Sigma0=Sigma.0,nu0=nu0,s20=sig2.ols,gprior=FALSE)
+result_scp3 = rpredNormReg(S,Xpred,X,y,beta0=beta.ols,Sigma0=Sigma.0,nu0=nu0,s20=10,gprior=FALSE)
+result_scp4 = rpredNormReg(S,Xpred,X,y,beta0=beta.ols,Sigma0=Sigma.0,nu0=nu0,s20=100,gprior=FALSE)
+result_scp5 = rpredNormReg(S,Xpred,X,y,beta0=beta.ols,Sigma0=Sigma.0,nu0=nu0,s20=1000,gprior=FALSE)
+result_scp6 = rpredNormReg(S,Xpred,X,y,beta0=beta.ols,Sigma0=Sigma.0,nu0=nu0,s20=10000,gprior=FALSE)
+result_zgp = rpredNormReg(S,Xpred,X,y,nu0=nu0,s20=sig2.ols)
+
+lt1 = expression("var(residuals)" == 6.21)
+lt2 = expression(sigma[ols]^2 == 8.54)
+lt3 = expression(10)
+lt4 = expression(100)
+lt5 = expression(1000)
+lt6 = expression(10000)
+lt7 = expression("Zellner's g-prior")
+ltitle = expression(sigma[0]^2)
+
+ptitle = expression(paste("Varying Prior Information:  Scaling ", sigma[0]^2))
+
+maxx = 0
+minx = 0
+maxy = 0
+numplots = 7
+
+maxx = max(max(density(result_scp1$predictions[1,])$x),max(density(result_scp2$predictions[1,])$x),max(density(result_scp3$predictions[1,])$x),max(density(result_scp4$predictions[1,])$x),max(density(result_scp5$predictions[1,])$x),max(density(result_scp6$predictions[1,])$x),max(density(result_zgp$predictions[1,])$x))
+
+minx = min(min(density(result_scp1$predictions[1,])$x),min(density(result_scp2$predictions[1,])$x),min(density(result_scp3$predictions[1,])$x),min(density(result_scp4$predictions[1,])$x),min(density(result_scp5$predictions[1,])$x),min(density(result_scp6$predictions[1,])$x),min(density(result_zgp$predictions[1,])$x))
+
+maxy = max(max(density(result_scp1$predictions[1,])$y),max(density(result_scp2$predictions[1,])$y),max(density(result_scp3$predictions[1,])$y),max(density(result_scp4$predictions[1,])$y),max(density(result_scp5$predictions[1,])$y),max(density(result_scp6$predictions[1,])$y),max(density(result_zgp$predictions[1,])$y))
+
+miny = min(min(density(result_scp1$predictions[1,])$y),min(density(result_scp2$predictions[1,])$y),min(density(result_scp3$predictions[1,])$y),min(density(result_scp4$predictions[1,])$y),min(density(result_scp5$predictions[1,])$y),min(density(result_scp6$predictions[1,])$y),min(density(result_zgp$predictions[1,])$y))
+
+plot(density(result_scp1$predictions[1,]), main = ptitle,col=c(rep(1,6),2),ylim = c(0,1.2*maxy))
+
+#PLOT DIFFERENT RESULTS FOR THE DIFFERENT PRIOR COVARIANCE MATRICES.
+lines(density(result_scp2$predictions[1,]),lty=2)
+lines(density(result_scp3$predictions[1,]),lty=3)
+lines(density(result_scp4$predictions[1,]),lty=4)
+lines(density(result_scp5$predictions[1,]),lty=5)
+lines(density(result_scp6$predictions[1,]),lty=6)
+lines(density(result_zgp$predictions[1,]),col=2,lty=7,lwd=2)
+
+legtxt = c(lt1,lt2,lt3,lt4,lt5,lt6,lt7)
+legend("topright",legend = legtxt,title = ltitle,col=c(rep(1,6),2),lty = 1:7,lwd=c(rep(1,6),2),bty = "n")
+
+
+@
+
+<<fig=TRUE,echo=FALSE>>=
+source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredNormReg.R')
+#rpredNormReg = function(S=1,Xpred,X,y,beta0,Sigma0,nu0=1,s20=1,gprior = TRUE)
+
+x1 <- rep(1,n)
+x2<-c(0,0,0,0,0,0,1,1,1,1,1,1)
+x3<-c(23,22,22,25,27,20,31,23,27,28,22,24)
+x4 <- x2*x3
+X = cbind(x1,x2,x3,x4)  #regression design matrix
+
+y<-c(-0.87,-10.74,-3.27,-1.97,7.50,-7.25,17.05,4.96,10.40,11.05,0.26,2.51)  #observed response vector
+
+n = length(y)
+p = dim(X)[2]
+
+fit.ls<-lm(y~-1+ X)
+beta.0<-fit.ls$coef
+nu0<-1
+
+# prior info for semi-conjugate prior case
+sigma2.0<-sum(fit.ls$res^2)/(n-p)
+sig2.ols<-sum(fit.ls$res^2)/(n-p)
+Sigma.0<- solve(t(X)%*%X)*sig2.ols*n
+sig20<- var( residuals(lm(y~0+X)) )
+
+# starting with ols variance for non-informative g-prior case
+sig2.ols = (t(y-X%*%beta.ols)%*%(y-X%*%beta.0)/(n-p))[1]
+
+Xpred = X[1,]
+
+S = 5000 #desired sample size
+
+#END OF REPEATED BLOCK
+################
+################
+################
+#set.seed(1)
+
+result_scp1 = rpredNormReg(S,Xpred,X,y,beta0=beta.ols,Sigma0=Sigma.0,nu0=1,s20=sig20,gprior=FALSE)
+result_scp2 = rpredNormReg(S,Xpred,X,y,beta0=beta.ols,Sigma0=Sigma.0,nu0=10,s20=sig20,gprior=FALSE)
+result_scp3 = rpredNormReg(S,Xpred,X,y,beta0=beta.ols,Sigma0=Sigma.0,nu0=100,s20=sig20,gprior=FALSE)
+result_scp4 = rpredNormReg(S,Xpred,X,y,beta0=beta.ols,Sigma0=Sigma.0,nu0=1000,s20=sig20,gprior=FALSE)
+result_scp5 = rpredNormReg(S,Xpred,X,y,beta0=beta.ols,Sigma0=Sigma.0,nu0=10000,s20=sig20,gprior=FALSE)
+result_scp6 = rpredNormReg(S,Xpred,X,y,beta0=beta.ols,Sigma0=Sigma.0,nu0=100000,s20=sig20,gprior=FALSE)
+result_zgp = rpredNormReg(S,Xpred,X,y,nu0=nu0,s20=sig2.ols)
+
+lt1 = expression(1)
+lt2 = expression(10)
+lt3 = expression(100)
+lt4 = expression(1000)
+lt5 = expression(10000)
+lt6 = expression(100000)
+lt7 = expression("Zellner's g-prior")
+ltitle = expression(nu[0])
+
+ptitle = expression(paste("Varying Prior Information:  Scaling ", nu[0]))
+
+maxx = 0
+minx = 0
+maxy = 0
+numplots = 7
+
+maxx = max(max(density(result_scp1$predictions[1,])$x),max(density(result_scp2$predictions[1,])$x),max(density(result_scp3$predictions[1,])$x),max(density(result_scp4$predictions[1,])$x),max(density(result_scp5$predictions[1,])$x),max(density(result_scp6$predictions[1,])$x),max(density(result_zgp$predictions[1,])$x))
+
+minx = min(min(density(result_scp1$predictions[1,])$x),min(density(result_scp2$predictions[1,])$x),min(density(result_scp3$predictions[1,])$x),min(density(result_scp4$predictions[1,])$x),min(density(result_scp5$predictions[1,])$x),min(density(result_scp6$predictions[1,])$x),min(density(result_zgp$predictions[1,])$x))
+
+maxy = max(max(density(result_scp1$predictions[1,])$y),max(density(result_scp2$predictions[1,])$y),max(density(result_scp3$predictions[1,])$y),max(density(result_scp4$predictions[1,])$y),max(density(result_scp5$predictions[1,])$y),max(density(result_scp6$predictions[1,])$y),max(density(result_zgp$predictions[1,])$y))
+
+miny = min(min(density(result_scp1$predictions[1,])$y),min(density(result_scp2$predictions[1,])$y),min(density(result_scp3$predictions[1,])$y),min(density(result_scp4$predictions[1,])$y),min(density(result_scp5$predictions[1,])$y),min(density(result_scp6$predictions[1,])$y),min(density(result_zgp$predictions[1,])$y))
+
+plot(density(result_scp1$predictions[1,]), main = ptitle,col=c(rep(1,6),2),ylim = c(0,1.2*maxy))
+
+#PLOT DIFFERENT RESULTS FOR THE DIFFERENT PRIOR COVARIANCE MATRICES.
+lines(density(result_scp2$predictions[1,]),lty=2)
+lines(density(result_scp3$predictions[1,]),lty=3)
+lines(density(result_scp4$predictions[1,]),lty=4)
+lines(density(result_scp5$predictions[1,]),lty=5)
+lines(density(result_scp6$predictions[1,]),lty=6)
+lines(density(result_zgp$predictions[1,]),col=2,lty=7,lwd=2)
+
+legtxt = c(lt1,lt2,lt3,lt4,lt5,lt6,lt7)
+legend("topright",legend = legtxt,title = ltitle,col=c(rep(1,6),2),lty = 1:7,lwd=c(rep(1,6),2),bty = "n")
+
+
+@
 
 \clearpage
 
