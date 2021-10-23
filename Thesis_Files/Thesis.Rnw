@@ -1057,7 +1057,7 @@ pause(2)
 
 \subsection{Least Squares Estimation with Example (Hoff p. 149ff.)}
 
-Regression modeling is concerned with describing how the sampling istribution of one random variable $Y$ varies with another variable or set of variables $\mathbf{x} = \left(x_1,...,x_p\right)$.  Specifically, a regression model postulates a form for $p(y|\mathbf{x})$, the conditional distribution of $Y$ given $\mathbf{x}$.  Estimation of $p(y|\mathbf{x})$ is made using data $y_1,...,y_n$ that are gathered under a variety of conditions $\mathbf{x}_1,...,\mathbf{x}_n$.
+Regression modeling is concerned with describing how the sampling distribution of one random variable $Y$ varies with another variable or set of variables $\mathbf{x} = \left(x_1,...,x_p\right)$.  Specifically, a regression model postulates a form for $p(y|\mathbf{x})$, the conditional distribution of $Y$ given $\mathbf{x}$.  Estimation of $p(y|\mathbf{x})$ is made using data $y_1,...,y_n$ that are gathered under a variety of conditions $\mathbf{x}_1,...,\mathbf{x}_n$.
 
 The normal linear regression model specifies that, in addition to $E[Y|\mathbf{x}]$ being linear, the sampling variability around the mean is i.i.d. normal:
 
@@ -1137,15 +1137,6 @@ legend(27,0,legend=c("aerobic","running"),pch=c(16,16),col=c("gray","black"))
 
 Hoff's regression model:
 
-% \begin{flalign*}
-%     Y_i &= \beta_1x_{i,1} + \beta_2x_{i,2} + \beta_3x_{i,3} + \beta_4x_{i,4} + \epsilon_i, \text{ where}\\
-%     x_{i,1} &= 1 \text{ for each subject } i\\
-%     x_{i,2} &= 0 \text{ if subject } j \text{ is on the running program, } 1 \text{ if on aerobic}\\
-%     x_{i,3} &= \text{ age of subject } i\\
-%     x_{i,4} &= x_{i,2} \times x_{i,3}
-% \end{flalign*}
-
-%\begin{subequations}
     \begin{align}
         Y_i &= \beta_1x_{i,1} + \beta_2x_{i,2} + \beta_3x_{i,3} + \beta_4x_{i,4} + \epsilon_i, \text{ where} \label{example_model}\\
         x_{i,1} &= 1 \text{ for each subject } i \nonumber \\
@@ -1153,27 +1144,16 @@ Hoff's regression model:
         x_{i,3} &= \text{ age of subject } i \nonumber \\
         x_{i,4} &= x_{i,2} \times x_{i,3} \nonumber
     \end{align}
-%\end{subequations}
-
-% \begin{subequations}
-% \begin{align}
-% \frac{\mathrm{d} x}{\mathrm{d} t} &=\sigma(y-x)\label{eqn:line-1} \\
-% \frac{\mathrm{d} y}{\mathrm{d} t} &=x(\rho-z)-y\label{eqn:line-2} \\
-% \frac{\mathrm{d} z}{\mathrm{d} t} &=x y-\beta z
-% \end{align}
-% \label{eqn:all-lines}
-% \end{subequations}
-%
-% Look at the first line \ref{eqn:line-1}, and now look at the second line \ref{eqn:line-2}. They are both part of the whole system \ref{eqn:all-lines}.
 
 Under this model the conditional expectations of $Y$ for the two different levels of $x_{i,1}$ are
 
 \begin{flalign*}
-    E[Y|\mathbf{x}] &= \beta_1 + \beta_3 \times \text{ age if } x_1 = 0, \text{ and}\\
-    E[Y|\mathbf{x}] &= \left(\beta_1 + \beta_2\right) + \left(\beta_3 + \beta_4\right) \times \text{ age if } x_1 = 1
+    E[Y|\mathbf{x}] &= \beta_1 + \beta_3 \times (age) \text{ if } x_1 = 0, \text{ and}\\
+    E[Y|\mathbf{x}] &= \left(\beta_1 + \beta_2\right) + \left(\beta_3 + \beta_4\right) \times (age) \text{ if } x_1 = 1
 \end{flalign*}
 
-In other words, the model assumes that the relationship is linear in age for both exercise groups, with the difference in intercepts given by $\beta_2$ and the difference in slopes given by $\beta_4$.  If we assumed that $\beta_2 = \beta_4 = 0$, then we would have identical lines for both groups.  If we assumed $\beta_4 =  0$ then we would have a different line for each group but they would be parallel.  Allowing all coefficients to be non-zero gives us two unrelated lines.  Some different possibilities are depicted graphically below:\\\\
+In other words, the model assumes that the relationship is linear in age for both exercise groups, with the difference in intercepts given by $\beta_2$ and the difference in slopes given by $\beta_4$.  If we assumed that $\beta_2 = \beta_4 = 0$, then we would have identical lines for both groups.  If we assumed $\beta_2 \ne 0$ and $\beta_4 =  0$ then we would have a different line for each group but they would be parallel.  Allowing all coefficients to be non-zero gives us two unrelated lines.  Some different possibilities are depicted graphically below:\\\\
+\textcolor{red}{BELOW ARE JUST EXAMPLES OF MINIMIZING SQUARED RESIDUALS UNDER VARIOUS ASSUMPTIONS ABOUT THE BETAS}
 
 <<fig=TRUE,echo=FALSE>>=
 #### Figure 9.2
@@ -1183,36 +1163,43 @@ par(mfrow=c(2,2),mar=c(3,3,1,1),mgp=c(1.75,.75,0),oma=c(0,0,.25,0))
 plot(y~x3,pch=16,col=c("black","gray")[x2+1],ylab="change in maximal oxygen uptake",xlab="",xaxt="n")
 abline(h=mean(y[x2==0]),col="black")
 abline(h=mean(y[x2==1]),col="gray")
-mtext(side=3,expression(paste(beta[3]==0,"  ",beta[4]==0)) )
+mtext(side=3,expression(paste(beta[3]==0,",  ",beta[4]==0)) )
+legend("topleft",legend=c("aerobic","running"),pch=c(16,16),col=c("gray","black"),bty="n")
 
 plot(y~x3,pch=16,col=c("black","gray")[x2+1],xlab="",ylab="",xaxt="n",yaxt="n")
 abline(lm(y~x3),col="black")
-abline(lm((y+.5)~x3),col="gray")
-mtext(side=3,expression(paste(beta[2]==0,"  ",beta[4]==0)) )
+abline(lm((y+.25)~x3),col="gray")
+mtext(side=3,expression(paste(beta[2]==0,",  ",beta[4]==0)) )
+legend("topleft",legend=c("aerobic","running"),pch=c(16,16),col=c("gray","black"),bty="n")
 
 plot(y~x3,pch=16,col=c("black","gray")[x2+1],
      xlab="age",ylab="change in maximal oxygen uptake" )
 fit<-lm( y~x2+x3)
 abline(a=fit$coef[1],b=fit$coef[3],col="black")
 abline(a=fit$coef[1]+fit$coef[2],b=fit$coef[3],col="gray")
-mtext(side=3,expression(beta[4]==0))
+mtext(side=3,expression(paste(beta[2]!=0,",  ",beta[4]==0)))
+legend("topleft",legend=c("aerobic","running"),pch=c(16,16),col=c("gray","black"),bty="n")
 
 plot(y~x3,pch=16,col=c("black","gray")[x2+1],
      xlab="age",ylab="",yaxt="n")
 abline(lm(y[x2==0]~x3[x2==0]),col="black")
 abline(lm(y[x2==1]~x3[x2==1]),col="gray")
+mtext(side=3,expression(paste(beta[i]!=0,", for all i")))
+legend("topleft",legend=c("aerobic","running"),pch=c(16,16),col=c("gray","black"),bty="n")
 @
 
-Let's find the least squares regression estimates for the model in \ref{example_model}, and use the results to evaluate the differences between the two exercise groups.  The ages of the 12 subjects, along with their observed changes in maximal oxygen uptake, are
+Let's find the least squares regression estimates for the model (\ref{example_model}), and use the results to evaluate the differences between the two exercise groups.  The ages of the 12 subjects, along with their observed changes in maximal oxygen uptake, are
 
 \begin{flalign*}
     \mathbf{x}_3 &= (23,22,22,25,27,20,31,23,27,28,22,24)\\
     \mathbf{y}   &= (-0.87,-10.74,-3.27,-1.97,7.50,-7.25,17.05,4.96,10.40,11.05,0.26,2.51),
 \end{flalign*}
 
-\noindent with the first six elements of each vector corresponding to the subjects in the running group and the latter six corresponding ot sujects in the aerobics group.  After constructing the $12 \time 4$ matrix $\mathbf{X}$ out of the vectors $\mathbf{x}_1,\mathbf{x}_2,\mathbf{x}_3,\mathbf{x}_4$ defined as in (\ref{example_model}), the matrices $\mathbf{X}^T\mathbf{X}$ and $\mathbf{X}^T\mathbf{y}$ can be computed, from which we get $\beta_{ols} = (-51.29,13.11,2.09,-0.32)^T$:\\
+\noindent with the first six elements of each vector corresponding to the subjects in the running group and the latter six corresponding to subjects in the aerobics group.  After constructing the $12 \times 4$ matrix $\mathbf{X} = (\mathbf{x}_1\, \mathbf{x}_2\, \mathbf{x}_3\, \mathbf{x}_4)$, the matrices $\mathbf{X}^T\mathbf{X}$ and $\mathbf{X}^T\mathbf{y}$ can be computed, from which we get $\beta_{ols} = (-51.29,13.11,2.09,-0.32)^T$:\\
 
+This means that the estimated linear relationship between uptake and age has an intercept and slope of -51.29 and 2.09 for the running group, and -51.29 + 13.11 = -38.18 and 2.09 - 0.32 = 1.77 for the aerobics group.  These two lines are plotted in the fourth panel of Figure XX.  We obtain unbiased estimate $\sigma^2 = SSR(\hat{\beta}_{ols})/(n-p) = 8.54$, and use this to compute the standard error of the components of $\hat{\beta}_{ols}$, which are 12.25, 15.76, 0.53, and 0.65, respectively.  Comparing the values of $\hat{\beta}_{ols}$ to their standard errors suggests that the evidence for differences between the two exercise regimens is not very strong.
 
+textcolor{red}{need to understand this better.  How are the values of the ols beta estimates being compared to their standard errors?  Seems like -51 is 4+ standard errors away from 0, for example}
 
 <<>>=
 n <- length(y)
@@ -1227,12 +1214,16 @@ sig2.ols
 SIG2.ols = solve(t(X)%*%X)*sig2.ols
 #standard errors for the components of beta.ols:
 SE.ols = sqrt(diag(SIG2.ols))
-betadata = cbind(beta.ols,SE.ols)
-colnames(betadata) = c("beta.ols","SE.ols")
+Score = beta.ols/SE.ols
+
+CIL = beta.ols - SE.ols*qt(.975,10)
+CIU = beta.ols + SE.ols*qt(.975,10)
+betadata = cbind(beta.ols,SE.ols,CIL,CIU)
+colnames(betadata) = c("beta.ols","SE.ols","CIL","CIU")
 betadata
 @
 
-This means that the estimated linear relationship between uptake and age has an intercept and slope of -51.29 and 2.09 for the running group, and -51.29 + 13.11 = -38.18 and 2.09 - 0.32 = 1.77 for the aerobics group.  These two lines are plotted in the fourth panel of Figure XX.  We obtain unbiased estimate $\sigma^2 = SSR(\hat{\beta}_{ols})/(n-p) = 8.54$, and use this to compute the standard error of the components of $\hat{\beta}_{ols}$, which are 12.25, 15.76, 0.53, and 0.65, respectively.  comparing the values of $\hat{\beta}_{ols}$ to their standard errors suggests that the evidence for differences between the two exercise regimens is not very strong.
+
 
 \clearpage
 
@@ -1241,7 +1232,7 @@ This means that the estimated linear relationship between uptake and age has an 
   \subsubsection{Derivation}
 
     \paragraph{A semiconjugate prior distribution}
-    A semiconjugate prior distribution for $\beta$ and $\sigma^2$ is used when there is information available about the parameters.  The sampling density of the data (Equation \ref{conditional_density}) is
+    Hoff proposes a semiconjugate prior distribution for $\beta$ and $\sigma^2$ to be used when there is information available about the parameters.  The sampling density of the data (Equation \ref{conditional_density}) is
 
     $$p(\mathbf{y}|\mathbf{X},\beta,\sigma^2) \propto \text{exp}\{-\frac{1}{2\sigma^2}\text{SSR}(\beta)\} = \text{exp}\{-\frac{1}{2\sigma^2}[\mathbf{y}^T\mathbf{y} - 2\beta^T\mathbf{X}^T\mathbf{y}+\beta^T\mathbf{X}^T\mathbf{X}\beta]\}.$$
 
@@ -1263,7 +1254,7 @@ This means that the estimated linear relationship between uptake and age has an 
 
 As usual, we can gain some understanding of these formulae by considering some limiting cases.  If the elements of the prior precision matrix $\Sigma_0^{-1}$ are small in magnitude, then the conditional expectation E$[\beta|\mathbf{y,X},\sigma^2]$ is approximately equal to $(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{y}$, the least squares estimate. On the other hand, if the measurement precision is very small ($\sigma^2$ is very large), then the expectation is approximately $\beta_0$, the prior expectation.\\
 
-As in most normal sampling problems, the semiconjugate prior distribution for $\sigma^2$ is an inverse-gamma distriution.  Letting $\gamma = 1/\sigma^2$ be the measurement precision, if $\gamma \sim \text{gamma}(\nu_0/2,\nu_0\sigma^2_0/2)$, then
+As in most normal sampling problems, the semiconjugate prior distribution for $\sigma^2$ is an inverse-gamma distribution.  Letting $\gamma = 1/\sigma^2$ be the measurement precision, if $\gamma \sim \text{gamma}(\nu_0/2,\nu_0\sigma^2_0/2)$, then
 
 
 \begin{flalign*}
@@ -1313,7 +1304,7 @@ we arrive at posteriors
 
 Here $\text{SSR}_g = \mathbf{y^Ty - m^TV^{-1}m = y^T(I - }\frac{g}{g+1}\mathbf{X(X^TX)^{-1}X^T)y}$.\\
 
-Simple Monte Carlo approximation can be used to sample from the joint posterior density $p(\sigma^2,\beta|\mathbf{y,X})$ as follows:
+Simple Monte Carlo approximation can be used to sample from the joint posterior density $p(\sigma^2,\beta|\mathbf{y,X})$ as follows.  Here $g$ is typically set to the number of prior observations.  Then:
 
 \begin{enumerate}
     \item sample $\sigma^2 \sim \text{inverse-gamma}([\nu_0 + n]/2,[\nu_0\sigma^2_0 + \text{SSR}_g]/2)$
@@ -1322,24 +1313,26 @@ Simple Monte Carlo approximation can be used to sample from the joint posterior 
 
   \subsubsection{R Implementation}
 
-The standard format R function rpredNormReg() approximates the joint posterior density $p(\sigma^2,\beta|\mathbf{y,X})$ using one of the two methods described above, as selected by the user.\\
+The standard format R function rpredNormReg() approximates the joint posterior density $p(\sigma^2,\beta|\mathbf{y,X})$ using one of the two methods described above, as selected by the user.  The user inputs the set or sets of explanatory variables $X_{pred} = (x_{i1}, x_{i2}, x_{i3}, x_{i4})$ and the number $S$ of predicted values desired for each set. The function produces $S$ sampled values from the relevant posterior distribution of $\beta$, and then computes a prediction for each beta as $y = X_{pred}\boldsymbol\beta$.
 
-To use the semiconjugate prior, the user must supply values for prior parameters $(\beta_0, \Sigma_0)$ and $(\nu_0, \sigma^2_0)$.
+\textcolor{red}{SHOULD I PASTE THE R CODE INto THIS SECTION?}
 
-In the absence of prior information, predictions are made by means of Monte Carlo sampling, using Zellner's g-prior.
-
-\begin{enumerate}
-    \item sample $\sigma^2 \sim \text{inverse-gamma}([\nu_0 + n]/2,[\nu_0\sigma^2_0 + \text{SSR}_g]/2)$
-    \item sample $\beta \sim \text{multivariate normal}\left(\frac{g}{g+1}\hat{\beta}_{ols},\frac{g}{g+1}\sigma^2[\mathbf{X^TX}]^{-1}\right)$.
-\end{enumerate}
-
-Here $g$ is typically set to the number of prior observations.
+% To use the semiconjugate prior, the user must supply values for prior parameters $(\beta_0, \Sigma_0)$ and $(\nu_0, \sigma^2_0)$.
+%
+% In the absence of prior information, predictions are made by means of Monte Carlo sampling, using Zellner's g-prior.
+%
+% \begin{enumerate}
+%     \item sample $\sigma^2 \sim \text{inverse-gamma}([\nu_0 + n]/2,[\nu_0\sigma^2_0 + \text{SSR}_g]/2)$
+%     \item sample $\beta \sim \text{multivariate normal}\left(\frac{g}{g+1}\hat{\beta}_{ols},\frac{g}{g+1}\sigma^2[\mathbf{X^TX}]^{-1}\right)$.
+% \end{enumerate}
+%
+% Here $g$ is typically set to the number of prior observations.
 
 
 
   \subsubsection{Example}
 
-In the example below (Hoff data and code found \href{https://pdhoff.github.io/book/}{here}) to employ the semi-conjugate prior we use
+In the example below (Hoff data and code found \href{https://pdhoff.github.io/book/}{here}) to employ Hoff's semi-conjugate prior we use
 
 <<echo=FALSE>>=
 ################
@@ -1512,6 +1505,12 @@ beta.ols<- solve(t(X)%*%X)%*%t(X)%*%y
 sig2.ols = (t(y-X%*%beta.ols)%*%(y-X%*%beta.ols)/(n-p))[1]
 nu0=1
 
+xp1 = rep(1,8)
+xp2 = c(rep(0,4),rep(1,4))
+xp3 = rep(c(20,24,28,32),2)
+xp4 = xp2*xp3
+
+# Xpred = cbind(xp1,xp2,xp3,xp4)
 Xpred = X
 
 S = 5000 #desired sample size
@@ -1538,17 +1537,28 @@ for(i in 1:numplots){
   if(tempminx < minx) {minx = tempminx}
   tempmaxy = max(density(result$predictions[i,])$y)
   if(tempmaxy > maxy) {maxy = tempmaxy}
-  legtxt[i] = toString(X[i,])
+  # if(Xpred[i,2]){
+  #   legtxt[i] = paste("Aerobic, age ",toString(Xpred[i,3]))
+  # }else{
+  #     legtxt[i] = paste("Running, age ",toString(Xpred[i,3]))
+  #   }
+  legtxt[i] = toString(Xpred[i,])
 }
 
-plot(density(result$predictions[1,]), main = bquote("Predictive Density Using Zellner's g-prior"),col=1,xlim = c(minx,1.25*maxx),ylim = c(0,1.1*maxy))
+plot(density(result$predictions[1,]), main = bquote("Predictive Density Using Zellner's g-prior"),col=1,xlim = c(minx,1.25*maxx),ylim = c(0,1.1*maxy),lwd = 2)
 
+ncolor = nrow(Xpred)/2
 
 for(i in 2:numplots){
-  lines(density(result$predictions[i,]),col=i)
+  lines(density(result$predictions[i,]),lty=1,col=i)
 }
 
+# legtitle = paste(expression("X"[1]*", "*"X"[2]*", "*"X"[3]*", "*"X"[4]),"\nasdf")
+# legtitle = expression(paste("X"[1]*", "*"X"[2]*", "*"X"[3]*", "*"X"[4]),"\nasdf")
+# legend("bottomright",legend = legtxt,lty = 1, col=1:numplots,bty = "n",title=legtitle)
+#
 legend("topright",legend = legtxt,lty = 1, col=1:numplots,bty = "n",title=expression("X"[1]*", "*"X"[2]*", "*"X"[3]*", "*"X"[4]))
+# legend("topright",legend = legtxt,lty = c(rep(1,ncolor),rep(2,ncolor)), lwd = 2, col=c(1:ncolor,1:ncolor),bty = "n")
 
 for(i in 1:numplots){
   lines(density(result2$predictions[i,]),lty=2,col=i)
@@ -1561,7 +1571,204 @@ for(i in 1:numplots){
 
 @
 
+<<fig=TRUE,echo=FALSE>>=
+source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredNormReg.R')
+#rpredNormReg = function(S=1,Xpred,X,y,beta0,Sigma0,nu0=1,s20=1,gprior = TRUE)
+
+S = 100000 #desired sample size
+
+x1 <- rep(1,n)
+x2<-c(0,0,0,0,0,0,1,1,1,1,1,1)
+x3<-c(23,22,22,25,27,20,31,23,27,28,22,24)
+x4 <- x2*x3
+X = cbind(x1,x2,x3,x4)  #regression design matrix
+
+y<-c(-0.87,-10.74,-3.27,-1.97,7.50,-7.25,17.05,4.96,10.40,11.05,0.26,2.51)  #observed response vector
+
+n = length(y)
+p = dim(X)[2]
+
+beta.ols<- solve(t(X)%*%X)%*%t(X)%*%y
+sig2.ols = (t(y-X%*%beta.ols)%*%(y-X%*%beta.ols)/(n-p))[1]
+nu0=1
+
+xp1 = rep(1,8)
+xp2 = c(rep(0,4),rep(1,4))
+xp3 = rep(c(20,24,28,32),2)
+xp4 = xp2*xp3
+
+Xpred = cbind(xp1,xp2,xp3,xp4)
+
+S = 5000 #desired sample size
+
+#END OF REPEATED BLOCK
+################
+################
+################
+
+#       result = rpredNormReg(S,CurrentX,X,y,nu0=nu0,s20=sig2.ols)
+result = rpredNormReg(S,Xpred,X,y,nu0=nu0,s20=sig2.ols)
+# result2 = rpredNormReg(S,Xpred,X,y,nu0=nu0,s20=sig2.ols)
+# result3 = rpredNormReg(S,Xpred,X,y,nu0=nu0,s20=sig2.ols)
+
+maxx = 0
+minx = 0
+maxy = 0
+numplots = nrow(result$predictions)
+legtxt = vector(mode = "character",length = numplots)
+for(i in 1:numplots){
+  tempmaxx = max(density(result$predictions[i,])$x)
+  if(tempmaxx > maxx) {maxx = tempmaxx}
+  tempminx = min(density(result$predictions[i,])$x)
+  if(tempminx < minx) {minx = tempminx}
+  tempmaxy = max(density(result$predictions[i,])$y)
+  if(tempmaxy > maxy) {maxy = tempmaxy}
+  if(Xpred[i,2]){
+    legtxt[i] = paste("Aerobic, age ",toString(Xpred[i,3]))
+  }else{
+      legtxt[i] = paste("Running, age ",toString(Xpred[i,3]))
+    }
+  # legtxt[i] = toString(Xpred[i,])
+}
+
+plot(density(result$predictions[1,]), main = bquote("Predictive Density Using Zellner's g-prior"),col=1,xlim = c(minx,1.25*maxx),ylim = c(0,1.1*maxy),lwd = 2)
+
+ncolor = nrow(Xpred)/2
+
+for(i in 2:numplots){
+  linecolor = i%%(ncolor)
+  if(linecolor == 0){linecolor = ncolor}
+  if(Xpred[i,2]){
+    linetype = 2
+  }else{
+    linetype = 1
+  }
+  lines(density(result$predictions[i,]),col=linecolor,lty=linetype,lwd = 2)
+}
+
+# legtitle = paste(expression("X"[1]*", "*"X"[2]*", "*"X"[3]*", "*"X"[4]),"\nasdf")
+# legtitle = expression(paste("X"[1]*", "*"X"[2]*", "*"X"[3]*", "*"X"[4]),"\nasdf")
+# legend("bottomright",legend = legtxt,lty = 1, col=1:numplots,bty = "n",title=legtitle)
+#
+# legend("topright",legend = legtxt,lty = 1, col=1:numplots,bty = "n",title=expression("X"[1]*", "*"X"[2]*", "*"X"[3]*", "*"X"[4]))
+legend("topright",legend = legtxt,lty = c(rep(1,ncolor),rep(2,ncolor)), lwd = 2, col=c(1:ncolor,1:ncolor),bty = "n")
+
+# for(i in 1:numplots){
+#   lines(density(result2$predictions[i,]),lty=2,col=i)
+# }
+#
+# for(i in 1:numplots){
+#   lines(density(result3$predictions[i,]),lty=3,col=i)
+# }
+
+
+@
+
 \clearpage
+
+
+<<fig=TRUE,echo=FALSE>>=
+source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredNormReg.R')
+#rpredNormReg = function(S=1,Xpred,X,y,beta0,Sigma0,nu0=1,s20=1,gprior = TRUE)
+
+S = 100000 #desired sample size
+
+x1 <- rep(1,n)
+x2<-c(0,0,0,0,0,0,1,1,1,1,1,1)
+x3<-c(23,22,22,25,27,20,31,23,27,28,22,24)
+x4 <- x2*x3
+X = cbind(x1,x2,x3,x4)  #regression design matrix
+
+y<-c(-0.87,-10.74,-3.27,-1.97,7.50,-7.25,17.05,4.96,10.40,11.05,0.26,2.51)  #observed response vector
+
+n = length(y)
+p = dim(X)[2]
+
+beta.ols<- solve(t(X)%*%X)%*%t(X)%*%y
+sig2.ols = (t(y-X%*%beta.ols)%*%(y-X%*%beta.ols)/(n-p))[1]
+nu0=1
+
+xp1 = rep(1,4)
+xp2 = c(rep(0,2),rep(1,2))
+xp3 = rep(c(23,27),2)
+xp4 = xp2*xp3
+
+y23_0 = y[1]
+y27_0 = y[5]
+y23_1 = y[8]
+y27_1 = y[9]
+
+Xpred = cbind(xp1,xp2,xp3,xp4)
+y_obs = c(y23_0,y27_0,y23_1,y27_1)
+
+S = 5000 #desired sample size
+
+#END OF REPEATED BLOCK
+################
+################
+################
+
+#       result = rpredNormReg(S,CurrentX,X,y,nu0=nu0,s20=sig2.ols)
+result = rpredNormReg(S,Xpred,X,y,nu0=nu0,s20=sig2.ols)
+# result2 = rpredNormReg(S,Xpred,X,y,nu0=nu0,s20=sig2.ols)
+# result3 = rpredNormReg(S,Xpred,X,y,nu0=nu0,s20=sig2.ols)
+
+maxx = 0
+minx = 0
+maxy = 0
+numplots = nrow(result$predictions)
+legtxt = vector(mode = "character",length = numplots)
+for(i in 1:numplots){
+  tempmaxx = max(density(result$predictions[i,])$x)
+  if(tempmaxx > maxx) {maxx = tempmaxx}
+  tempminx = min(density(result$predictions[i,])$x)
+  if(tempminx < minx) {minx = tempminx}
+  tempmaxy = max(density(result$predictions[i,])$y)
+  if(tempmaxy > maxy) {maxy = tempmaxy}
+  if(Xpred[i,2]){
+    legtxt[i] = paste("Aerobic, age ",toString(Xpred[i,3]))
+  }else{
+      legtxt[i] = paste("Running, age ",toString(Xpred[i,3]))
+    }
+  # legtxt[i] = toString(Xpred[i,])
+}
+
+plot(density(result$predictions[1,]), main = bquote("Predictive Density Using Zellner's g-prior"),col=1,xlim = c(minx,1.25*maxx),ylim = c(0,1.1*maxy),lwd = 2)
+
+abline(v=y_obs[1],lwd = 2)
+
+ncolor = nrow(Xpred)/2
+
+for(i in 2:numplots){
+  linecolor = i%%(ncolor)
+  if(linecolor == 0){linecolor = ncolor}
+  if(Xpred[i,2]){
+    linetype = 2
+  }else{
+    linetype = 1
+  }
+  lines(density(result$predictions[i,]),col=linecolor,lty=linetype,lwd = 2)
+  abline(v=y_obs[i],col=linecolor,lty=linetype,lwd=2)
+}
+
+# legtitle = paste(expression("X"[1]*", "*"X"[2]*", "*"X"[3]*", "*"X"[4]),"\nasdf")
+# legtitle = expression(paste("X"[1]*", "*"X"[2]*", "*"X"[3]*", "*"X"[4]),"\nasdf")
+# legend("bottomright",legend = legtxt,lty = 1, col=1:numplots,bty = "n",title=legtitle)
+#
+# legend("topright",legend = legtxt,lty = 1, col=1:numplots,bty = "n",title=expression("X"[1]*", "*"X"[2]*", "*"X"[3]*", "*"X"[4]))
+legend("topright",legend = legtxt,lty = c(rep(1,ncolor),rep(2,ncolor)), lwd = 2, col=c(1:ncolor,1:ncolor),bty = "n")
+text(0.8*minx,maxy,"Vertical lines show \n observed values \n for each case.")
+# for(i in 1:numplots){
+#   lines(density(result2$predictions[i,]),lty=2,col=i)
+# }
+#
+# for(i in 1:numplots){
+#   lines(density(result3$predictions[i,]),lty=3,col=i)
+# }
+
+
+@
+
 
 Comparing predictions using semi-conjugate prior vs. Zellner's g-prior:
 

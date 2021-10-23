@@ -85,7 +85,7 @@ rpredNormReg = function(S=1,Xpred,X,y,beta0,Sigma0,nu0=1,s20=1,gprior = TRUE){
 
 
 
-  } else { #DO THIS PART TOO
+  } else { #using Hoff's semi-conjugate prior
 
     rmvnorm<-function(n,mu,Sigma)
     { # samples from the multivariate normal distribution
