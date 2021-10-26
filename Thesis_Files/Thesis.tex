@@ -115,7 +115,7 @@
 
       \vspace{5mm}
 
-      Assume $\theta\sim\text{Beta}(\alpha,\beta)$, so
+      Assume $\theta\sim\text{Beta}(\alpha,\boldsymbol\beta)$, so
 
       \vspace{5mm}
 
@@ -709,24 +709,24 @@ The normal linear regression model specifies that, in addition to $E[Y|\mathbf{x
 
 \begin{flalign*}
     \epsilon_1,...,\epsilon_n &\overset{\text{i.i.d}}{\sim} \text{normal}\left(0,\sigma^2\right)\\
-    Y_i &= \beta^T \mathbf{x}_i + \epsilon_i
+    Y_i &= \boldsymbol\beta^T \mathbf{x}_i + \epsilon_i
 \end{flalign*}
 
-This model provides a complete specification of the joint probability density of observed data $y_1,...,y_n$ conditional upon $\mathbf{x}_1,...,\mathbf{x}_n$ and values of $\beta$ and $\sigma^2$:
+This model provides a complete specification of the joint probability density of observed data $y_1,...,y_n$ conditional upon $\mathbf{x}_1,...,\mathbf{x}_n$ and values of $\boldsymbol\beta$ and $\sigma^2$:
 
 \begin{flalign}
-    p\left(y_1,...y_n|\mathbf{x}_1,...,\mathbf{x}_n,\beta,\sigma^2\right) &= \prod_{i=1}^n p\left(y_i|\mathbf{x}_i,\beta,\sigma^2\right) \nonumber\\
-    &= \left(2\pi\sigma^2\right)^{-n/2}\text{exp}\left\{-\frac{1}{2\sigma^2}\sum_{i=1}^n\left(y_i - \beta^T\mathbf{x}_i\right)^2\right\} \label{conditional_density}
+    p\left(y_1,...y_n|\mathbf{x}_1,...,\mathbf{x}_n,\boldsymbol\beta,\sigma^2\right) &= \prod_{i=1}^n p\left(y_i|\mathbf{x}_i,\boldsymbol\beta,\sigma^2\right) \nonumber\\
+    &= \left(2\pi\sigma^2\right)^{-n/2}\text{exp}\left\{-\frac{1}{2\sigma^2}\sum_{i=1}^n\left(y_i - \boldsymbol\beta^T\mathbf{x}_i\right)^2\right\} \label{conditional_density}
 \end{flalign}
 
 Another way to write this joint probability density is in terms of the multivariate normal distribution:  Let $\mathbf{y}$ be the $n$-dimensional column vector $\left(y_1,...,y_n\right)^T$ and let $\mathbf{X}$ be the $n \times p$ matrix whose $i$th row is $\mathbf{x}_i = \left\{ x_{i,1}, x_{i,2}, ..., x_{i,p} \right\}$.  Then the normal regression model is
 
-$$\{\mathbf{y}|\mathbf{X},\beta,\sigma^2\} \sim \text{multivariate normal}\left(\mathbf{X}\beta,\sigma^2\mathbf{I}\right),$$
+$$\{\mathbf{y}|\mathbf{X},\boldsymbol\beta,\sigma^2\} \sim \text{multivariate normal}\left(\mathbf{X}\boldsymbol\beta,\sigma^2\mathbf{I}\right),$$
 
 where $\mathbf{I}$ is the $p \times p$ identity matrix and
 
 \begin{equation*}
-    \mathbf{X}\beta =
+    \mathbf{X}\boldsymbol\beta =
     \begin{pmatrix}
         \mathbf{x}_1 \\
         \mathbf{x}_2 \\
@@ -747,19 +747,19 @@ where $\mathbf{I}$ is the $p \times p$ identity matrix and
     \end{pmatrix}
     =
     \begin{pmatrix}
-        E\left[Y_1|\mathbf{\beta},\mathbf{x}_1\right] \\
+        E\left[Y_1|\mathbf{\boldsymbol\beta},\mathbf{x}_1\right] \\
         \vdots \\
-        E\left[Y_n|\mathbf{\beta},\mathbf{x}_n\right] \\
+        E\left[Y_n|\mathbf{\boldsymbol\beta},\mathbf{x}_n\right] \\
     \end{pmatrix}
 \end{equation*}
 
-The density (\ref{conditional_density}) depends on $\beta$ through the residuals $\left(y_i - \beta^T\mathbf{x}_i\right)$.  We compute the ordinary least squares estimates
+The density (\ref{conditional_density}) depends on $\boldsymbol\beta$ through the residuals $\left(y_i - \boldsymbol\beta^T\mathbf{x}_i\right)$.  We compute the ordinary least squares estimates
 
-$$\hat{\beta}_{ols} = \left(\mathbf{X}^T\mathbf{X}\right)^{-1}\mathbf{X}^T\mathbf{y}$$
+$$\hat{\boldsymbol\beta}_{ols} = \left(\mathbf{X}^T\mathbf{X}\right)^{-1}\mathbf{X}^T\mathbf{y}$$
 
 and
 
-$$\hat{\sigma}^2_{ols} = \frac{SSR\left(\hat{\beta}_{ols}\right)}{(n-p)} = \frac{\sum\left(y_i - \hat{\beta}_{ols}^T x_i\right)^2}{(n-p)}.$$
+$$\hat{\sigma}^2_{ols} = \frac{SSR\left(\hat{\boldsymbol\beta}_{ols}\right)}{(n-p)} = \frac{\sum\left(y_i - \hat{\boldsymbol\beta}_{ols}^T x_i\right)^2}{(n-p)}.$$
 
 \clearpage
 
@@ -787,7 +787,6 @@ Under this model the conditional expectations of $Y$ for the two different level
 \end{flalign*}
 
 In other words, the model assumes that the relationship is linear in age for both exercise groups, with the difference in intercepts given by $\beta_2$ and the difference in slopes given by $\beta_4$.  If we assumed that $\beta_2 = \beta_4 = 0$, then we would have identical lines for both groups.  If we assumed $\beta_2 \ne 0$ and $\beta_4 =  0$ then we would have a different line for each group but they would be parallel.  Allowing all coefficients to be non-zero gives us two unrelated lines.  Some different possibilities are depicted graphically below:\\\\
-\textcolor{red}{BELOW ARE JUST EXAMPLES OF MINIMIZING SQUARED RESIDUALS UNDER VARIOUS ASSUMPTIONS ABOUT THE BETAS}
 
 \includegraphics{Thesis-011}
 
@@ -798,11 +797,27 @@ Let's find the least squares regression estimates for the model (\ref{example_mo
     \mathbf{y}   &= (-0.87,-10.74,-3.27,-1.97,7.50,-7.25,17.05,4.96,10.40,11.05,0.26,2.51),
 \end{flalign*}
 
-\noindent with the first six elements of each vector corresponding to the subjects in the running group and the latter six corresponding to subjects in the aerobics group.  After constructing the $12 \times 4$ matrix $\mathbf{X} = (\mathbf{x}_1\, \mathbf{x}_2\, \mathbf{x}_3\, \mathbf{x}_4)$, the matrices $\mathbf{X}^T\mathbf{X}$ and $\mathbf{X}^T\mathbf{y}$ can be computed, from which we get $\beta_{ols} = (-51.29,13.11,2.09,-0.32)^T$:\\
+\noindent with the first six elements of each vector corresponding to the subjects in the running group and the latter six corresponding to subjects in the aerobics group.  After constructing the $12 \times 4$ matrix $\mathbf{X} = (\mathbf{x}_1\, \mathbf{x}_2\, \mathbf{x}_3\, \mathbf{x}_4)$, the matrices $\mathbf{X}^T\mathbf{X}$ and $\mathbf{X}^T\mathbf{y}$ can be computed, from which we get $\boldsymbol\beta_{ols} = (-51.29,13.11,2.09,-0.32)^T$:\\
 
-This means that the estimated linear relationship between uptake and age has an intercept and slope of -51.29 and 2.09 for the running group, and -51.29 + 13.11 = -38.18 and 2.09 - 0.32 = 1.77 for the aerobics group.  These two lines are plotted in the fourth panel of Figure XX.  We obtain unbiased estimate $\sigma^2 = SSR(\hat{\beta}_{ols})/(n-p) = 8.54$, and use this to compute the standard error of the components of $\hat{\beta}_{ols}$, which are 12.25, 15.76, 0.53, and 0.65, respectively.  Comparing the values of $\hat{\beta}_{ols}$ to their standard errors suggests that the evidence for differences between the two exercise regimens is not very strong.
+This means that the estimated linear relationship between uptake and age has an intercept and slope of -51.29 and 2.09 for the running group, and -51.29 + 13.11 = -38.18 and 2.09 - 0.32 = 1.77 for the aerobics group.  These two lines are plotted in the fourth panel of Figure XX.  We obtain unbiased estimate $\sigma^2 = SSR(\hat{\boldsymbol\beta}_{ols})/(n-p) = 8.54$, and use this to compute the standard error of the components of $\hat{\boldsymbol\beta}_{ols}$, which are 12.25, 15.76, 0.53, and 0.65, respectively.  Comparing the values of $\hat{\boldsymbol\beta}_{ols}$ to their standard errors suggests that the evidence for differences between the two exercise regimens is not very strong.
 
-textcolor{red}{need to understand this better.  How are the values of the ols beta estimates being compared to their standard errors?  Seems like -51 is 4+ standard errors away from 0, for example}
+\hrulefill \\
+
+\textcolor{red}{"Comparing the values of $\hat{\boldsymbol\beta}_{ols}$ to their standard errors:"}\\
+Diference in Intercept:\\
+$$H_0:  Intercept_{running} - Intercept_{aerobic} = 0; H_A:  Intercept_{running} - Intercept_{aerobic} \ne 0$$
+$$H_0:  \beta_1 - (\beta_1 + \beta_2) = -\beta_2 = 0 \text{ (that is } \beta_2 = 0); H_A:  \beta_2 \ne 0$$
+$$T = \frac{\beta_2 - 0}{SE_{beta_2}} = \frac{13.11}{15.76} = 0.49$$
+$$\longrightarrow p = 0.79\longrightarrow \text{ fail to reject } H_0 \text{ and conclude no significant difference in intercept}$$
+
+Difference in Slope:\\
+$$H_0:  Slope_{running} - Slope_{aerobic} = 0; H_A:  Slope_{running} - Slope_{aerobic} \ne 0$$
+$$H_0:  \beta_3 - (\beta_3 + \beta_4) = 0 \text{ (that is } \beta_4 = 0); H_A:  \beta_4 \ne 0$$
+$$T = \frac{\beta_4 - 0}{SE_{beta_4}} = \frac{-0.32}{0.65} = 0.83$$
+$$\longrightarrow p = 0.68\longrightarrow \text{ fail to reject } H_0 \text{ and conclude no significant difference in slope}$$
+
+
+\hrulefill \\
 
 \begin{Schunk}
 \begin{Sinput}
@@ -848,63 +863,63 @@ x4  -0.3182438  0.6498086  -1.7661075   1.129620
   \subsubsection{Derivation}
 
     \paragraph{A semiconjugate prior distribution}
-    Hoff proposes a semiconjugate prior distribution for $\beta$ and $\sigma^2$ to be used when there is information available about the parameters.  The sampling density of the data (Equation \ref{conditional_density}) is
+    Hoff proposes a semiconjugate prior distribution for $\boldsymbol\beta$ and $\sigma^2$ to be used when there is information available about the parameters.  The sampling density of the data (Equation \ref{conditional_density}) is
 
-    $$p(\mathbf{y}|\mathbf{X},\beta,\sigma^2) \propto \text{exp}\{-\frac{1}{2\sigma^2}\text{SSR}(\beta)\} = \text{exp}\{-\frac{1}{2\sigma^2}[\mathbf{y}^T\mathbf{y} - 2\beta^T\mathbf{X}^T\mathbf{y}+\beta^T\mathbf{X}^T\mathbf{X}\beta]\}.$$
+    $$p(\mathbf{y}|\mathbf{X},\boldsymbol\beta,\sigma^2) \propto \text{exp}\{-\frac{1}{2\sigma^2}\text{SSR}(\boldsymbol\beta)\} = \text{exp}\{-\frac{1}{2\sigma^2}[\mathbf{y}^T\mathbf{y} - 2\boldsymbol\beta^T\mathbf{X}^T\mathbf{y}+\boldsymbol\beta^T\mathbf{X}^T\mathbf{X}\boldsymbol\beta]\}.$$
 
-    The role that $\beta$ plays in the exponent looks very similar to that played by $\mathbf{y}$, and the distribution of $\mathbf{y}$ is multivariate normal.  This suggests that a multivariate normal prior distribution for $\beta$ is conjugate:  if $\beta \sim \text{multivariate normal}(\beta_0,\Sigma_0)$, then
+    The role that $\boldsymbol\beta$ plays in the exponent looks very similar to that played by $\mathbf{y}$, and the distribution of $\mathbf{y}$ is multivariate normal.  This suggests that a multivariate normal prior distribution for $\boldsymbol\beta$ is conjugate:  if $\boldsymbol\beta \sim \text{multivariate normal}(\boldsymbol\beta_0,\Sigma_0)$, then
 
     \begin{flalign*}
-        p&(\beta|\mathbf{y,X},\sigma^2)\\
-        &\propto p(\mathbf{y}|\mathbf{X},\beta, \sigma^2) \times p(\beta)\\
-        &\propto \text{exp}\{-\frac{1}{2}(-2\beta^T\mathbf{X}^T\mathbf{y}/\sigma^2 + \beta^T\mathbf{X}^T\mathbf{X}\beta/\sigma^2) - \frac{1}{2}(-2\beta^T\Sigma_0^{-1}\beta_0 + \beta^T\Sigma_0^{-1}\beta)\}\\
-        &=\text{exp}\{\beta^T(\Sigma_0^{-1}\beta_0 + \mathbf{X}^T\mathbf{y}/\sigma^2) - \frac{1}{2}\beta^T(\Sigma_0^{-1} + \mathbf{X}^T\mathbf{X}/\sigma^2)\beta\}
+        p&(\boldsymbol\beta|\mathbf{y,X},\sigma^2)\\
+        &\propto p(\mathbf{y}|\mathbf{X},\boldsymbol\beta, \sigma^2) \times p(\boldsymbol\beta)\\
+        &\propto \text{exp}\{-\frac{1}{2}(-2\boldsymbol\beta^T\mathbf{X}^T\mathbf{y}/\sigma^2 + \boldsymbol\beta^T\mathbf{X}^T\mathbf{X}\boldsymbol\beta/\sigma^2) - \frac{1}{2}(-2\boldsymbol\beta^T\Sigma_0^{-1}\boldsymbol\beta_0 + \boldsymbol\beta^T\Sigma_0^{-1}\boldsymbol\beta)\}\\
+        &=\text{exp}\{\boldsymbol\beta^T(\Sigma_0^{-1}\boldsymbol\beta_0 + \mathbf{X}^T\mathbf{y}/\sigma^2) - \frac{1}{2}\boldsymbol\beta^T(\Sigma_0^{-1} + \mathbf{X}^T\mathbf{X}/\sigma^2)\boldsymbol\beta\}
     \end{flalign*}
 
     This is proportional to a multivariate normal density, with
 
     \begin{flalign}
-        Var[\beta|\mathbf{y,X},\sigma^2] &= (\Sigma_0^{-1} + \mathbf{X}^T\mathbf{X}/\sigma^2)^{-1} \label{semiconj_var}\\
-        \text{E}[\beta|\mathbf{y,X},\sigma^2] &= (\Sigma_0^{-1} + \mathbf{X}^T\mathbf{X}/\sigma^2)^{-1} (\Sigma_0^{-1}\beta_0 + \mathbf{X}^T\mathbf{y}/\sigma^2). \label{semiconj_expec}
+        Var[\boldsymbol\beta|\mathbf{y,X},\sigma^2] &= (\Sigma_0^{-1} + \mathbf{X}^T\mathbf{X}/\sigma^2)^{-1} \label{semiconj_var}\\
+        \text{E}[\boldsymbol\beta|\mathbf{y,X},\sigma^2] &= (\Sigma_0^{-1} + \mathbf{X}^T\mathbf{X}/\sigma^2)^{-1} (\Sigma_0^{-1}\boldsymbol\beta_0 + \mathbf{X}^T\mathbf{y}/\sigma^2). \label{semiconj_expec}
     \end{flalign}
 
-As usual, we can gain some understanding of these formulae by considering some limiting cases.  If the elements of the prior precision matrix $\Sigma_0^{-1}$ are small in magnitude, then the conditional expectation E$[\beta|\mathbf{y,X},\sigma^2]$ is approximately equal to $(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{y}$, the least squares estimate. On the other hand, if the measurement precision is very small ($\sigma^2$ is very large), then the expectation is approximately $\beta_0$, the prior expectation.\\
+As usual, we can gain some understanding of these formulae by considering some limiting cases.  If the elements of the prior precision matrix $\Sigma_0^{-1}$ are small in magnitude, then the conditional expectation E$[\boldsymbol\beta|\mathbf{y,X},\sigma^2]$ is approximately equal to $(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{y}$, the least squares estimate. On the other hand, if the measurement precision is very small ($\sigma^2$ is very large), then the expectation is approximately $\boldsymbol\beta_0$, the prior expectation.\\
 
 As in most normal sampling problems, the semiconjugate prior distribution for $\sigma^2$ is an inverse-gamma distribution.  Letting $\gamma = 1/\sigma^2$ be the measurement precision, if $\gamma \sim \text{gamma}(\nu_0/2,\nu_0\sigma^2_0/2)$, then
 
 
 \begin{flalign*}
-    p(\gamma|\mathbf{y,X},\beta) &\propto p(\gamma)p(\mathbf{y}|\mathbf{X},\beta,\gamma)\\
+    p(\gamma|\mathbf{y,X},\boldsymbol\beta) &\propto p(\gamma)p(\mathbf{y}|\mathbf{X},\boldsymbol\beta,\gamma)\\
         &\propto \left[\gamma^{\nu_0/2-1}\text{exp}(-\gamma \times \nu_0\sigma^2_0/2)\right] \times
-                 \left[\gamma^{n/2}\text{exp}(-\gamma \times \text{SSR}(\beta)/2)\right]\\
-        &= \gamma^{(\nu_0+n)/2-1} \text{exp}(-\gamma[\nu_0\sigma^2_0 + \text{SSR}(\beta)]/2),
+                 \left[\gamma^{n/2}\text{exp}(-\gamma \times \text{SSR}(\boldsymbol\beta)/2)\right]\\
+        &= \gamma^{(\nu_0+n)/2-1} \text{exp}(-\gamma[\nu_0\sigma^2_0 + \text{SSR}(\boldsymbol\beta)]/2),
 \end{flalign*}
 
 \noindent which we recognize as a gamma density, so that
 
-$$\{\sigma^2|\mathbf{y,X},\beta\} \sim \text{inverse-gamma}([\nu_0 + n]/2,[\nu_0\sigma^2_0 + \text{SSR}(\beta)]/2).$$
+$$\{\sigma^2|\mathbf{y,X},\boldsymbol\beta\} \sim \text{inverse-gamma}([\nu_0 + n]/2,[\nu_0\sigma^2_0 + \text{SSR}(\boldsymbol\beta)]/2).$$
 
-\noindent Constructing a Gibbs sampler to approximate the joint posterior distribution $p(\beta,\sigma^2|\mathbf{y,X})$ is then straightforward:  given current values $\{\beta^{(s)},\sigma^{2(s)}\}$, new values can be generated by
+\noindent Constructing a Gibbs sampler to approximate the joint posterior distribution $p(\boldsymbol\beta,\sigma^2|\mathbf{y,X})$ is then straightforward:  given current values $\{\boldsymbol\beta^{(s)},\sigma^{2(s)}\}$, new values can be generated by
 
 \begin{enumerate}
-    \item updating $\beta$:
+    \item updating $\boldsymbol\beta$:
     \begin{enumerate}
-        \item compute $\mathbf{V} = \text{Var}[\beta|\mathbf{y,X},\sigma^{2(s)}]$ and $\mathbf{m} = \text{E}[\beta|\mathbf{y,X},\sigma^{2(s)}]$
-        \item sample $\beta^{(s+1)} \sim \text{multivariate normal}(\mathbf{m,V})$
+        \item compute $\mathbf{V} = \text{Var}[\boldsymbol\beta|\mathbf{y,X},\sigma^{2(s)}]$ and $\mathbf{m} = \text{E}[\boldsymbol\beta|\mathbf{y,X},\sigma^{2(s)}]$
+        \item sample $\boldsymbol\beta^{(s+1)} \sim \text{multivariate normal}(\mathbf{m,V})$
     \end{enumerate}
     \item updating $\sigma^2$:
     \begin{enumerate}
-        \item compute SSR$(\beta^{(s+1)})$
-        \item sample $\sigma^{2(s+1)} \sim \text{inverse-gamma}([\nu_0 + n]/2,[\nu_0\sigma_0^2 + \text{SSR}(\beta^{(s+1)})]/2)$.
+        \item compute SSR$(\boldsymbol\beta^{(s+1)})$
+        \item sample $\sigma^{2(s+1)} \sim \text{inverse-gamma}([\nu_0 + n]/2,[\nu_0\sigma_0^2 + \text{SSR}(\boldsymbol\beta^{(s+1)})]/2)$.
     \end{enumerate}
 \end{enumerate}
 
     \paragraph{Default and weakly informative prior distributions}
-    In situations where prior information is unavailable or difficult to quantify, an alternative ``default" class of prior distributions is given. Specification of the prior parameters $(\beta_0, \Sigma_0)$ and $(\nu_0,\sigma^2_0)$ that represent actual prior information for a Bayesian analysis can be difficult.  For a prior distribution that is not going to represent real prior information about the parameters, we choose one that is as minimally informative as possible.  The resulting posterior distribution, then, will represent the posterior information of someone who began with little knowledge of the population being studied.  Here we will employ Zellner's ``$g$-prior" (Zellner, 1986).  We choose $\beta_0 = \mathbf{0}$ and $\Sigma_0 = k(\mathbf{X}^T\mathbf{X})^{-1}, k = g\sigma^2, g > 0$, which satisfies a desired condition that the regression parameter estimation be invariant to changes in the scale of the regressors.  With this, equations \ref{semiconj_var} and \ref{semiconj_expec} reduce to
+    In situations where prior information is unavailable or difficult to quantify, an alternative ``default" class of prior distributions is given. Specification of the prior parameters $(\boldsymbol\beta_0, \Sigma_0)$ and $(\nu_0,\sigma^2_0)$ that represent actual prior information for a Bayesian analysis can be difficult.  For a prior distribution that is not going to represent real prior information about the parameters, we choose one that is as minimally informative as possible.  The resulting posterior distribution, then, will represent the posterior information of someone who began with little knowledge of the population being studied.  Here we will employ Zellner's ``$g$-prior" (Zellner, 1986).  We choose $\boldsymbol\beta_0 = \mathbf{0}$ and $\Sigma_0 = k(\mathbf{X}^T\mathbf{X})^{-1}, k = g\sigma^2, g > 0$, which satisfies a desired condition that the regression parameter estimation be invariant to changes in the scale of the regressors.  With this, equations \ref{semiconj_var} and \ref{semiconj_expec} reduce to
 
 \begin{flalign}
-    \text{Var}[\beta|\mathbf{y,X},\sigma^2] &= [\mathbf{X^TX}/(g\sigma^2) + \mathbf{X^TX}/\sigma^2]^{-1} = \frac{g}{g+1}\sigma^2(\mathbf{X^TX})^{-1} \label{noninf_var}\\
-    \text{E}[\beta|\mathbf{y,X},\sigma^2] &= [\mathbf{X^TX}/(g\sigma^2) + \mathbf{X^TX}/\sigma^2]^{-1}\mathbf{X^Ty}/\sigma^2 = \frac{g}{g+1}\sigma^2(\mathbf{X^TX})^{-1}\mathbf{X^Ty}.\label{noninf_expec}
+    \text{Var}[\boldsymbol\beta|\mathbf{y,X},\sigma^2] &= [\mathbf{X^TX}/(g\sigma^2) + \mathbf{X^TX}/\sigma^2]^{-1} = \frac{g}{g+1}\sigma^2(\mathbf{X^TX})^{-1} \label{noninf_var}\\
+    \text{E}[\boldsymbol\beta|\mathbf{y,X},\sigma^2] &= [\mathbf{X^TX}/(g\sigma^2) + \mathbf{X^TX}/\sigma^2]^{-1}\mathbf{X^Ty}/\sigma^2 = \frac{g}{g+1}\sigma^2(\mathbf{X^TX})^{-1}\mathbf{X^Ty}.\label{noninf_expec}
 \end{flalign}
 
 Letting
@@ -915,21 +930,21 @@ we arrive at posteriors
 
 \begin{flalign}
     \{\sigma^2|\mathbf{y,X}\} &\sim \text{inverse-gamma}([\nu_0 + n]/2,[\nu_0\sigma^2_0 + \text{SSR}_g]/2) \label{noninf_sig2_post}\\
-    \{\beta|\mathbf{y,X},\sigma^2\} &\sim \text{multivariate normal}\left(\frac{g}{g+1}\hat{\beta}_{ols},\frac{g}{g+1}\sigma^2[\mathbf{X^TX}]^{-1}\right).\label{noninf_beta_post}
+    \{\boldsymbol\beta|\mathbf{y,X},\sigma^2\} &\sim \text{multivariate normal}\left(\frac{g}{g+1}\hat{\boldsymbol\beta}_{ols},\frac{g}{g+1}\sigma^2[\mathbf{X^TX}]^{-1}\right).\label{noninf_beta_post}
 \end{flalign}
 
 Here $\text{SSR}_g = \mathbf{y^Ty - m^TV^{-1}m = y^T(I - }\frac{g}{g+1}\mathbf{X(X^TX)^{-1}X^T)y}$.\\
 
-Simple Monte Carlo approximation can be used to sample from the joint posterior density $p(\sigma^2,\beta|\mathbf{y,X})$ as follows.  Here $g$ is typically set to the number of prior observations.  Then:
+Simple Monte Carlo approximation can be used to sample from the joint posterior density $p(\sigma^2,\boldsymbol\beta|\mathbf{y,X})$ as follows.  Here $g$ is typically set to the number of prior observations.  Then:
 
 \begin{enumerate}
     \item sample $\sigma^2 \sim \text{inverse-gamma}([\nu_0 + n]/2,[\nu_0\sigma^2_0 + \text{SSR}_g]/2)$
-    \item sample $\beta \sim \text{multivariate normal}\left(\frac{g}{g+1}\hat{\beta}_{ols},\frac{g}{g+1}\sigma^2[\mathbf{X^TX}]^{-1}\right)$.
+    \item sample $\boldsymbol\beta \sim \text{multivariate normal}\left(\frac{g}{g+1}\hat{\boldsymbol\beta}_{ols},\frac{g}{g+1}\sigma^2[\mathbf{X^TX}]^{-1}\right)$.
 \end{enumerate}
 
   \subsubsection{R Implementation}
 
-The standard format R function rpredNormReg() approximates the joint posterior density $p(\sigma^2,\beta|\mathbf{y,X})$ using one of the two methods described above, as selected by the user.  The user inputs the set or sets of explanatory variables $X_{pred} = (x_{i1}, x_{i2}, x_{i3}, x_{i4})$ and the number $S$ of predicted values desired for each set. The function produces $S$ sampled values from the relevant posterior distribution of $\beta$, and then computes a prediction for each beta as $y = X_{pred}\boldsymbol\beta$.
+The standard format R function rpredNormReg() approximates the joint posterior density $p(\sigma^2,\boldsymbol\beta|\mathbf{y,X})$ using one of the two methods described above, as selected by the user.  The user inputs the set or sets of explanatory variables $X_{pred} = (x_{i1}, x_{i2}, x_{i3}, x_{i4})$ and the number $S$ of predicted values desired for each set. The function produces $S$ sampled values from the relevant posterior distribution of $\boldsymbol\beta$, and then computes a prediction for each beta as $y = X_{pred}\boldsymbol\beta$.
 
 \textcolor{red}{SHOULD I PASTE THE R CODE INto THIS SECTION?}
 
@@ -953,7 +968,7 @@ In the example below (Hoff data and code found \href{https://pdhoff.github.io/bo
 
 
 \begin{flalign*}
-  \beta_0 &= \hat{\beta}_{ols} = (-51.29, -51.29, -51.29, -51.29)  \text{ (ordinary least squares estimator of } \beta \text{)}\\
+  \boldsymbol\beta_0 &= \hat{\boldsymbol\beta}_{ols} = (-51.29, -51.29, -51.29, -51.29)  \text{ (ordinary least squares estimator of } \boldsymbol\beta \text{)}\\
   \Sigma_0 &= (X^TX)^{-1}\sigma^2n =
     \begin{pmatrix}
       1801.4 & -1801.4 & -77.02 & 77.02 \\
@@ -961,7 +976,7 @@ In the example below (Hoff data and code found \href{https://pdhoff.github.io/bo
       -77.02 & 77.02 & 3.32 & -3.32 \\
       77.02 & -122.03 & -3.32 & 5.07
     \end{pmatrix}
-    \text{ (sampling variance of } \hat{\beta}_{ols} \text{)}\text{WHY TIMES n????}\\
+    \text{ (sampling variance of } \hat{\boldsymbol\beta}_{ols} \text{)}\text{WHY TIMES n????}\\
   \nu_0 &= 1 \text{ (prior sample size)}\\
   \sigma^2_0 &= \frac{\sum e_i}{n-1} = 6.21 \text{ (variance of the residuals)}\\
   S &= 5000 \text{ (sample size for predictive distribution random draw)}
