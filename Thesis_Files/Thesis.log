@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  27 OCT 2021 06:39
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  28 OCT 2021 09:24
 entering extended mode
 **./Thesis.tex
 (Thesis.tex
@@ -1362,48 +1362,63 @@ File: Thesis-017.pdf Graphic file (type pdf)
 <use Thesis-017.pdf>
 Package pdftex.def Info: Thesis-017.pdf  used on input line 1004.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
-<Thesis-018.pdf, id=640, 433.62pt x 433.62pt>
-File: Thesis-018.pdf Graphic file (type pdf)
-<use Thesis-018.pdf>
-Package pdftex.def Info: Thesis-018.pdf  used on input line 1009.
-(pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
 
 [41
 
- <./Thesis-017.pdf>] [42 <./Thesis-018.pdf>]
-<Thesis-019.pdf, id=661, 433.62pt x 433.62pt>
+ <./Thesis-017.pdf>]
+<Thesis-018.pdf, id=650, 433.62pt x 433.62pt>
+File: Thesis-018.pdf Graphic file (type pdf)
+<use Thesis-018.pdf>
+Package pdftex.def Info: Thesis-018.pdf  used on input line 1010.
+(pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
+<Thesis-019.pdf, id=651, 433.62pt x 433.62pt>
 File: Thesis-019.pdf Graphic file (type pdf)
 <use Thesis-019.pdf>
-Package pdftex.def Info: Thesis-019.pdf  used on input line 1015.
+Package pdftex.def Info: Thesis-019.pdf  used on input line 1014.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
-<Thesis-020.pdf, id=662, 433.62pt x 433.62pt>
+ [42
+
+ <./Thesis-018.pdf>] [43 <./Thesis-019.pdf>]
+<Thesis-020.pdf, id=673, 433.62pt x 433.62pt>
 File: Thesis-020.pdf Graphic file (type pdf)
 <use Thesis-020.pdf>
-Package pdftex.def Info: Thesis-020.pdf  used on input line 1017.
+Package pdftex.def Info: Thesis-020.pdf  used on input line 1022.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
- [43
-
- <./Thesis-019.pdf>]
 <Thesis-021.pdf, id=674, 433.62pt x 433.62pt>
 File: Thesis-021.pdf Graphic file (type pdf)
 <use Thesis-021.pdf>
-Package pdftex.def Info: Thesis-021.pdf  used on input line 1019.
+Package pdftex.def Info: Thesis-021.pdf  used on input line 1030.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
 
-[44 <./Thesis-020.pdf>]
-<Thesis-022.pdf, id=685, 433.62pt x 433.62pt>
+[44
+
+ <./Thesis-020.pdf>]
+<Thesis-022.pdf, id=684, 433.62pt x 433.62pt>
 File: Thesis-022.pdf Graphic file (type pdf)
 <use Thesis-022.pdf>
-Package pdftex.def Info: Thesis-022.pdf  used on input line 1021.
+Package pdftex.def Info: Thesis-022.pdf  used on input line 1032.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
  [45 <./Thesis-021.pdf>]
-<Thesis-023.pdf, id=696, 433.62pt x 433.62pt>
+<Thesis-023.pdf, id=695, 433.62pt x 433.62pt>
 File: Thesis-023.pdf Graphic file (type pdf)
 <use Thesis-023.pdf>
-Package pdftex.def Info: Thesis-023.pdf  used on input line 1023.
+Package pdftex.def Info: Thesis-023.pdf  used on input line 1034.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
  [46 <./Thesis-022.pdf>]
-[47 <./Thesis-023.pdf>] [48
+<Thesis-024.pdf, id=706, 433.62pt x 433.62pt>
+File: Thesis-024.pdf Graphic file (type pdf)
+<use Thesis-024.pdf>
+Package pdftex.def Info: Thesis-024.pdf  used on input line 1036.
+(pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
+
+[47 <./Thesis-023.pdf>]
+<Thesis-025.pdf, id=717, 433.62pt x 433.62pt>
+File: Thesis-025.pdf Graphic file (type pdf)
+<use Thesis-025.pdf>
+Package pdftex.def Info: Thesis-025.pdf  used on input line 1038.
+(pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
+ [48 <./Thesis-024.pdf>] [49 <./Thesis-025.pdf>]
+[50
 
 ] (Thesis.aux)
 Package rerunfilecheck Info: File `Thesis.out' has not changed.
@@ -1415,10 +1430,10 @@ LaTeX Font Warning: Size substitutions with differences
 
  ) 
 Here is how much of TeX's memory you used:
- 30643 strings out of 479696
- 712489 string characters out of 2881701
- 1158469 words of memory out of 3000000
- 46964 multiletter control sequences out of 15000+200000
+ 30657 strings out of 479696
+ 712757 string characters out of 2881701
+ 1158470 words of memory out of 3000000
+ 46976 multiletter control sequences out of 15000+200000
  447990 words of font info for 138 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  94i,20n,98p,1134b,609s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1440,9 +1455,9 @@ pe1/public/amsfonts/cm/cmsy10.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
 .9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/MiKTeX 2.9/fonts/type1/public/
 amsfonts/cm/cmtt12.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/latxfont/line
 10.pfb>
-Output written on Thesis.pdf (48 pages, 1135759 bytes).
+Output written on Thesis.pdf (50 pages, 1226171 bytes).
 PDF statistics:
- 819 PDF objects out of 1000 (max. 8388607)
- 129 named destinations out of 1000 (max. 500000)
- 509 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 841 PDF objects out of 1000 (max. 8388607)
+ 131 named destinations out of 1000 (max. 500000)
+ 519 words of extra memory for PDF output out of 10000 (max. 10000000)
 

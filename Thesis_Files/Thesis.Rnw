@@ -1766,24 +1766,13 @@ for(i in 2:numplots){
   abline(v=y_obs[i],col=linecolor,lty=linetype,lwd=2)
 }
 
-# legtitle = paste(expression("X"[1]*", "*"X"[2]*", "*"X"[3]*", "*"X"[4]),"\nasdf")
-# legtitle = expression(paste("X"[1]*", "*"X"[2]*", "*"X"[3]*", "*"X"[4]),"\nasdf")
-# legend("bottomright",legend = legtxt,lty = 1, col=1:numplots,bty = "n",title=legtitle)
-#
-# legend("topright",legend = legtxt,lty = 1, col=1:numplots,bty = "n",title=expression("X"[1]*", "*"X"[2]*", "*"X"[3]*", "*"X"[4]))
 legend("topright",legend = legtxt,lty = c(rep(1,ncolor),rep(2,ncolor)), lwd = 2, col=c(1:ncolor,1:ncolor),bty = "n")
 text(0.8*minx,maxy,"Vertical lines show \n observed values \n for each case.")
-# for(i in 1:numplots){
-#   lines(density(result2$predictions[i,]),lty=2,col=i)
-# }
-#
-# for(i in 1:numplots){
-#   lines(density(result3$predictions[i,]),lty=3,col=i)
-# }
 
 
 @
 
+\clearpage
 
 Comparing predictions using semi-conjugate prior vs. Zellner's g-prior:
 
@@ -1856,9 +1845,205 @@ for(i in 1:numplots){
   lines(density(result_zgp$predictions[i,]),lty=2,col=i)
 }
 
+# for(i in 1:numplots){
+#   abline(v=y[i],col=i,lty=1,lwd=2)
+# }
+
 @
 
+
+
+<<fig=TRUE,echo=FALSE>>=
+source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredNormReg.R')
+#rpredNormReg = function(S=1,Xpred,X,y,beta0,Sigma0,nu0=1,s20=1,gprior = TRUE)
+
+S = 100000 #desired sample size
+
+x1 <- rep(1,n)
+x2<-c(0,0,0,0,0,0,1,1,1,1,1,1)
+x3<-c(23,22,22,25,27,20,31,23,27,28,22,24)
+x4 <- x2*x3
+X = cbind(x1,x2,x3,x4)  #regression design matrix
+
+y<-c(-0.87,-10.74,-3.27,-1.97,7.50,-7.25,17.05,4.96,10.40,11.05,0.26,2.51)  #observed response vector
+
+n = length(y)
+p = dim(X)[2]
+
+fit.ls<-lm(y~-1+ X)
+beta.0<-fit.ls$coef
+nu0<-1
+
+# prior info for semi-conjugate prior case
+sigma2.0<-sum(fit.ls$res^2)/(n-p)
+sig2.ols<-sum(fit.ls$res^2)/(n-p)
+Sigma.0<- solve(t(X)%*%X)*sig2.ols*n
+sig20<- var( residuals(lm(y~0+X)) )
+
+# starting with ols variance for non-informative g-prior case
+sig2.ols = (t(y-X%*%beta.ols)%*%(y-X%*%beta.0)/(n-p))[1]
+
+xp1 = rep(1,4)
+xp2 = c(rep(0,2),rep(1,2))
+xp3 = rep(c(23,27),2)
+xp4 = xp2*xp3
+
+Xpred = cbind(xp1,xp2,xp3,xp4)
+
+S = 10000 #desired sample size
+
+#END OF REPEATED BLOCK
+################
+################
+################
+
+result_scp = rpredNormReg(S,Xpred,X,y,beta0=beta.ols,Sigma0=Sigma.0,nu0=nu0,s20=sig20,gprior=FALSE)
+result_zgp = rpredNormReg(S,Xpred,X,y,nu0=nu0,s20=sig2.ols)
+
+maxx = 0
+minx = 0
+maxy = 0
+
+numcases = nrow(result_scp$predictions)
+for(i in 1:numcases){
+  tempmaxx = max(density(result_scp$predictions[i,])$x)
+  if(tempmaxx > maxx) {maxx = tempmaxx}
+  tempmaxx = max(density(result_zgp$predictions[i,])$x)
+  if(tempmaxx > maxx) {maxx = tempmaxx}
+
+  tempminx = min(density(result_scp$predictions[i,])$x)
+  if(tempminx < minx) {minx = tempminx}
+  tempminx = min(density(result_zgp$predictions[i,])$x)
+  if(tempminx < minx) {minx = tempminx}
+
+  tempmaxy = max(density(result_scp$predictions[i,])$y)
+  if(tempmaxy > maxy) {maxy = tempmaxy}
+  tempmaxy = max(density(result_zgp$predictions[i,])$y)
+  if(tempmaxy > maxy) {maxy = tempmaxy}
+
+  if(Xpred[i,2]){
+    legtxt[i] = paste("Aerobic, age ",toString(Xpred[i,3]),", SCP", sep="")
+    legtxt[i+numcases] = paste("Aerobic, age ",toString(Xpred[i,3]),", ZGP", sep="")
+  }else{
+      legtxt[i] = paste("Running, age ",toString(Xpred[i,3]),", SCP", sep="")
+      legtxt[i+numcases] = paste("Running, age ",toString(Xpred[i,3]),", ZGP", sep="")
+    }
+}
+
+# numcases = 2*numplots
+# legtxt = vector(mode = "character",length = numplots)
+# for(i in 1:numplots)
+
+maxx = 1.5*maxx
+
+plot(density(result_scp$predictions[1,]), main = bquote("Semi-conjugate prior vs. Zellner's g-prior"),col=1,xlim = c(minx,1.25*maxx),ylim = c(0,1.1*maxy))
+
+
+for(i in 2:numcases){
+  lines(density(result_scp$predictions[i,]),col=i)
+}
+
+# legtxt = c("SCP", "ZGP")
+# legend("topright",legend = legtxt,lty = 1:2,bty = "n")
+
+legend("topright",legend = legtxt,lty = c(rep(1,numcases),rep(2,numcases)), col=rep(1:numcases,2),bty = "n")
+
+for(i in 1:numcases){
+  lines(density(result_zgp$predictions[i,]),lty=2,col=i)
+}
+
+# for(i in 1:numcases){
+#   abline(v=y[i],col=i,lty=1,lwd=2)
+# }
+
+@
+
+\textcolor{red}{EXPLAIN WHY SCP PREDICTIONS HAVE TALLER DISTRIBUTIONS THAN ZGP PREDICTIONS.  ALSO WHY ZGP PREDICTIONS SHRINK TOWARD 0}
+
 \clearpage
+
+Comparing observed values to predictive distributions:
+
+<<fig=TRUE,echo=FALSE>>=
+source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredNormReg.R')
+#rpredNormReg = function(S=1,Xpred,X,y,beta0,Sigma0,nu0=1,s20=1,gprior = TRUE)
+
+S = 100000 #desired sample size
+
+x1 <- rep(1,n)
+x2<-c(0,0,0,0,0,0,1,1,1,1,1,1)
+x3<-c(23,22,22,25,27,20,31,23,27,28,22,24)
+x4 <- x2*x3
+X = cbind(x1,x2,x3,x4)  #regression design matrix
+
+y<-c(-0.87,-10.74,-3.27,-1.97,7.50,-7.25,17.05,4.96,10.40,11.05,0.26,2.51)  #observed response vector
+
+n = length(y)
+p = dim(X)[2]
+
+fit.ls<-lm(y~-1+ X)
+beta.0<-fit.ls$coef
+nu0<-1
+
+# prior info for semi-conjugate prior case
+sigma2.0<-sum(fit.ls$res^2)/(n-p)
+sig2.ols<-sum(fit.ls$res^2)/(n-p)
+Sigma.0<- solve(t(X)%*%X)*sig2.ols*n
+sig20<- var( residuals(lm(y~0+X)) )
+
+# starting with ols variance for non-informative g-prior case
+sig2.ols = (t(y-X%*%beta.ols)%*%(y-X%*%beta.0)/(n-p))[1]
+
+par(mfrow = c(3,4))
+
+for(whichPredictor in 1:length(y)){
+
+  Xpred = X[whichPredictor,]
+
+  S = 5000 #desired sample size
+
+  result_scp = rpredNormReg(S,Xpred,X,y,beta0=beta.ols,Sigma0=Sigma.0,nu0=nu0,s20=sig20,gprior=FALSE)
+  result_zgp = rpredNormReg(S,Xpred,X,y,nu0=nu0,s20=sig2.ols)
+
+  maxx = 0
+  minx = 0
+  maxy = 0
+  numplots = nrow(result_scp$predictions)
+  for(i in 1:numplots){
+    tempmaxx = max(density(result_scp$predictions[i,])$x)
+    if(tempmaxx > maxx) {maxx = tempmaxx}
+    tempminx = min(density(result_scp$predictions[i,])$x)
+    if(tempminx < minx) {minx = tempminx}
+    tempmaxy = max(density(result_scp$predictions[i,])$y)
+    if(tempmaxy > maxy) {maxy = tempmaxy}
+  }
+
+  # plot(density(result_scp$predictions[whichPredictor,]), main = bquote("Semi-conjugate prior vs. Zellner's g-prior"),col=whichPredictor,xlim = c(minx,1.25*maxx),ylim = c(0,1.1*maxy))
+  plot(density(result_scp$predictions), main="",col=whichPredictor,xlim = c(minx,1.25*maxx),ylim = c(0,1.1*maxy))
+
+  # for(i in 2:numplots){
+  #   lines(density(result_scp$predictions[i,]),col=i)
+  # }
+
+  legtxt = c("SCP", "ZGP")
+  legend("topright",legend = legtxt,lty = 1:2,bty = "n")
+
+  #for(i in 1:numplots){
+    # lines(density(result_zgp$predictions[whichPredictor,]),lty=2,col=whichPredictor)
+    lines(density(result_zgp$predictions),lty=2,col=whichPredictor)
+  #}
+
+ # for(i in 1:numplots){
+    abline(v=y[whichPredictor],col=whichPredictor,lty=1,lwd=2)
+  #}
+}
+
+par(mfrow=c(1,1))
+@
+
+
+
+
 
 The following plots exhibit the influence of varying the prior info with the semi-conjugate prior.
 
