@@ -1200,8 +1200,8 @@ This means that the estimated linear relationship between uptake and age has an 
 
 \hrulefill \\
 
-\textcolor{red}{"Comparing the values of $\hat{\boldsymbol\beta}_{ols}$ to their standard errors:"}\\
-Diference in Intercept:\\
+\textcolor{red}{``Comparing the values of $\hat{\boldsymbol\beta}_{ols}$ to their standard errors:"}\\
+Difference in Intercept:\\
 $$H_0:  Intercept_{running} - Intercept_{aerobic} = 0; H_A:  Intercept_{running} - Intercept_{aerobic} \ne 0$$
 $$H_0:  \beta_1 - (\beta_1 + \beta_2) = -\beta_2 = 0 \text{ (that is } \beta_2 = 0); H_A:  \beta_2 \ne 0$$
 $$T = \frac{\beta_2 - 0}{SE_{beta_2}} = \frac{13.11}{15.76} = 0.49$$
@@ -1216,7 +1216,7 @@ $$\longrightarrow p = 0.68\longrightarrow \text{ fail to reject } H_0 \text{ and
 
 \hrulefill \\
 
-<<>>=
+<<echo=FALSE>>=
 n <- length(y)
 x1 <- rep(1,n)
 x4 <- x2*x3
@@ -1246,7 +1246,7 @@ betadata
 
   \subsubsection{Derivation}
 
-    \paragraph{A semiconjugate prior distribution}
+    \paragraph{A semiconjugate prior distribution}\label{normRegSemiconjugatePrior}
     Hoff proposes a semiconjugate prior distribution for $\boldsymbol\beta$ and $\sigma^2$ to be used when there is information available about the parameters.  The sampling density of the data (Equation \ref{conditional_density}) is
 
     $$p(\mathbf{y}|\mathbf{X},\boldsymbol\beta,\sigma^2) \propto \text{exp}\{-\frac{1}{2\sigma^2}\text{SSR}(\boldsymbol\beta)\} = \text{exp}\{-\frac{1}{2\sigma^2}[\mathbf{y}^T\mathbf{y} - 2\boldsymbol\beta^T\mathbf{X}^T\mathbf{y}+\boldsymbol\beta^T\mathbf{X}^T\mathbf{X}\boldsymbol\beta]\}.$$
@@ -1298,7 +1298,7 @@ $$\{\sigma^2|\mathbf{y,X},\boldsymbol\beta\} \sim \text{inverse-gamma}([\nu_0 + 
     \end{enumerate}
 \end{enumerate}
 
-To create a sample from the predictive distribution of responses:  for each $s\in\{1,...,S\}$, draw $\epsilon^{(s)} \sim N(0,\sigma^{2(s)})$.  Then
+To create a sample from the predictive distribution of responses:  for each $s\in\{1,...,S\}$, draw $\epsilon^{(s)} \sim N(0,\sigma^{2(s)})$.  Then compute
 
 $$y^{(s)} = \boldsymbol\beta^{(s)T}\mathbf{X} + \epsilon.$$
 
@@ -1336,20 +1336,14 @@ $$y = \boldsymbol\beta^T\mathbf{X} + \epsilon.$$
 
   \subsubsection{R Implementation}
 
-The standard format R function rpredNormReg() approximates the joint posterior density $p(\sigma^2,\boldsymbol\beta|\mathbf{y,X})$ using one of the two methods described above, as selected by the user.  The user inputs the set or sets of explanatory variables $X_{pred} = (x_{i1}, x_{i2}, x_{i3}, x_{i4})$ and the number $S$ of predicted values desired for each set. The function produces $S$ sampled values from the relevant posterior distribution of $\boldsymbol\beta$, and then computes a prediction for each beta as $y = X_{pred}\boldsymbol\beta$.
+The standard format R function
 
-\textcolor{red}{SHOULD I PASTE THE R CODE INto THIS SECTION?}
+\begin{center}\texttt{rpredNormReg(S=1,Xpred,X,y,beta0,Sigma0,nu0=1,s20=1,gprior = TRUE)}\end{center}
 
-% To use the semiconjugate prior, the user must supply values for prior parameters $(\beta_0, \Sigma_0)$ and $(\nu_0, \sigma^2_0)$.
-%
-% In the absence of prior information, predictions are made by means of Monte Carlo sampling, using Zellner's g-prior.
-%
-% \begin{enumerate}
-%     \item sample $\sigma^2 \sim \text{inverse-gamma}([\nu_0 + n]/2,[\nu_0\sigma^2_0 + \text{SSR}_g]/2)$
-%     \item sample $\beta \sim \text{multivariate normal}\left(\frac{g}{g+1}\hat{\beta}_{ols},\frac{g}{g+1}\sigma^2[\mathbf{X^TX}]^{-1}\right)$.
-% \end{enumerate}
-%
-% Here $g$ is typically set to the number of prior observations.
+\noindent approximates the joint posterior density $p(\sigma^2,\boldsymbol\beta|\mathbf{y,X})$ using one of the two methods described above, generates $S$ triplets $(\boldsymbol\beta^{(s)}, \sigma^{2(s)},\epsilon^{(s)} \sim N(0,\sigma^{2(s)})$ , and returns $S$ predictions $y = X_{pred}\boldsymbol\beta^{(s)} + \epsilon^{(s)}$.\\\\
+
+The function defaults to Zellner's location-invariant g-prior, in which case input values for \texttt{beta0, Sigma0, nu0}, and \texttt{s20} are ignored.  If the user wants to employ Hoff's semi-conjugate prior as defined in section \ref{normRegSemiconjugatePrior} above, all input variables must be specified, with gprior = FALSE.
+
 
 
 

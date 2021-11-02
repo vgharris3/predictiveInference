@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  1 NOV 2021 17:38
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  2 NOV 2021 09:59
 entering extended mode
 **./Thesis.tex
 (Thesis.tex
@@ -1315,117 +1315,127 @@ LaTeX Font Info:    Trying to load font information for T1+aett on input line 8
 23.
 ("C:\MiKTeX 2.9\tex/latex/ae\t1aett.fd"
 File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
-) [33] [34]
-Underfull \hbox (badness 10000) in paragraph at lines 886--887
+) [33]
+Underfull \hbox (badness 10000) in paragraph at lines 864--865
 
  []
 
 
-Overfull \hbox (1.57745pt too wide) in paragraph at lines 902--903
+Overfull \hbox (1.57745pt too wide) in paragraph at lines 880--881
 \T1/aer/m/n/12 Constructing a Gibbs sam-pler to ap-prox-i-mate the joint pos-te
 -rior dis-tri-bu-tion $\OML/cmm/m/it/12 p\OT1/cmr/m/n/12 (\OML/cmm/b/it/12 \OM
 L/cmm/m/it/12 ; []\OMS/cmsy/m/n/12 j[]\OT1/cmr/m/n/12 )$
  []
 
-[35
+[34
 
 ]
-Overfull \hbox (0.347pt too wide) in paragraph at lines 917--918
+Overfull \hbox (0.347pt too wide) in paragraph at lines 895--896
 []\T1/aer/m/n/12 To cre-ate a sam-ple from the pre-dic-tive dis-tri-bu-tion of 
 re-sponses: for each $\OML/cmm/m/it/12 s \OMS/cmsy/m/n/12 2 f\OT1/cmr/m/n/12 1\
 OML/cmm/m/it/12 ; :::; S\OMS/cmsy/m/n/12 g$\T1/aer/m/n/12 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 940--941
+Underfull \hbox (badness 10000) in paragraph at lines 918--919
 
  []
 
-[36]
-Overfull \hbox (119.5216pt too wide) detected at line 991
+[35]
+Underfull \hbox (badness 10000) in paragraph at lines 937--938
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 937--938
+
+ []
+
+
+Overfull \hbox (119.5216pt too wide) detected at line 963
 []
  []
 
-<Thesis-014.pdf, id=599, 433.62pt x 433.62pt>
+<Thesis-014.pdf, id=595, 433.62pt x 433.62pt>
 File: Thesis-014.pdf Graphic file (type pdf)
 <use Thesis-014.pdf>
-Package pdftex.def Info: Thesis-014.pdf  used on input line 997.
+Package pdftex.def Info: Thesis-014.pdf  used on input line 969.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
-[37]
-<Thesis-015.pdf, id=607, 433.62pt x 433.62pt>
+[36]
+<Thesis-015.pdf, id=602, 433.62pt x 433.62pt>
 File: Thesis-015.pdf Graphic file (type pdf)
 <use Thesis-015.pdf>
-Package pdftex.def Info: Thesis-015.pdf  used on input line 1005.
+Package pdftex.def Info: Thesis-015.pdf  used on input line 977.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
- [38 <./Thesis-014.pdf>]
-<Thesis-016.pdf, id=618, 433.62pt x 433.62pt>
+ [37 <./Thesis-014.pdf>]
+<Thesis-016.pdf, id=614, 433.62pt x 433.62pt>
 File: Thesis-016.pdf Graphic file (type pdf)
 <use Thesis-016.pdf>
-Package pdftex.def Info: Thesis-016.pdf  used on input line 1007.
+Package pdftex.def Info: Thesis-016.pdf  used on input line 979.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
- [39 <./Thesis-015.pdf>] [40 <./Thesis-016.pdf>]
-<Thesis-017.pdf, id=639, 433.62pt x 433.62pt>
+ [38 <./Thesis-015.pdf>] [39 <./Thesis-016.pdf>]
+<Thesis-017.pdf, id=635, 433.62pt x 433.62pt>
 File: Thesis-017.pdf Graphic file (type pdf)
 <use Thesis-017.pdf>
-Package pdftex.def Info: Thesis-017.pdf  used on input line 1012.
+Package pdftex.def Info: Thesis-017.pdf  used on input line 984.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
 
-[41
+[40
 
  <./Thesis-017.pdf>]
-<Thesis-018.pdf, id=650, 433.62pt x 433.62pt>
+<Thesis-018.pdf, id=646, 433.62pt x 433.62pt>
 File: Thesis-018.pdf Graphic file (type pdf)
 <use Thesis-018.pdf>
-Package pdftex.def Info: Thesis-018.pdf  used on input line 1018.
+Package pdftex.def Info: Thesis-018.pdf  used on input line 990.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
-<Thesis-019.pdf, id=651, 433.62pt x 433.62pt>
+<Thesis-019.pdf, id=647, 433.62pt x 433.62pt>
 File: Thesis-019.pdf Graphic file (type pdf)
 <use Thesis-019.pdf>
-Package pdftex.def Info: Thesis-019.pdf  used on input line 1022.
+Package pdftex.def Info: Thesis-019.pdf  used on input line 994.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
- [42
+ [41
 
- <./Thesis-018.pdf>] [43 <./Thesis-019.pdf>]
-<Thesis-020.pdf, id=673, 433.62pt x 433.62pt>
+ <./Thesis-018.pdf>] [42 <./Thesis-019.pdf>]
+<Thesis-020.pdf, id=668, 433.62pt x 433.62pt>
 File: Thesis-020.pdf Graphic file (type pdf)
 <use Thesis-020.pdf>
-Package pdftex.def Info: Thesis-020.pdf  used on input line 1030.
+Package pdftex.def Info: Thesis-020.pdf  used on input line 1002.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
-<Thesis-021.pdf, id=674, 433.62pt x 433.62pt>
+<Thesis-021.pdf, id=669, 433.62pt x 433.62pt>
 File: Thesis-021.pdf Graphic file (type pdf)
 <use Thesis-021.pdf>
-Package pdftex.def Info: Thesis-021.pdf  used on input line 1038.
+Package pdftex.def Info: Thesis-021.pdf  used on input line 1010.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
 
-[44
+[43
 
  <./Thesis-020.pdf>]
-<Thesis-022.pdf, id=684, 433.62pt x 433.62pt>
+<Thesis-022.pdf, id=680, 433.62pt x 433.62pt>
 File: Thesis-022.pdf Graphic file (type pdf)
 <use Thesis-022.pdf>
-Package pdftex.def Info: Thesis-022.pdf  used on input line 1040.
+Package pdftex.def Info: Thesis-022.pdf  used on input line 1012.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
- [45 <./Thesis-021.pdf>]
-<Thesis-023.pdf, id=695, 433.62pt x 433.62pt>
+ [44 <./Thesis-021.pdf>]
+<Thesis-023.pdf, id=691, 433.62pt x 433.62pt>
 File: Thesis-023.pdf Graphic file (type pdf)
 <use Thesis-023.pdf>
-Package pdftex.def Info: Thesis-023.pdf  used on input line 1042.
+Package pdftex.def Info: Thesis-023.pdf  used on input line 1014.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
- [46 <./Thesis-022.pdf>]
-<Thesis-024.pdf, id=706, 433.62pt x 433.62pt>
+ [45 <./Thesis-022.pdf>]
+<Thesis-024.pdf, id=702, 433.62pt x 433.62pt>
 File: Thesis-024.pdf Graphic file (type pdf)
 <use Thesis-024.pdf>
-Package pdftex.def Info: Thesis-024.pdf  used on input line 1044.
+Package pdftex.def Info: Thesis-024.pdf  used on input line 1016.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
 
-[47 <./Thesis-023.pdf>]
-<Thesis-025.pdf, id=717, 433.62pt x 433.62pt>
+[46 <./Thesis-023.pdf>]
+<Thesis-025.pdf, id=713, 433.62pt x 433.62pt>
 File: Thesis-025.pdf Graphic file (type pdf)
 <use Thesis-025.pdf>
-Package pdftex.def Info: Thesis-025.pdf  used on input line 1046.
+Package pdftex.def Info: Thesis-025.pdf  used on input line 1018.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
- [48 <./Thesis-024.pdf>] [49 <./Thesis-025.pdf>]
-[50
+ [47 <./Thesis-024.pdf>] [48 <./Thesis-025.pdf>]
+[49
 
 ] (Thesis.aux)
 Package rerunfilecheck Info: File `Thesis.out' has not changed.
@@ -1437,11 +1447,11 @@ LaTeX Font Warning: Size substitutions with differences
 
  ) 
 Here is how much of TeX's memory you used:
- 30657 strings out of 479696
- 712757 string characters out of 2881701
+ 30654 strings out of 479696
+ 712746 string characters out of 2881701
  1158470 words of memory out of 3000000
  46976 multiletter control sequences out of 15000+200000
- 447990 words of font info for 138 fonts, out of 3000000 for 9000
+ 447499 words of font info for 136 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  94i,20n,98p,1134b,609s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\gabe\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\t
@@ -1456,15 +1466,14 @@ pe1/public/amsfonts/cm/cmmi8.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/
 cmmib10.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/MiKTeX 
 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/MiKTeX 2.9/fonts/type1/public/
 amsfonts/cm/cmr6.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:
-/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsltt10.pfb><C:/MiKTeX 2.9/fonts/ty
-pe1/public/amsfonts/cm/cmsy10.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
-/cmsy6.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/MiKTeX 2
-.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/MiKTeX 2.9/fonts/type1/public/
-amsfonts/cm/cmtt12.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/latxfont/line
-10.pfb>
-Output written on Thesis.pdf (50 pages, 1227564 bytes).
+/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/MiKTeX 2.9/fonts/type
+1/public/amsfonts/cm/cmsy6.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm
+sy8.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/MiKTeX 2.9
+/fonts/type1/public/amsfonts/cm/cmtt12.pfb><C:/MiKTeX 2.9/fonts/type1/public/am
+sfonts/latxfont/line10.pfb>
+Output written on Thesis.pdf (49 pages, 1212882 bytes).
 PDF statistics:
- 841 PDF objects out of 1000 (max. 8388607)
- 131 named destinations out of 1000 (max. 500000)
+ 834 PDF objects out of 1000 (max. 8388607)
+ 130 named destinations out of 1000 (max. 500000)
  519 words of extra memory for PDF output out of 10000 (max. 10000000)
 
