@@ -1298,6 +1298,10 @@ $$\{\sigma^2|\mathbf{y,X},\boldsymbol\beta\} \sim \text{inverse-gamma}([\nu_0 + 
     \end{enumerate}
 \end{enumerate}
 
+To create a sample from the predictive distribution of responses:  for each $s\in\{1,...,S\}$, draw $\epsilon^{(s)} \sim N(0,\sigma^{2(s)})$.  Then
+
+$$y^{(s)} = \boldsymbol\beta^{(s)T}\mathbf{X} + \epsilon.$$
+
     \paragraph{Default and weakly informative prior distributions}
     In situations where prior information is unavailable or difficult to quantify, an alternative ``default" class of prior distributions is given. Specification of the prior parameters $(\boldsymbol\beta_0, \Sigma_0)$ and $(\nu_0,\sigma^2_0)$ that represent actual prior information for a Bayesian analysis can be difficult.  For a prior distribution that is not going to represent real prior information about the parameters, we choose one that is as minimally informative as possible.  The resulting posterior distribution, then, will represent the posterior information of someone who began with little knowledge of the population being studied.  Here we will employ Zellner's ``$g$-prior" (Zellner, 1986).  We choose $\boldsymbol\beta_0 = \mathbf{0}$ and $\Sigma_0 = k(\mathbf{X}^T\mathbf{X})^{-1}, k = g\sigma^2, g > 0$, which satisfies a desired condition that the regression parameter estimation be invariant to changes in the scale of the regressors.  With this, equations \ref{semiconj_var} and \ref{semiconj_expec} reduce to
 
@@ -1325,6 +1329,10 @@ Simple Monte Carlo approximation can be used to sample from the joint posterior 
     \item sample $\sigma^2 \sim \text{inverse-gamma}([\nu_0 + n]/2,[\nu_0\sigma^2_0 + \text{SSR}_g]/2)$
     \item sample $\boldsymbol\beta \sim \text{multivariate normal}\left(\frac{g}{g+1}\hat{\boldsymbol\beta}_{ols},\frac{g}{g+1}\sigma^2[\mathbf{X^TX}]^{-1}\right)$.
 \end{enumerate}
+
+To create a sample from the predictive distribution of responses, draw $\epsilon \sim N(0,\sigma^2)$.  Then for each triplet $(\beta,\sigma^2,\epsilon)$ we have
+
+$$y = \boldsymbol\beta^T\mathbf{X} + \epsilon.$$
 
   \subsubsection{R Implementation}
 
