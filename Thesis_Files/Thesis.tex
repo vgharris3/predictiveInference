@@ -63,7 +63,13 @@
 \section{Thesis Abstract}
   \begin{itemize}
     \item (paragraph) Statement of the thesis topic and objectives
+
+    An obstacle to widespread adoption of predictive inference is the lack of suitable computing tools.  Here we demonstrate Bayesian predictive methods for several
+
+    [CONTINUE...]
+
     \item (paragraph) Explanation of R package
+
   \end{itemize}
 
 \clearpage
@@ -72,12 +78,27 @@
 
   \subsection{Why is predictive inference important?}
 
+    Sources:
+    \begin{itemize}
+      \item Nate Silver's book (1st chapter or intro)
+      \item Geyser's book (1st chapter or intro)
+      \item Aitchison and Dunsmore (1st chapter or intro)
+      \item Dean's paper
+      \item maybe some googling
+    \end{itemize}
+
+
   \subsection{Difference between parametric inference and predictive inference}
 
     \subsubsection{When is predictive inference more useful?}
+    Prediction is a means of discriminating between scientific hypotheses.  Generally, a model may be judged by the quality of its predictions.  Given competing models, the better predictor will be given more weight, and a useful model increases in utility as it its predictive capability improves.\\
+
+    If a model doesn't predict well, why use it at all?
 
     \subsubsection{When is parametric inference more useful?}
       [examples, comparisons]
+
+      When the goal is to extract a maximum amount of information from a data set and summarise it in a handful of quantities, inferences about parameters can be useful.  Parametric inference can also be helpful in determining whether a particular problem is worth continued attention.
 
   \subsection{The Bayesian Parametric Prediction Format}
     [Geisser p. 49]\\
@@ -97,6 +118,8 @@
     $$p\left(\theta|x^{(N)}\right) \propto f\left(x^{(N)}|\theta\right)p(\theta).$$
 
   \subsection{[Maybe] Example of Difference between results from Plug-in estimator and results using Predictive Inference}
+
+  Dean's suggestion:  1-sample binomial with small sample size.  E.g. 3 successes, 7 failures (Pr(success) < 0.5).  Difference will be more pronounced with smaller sample sizes.
 
 \clearpage
 
@@ -989,7 +1012,7 @@ Comparing predictions using semi-conjugate prior vs. Zellner's g-prior:
 
 \includegraphics{Thesis-018}
 
-
+Inspection of the graphs shows the predicted distributions using Zellner's g-prior shrink toward 0, and have greater variance than those predicted using Hoff's semi-conjugate prior.
 
 \includegraphics{Thesis-019}
 

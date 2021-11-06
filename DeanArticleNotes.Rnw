@@ -123,5 +123,9 @@ More fundamental advantage:  ``predictions of observable events is understandabl
 
 
 
+\section{Notes from Dean Meeting 11/5/2021}
+
+
+
 
 \end{document}
