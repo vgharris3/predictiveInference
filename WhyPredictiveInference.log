@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  8 NOV 2021 09:13
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  8 NOV 2021 09:14
 entering extended mode
-**./Thesis.tex
-(Thesis.tex
+**./WhyPredictiveInference.tex
+(WhyPredictiveInference.tex
 LaTeX2e <2020-10-01> patch level 2
 L3 programming layer <2020-12-07> xparse <2020-03-03>
 ("C:\MiKTeX 2.9\tex/latex/base\article.cls"
@@ -779,37 +779,16 @@ File: tikzlibraryplotmarks.code.tex 2020/12/01 v3.1.7a (3.1.7a)
 ("C:\MiKTeX 2.9\tex/generic/pgf/libraries\pgflibraryplotmarks.code.tex"
 File: pgflibraryplotmarks.code.tex 2020/12/01 v3.1.7a (3.1.7a)
 )))
-("C:\MiKTeX 2.9\tex/latex/pdfpages\pdfpages.sty"
-Package: pdfpages 2020/01/28 v0.5q Insert pages of external PDF documents (AM)
-
-("C:\MiKTeX 2.9\tex/latex/eso-pic\eso-pic.sty"
-Package: eso-pic 2020/10/14 v3.0a eso-pic (RN)
-\ESO@tempdima=\dimen305
-\ESO@tempdimb=\dimen306
-)
-\AM@pagewidth=\dimen307
-\AM@pageheight=\dimen308
-
-("C:\MiKTeX 2.9\tex/latex/pdfpages\pppdftex.def"
-File: pppdftex.def 2020/01/28 v0.5q Pdfpages driver for pdfTeX (AM)
-)
-\AM@pagebox=\box68
-\AM@global@opts=\toks46
-\AM@pagecnt=\count313
-\AM@toc@title=\toks47
-\c@AM@survey=\count314
-\AM@templatesizebox=\box69
-)
 (C:/PROGRA~1/R/R-41~1.1/share/texmf/tex/latex\Sweave.sty
 Package: Sweave 
 
 ("C:\MiKTeX 2.9\tex/latex/fancyvrb\fancyvrb.sty"
 Package: fancyvrb 2020/05/03 v3.6 verbatim text (tvz,hv)
-\FV@CodeLineNo=\count315
+\FV@CodeLineNo=\count313
 \FV@InFile=\read3
-\FV@TabBox=\box70
-\c@FancyVerbLine=\count316
-\FV@StepNumber=\count317
+\FV@TabBox=\box68
+\c@FancyVerbLine=\count314
+\FV@StepNumber=\count315
 \FV@OutFile=\write4
 )
 ("C:\MiKTeX 2.9\tex/latex/base\fontenc.sty"
@@ -824,8 +803,8 @@ LaTeX Font Info:    Trying to load font information for T1+aer on input line 51
 
 ("C:\MiKTeX 2.9\tex/latex/ae\t1aer.fd"
 File: t1aer.fd 1997/11/16 Font definitions for T1/aer.
-) (Thesis.aux)
-\openout1 = `Thesis.aux'.
+) (WhyPredictiveInference.aux)
+\openout1 = `WhyPredictiveInference.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 51.
 LaTeX Font Info:    ... okay on input line 51.
@@ -880,17 +859,17 @@ LaTeX Font Info:    ... okay on input line 51.
 
 ("C:\MiKTeX 2.9\tex/context/base/mkii\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count318
-\scratchdimen=\dimen309
-\scratchbox=\box71
-\nofMPsegments=\count319
-\nofMParguments=\count320
-\everyMPshowfont=\toks48
-\MPscratchCnt=\count321
-\MPscratchDim=\dimen310
-\MPnumerator=\count322
-\makeMPintoPDFobject=\count323
-\everyMPtoPDFconversion=\toks49
+\scratchcounter=\count316
+\scratchdimen=\dimen305
+\scratchbox=\box69
+\nofMPsegments=\count317
+\nofMParguments=\count318
+\everyMPshowfont=\toks46
+\MPscratchCnt=\count319
+\MPscratchDim=\dimen306
+\MPnumerator=\count320
+\makeMPintoPDFobject=\count321
+\everyMPtoPDFconversion=\toks47
 ) ("C:\MiKTeX 2.9\tex/latex/epstopdf-pkg\epstopdf-base.sty"
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 
@@ -915,15 +894,15 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ("C:\MiKTeX 2.9\tex/generic/gettitlestring\gettitlestring.sty"
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count324
+\c@section@level=\count322
 )
 LaTeX Info: Redefining \ref on input line 51.
 LaTeX Info: Redefining \pageref on input line 51.
 LaTeX Info: Redefining \nameref on input line 51.
- (Thesis.out)
-(Thesis.out)
+
+(WhyPredictiveInference.out) (WhyPredictiveInference.out)
 \@outlinefile=\write5
-\openout5 = `Thesis.out'.
+\openout5 = `WhyPredictiveInference.out'.
 
 
 
@@ -932,553 +911,63 @@ ick labels; missing features). Consider writing \pgfplotsset{compat=1.17} into
 your preamble.
  on input line 51.
 
-("C:\MiKTeX 2.9\tex/latex/pdflscape\pdflscape.sty"
-Package: pdflscape 2019/12/05 v0.12 Display of landscape pages in PDF (HO)
+(WhyPredictiveInference-concordance.tex)
+LaTeX Font Info:    Trying to load font information for U+msa on input line 64.
 
-("C:\MiKTeX 2.9\tex/latex/graphics\lscape.sty"
-Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
-)
-Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
-)
-<TitlePage_MastersThesis.pdf, id=182, 597.50829pt x 845.0471pt>
-File: TitlePage_MastersThesis.pdf Graphic file (type pdf)
-<use TitlePage_MastersThesis.pdf>
-Package pdftex.def Info: TitlePage_MastersThesis.pdf  used on input line 52.
-(pdftex.def)             Requested size: 362.37569pt x 512.49939pt.
-File: TitlePage_MastersThesis.pdf Graphic file (type pdf)
-<use TitlePage_MastersThesis.pdf>
-Package pdftex.def Info: TitlePage_MastersThesis.pdf  used on input line 52.
-(pdftex.def)             Requested size: 362.37569pt x 512.49939pt.
-<TitlePage_MastersThesis.pdf, id=185, page=1, 597.50829pt x 845.0471pt>
-File: TitlePage_MastersThesis.pdf Graphic file (type pdf)
-<use TitlePage_MastersThesis.pdf, page 1>
-Package pdftex.def Info: TitlePage_MastersThesis.pdf , page1 used on input line
- 52.
-(pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
-File: TitlePage_MastersThesis.pdf Graphic file (type pdf)
-<use TitlePage_MastersThesis.pdf, page 1>
-Package pdftex.def Info: TitlePage_MastersThesis.pdf , page1 used on input line
- 52.
-(pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
-File: TitlePage_MastersThesis.pdf Graphic file (type pdf)
-<use TitlePage_MastersThesis.pdf, page 1>
-Package pdftex.def Info: TitlePage_MastersThesis.pdf , page1 used on input line
- 52.
-(pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
-File: TitlePage_MastersThesis.pdf Graphic file (type pdf)
-<use TitlePage_MastersThesis.pdf, page 1>
-Package pdftex.def Info: TitlePage_MastersThesis.pdf , page1 used on input line
- 52.
-(pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
-File: TitlePage_MastersThesis.pdf Graphic file (type pdf)
-<use TitlePage_MastersThesis.pdf, page 1>
-Package pdftex.def Info: TitlePage_MastersThesis.pdf , page1 used on input line
- 52.
-(pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
- [1
-
- <./TitlePage_MastersThesis.pdf{C:/Users/gabe/AppData/Local/MiKTeX/2.9/pdftex/c
-onfig/pdftex.map}>]
-
-pdfTeX warning: pdflatex.exe (file ./ThesisApprovalPage.pdf): PDF inclusion: fo
-und PDF version <1.7>, but at most version <1.5> allowed
-<ThesisApprovalPage.pdf, id=212, 614.295pt x 794.97pt>
-File: ThesisApprovalPage.pdf Graphic file (type pdf)
-<use ThesisApprovalPage.pdf>
-Package pdftex.def Info: ThesisApprovalPage.pdf  used on input line 53.
-(pdftex.def)             Requested size: 362.37569pt x 468.95546pt.
-
-
-pdfTeX warning: pdflatex.exe (file ./ThesisApprovalPage.pdf): PDF inclusion: fo
-und PDF version <1.7>, but at most version <1.5> allowed
-File: ThesisApprovalPage.pdf Graphic file (type pdf)
-<use ThesisApprovalPage.pdf>
-Package pdftex.def Info: ThesisApprovalPage.pdf  used on input line 53.
-(pdftex.def)             Requested size: 362.37569pt x 468.95546pt.
-
-
-pdfTeX warning: pdflatex.exe (file ./ThesisApprovalPage.pdf): PDF inclusion: fo
-und PDF version <1.7>, but at most version <1.5> allowed
-
-
-pdfTeX warning: pdflatex.exe (file ./ThesisApprovalPage.pdf): PDF inclusion: fo
-und PDF version <1.7>, but at most version <1.5> allowed
-<ThesisApprovalPage.pdf, id=215, page=1, 614.295pt x 794.97pt>
-File: ThesisApprovalPage.pdf Graphic file (type pdf)
-<use ThesisApprovalPage.pdf, page 1>
-Package pdftex.def Info: ThesisApprovalPage.pdf , page1 used on input line 53.
-(pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
-File: ThesisApprovalPage.pdf Graphic file (type pdf)
-<use ThesisApprovalPage.pdf, page 1>
-Package pdftex.def Info: ThesisApprovalPage.pdf , page1 used on input line 53.
-(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-File: ThesisApprovalPage.pdf Graphic file (type pdf)
-<use ThesisApprovalPage.pdf, page 1>
-Package pdftex.def Info: ThesisApprovalPage.pdf , page1 used on input line 53.
-(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-File: ThesisApprovalPage.pdf Graphic file (type pdf)
-<use ThesisApprovalPage.pdf, page 1>
-Package pdftex.def Info: ThesisApprovalPage.pdf , page1 used on input line 53.
-(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-File: ThesisApprovalPage.pdf Graphic file (type pdf)
-<use ThesisApprovalPage.pdf, page 1>
-Package pdftex.def Info: ThesisApprovalPage.pdf , page1 used on input line 53.
-(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
-[2 <./ThesisApprovalPage.pdf>] (Thesis-concordance.tex) (Thesis.toc
-LaTeX Font Info:    Trying to load font information for U+msa on input line 3.
 
 ("C:\MiKTeX 2.9\tex/latex/amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 3.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 64.
+
 
 ("C:\MiKTeX 2.9\tex/latex/amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Trying to load font information for U+rsfs on input line 3.
-
+LaTeX Font Info:    Trying to load font information for U+rsfs on input line 64
+.
 
 ("C:\MiKTeX 2.9\tex/latex/jknappen\ursfs.fd"
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
-) [3])
-\tf@toc=\write6
-\openout6 = `Thesis.toc'.
-
- [4]
-LaTeX Font Info:    Trying to load font information for TS1+aer on input line 6
-5.
+)
+LaTeX Font Info:    Trying to load font information for TS1+aer on input line 7
+0.
 
 (C:/PROGRA~1/R/R-41~1.1/share/texmf/tex/latex\ts1aer.fd
 File: ts1aer.fd 
 )
 LaTeX Font Info:    Font shape `TS1/aer/m/n' in size <12> not available
-(Font)              Font shape `TS1/cmr/m/n' tried instead on input line 65.
- [5]
-Underfull \hbox (badness 10000) in paragraph at lines 94--95
+(Font)              Font shape `TS1/cmr/m/n' tried instead on input line 70.
+
+Underfull \hbox (badness 10000) in paragraph at lines 84--86
 
  []
 
+[1
 
-Underfull \hbox (badness 10000) in paragraph at lines 113--114
+{C:/Users/gabe/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [2]
+[3] [4] (WhyPredictiveInference.aux)
+Package rerunfilecheck Info: File `WhyPredictiveInference.out' has not changed.
 
- []
-
-[6
-
-] [7]
-
-Package amsmath Warning: Foreign command \atopwithdelims;
-(amsmath)                \frac or \genfrac should be used instead
-(amsmath)                 on input line 146.
-
-[8
-
-]
-<Thesis-002.pdf, id=367, 433.62pt x 433.62pt>
-File: Thesis-002.pdf Graphic file (type pdf)
-<use Thesis-002.pdf>
-Package pdftex.def Info: Thesis-002.pdf  used on input line 191.
-(pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
- [9
-
- <./Thesis-002.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 203--205
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 231--232
-
- []
-
-[10]
-Underfull \hbox (badness 10000) in paragraph at lines 248--249
-
- []
-
-<Thesis-003.pdf, id=386, 433.62pt x 433.62pt>
-File: Thesis-003.pdf Graphic file (type pdf)
-<use Thesis-003.pdf>
-Package pdftex.def Info: Thesis-003.pdf  used on input line 262.
-(pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
-[11] [12 <./Thesis-003.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 268--270
-
- []
-
-[13
-
-] [14]
-Overfull \hbox (41.8812pt too wide) detected at line 379
-[]
- []
-
-[15]
-Overfull \hbox (23.23816pt too wide) detected at line 412
-[]
- []
-
-[16]
-Underfull \hbox (badness 10000) in paragraph at lines 426--427
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 428--429
-
- []
-
-<Thesis-004.pdf, id=420, 433.62pt x 433.62pt>
-File: Thesis-004.pdf Graphic file (type pdf)
-<use Thesis-004.pdf>
-Package pdftex.def Info: Thesis-004.pdf  used on input line 443.
-(pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
-[17] [18 <./Thesis-004.pdf>]
-LaTeX Font Info:    Calculating math sizes for size <8.4> on input line 460.
-
-
-LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <4.2> not available
-(Font)              size <5> substituted on input line 460.
-
-
-LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <4.2> not available
-(Font)              size <5> substituted on input line 460.
-
-
-LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <4.2> not available
-(Font)              size <5> substituted on input line 460.
-
-
-LaTeX Font Warning: Font shape `OT1/cmr/bx/n' in size <4.2> not available
-(Font)              size <5> substituted on input line 460.
-
-
-LaTeX Font Warning: Font shape `OML/cmm/b/it' in size <4.2> not available
-(Font)              size <5> substituted on input line 460.
-
-
-LaTeX Font Warning: Font shape `OMS/cmsy/b/n' in size <4.2> not available
-(Font)              size <5> substituted on input line 460.
-
-
-LaTeX Font Warning: Font shape `U/rsfs/m/n' in size <4.2> not available
-(Font)              size <5> substituted on input line 460.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 475--476
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 477--478
-
- []
-
-[19
-
-]
-Underfull \hbox (badness 10000) in paragraph at lines 499--500
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 511--512
-
- []
-
-
-Overfull \hbox (18.08081pt too wide) in paragraph at lines 519--520
- \T1/aer/b/n/12 3.4.1.2 R Im-ple-men-ta-tion[][] \T1/aer/m/n/12 Stan-dard for-m
-at R func-tions dpred-NormIG(), ppred-NormIG(),
- []
-
-[20]
-Underfull \hbox (badness 10000) in paragraph at lines 533--534
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 538--539
-
- []
-
-[21]
-<Thesis-005.pdf, id=456, 433.62pt x 433.62pt>
-File: Thesis-005.pdf Graphic file (type pdf)
-<use Thesis-005.pdf>
-Package pdftex.def Info: Thesis-005.pdf  used on input line 566.
-(pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
- [22] [23 <./Thesis-005.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 590--591
-
- []
-
-[24
-
-]
-Underfull \hbox (badness 10000) in paragraph at lines 631--634
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 631--634
-
- []
-
-<Thesis-006.pdf, id=475, 433.62pt x 433.62pt>
-File: Thesis-006.pdf Graphic file (type pdf)
-<use Thesis-006.pdf>
-Package pdftex.def Info: Thesis-006.pdf  used on input line 635.
-(pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
-[25]
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 638.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 638.
-
-[26 <./Thesis-006.pdf>] [27]
-<Thesis-007.pdf, id=505, 433.62pt x 433.62pt>
-File: Thesis-007.pdf Graphic file (type pdf)
-<use Thesis-007.pdf>
-Package pdftex.def Info: Thesis-007.pdf  used on input line 696.
-(pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
-<Thesis-008.pdf, id=506, 433.62pt x 433.62pt>
-File: Thesis-008.pdf Graphic file (type pdf)
-<use Thesis-008.pdf>
-Package pdftex.def Info: Thesis-008.pdf  used on input line 698.
-(pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
- [28 <./Thesis-007.pdf>]
-<Thesis-009.pdf, id=520, 433.62pt x 433.62pt>
-File: Thesis-009.pdf Graphic file (type pdf)
-<use Thesis-009.pdf>
-Package pdftex.def Info: Thesis-009.pdf  used on input line 727.
-(pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
- [29 <./Thesis-008.pdf>]
-[30 <./Thesis-009.pdf>]
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 734.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 734.
-
-[31
-
-]
-<Thesis-010.pdf, id=547, 433.62pt x 433.62pt>
-File: Thesis-010.pdf Graphic file (type pdf)
-<use Thesis-010.pdf>
-Package pdftex.def Info: Thesis-010.pdf  used on input line 802.
-(pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
- [32
-
- <./Thesis-010.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 821--822
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 821--822
-
- []
-
-<Thesis-011.pdf, id=558, 433.62pt x 433.62pt>
-File: Thesis-011.pdf Graphic file (type pdf)
-<use Thesis-011.pdf>
-Package pdftex.def Info: Thesis-011.pdf  used on input line 823.
-(pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 832--833
-
- []
-
-[33 <./Thesis-011.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 836--837
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 838--840
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 845--846
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 852--853
-
- []
-
-LaTeX Font Info:    Trying to load font information for T1+aett on input line 8
-55.
-("C:\MiKTeX 2.9\tex/latex/ae\t1aett.fd"
-File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
-) [34]
-Underfull \hbox (badness 10000) in paragraph at lines 896--897
-
- []
-
-
-Overfull \hbox (1.57745pt too wide) in paragraph at lines 912--913
-\T1/aer/m/n/12 Constructing a Gibbs sam-pler to ap-prox-i-mate the joint pos-te
--rior dis-tri-bu-tion $\OML/cmm/m/it/12 p\OT1/cmr/m/n/12 (\OML/cmm/b/it/12 \OM
-L/cmm/m/it/12 ; []\OMS/cmsy/m/n/12 j[]\OT1/cmr/m/n/12 )$
- []
-
-[35
-
-]
-Overfull \hbox (0.347pt too wide) in paragraph at lines 927--928
-[]\T1/aer/m/n/12 To cre-ate a sam-ple from the pre-dic-tive dis-tri-bu-tion of 
-re-sponses: for each $\OML/cmm/m/it/12 s \OMS/cmsy/m/n/12 2 f\OT1/cmr/m/n/12 1\
-OML/cmm/m/it/12 ; :::; S\OMS/cmsy/m/n/12 g$\T1/aer/m/n/12 ,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 950--951
-
- []
-
-[36]
-Underfull \hbox (badness 10000) in paragraph at lines 969--970
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 969--970
-
- []
-
-
-Overfull \hbox (119.5216pt too wide) detected at line 995
-[]
- []
-
-<Thesis-014.pdf, id=600, 433.62pt x 433.62pt>
-File: Thesis-014.pdf Graphic file (type pdf)
-<use Thesis-014.pdf>
-Package pdftex.def Info: Thesis-014.pdf  used on input line 1001.
-(pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
-[37]
-<Thesis-015.pdf, id=608, 433.62pt x 433.62pt>
-File: Thesis-015.pdf Graphic file (type pdf)
-<use Thesis-015.pdf>
-Package pdftex.def Info: Thesis-015.pdf  used on input line 1009.
-(pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
- [38 <./Thesis-014.pdf>]
-<Thesis-016.pdf, id=619, 433.62pt x 433.62pt>
-File: Thesis-016.pdf Graphic file (type pdf)
-<use Thesis-016.pdf>
-Package pdftex.def Info: Thesis-016.pdf  used on input line 1011.
-(pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
- [39 <./Thesis-015.pdf>] [40 <./Thesis-016.pdf>]
-<Thesis-017.pdf, id=640, 433.62pt x 433.62pt>
-File: Thesis-017.pdf Graphic file (type pdf)
-<use Thesis-017.pdf>
-Package pdftex.def Info: Thesis-017.pdf  used on input line 1016.
-(pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
-
-[41
-
- <./Thesis-017.pdf>]
-<Thesis-018.pdf, id=651, 433.62pt x 433.62pt>
-File: Thesis-018.pdf Graphic file (type pdf)
-<use Thesis-018.pdf>
-Package pdftex.def Info: Thesis-018.pdf  used on input line 1022.
-(pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
-<Thesis-019.pdf, id=652, 433.62pt x 433.62pt>
-File: Thesis-019.pdf Graphic file (type pdf)
-<use Thesis-019.pdf>
-Package pdftex.def Info: Thesis-019.pdf  used on input line 1026.
-(pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
- [42
-
- <./Thesis-018.pdf>] [43 <./Thesis-019.pdf>]
-<Thesis-020.pdf, id=674, 433.62pt x 433.62pt>
-File: Thesis-020.pdf Graphic file (type pdf)
-<use Thesis-020.pdf>
-Package pdftex.def Info: Thesis-020.pdf  used on input line 1034.
-(pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
-<Thesis-021.pdf, id=675, 433.62pt x 433.62pt>
-File: Thesis-021.pdf Graphic file (type pdf)
-<use Thesis-021.pdf>
-Package pdftex.def Info: Thesis-021.pdf  used on input line 1042.
-(pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
-
-[44
-
- <./Thesis-020.pdf>]
-<Thesis-022.pdf, id=685, 433.62pt x 433.62pt>
-File: Thesis-022.pdf Graphic file (type pdf)
-<use Thesis-022.pdf>
-Package pdftex.def Info: Thesis-022.pdf  used on input line 1044.
-(pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
- [45 <./Thesis-021.pdf>]
-<Thesis-023.pdf, id=696, 433.62pt x 433.62pt>
-File: Thesis-023.pdf Graphic file (type pdf)
-<use Thesis-023.pdf>
-Package pdftex.def Info: Thesis-023.pdf  used on input line 1046.
-(pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
- [46 <./Thesis-022.pdf>]
-<Thesis-024.pdf, id=707, 433.62pt x 433.62pt>
-File: Thesis-024.pdf Graphic file (type pdf)
-<use Thesis-024.pdf>
-Package pdftex.def Info: Thesis-024.pdf  used on input line 1048.
-(pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
-
-[47 <./Thesis-023.pdf>]
-<Thesis-025.pdf, id=718, 433.62pt x 433.62pt>
-File: Thesis-025.pdf Graphic file (type pdf)
-<use Thesis-025.pdf>
-Package pdftex.def Info: Thesis-025.pdf  used on input line 1050.
-(pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
- [48 <./Thesis-024.pdf>] [49 <./Thesis-025.pdf>]
-[50
-
-] (Thesis.aux)
-Package rerunfilecheck Info: File `Thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 542B9F2F766D04C76700AD0DF2F1D535;3646.
-
-
-LaTeX Font Warning: Size substitutions with differences
-(Font)              up to 2.90001pt have occurred.
-
+(rerunfilecheck)             Checksum: 046B4491995E32951BC0F8E2A2CCEE9B;300.
  ) 
 Here is how much of TeX's memory you used:
- 30657 strings out of 479696
- 712796 string characters out of 2881701
- 1158470 words of memory out of 3000000
- 46977 multiletter control sequences out of 15000+200000
- 447499 words of font info for 136 fonts, out of 3000000 for 9000
+ 29564 strings out of 479696
+ 694914 string characters out of 2881701
+ 1144486 words of memory out of 3000000
+ 46032 multiletter control sequences out of 15000+200000
+ 439265 words of font info for 117 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 94i,20n,98p,1134b,609s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 94i,7n,98p,721b,609s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\gabe\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\t
 crm1200.pk><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmb10.pfb><C:/MiKTeX 2
-.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/MiKTeX 2.9/fonts/type1/public/
-amsfonts/cm/cmbx8.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmcsc10.pfb
-><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/MiKTeX 2.9/fonts/
-type1/public/amsfonts/cmextra/cmex7.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfo
-nts/cmextra/cmex8.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb>
-<C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/MiKTeX 2.9/fonts/ty
-pe1/public/amsfonts/cm/cmmi8.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/
-cmmib10.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/MiKTeX 
-2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/MiKTeX 2.9/fonts/type1/public/
-amsfonts/cm/cmr6.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:
-/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/MiKTeX 2.9/fonts/type
-1/public/amsfonts/cm/cmsy6.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm
-sy8.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/MiKTeX 2.9
-/fonts/type1/public/amsfonts/cm/cmtt12.pfb><C:/MiKTeX 2.9/fonts/type1/public/am
-sfonts/latxfont/line10.pfb>
-Output written on Thesis.pdf (50 pages, 1216605 bytes).
+.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/MiKTeX 2.9/fonts/type1/public/
+amsfonts/cm/cmr12.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><
+C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/MiKTeX 2.9/fonts/ty
+pe1/public/amsfonts/cm/cmti12.pfb>
+Output written on WhyPredictiveInference.pdf (4 pages, 89956 bytes).
 PDF statistics:
- 839 PDF objects out of 1000 (max. 8388607)
- 132 named destinations out of 1000 (max. 500000)
- 519 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 76 PDF objects out of 1000 (max. 8388607)
+ 9 named destinations out of 1000 (max. 500000)
+ 49 words of extra memory for PDF output out of 10000 (max. 10000000)
 

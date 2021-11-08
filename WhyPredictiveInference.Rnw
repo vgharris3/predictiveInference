@@ -60,11 +60,14 @@ setwd("C:/Users/gabe/Documents/tmp/predictiveInference")
 @
 
 
-\title{Notes on ``Predictive Inference and Scientific Reproducibility" by Dean Billheimer}
+\title{Notes on the question:  Why Predictive Inference?}
 \author{\Large Gabe Harris}
 \maketitle
 
-\textbf{Abstract}\\
+\section{``Predictive Inference and Scientific Reproducibility" by Dean Billheimer}
+
+\subsection{Abstract}
+
 \begin{itemize}
   \item hypothesis tests and parameter estimation for inference are ``noble, but misguided."
   \item "observables are fundamental"
@@ -83,7 +86,7 @@ setwd("C:/Users/gabe/Documents/tmp/predictiveInference")
 \textit{``The only useful function for a statistician is to make predictions, and thus provide a basis for action."}\\
 W. Edwards Deming\\
 
-\section{Introduction}
+\subsection{Introduction}
 
 \begin{itemize}
   \item ``current disciplinary dilemma over $p$-values," conventional hypothesis tests.  Conventional ways of doing statistics compromises reproducibility \textcolor{red}{elaborate}
@@ -117,13 +120,38 @@ Additional advantages
 More fundamental advantage:  ``predictions of observable events is understandable to humans."
 
 
+\subsection{Why Predictive Inference?}
+
+\begin{itemize}
+  \item Predictivist approach to inference advocated by de Finetti (1937,2017), Aitchison and Dunsmore (1975), and Geisser (1993), among others, all of whom stress that observables are fundamental and the purpose of statistics is to make inferences about values not yet observed based on values that have been observed
+  \item ``Thus, the proper use of statistical models is the prediction of future observations."
+  \item In modern applications, the systems generating the data are inherently complex.
+  \item Inferences about (imaginary) model parameters are convenient, but do not account for the inherent complexity of the systems generating the data.
+  \item Problems with parametric inference
+  \begin{itemize}
+    \item ``Future results based on a finite sample are more uncertain than those based on a hypothetical infinite sample." \textcolor{red}{Is this just because the hypothetical sample includes not only the observed data but also prior information?  Does this contradict your stress on the primacy of observed data?  Or does it underscore it, understanding prior information to be additional informative observed data?}
+    \item ``parametric inference amounts to a type of `uncertainty laundering' and serves to mask the actual uncertainty inherent in inference."  \textcolor{red}{Is this saying that parametric inference carries an assumption that the uncertainty inherent in inference is negligible or nonexistent?}
+    \item The way scientific studies are done usually involves sequences of experiments, so the next set of results is naturally conditional on the previous experiments in the sequence.
+    \item Repeatability/reproducibility is paramount:  What is the probability that $X$ will be observed in the follow-on study?
+    \item Most scientist think in terms of observables.  ``Observation is the currency of science."
+  \end{itemize}
+  \begin{itemize}
+    \item Prediction of a single future outcome most natural for personal decision-making
+    \item Situations influencing future sample size for scientists considering reproducibility (here $N$ is current sample size and $M$ is future sample size)
+    \begin{itemize}
+      \item Prediction of the next observation ($M=1$)
+      \item Replication of results of the previous experiment ($M=N$)
+      \item Prediction of results in a future targeted experiment--this depends on the anticipated next step (e.g., probability of success in a targeted phase III drug trial, based on phase II trial results.) \textcolor{red}{($M=$?)}
+      \item Prediction of results in a large (infinite) sample ($M=\infty$)
+    \end{itemize}
+      \item Inferential statements about future results must be meaningful to the consumer of the analysis.  Statements about hypothetical parameters often are not.
+  \end{itemize}
+  \item Predictions of future observables provide the opportunity to corroborate or refute the original hypothesis based on follow-on confirmatory experiments.
+\end{itemize}
 
 
 
 
-
-
-\section{Notes from Dean Meeting 11/5/2021}
 
 
 
