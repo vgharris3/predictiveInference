@@ -64,7 +64,15 @@
   \begin{itemize}
     \item (paragraph) Statement of the thesis topic and objectives
 
-    An obstacle to widespread adoption of predictive inference is the lack of suitable computing tools.  Here we demonstrate Bayesian predictive methods for several
+    There is a disparity between the growing interest in Bayesian predictive inference and the rate at which these techniques are employed in scientific research.  An obstacle to widespread adoption of predictive inference is the lack of suitable computing tools.  Here we demonstrate methods for several useful cases, and provide an applicable set of tools for statisticians.\\
+    The following cases, borrowed from Seymour Geisser and Peter D. Hoff, are the object of this thesis:
+    \begin{itemize}
+      \item Beta-Binomial, prediction of future successes (Geisser)
+      \item Exponential-Gamma, survival time (Geisser)
+      \item Poisson-Gamma, \textcolor{red}{Hoff's example is predicting future number of children based on a woman's level of education} (Hoff)
+      \item Normal-Inverse Gamma \textcolor{red}{midge wing length} (Hoff)
+      \item Normal Regression \textcolor{red}{prediction of oxygen up-take after different exercise programs} (Hoff)
+    \end{itemize}
 
     [CONTINUE...]
 
@@ -104,11 +112,19 @@
 
   \textcolor{red}{Use Billheimer's setup from his article, start of section 3}
 
-  This thesis and the accompanying set of tools (R package) employs a Bayesian approach to predictive inference relying on the de Finetti representation theorem (de Finetti 1937). \textcolor{red}{State theorem here?} We can write
+  This thesis and the accompanying set of tools (R package) employs a Bayesian approach to predictive inference relying on the de Finetti representation theorem (de Finetti 1937). \textcolor{red}{State the de Finetti theorem here?} We can write
 
 \begin{equation}
-  g(x_{n+1}|\mathbf{x}_n) = \frac{\int_\Theta f(\mathbf{x}_{n+1}|\mathbf{\theta})\pi(\mathbf{\theta})d\mathbf{\theta}}{\int_\Theta f(\mathbf{x}_n|\mathbf{\theta})\pi(\mathbf{\theta})d\mathbf{\theta}} = \frac{h(\mathbf{x}_{n+1})}{h(\mathbf{x}_n)} \label{generalPredictiveDistribution}
+  g(x_{n+1}|\mathbf{x}_n) = \frac{\int_\Theta f(\mathbf{x}_{n+1}|\boldsymbol\theta)\pi(\boldsymbol\theta)d\boldsymbol\theta}{\int_\Theta f(\mathbf{x}_n|\boldsymbol\theta)\pi(\boldsymbol\theta)d\boldsymbol\theta} = \frac{h(\mathbf{x}_{n+1})}{h(\mathbf{x}_n)} \label{generalPredictiveDistributionFormula}
 \end{equation}
+
+\noindent where $h(\mathbf{x}_k)$ is the marginal density of $\mathbf{x}_k$, $\boldsymbol\theta$ has prior distribution $\pi(\boldsymbol\theta)$, and $\Theta$ is the parameter space for $\boldsymbol\theta$.  Then the predictive density $g(\cdot)$ can be written:
+
+\begin{equation}
+  g(x_{n+1}|\mathbf{x}_n) = \int_\Theta f(\mathbf{x}_{n+1}|\boldsymbol\theta)\pi(\boldsymbol\theta | \mathbf{x}_n)d\boldsymbol\theta \label{concisePredictiveDistributionFormula}
+\end{equation}
+
+\noindent where $x_{n+1}$ is conditionally independent of $\mathbf{x}_n$ given $\boldsymbol\theta$, and $\pi(\boldsymbol\theta | \mathbf{x}_n)d\boldsymbol\theta)$ is the posterior distribution of $\mathbf{x}_n$ given $\boldsymbol\theta$.
 
     [Geisser p. 49]\\
 
@@ -1052,5 +1068,7 @@ The following plots exhibit the influence of varying the prior info with the sem
 \clearpage
 
 \section{Conclusion}
+
+\section{References}
 
 \end{document}
