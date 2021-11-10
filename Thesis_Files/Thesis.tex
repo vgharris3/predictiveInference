@@ -61,11 +61,10 @@
 %%INTRODUCTION
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Thesis Abstract}
-  \begin{itemize}
-    \item (paragraph) Statement of the thesis topic and objectives
+  % \begin{itemize}
+  %   \item (paragraph) Statement of the thesis topic and objectives
 
-    There is a disparity between the growing interest in Bayesian predictive inference and the rate at which these techniques are employed in scientific research.  An obstacle to widespread adoption of predictive inference is the lack of suitable computing tools.  Here we demonstrate methods for several useful cases, and provide an applicable set of tools for statisticians.\\
-    The following cases, borrowed from Seymour Geisser and Peter D. Hoff, are the object of this thesis:
+    There is a disparity between the growing interest in Bayesian predictive inference and the rate at which these techniques are employed in scientific research.  An obstacle to widespread adoption of predictive inference is the lack of suitable computing tools.  Here we demonstrate methods for several useful cases, and provide an applicable set of tools for statisticians.  The following cases, borrowed from Seymour Geisser and Peter D. Hoff, are the subject of this thesis.
     \begin{itemize}
       \item Beta-Binomial, prediction of future successes (Geisser)
       \item Exponential-Gamma, survival time (Geisser)
@@ -74,17 +73,25 @@
       \item Normal Regression \textcolor{red}{prediction of oxygen up-take after different exercise programs} (Hoff)
     \end{itemize}
 
-    [CONTINUE...]
+    % \item (paragraph) Explanation of R package
 
-    \item (paragraph) Explanation of R package
+    An R package has been developed, the main purpose of which is to provide the researcher with a means of producing random samples from predictive distributions.  Functions have been created for this purpose, following a naming convention patterned after base R distribution functions.  There is a random sampler for each case, prefixed with the letter ``r."  For some of the cases there are also density and distribution functions prefixed with ``d" and ``p," respectively. The R code for each function is included in Appendix \textcolor{red}{X-insert link to appendix here}.  The names of the functions for each case are:
+    \begin{itemize}
+      \item dpredBB(), ppredBB(), rpredBB() (Beta-Binomial)
+      \item dpredEG(), ppredEG(), rpredEG() (Exponential Gamma)
+      \item dpredPG(), ppredPG(), rpredPG() (Poisson-Gamma)
+      \item dpredNormIG(), ppredNormIG(), rpredNormIG() (Normal-Inverse Gamma)
+        \subitem \textcolor{red}{also created rpredNormIG2() and rpredNormIGk() for samples comparing 2 groups and k groups, respectively.  I need to look into combining them into one function.  maybe do away with dpredNormIG() and ppredNormIG()?}
+      \item rpredNormReg() (Normal Regression)
+    \end{itemize}
 
-  \end{itemize}
+  % \end{itemize}
 
 \clearpage
 
 \section{Introduction:  Predictive Inference}
 
-  \subsection{Why is predictive inference important?}
+  \subsection{Why Predictive Inference? \textcolor{red}{Am I answering why \textit{Bayesian} predictive inference?}}
 
     Sources:
     \begin{itemize}
@@ -94,6 +101,8 @@
       \item Dean's paper
       \item maybe some googling
     \end{itemize}
+
+    The main purpose of statistics is to predict future events based on observed data.  Prediction about meaningful quantities that are relevant to the object of study facilitates scientific progress in multiple ways.  Advantages include enhancing scientific reproducibility, enabling corroboration or refutation of current hypotheses through future experimentation, informing decision-making with summaries of quantities of direct interest to the researcher, and shifting the focus of statistical analysis from estimation of hypothetical parameters to statements about concrete observables.
 
 
   \subsection{Difference between parametric inference and predictive inference}
