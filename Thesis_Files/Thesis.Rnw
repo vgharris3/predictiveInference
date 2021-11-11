@@ -157,6 +157,34 @@ setwd("C:/Users/gabe/Documents/tmp/predictiveInference/Thesis_Files")
 
   Dean's suggestion:  1-sample binomial with small sample size.  E.g. 3 successes, 7 failures (Pr(success) < 0.5).  Difference will be more pronounced with smaller sample sizes.
 
+  Using Beta-Binomial example from below:
+
+  Suppose $t=5$ successes have been observed out of $N=10$ binary events, $\alpha = 2$ and $\beta = 8$.  For $M = 1000$ future observations, how many successes are predicted?  The histograms below are drastically different, demonstrating the influence of applying prior knowledge with a Bayesian predictive framework.
+
+
+<<fig=TRUE, echo=FALSE>>=
+source('C:/Users/gabe/Documents/tmp/predictiveInference/R/dpredBB.R')
+source('C:/Users/gabe/Documents/tmp/predictiveInference/R/ppredBB.R')
+source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredBB.R')
+N = 10
+t = 5
+M = 1000
+a = 2
+b = 8
+
+random_sample = rpredBB(10000,N,t,M,a,b)
+random_sample_plugin = rbinom(10000,1000,0.5)
+
+par(mfrow=c(2,1))
+xmin = 0#min(rsHist$breaks,rsHistPI$breaks)
+xmax = 800#max(rsHist$breaks,rsHistPI$breaks)
+rsHist = hist(random_sample,xlim = c(xmin,xmax),main="Random Sample of Beta-Binomial Predictions")
+rsHistPI = hist(random_sample_plugin,xlim = c(xmin,xmax), main="Random Sample using Binomial Plug-in Estimator")
+
+@
+
+
+
 \clearpage
 
 \section{Chapter 1:  Predictive Problems with Conjugate Priors}
@@ -212,7 +240,7 @@ This result has been used to create ``standard" R functions dpredBB(), ppredBB()
 
     \subsubsection{Example}
 
-Suppose $t=5$ successes have been observed out of $N=10$ binary events, $\alpha = 2$ and $\beta = 8$.  For $M = 1000$ future observations, the figures below show the predictive distribution from dpredBB(), the cumulative distribution from ppredBB(), and a histogram of random draws from rpredBB().
+Suppose $t=5$ successes have been observed out of $N=10$ binary events, $\alpha = 2$ and $\beta = 8$.  For $M = 1000$ future observations, how many successes are predicted?  The figures below show the predictive distribution from dpredBB(), the cumulative distribution from ppredBB(), and a histogram of random draws from rpredBB().
 
 
 <<fig=TRUE, echo=FALSE>>=

@@ -155,6 +155,15 @@
 
   Dean's suggestion:  1-sample binomial with small sample size.  E.g. 3 successes, 7 failures (Pr(success) < 0.5).  Difference will be more pronounced with smaller sample sizes.
 
+  Using Beta-Binomial example from below:
+
+  Suppose $t=5$ successes have been observed out of $N=10$ binary events, $\alpha = 2$ and $\beta = 8$.  For $M = 1000$ future observations, how many successes are predicted?  The histograms below are drastically different, demonstrating the influence of applying prior knowledge with a Bayesian predictive framework.
+
+
+\includegraphics{Thesis-002}
+
+
+
 \clearpage
 
 \section{Chapter 1:  Predictive Problems with Conjugate Priors}
@@ -210,10 +219,10 @@ This result has been used to create ``standard" R functions dpredBB(), ppredBB()
 
     \subsubsection{Example}
 
-Suppose $t=5$ successes have been observed out of $N=10$ binary events, $\alpha = 2$ and $\beta = 8$.  For $M = 1000$ future observations, the figures below show the predictive distribution from dpredBB(), the cumulative distribution from ppredBB(), and a histogram of random draws from rpredBB().
+Suppose $t=5$ successes have been observed out of $N=10$ binary events, $\alpha = 2$ and $\beta = 8$.  For $M = 1000$ future observations, how many successes are predicted?  The figures below show the predictive distribution from dpredBB(), the cumulative distribution from ppredBB(), and a histogram of random draws from rpredBB().
 
 
-\includegraphics{Thesis-002}
+\includegraphics{Thesis-003}
 
 
 
@@ -284,7 +293,7 @@ This result has been used to create standard format R functions dpredEG(), ppred
 Suppose $d=800$ out of $N = 1000$ copies have been observed, and the remaining $200$ censored.  Say $\delta = 20$, $\gamma=5$, and we are interested in the number of survivors out of $M = 1000$ future observations.  The figures below illustrate the predictive probability using dpredEG() and rpredEG(), along with a histogram of a random sample taken using rpredEG().
 
 
-\includegraphics{Thesis-003}
+\includegraphics{Thesis-004}
 
 \clearpage
 
@@ -465,7 +474,7 @@ This result has been used to create standard format R functions dpredPG(), ppred
 
 Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15, 3, 97.  Let $\alpha = 11$ and $\beta = 3$.  For $\tilde{y} = 1:100$ possible future occurrences, the figures below show the predictive distribution from dpredPG(), the cumulative distribution from ppredPG(), and a histogram of random draws from rpredPG().
 
-\includegraphics{Thesis-004}
+\includegraphics{Thesis-005}
 
 \clearpage
 
@@ -588,7 +597,7 @@ Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15,
 
       The plot below illustrates the influence of previous knowledge of the population mean, and compares to the predictions resulting from Jeffreys prior.
 
-\includegraphics{Thesis-005}
+\includegraphics{Thesis-006}
 
         \clearpage
 
@@ -657,7 +666,7 @@ Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15,
       Math score data for two schools were based on results of a national exam in the United States, standardized to produce a nationwide mean of 50 and a standard deviation of 10.  Unless the two schools were known in advance to be extremely exceptional, reasonable prior parameters can be based on this information.  For the prior distributions of $\mu$ and $\sigma^2$, we'll take $\mu_0 = 50$ and $\sigma^2_0 = 10^2 = 100$, although this latter value is likely to be an overestimate of the within-school sampling variability.  We'll make these prior distributions somewhat diffuse, with $\gamma^2_0 = 25^2 = 625$ and $\nu_0 = 1$.  For the prior distribution on $\delta$, choosing $\delta_0 = 0$ represents the prior opinion that $\theta_1 > \theta_2$ and $\theta_2 > \theta_1$ are equally probable.  Finally, since the scores are bounded between 0 and 100, half the difference between $\theta_1$ and $\theta_2$ must be less than 50 in absolute value, so a value of $\tau^2_0 = 25^2 = 625$ seems reasonably diffuse.\\\\
       The results of a call to rpredNormIG2$\left(\mathbf{y}_1,\mathbf{y}_2,\mu_0,\sigma^2_0,\delta_0,\tau^2_0,N\right)$ are summarized in the following plot.\\
 
-\includegraphics{Thesis-006}
+\includegraphics{Thesis-007}
 
 
     \subsubsection{$k$ samples:  Comparing multiple groups}
@@ -718,9 +727,9 @@ Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15,
       \paragraph{Example}
       Returning to the math scores example, data for 10th-grade students from 100 large urban schools (each having 10th-grade enrollment of at least 400) is summarized in the following plots.
 
-\includegraphics{Thesis-007}
-
 \includegraphics{Thesis-008}
+
+\includegraphics{Thesis-009}
 
       % The prior parameters that need to be specified are
 
@@ -749,7 +758,7 @@ Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15,
 
 \textcolor{red}{Below:  Pick a couple of schools that show different relationships between teh data and the prediction}
 
-\includegraphics{Thesis-009}
+\includegraphics{Thesis-010}
 
       \paragraph{Ranking Treatments}
 
@@ -824,7 +833,7 @@ $$\hat{\sigma}^2_{ols} = \frac{SSR\left(\hat{\boldsymbol\beta}_{ols}\right)}{(n-
 
 Twelve healthy men who did not exercise regularly were recruited to take part in a study of the effects of two different exercise regimens on oxygen uptake.  Six of the twelve men were randomly assigned to a 12-week flat-terrain running program, and the remaining six were assigned to a 12-week step aerobics program.  The maximum oxygen uptake of each subject was measured (in liters per minute) while running on an inclined treadmill, both before and after the 12-week program.  Of interest is how a subject's change in maximal oxygen uptake may depend on which program they were assigned to.  However, other factors, such as age, are expected to affect the change in maximal uptake as well.  The results are shown here:
 
-\includegraphics{Thesis-010}
+\includegraphics{Thesis-011}
 
 Hoff's regression model:
 
@@ -845,7 +854,7 @@ Under this model the conditional expectations of $Y$ for the two different level
 
 In other words, the model assumes that the relationship is linear in age for both exercise groups, with the difference in intercepts given by $\beta_2$ and the difference in slopes given by $\beta_4$.  If we assumed that $\beta_2 = \beta_4 = 0$, then we would have identical lines for both groups.  If we assumed $\beta_2 \ne 0$ and $\beta_4 =  0$ then we would have a different line for each group but they would be parallel.  Allowing all coefficients to be non-zero gives us two unrelated lines.  Some different possibilities are depicted graphically below:\\\\
 
-\includegraphics{Thesis-011}
+\includegraphics{Thesis-012}
 
 Let's find the least squares regression estimates for the model (\ref{example_model}), and use the results to evaluate the differences between the two exercise groups.  The ages of the 12 subjects, along with their observed changes in maximal oxygen uptake, are
 
@@ -1023,7 +1032,7 @@ In the example below (Hoff data and code found \href{https://pdhoff.github.io/bo
 
 \textcolor{red}{ALSO INCLUDE IN WRITE-UP EXPLICIT PREDICTION STEP, E.G. "Y = ..."}
 
-\includegraphics{Thesis-014}
+\includegraphics{Thesis-015}
 
 %\textcolor{red}{MAYBE DO BOTH IN THE SAME BLOCK AND PLOT ON ONE PLOT?}
 
@@ -1031,24 +1040,24 @@ In the example below (Hoff data and code found \href{https://pdhoff.github.io/bo
 
 %For the same example without prior information, we use Zellner's g-prior with $g =$ length$(y) =$ 12.
 
-\includegraphics{Thesis-015}
-
 \includegraphics{Thesis-016}
-
-\clearpage
-
 
 \includegraphics{Thesis-017}
 
 \clearpage
 
-Comparing predictions using semi-conjugate prior vs. Zellner's g-prior:
 
 \includegraphics{Thesis-018}
 
-Inspection of the graphs shows the predicted distributions using Zellner's g-prior shrink toward 0, and have greater variance than those predicted using Hoff's semi-conjugate prior.
+\clearpage
+
+Comparing predictions using semi-conjugate prior vs. Zellner's g-prior:
 
 \includegraphics{Thesis-019}
+
+Inspection of the graphs shows the predicted distributions using Zellner's g-prior shrink toward 0, and have greater variance than those predicted using Hoff's semi-conjugate prior.
+
+\includegraphics{Thesis-020}
 
 \textcolor{red}{EXPLAIN WHY SCP PREDICTIONS HAVE TALLER DISTRIBUTIONS THAN ZGP PREDICTIONS.  ALSO WHY ZGP PREDICTIONS SHRINK TOWARD 0}
 
@@ -1056,15 +1065,13 @@ Inspection of the graphs shows the predicted distributions using Zellner's g-pri
 
 Comparing observed values to predictive distributions:
 
-\includegraphics{Thesis-020}
+\includegraphics{Thesis-021}
 
 
 
 
 
 The following plots exhibit the influence of varying the prior info with the semi-conjugate prior.
-
-\includegraphics{Thesis-021}
 
 \includegraphics{Thesis-022}
 
@@ -1073,6 +1080,8 @@ The following plots exhibit the influence of varying the prior info with the sem
 \includegraphics{Thesis-024}
 
 \includegraphics{Thesis-025}
+
+\includegraphics{Thesis-026}
 
 \clearpage
 
