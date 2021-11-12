@@ -159,7 +159,7 @@ setwd("C:/Users/gabe/Documents/tmp/predictiveInference/Thesis_Files")
 
   Using Beta-Binomial example from below:
 
-  Suppose $t=5$ successes have been observed out of $N=10$ binary events, $\alpha = 2$ and $\beta = 8$.  For $M = 1000$ future observations, how many successes are predicted?  The histograms below are drastically different, demonstrating the influence of applying prior knowledge with a Bayesian predictive framework.
+  Suppose $t=5$ successes have been observed out of $N=10$ binary events, $\alpha = 2$ and $\beta = 8$.  For $M = 100$ future observations, how many successes are predicted?  The histograms below are drastically different, demonstrating the influence of applying prior knowledge with a Bayesian predictive framework.
 
 
 <<fig=TRUE, echo=FALSE>>=
@@ -168,18 +168,48 @@ source('C:/Users/gabe/Documents/tmp/predictiveInference/R/ppredBB.R')
 source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredBB.R')
 N = 10
 t = 5
-M = 1000
+M = 100
 a = 2
 b = 8
 
-random_sample = rpredBB(10000,N,t,M,a,b)
-random_sample_plugin = rbinom(10000,1000,0.5)
+# random_sample = rpredBB(10000,N,t,M,a,b)
+# random_sample_plugin = rbinom(10000,M,0.5)
+#
+# par(mfrow=c(2,1))
+# xmin = 0#min(rsHist$breaks,rsHistPI$breaks)
+# xmax = 800#max(rsHist$breaks,rsHistPI$breaks)
+# rsHist = hist(random_sample,xlim = c(xmin,xmax),main="Random Sample of Beta-Binomial Predictions")
+# rsHistPI = hist(random_sample_plugin,xlim = c(xmin,xmax), main="Random Sample using Binomial Plug-in Estimator")
 
-par(mfrow=c(2,1))
-xmin = 0#min(rsHist$breaks,rsHistPI$breaks)
-xmax = 800#max(rsHist$breaks,rsHistPI$breaks)
-rsHist = hist(random_sample,xlim = c(xmin,xmax),main="Random Sample of Beta-Binomial Predictions")
-rsHistPI = hist(random_sample_plugin,xlim = c(xmin,xmax), main="Random Sample using Binomial Plug-in Estimator")
+par(mfrow = c(1,1))
+
+x = 0:M
+f_x_BB = dpredBB(x,N,t,M,a,b)
+f_x_PI = dbinom(x,M,0.5)
+
+ymax = max(f_x_BB,f_x_PI)*1.2
+
+plot(x,f_x_BB,type = "l", col = "blue", lwd = 2, ylim = c(0,ymax),
+     main = "Beta-Binomial Prediction vs. Binomial Plug-in")
+lines(x,f_x_PI,col="green",lwd = 2)
+
+leg1 = expression(paste("Beta-Binomial with"~mu~"~Beta(2,8)"))
+leg2 = expression(paste("Binomial plug-in with"~mu~"=0.5"))
+
+leg = c(leg1,leg2)
+
+
+legend("topright", inset = 0.025,bg="transparent",
+       legend = leg,
+       lty=1,
+       lwd = 2,
+       cex = .8,
+       col = c("blue","green"),
+       box.col="white")
+
+
+
+text(0,0.9*ymax,"Given: 10 trials, 5 successes\nPredicting: #successes out of 100 future trials", pos = 4)
 
 @
 
