@@ -173,13 +173,13 @@ source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredBB.R')
 N = 10
 t = 4
 M = 100
-a = 2
-b = 8
+a = 22
+b = 78
 
 par(mfrow = c(1,1))
 
 x = 0:M
-f_x_BB28 = dpredBB(x,N,t,M,224,776)
+f_x_BB28 = dpredBB(x,N,t,M,a,b)
 f_x_PI = dbinom(x,M,t/N)
 
 fmat = cbind(f_x_BB28,f_x_PI)
@@ -189,21 +189,25 @@ ymax = max(fmat)*1.2
 matplot(x,fmat,type="l",lty=1,lwd = 2, col = c(1,2), ylim = c(0,ymax),
      main = "Pass the Pigs(TM):  Beta-Binomial Prediction vs. Binomial Plug-in")
 
-leg1 = expression(paste("Beta-Binomial with"~mu~"~Beta(224,776)"))
+leg1 = eval(bquote(expression("Beta-Binomial with "*mu*" ~ Beta("*.(a)*","*.(b)*")")))
+leg2 = eval(bquote(expression("Binomial plug-in with "*mu==.(t/N))))
 leg4 = expression(paste("Binomial plug-in with"~mu~"=0.4"))
 
-leg = c(leg1,leg4)
+leg = c(leg1,leg2)
 
 
 legend("topright", inset = 0.025,bg="transparent",
        legend = leg,
-       lty = c(1,2,3,1),
+       lty = 1,
        lwd = 2,
        cex = .8,
-       col = c(1,1,1,2),
+       col = c(1,2),
        box.col="white")
 
-text(0,0.9*ymax,"Given: 10 trials, 4   successes\nPredicting: #successes out of 100 future trials", pos = 4)
+# text(0,0.9*ymax,"Given: 10 trials, 4   successes\nPredicting: #successes out of 100 future trials", pos = 4)
+
+marginaltext = bquote("Given "*.(N)*" trials, "*.(t)*" successes, predicting # successes out of "*.(M)*" future trials")
+mtext(marginaltext, side = 3)
 
 @
 
