@@ -153,17 +153,13 @@ setwd("C:/Users/gabe/Documents/tmp/predictiveInference/Thesis_Files")
 
     $$p\left(\theta|x^{(N)}\right) \propto f\left(x^{(N)}|\theta\right)p(\theta).$$
 
-  \subsection{[Example of Difference between results from Plug-in estimator and results using Predictive Inference}
+  \subsection{Example of Difference between results from Plug-in estimator and results using Predictive Inference}
 
-To illustrate the potential difference between results from Bayesian prediction and using plug-in estimators, consider the game Pass the Pigs, a push-your-luck dice game in which the ``dice" are actually pick figures
+  To illustrate the potential difference between results from Bayesian prediction and using plug-in estimators, consider the game Pass the Pigs\texttrademark, a push-your-luck dice game in which the ``dice" are actually rubber pig figures.  Two pig dice are thrown, and points are scored according to the combination of positions in which they come to rest.  Details about the game can be found on Wikipedia here: \url{https://en.wikipedia.org/wiki/Pass_the_Pigs}\\
 
-  Dean's suggestion:  1-sample binomial with small sample size.  E.g. 3 successes, 7 failures (Pr(success) < 0.5).  Difference will be more pronounced with smaller sample sizes.
+  For the purpose of this example, consider the probability of a single pig landing in the ``Razorback" position, which occurs when the pig is lying on its back with its legs extended upward.  The irregular shape of the pig makes it difficult to assign probabilities to results other than by means of experimentation.  Such an experiment was conducted at Duquesne University, and an article describing the experiment as well as Bayesian predictive inference performed on the results appeared in the \textit{Journal of Statistics Education} Volume 14, Number 3, in 2006.  The article can be accessed here:  \url{http://jse.amstat.org/v14n3/datasets.kern.html}. Of the $11,954$ recorded results for individual pigs, approximately $22.4\%$ were Razorbacks.\\
 
-Pass the Pigs Wiki article can be found \href{https://en.wikipedia.org/wiki/Pass_the_Pigs}{here}
-
-  Using Beta-Binomial example from below:
-
-  Suppose $t=4$ successes have been observed out of $N=10$ binary events, $\alpha = 2$ and $\beta = 8$.  For $M = 100$ future observations, how many successes are predicted?  The histograms below are drastically different, demonstrating the influence of applying prior knowledge with a Bayesian predictive framework.
+  Suppose $t=4$ Razorbacks have been observed out of $N=10$ tosses of a single pig die, suggesting a straightforward binomial distribution with $p =$ Pr(Razorback) $= 0.4$. Taking the Duquesne experiment into consideration, we'll assign prior $p\sim\text{Beta}(22,78)$ and compare resulting predictions to those obtained from the plug-in estimator.   For $M = 100$ future observations, how many Razorbacks are predicted?  The differences in the density curves (below) are striking, with the experimental mean number of Razorbacks very unlikely to be predicted by the binomial using the plug-in value of $0.4$.
 
 
 <<fig=TRUE, echo=FALSE>>=
@@ -176,6 +172,20 @@ M = 100
 a = 22
 b = 78
 
+if(0){
+  #beta distribution stats
+  meanab = a/(a+b)
+  varab = a*b/((a+b)^2*(a+b+1))
+  stdab = sqrt(varab)
+  sig2L = meanab - 2*stdab
+  sig2U = meanab + 2*stdab
+  sig3L = meanab - 3*stdab
+  sig3U = meanab + 3*stdab
+
+  c(a,b,meanab,varab,stdab,sig2L,sig2U,sig3L,sig3U)
+}
+
+
 par(mfrow = c(1,1))
 
 x = 0:M
@@ -187,7 +197,8 @@ fmat = cbind(f_x_BB28,f_x_PI)
 ymax = max(fmat)*1.2
 
 matplot(x,fmat,type="l",lty=1,lwd = 2, col = c(1,2), ylim = c(0,ymax),
-     main = "Pass the Pigs(TM):  Beta-Binomial Prediction vs. Binomial Plug-in")
+     main = expression("Pass the Pigs"^"TM"*":  Beta-Binomial Prediction vs. Binomial Plug-in"))
+     # main = "Pass the Pigs(TM):  Beta-Binomial Prediction vs. Binomial Plug-in")
 
 leg1 = eval(bquote(expression("Beta-Binomial with "*mu*" ~ Beta("*.(a)*","*.(b)*")")))
 leg2 = eval(bquote(expression("Binomial plug-in with "*mu==.(t/N))))
@@ -206,8 +217,8 @@ legend("topright", inset = 0.025,bg="transparent",
 
 # text(0,0.9*ymax,"Given: 10 trials, 4   successes\nPredicting: #successes out of 100 future trials", pos = 4)
 
-marginaltext = bquote("Given "*.(N)*" trials, "*.(t)*" successes, predicting # successes out of "*.(M)*" future trials")
-mtext(marginaltext, side = 3)
+#marginaltext = bquote("Given "*.(N)*" trials, "*.(t)*" successes, predicting # successes out of "*.(M)*" future trials")
+#mtext(marginaltext, side = 3)
 
 @
 

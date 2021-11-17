@@ -5,7 +5,7 @@
 \contentsline {subsubsection}{\numberline {2.2.1}When is predictive inference more useful?}{6}{subsubsection.2.2.1}%
 \contentsline {subsubsection}{\numberline {2.2.2}When is parametric inference more useful?}{6}{subsubsection.2.2.2}%
 \contentsline {subsection}{\numberline {2.3}The Bayesian Parametric Prediction Format}{7}{subsection.2.3}%
-\contentsline {subsection}{\numberline {2.4}[Maybe] Example of Difference between results from Plug-in estimator and results using Predictive Inference}{7}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.4}Example of Difference between results from Plug-in estimator and results using Predictive Inference}{7}{subsection.2.4}%
 \contentsline {section}{\numberline {3}Chapter 1: Predictive Problems with Conjugate Priors}{9}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Prediction of Future Successes: Beta-Binomial (Geisser p. 73)}{9}{subsection.3.1}%
 \contentsline {subsubsection}{\numberline {3.1.1}Derivation}{9}{subsubsection.3.1.1}%
