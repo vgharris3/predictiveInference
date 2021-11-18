@@ -24,6 +24,8 @@
 \usepackage{array}
 \setcounter{MaxMatrixCols}{40}
 
+\usepackage{ulem} %just so I can strike through items on my todo list using \sout{text to be struck through}
+
 \usepackage{enumerate}
 \usepackage{enumitem}
 \usepackage{multirow}
@@ -64,11 +66,13 @@
 
 \begin{itemize}
   \item Read intros to listed texts (See Thesis section 2.1 Why Predictive Inference?) and summarize answers to that question in WhyPredictiveInference.Rnw
-  \item Create example comparing predictive inference result with plug in parameter result
-    \subitem Dean's suggestion:  1-sample binomial with small sample size.  E.g. 3 successes, 7 failures (Pr(success) < 0.5).  Difference will be more pronounced with smaller sample sizes.
+  \item \sout{Create example comparing predictive inference result with plug in parameter result}
+    \subitem \sout{Dean's suggestion:  1-sample binomial with small sample size.  E.g. 3 successes, 7 failures (Pr(success) < 0.5).  Difference will be more pronounced with smaller sample sizes.}
   \item Combine rpredNormIG(), rpredNormIG2(), and rpredNormIGk() into one function
   \item Read up on convergence in probability and justification for MCMC (Hoff, Casella \& Berger)
   \item Compare variance computations: var() function on MCMC sample vs direct computation from theory ($EX^2 - (EX)^2$)
+  \item General guidance:  Read up on ``How to write a thesis in Latex," for example \url{https://www.overleaf.com/learn/latex/How_to_Write_a_Thesis_in_LaTeX_(Part_1)%3A_Basic_Structure}
+  \item Figure formatting:  save figures as .png files and insert?  Or what?  Need better control over how figure appears in resulting pdf.
 \end{itemize}
 
 

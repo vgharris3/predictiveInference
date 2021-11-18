@@ -92,7 +92,7 @@
 \section{Introduction:  Predictive Inference}
 
   \subsection{Why Predictive Inference? \textcolor{red}{Am I answering why \textit{Bayesian} predictive inference?}}
-
+\textcolor{red}{
     Sources:
     \begin{itemize}
       \item Nate Silver's book (1st chapter or intro)
@@ -101,7 +101,7 @@
       \item Dean's paper
       \item maybe some googling
     \end{itemize}
-
+}
     The main purpose of statistics is to predict future events based on observed data.  Prediction about meaningful quantities that are relevant to the object of study facilitates scientific progress in multiple ways.  Advantages include enhancing scientific reproducibility, enabling corroboration or refutation of current hypotheses through future experimentation, informing decision-making with summaries of quantities of direct interest to the researcher, and shifting the focus of statistical analysis from estimation of hypothetical parameters to statements about concrete observables.
 
 
@@ -113,13 +113,12 @@
     If a model doesn't predict well, why use it at all?
 
     \subsubsection{When is parametric inference more useful?}
-      [examples, comparisons]
 
       When the goal is to extract a maximum amount of information from a data set and summarize it in a handful of quantities, inferences about parameters can be useful.  Parametric inference can also be helpful in determining whether a particular problem is worth continued attention.  "In some instances, a parameter may be conceived as the limit of a function of an infinite sequence of observations (Geisser 1993), and can be a useful concept when our object of interest is approximated as a large sample limit." (Dean Billheimer 2019)
 
   \subsection{The Bayesian Parametric Prediction Format}
 
-  \textcolor{red}{Use Billheimer's setup from his article, start of section 3}
+  \textcolor{red}{Use Dean's setup from his article, start of section 3}
 
   This thesis and the accompanying set of tools (R package) employs a Bayesian approach to predictive inference relying on the de Finetti representation theorem (de Finetti 1937). \textcolor{red}{State the de Finetti theorem here?} We can write
 
@@ -135,6 +134,7 @@
 
 \noindent where $x_{n+1}$ is conditionally independent of $\mathbf{x}_n$ given $\boldsymbol\theta$, and $\pi(\boldsymbol\theta | \mathbf{x}_n)d\boldsymbol\theta)$ is the posterior distribution of $\mathbf{x}_n$ given $\boldsymbol\theta$.
 
+\textcolor{red}{Originally I used Geisser's notation, carrying it through the two examples I used from his book.  For the remaining cases I imitated Hoff's notation.  I think I should standardize everything with one kind of notation.}
     [Geisser p. 49]\\
 
         Let $$f\left(x^{(N)},x_{(M)}|\theta\right) = f\left(x_{(M)}|x^{(N)},\theta\right)f\left(x^{(N)}|\theta\right).$$
@@ -151,13 +151,15 @@
 
     $$p\left(\theta|x^{(N)}\right) \propto f\left(x^{(N)}|\theta\right)p(\theta).$$
 
+
+
   \subsection{Example of Difference between results from Plug-in estimator and results using Predictive Inference}
 
   To illustrate the potential difference between results from Bayesian prediction and using plug-in estimators, consider the game Pass the Pigs\texttrademark, a push-your-luck dice game in which the ``dice" are actually rubber pig figures.  Two pig dice are thrown, and points are scored according to the combination of positions in which they come to rest.  Details about the game can be found on Wikipedia here: \url{https://en.wikipedia.org/wiki/Pass_the_Pigs}\\
 
   For the purpose of this example, consider the probability of a single pig landing in the ``Razorback" position, which occurs when the pig is lying on its back with its legs extended upward.  The irregular shape of the pig makes it difficult to assign probabilities to results other than by means of experimentation.  Such an experiment was conducted at Duquesne University, and an article describing the experiment as well as Bayesian predictive inference performed on the results appeared in the \textit{Journal of Statistics Education} Volume 14, Number 3, in 2006.  The article can be accessed here:  \url{http://jse.amstat.org/v14n3/datasets.kern.html}. Of the $11,954$ recorded results for individual pigs, approximately $22.4\%$ were Razorbacks.\\
 
-  Suppose $t=4$ Razorbacks have been observed out of $N=10$ tosses of a single pig die, suggesting a straightforward binomial distribution with $p =$ Pr(Razorback) $= 0.4$. Taking the Duquesne experiment into consideration, we'll assign prior $p\sim\text{Beta}(22,78)$ and compare resulting predictions to those obtained from the plug-in estimator.   For $M = 100$ future observations, how many Razorbacks are predicted?  The differences in the density curves (below) are striking, with the experimental mean number of Razorbacks very unlikely to be predicted by the binomial using the plug-in value of $0.4$.
+  Suppose $t=4$ Razorbacks have been observed out of $N=10$ tosses of a single pig die, suggesting a straightforward binomial distribution with $\theta =$ Pr(Razorback) $= 0.4$. Taking the Duquesne experiment into consideration, we'll perform Bayesian prediction using three prior distributions for $\theta$: $\theta\sim\text{Beta}(2,8)$, $\theta\sim\text{Beta}(22,78)$, and $\theta\sim\text{Beta}(224,776)$, and compare these results to predictions obtained from the plug-in estimator.   For $M = 100$ future observations, how many Razorbacks are predicted?  The density curves in the plot below show the influence of the prior on the location of the predictive distribution, and also the difference in variance resulting from the choice of shape parameters used in the Beta prior.  Essentially, each $(\alpha,\beta)$ pair reflects the prior knowledge from the Duquesne experiment, with the ``weight" given to that knowledge increasing by orders of magnitude, causing variance in the prediction to decrease.
 
 
 \includegraphics{Thesis-002}
