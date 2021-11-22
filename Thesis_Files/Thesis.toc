@@ -1,45 +1,42 @@
 \contentsline {section}{\numberline {1}Thesis Abstract}{5}{section.1}%
 \contentsline {section}{\numberline {2}Introduction: Predictive Inference}{6}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Why Predictive Inference? \leavevmode {\color {red}Am I answering why \textit {Bayesian} predictive inference?}}{6}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}Difference between parametric inference and predictive inference}{6}{subsection.2.2}%
-\contentsline {subsubsection}{\numberline {2.2.1}When is predictive inference more useful?}{6}{subsubsection.2.2.1}%
-\contentsline {subsubsection}{\numberline {2.2.2}When is parametric inference more useful?}{6}{subsubsection.2.2.2}%
-\contentsline {subsection}{\numberline {2.3}The Bayesian Parametric Prediction Format}{7}{subsection.2.3}%
-\contentsline {subsection}{\numberline {2.4}Example of Difference between results from Plug-in estimator and results using Predictive Inference}{7}{subsection.2.4}%
-\contentsline {section}{\numberline {3}Chapter 1: Predictive Problems with Conjugate Priors}{9}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Prediction of Future Successes: Beta-Binomial (Geisser p. 73)}{9}{subsection.3.1}%
-\contentsline {subsubsection}{\numberline {3.1.1}Derivation}{9}{subsubsection.3.1.1}%
-\contentsline {subsubsection}{\numberline {3.1.2}R Implementation}{10}{subsubsection.3.1.2}%
-\contentsline {subsubsection}{\numberline {3.1.3}Example}{10}{subsubsection.3.1.3}%
-\contentsline {subsection}{\numberline {3.2}Survival Time: Exponential-Gamma (Geisser p. 74)}{10}{subsection.3.2}%
-\contentsline {subsubsection}{\numberline {3.2.1}Derivation}{10}{subsubsection.3.2.1}%
-\contentsline {subsubsection}{\numberline {3.2.2}R Implementation}{12}{subsubsection.3.2.2}%
-\contentsline {subsubsection}{\numberline {3.2.3}Example}{12}{subsubsection.3.2.3}%
-\contentsline {subsection}{\numberline {3.3}Poisson-Gamma Model (Hoff p. 43ff)}{14}{subsection.3.3}%
-\contentsline {subsubsection}{\numberline {3.3.1}Derivation}{14}{subsubsection.3.3.1}%
-\contentsline {subsubsection}{\numberline {3.3.2}R Implementation}{18}{subsubsection.3.3.2}%
-\contentsline {subsubsection}{\numberline {3.3.3}Example}{18}{subsubsection.3.3.3}%
-\contentsline {subsection}{\numberline {3.4}Normal Observation with Normal-Inverse Gamma Prior}{20}{subsection.3.4}%
-\contentsline {subsubsection}{\numberline {3.4.1}One sample}{20}{subsubsection.3.4.1}%
-\contentsline {paragraph}{\numberline {3.4.1.1}Derivation}{20}{paragraph.3.4.1.1}%
-\contentsline {paragraph}{\numberline {3.4.1.2}R Implementation}{21}{paragraph.3.4.1.2}%
-\contentsline {paragraph}{\numberline {3.4.1.3}Example}{22}{paragraph.3.4.1.3}%
-\contentsline {subsubsection}{\numberline {3.4.2}Two samples}{25}{subsubsection.3.4.2}%
-\contentsline {paragraph}{\numberline {3.4.2.1}Derivation}{25}{paragraph.3.4.2.1}%
-\contentsline {paragraph}{\numberline {3.4.2.2}R Implementation}{26}{paragraph.3.4.2.2}%
-\contentsline {paragraph}{\numberline {3.4.2.3}Example}{26}{paragraph.3.4.2.3}%
-\contentsline {subsubsection}{\numberline {3.4.3}$k$ samples: Comparing multiple groups}{27}{subsubsection.3.4.3}%
-\contentsline {paragraph}{\numberline {3.4.3.1}Derivation}{28}{paragraph.3.4.3.1}%
-\contentsline {paragraph}{\numberline {3.4.3.2}R Implementation}{28}{paragraph.3.4.3.2}%
-\contentsline {paragraph}{\numberline {3.4.3.3}Example}{29}{paragraph.3.4.3.3}%
-\contentsline {paragraph}{\numberline {3.4.3.4}Ranking Treatments}{31}{paragraph.3.4.3.4}%
-\contentsline {section}{\numberline {4}Chapter 2: Normal Regression with Zellner's $g$-prior}{32}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Least Squares Estimation with Example (Hoff p. 149ff.)}{32}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Bayesian Estimation for a Regression Model (Hoff p. 154ff)}{36}{subsection.4.2}%
-\contentsline {subsubsection}{\numberline {4.2.1}Derivation}{36}{subsubsection.4.2.1}%
-\contentsline {paragraph}{\numberline {4.2.1.1}A semiconjugate prior distribution}{36}{paragraph.4.2.1.1}%
-\contentsline {paragraph}{\numberline {4.2.1.2}Default and weakly informative prior distributions}{37}{paragraph.4.2.1.2}%
-\contentsline {subsubsection}{\numberline {4.2.2}R Implementation}{38}{subsubsection.4.2.2}%
-\contentsline {subsubsection}{\numberline {4.2.3}Example}{38}{subsubsection.4.2.3}%
-\contentsline {section}{\numberline {5}Conclusion}{51}{section.5}%
-\contentsline {section}{\numberline {6}References}{51}{section.6}%
+\contentsline {subsection}{\numberline {2.1}Why Predictive Inference?}{6}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Example of Difference between results from Plug-in estimator and results using Predictive Inference}{7}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}The Bayesian Parametric Prediction Format}{8}{subsection.2.3}%
+\contentsline {section}{\numberline {3}Chapter 1: Predictive Problems with Conjugate Priors}{10}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Prediction of Future Successes: Beta-Binomial (Geisser p. 73)}{10}{subsection.3.1}%
+\contentsline {subsubsection}{\numberline {3.1.1}Derivation}{10}{subsubsection.3.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.2}R Implementation}{12}{subsubsection.3.1.2}%
+\contentsline {subsubsection}{\numberline {3.1.3}Example}{12}{subsubsection.3.1.3}%
+\contentsline {subsection}{\numberline {3.2}Survival Time: Exponential-Gamma (Geisser p. 74)}{12}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Derivation}{12}{subsubsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2}R Implementation}{14}{subsubsection.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.3}Example}{14}{subsubsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.3}Poisson-Gamma Model (Hoff p. 43ff)}{16}{subsection.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.1}Derivation}{16}{subsubsection.3.3.1}%
+\contentsline {subsubsection}{\numberline {3.3.2}R Implementation}{20}{subsubsection.3.3.2}%
+\contentsline {subsubsection}{\numberline {3.3.3}Example}{20}{subsubsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.4}Normal Observation with Normal-Inverse Gamma Prior}{22}{subsection.3.4}%
+\contentsline {subsubsection}{\numberline {3.4.1}One sample}{22}{subsubsection.3.4.1}%
+\contentsline {paragraph}{\numberline {3.4.1.1}Derivation}{22}{paragraph.3.4.1.1}%
+\contentsline {paragraph}{\numberline {3.4.1.2}R Implementation}{23}{paragraph.3.4.1.2}%
+\contentsline {paragraph}{\numberline {3.4.1.3}Example}{24}{paragraph.3.4.1.3}%
+\contentsline {subsubsection}{\numberline {3.4.2}Two samples}{27}{subsubsection.3.4.2}%
+\contentsline {paragraph}{\numberline {3.4.2.1}Derivation}{27}{paragraph.3.4.2.1}%
+\contentsline {paragraph}{\numberline {3.4.2.2}R Implementation}{28}{paragraph.3.4.2.2}%
+\contentsline {paragraph}{\numberline {3.4.2.3}Example}{28}{paragraph.3.4.2.3}%
+\contentsline {subsubsection}{\numberline {3.4.3}$k$ samples: Comparing multiple groups}{29}{subsubsection.3.4.3}%
+\contentsline {paragraph}{\numberline {3.4.3.1}Derivation}{30}{paragraph.3.4.3.1}%
+\contentsline {paragraph}{\numberline {3.4.3.2}R Implementation}{30}{paragraph.3.4.3.2}%
+\contentsline {paragraph}{\numberline {3.4.3.3}Example}{31}{paragraph.3.4.3.3}%
+\contentsline {paragraph}{\numberline {3.4.3.4}Ranking Treatments}{33}{paragraph.3.4.3.4}%
+\contentsline {section}{\numberline {4}Chapter 2: Normal Regression with Zellner's $g$-prior}{34}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Least Squares Estimation with Example (Hoff p. 149ff.)}{34}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Bayesian Estimation for a Regression Model (Hoff p. 154ff)}{38}{subsection.4.2}%
+\contentsline {subsubsection}{\numberline {4.2.1}Derivation}{38}{subsubsection.4.2.1}%
+\contentsline {paragraph}{\numberline {4.2.1.1}A semiconjugate prior distribution}{38}{paragraph.4.2.1.1}%
+\contentsline {paragraph}{\numberline {4.2.1.2}Default and weakly informative prior distributions}{39}{paragraph.4.2.1.2}%
+\contentsline {subsubsection}{\numberline {4.2.2}R Implementation}{40}{subsubsection.4.2.2}%
+\contentsline {subsubsection}{\numberline {4.2.3}Example}{40}{subsubsection.4.2.3}%
+\contentsline {section}{\numberline {5}Conclusion}{53}{section.5}%
+\contentsline {section}{\numberline {6}References}{53}{section.6}%

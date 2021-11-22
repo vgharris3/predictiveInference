@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  10 NOV 2021 07:28
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  22 NOV 2021 07:35
 entering extended mode
 **./WhyPredictiveInference.tex
 (WhyPredictiveInference.tex
@@ -930,16 +930,39 @@ LaTeX Font Info:    Trying to load font information for U+rsfs on input line 64
 ("C:\MiKTeX 2.9\tex/latex/jknappen\ursfs.fd"
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 )
-LaTeX Font Info:    Trying to load font information for TS1+aer on input line 7
-0.
 
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 65.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\@@underline' on input line 65.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\hbox' on input line 65.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\mathsurround' on input line 65.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\z@' on input line 65.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 65.
+
+LaTeX Font Info:    Trying to load font information for TS1+aer on input line 7
+4.
 (C:/PROGRA~1/R/R-41~1.1/share/texmf/tex/latex\ts1aer.fd
 File: ts1aer.fd 
 )
 LaTeX Font Info:    Font shape `TS1/aer/m/n' in size <12> not available
-(Font)              Font shape `TS1/cmr/m/n' tried instead on input line 70.
+(Font)              Font shape `TS1/cmr/m/n' tried instead on input line 74.
 
-Underfull \hbox (badness 10000) in paragraph at lines 84--86
+Underfull \hbox (badness 10000) in paragraph at lines 88--90
 
  []
 
@@ -949,14 +972,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 84--86
 [3] [4] (WhyPredictiveInference.aux)
 Package rerunfilecheck Info: File `WhyPredictiveInference.out' has not changed.
 
-(rerunfilecheck)             Checksum: 905486ED41806F7AF9299AF38739B44B;359.
+(rerunfilecheck)             Checksum: DF14BA1134D94FD6D305C7283B38DEB5;457.
  ) 
 Here is how much of TeX's memory you used:
- 29566 strings out of 479696
- 694944 string characters out of 2881701
+ 29574 strings out of 479696
+ 695109 string characters out of 2881701
  1145485 words of memory out of 3000000
- 46033 multiletter control sequences out of 15000+200000
- 439265 words of font info for 117 fonts, out of 3000000 for 9000
+ 46044 multiletter control sequences out of 15000+200000
+ 440369 words of font info for 122 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  94i,7n,98p,721b,609s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\gabe\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\t
@@ -965,9 +988,9 @@ crm1200.pk><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmb10.pfb><C:/MiKTeX 2
 amsfonts/cm/cmr12.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><
 C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/MiKTeX 2.9/fonts/ty
 pe1/public/amsfonts/cm/cmti12.pfb>
-Output written on WhyPredictiveInference.pdf (4 pages, 91372 bytes).
+Output written on WhyPredictiveInference.pdf (4 pages, 92912 bytes).
 PDF statistics:
- 80 PDF objects out of 1000 (max. 8388607)
- 10 named destinations out of 1000 (max. 500000)
- 57 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 84 PDF objects out of 1000 (max. 8388607)
+ 11 named destinations out of 1000 (max. 500000)
+ 65 words of extra memory for PDF output out of 10000 (max. 10000000)
 

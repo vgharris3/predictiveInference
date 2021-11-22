@@ -64,6 +64,10 @@ setwd("C:/Users/gabe/Documents/tmp/predictiveInference")
 \author{\Large Gabe Harris}
 \maketitle
 
+\section{\underline{A First Course in Bayesian Statistical Methods} by Peter D. Hoff}
+
+
+
 \section{``Predictive Inference and Scientific Reproducibility" by Dean Billheimer}
 
 \subsection{Abstract}
