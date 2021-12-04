@@ -6,8 +6,8 @@
 #' @param n desired random sample size
 #' @param N number of observed independent binary variables
 #' @param s number of observed successes out of N
-#' @param M number of future observations for which prediction is desired (note x <= M)
-#' @param alpha shape factors for prior Beta distribution on theta
+#' @param M number of future observations for which prediction is desired
+#' @param alpha shape factor for prior Beta distribution on theta
 #' @param beta rate factor for prior Beta distribution on theta
 #'
 #' @return random sample of size n from the Beta-Binomial predictive probability distribution

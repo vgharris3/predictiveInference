@@ -64,62 +64,68 @@ setwd("C:/Users/gabe/Documents/tmp/predictiveInference/Thesis_Files")
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Thesis Abstract}
 
-    \indent An obstacle to widespread employment of Bayesian predictive inference in scientific research is the lack of suitable computing tools.  In this thesis we document several established useful models, and provide an applicable set of tools for statisticians.  For each of the included models, some basic notes on mathematical derivation are presented, and predictive inference is illustrated with examples.  Note that throughout this thesis the terms ``predictive inference" and ``Bayesian predictive inference" are used interchangeably.  For the details of the models and some of the examples we relied primarily on Seymour Geisser's \underline{Predictive Inference:  An Introduction} (1993) and Peter D. Hoff's \underline{A First Course in Bayesian Predictive Methods} (2009).
+An obstacle to widespread employment of Bayesian predictive inference in scientific research is the lack of suitable computing tools.  In this thesis I document several established useful models, and provide an applicable set of tools for statisticians.  For each of the included models, some basic notes on mathematical derivation are presented, and predictive inference is illustrated with examples.  Note that throughout this thesis the terms ``predictive inference," ``Bayesian inference," and ``Bayesian prediction" are used interchangeably.  For the details of the models and some of the examples we relied primarily on Seymour Geisser's \underline{Predictive Inference:  An Introduction} (1993) and Peter D. Hoff's \underline{A First Course in Bayesian Predictive Methods} (2009).
 
     An R package has been developed, the main purpose of which is to provide the researcher with a means of producing random samples from predictive distributions.  For all the models, the package includes random sample generators.  For those models with analytical solutions, density and distribution functions are also provided.  The standard R naming convention has been adopted:  density functions are prefixed with the letter ``d," distribution functions with the letter ``p," and random generation functions with the letter ``r."  Also included in all function names is the abbreviation ``pred" (for predictive) and an initialism or abbreviation identifying the model itself.  For example, the density function for the Beta-Binomial model is named ``dpredBB()."  The R code for each function is included in Appendix \textcolor{red}{X-insert link to appendix here}.
 
 
 
-\clearpage
+% \clearpage
 
 \section{Introduction:  Predictive Inference}
 
   \subsection{Why Predictive Inference?}
 
 
-\textcolor{red}{
-    \begin{itemize}
-      \item Intro:  ~3 paragraphs, < 2 pages
-      \item Audience:  my classmates (persuade), my committee (demonstrate that \textit{I} get it)
-    \end{itemize}
-}
+% \textcolor{red}{
+%     \begin{itemize}
+%       \item Intro:  ~3 paragraphs, < 2 pages
+%       \item Audience:  my classmates (persuade), my committee (demonstrate that \textit{I} get it)
+%     \end{itemize}
+% }
+%
+% \textcolor{red}{
+%     Sources:
+%     \begin{itemize}
+%       \item Nate Silver's book (1st chapter or intro)
+%       \item Geyser's book (1st chapter or intro)
+%       \item Aitchison and Dunsmore (1st chapter or intro)
+%       \item Dean's paper
+%       \item maybe some googling
+%     \end{itemize}
+% }
+    The main purpose of statistics is to predict future events based on observed data.  Prediction about meaningful quantities that are relevant to the object of study facilitates scientific progress in multiple ways.  Advantages include enhancing scientific reproducibility, enabling corroboration or refutation of current hypotheses through future experimentation, informing decision-making by summarizing quantities of direct interest to the researcher, and shifting the focus of statistical analysis from estimation of hypothetical parameters to statements about concrete observables.
 
-\textcolor{red}{
-    Sources:
-    \begin{itemize}
-      \item Nate Silver's book (1st chapter or intro)
-      \item Geyser's book (1st chapter or intro)
-      \item Aitchison and Dunsmore (1st chapter or intro)
-      \item Dean's paper
-      \item maybe some googling
-    \end{itemize}
-}
-    The main purpose of statistics is to predict future events based on observed data.  Prediction about meaningful quantities that are relevant to the object of study facilitates scientific progress in multiple ways.  Advantages include enhancing scientific reproducibility, enabling corroboration or refutation of current hypotheses through future experimentation, informing decision-making with summaries of quantities of direct interest to the researcher, and shifting the focus of statistical analysis from estimation of hypothetical parameters to statements about concrete observables.
-
-
+    It is not the intent of this thesis to suggest that parametric inference should be abandoned in statistical analyses.  Conventional statistical inference techniques are useful for summarizing information about large quantities of data in a handful of usable values, and leveraging such summaries to determine whether a particular problem merits continued attention.  Indeed, statistics as a scientific discipline developed along frequentist lines, and the evolution of Bayesian methods has occurred atop that foundation.
+  %
+  %
+  % Settings in which parametric inference will continue to be needed include:
+  % \begin{itemize}
+  %   \item Summarizing in a handful of useful quantities a maximum amount of information about a data set
+  %   \item Leveraging such summaries to whether a particular problem is worth continued attention.
+  %   \item ``In some instances, a parameter may be conceived as the limit of a function of an infinite sequence of observations (Geisser 1993), and can be a useful concept when our object of interest is approximated as a large sample limit." (Dean Billheimer 2019)
+  % \end{itemize}
   % \subsection{Difference between parametric inference and predictive inference}
 
-  \textcolor{red}{paragraph or two about the difference between parametric inference and predictive inference}
+%  \textcolor{red}{paragraph or two about the difference between parametric inference and predictive inference}
 
     % \subsubsection{When is predictive inference more useful?}
-    \textcolor{red}{When is predictive inference more useful?}\\
-    Prediction is a means of discriminating between scientific hypotheses.  Generally, a model may be judged by the quality of its predictions.  Given competing models, the better predictor will be given more weight, and a useful model increases in utility as it its predictive capability improves.\\
+    % \textcolor{red}{redo next paragraph and then segue to the example without the subsection split}\\
+    Prediction is a means of discriminating between scientific hypotheses.  Generally, a model may be judged by the quality of its predictions.  Given competing models, the better predictor will be given more weight, and a useful model increases in utility as it its predictive capability improves.
 
-    If a model doesn't predict well, why use it at all?\\
+    % If a model doesn't predict well, why use it at all?\\
 
     % \subsubsection{When is parametric inference more useful?}
-    \textcolor{red}{When is parametric inference more useful?}\\
-
-      When the goal is to extract a maximum amount of information from a data set and summarize it in a handful of quantities, inferences about parameters can be useful.  Parametric inference can also be helpful in determining whether a particular problem is worth continued attention.  "In some instances, a parameter may be conceived as the limit of a function of an infinite sequence of observations (Geisser 1993), and can be a useful concept when our object of interest is approximated as a large sample limit." (Dean Billheimer 2019)
+%    \textcolor{red}{When is parametric inference more useful?}\\
 
 
-  \subsection{Example of Difference between results from Plug-in estimator and results using Predictive Inference}
+  % \subsection{Example of Difference between results from Plug-in estimator and results using Predictive Inference}
 
-  To illustrate the potential difference between results from Bayesian prediction and using plug-in estimators, consider the game Pass the Pigs\texttrademark, a push-your-luck dice game in which the ``dice" are actually rubber pig figures.  Two pig dice are thrown, and points are scored according to the combination of positions in which they come to rest.  Details about the game can be found on Wikipedia here: \url{https://en.wikipedia.org/wiki/Pass_the_Pigs}\\
+  To illustrate the potential difference between results from Bayesian prediction and using plug-in estimators, consider the game Pass the Pigs\texttrademark, a push-your-luck dice game in which the ``dice" are actually rubber pig figures.  Two pig dice are thrown, and points are scored according to the combination of positions in which they come to rest.  Details about the game can be found on Wikipedia here: \url{https://en.wikipedia.org/wiki/Pass_the_Pigs}
 
-  For the purpose of this example, consider the probability of a single pig landing in the ``Razorback" position, which occurs when the pig is lying on its back with its legs extended upward.  The irregular shape of the pig makes it difficult to assign probabilities to results other than by means of experimentation.  Such an experiment was conducted at Duquesne University, and an article describing the experiment as well as Bayesian predictive inference performed on the results appeared in the \textit{Journal of Statistics Education} Volume 14, Number 3, in 2006.  The article can be accessed here:  \url{http://jse.amstat.org/v14n3/datasets.kern.html}. Of the $11,954$ recorded results for individual pigs, approximately $22.4\%$ were Razorbacks.\\
+  For the purpose of this example, consider the probability of a single pig landing in the ``Razorback" position, which occurs when the pig is lying on its back with its legs extended upward.  The irregular shape of the pig makes it difficult to assign probabilities to results other than by means of experimentation.  Such an experiment was conducted at Duquesne University, and an article describing the experiment as well as Bayesian predictive inference performed on the results appeared in the \textit{Journal of Statistics Education} Volume 14, Number 3, in 2006.  The article can be accessed here:  \url{http://jse.amstat.org/v14n3/datasets.kern.html}. Of the $11,954$ recorded results for individual pigs, approximately $22.4\%$ were Razorbacks.
 
-  Suppose $t=4$ Razorbacks have been observed out of $N=10$ tosses of a single pig die, suggesting a straightforward binomial distribution with $\theta =$ Pr(Razorback) $= 0.4$. Taking the Duquesne experiment into consideration, we'll perform Bayesian prediction using three prior distributions for $\theta$: $\theta\sim\text{Beta}(2,8)$, $\theta\sim\text{Beta}(22,78)$, and $\theta\sim\text{Beta}(224,776)$, and compare these results to predictions obtained from the plug-in estimator.   For $M = 100$ future observations, how many Razorbacks are predicted?  The density curves in the plot below show the influence of the prior on the location of the predictive distribution, and also the difference in variance resulting from the choice of shape parameters used in the Beta prior.  Essentially, each $(\alpha,\beta)$ pair reflects the prior knowledge from the Duquesne experiment, with the ``weight" given to that knowledge increasing by orders of magnitude, causing variance in the prediction to decrease.
+  Suppose $t=4$ Razorbacks have been observed out of $N=10$ tosses of a single pig die, suggesting a straightforward binomial distribution with $\theta =$ Pr(Razorback) $= 0.4$. Taking the Duquesne experiment into consideration, we'll perform Bayesian prediction using three prior distributions for $\theta$: $\theta\sim\text{Beta}(2,8)$, $\theta\sim\text{Beta}(22,78)$, and $\theta\sim\text{Beta}(224,776)$, and compare these results to predictions obtained from the plug-in estimator.   For $M = 100$ future observations, how many Razorbacks are predicted?  The density curves in the plot below show the influence of the details of the choice of prior on the location and variance of the predictive distribution.  Essentially, each pair of shape parameters $(\alpha,\beta)$ in the Beta prior reflects the knowledge about the results of the Duquesne experiment, with the ``weight" given to that knowledge increasing with the shape parameters by orders of magnitude, causing variance in the prediction to decrease.
 
 \textcolor{red}{talk more in previous paragraph about reasons for choices of $\alpha$ and $\beta$ in Beta prior.  E.g. my method of throwing the pigs may be different than the experimental method, pig-to-pig variation, etc.}
 
@@ -158,9 +164,9 @@ x = 0:M
 f_x_BB28 = dpredBB(x,N,t,M,a1,b1)
 f_x_BB2278 = dpredBB(x,N,t,M,a2,b2)
 f_x_BB224776 = dpredBB(x,N,t,M,a3,b3)
-f_x_PI = dbinom(x,M,t/N)
+f_x_PIE = dbinom(x,M,t/N)
 
-fmat = cbind(f_x_BB28,f_x_BB2278,f_x_BB224776,f_x_PI)
+fmat = cbind(f_x_BB28,f_x_BB2278,f_x_BB224776,f_x_PIE)
 
 ymax = max(fmat)*1.2
 
@@ -172,7 +178,7 @@ leg1 = eval(bquote(expression("Beta-Binomial with "*theta*" ~ Beta("*.(a1)*","*.
 leg2 = eval(bquote(expression("Beta-Binomial with "*theta*" ~ Beta("*.(a2)*","*.(b2)*")")))
 leg3 = eval(bquote(expression("Beta-Binomial with "*theta*" ~ Beta("*.(a3)*","*.(b3)*")")))
 # leg4 = eval(bquote(expression("Binomial plug-in with "*theta==.(t/N))))
-leg4 = eval(bquote(expression("y ~ Binomial("*.(M)*","*.(t/N)*")")))
+leg4 = eval(bquote(expression("Binomial("*.(M)*","*.(t/N)*")")))
 
 leg = c(leg1,leg2,leg3,leg4)
 
@@ -185,8 +191,38 @@ legend("topright", inset = 0.025,bg="transparent",
        col = c(1,1,1,2),
        box.col="white")
 
+##############################################################################
+##Compute values for table comparing mean and variance of the different models
+
+PtPSample2_8 = rpredBB(1000,10,4,100,2,8)
+PtPMean2_8 = mean(PtPSample2_8)
+PtPSD2_8 = sqrt(var(PtPSample2_8))
+
+PtPSample22_78 = rpredBB(1000,10,4,100,22,78)
+PtPMean22_78 = mean(PtPSample22_78)
+PtPSD22_78 = sqrt(var(PtPSample22_78))
+
+PtPSample224_776 = rpredBB(1000,10,4,100,224,776)
+PtPMean224_776 = mean(PtPSample224_776)
+PtPSD224_776 = sqrt(var(PtPSample224_776))
+
 
 @
+
+\begin{center}
+  \begin{tabular}{ |c|c|c|c| }
+     \hline
+     % \rowcolor{lightgray}
+     $(\alpha,\beta)$ & $E(\theta)$ & mean(Razorbacks Predicted) & SD(Razorbacks Predicted) \\
+     \hline
+     (\Sexpr{a1},\Sexpr{b1}) & \Sexpr{a1/(a1+b1)} & \Sexpr{round(PtPMean2_8,2)} & \Sexpr{round(PtPSD2_8,2)} \\
+     \hline
+     (\Sexpr{a2},\Sexpr{b2}) & \Sexpr{a2/(a2+b2)} & \Sexpr{round(PtPMean22_78,2)} & \Sexpr{round(PtPSD22_78,2)} \\
+     \hline
+     (\Sexpr{a3},\Sexpr{b3}) & \Sexpr{a3/(a3+b3)} & \Sexpr{round(PtPMean224_776,2)} & \Sexpr{round(PtPSD224_776,2)} \\
+     \hline
+  \end{tabular}
+\end{center}
 
 
   \subsection{The Bayesian Parametric Prediction Format}
