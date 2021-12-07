@@ -94,7 +94,7 @@ An obstacle to widespread employment of Bayesian predictive inference in scienti
 % }
     The main purpose of statistics is to predict future events based on observed data.  Prediction about meaningful quantities that are relevant to the object of study facilitates scientific progress in multiple ways.  Advantages include enhancing scientific reproducibility, enabling corroboration or refutation of current hypotheses through future experimentation, informing decision-making by summarizing quantities of direct interest to the researcher, and shifting the focus of statistical analysis from estimation of hypothetical parameters to statements about concrete observables.
 
-    It is not the intent of this thesis to suggest that parametric inference should be abandoned in statistical analyses.  Conventional statistical inference techniques are useful for summarizing information about large quantities of data in a handful of usable values, and leveraging such summaries to determine whether a particular problem merits continued attention.  Indeed, statistics as a scientific discipline developed along frequentist lines, and the evolution of Bayesian methods has occurred atop that foundation.
+    It is not the intent of this thesis to suggest that parametric inference should be abandoned in statistical analyses.  Conventional statistical inference techniques are useful for summarizing information about large quantities of data in a handful of usable values, and leveraging such summaries to determine whether a particular problem merits continued attention.  Indeed, the scientific discipline of statistics developed along frequentist lines, and the evolution of Bayesian methods has occurred atop that foundation.
   %
   %
   % Settings in which parametric inference will continue to be needed include:
@@ -123,24 +123,26 @@ An obstacle to widespread employment of Bayesian predictive inference in scienti
 
   For the purpose of this example, consider the probability of a single pig landing in the ``Razorback" position, which occurs when the pig is lying on its back with its legs extended upward.  The irregular shape of the pig makes it difficult to assign probabilities to results other than by means of experimentation.  Such an experiment was conducted at Duquesne University, and an article describing the experiment as well as Bayesian predictive inference performed on the results appeared in the \textit{Journal of Statistics Education} Volume 14, Number 3, in 2006.  The article can be accessed here:  \url{http://jse.amstat.org/v14n3/datasets.kern.html}. Of the $11,954$ recorded results for individual pigs, approximately $22.4\%$ were Razorbacks.
 
-  Suppose $t=4$ Razorbacks have been observed out of $N=10$ tosses of a single pig die, suggesting a straightforward binomial distribution with $\theta =$ Pr(Razorback) $= 0.4$. Taking the Duquesne experiment into consideration, we'll perform Bayesian prediction using three prior distributions for $\theta$: $\theta\sim\text{Beta}(2,8)$, $\theta\sim\text{Beta}(22,78)$, and $\theta\sim\text{Beta}(224,776)$, and compare these results to predictions obtained from the plug-in estimator.   For $M = 100$ future observations, how many Razorbacks are predicted?  The density curves in the plot below show the influence of the details of the choice of prior on the location and variance of the predictive distribution.  Essentially, each pair of shape parameters $(\alpha,\beta)$ in the Beta prior reflects the knowledge about the results of the Duquesne experiment, with the ``weight" given to that knowledge increasing with the shape parameters by orders of magnitude, causing variance in the prediction to decrease.
+  Suppose $t=4$ Razorbacks have been observed out of $N=10$ tosses of a single pig die, suggesting a straightforward binomial distribution with $\theta =$ Pr(Razorback) $= t/N = 0.4$. Taking the Duquesne experiment into consideration, we'll perform Bayesian prediction using three Beta prior distributions for $\theta$: $\theta\sim\text{Beta}(2,8)$, $\theta\sim\text{Beta}(22,78)$, and $\theta\sim\text{Beta}(224,776)$, and compare these results to predictions obtained from the plug-in estimator $\theta = 0.4$.   Any number of prior distributions on $\theta$ would satisfy the condition that $E(\theta) \approx 0.224$, suggested by the prior information.  The specific choice of a Beta prior is made largely for computational convenience.
 
-\textcolor{red}{talk more in previous paragraph about reasons for choices of $\alpha$ and $\beta$ in Beta prior.  E.g. my method of throwing the pigs may be different than the experimental method, pig-to-pig variation, etc.}
+  In this example the question asked by the researcher is, ``For $M = 100$ future observations, how many Razorbacks are predicted?"  The density curves in the plot below show the influence of the details of the choice of prior on the location and variance of the predictive distribution.  Essentially, each pair of shape parameters $(\alpha,\beta)$ in the Beta prior reflects the prior knowledge about the results of the Duquesne experiment, with the ``weight" given to that knowledge increasing with the shape parameters by orders of magnitude.  The choice of shape parameters might be influenced by such things as pig throwing method (perhaps the researcher is throwing them by hand rather than by the carefully controlled method used in the Duquesne experiment, e.g.), or by a need to account for pig-to-pig variation, or anything else the researcher believes introduces a deviation from the events upon which the prior information is based.  Notice in the graph and table below that the choice of prior parameters has a significant effect on the variance of the predictive distribution.
 
 
 \includegraphics{Thesis-002}
 
+
+% Table of prior parameter values and resulting effect on location and variance of prediction
 \begin{center}
   \begin{tabular}{ |c|c|c|c| }
      \hline
      % \rowcolor{lightgray}
-     $(\alpha,\beta)$ & $E(\theta)$ & mean(Razorbacks Predicted) & SD(Razorbacks Predicted) \\
+     $\textbf{(}\boldsymbol\alpha,\boldsymbol\beta\textbf{)}$ & $\textbf{E(}\boldsymbol\theta\textbf{)}$ & \textbf{mean(Razorbacks Predicted)} & \textbf{SD(Razorbacks Predicted)} \\
      \hline
-     (2,8) & 0.2 & 29.86 & 10.97 \\
+     (2,8) & 0.2 & 29.69 & 10.81 \\
      \hline
-     (22,78) & 0.22 & 23.8 & 5.89 \\
+     (22,78) & 0.22 & 23.63 & 5.96 \\
      \hline
-     (224,776) & 0.224 & 22.67 & 4.45 \\
+     (224,776) & 0.224 & 22.53 & 4.67 \\
      \hline
   \end{tabular}
 \end{center}
