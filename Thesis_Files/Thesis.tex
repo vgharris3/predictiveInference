@@ -138,11 +138,11 @@ An obstacle to widespread employment of Bayesian predictive inference in scienti
      % \rowcolor{lightgray}
      $\textbf{(}\boldsymbol\alpha,\boldsymbol\beta\textbf{)}$ & $\textbf{E(}\boldsymbol\theta\textbf{)}$ & \textbf{mean(Razorbacks Predicted)} & \textbf{SD(Razorbacks Predicted)} \\
      \hline
-     (2,8) & 0.2 & 29.69 & 10.81 \\
+     (2,8) & 0.2 & 30.32 & 10.68 \\
      \hline
-     (22,78) & 0.22 & 23.63 & 5.96 \\
+     (22,78) & 0.22 & 23.5 & 5.8 \\
      \hline
-     (224,776) & 0.224 & 22.53 & 4.67 \\
+     (224,776) & 0.224 & 22.86 & 4.53 \\
      \hline
   \end{tabular}
 \end{center}
@@ -153,7 +153,18 @@ An obstacle to widespread employment of Bayesian predictive inference in scienti
   \textcolor{red}{Use Dean's setup from his article, start of section 3}\\
   \textcolor{red}{talk about exchangeability and di Finetti (reread Hoff's intro, also Geisser?)}
 
-  This thesis and the accompanying set of tools (R package) employs a Bayesian approach to predictive inference relying on the de Finetti representation theorem (de Finetti 1937). \textcolor{red}{State the de Finetti theorem here?} We can write
+
+
+  This thesis and the accompanying set of tools (R package) employs a Bayesian approach to predictive inference relying on the de Finetti representation theorem (de Finetti 1937).
+
+  \textbf{Definition} (Hoff p. 27) Let $p(y_1,...,y_n)$ be the joint density of $Y_1,...,Y_n$.  If $p(y_1,...,y_n) = p(y_{\pi_1},...,y_{\pi_n})$ for all permutations $\{\pi_1,...,\pi_n\}$ of $\{1,...,n\}$, then $Y_1,...,Y_n$ are \textit{exchangeable}.
+
+  ``Roughly speaking, $Y_1,...,Y_n$ are exchangeable if the subscript labels convey no information about the outcomes."
+
+The examples presented in this thesis start with an assumption of exchangeability.
+
+
+  \textcolor{red}{State the de Finetti theorem here?} We can write
 
 \begin{equation}
   g(x_{n+1}|\mathbf{x}_n) = \frac{\int_\Theta f(\mathbf{x}_{n+1}|\boldsymbol\theta)\pi(\boldsymbol\theta)d\boldsymbol\theta}{\int_\Theta f(\mathbf{x}_n|\boldsymbol\theta)\pi(\boldsymbol\theta)d\boldsymbol\theta} = \frac{h(\mathbf{x}_{n+1})}{h(\mathbf{x}_n)} \label{generalPredictiveDistributionFormula}

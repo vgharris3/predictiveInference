@@ -232,7 +232,18 @@ PtPSD224_776 = sqrt(var(PtPSample224_776))
   \textcolor{red}{Use Dean's setup from his article, start of section 3}\\
   \textcolor{red}{talk about exchangeability and di Finetti (reread Hoff's intro, also Geisser?)}
 
-  This thesis and the accompanying set of tools (R package) employs a Bayesian approach to predictive inference relying on the de Finetti representation theorem (de Finetti 1937). \textcolor{red}{State the de Finetti theorem here?} We can write
+
+
+  This thesis and the accompanying set of tools (R package) employs a Bayesian approach to predictive inference relying on the de Finetti representation theorem (de Finetti 1937).
+
+  \textbf{Definition} (Hoff p. 27) Let $p(y_1,...,y_n)$ be the joint density of $Y_1,...,Y_n$.  If $p(y_1,...,y_n) = p(y_{\pi_1},...,y_{\pi_n})$ for all permutations $\{\pi_1,...,\pi_n\}$ of $\{1,...,n\}$, then $Y_1,...,Y_n$ are \textit{exchangeable}.
+
+  ``Roughly speaking, $Y_1,...,Y_n$ are exchangeable if the subscript labels convey no information about the outcomes."
+
+The examples presented in this thesis start with an assumption of exchangeability.
+
+
+  \textcolor{red}{State the de Finetti theorem here?} We can write
 
 \begin{equation}
   g(x_{n+1}|\mathbf{x}_n) = \frac{\int_\Theta f(\mathbf{x}_{n+1}|\boldsymbol\theta)\pi(\boldsymbol\theta)d\boldsymbol\theta}{\int_\Theta f(\mathbf{x}_n|\boldsymbol\theta)\pi(\boldsymbol\theta)d\boldsymbol\theta} = \frac{h(\mathbf{x}_{n+1})}{h(\mathbf{x}_n)} \label{generalPredictiveDistributionFormula}
