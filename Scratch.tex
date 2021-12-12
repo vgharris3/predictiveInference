@@ -1,0 +1,102 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[margin=0.5in]{geometry}
+
+\usepackage{color}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    linktoc=all
+}
+
+
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{cancel}
+\usepackage{bm}
+\usepackage{dsfont}
+\usepackage{graphicx}
+\usepackage{graphics}
+\usepackage{xfrac}
+\usepackage{array}
+\setcounter{MaxMatrixCols}{40}
+
+\usepackage{ulem} %just so I can strike through items on my todo list using \sout{text to be struck through}
+
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{multirow}
+
+%inclusions carried over from past class homework formats
+\usepackage{units}
+\usepackage{fullpage}
+\usepackage{alltt}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{soul}
+
+\usepackage{pgfplots}
+
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\newcommand*{\fontCourier}{\fontfamily{pcr}\selectfont}
+\newcommand*\mean[1]{\overline{#1}}
+\newcommand\scalemath[2]{\scalebox{#1}{\mbox{\ensuremath{\displaystyle #2}}}}
+
+\setcounter{tocdepth}{5}
+\setcounter{secnumdepth}{5}
+
+% \usepackage{pdfpages}
+\usepackage{Sweave}
+\begin{document}
+% \includepdf{TitlePage_MastersThesis}
+% \includepdf{ThesisApprovalPage}
+\input{Scratch-concordance}
+
+% \tableofcontents
+% \newpage
+
+
+
+% \title{To Do List}
+% \author{\Large Gabe Harris}
+% \maketitle
+
+$Y_1,...,Y_n$ are \textit{exchangeable}
+
+$\Rightarrow$
+
+$Y_1,...,Y_n | \theta$ are conditionally i.i.d., $\theta \sim \pi(\theta)$ (de Finetti)
+
+% $\Rightarrow$
+%
+% $p(y_1,...,y_n) = \int\left\{\prod_1^n p(y_i|\theta)\right\}\pi(\theta)d\theta$ (de Finetti)
+%
+% $\Rightarrow$
+%
+% $\vdots$
+
+$\Rightarrow$
+
+\begin{flalign}
+  p(\tilde{Y} = \tilde{y} | Y_1 = y_1,...,Y_n = y_n) &= \frac{\int p(\tilde{y},y_1,...,y_n | \theta)\pi(\theta) d\theta}{\int p(y_1,...,y_n | \theta)\pi(\theta) d\theta}\\
+  &\\
+    &= \frac{\int p(\tilde{y}|\theta)p(y_1,...,y_n | \theta)\pi(\theta) d\theta}{\int p(y_1,...,y_n | \theta)\pi(\theta) d\theta}\\
+  &\\
+    &= \frac{\int p(\tilde{y}|\theta)p(\theta|y_1,...,y_n) p(y_1,...,y_n) d\theta}{\int p(y_1,...,y_n | \theta)\pi(\theta) d\theta}\\
+  &\\
+  &= \frac{\cancel{p(y_1,...,y_n)} \int p(\tilde{y}|\theta)p(\theta|y_1,...,y_n) d\theta}{\cancel{p(y_1,...,y_n)}}\\
+  &\\
+  &= \int p(\tilde{y}|\theta) p(\theta|y_1,...,y_n) d\theta
+\end{flalign}
+
+
+
+
+
+
+
+
+\end{document}

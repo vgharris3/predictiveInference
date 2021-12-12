@@ -228,52 +228,66 @@ PtPSD224_776 = sqrt(var(PtPSample224_776))
 
 
   \subsection{The Bayesian Parametric Prediction Format}
+  %
+  % \textcolor{red}{Use Dean's setup from his article, start of section 3}\\
+  % \textcolor{red}{talk about exchangeability and di Finetti (reread Hoff's intro, also Geisser?)}
 
-  \textcolor{red}{Use Dean's setup from his article, start of section 3}\\
-  \textcolor{red}{talk about exchangeability and di Finetti (reread Hoff's intro, also Geisser?)}
+  We want to predict future outcomes based on current knowledge.  The question is, for observed values $Y_1 = y_1,...,Y_n = y_n$, what is likely to be the value of the next observation, $\tilde{Y}=\tilde{y}$?  We want to compute $Pr(\tilde{Y}|\theta,y_1,...,y_n)$, where $\theta$ is a population parameter with a distribution $\pi(\theta)$ based on some prior knowledge or beliefs.  Here we are careful to satisfy ourselves that $Y_1,...,Y_n$ are \textit{exchangeable}.  Exchangeability means that $p(y_1,...,y_n) = p(y_{a_1},...,y_{a_n})$ for all permutations $\{a_1,...,a_n\}$ of $\{1,...,n\}$.  In other words the order of the $y_i$s does not convey any information about their joint density.  From de Finetti's representation theorem, then, $Y_1,...,Y_n$ are conditionally independent and identically distributed (i.i.d.) given $\theta$ (Hoff p. 27), and we can write the joint density
 
+  $$p(y_1,...,y_n) = \int\left\{\prod_1^n p(y_i|\theta)\right\}\pi(\theta)d\theta$$.
 
+  Get to:  We can predict $\tilde{Y}$ using
 
-  This thesis and the accompanying set of tools (R package) employs a Bayesian approach to predictive inference relying on the de Finetti representation theorem (de Finetti 1937).
-
-  \textbf{Definition} (Hoff p. 27) Let $p(y_1,...,y_n)$ be the joint density of $Y_1,...,Y_n$.  If $p(y_1,...,y_n) = p(y_{\pi_1},...,y_{\pi_n})$ for all permutations $\{\pi_1,...,\pi_n\}$ of $\{1,...,n\}$, then $Y_1,...,Y_n$ are \textit{exchangeable}.
-
-  ``Roughly speaking, $Y_1,...,Y_n$ are exchangeable if the subscript labels convey no information about the outcomes."
-
-The examples presented in this thesis start with an assumption of exchangeability.
+  $$p(\tilde{Y} = \tilde{y} | Y_1 = y_1,...,Y_n = y_n) = \int p(\tilde{y}|\theta) p(\theta|y_1,...,y_n) d\theta$$
 
 
-  \textcolor{red}{State the de Finetti theorem here?} We can write
 
-\begin{equation}
-  g(x_{n+1}|\mathbf{x}_n) = \frac{\int_\Theta f(\mathbf{x}_{n+1}|\boldsymbol\theta)\pi(\boldsymbol\theta)d\boldsymbol\theta}{\int_\Theta f(\mathbf{x}_n|\boldsymbol\theta)\pi(\boldsymbol\theta)d\boldsymbol\theta} = \frac{h(\mathbf{x}_{n+1})}{h(\mathbf{x}_n)} \label{generalPredictiveDistributionFormula}
-\end{equation}
 
-\noindent where $h(\mathbf{x}_k)$ is the marginal density of $\mathbf{x}_k$, $\boldsymbol\theta$ has prior distribution $\pi(\boldsymbol\theta)$, and $\Theta$ is the parameter space for $\boldsymbol\theta$.  Then the predictive density $g(\cdot)$ can be written:
 
-\begin{equation}
-  g(x_{n+1}|\mathbf{x}_n) = \int_\Theta f(\mathbf{x}_{n+1}|\boldsymbol\theta)\pi(\boldsymbol\theta | \mathbf{x}_n)d\boldsymbol\theta \label{concisePredictiveDistributionFormula}
-\end{equation}
-
-\noindent where $x_{n+1}$ is conditionally independent of $\mathbf{x}_n$ given $\boldsymbol\theta$, and $\pi(\boldsymbol\theta | \mathbf{x}_n)d\boldsymbol\theta)$ is the posterior distribution of $\mathbf{x}_n$ given $\boldsymbol\theta$.
-
-\textcolor{red}{Originally I used Geisser's notation, carrying it through the two examples I used from his book.  For the remaining cases I imitated Hoff's notation.  I think I should standardize everything with one kind of notation.}
-    [Geisser p. 49]\\
-
-        Let $$f\left(x^{(N)},x_{(M)}|\theta\right) = f\left(x_{(M)}|x^{(N)},\theta\right)f\left(x^{(N)}|\theta\right).$$
-
-    Here $x^{(N)}$ represents observed events and $x_{(M)}$ are future events.  We calculate
-
-    $$f\left(x_{(M)},x^{(N)}\right) = \int f\left(x^{(N)},x_{(M)}|\theta\right)p(\theta)d\theta$$
-
-    where $p(\theta)$ is the prior density and
-
-    $$f\left(x_{(M)}|x^{(N)}\right) = \frac{f\left(x_{(M)},x^{(N)}\right)}{f\left(x^{(N)}\right)} = \int f\left(x_{(M)}|\theta\right)p\left(\theta|x^{(N)}\right)d\theta$$
-
-    where
-
-    $$p\left(\theta|x^{(N)}\right) \propto f\left(x^{(N)}|\theta\right)p(\theta).$$
-
+%     \textbf{Definition} (Hoff p. 27) Let $p(y_1,...,y_n)$ be the joint density of $Y_1,...,Y_n$.  If $p(y_1,...,y_n) = p(y_{\pi_1},...,y_{\pi_n})$ for all permutations $\{\pi_1,...,\pi_n\}$ of $\{1,...,n\}$, then $Y_1,...,Y_n$ are \textit{exchangeable}.
+%
+%   Given joint density $p(y_1,...,y_n)$ of $Y_1,...,Y_n$ and some parameter $\theta$ with prior distribution $\pi(\theta)$, de Finetti' Representation Theorem (1937) enables us to write
+%
+%   $$p(y_1,...,y_n) = \int$$
+%
+%   This thesis and the accompanying set of tools (R package) employs a Bayesian approach to predictive inference relying on the de Finetti representation theorem (de Finetti 1937).
+%
+% %   ``Roughly speaking, $Y_1,...,Y_n$ are exchangeable if the subscript labels convey no information about the outcomes."
+% %
+% % The examples presented in this thesis start with an assumption of exchangeability.
+%
+%
+%   \textcolor{red}{State the de Finetti theorem here?} We can write
+%
+% \begin{equation}
+%   g(x_{n+1}|\mathbf{x}_n) = \frac{\int_\Theta f(\mathbf{x}_{n+1}|\boldsymbol\theta)\pi(\boldsymbol\theta)d\boldsymbol\theta}{\int_\Theta f(\mathbf{x}_n|\boldsymbol\theta)\pi(\boldsymbol\theta)d\boldsymbol\theta} = \frac{h(\mathbf{x}_{n+1})}{h(\mathbf{x}_n)} \label{generalPredictiveDistributionFormula}
+% \end{equation}
+%
+% \noindent where $h(\mathbf{x}_k)$ is the marginal density of $\mathbf{x}_k$, $\boldsymbol\theta$ has prior distribution $\pi(\boldsymbol\theta)$, and $\Theta$ is the parameter space for $\boldsymbol\theta$.  Then the predictive density $g(\cdot)$ can be written:
+%
+% \begin{equation}
+%   g(x_{n+1}|\mathbf{x}_n) = \int_\Theta f(\mathbf{x}_{n+1}|\boldsymbol\theta)\pi(\boldsymbol\theta | \mathbf{x}_n)d\boldsymbol\theta \label{concisePredictiveDistributionFormula}
+% \end{equation}
+%
+% \noindent where $x_{n+1}$ is conditionally independent of $\mathbf{x}_n$ given $\boldsymbol\theta$, and $\pi(\boldsymbol\theta | \mathbf{x}_n)d\boldsymbol\theta)$ is the posterior distribution of $\mathbf{x}_n$ given $\boldsymbol\theta$.
+%
+% \textcolor{red}{Originally I used Geisser's notation, carrying it through the two examples I used from his book.  For the remaining cases I imitated Hoff's notation.  I think I should standardize everything with one kind of notation.}
+%     [Geisser p. 49]\\
+%
+%         Let $$f\left(x^{(N)},x_{(M)}|\theta\right) = f\left(x_{(M)}|x^{(N)},\theta\right)f\left(x^{(N)}|\theta\right).$$
+%
+%     Here $x^{(N)}$ represents observed events and $x_{(M)}$ are future events.  We calculate
+%
+%     $$f\left(x_{(M)},x^{(N)}\right) = \int f\left(x^{(N)},x_{(M)}|\theta\right)p(\theta)d\theta$$
+%
+%     where $p(\theta)$ is the prior density and
+%
+%     $$f\left(x_{(M)}|x^{(N)}\right) = \frac{f\left(x_{(M)},x^{(N)}\right)}{f\left(x^{(N)}\right)} = \int f\left(x_{(M)}|\theta\right)p\left(\theta|x^{(N)}\right)d\theta$$
+%
+%     where
+%
+%     $$p\left(\theta|x^{(N)}\right) \propto f\left(x^{(N)}|\theta\right)p(\theta).$$
+%
 
 
 
