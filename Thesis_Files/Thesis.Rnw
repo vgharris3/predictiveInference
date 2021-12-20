@@ -232,6 +232,8 @@ PtPSD224_776 = sqrt(var(PtPSample224_776))
   % \textcolor{red}{Use Dean's setup from his article, start of section 3}\\
   % \textcolor{red}{talk about exchangeability and di Finetti (reread Hoff's intro, also Geisser?)}
 
+  \textcolor{red}{minor change to test Github functionality after regenerating personal access token}
+
   We want to predict future outcomes based on current knowledge.  The question is, for observed values $Y_1 = y_1,...,Y_n = y_n$, what is likely to be the value of the next observation, $\tilde{Y}=\tilde{y}$?  We want to compute $Pr(\tilde{Y}|\theta,y_1,...,y_n)$, where $\theta$ is a population parameter with a distribution $\pi(\theta)$ based on some prior knowledge or beliefs.  Here we are careful to satisfy ourselves that $Y_1,...,Y_n$ are \textit{exchangeable}.  Exchangeability means that $p(y_1,...,y_n) = p(y_{a_1},...,y_{a_n})$ for all permutations $\{a_1,...,a_n\}$ of $\{1,...,n\}$.  In other words the order of the $y_i$s does not convey any information about their joint density.  From de Finetti's representation theorem, then, $Y_1,...,Y_n$ are conditionally independent and identically distributed (i.i.d.) given $\theta$ (Hoff p. 27), and we can write the joint density
 
   $$p(y_1,...,y_n) = \int\left\{\prod_1^n p(y_i|\theta)\right\}\pi(\theta)d\theta$$.
