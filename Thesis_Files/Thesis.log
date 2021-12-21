@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  20 DEC 2021 11:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  20 DEC 2021 14:33
 entering extended mode
 **./Thesis.tex
 (Thesis.tex
@@ -1066,14 +1066,14 @@ Package pdftex.def Info: Thesis-002.pdf  used on input line 131.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
  [6] [7 <./Thesis-002.pdf>]
 [8]
-Underfull \hbox (badness 10000) in paragraph at lines 221--222
+Underfull \hbox (badness 10000) in paragraph at lines 235--236
 
  []
 
 
 Package amsmath Warning: Foreign command \atopwithdelims;
 (amsmath)                \frac or \genfrac should be used instead
-(amsmath)                 on input line 233.
+(amsmath)                 on input line 247.
 
 [9
 
@@ -1081,252 +1081,257 @@ Package amsmath Warning: Foreign command \atopwithdelims;
 <Thesis-003.pdf, id=368, 433.62pt x 433.62pt>
 File: Thesis-003.pdf Graphic file (type pdf)
 <use Thesis-003.pdf>
-Package pdftex.def Info: Thesis-003.pdf  used on input line 278.
+Package pdftex.def Info: Thesis-003.pdf  used on input line 292.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
  [11
 
  <./Thesis-003.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 290--292
+Underfull \hbox (badness 10000) in paragraph at lines 304--306
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 318--319
+Underfull \hbox (badness 10000) in paragraph at lines 332--333
 
  []
 
 [12]
-Underfull \hbox (badness 10000) in paragraph at lines 335--336
+Underfull \hbox (badness 10000) in paragraph at lines 349--350
 
  []
 
-<Thesis-004.pdf, id=385, 433.62pt x 433.62pt>
+<Thesis-004.pdf, id=387, 433.62pt x 433.62pt>
 File: Thesis-004.pdf Graphic file (type pdf)
 <use Thesis-004.pdf>
-Package pdftex.def Info: Thesis-004.pdf  used on input line 349.
+Package pdftex.def Info: Thesis-004.pdf  used on input line 363.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
 [13] [14 <./Thesis-004.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 355--357
+Underfull \hbox (badness 10000) in paragraph at lines 369--371
 
  []
 
 [15
 
 ] [16]
-Overfull \hbox (41.8812pt too wide) detected at line 466
+Overfull \hbox (41.8812pt too wide) detected at line 480
 []
  []
 
 [17]
-Overfull \hbox (23.23816pt too wide) detected at line 499
+Overfull \hbox (23.23816pt too wide) detected at line 513
 []
  []
 
 [18]
-Underfull \hbox (badness 10000) in paragraph at lines 513--514
+Underfull \hbox (badness 10000) in paragraph at lines 527--528
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 515--516
+Underfull \hbox (badness 10000) in paragraph at lines 529--530
 
  []
 
-<Thesis-005.pdf, id=419, 433.62pt x 433.62pt>
+<Thesis-005.pdf, id=421, 433.62pt x 433.62pt>
 File: Thesis-005.pdf Graphic file (type pdf)
 <use Thesis-005.pdf>
-Package pdftex.def Info: Thesis-005.pdf  used on input line 530.
+Package pdftex.def Info: Thesis-005.pdf  used on input line 544.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
 [19] [20 <./Thesis-005.pdf>]
-LaTeX Font Info:    Calculating math sizes for size <8.4> on input line 549.
+LaTeX Font Info:    Calculating math sizes for size <8.4> on input line 563.
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <4.2> not available
-(Font)              size <5> substituted on input line 549.
+(Font)              size <5> substituted on input line 563.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <4.2> not available
-(Font)              size <5> substituted on input line 549.
+(Font)              size <5> substituted on input line 563.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <4.2> not available
-(Font)              size <5> substituted on input line 549.
+(Font)              size <5> substituted on input line 563.
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/bx/n' in size <4.2> not available
-(Font)              size <5> substituted on input line 549.
+(Font)              size <5> substituted on input line 563.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/b/it' in size <4.2> not available
-(Font)              size <5> substituted on input line 549.
+(Font)              size <5> substituted on input line 563.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/b/n' in size <4.2> not available
-(Font)              size <5> substituted on input line 549.
+(Font)              size <5> substituted on input line 563.
 
 
 LaTeX Font Warning: Font shape `U/rsfs/m/n' in size <4.2> not available
-(Font)              size <5> substituted on input line 549.
+(Font)              size <5> substituted on input line 563.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 564--565
+Underfull \hbox (badness 10000) in paragraph at lines 578--579
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 566--567
+Underfull \hbox (badness 10000) in paragraph at lines 580--581
 
  []
 
 [21
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 588--589
+Underfull \hbox (badness 10000) in paragraph at lines 602--603
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 600--601
+Underfull \hbox (badness 10000) in paragraph at lines 614--615
 
  []
 
 
-Overfull \hbox (18.08081pt too wide) in paragraph at lines 608--609
+Overfull \hbox (18.08081pt too wide) in paragraph at lines 622--623
  \T1/aer/b/n/12 3.4.1.2 R Im-ple-men-ta-tion[][] \T1/aer/m/n/12 Stan-dard for-m
 at R func-tions dpred-NormIG(), ppred-NormIG(),
  []
 
 [22]
-Underfull \hbox (badness 10000) in paragraph at lines 622--623
+Underfull \hbox (badness 10000) in paragraph at lines 636--637
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 627--628
+Underfull \hbox (badness 10000) in paragraph at lines 641--642
 
  []
 
 [23]
-<Thesis-006.pdf, id=454, 433.62pt x 433.62pt>
+<Thesis-006.pdf, id=456, 433.62pt x 433.62pt>
 File: Thesis-006.pdf Graphic file (type pdf)
 <use Thesis-006.pdf>
-Package pdftex.def Info: Thesis-006.pdf  used on input line 655.
+Package pdftex.def Info: Thesis-006.pdf  used on input line 669.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
  [24] [25 <./Thesis-006.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 679--680
+Underfull \hbox (badness 10000) in paragraph at lines 693--694
 
  []
 
 [26
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 720--723
+Underfull \hbox (badness 10000) in paragraph at lines 734--737
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 720--723
+Underfull \hbox (badness 10000) in paragraph at lines 734--737
 
  []
 
-<Thesis-007.pdf, id=475, 433.62pt x 433.62pt>
+<Thesis-007.pdf, id=477, 433.62pt x 433.62pt>
 File: Thesis-007.pdf Graphic file (type pdf)
 <use Thesis-007.pdf>
-Package pdftex.def Info: Thesis-007.pdf  used on input line 724.
+Package pdftex.def Info: Thesis-007.pdf  used on input line 738.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
 [27]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 727.
+(hyperref)                removing `math shift' on input line 741.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 727.
+(hyperref)                removing `math shift' on input line 741.
 
 [28 <./Thesis-007.pdf>] [29]
-<Thesis-008.pdf, id=504, 433.62pt x 433.62pt>
+<Thesis-008.pdf, id=506, 433.62pt x 433.62pt>
 File: Thesis-008.pdf Graphic file (type pdf)
 <use Thesis-008.pdf>
-Package pdftex.def Info: Thesis-008.pdf  used on input line 785.
+Package pdftex.def Info: Thesis-008.pdf  used on input line 799.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
-<Thesis-009.pdf, id=505, 433.62pt x 433.62pt>
+<Thesis-009.pdf, id=507, 433.62pt x 433.62pt>
 File: Thesis-009.pdf Graphic file (type pdf)
 <use Thesis-009.pdf>
-Package pdftex.def Info: Thesis-009.pdf  used on input line 787.
+Package pdftex.def Info: Thesis-009.pdf  used on input line 801.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
  [30 <./Thesis-008.pdf>]
-<Thesis-010.pdf, id=519, 433.62pt x 433.62pt>
+<Thesis-010.pdf, id=521, 433.62pt x 433.62pt>
 File: Thesis-010.pdf Graphic file (type pdf)
 <use Thesis-010.pdf>
-Package pdftex.def Info: Thesis-010.pdf  used on input line 816.
+Package pdftex.def Info: Thesis-010.pdf  used on input line 830.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
  [31 <./Thesis-009.pdf>]
 [32 <./Thesis-010.pdf>]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 823.
+(hyperref)                removing `math shift' on input line 837.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 823.
+(hyperref)                removing `math shift' on input line 837.
 
 [33
 
 ]
-<Thesis-011.pdf, id=546, 433.62pt x 433.62pt>
+<Thesis-011.pdf, id=548, 433.62pt x 433.62pt>
 File: Thesis-011.pdf Graphic file (type pdf)
 <use Thesis-011.pdf>
-Package pdftex.def Info: Thesis-011.pdf  used on input line 891.
+Package pdftex.def Info: Thesis-011.pdf  used on input line 905.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
  [34
 
  <./Thesis-011.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 910--911
+Underfull \hbox (badness 10000) in paragraph at lines 924--925
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 910--911
+Underfull \hbox (badness 10000) in paragraph at lines 924--925
 
  []
 
-<Thesis-012.pdf, id=557, 433.62pt x 433.62pt>
+<Thesis-012.pdf, id=559, 433.62pt x 433.62pt>
 File: Thesis-012.pdf Graphic file (type pdf)
 <use Thesis-012.pdf>
-Package pdftex.def Info: Thesis-012.pdf  used on input line 912.
+Package pdftex.def Info: Thesis-012.pdf  used on input line 926.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 921--922
+Underfull \hbox (badness 10000) in paragraph at lines 935--936
 
  []
 
 [35 <./Thesis-012.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 925--926
+Underfull \hbox (badness 10000) in paragraph at lines 939--940
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 927--929
+Underfull \hbox (badness 10000) in paragraph at lines 941--943
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 934--935
+Underfull \hbox (badness 10000) in paragraph at lines 948--949
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 941--942
+Underfull \hbox (badness 10000) in paragraph at lines 955--956
 
  []
 
 [36]
-Underfull \hbox (badness 10000) in paragraph at lines 985--986
+
+LaTeX Warning: Reference `conditional_density' on page 37 undefined on input li
+ne 979.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 999--1000
 
  []
 
 
-Overfull \hbox (1.57745pt too wide) in paragraph at lines 1001--1002
+Overfull \hbox (1.57745pt too wide) in paragraph at lines 1015--1016
 \T1/aer/m/n/12 Constructing a Gibbs sam-pler to ap-prox-i-mate the joint pos-te
 -rior dis-tri-bu-tion $\OML/cmm/m/it/12 p\OT1/cmr/m/n/12 (\OML/cmm/b/it/12 \OM
 L/cmm/m/it/12 ; []\OMS/cmsy/m/n/12 j[]\OT1/cmr/m/n/12 )$
@@ -1335,109 +1340,109 @@ L/cmm/m/it/12 ; []\OMS/cmsy/m/n/12 j[]\OT1/cmr/m/n/12 )$
 [37
 
 ]
-Overfull \hbox (0.347pt too wide) in paragraph at lines 1016--1017
+Overfull \hbox (0.347pt too wide) in paragraph at lines 1030--1031
 []\T1/aer/m/n/12 To cre-ate a sam-ple from the pre-dic-tive dis-tri-bu-tion of 
 re-sponses: for each $\OML/cmm/m/it/12 s \OMS/cmsy/m/n/12 2 f\OT1/cmr/m/n/12 1\
 OML/cmm/m/it/12 ; :::; S\OMS/cmsy/m/n/12 g$\T1/aer/m/n/12 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1039--1040
+Underfull \hbox (badness 10000) in paragraph at lines 1053--1054
 
  []
 
 [38]
-Underfull \hbox (badness 10000) in paragraph at lines 1058--1059
+Underfull \hbox (badness 10000) in paragraph at lines 1072--1073
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1058--1059
+Underfull \hbox (badness 10000) in paragraph at lines 1072--1073
 
  []
 
 
-Overfull \hbox (119.5216pt too wide) detected at line 1084
+Overfull \hbox (119.5216pt too wide) detected at line 1098
 []
  []
 
-<Thesis-015.pdf, id=599, 433.62pt x 433.62pt>
+<Thesis-015.pdf, id=600, 433.62pt x 433.62pt>
 File: Thesis-015.pdf Graphic file (type pdf)
 <use Thesis-015.pdf>
-Package pdftex.def Info: Thesis-015.pdf  used on input line 1090.
+Package pdftex.def Info: Thesis-015.pdf  used on input line 1104.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
 [39]
-<Thesis-016.pdf, id=606, 433.62pt x 433.62pt>
+<Thesis-016.pdf, id=607, 433.62pt x 433.62pt>
 File: Thesis-016.pdf Graphic file (type pdf)
 <use Thesis-016.pdf>
-Package pdftex.def Info: Thesis-016.pdf  used on input line 1098.
+Package pdftex.def Info: Thesis-016.pdf  used on input line 1112.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
  [40 <./Thesis-015.pdf>]
-<Thesis-017.pdf, id=617, 433.62pt x 433.62pt>
+<Thesis-017.pdf, id=618, 433.62pt x 433.62pt>
 File: Thesis-017.pdf Graphic file (type pdf)
 <use Thesis-017.pdf>
-Package pdftex.def Info: Thesis-017.pdf  used on input line 1100.
+Package pdftex.def Info: Thesis-017.pdf  used on input line 1114.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
  [41 <./Thesis-016.pdf>] [42 <./Thesis-017.pdf>]
-<Thesis-018.pdf, id=638, 433.62pt x 433.62pt>
+<Thesis-018.pdf, id=639, 433.62pt x 433.62pt>
 File: Thesis-018.pdf Graphic file (type pdf)
 <use Thesis-018.pdf>
-Package pdftex.def Info: Thesis-018.pdf  used on input line 1105.
+Package pdftex.def Info: Thesis-018.pdf  used on input line 1119.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
 
 [43
 
  <./Thesis-018.pdf>]
-<Thesis-019.pdf, id=650, 433.62pt x 433.62pt>
+<Thesis-019.pdf, id=651, 433.62pt x 433.62pt>
 File: Thesis-019.pdf Graphic file (type pdf)
 <use Thesis-019.pdf>
-Package pdftex.def Info: Thesis-019.pdf  used on input line 1111.
+Package pdftex.def Info: Thesis-019.pdf  used on input line 1125.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
-<Thesis-020.pdf, id=651, 433.62pt x 433.62pt>
+<Thesis-020.pdf, id=652, 433.62pt x 433.62pt>
 File: Thesis-020.pdf Graphic file (type pdf)
 <use Thesis-020.pdf>
-Package pdftex.def Info: Thesis-020.pdf  used on input line 1115.
+Package pdftex.def Info: Thesis-020.pdf  used on input line 1129.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
  [44
 
  <./Thesis-019.pdf>] [45 <./Thesis-020.pdf>]
-<Thesis-021.pdf, id=672, 433.62pt x 433.62pt>
+<Thesis-021.pdf, id=673, 433.62pt x 433.62pt>
 File: Thesis-021.pdf Graphic file (type pdf)
 <use Thesis-021.pdf>
-Package pdftex.def Info: Thesis-021.pdf  used on input line 1123.
+Package pdftex.def Info: Thesis-021.pdf  used on input line 1137.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
-<Thesis-022.pdf, id=673, 433.62pt x 433.62pt>
+<Thesis-022.pdf, id=674, 433.62pt x 433.62pt>
 File: Thesis-022.pdf Graphic file (type pdf)
 <use Thesis-022.pdf>
-Package pdftex.def Info: Thesis-022.pdf  used on input line 1131.
+Package pdftex.def Info: Thesis-022.pdf  used on input line 1145.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
 
 [46
 
  <./Thesis-021.pdf>]
-<Thesis-023.pdf, id=683, 433.62pt x 433.62pt>
+<Thesis-023.pdf, id=684, 433.62pt x 433.62pt>
 File: Thesis-023.pdf Graphic file (type pdf)
 <use Thesis-023.pdf>
-Package pdftex.def Info: Thesis-023.pdf  used on input line 1133.
+Package pdftex.def Info: Thesis-023.pdf  used on input line 1147.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
  [47 <./Thesis-022.pdf>]
-<Thesis-024.pdf, id=694, 433.62pt x 433.62pt>
+<Thesis-024.pdf, id=695, 433.62pt x 433.62pt>
 File: Thesis-024.pdf Graphic file (type pdf)
 <use Thesis-024.pdf>
-Package pdftex.def Info: Thesis-024.pdf  used on input line 1135.
+Package pdftex.def Info: Thesis-024.pdf  used on input line 1149.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
  [48 <./Thesis-023.pdf>]
-<Thesis-025.pdf, id=705, 433.62pt x 433.62pt>
+<Thesis-025.pdf, id=706, 433.62pt x 433.62pt>
 File: Thesis-025.pdf Graphic file (type pdf)
 <use Thesis-025.pdf>
-Package pdftex.def Info: Thesis-025.pdf  used on input line 1137.
+Package pdftex.def Info: Thesis-025.pdf  used on input line 1151.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
 
 [49 <./Thesis-024.pdf>]
-<Thesis-026.pdf, id=717, 433.62pt x 433.62pt>
+<Thesis-026.pdf, id=718, 433.62pt x 433.62pt>
 File: Thesis-026.pdf Graphic file (type pdf)
 <use Thesis-026.pdf>
-Package pdftex.def Info: Thesis-026.pdf  used on input line 1139.
+Package pdftex.def Info: Thesis-026.pdf  used on input line 1153.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
  [50 <./Thesis-025.pdf>] [51 <./Thesis-026.pdf>]
 [52
@@ -1450,12 +1455,15 @@ Package rerunfilecheck Info: File `Thesis.out' has not changed.
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 2.90001pt have occurred.
 
+
+LaTeX Warning: There were undefined references.
+
  ) 
 Here is how much of TeX's memory you used:
- 30660 strings out of 479696
- 712814 string characters out of 2881701
+ 30663 strings out of 479696
+ 712950 string characters out of 2881701
  1158470 words of memory out of 3000000
- 46982 multiletter control sequences out of 15000+200000
+ 46984 multiletter control sequences out of 15000+200000
  450517 words of font info for 138 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  94i,20n,98p,1134b,609s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1476,9 +1484,9 @@ amsfonts/cm/cmr6.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:
 sy8.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/MiKTeX 2.9
 /fonts/type1/public/amsfonts/cm/cmtt12.pfb><C:/MiKTeX 2.9/fonts/type1/public/am
 sfonts/latxfont/line10.pfb>
-Output written on Thesis.pdf (52 pages, 1230922 bytes).
+Output written on Thesis.pdf (52 pages, 1230300 bytes).
 PDF statistics:
- 838 PDF objects out of 1000 (max. 8388607)
- 130 named destinations out of 1000 (max. 500000)
+ 839 PDF objects out of 1000 (max. 8388607)
+ 131 named destinations out of 1000 (max. 500000)
  500 words of extra memory for PDF output out of 10000 (max. 10000000)
 

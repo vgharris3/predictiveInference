@@ -1,0 +1,1167 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[margin=0.5in]{geometry}
+
+\usepackage{color}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    linktoc=all
+}
+
+
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{cancel}
+\usepackage{bm}
+\usepackage{dsfont}
+\usepackage{graphicx}
+\usepackage{graphics}
+\usepackage{xfrac}
+\usepackage{array}
+\setcounter{MaxMatrixCols}{40}
+
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{multirow}
+
+%inclusions carried over from past class homework formats
+\usepackage{units}
+\usepackage{fullpage}
+\usepackage{alltt}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{soul}
+
+\usepackage{pgfplots}
+
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\newcommand*{\fontCourier}{\fontfamily{pcr}\selectfont}
+\newcommand*\mean[1]{\overline{#1}}
+\newcommand\scalemath[2]{\scalebox{#1}{\mbox{\ensuremath{\displaystyle #2}}}}
+
+\setcounter{tocdepth}{5}
+\setcounter{secnumdepth}{5}
+
+\usepackage{pdfpages}
+\usepackage{Sweave}
+\begin{document}
+\includepdf{TitlePage_MastersThesis}
+\includepdf{ThesisApprovalPage}
+\input{Thesis_v1-concordance}
+
+\tableofcontents
+\newpage
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%INTRODUCTION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Thesis Abstract}
+
+An obstacle to widespread employment of Bayesian predictive inference in scientific research is the lack of suitable computing tools.  In this thesis I document several established useful models, and provide an applicable set of tools for statisticians.  For each of the included models, some basic notes on mathematical derivation are presented, and predictive inference is illustrated with examples.  Note that throughout this thesis the terms ``predictive inference," ``Bayesian inference," and ``Bayesian prediction" are used interchangeably.  For the details of the models and some of the examples we relied primarily on Seymour Geisser's \underline{Predictive Inference:  An Introduction} (1993) and Peter D. Hoff's \underline{A First Course in Bayesian Predictive Methods} (2009).
+
+    An R package has been developed, the main purpose of which is to provide the researcher with a means of producing random samples from predictive distributions.  For all the models, the package includes random sample generators.  For those models with analytical solutions, density and distribution functions are also provided.  The standard R naming convention has been adopted:  density functions are prefixed with the letter ``d," distribution functions with the letter ``p," and random generation functions with the letter ``r."  Also included in all function names is the abbreviation ``pred" (for predictive) and an initialism or abbreviation identifying the model itself.  For example, the density function for the Beta-Binomial model is named ``dpredBB()."  The R code for each function is included in Appendix \textcolor{red}{X-insert link to appendix here}.
+
+
+
+% \clearpage
+
+\section{Introduction:  Predictive Inference}
+
+  \subsection{Why Predictive Inference?}
+
+
+% \textcolor{red}{
+%     \begin{itemize}
+%       \item Intro:  ~3 paragraphs, < 2 pages
+%       \item Audience:  my classmates (persuade), my committee (demonstrate that \textit{I} get it)
+%     \end{itemize}
+% }
+%
+% \textcolor{red}{
+%     Sources:
+%     \begin{itemize}
+%       \item Nate Silver's book (1st chapter or intro)
+%       \item Geyser's book (1st chapter or intro)
+%       \item Aitchison and Dunsmore (1st chapter or intro)
+%       \item Dean's paper
+%       \item maybe some googling
+%     \end{itemize}
+% }
+    The main purpose of statistics is to predict future events based on observed data.  Prediction about meaningful quantities that are relevant to the object of study facilitates scientific progress in multiple ways.  Advantages include enhancing scientific reproducibility, enabling corroboration or refutation of current hypotheses through future experimentation, informing decision-making by summarizing quantities of direct interest to the researcher, and shifting the focus of statistical analysis from estimation of hypothetical parameters to statements about concrete observables.
+
+    It is not the intent of this thesis to suggest that parametric inference should be abandoned in statistical analyses.  Conventional statistical inference techniques are useful for summarizing information about large quantities of data in a handful of usable values, and leveraging such summaries to determine whether a particular problem merits continued attention.  Indeed, the scientific discipline of statistics developed along frequentist lines, and the evolution of Bayesian methods has occurred atop that foundation.
+  %
+  %
+  % Settings in which parametric inference will continue to be needed include:
+  % \begin{itemize}
+  %   \item Summarizing in a handful of useful quantities a maximum amount of information about a data set
+  %   \item Leveraging such summaries to whether a particular problem is worth continued attention.
+  %   \item ``In some instances, a parameter may be conceived as the limit of a function of an infinite sequence of observations (Geisser 1993), and can be a useful concept when our object of interest is approximated as a large sample limit." (Dean Billheimer 2019)
+  % \end{itemize}
+  % \subsection{Difference between parametric inference and predictive inference}
+
+%  \textcolor{red}{paragraph or two about the difference between parametric inference and predictive inference}
+
+    % \subsubsection{When is predictive inference more useful?}
+    % \textcolor{red}{redo next paragraph and then segue to the example without the subsection split}\\
+    Prediction is a means of discriminating between scientific hypotheses.  Generally, a model may be judged by the quality of its predictions.  Given competing models, the better predictor will be given more weight, and a useful model increases in utility as it its predictive capability improves.
+
+    % If a model doesn't predict well, why use it at all?\\
+
+    % \subsubsection{When is parametric inference more useful?}
+%    \textcolor{red}{When is parametric inference more useful?}\\
+
+
+  % \subsection{Example of Difference between results from Plug-in estimator and results using Predictive Inference}
+
+  To illustrate the potential difference between results from Bayesian prediction and using plug-in estimators, consider the game Pass the Pigs\texttrademark, a push-your-luck dice game in which the ``dice" are actually rubber pig figures.  Two pig dice are thrown, and points are scored according to the combination of positions in which they come to rest.  Details about the game can be found on Wikipedia here: \url{https://en.wikipedia.org/wiki/Pass_the_Pigs}
+
+  For the purpose of this example, consider the probability of a single pig landing in the ``Razorback" position, which occurs when the pig is lying on its back with its legs extended upward.  The irregular shape of the pig makes it difficult to assign probabilities to results other than by means of experimentation.  Such an experiment was conducted at Duquesne University, and an article describing the experiment as well as Bayesian predictive inference performed on the results appeared in the \textit{Journal of Statistics Education} Volume 14, Number 3, in 2006.  The article can be accessed here:  \url{http://jse.amstat.org/v14n3/datasets.kern.html}. Of the $11,954$ recorded results for individual pigs, approximately $22.4\%$ were Razorbacks.
+
+  Suppose $t=4$ Razorbacks have been observed out of $N=10$ tosses of a single pig die, suggesting a straightforward binomial distribution with $\theta =$ Pr(Razorback) $= t/N = 0.4$. Taking the Duquesne experiment into consideration, we'll perform Bayesian prediction using three Beta prior distributions for $\theta$: $\theta\sim\text{Beta}(2,8)$, $\theta\sim\text{Beta}(22,78)$, and $\theta\sim\text{Beta}(224,776)$, and compare these results to predictions obtained from the plug-in estimator $\theta = 0.4$.   Any number of prior distributions on $\theta$ would satisfy the condition that $E(\theta) \approx 0.224$, suggested by the prior information.  The specific choice of a Beta prior is made largely for computational convenience.
+
+  In this example the question asked by the researcher is, ``For $M = 100$ future observations, how many Razorbacks are predicted?"  The density curves in the plot below show the influence of the details of the choice of prior on the location and variance of the predictive distribution.  Essentially, each pair of shape parameters $(\alpha,\beta)$ in the Beta prior reflects the prior knowledge about the results of the Duquesne experiment, with the ``weight" given to that knowledge increasing with the shape parameters by orders of magnitude.  The choice of shape parameters might be influenced by such things as pig throwing method (perhaps the researcher is throwing them by hand rather than by the carefully controlled method used in the Duquesne experiment, e.g.), or by a need to account for pig-to-pig variation, or anything else the researcher believes introduces a deviation from the events upon which the prior information is based.  Notice in the graph and table below that the choice of prior parameters has a significant effect on the variance of the predictive distribution.
+
+
+\includegraphics{Thesis_v1-002}
+
+
+% Table of prior parameter values and resulting effect on location and variance of prediction
+\begin{center}
+  \begin{tabular}{ |c|c|c|c| }
+     \hline
+     % \rowcolor{lightgray}
+     $\textbf{(}\boldsymbol\alpha,\boldsymbol\beta\textbf{)}$ & $\textbf{E(}\boldsymbol\theta\textbf{)}$ & \textbf{mean(Razorbacks Predicted)} & \textbf{SD(Razorbacks Predicted)} \\
+     \hline
+     (2,8) & 0.2 & 29.73 & 11.08 \\
+     \hline
+     (22,78) & 0.22 & 23.79 & 5.98 \\
+     \hline
+     (224,776) & 0.224 & 22.56 & 4.38 \\
+     \hline
+  \end{tabular}
+\end{center}
+
+
+  \subsection{The Bayesian Parametric Prediction Format}
+  %
+  % \textcolor{red}{Use Dean's setup from his article, start of section 3}\\
+  % \textcolor{red}{talk about exchangeability and di Finetti (reread Hoff's intro, also Geisser?)}
+
+  We want to predict future outcomes based on current knowledge.  Specifically we're asking: for observed values $Y_1 = y_1,...,Y_n = y_n$, what is likely to be the value of the next observation, $\tilde{Y}=\tilde{y}$?  We want to compute $Pr(\tilde{Y}|\theta,y_1,...,y_n)$, where $\theta$ is a population parameter with a distribution $\pi(\theta)$ based on some prior knowledge or beliefs.  Here we are careful to satisfy ourselves that $Y_1,...,Y_n$ are \textit{exchangeable}, which enables us to rely on de Finetti's representation theorem for the conditional independence and identical distribution of $Y_1,...,Y_n$.  Thus we can write
+
+\begin{flalign}
+  p(\tilde{Y} = \tilde{y} | Y_1 = y_1,...,Y_n = y_n) &= \frac{p(\tilde{y},y_1,...,y_n)}{p(y_1,...,y_n)}\nonumber\\
+  &\nonumber\\
+  &=\frac{\int p(\tilde{y},y_1,...,y_n | \theta)\pi(\theta) d\theta}{\int p(y_1,...,y_n | \theta)\pi(\theta) d\theta}\nonumber\\
+  &\nonumber\\
+  &= \frac{\int p(\tilde{y}|\theta)p(y_1,...,y_n | \theta)\pi(\theta) d\theta}{\int p(y_1,...,y_n | \theta)\pi(\theta) d\theta}\nonumber\\
+  &\nonumber\\
+  &= \frac{\int p(\tilde{y}|\theta)p(\theta|y_1,...,y_n) p(y_1,...,y_n) d\theta}{\int p(y_1,...,y_n | \theta)\pi(\theta) d\theta}\nonumber\\
+  &\nonumber\\
+  &= \int p(\tilde{y}|\theta) p(\theta|y_1,...,y_n) d\theta \label{BayesianPredictiveFormat}
+\end{flalign}
+
+For prediction, we need only to characterize the observed data $(y_1,...,y_n)$ conditional on the relevant parameter(s) $(\theta)$ and supply a suitable prior distribution for the relevant parameter(s) $\theta$.  From there we compute
+
+$$p(\theta|y) = \frac{p(\theta)p(y|\theta)}{\int_\theta p(\theta)p(y|\theta)d\theta}$$
+
+and make our prediction using (\ref{BayesianPredictiveFormat}).
+
+
+
+  % Exchangeability means that $p(y_1,...,y_n) = p(y_{a_1},...,y_{a_n})$ for all permutations $\{a_1,...,a_n\}$ of $\{1,...,n\}$.  In other words the order of the $y_i$s does not convey any information about their joint density.  From de Finetti's representation theorem, then, $Y_1,...,Y_n$ are conditionally independent and identically distributed (i.i.d.) given $\theta$ (Hoff p. 27), and we can write the joint density
+  %
+  % $$p(y_1,...,y_n) = \int\left\{\prod_1^n p(y_i|\theta)\right\}\pi(\theta)d\theta$$.
+  %
+  % Get to:  We can predict $\tilde{Y}$ using
+  %
+  % $$p(\tilde{Y} = \tilde{y} | Y_1 = y_1,...,Y_n = y_n) = \int p(\tilde{y}|\theta) p(\theta|y_1,...,y_n) d\theta$$
+
+
+
+
+
+%     \textbf{Definition} (Hoff p. 27) Let $p(y_1,...,y_n)$ be the joint density of $Y_1,...,Y_n$.  If $p(y_1,...,y_n) = p(y_{\pi_1},...,y_{\pi_n})$ for all permutations $\{\pi_1,...,\pi_n\}$ of $\{1,...,n\}$, then $Y_1,...,Y_n$ are \textit{exchangeable}.
+%
+%   Given joint density $p(y_1,...,y_n)$ of $Y_1,...,Y_n$ and some parameter $\theta$ with prior distribution $\pi(\theta)$, de Finetti' Representation Theorem (1937) enables us to write
+%
+%   $$p(y_1,...,y_n) = \int$$
+%
+%   This thesis and the accompanying set of tools (R package) employs a Bayesian approach to predictive inference relying on the de Finetti representation theorem (de Finetti 1937).
+%
+% %   ``Roughly speaking, $Y_1,...,Y_n$ are exchangeable if the subscript labels convey no information about the outcomes."
+% %
+% % The examples presented in this thesis start with an assumption of exchangeability.
+%
+%
+%   \textcolor{red}{State the de Finetti theorem here?} We can write
+%
+% \begin{equation}
+%   g(x_{n+1}|\mathbf{x}_n) = \frac{\int_\Theta f(\mathbf{x}_{n+1}|\boldsymbol\theta)\pi(\boldsymbol\theta)d\boldsymbol\theta}{\int_\Theta f(\mathbf{x}_n|\boldsymbol\theta)\pi(\boldsymbol\theta)d\boldsymbol\theta} = \frac{h(\mathbf{x}_{n+1})}{h(\mathbf{x}_n)} \label{generalPredictiveDistributionFormula}
+% \end{equation}
+%
+% \noindent where $h(\mathbf{x}_k)$ is the marginal density of $\mathbf{x}_k$, $\boldsymbol\theta$ has prior distribution $\pi(\boldsymbol\theta)$, and $\Theta$ is the parameter space for $\boldsymbol\theta$.  Then the predictive density $g(\cdot)$ can be written:
+%
+% \begin{equation}
+%   g(x_{n+1}|\mathbf{x}_n) = \int_\Theta f(\mathbf{x}_{n+1}|\boldsymbol\theta)\pi(\boldsymbol\theta | \mathbf{x}_n)d\boldsymbol\theta \label{concisePredictiveDistributionFormula}
+% \end{equation}
+%
+% \noindent where $x_{n+1}$ is conditionally independent of $\mathbf{x}_n$ given $\boldsymbol\theta$, and $\pi(\boldsymbol\theta | \mathbf{x}_n)d\boldsymbol\theta)$ is the posterior distribution of $\mathbf{x}_n$ given $\boldsymbol\theta$.
+%
+% \textcolor{red}{Originally I used Geisser's notation, carrying it through the two examples I used from his book.  For the remaining cases I imitated Hoff's notation.  I think I should standardize everything with one kind of notation.}
+%     [Geisser p. 49]\\
+%
+%         Let $$f\left(x^{(N)},x_{(M)}|\theta\right) = f\left(x_{(M)}|x^{(N)},\theta\right)f\left(x^{(N)}|\theta\right).$$
+%
+%     Here $x^{(N)}$ represents observed events and $x_{(M)}$ are future events.  We calculate
+%
+%     $$f\left(x_{(M)},x^{(N)}\right) = \int f\left(x^{(N)},x_{(M)}|\theta\right)p(\theta)d\theta$$
+%
+%     where $p(\theta)$ is the prior density and
+%
+%     $$f\left(x_{(M)}|x^{(N)}\right) = \frac{f\left(x_{(M)},x^{(N)}\right)}{f\left(x^{(N)}\right)} = \int f\left(x_{(M)}|\theta\right)p\left(\theta|x^{(N)}\right)d\theta$$
+%
+%     where
+%
+%     $$p\left(\theta|x^{(N)}\right) \propto f\left(x^{(N)}|\theta\right)p(\theta).$$
+%
+
+
+
+\clearpage
+
+\section{Chapter 1:  Predictive Problems with Conjugate Priors}
+
+  [Problems with closed-form solutions.  These problems will be what the R package is designed for.  Use problems from Geisser, Casella \& Berger (Bayesian chapter), other sources.  Regression problem--predictive distributions of models that include and exclude some predictor]\\
+
+  \textcolor{red}{write up background for each model:  What are they useful for? (2-4 sentence paragraph for each)}\\
+  \textcolor{red}{ need to create ``good" examples for Geisser's models}
+
+  \subsection{Prediction of Future Successes:  Beta-Binomial (Geisser p. 73)}
+
+
+    \subsubsection{Derivation}
+
+      Let $X_i$ be independent binary variables with Pr$(X_i = 1) = \theta$, and let $T = \sum X_i$.  Then $T$ has probability
+
+      $${N\choose t}\theta^t(1-\theta)^{N-t}.$$
+
+      \vspace{5mm}
+
+      Assume $\theta\sim\text{Beta}(\alpha,\boldsymbol\beta)$, so
+
+      \vspace{5mm}
+
+      $$p(\theta) = \frac{\Gamma(\alpha + \beta)\theta^{\alpha - 1}(1 - \theta)^{\beta - 1}}{\Gamma(\alpha)\Gamma(\beta)}.$$
+
+      \vspace{5mm}
+
+      Then
+
+      \vspace{5mm}
+
+      $$p\left(\theta|X^{(N)}\right) = \frac{\Gamma(N+\alpha+\beta)\theta^{t+\alpha-1}(1-\theta)^{N-t+\beta-1}}{\Gamma(t+\alpha)\Gamma(N-t+\beta)}$$
+
+      \vspace{5mm}
+
+      \noindent So for $R = \sum_{i=1}^M X_{N+i}$ we have Beta-Binomial predictive distribution
+
+\begin{flalign*}
+  \text{Pr}[R=r|t]
+  &= \int {M\choose r}\theta^r(1-\theta)^{M-r}p\left(\theta|X^{(N)}\right)d\theta\\
+  &\\
+  &= {M\choose r}\int \theta^r(1-\theta)^{M-r}\frac{\Gamma(N+\alpha+\beta)}{\Gamma(t+\alpha)\Gamma(N-t+\beta)}\theta^{t+\alpha-1}(1-\theta)^{N-t+\beta-1}d\theta\\
+  &\\
+  &= \frac{M!}{r!(M-r)!}\frac{\Gamma(N+\alpha+\beta)}{\Gamma(t+\alpha)\Gamma(N-t+\beta)}\int\theta^{r+t+\alpha-1}(1-\theta)^{M-r+N-t+\beta-1}d\theta\\
+  &\\
+  &= \frac{\Gamma(M+1)\Gamma(N+\alpha+\beta)\Gamma(r+t+\alpha)\Gamma(M-r+N-t+\beta)}{\Gamma(r+1)\Gamma(M-r+1)\Gamma(t+\alpha)\Gamma(N-t+\beta)\Gamma(M+N+\alpha+\beta)}
+\end{flalign*}
+
+\clearpage
+
+    \subsubsection{R Implementation}
+
+This result has been used to create ``standard" R functions dpredBB(), ppredBB(), and rpredBB() for the Beta-Binomial distribtuion for density, cumulative probability, and random sampling, respectively (see appendix).  These functions are exercised in the following example.
+
+
+    \subsubsection{Example}
+
+Suppose $t=5$ successes have been observed out of $N=10$ binary events, $\alpha = 2$ and $\beta = 8$.  For $M = 1000$ future observations, how many successes are predicted?  The figures below show the predictive distribution from dpredBB(), the cumulative distribution from ppredBB(), and a histogram of random draws from rpredBB().
+
+
+\includegraphics{Thesis_v1-003}
+
+
+
+    \subsection{Survival Time:  Exponential-Gamma (Geisser p. 74)}
+
+
+    \subsubsection{Derivation}
+
+      Suppose $X^{(N)} = \left(X^{(d)},X^{(N-d)}\right)$ where $X^{(d)}$ represents copies fully observed from an exponential survival time density
+          $$f(x|\theta) = \theta e^{-\theta x}$$
+      and $X^{(N-d)}$ represents copies censored at $x_{d+1},...,x_N$, respectively.  Hence
+          $$L(\theta)\propto\theta^d e^{-\theta N\bar{x}}$$
+      when $N\bar{x} = \sum_1^N{x_i}$, as shown below.\\
+
+      The usual exponential likelihood is used for the fully observed copies, whereas for the censored copies we need Pr$(x > \theta) = 1 - \text{Pr}(x\leq\theta) = 1 - F(x|\theta) = 1 - (1 - e^{-\theta x}) = e^{-\theta x}$.  Thus the overall likelihood is
+
+      $$L(\theta|x) = \prod_{i=1}^d\theta e^{-\theta x_i}\prod_{i=d+1}^N e^{-\theta x_i} = \theta^d e^{-\theta N\bar{x}}$$
+
+      Assuming a Gamma$(\delta,\gamma)$ prior for $\theta$,
+
+       $$p(\theta) = \frac{\gamma^\delta\theta^{\delta - 1}e^{-\gamma\theta}}{\Gamma(\delta)}$$
+
+       we obtain the posterior
+
+       %$$p\left(\theta|X^{(N)}\right) = \frac{p\left(x^{(N)}|\theta\right)p(\theta)}{\int p\left(X^{(N)}|\theta\right)p(\theta)d\theta} = \frac{(\gamma+N\bar{x})^{d+\delta}\theta^{d+\delta - 1}e^{-\theta(\gamma+N\bar{x})}}{\Gamma(d+\delta)}$$
+
+        \begin{flalign*}
+          p\left(\theta|X^{(N)}\right)
+          &= \frac{p\left(x^{(N)}|\theta\right)p(\theta)}{\int p\left(X^{(N)}|\theta\right)p(\theta)d\theta}\\
+          &\\
+          &= \frac{\theta^d e^{-\theta N\bar{x}}\cdot\frac{\gamma^\delta\theta^{\delta - 1}e^{-\gamma\theta}}{\Gamma(\delta)}}{\int\left(\theta^d e^{-\theta N\bar{x}}\cdot\frac{\gamma^\delta\theta^{\delta - 1}e^{-\gamma\theta}}{\Gamma(\delta)}\right)d\theta}\\
+          &\\
+          &= \frac{\cancel{\frac{\gamma^\delta}{\Gamma(\delta)}}\left(\theta^{d+\delta - 1}e^{-\theta(\gamma+N\bar{x})}\right)}{\cancel{\frac{\gamma^\delta}{\Gamma(\delta)}}\int\left(\theta^{d+\delta - 1}e^{-\theta(\gamma+N\bar{x})}\right)d\theta}\\
+          &\\
+          &= \frac{\frac{(\gamma+N\bar{x})^{d+\delta}}{\Gamma(d+\delta)}\left(\theta^{d+\delta - 1}e^{-\theta(\gamma+N\bar{x})}\right)}{\cancel{\frac{(\gamma+N\bar{x})^{d+\delta}}{\Gamma(d+\delta)}\int\left(\theta^{d+\delta - 1}e^{-\theta(\gamma+N\bar{x})}\right)d\theta}}\\
+          &\\
+          &= \frac{(\gamma+N\bar{x})^{d+\delta}\theta^{d+\delta - 1}e^{-\theta(\gamma+N\bar{x})}}{\Gamma(d+\delta)}
+        \end{flalign*}
+
+    with the Gamma$(d+\delta,\gamma+N\bar{x})$ density in the next to last step integrating to $1$.\\
+
+    Thus the survival time predictive probability is
+
+    \begin{flalign*}
+      P\left(X = x|\theta,X^{(N)}\right)
+      &= \int p\left(\theta|X^{(N)}\right)p(x|\theta)d\theta\\
+      &\\
+      &= \int\frac{(\gamma+N\bar{x})^{d+\delta}\theta^{d+\delta - 1}e^{-\theta(\gamma+N\bar{x})}}{\Gamma(d+\delta)}\cdot\theta e^{-\theta x}d\theta\\
+      &\\
+      &= (d+\delta)(\gamma+N\bar{x})^{d+\delta}\int\frac{\theta^{(d+\delta + 1) - 1}e^{-\theta(\gamma+N\bar{x} + x)}}{(d+\delta)\Gamma(d+\delta)}d\theta\\
+      &\\
+      &= \frac{(d+\delta)(\gamma+N\bar{x})^{d+\delta}}{\left(\gamma+N\bar{x}+x\right)^{d+\delta+1}}\int\frac{\left(\gamma+N\bar{x}+x\right)^{d+\delta+1}\theta^{(d+\delta + 1) - 1}e^{-\theta(\gamma+N\bar{x} + x)}}{\Gamma(d+\delta+1)}d\theta\\
+      &\\
+      &= \frac{(d+\delta)(\gamma+N\bar{x})^{d+\delta}}{\left(\gamma+N\bar{x}+x\right)^{d+\delta+1}}
+    \end{flalign*}
+
+    (simplifying by constructing a Gamma$(d+\delta+1,\gamma+N\bar{x}+x)$ density in the final integrand.)\\
+
+
+
+    \subsubsection{R Implementation}
+
+This result has been used to create standard format R functions dpredEG(), ppredEG(), and rpredEG() for the Gamma-Exponential distribtuion for density, cumulative probability, and random sampling, respectively (see appendix).  These functions are exercised in the following example.
+
+
+    \subsubsection{Example}
+
+Suppose $d=800$ out of $N = 1000$ copies have been observed, and the remaining $200$ censored.  Say $\delta = 20$, $\gamma=5$, and we are interested in the number of survivors out of $M = 1000$ future observations.  The figures below illustrate the predictive probability using dpredEG() and rpredEG(), along with a histogram of a random sample taken using rpredEG().
+
+
+\includegraphics{Thesis_v1-004}
+
+\clearpage
+
+  \subsection{Poisson-Gamma Model (Hoff p. 43ff)}
+    \subsubsection{Derivation}
+    [using Hoff's notation and variable names below.  Should I convert this to Geisser's $x^{(N)},x_{(M)}$ convention for uniformity throughout my thesis?]\\\\
+      Suppose $Y_1,...,Y_n|\theta\overset{i.i.d.}{\sim}\text{Poisson}(\theta)$ with Gamma prior $\theta\sim\text{Gamma}(\alpha,\beta)$.  That is,
+
+      \begin{flalign*}
+        P\left(Y_1 = y_1,...,Y_n = y_n|\theta\right)
+        &= \prod_{i=1}^n p\left(y_i|\theta\right)\\
+        &\\
+        &= \prod_{i=1}^n\frac{1}{y!}\theta^{y_i}e^{-\theta}\\
+        &\\
+        &= \left(\prod_{i=1}^n\frac{1}{y!}\right)\theta^{\sum y_i}e^{-n\theta}\\
+        &\\
+        &= c\left(y_1,...,y_n\right)\theta^{\sum y_i}e^{-n\theta}
+      \end{flalign*}
+
+      and
+
+      $$p(\theta) = \dfrac{\beta^\alpha}{\Gamma(\alpha)}\theta^{\alpha-1}e^{-\beta\theta}, \theta, \alpha, \beta > 0.$$
+
+\bigskip
+
+      Then we have posterior distribution
+
+      \begin{flalign*}
+        p\left(\theta|y_1,...,y_n\right)
+        &= \dfrac{p\left(y_1,...,y_n|\theta\right)p(\theta)}{\int_\theta p\left(y_1,...,y_n|\theta\right)p(\theta)}\\
+        &\\
+        &= \dfrac{p\left(y_1,...,y_n|\theta\right)p(\theta)}{p\left(y_1,...,y_n\right)}\\
+        &\\
+        &= \dfrac{1}{p\left(y_1,...,y_n\right)}\theta^{\sum y_i}e^{-n\theta}\dfrac{\beta^\alpha}{\Gamma(\alpha)}\theta^{\alpha - 1}e^{-\beta\theta}\\
+        &\\
+        &= C\left(y_1,...,y_n,\alpha,\beta\right)\theta^{\alpha+\sum y_i - 1}e^{-(\beta + n)\theta}\\
+        &\\
+        &\sim \text{Gamma}\left(\alpha+\sum y_i,\beta + n\right).
+      \end{flalign*}
+
+
+      Here
+
+      \begin{flalign*}
+        C\left(y_1,...,y_n,\alpha,\beta\right)
+        &= \dfrac{1}{p\left(y_1,...,y_n\right)}\cdot\dfrac{\beta^\alpha}{\Gamma(\alpha)}\\
+        &\\
+        &= \dfrac{1}{\int_\theta p\left(y_1,...,y_n|\theta\right)p(\theta)}\cdot\dfrac{\beta^\alpha}{\Gamma(\alpha)}\\
+        &\\
+        &= \dfrac{1}{\int_\theta\left(\prod\frac{1}{y_i!}\right)\theta^{\sum y_i}e^{-n\theta}\cancel{\left(\frac{\beta^\alpha}{\Gamma(\alpha)}\right)}\theta^{\alpha-1}e^{-\beta\theta}}\cdot\cancel{\left(\frac{\beta^\alpha}{\Gamma(\alpha)}\right)}
+        &\\
+        &= \dfrac{1}{\left(\prod\frac{1}{y_i!}\right)\frac{\Gamma(\alpha + \sum y_i)}{(\beta+n)^{\alpha+\sum y_i}}\int_\theta \frac{(\beta+n)^{\alpha+\sum y_i}}{\Gamma(\alpha+\sum y_i)}\theta^{\sum y_i+\alpha-1}e^{-(\beta+n)\theta}}\\
+        &\\
+        &= \dfrac{\prod_{i=1}^n y_i!(\beta+n)^{\alpha+\sum y_i}}{\Gamma(\alpha+\sum y_i)}
+      \end{flalign*}
+
+      Call this constant $C_n$ (for $n$ observations).
+
+\bigskip
+
+      Note that an additional observation $y_{n+1} = \tilde{y}$ the constant becomes
+
+      $$C_{n+1} = \dfrac{\prod_{i=1}^{n+1} y_i!(\beta+n+1)^{\alpha+\sum_{i=1}^{n+1} y_i}}{\Gamma(\alpha+\sum_{i=1}^{n+1} y_i)}.$$
+
+      Also note that the marginal joint distribution of $k$ observations is
+
+      $$p\left(\tilde{y}|y_1,...,y_k\right) = \dfrac{1}{C_k}\dfrac{\beta^\alpha}{\Gamma(\alpha)}.$$
+
+      For future observation $\tilde{y}$, then, we compute predictive distribution
+
+      \begin{flalign*}
+        p\left(\tilde{y}|y_1,...,y_n\right)
+        &= \dfrac{p\left(y_1,...,y_n,\tilde{y}\right)}{p\left(y_1,...,y_n\right)} = \dfrac{p\left(y_1,...,y_{n+1}\right)}{p\left(y_1,...,y_n\right)}
+        = \dfrac{\frac{1}{C_{n+1}}\cancel{\frac{\beta^\alpha}{\Gamma(\alpha)}}}{\frac{1}{C_n}\cancel{\frac{\beta^\alpha}{\Gamma(\alpha)}}}
+        = \dfrac{C_n}{C_{n+1}}\\
+        &\\
+        &= \dfrac{\dfrac{\prod_{i=1}^n y_i!(\beta+n)^{\alpha+\sum_{i=1}^n y_i}}{\Gamma(\alpha+\sum_{i=1}^n y_i)}}{\dfrac{\prod_{i=1}^{n+1} y_i!(\beta+n+1)^{\alpha+\sum_{i=1}^{n+1} y_i}}{\Gamma(\alpha+\sum_{i=1}^{n+1} y_i)}}\\
+        &\\
+        &= \dfrac{\Gamma\left(\alpha+\sum_{i=1}^{n+1}y_i\right)(\beta+n)^{\alpha+\sum_{i=1}^n y_i}}{\left(y_{n+1}!\right)\Gamma\left(\alpha+\sum_{i=1}^n y_i\right)(\beta+n+1)^{\alpha+\sum_{i=1}^{n+1}y_i}}\\
+        &\\
+        &= \dfrac{\Gamma\left(\alpha+\sum_{i=1}^n y_i + \tilde{y}\right)(\beta+n)^{\alpha+\sum_{i=1}^n y_i}}{\left(\tilde{y}!\right)\Gamma\left(\alpha+\sum_{i=1}^n y_i\right)(\beta+n+1)^{\alpha+\sum_{i=1}^n y_i + \tilde{y}}}\\
+        &\\
+        &= \dfrac{\Gamma\left(\alpha+\sum y_i+\tilde{y}\right)}{\Gamma(\tilde{y}+1)\Gamma(\alpha+\sum y_i)}\cdot \left(\dfrac{\beta+n}{\beta+n+1}\right)^{\alpha+\sum y_i} \cdot \left(\dfrac{1}{\beta+n+1}\right)^{\tilde{y}}\\
+      \end{flalign*}
+
+This is a negative binomial distribution:  $\tilde{y}\sim NB\left(\alpha+\sum y_i,\beta+n\right)$, for which
+
+\begin{flalign*}
+  E\left[\tilde{Y}|y_1,...,y_n\right] &= \dfrac{a+\sum{y_i}}{b+n} = E\left[\theta|y_1,...,y_n\right];\\
+  &\\
+  \text{Var}\left[\tilde{Y}|y_1,...,y_n\right] &= \dfrac{a+\sum{y_i}}{b+n}\dfrac{b+n+1}{b+n}\\
+  &\\
+  &=\text{Var}\left[\theta|y_1,...,y_n\right]\times(b+n+1)\\
+  &\\
+  &=E\left[\theta|y_1,...,y_n\right]\times\dfrac{b+n+1}{b+n}\\
+\end{flalign*}
+
+\vspace{5mm}
+
+\hrule
+
+\vspace{5mm}
+
+[Showing here that it is indeed a NB distribution]
+
+$$\theta\sim NB(\alpha,\beta)\Rightarrow p(\theta) = \binom{\theta+\alpha-1}{\alpha - 1}\left(\dfrac{\beta}{\beta+1}\right)^\alpha\left(\dfrac{1}{\beta+1}\right)^\theta$$
+
+\begin{center}so\end{center}
+
+\begin{flalign*}
+  \tilde{y}\sim NB\left(\alpha + \sum{y_i}),\beta+n\right)\Rightarrow p(\tilde{y})
+  &= \binom{\tilde{y}+\alpha+\sum{y_i}-1}{\alpha+\sum{y_i}-1}\left(\dfrac{\beta+n}{\beta+n+1}\right)^{\alpha+\sum{y_i}}\left(\dfrac{1}{\beta+n+1}\right)^{\tilde{y}}\\
+  &\\
+  &= \dfrac{\left(\alpha + \sum{y_i} + \tilde{y} - 1\right)!}{\left(\alpha + \sum{y_i} - 1\right)!\left(\tilde{y}\right)!}\left(\dfrac{\beta+n}{\beta+n+1}\right)^{\alpha+\sum{y_i}}\left(\dfrac{1}{\beta+n+1}\right)^{\tilde{y}}\\
+  &\\
+  &= \dfrac{\Gamma\left(\alpha + \sum{y_i} + \tilde{y}\right)}{\Gamma\left(\alpha + \sum{y_i}\right)\Gamma\left(\tilde{y}+1\right)}\left(\dfrac{\beta+n}{\beta+n+1}\right)^{\alpha+\sum{y_i}}\left(\dfrac{1}{\beta+n+1}\right)^{\tilde{y}}
+\end{flalign*}
+
+\vspace{5mm}
+
+\hrule
+
+\vspace{5mm}
+
+      \bigskip
+
+
+
+      [This is the result in Hoff.  The straightforward derivation below is off by a constant multiple.  Need to figure out what went awry.]
+
+
+
+      \begin{flalign*}
+        p\left(\tilde{y}|y_1,...,y_n\right)
+        &= \int_0^\infty p\left(\tilde{y}|\theta,y_1,...,y_n\right)p\left(\theta|y_1,...,y_n\right)d\theta\\
+        &\\
+        &= \int p\left(\tilde{y}|\theta\right)p\left(\theta|y_1,...,y_n\right)d\theta\\
+        &\\
+        &= C\int\left(\dfrac{1}{\tilde{y}!}\theta^{\tilde{y}}e^{-\theta}\right)\theta^{\alpha+\sum y_i - 1}e^{-(\beta+n)\theta}d\theta\\
+        &\\
+        &= \dfrac{C}{\tilde{y}!}\int\theta^{\tilde{y}+\alpha+\sum y_i - 1}e^{-(\beta+n+1)\theta}d\theta\\
+        &\\
+        &= \dfrac{C\Gamma\left(\tilde{y}+\alpha+\sum y_i\right)}{\Gamma\left(\tilde{y}+1\right)(\beta+n+1)^{\tilde{y}+\alpha+\sum y_i}}\int\dfrac{(\beta+n+1)^{\tilde{y}+\alpha+\sum y_i}}{\Gamma\left(\tilde{y}+\alpha+\sum y_i\right)}\theta^{\tilde{y}+\alpha+\sum y_i - 1}e^{-(\beta+n+1)\theta)}d\theta\\
+        &\\
+        &= C\cdot\dfrac{\Gamma\left(\tilde{y}+\alpha+\sum y_i\right)}{\Gamma\left(\tilde{y}+1\right)(\beta+n+1)^{\tilde{y}+\alpha+\sum y_i}}\\
+        &\\
+        &= \dfrac{\prod_{i=1}^n y_i!(\beta+n)^{\alpha+\sum y_i}}{\Gamma(\alpha+\sum y_i)}\cdot\dfrac{\Gamma\left(\tilde{y}+\alpha+\sum y_i\right)}{\Gamma\left(\tilde{y}+1\right)(\beta+n+1)^{\tilde{y}+\alpha+\sum y_i}}\\
+        &\\
+        &= \prod_{i=1}^n y_i! \cdot \dfrac{\Gamma\left(\tilde{y}+\alpha+\sum y_i\right)}{\Gamma(\tilde{y}+1)\Gamma(\alpha+\sum y_i)}\cdot \left(\dfrac{\beta+n}{\beta+n+1}\right)^{\alpha+\sum y_i} \cdot \left(\dfrac{1}{\beta+n+1}\right)^{\tilde{y}}\\
+      \end{flalign*}
+
+\textcolor{red}{Hoff p.47:
+  \begin{itemize}
+    \item $b$ is interpreted as the number of prior observations
+    \item $a$ is interpreted as the sum of counts from $b$ prior observations
+  \end{itemize}
+}
+
+\textcolor{red}{  Hoff p. 49 (Birth rate example):  $a = 2, b = 1$. }
+
+
+    \subsubsection{R Implementation}
+
+This result has been used to create standard format R functions dpredPG(), ppredPG(), and rpredPG() for the Poisson-Gamma distribution for density, cumulative probability, and random sampling, respectively (see appendix).  These functions are exercised in the following example.\\
+
+    Developing the random sample function rpredPG():  I need to establish the support of the predictive distribution $f_x$ from which to sample.  the uniroot() function is not working because it keeps feeding non-integer values to dnbinom().  Strategy: a modified bisection method as follows:\\
+
+    \begin{enumerate}
+      \item set a desired tolerance $\epsilon$.
+      \item Find the expected value $E_x$ (closed formula, see above).
+      \item Step to the right of $E_x$ by whole integers, in the sequence $E_x + \{1,2,4,...2^n\}$, stopping at $U=f_x\left(E_x + 2^n\right) < 0$.  This is the upper bound for the bisection method.
+      \item Bisect the interval, rounding to the nearest integer.  Call the resulting mid-interval number $B$.
+      \item If B is positive, test whether $0 \leq f_x(B) \leq \epsilon$.  If so, DONE.  If not:
+      \item Establish new interval, choosing endpoints from $E_x$, $B$, and $U$ so that the interval straddles $0$, and repeat the steps until the condition in step 5 is reached.
+    \end{enumerate}
+
+    \subsubsection{Example}
+
+Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15, 3, 97.  Let $\alpha = 11$ and $\beta = 3$.  For $\tilde{y} = 1:100$ possible future occurrences, the figures below show the predictive distribution from dpredPG(), the cumulative distribution from ppredPG(), and a histogram of random draws from rpredPG().
+
+\includegraphics{Thesis_v1-005}
+
+\clearpage
+
+  \subsection{Normal Observation with Normal-Inverse Gamma Prior}
+
+    \textcolor{red}{also created rpredNormIG2() and rpredNormIGk() for samples comparing 2 groups and k groups, respectively.  I need to look into combining them into one function.  maybe do away with dpredNormIG() and ppredNormIG()?}
+    \subsubsection{One sample}
+      \paragraph{Derivation}
+      [Hoff p. 69ff]\\
+        Let $\left\{Y_1,...,Y_n|\theta,\sigma^2\right\}\overset{i.i.d.}{\sim}N\left(\theta,\sigma^2\right)$.  Then the joint sampling density is
+
+        \begin{flalign*}
+          p\left(y_1,...,y_n|\theta,\sigma^2\right)
+          &= \prod_{i=1}^n p\left(y_i|\theta,\sigma^2\right)\\
+          &\\
+          &= \prod_{i=1}^n \dfrac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{1}{2}\left(\frac{y_i - \theta}{\sigma}\right)^2}\\
+          &\\
+          &= \left(2\pi\sigma^2\right)^{-\sfrac{n}{2}}e^{-\frac{1}{2}\sum_{i=1}^n\left(\frac{y_i - \theta}{\sigma}\right)^2}.\\
+        \end{flalign*}
+
+        %It can be shown that $\left\{\sum{y_i^2},\sum{y_i}\right\}$ and hence $\left\{\bar{y},s^2\right\}$ are sufficient statistics, where $\bar{y} = \sum{y_i}/n$ and $s^2 = \sum\left(y_i - \bar{y}\right)^2/(n-1)$.\\
+
+
+        %\vdots
+
+        Following Hoff (p. 74ff), for joint inference on both $\theta$ and $\sigma$, assume priors
+
+        \begin{flalign*}
+          \frac{1}{\sigma^2} &\sim \text{gamma}\left(\sfrac{\nu_0}{2},\sfrac{\nu_0\sigma_0^2}{2}\right)\\
+          &\\
+          \theta|\sigma^2 &\sim \text{normal}\left(\mu_0,\sfrac{\sigma^2}{\kappa_0}\right)\\
+        \end{flalign*}
+
+        where $\left(\sigma_0^2,\nu_0\right)$ are the sample variance and sample size of prior observations, and $\left(\mu_o, \kappa_0\right)$ are the sample mean and sample size of prior observations.\\
+
+        Note:  $\mu_0$, $\kappa_0$, $\nu_0$, and $\sigma_0^2$ come from prior knowledge. [in the Hoff example (Midge Wing Length), $\kappa_0$ and $\nu_0$ are both set to $1$ so that ``our prior distributions are only weakly centered around these estimates from other populations."]\\
+
+        From this we derive joint posterior distribution
+
+        \begin{flalign*}
+          \left\{\theta|y_1,...,y_n,\sigma^2\right\} &\sim \text{normal}\left(\mu_n,\sfrac{\sigma^2}{\kappa_n}\right)\\
+          &\\
+          \left\{\sigma^2|y_1,...,y_n\right\} &\sim \text{inverse-gamma}\left(\sfrac{\nu_n}{2},\sfrac{\sigma^2_n\nu_n}{2}\right).
+        \end{flalign*}
+
+        where
+
+        \begin{flalign*}
+          \kappa_n &= \kappa_0 + n\\
+          &\\
+          \mu_n &= \frac{\kappa_0\mu_0+n\bar{y}}{\kappa_n}\\
+          &\\
+          \nu_n &= \nu_0 + n\\
+          &\\
+          \sigma_n^2 &= \frac{1}{\nu_n}\left[\nu_0\sigma_0^2 + (n-1)s^2 + \frac{\kappa_0 n}{\kappa_n}\left(\bar{y}-\mu_0\right)^2\right].\\
+        \end{flalign*}
+
+        Here $\bar{y} = \frac{1}{n}\sum_{i=1}^n y_i$ is the sample mean and $s^2 = \frac{1}{n-1}\sum_{i=1}^n\left(y_i - \bar{y}\right)^2$ is the sample variance.\\
+
+        From the joint posterior distribution we generate marginal samples by means of the Monte Carlo method (Hoff, p. 77):
+
+        \begin{flalign*}
+          \begin{matrix}
+            \sigma^{2(1)}\sim \text{inverse-gamma}\left(\nu_n/2,\sigma^2_n\nu_n/2\right), & \theta^{(1)}\sim \text{normal}\left(\mu_n,\sigma^{2(1)}/\kappa_n\right) \\
+            \vdots  & \vdots  \\
+            \sigma^{2(S)}\sim \text{inverse-gamma}\left(\nu_n/2,\sigma^2_n\nu_n/2\right), & \theta^{(S)}\sim \text{normal}\left(\mu_n,\sigma^{2(S)}/\kappa_n\right) \\
+          \end{matrix}
+        \end{flalign*}
+
+        For prediction of future $\tilde{y}|y_1,...,y_n,\theta,\sigma^2$, generate $\tilde{y}_i \sim \text{normal}\left(\theta^{(i)},\sigma^{2(i)}\right)$.\\
+
+        For prediction without the influence of any previous knowledge (Hoff p. 79), we can employ Jeffreys prior $\tilde{p}\left(\theta,\sigma^2\right) = 1/\sigma^2$.  This leads to the same conditional distribution for $\theta$ but a gamma$\left(\frac{n-1}{2},\frac{1}{2}\sum\left(y_i - \bar{y}\right)^2\right)$ distribution for $1/\sigma^2$.  This joint posterior distribution can be used to predict future $\tilde{y}$ by first drawing $\theta,\sigma^2$ and then simulating $\tilde{y}\sim\text{normal}\left(\theta,\sigma^2\right)$.   Alternatively, the joint posterior can be integrated to show that
+        $$\dfrac{\theta-\bar{y}}{s/\sqrt{n}}|y_1,...,y_n\sim t_{n-1}.$$
+        The resulting predictive distribution for $\tilde{y}$ is a t-distribution with location $\bar{y}$ and scale $s\sqrt{1+1/n}$ and $n-1$ degrees of freedom (Gelman et. al. p. 66).
+
+
+      \paragraph{R Implementation}
+      Standard format R functions dpredNormIG(), ppredNormIG(), and rpredNormIG() have been created for the Normal-Inverse Gamma distribution for density, cumulative probability, and random sampling, respectively (see appendix).  These functions all include options for implementation with or without previous knowledge as desired.  If Jeffreys prior is used, the functions simply implement R's Student's t-distribution functions rt(), dt(), and pt(), applying the location and scale parameters as described above.  For predictions using previous knowledge, the functions work as follows:  For the random sampler rpredNormIG(), the Monte-Carlo method described above is directly employed.  The predictive density and cumulative predictive density functions (dpredNormIG() and ppredNormID(), respectively) depend on the random sample.  ppredNormIG() utilizes the empirical cumulative density function ecdf() from R's stats package.  dpredNormIG() utilizes a Kernel Density Estimation (KDE) method and R's built-in density() function.  The KDE is computed by definition, using a normal kernel:
+
+      $$\hat{f}_K(x) = \frac{1}{n}\sum_{i=1}^n\frac{1}{h}K\left(\frac{x-X_i}{h}\right),$$
+
+      where
+
+      \begin{flalign*}
+        X_i & \text{ is the random sample generated using rpredNormIG()}\\
+        &\\
+        K & \text{ is Normal(0,1)}\\
+        &\\
+        h & \text{ is the bandwidth from R's density() function (that is, } h = \text{ density}(X_i)\text{\$bw)}\\
+      \end{flalign*}
+
+      These functions are exercised in the following example.\\
+
+
+      \paragraph{Example}
+
+        \textit{Example (Hoff p. 72ff, using data from Grogan and Wirth (1981)):  Midge wing length}\\
+
+        Grogan and Wirth (1981) provide 9 measurements of midge wing length, in millimeters:  $y = \{1.64, 1.7, 1.72, 1.74, 1.82, 1.82, 1.82, 1.90, 2.08\}$. Previous studies suggest values $\mu_0 = 1.9$ and $\sigma_0^2 = 0.01$.  We choose $\kappa_0 = \nu_0 = 1$ ``...so that our prior distributions are only weakly centered around these estimates from other populations" (Hoff p. 76).  We compute
+
+        \begin{flalign*}
+          \bar{y} &= 1.804\\
+          &\\
+          \text{var}(y) &= 0.0169\\
+          &\\
+          \kappa_n &= 1 + 9 = 10\\
+          &\\
+          \mu_n &= \frac{1 \cdot 1.9 + 9 \cdot 1.804}{10} = 1.814\\
+          &\\
+          \nu_n &= 1 + 9 = 10\\
+          &\\
+          \sigma_n^2 &= \frac{1}{10}\left[1 \cdot 0.01 + (9-1) \cdot 0.0169 + \frac{1 \cdot 9}{10}\left(1.804 - 1\right)^2\right] = 0.0153\\
+        \end{flalign*}
+
+        Thus $\sfrac{\nu_n}{2} = 5$ and $\sfrac{\nu_n\sigma_n^2}{2} = 0.7662$ and we have posteriors
+
+        \begin{flalign*}
+          \left\{\theta|y_1,...,y_n,\sigma^2\right\} &\sim \text{normal}\left(1.814,\sfrac{\sigma^2}{10}\right)\\
+          &\\
+          \left\{\sigma^2|y_1,...,y_n\right\} &\sim \text{inverse-gamma}(5,0.7662)\\
+        \end{flalign*}
+
+      The plot below illustrates the influence of previous knowledge of the population mean, and compares to the predictions resulting from Jeffreys prior.
+
+\includegraphics{Thesis_v1-006}
+
+        \clearpage
+
+    \subsubsection{Two samples}
+      \paragraph{Derivation}
+
+        For a Bayesian analysis comparing two groups we use the following sampling model (Hoff p. 127):
+
+        \begin{flalign*}
+          Y_{i,1} &= \mu + \delta + \epsilon_{i,1}\\
+          Y_{i,2} &= \mu - \delta + \epsilon_{i,2}\\
+          \left\{\epsilon_{i,j}\right\} &\sim\text{i.i.d. normal}\left(0,\sigma^2\right).
+        \end{flalign*}
+
+        Letting $\theta_1 = \mu + \delta$ and $\theta_2 = \mu - \delta$ we see that $\delta = \left(\theta_1 - \theta_2\right)/2$ is half the population difference in means, and $\mu = \left(\theta_1 + \theta_2\right)/2$ is the pooled average.  We'll assume conjugate prior distributions
+
+        \begin{flalign*}
+          p\left(\mu,\delta,\sigma^2\right) &= p(\mu) \times p(\delta) \times p\left(\sigma^2\right)\\
+          \mu &\sim \text{normal}\left(\mu_0,\gamma^2_0\right)\\
+          \delta &\sim \text{normal}\left(\delta_0,\tau^2_0\right)\\
+          \sigma^2 &\sim \text{inverse-gamma}\left(\nu_0/2,\nu_0\sigma^2_0/2\right),
+        \end{flalign*}
+
+\noindent where $\nu_0$ as before is the assumed prior sample size.  The full conditional distributions follow:\\
+
+        \indent $\left\{\mu|\mathbf{y}_1,\mathbf{y}_2,\delta,\sigma^2\right\} \sim \text{normal}\left(\mu_n,\gamma^2_n\right)$, where
+
+        \begin{flalign*}
+          \mu_n &= \gamma^2_n \times \left[\dfrac{\mu_0}{\gamma^2_0} + \dfrac{\sum_{i=1}^{n_1}\left(y_{i,1}-\delta\right) + \sum_{i=1}^{n_2}\left(y_{i,2}+\delta\right)}{\sigma^2}\right]\\
+          &\\
+          \gamma^2_n &=\left[\dfrac{1}{\gamma^2_0} + \dfrac{\left(n_1 + n_2\right)}{\sigma^2}\right]^{-1}
+        \end{flalign*}
+
+        \indent $\left\{\delta|\mathbf{y}_1,\mathbf{y}_2,\mu,\sigma^2\right\} \sim \text{normal}\left(\delta_n,\tau^2_n\right)$, where
+
+        \begin{flalign*}
+          \delta_n &= \tau^2_n \times \left[\dfrac{\delta_0}{\tau^2_0} + \dfrac{\sum_{i=1}^{n_1}\left(y_{i,1}-\mu\right) - \sum_{i=1}^{n_2}\left(y_{i,2}-\mu\right)}{\sigma^2}\right]\\
+          &\\
+          \tau^2_n &=\left[\dfrac{1}{\tau^2_0} + \dfrac{\left(n_1 + n_2\right)}{\sigma^2}\right]^{-1}
+        \end{flalign*}
+
+        \indent $\left\{\sigma^2|\mathbf{y}_1,\mathbf{y}_2,\mu,\delta\right\} \sim \text{inverse-gamma}\left(\frac{\nu_n}{2},\frac{\nu_n\sigma^2_n}{2}\right)$, where
+
+        \begin{flalign*}
+          \nu_n &= \nu_0 + n_1 + n_2\\
+          \\
+          \nu_n\sigma^2_n &= \nu_0\sigma^2_0 + \sum_{i=1}^{n_1}\left(y_{i,1} - [\mu + \delta]\right)^2 + \sum_{i=1}^{n_2}\left(y_{i,2} - [\mu - \delta]\right)^2\\
+        \end{flalign*}
+
+      \paragraph{R Implementation}
+
+      The standard format R function rpredNormIG2() implements a Gibbs sampler to approximate the posterior distribution $p\left(\mu,\delta,\sigma^2|\mathbf{y}_1,\mathbf{y}_2\right)$, from which to generate predictions for the two populations as follows:
+      \begin{enumerate}
+        \item Set initial values $\mu = \frac{\theta_1 + \theta_2}{2}$ and $\delta = \frac{\theta_1 - \theta_2}{2}$
+        \item Generate a single $\sigma^2|\mathbf{y_1},\mathbf{y_2},\mu,\delta$
+        \item Generate a single $\mu|\mathbf{y_1},\mathbf{y_2},\delta,\sigma^2$
+        \item Generate a single $\delta|\mathbf{y_1},\mathbf{y_2},\mu,\sigma^2$
+        \item Predict $\tilde{y}_1\sim \text{normal}\left(\mu+\delta,\sigma^2\right)$ and $\tilde{y}_2\sim \text{normal}\left(\mu-\delta,\sigma^2\right)$
+      \end{enumerate}
+
+      The user provides the two samples $\mathbf{y_1}$ and $\mathbf{y_2}$ along with values for $\mu_0, \sigma^2_0, \delta_0, \tau^2_0, \nu_0$, and desired prediction sample size $N$.  The function returns $N$ predictions for each population and the vectors of generated values for $\mu$, $\delta$, and $\sigma^2$.
+
+      \paragraph{Example}
+
+      Hoff p. 128-129 \textit{Analysis of math score data}\\
+      Math score data for two schools were based on results of a national exam in the United States, standardized to produce a nationwide mean of 50 and a standard deviation of 10.  Unless the two schools were known in advance to be extremely exceptional, reasonable prior parameters can be based on this information.  For the prior distributions of $\mu$ and $\sigma^2$, we'll take $\mu_0 = 50$ and $\sigma^2_0 = 10^2 = 100$, although this latter value is likely to be an overestimate of the within-school sampling variability.  We'll make these prior distributions somewhat diffuse, with $\gamma^2_0 = 25^2 = 625$ and $\nu_0 = 1$.  For the prior distribution on $\delta$, choosing $\delta_0 = 0$ represents the prior opinion that $\theta_1 > \theta_2$ and $\theta_2 > \theta_1$ are equally probable.  Finally, since the scores are bounded between 0 and 100, half the difference between $\theta_1$ and $\theta_2$ must be less than 50 in absolute value, so a value of $\tau^2_0 = 25^2 = 625$ seems reasonably diffuse.\\\\
+      The results of a call to rpredNormIG2$\left(\mathbf{y}_1,\mathbf{y}_2,\mu_0,\sigma^2_0,\delta_0,\tau^2_0,N\right)$ are summarized in the following plot.\\
+
+\includegraphics{Thesis_v1-007}
+
+
+    \subsubsection{$k$ samples:  Comparing multiple groups}
+    For two-level data consisting of groups and units within groups, denote $y_{i,j}$ as the data on the $i$th unit in group $j$. We have the hierarchical normal model (Hoff p. 132ff):
+    $$\phi_j = \left\{\theta_j,\sigma^2\right\}, p\left(y|\phi_j\right) = \text{normal}\left(\theta_j,\sigma^2\right) \text{ (within-group model)}$$
+    $$\psi_j = \left\{\mu,\tau^2\right\}, p\left(\theta_j|\psi\right) = \text{normal}\left(\mu,\tau^2\right) \text{ (between-group model)}$$
+    We use standard semiconjugate normal and inverse-gamma prior distributions for the fixed but unknown parameters in the model:
+    \begin{flalign*}
+      \sigma^2 &\sim \text{inverse-gamma}\left(\frac{\nu_0}{2},\frac{\nu_0\sigma^2_0}{2}\right)\\
+      &\\
+      \tau^2 &\sim \text{inverse-gamma}\left(\frac{\eta_0}{2},\frac{\eta_0\tau^2_0}{2}\right)\\
+      &\\
+      \mu &\sim \text{normal}\left(\mu_0,\gamma^2_0\right)\\
+    \end{flalign*}
+
+      \paragraph{Derivation}
+      As with the two-sample problem, joint posterior inferences for the unknown parameters can be made by constructing a Gibbs sampler to approximate the posterior distribution $p\left(\theta_1,...,\theta_m,\mu,\tau^2,\sigma^2|\mathbf{y}_1,...,\mathbf{y}_m\right)$.  For this we need the full conditional distribution of each parameter (Hoff pp. 134-135):
+      %%$$\left\{\mu|\theta_1,...,\theta_m,\tau^2\right\} \sim \text{normal}\left(\dfrac{m\bar{\theta}/\tau^2 + \mu_0/\gamma^2_0}{m/\tau^2 + 1/\gamma^2_0},\dfrac{1}{m/\tau^2+1/\gamma^2_0}\right)$$
+      $$\left\{\mu|\theta_1,...,\theta_m,\tau^2\right\} \sim \text{normal}\left(\dfrac{\frac{m\bar{\theta}}{\tau^2} + \frac{\mu_0}{\gamma^2_0}}{\frac{m}{\tau^2} + \frac{1}{\gamma^2_0}},\dfrac{1}{\frac{m}{\tau^2}+\frac{1}{\gamma^2_0}}\right)$$
+      $$\left\{\tau^2|\theta_1,...,\theta_m,\mu\right\} \sim \text{inverse-gamma}\left(\dfrac{\eta_0 + m}{2},\dfrac{\eta_0\tau^2_0 + \sum\left(\theta_j-\mu\right)^2}{2}\right)$$
+
+      $$\left\{\theta_j|y_{1,j},...,y_{n,j},\sigma^2\right\} \sim \text{normal}\left(\dfrac{\frac{n_j\bar{y}_j}{\sigma^2} + \frac{1}{\tau^2}}{\frac{n_j}{\sigma^2}+\frac{1}{\tau^2}},\dfrac{1}{\frac{n_j}{\sigma^2}+\frac{1}{\tau^2}}\right)$$
+
+      $$\left\{\sigma^2|\mathbf{\theta,y_1,...,y_n}\right\} \sim \text{inverse-gamma}\left(\dfrac{1}{2}\left[\nu_0 + \sum_{j=1}^m n_j\right],\dfrac{1}{2}\left[\nu_0\sigma^2_0 + \sum_{j=1}^m\sum_{i=1}^{n_j}\left(y_{i,j}-\theta_j\right)^2\right]\right).$$
+
+      Note that $\sum\sum\left(y_{i,j}-\theta_j\right)^2$ is the sum of squared residuals across all groups, conditional on the within-group means, and so the conditional distribution concentrates probability around a pooled-sample estimate of the variance.
+
+
+      \paragraph{R Implementation}
+
+      The standard format R function rpredNormIGk() implements a Gibbs sampler for posterior approximation of each unknown quantity by sampling from its full conditional distribution.  From these posteriors, predictions are generated, as follows:
+
+      \begin{enumerate}
+        \item Set prior parameter values:
+          \begin{flalign*}
+            \nu_0,\sigma^2_0 \text{ for } p\left(\sigma^2\right)\\
+            \eta_0,\tau^2_0 \text{ for } p\left(\tau^2\right)\\
+            \mu_0,\gamma^2_0 \text{ for } p\left(\mu\right).
+          \end{flalign*}
+        \item Set initial states for the unknown parameters:
+          \begin{flalign*}
+            \theta_1^{(1)} &= \mathbf{\bar{y}_1},...,\theta_m^{(1)} = \mathbf{\bar{y}_m}\\
+            \mu^{(1)} &= \text{mean}\left(\theta_1^{(1)},...,\theta_m^{(1)}\right)\\
+            \tau^{2(1)} &= \text{var}\left(\theta_1^{(1)},...,\theta_m^{(1)}\right)\\
+            \sigma^{2(1)} &= \text{mean}\left(\text{var}\left(\mathbf{y}_1\right),...,\text{var}\left(\mathbf{y}_m\right)\right))
+          \end{flalign*}
+        \item For $s\in\{1,...,S\}$, sample
+          \begin{enumerate}
+            \item $\mu^{(s+1)} \sim p\left(\mu|\theta_1^{(s)},...,\theta_m^{(s)},\tau^{2(s)}\right)$
+            \item $\tau^{2(s+1)} \sim p\left(\tau^2|\theta_1^{(s)},...,\theta_m^{(s)},\mu^{(s+1)}\right)$
+            \item $\sigma^{2(s+1)} \sim p\left(\sigma^2|\theta_1^{(s)},...,\theta_m^{(s)},\mathbf{y}_1,...,\mathbf{y}_m\right)$
+            \item $\theta_j^{(s+1)} \sim p\left(\theta_j|\mu^{(s+1)},\tau^{2(s+1)},\sigma^{2(s+1)},\mathbf{y}_j\right)$ for $j \in \{1,...,m\}$
+          \end{enumerate}
+        \item For $s\in\{1,...,S\}$, generate prediction $\tilde{y}_j^{(s)} \sim \text{normal}\left(\theta_j^{(s)},\sigma^{2(s)}\right)$
+      \end{enumerate}
+
+
+      \paragraph{Example}
+      Returning to the math scores example, data for 10th-grade students from 100 large urban schools (each having 10th-grade enrollment of at least 400) is summarized in the following plots.
+
+\includegraphics{Thesis_v1-008}
+
+\includegraphics{Thesis_v1-009}
+
+      % The prior parameters that need to be specified are
+
+      % \begin{flalign*}
+      %   \left(\nu_0,\sigma^2_0\right) \text{ for } p\left(\sigma^2\right)\\
+      %   \left(\eta_0,\tau^2_0\right) \text{ for } p\left(\tau^2\right)\\
+      %   \left(\mu_0,\gamma^2_0\right) \text{ for } p\left(\mu\right).
+      % \end{flalign*}
+
+      % \begin{flalign*}
+      %   \nu_0,\sigma^2_0 \text{ for } p\left(\sigma^2\right)\\
+      %   \eta_0,\tau^2_0 \text{ for } p\left(\tau^2\right)\\
+      %   \mu_0,\gamma^2_0 \text{ for } p\left(\mu\right).
+      % \end{flalign*}
+
+      For prediction, we'll use the following prior values (Hoff p. 137):
+
+      \begin{flalign*}
+        \sigma^2_0&:  100 \text{ (within-school variance)}\\
+        \nu_0&:  1 \text{ (prior sample size)}\\
+        \tau^2_0&:  100 \text{ (between-school variance)}\\
+        \eta_0&:  1 \text{ (prior sample size)}\\
+        \mu_0&:  50 \text{ (prior mean of school means)}\\
+        \gamma^2_0&:  25 \text{ (prior variance of school means)}
+      \end{flalign*}
+
+\textcolor{red}{Below:  Pick a couple of schools that show different relationships between teh data and the prediction}
+
+\includegraphics{Thesis_v1-010}
+
+      \paragraph{Ranking Treatments}
+
+\clearpage
+
+
+\section{Chapter 2:  Normal Regression with Zellner's $g$-prior}
+
+\subsection{Least Squares Estimation with Example (Hoff p. 149ff.)}
+
+Regression modeling is concerned with describing how the sampling distribution of one random variable $Y$ varies with another variable or set of variables $\mathbf{x} = \left(x_1,...,x_p\right)$.  Specifically, a regression model postulates a form for $p(y|\mathbf{x})$, the conditional distribution of $Y$ given $\mathbf{x}$.  Estimation of $p(y|\mathbf{x})$ is made using data $y_1,...,y_n$ that are gathered under a variety of conditions $\mathbf{x}_1,...,\mathbf{x}_n$.
+
+The normal linear regression model specifies that, in addition to $E[Y|\mathbf{x}]$ being linear, the sampling variability around the mean is i.i.d. normal:
+
+\begin{flalign*}
+    \epsilon_1,...,\epsilon_n &\overset{\text{i.i.d}}{\sim} \text{normal}\left(0,\sigma^2\right)\\
+    Y_i &= \boldsymbol\beta^T \mathbf{x}_i + \epsilon_i
+\end{flalign*}
+
+This model provides a complete specification of the joint probability density of observed data $y_1,...,y_n$ conditional upon $\mathbf{x}_1,...,\mathbf{x}_n$ and values of $\boldsymbol\beta$ and $\sigma^2$:
+
+\begin{flalign}
+    p\left(y_1,...y_n|\mathbf{x}_1,...,\mathbf{x}_n,\boldsymbol\beta,\sigma^2\right) &= \prod_{i=1}^n p\left(y_i|\mathbf{x}_i,\boldsymbol\beta,\sigma^2\right) \nonumber\\
+    &= \left(2\pi\sigma^2\right)^{-n/2}\text{exp}\left\{-\frac{1}{2\sigma^2}\sum_{i=1}^n\left(y_i - \boldsymbol\beta^T\mathbf{x}_i\right)^2\right\} \label{regressionJointNorm}
+\end{flalign}
+
+Another way to write this joint probability density is in terms of the multivariate normal distribution:  Let $\mathbf{y}$ be the $n$-dimensional column vector $\left(y_1,...,y_n\right)^T$ and let $\mathbf{X}$ be the $n \times p$ matrix whose $i$th row is $\mathbf{x}_i = \left\{ x_{i,1}, x_{i,2}, ..., x_{i,p} \right\}$.  Then the normal regression model is
+
+$$\{\mathbf{y}|\mathbf{X},\boldsymbol\beta,\sigma^2\} \sim \text{multivariate normal}\left(\mathbf{X}\boldsymbol\beta,\sigma^2\mathbf{I}\right),$$
+
+where $\mathbf{I}$ is the $p \times p$ identity matrix and
+
+\begin{equation*}
+    \mathbf{X}\boldsymbol\beta =
+    \begin{pmatrix}
+        \mathbf{x}_1 \\
+        \mathbf{x}_2 \\
+        \vdots  \\
+        \mathbf{x}_n
+    \end{pmatrix}
+    \begin{pmatrix}
+        \beta_1 \\
+        \beta_2 \\
+        \vdots \\
+        \beta_p
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        \beta_1 x_{1,1} + \cdots + \beta_p x_{1,p} \\
+        \vdots \\
+        \beta_1 x_{n,1} + \cdots + \beta_p x_{n,p} \\
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        E\left[Y_1|\mathbf{\boldsymbol\beta},\mathbf{x}_1\right] \\
+        \vdots \\
+        E\left[Y_n|\mathbf{\boldsymbol\beta},\mathbf{x}_n\right] \\
+    \end{pmatrix}
+\end{equation*}
+
+The density (\ref{regressionJointNorm}) depends on $\boldsymbol\beta$ through the residuals $\left(y_i - \boldsymbol\beta^T\mathbf{x}_i\right)$.  We compute the ordinary least squares estimates
+
+$$\hat{\boldsymbol\beta}_{ols} = \left(\mathbf{X}^T\mathbf{X}\right)^{-1}\mathbf{X}^T\mathbf{y}$$
+
+and
+
+$$\hat{\sigma}^2_{ols} = \frac{SSR\left(\hat{\boldsymbol\beta}_{ols}\right)}{(n-p)} = \frac{\sum\left(y_i - \hat{\boldsymbol\beta}_{ols}^T x_i\right)^2}{(n-p)}.$$
+
+\clearpage
+
+\textit{Example:  Oxygen uptake (from Kuehl (2000), Hoff p. 149ff)}
+
+Twelve healthy men who did not exercise regularly were recruited to take part in a study of the effects of two different exercise regimens on oxygen uptake.  Six of the twelve men were randomly assigned to a 12-week flat-terrain running program, and the remaining six were assigned to a 12-week step aerobics program.  The maximum oxygen uptake of each subject was measured (in liters per minute) while running on an inclined treadmill, both before and after the 12-week program.  Of interest is how a subject's change in maximal oxygen uptake may depend on which program they were assigned to.  However, other factors, such as age, are expected to affect the change in maximal uptake as well.  The results are shown here:
+
+\includegraphics{Thesis_v1-011}
+
+Hoff's regression model:
+
+    \begin{align}
+        Y_i &= \beta_1x_{i,1} + \beta_2x_{i,2} + \beta_3x_{i,3} + \beta_4x_{i,4} + \epsilon_i, \text{ where} \label{example_regression_model}\\
+        x_{i,1} &= 1 \text{ for each subject } i \nonumber \\
+        x_{i,2} &= 0 \text{ if subject } j \text{ is on the running program, } 1 \text{ if on aerobic} \nonumber \\
+        x_{i,3} &= \text{ age of subject } i \nonumber \\
+        x_{i,4} &= x_{i,2} \times x_{i,3} \nonumber
+    \end{align}
+
+Under this model the conditional expectations of $Y$ for the two different levels of $x_{i,1}$ are
+
+\begin{flalign*}
+    E[Y|\mathbf{x}] &= \beta_1 + \beta_3 \times (age) \text{ if } x_1 = 0, \text{ and}\\
+    E[Y|\mathbf{x}] &= \left(\beta_1 + \beta_2\right) + \left(\beta_3 + \beta_4\right) \times (age) \text{ if } x_1 = 1
+\end{flalign*}
+
+In other words, the model assumes that the relationship is linear in age for both exercise groups, with the difference in intercepts given by $\beta_2$ and the difference in slopes given by $\beta_4$.  If we assumed that $\beta_2 = \beta_4 = 0$, then we would have identical lines for both groups.  If we assumed $\beta_2 \ne 0$ and $\beta_4 =  0$ then we would have a different line for each group but they would be parallel.  Allowing all coefficients to be non-zero gives us two unrelated lines.  Some different possibilities are depicted graphically below:\\\\
+
+\includegraphics{Thesis_v1-012}
+
+Let's find the least squares regression estimates for the model (\ref{example_regression_model}), and use the results to evaluate the differences between the two exercise groups.  The ages of the 12 subjects, along with their observed changes in maximal oxygen uptake, are
+
+\begin{flalign*}
+    \mathbf{x}_3 &= (23,22,22,25,27,20,31,23,27,28,22,24)\\
+    \mathbf{y}   &= (-0.87,-10.74,-3.27,-1.97,7.50,-7.25,17.05,4.96,10.40,11.05,0.26,2.51),
+\end{flalign*}
+
+\noindent with the first six elements of each vector corresponding to the subjects in the running group and the latter six corresponding to subjects in the aerobics group.  After constructing the $12 \times 4$ matrix $\mathbf{X} = (\mathbf{x}_1\, \mathbf{x}_2\, \mathbf{x}_3\, \mathbf{x}_4)$, the matrices $\mathbf{X}^T\mathbf{X}$ and $\mathbf{X}^T\mathbf{y}$ can be computed, from which we get $\boldsymbol\beta_{ols} = (-51.29,13.11,2.09,-0.32)^T$:\\
+
+This means that the estimated linear relationship between uptake and age has an intercept and slope of -51.29 and 2.09 for the running group, and -51.29 + 13.11 = -38.18 and 2.09 - 0.32 = 1.77 for the aerobics group.  These two lines are plotted in the fourth panel of Figure XX.  We obtain unbiased estimate $\sigma^2 = SSR(\hat{\boldsymbol\beta}_{ols})/(n-p) = 8.54$, and use this to compute the standard error of the components of $\hat{\boldsymbol\beta}_{ols}$, which are 12.25, 15.76, 0.53, and 0.65, respectively.  Comparing the values of $\hat{\boldsymbol\beta}_{ols}$ to their standard errors suggests that the evidence for differences between the two exercise regimens is not very strong.
+
+\hrulefill \\
+
+\textcolor{red}{``Comparing the values of $\hat{\boldsymbol\beta}_{ols}$ to their standard errors:"}\\
+Difference in Intercept:\\
+$$H_0:  Intercept_{running} - Intercept_{aerobic} = 0; H_A:  Intercept_{running} - Intercept_{aerobic} \ne 0$$
+$$H_0:  \beta_1 - (\beta_1 + \beta_2) = -\beta_2 = 0 \text{ (that is } \beta_2 = 0); H_A:  \beta_2 \ne 0$$
+$$T = \frac{\beta_2 - 0}{SE_{beta_2}} = \frac{13.11}{15.76} = 0.49$$
+$$\longrightarrow p = 0.79\longrightarrow \text{ fail to reject } H_0 \text{ and conclude no significant difference in intercept}$$
+
+Difference in Slope:\\
+$$H_0:  Slope_{running} - Slope_{aerobic} = 0; H_A:  Slope_{running} - Slope_{aerobic} \ne 0$$
+$$H_0:  \beta_3 - (\beta_3 + \beta_4) = 0 \text{ (that is } \beta_4 = 0); H_A:  \beta_4 \ne 0$$
+$$T = \frac{\beta_4 - 0}{SE_{beta_4}} = \frac{-0.32}{0.65} = 0.83$$
+$$\longrightarrow p = 0.68\longrightarrow \text{ fail to reject } H_0 \text{ and conclude no significant difference in slope}$$
+
+
+\hrulefill \\
+
+\begin{Schunk}
+\begin{Soutput}
+[1] 8.542477
+\end{Soutput}
+\begin{Soutput}
+      beta.ols     SE.ols         CIL        CIU
+x1 -51.2939459 12.2522126 -78.5935768 -23.994315
+x2  13.1070904 15.7619762 -22.0127811  48.226962
+x3   2.0947027  0.5263585   0.9219028   3.267503
+x4  -0.3182438  0.6498086  -1.7661075   1.129620
+\end{Soutput}
+\end{Schunk}
+
+
+
+\clearpage
+
+  \subsection{Bayesian Estimation for a Regression Model (Hoff p. 154ff)}
+
+  \subsubsection{Derivation}
+
+    \paragraph{A semiconjugate prior distribution}\label{normRegSemiconjugatePrior}
+    Hoff proposes a semiconjugate prior distribution for $\boldsymbol\beta$ and $\sigma^2$ to be used when there is information available about the parameters.  The sampling density of the data (Equation \ref{conditional_density}) is
+
+    $$p(\mathbf{y}|\mathbf{X},\boldsymbol\beta,\sigma^2) \propto \text{exp}\{-\frac{1}{2\sigma^2}\text{SSR}(\boldsymbol\beta)\} = \text{exp}\{-\frac{1}{2\sigma^2}[\mathbf{y}^T\mathbf{y} - 2\boldsymbol\beta^T\mathbf{X}^T\mathbf{y}+\boldsymbol\beta^T\mathbf{X}^T\mathbf{X}\boldsymbol\beta]\}.$$
+
+    The role that $\boldsymbol\beta$ plays in the exponent looks very similar to that played by $\mathbf{y}$, and the distribution of $\mathbf{y}$ is multivariate normal.  This suggests that a multivariate normal prior distribution for $\boldsymbol\beta$ is conjugate:  if $\boldsymbol\beta \sim \text{multivariate normal}(\boldsymbol\beta_0,\Sigma_0)$, then
+
+    \begin{flalign*}
+        p&(\boldsymbol\beta|\mathbf{y,X},\sigma^2)\\
+        &\propto p(\mathbf{y}|\mathbf{X},\boldsymbol\beta, \sigma^2) \times p(\boldsymbol\beta)\\
+        &\propto \text{exp}\{-\frac{1}{2}(-2\boldsymbol\beta^T\mathbf{X}^T\mathbf{y}/\sigma^2 + \boldsymbol\beta^T\mathbf{X}^T\mathbf{X}\boldsymbol\beta/\sigma^2) - \frac{1}{2}(-2\boldsymbol\beta^T\Sigma_0^{-1}\boldsymbol\beta_0 + \boldsymbol\beta^T\Sigma_0^{-1}\boldsymbol\beta)\}\\
+        &=\text{exp}\{\boldsymbol\beta^T(\Sigma_0^{-1}\boldsymbol\beta_0 + \mathbf{X}^T\mathbf{y}/\sigma^2) - \frac{1}{2}\boldsymbol\beta^T(\Sigma_0^{-1} + \mathbf{X}^T\mathbf{X}/\sigma^2)\boldsymbol\beta\}
+    \end{flalign*}
+
+    This is proportional to a multivariate normal density, with
+
+    \begin{flalign}
+        Var[\boldsymbol\beta|\mathbf{y,X},\sigma^2] &= (\Sigma_0^{-1} + \mathbf{X}^T\mathbf{X}/\sigma^2)^{-1} \label{regression_semiconj_var}\\
+        \text{E}[\boldsymbol\beta|\mathbf{y,X},\sigma^2] &= (\Sigma_0^{-1} + \mathbf{X}^T\mathbf{X}/\sigma^2)^{-1} (\Sigma_0^{-1}\boldsymbol\beta_0 + \mathbf{X}^T\mathbf{y}/\sigma^2). \label{regression_semiconj_expec}
+    \end{flalign}
+
+As usual, we can gain some understanding of these formulae by considering some limiting cases.  If the elements of the prior precision matrix $\Sigma_0^{-1}$ are small in magnitude, then the conditional expectation E$[\boldsymbol\beta|\mathbf{y,X},\sigma^2]$ is approximately equal to $(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{y}$, the least squares estimate. On the other hand, if the measurement precision is very small ($\sigma^2$ is very large), then the expectation is approximately $\boldsymbol\beta_0$, the prior expectation.\\
+
+As in most normal sampling problems, the semiconjugate prior distribution for $\sigma^2$ is an inverse-gamma distribution.  Letting $\gamma = 1/\sigma^2$ be the measurement precision, if $\gamma \sim \text{gamma}(\nu_0/2,\nu_0\sigma^2_0/2)$, then
+
+
+\begin{flalign*}
+    p(\gamma|\mathbf{y,X},\boldsymbol\beta) &\propto p(\gamma)p(\mathbf{y}|\mathbf{X},\boldsymbol\beta,\gamma)\\
+        &\propto \left[\gamma^{\nu_0/2-1}\text{exp}(-\gamma \times \nu_0\sigma^2_0/2)\right] \times
+                 \left[\gamma^{n/2}\text{exp}(-\gamma \times \text{SSR}(\boldsymbol\beta)/2)\right]\\
+        &= \gamma^{(\nu_0+n)/2-1} \text{exp}(-\gamma[\nu_0\sigma^2_0 + \text{SSR}(\boldsymbol\beta)]/2),
+\end{flalign*}
+
+\noindent which we recognize as a gamma density, so that
+
+$$\{\sigma^2|\mathbf{y,X},\boldsymbol\beta\} \sim \text{inverse-gamma}([\nu_0 + n]/2,[\nu_0\sigma^2_0 + \text{SSR}(\boldsymbol\beta)]/2).$$
+
+\noindent Constructing a Gibbs sampler to approximate the joint posterior distribution $p(\boldsymbol\beta,\sigma^2|\mathbf{y,X})$ is then straightforward:  given current values $\{\boldsymbol\beta^{(s)},\sigma^{2(s)}\}$, new values can be generated by
+
+\begin{enumerate}
+    \item updating $\boldsymbol\beta$:
+    \begin{enumerate}
+        \item compute $\mathbf{V} = \text{Var}[\boldsymbol\beta|\mathbf{y,X},\sigma^{2(s)}]$ and $\mathbf{m} = \text{E}[\boldsymbol\beta|\mathbf{y,X},\sigma^{2(s)}]$
+        \item sample $\boldsymbol\beta^{(s+1)} \sim \text{multivariate normal}(\mathbf{m,V})$
+    \end{enumerate}
+    \item updating $\sigma^2$:
+    \begin{enumerate}
+        \item compute SSR$(\boldsymbol\beta^{(s+1)})$
+        \item sample $\sigma^{2(s+1)} \sim \text{inverse-gamma}([\nu_0 + n]/2,[\nu_0\sigma_0^2 + \text{SSR}(\boldsymbol\beta^{(s+1)})]/2)$.
+    \end{enumerate}
+\end{enumerate}
+
+To create a sample from the predictive distribution of responses:  for each $s\in\{1,...,S\}$, draw $\epsilon^{(s)} \sim N(0,\sigma^{2(s)})$.  Then compute
+
+$$y^{(s)} = \boldsymbol\beta^{(s)T}\mathbf{X} + \epsilon.$$
+
+    \paragraph{Default and weakly informative prior distributions}
+    In situations where prior information is unavailable or difficult to quantify, an alternative ``default" class of prior distributions is given. Specification of the prior parameters $(\boldsymbol\beta_0, \Sigma_0)$ and $(\nu_0,\sigma^2_0)$ that represent actual prior information for a Bayesian analysis can be difficult.  For a prior distribution that is not going to represent real prior information about the parameters, we choose one that is as minimally informative as possible.  The resulting posterior distribution, then, will represent the posterior information of someone who began with little knowledge of the population being studied.  Here we will employ Zellner's ``$g$-prior" (Zellner, 1986).  We choose $\boldsymbol\beta_0 = \mathbf{0}$ and $\Sigma_0 = k(\mathbf{X}^T\mathbf{X})^{-1}, k = g\sigma^2, g > 0$, which satisfies a desired condition that the regression parameter estimation be invariant to changes in the scale of the regressors.  With this, equations \ref{regression_semiconj_var} and \ref{regression_semiconj_expec} reduce to
+
+\begin{flalign}
+    \text{Var}[\boldsymbol\beta|\mathbf{y,X},\sigma^2] &= [\mathbf{X^TX}/(g\sigma^2) + \mathbf{X^TX}/\sigma^2]^{-1} = \frac{g}{g+1}\sigma^2(\mathbf{X^TX})^{-1} \label{regression_noninf_var}\\
+    \text{E}[\boldsymbol\beta|\mathbf{y,X},\sigma^2] &= [\mathbf{X^TX}/(g\sigma^2) + \mathbf{X^TX}/\sigma^2]^{-1}\mathbf{X^Ty}/\sigma^2 = \frac{g}{g+1}\sigma^2(\mathbf{X^TX})^{-1}\mathbf{X^Ty}.\label{regression_noninf_expec}
+\end{flalign}
+
+Letting
+
+$$\mathbf{V} = \frac{g}{g+1}\sigma^2(\mathbf{X^TX})^{-1} \text{ and } \mathbf{m} = \frac{g}{g+1}\sigma^2(\mathbf{X^TX})^{-1}\mathbf{X^Ty}$$
+
+we arrive at posteriors
+
+\begin{flalign}
+    \{\sigma^2|\mathbf{y,X}\} &\sim \text{inverse-gamma}([\nu_0 + n]/2,[\nu_0\sigma^2_0 + \text{SSR}_g]/2) \label{regression_noninf_sig2_post}\\
+    \{\boldsymbol\beta|\mathbf{y,X},\sigma^2\} &\sim \text{multivariate normal}\left(\frac{g}{g+1}\hat{\boldsymbol\beta}_{ols},\frac{g}{g+1}\sigma^2[\mathbf{X^TX}]^{-1}\right).\label{regression_noninf_beta_post}
+\end{flalign}
+
+Here $\text{SSR}_g = \mathbf{y^Ty - m^TV^{-1}m = y^T(I - }\frac{g}{g+1}\mathbf{X(X^TX)^{-1}X^T)y}$.\\
+
+Simple Monte Carlo approximation can be used to sample from the joint posterior density $p(\sigma^2,\boldsymbol\beta|\mathbf{y,X})$ as follows.  Here $g$ is typically set to the number of prior observations.  Then:
+
+\begin{enumerate}
+    \item sample $\sigma^2 \sim \text{inverse-gamma}([\nu_0 + n]/2,[\nu_0\sigma^2_0 + \text{SSR}_g]/2)$
+    \item sample $\boldsymbol\beta \sim \text{multivariate normal}\left(\frac{g}{g+1}\hat{\boldsymbol\beta}_{ols},\frac{g}{g+1}\sigma^2[\mathbf{X^TX}]^{-1}\right)$.
+\end{enumerate}
+
+To create a sample from the predictive distribution of responses, draw $\epsilon \sim N(0,\sigma^2)$.  Then for each triplet $(\beta,\sigma^2,\epsilon)$ we have
+
+$$y = \boldsymbol\beta^T\mathbf{X} + \epsilon.$$
+
+  \subsubsection{R Implementation}
+
+The standard format R function
+
+\begin{center}\texttt{rpredNormReg(S=1,Xpred,X,y,beta0,Sigma0,nu0=1,s20=1,gprior = TRUE)}\end{center}
+
+\noindent approximates the joint posterior density $p(\sigma^2,\boldsymbol\beta|\mathbf{y,X})$ using one of the two methods described above, generates $S$ triplets $(\boldsymbol\beta^{(s)}, \sigma^{2(s)},\epsilon^{(s)} \sim N(0,\sigma^{2(s)})$ , and returns $S$ predictions $y = X_{pred}\boldsymbol\beta^{(s)} + \epsilon^{(s)}$.\\\\
+
+The function defaults to Zellner's location-invariant g-prior, in which case input values for \texttt{beta0, Sigma0, nu0}, and \texttt{s20} are ignored.  If the user wants to employ Hoff's semi-conjugate prior as defined in section \ref{normRegSemiconjugatePrior} above, all input variables must be specified, with gprior = FALSE.
+
+
+
+
+  \subsubsection{Example}
+
+In the example below (Hoff data and code found \href{https://pdhoff.github.io/book/}{here}) to employ Hoff's semi-conjugate prior we use
+
+
+
+\begin{flalign*}
+  \boldsymbol\beta_0 &= \hat{\boldsymbol\beta}_{ols} = (-51.29, -51.29, -51.29, -51.29)  \text{ (ordinary least squares estimator of } \boldsymbol\beta \text{)}\\
+  \Sigma_0 &= (X^TX)^{-1}\sigma^2n =
+    \begin{pmatrix}
+      1801.4 & -1801.4 & -77.02 & 77.02 \\
+      -1801.4 & 2981.28 & 77.02 & -122.03 \\
+      -77.02 & 77.02 & 3.32 & -3.32 \\
+      77.02 & -122.03 & -3.32 & 5.07
+    \end{pmatrix}
+    \text{ (sampling variance of } \hat{\boldsymbol\beta}_{ols} \text{)}\text{WHY TIMES n????}\\
+  \nu_0 &= 1 \text{ (prior sample size)}\\
+  \sigma^2_0 &= \frac{\sum e_i}{n-1} = 6.21 \text{ (variance of the residuals)}\\
+  S &= 5000 \text{ (sample size for predictive distribution random draw)}
+\end{flalign*}
+
+\textcolor{red}{To do:  clean up write-up; make plots comparing g-prior and non-g-prior results;  circle back with Dean about appropriate priors for non-g-prior case; why is Hoff looking at the difference between the two cases with prior info very close to the sample characteristics? }
+
+\textcolor{red}{ALSO INCLUDE IN WRITE-UP EXPLICIT PREDICTION STEP, E.G. "Y = ..."}
+
+\includegraphics{Thesis_v1-015}
+
+%\textcolor{red}{MAYBE DO BOTH IN THE SAME BLOCK AND PLOT ON ONE PLOT?}
+
+%\clearpage
+
+%For the same example without prior information, we use Zellner's g-prior with $g =$ length$(y) =$ 12.
+
+\includegraphics{Thesis_v1-016}
+
+\includegraphics{Thesis_v1-017}
+
+\clearpage
+
+
+\includegraphics{Thesis_v1-018}
+
+\clearpage
+
+Comparing predictions using semi-conjugate prior vs. Zellner's g-prior:
+
+\includegraphics{Thesis_v1-019}
+
+Inspection of the graphs shows the predicted distributions using Zellner's g-prior shrink toward 0, and have greater variance than those predicted using Hoff's semi-conjugate prior.
+
+\includegraphics{Thesis_v1-020}
+
+\textcolor{red}{EXPLAIN WHY SCP PREDICTIONS HAVE TALLER DISTRIBUTIONS THAN ZGP PREDICTIONS.  ALSO WHY ZGP PREDICTIONS SHRINK TOWARD 0}
+
+\clearpage
+
+Comparing observed values to predictive distributions:
+
+\includegraphics{Thesis_v1-021}
+
+
+
+
+
+The following plots exhibit the influence of varying the prior info with the semi-conjugate prior.
+
+\includegraphics{Thesis_v1-022}
+
+\includegraphics{Thesis_v1-023}
+
+\includegraphics{Thesis_v1-024}
+
+\includegraphics{Thesis_v1-025}
+
+\includegraphics{Thesis_v1-026}
+
+\clearpage
+
+\section{Conclusion}
+
+\section{References}
+
+\end{document}

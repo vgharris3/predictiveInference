@@ -83,18 +83,29 @@ $Y_1,...,Y_n | \theta$ are conditionally i.i.d., $\theta \sim \pi(\theta)$ (de F
 $\Rightarrow$
 
 \begin{flalign}
-  p(\tilde{Y} = \tilde{y} | Y_1 = y_1,...,Y_n = y_n) &= \frac{\int p(\tilde{y},y_1,...,y_n | \theta)\pi(\theta) d\theta}{\int p(y_1,...,y_n | \theta)\pi(\theta) d\theta}\\
-  &\\
-    &= \frac{\int p(\tilde{y}|\theta)p(y_1,...,y_n | \theta)\pi(\theta) d\theta}{\int p(y_1,...,y_n | \theta)\pi(\theta) d\theta}\\
-  &\\
-    &= \frac{\int p(\tilde{y}|\theta)p(\theta|y_1,...,y_n) p(y_1,...,y_n) d\theta}{\int p(y_1,...,y_n | \theta)\pi(\theta) d\theta}\\
-  &\\
+  p(\tilde{Y} = \tilde{y} | Y_1 = y_1,...,Y_n = y_n) &= \frac{p(\tilde{y},y_1,...,y_n)}{p(y_1,...,y_n)}\\
+  &\nonumber\\
+  &=\frac{\int p(\tilde{y},y_1,...,y_n | \theta)\pi(\theta) d\theta}{\int p(y_1,...,y_n | \theta)\pi(\theta) d\theta}\\
+  &\nonumber\\
+  &= \frac{\int p(\tilde{y}|\theta)p(y_1,...,y_n | \theta)\pi(\theta) d\theta}{\int p(y_1,...,y_n | \theta)\pi(\theta) d\theta}\\
+  &\nonumber\\
+  &= \frac{\int p(\tilde{y}|\theta)p(\theta|y_1,...,y_n) p(y_1,...,y_n) d\theta}{\int p(y_1,...,y_n | \theta)\pi(\theta) d\theta}\\
+  &\nonumber\\
   &= \frac{\cancel{p(y_1,...,y_n)} \int p(\tilde{y}|\theta)p(\theta|y_1,...,y_n) d\theta}{\cancel{p(y_1,...,y_n)}}\\
-  &\\
+  &\nonumber\\
   &= \int p(\tilde{y}|\theta) p(\theta|y_1,...,y_n) d\theta
 \end{flalign}
 
+Explanation:
 
+\begin{enumerate}
+  \item The conditional density of $\tilde{y}$ is the quotient of the joint density $\tilde{y},y_1,...,y_n$ with the marginal joint density of $y_1,...,y_n$ (definition of conditional density)
+  \item The joint densities in both the numerator and denominator can be thought of as marginal joint densities, and written as integrals (with respect to something--here we conveniently choose $\theta$) of products of conditional joint densities (conditional on $\theta$) with the density of $\theta$
+  \item Conditional independence of the $y_i$s with respect to $\theta$ enables us to express the conditional joint density in the numerator as a product of densities
+  \item Pairing the second and third factor in the integrand of the numerator, we apply Bayes' rule $(p(A|B)p(B) = p(B|A)p(A))$
+  \item Now the last factor in the integrand of the numerator does not depend on $\theta$, and can be pulled out of the integral, while the denominator just reverts back to the original joint density from line 1 (clearly it was not necessary to change it in the first place), and these two quantities conveniently cancel out
+  \item We now have the Bayesian Predictive Inference format we're aiming for
+\end{enumerate}
 
 
 
