@@ -106,6 +106,27 @@ Explanation:
 \end{enumerate}
 
 
+\begin{flalign}
+  \text{Pr}[R=r|T=t] &= \int p(\R=r|\theta)p(\theta|T)d\theta\nonumber\\
+  &= 1
+  % &\nonumber\\
+  % &= \int {m\choose r}\theta^r(1-\theta)^{m-r}\frac{\Gamma(n+\alpha+\beta)}{\Gamma(t+\alpha)\Gamma(n-t+\beta)}\theta^{t+\alpha-1}(1-\theta)^{n-t+\beta-1}d\theta\nonumber\\
+  % &\nonumber\\
+  % &= \frac{m!}{r!(m-r)!}\frac{\Gamma(n+\alpha+\beta)}{\Gamma(t+\alpha)\Gamma(n-t+\beta)}\int\theta^{r+t+\alpha-1}(1-\theta)^{m+n-r-t+\beta-1}d\theta\\
+  % &\nonumber\\
+  % &= \frac{\Gamma(m+1)\Gamma(n+\alpha+\beta)\Gamma(r+t+\alpha)\Gamma(m+n-r-t+\beta)}{\Gamma(r+1)\Gamma(m-r+1)\Gamma(t+\alpha)\Gamma(n-t+\beta)\Gamma(m+n+\alpha+\beta)},\label{betaBinomial_pred}
+\end{flalign}
+
+% \begin{flalign}
+%   \text{Pr}[R=r|T=t]
+%   &= \int p(\R=r|\theta)p(\theta|T)d\theta\nonumber\\
+%   &\nonumber\\
+%   &= \int {m\choose r}\theta^r(1-\theta)^{m-r}\frac{\Gamma(n+\alpha+\beta)}{\Gamma(t+\alpha)\Gamma(n-t+\beta)}\theta^{t+\alpha-1}(1-\theta)^{n-t+\beta-1}d\theta\nonumber\\
+%   &\nonumber\\
+%   &= \frac{m!}{r!(m-r)!}\frac{\Gamma(n+\alpha+\beta)}{\Gamma(t+\alpha)\Gamma(n-t+\beta)}\int\theta^{r+t+\alpha-1}(1-\theta)^{m+n-r-t+\beta-1}d\theta\\
+%   &\nonumber\\
+%   &= \frac{\Gamma(m+1)\Gamma(n+\alpha+\beta)\Gamma(r+t+\alpha)\Gamma(m+n-r-t+\beta)}{\Gamma(r+1)\Gamma(m-r+1)\Gamma(t+\alpha)\Gamma(n-t+\beta)\Gamma(m+n+\alpha+\beta)},\label{betaBinomial_pred}
+% \end{flalign}
 
 
 

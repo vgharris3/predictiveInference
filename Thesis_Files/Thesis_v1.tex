@@ -138,227 +138,195 @@ An obstacle to widespread employment of Bayesian predictive inference in scienti
      % \rowcolor{lightgray}
      $\textbf{(}\boldsymbol\alpha,\boldsymbol\beta\textbf{)}$ & $\textbf{E(}\boldsymbol\theta\textbf{)}$ & \textbf{mean(Razorbacks Predicted)} & \textbf{SD(Razorbacks Predicted)} \\
      \hline
-     (2,8) & 0.2 & 29.73 & 11.08 \\
+     (2,8) & 0.2 & 29.98 & 10.82 \\
      \hline
-     (22,78) & 0.22 & 23.79 & 5.98 \\
+     (22,78) & 0.22 & 23.84 & 6.08 \\
      \hline
-     (224,776) & 0.224 & 22.56 & 4.38 \\
+     (224,776) & 0.224 & 22.52 & 4.46 \\
      \hline
   \end{tabular}
 \end{center}
 
+\clearpage
 
   \subsection{The Bayesian Parametric Prediction Format}
   %
   % \textcolor{red}{Use Dean's setup from his article, start of section 3}\\
   % \textcolor{red}{talk about exchangeability and di Finetti (reread Hoff's intro, also Geisser?)}
 
-  We want to predict future outcomes based on current knowledge.  Specifically we're asking: for observed values $Y_1 = y_1,...,Y_n = y_n$, what is likely to be the value of the next observation, $\tilde{Y}=\tilde{y}$?  We want to compute $Pr(\tilde{Y}|\theta,y_1,...,y_n)$, where $\theta$ is a population parameter with a distribution $\pi(\theta)$ based on some prior knowledge or beliefs.  Here we are careful to satisfy ourselves that $Y_1,...,Y_n$ are \textit{exchangeable}, which enables us to rely on de Finetti's representation theorem for the conditional independence and identical distribution of $Y_1,...,Y_n$.  Thus we can write
+  We want to predict future outcomes based on current knowledge.  Specifically we're asking: for observed values $Y_1 = y_1,...,Y_n = y_n$, what is likely to be the value of the next observation, $\tilde{Y}=\tilde{y}$?  We want to compute $Pr(\tilde{Y}|y_1,...,y_n)$, where $y_1,...,y_n$ are conditionally independent and identically distributed (i.i.d.) with respect to a population parameter (or parameters) $\theta$.  We assign prior distribution $\pi(\theta)$ based on some existing knowledge or beliefs.  Here we are careful to satisfy ourselves that $Y_1,...,Y_n$ are \textit{exchangeable}, which enables us to rely on de Finetti's representation theorem for the i.i.d. assumption.  Thus we can write
+
+% \begin{flalign}
+%   p(\tilde{Y} = \tilde{y} | Y_1 = y_1,...,Y_n = y_n) &= \frac{p(\tilde{y},y_1,...,y_n)}{p(y_1,...,y_n)}\nonumber\\
+%   &\nonumber\\
+%   &=\frac{\int p(\tilde{y},y_1,...,y_n | \theta)\pi(\theta) d\theta}{\int p(y_1,...,y_n | \theta)\pi(\theta) d\theta}\nonumber\\
+%   &\nonumber\\
+%   &= \frac{\int p(\tilde{y}|\theta)p(y_1,...,y_n | \theta)\pi(\theta) d\theta}{\int p(y_1,...,y_n | \theta)\pi(\theta) d\theta}\nonumber\\
+%   &\nonumber\\
+%   &= \frac{\int p(\tilde{y}|\theta)p(\theta|y_1,...,y_n) p(y_1,...,y_n) d\theta}{\int p(y_1,...,y_n | \theta)\pi(\theta) d\theta}\nonumber\\
+%   &\nonumber\\
+%   &= \int p(\tilde{y}|\theta) p(\theta|y_1,...,y_n) d\theta \label{BayesianPredictiveFormat}
+% \end{flalign}
 
 \begin{flalign}
   p(\tilde{Y} = \tilde{y} | Y_1 = y_1,...,Y_n = y_n) &= \frac{p(\tilde{y},y_1,...,y_n)}{p(y_1,...,y_n)}\nonumber\\
   &\nonumber\\
-  &=\frac{\int p(\tilde{y},y_1,...,y_n | \theta)\pi(\theta) d\theta}{\int p(y_1,...,y_n | \theta)\pi(\theta) d\theta}\nonumber\\
+  &=\frac{\int p(\tilde{y},y_1,...,y_n | \theta)\pi(\theta) d\theta}{p(y_1,...,y_n)}\nonumber\\
   &\nonumber\\
-  &= \frac{\int p(\tilde{y}|\theta)p(y_1,...,y_n | \theta)\pi(\theta) d\theta}{\int p(y_1,...,y_n | \theta)\pi(\theta) d\theta}\nonumber\\
+  &= \frac{\int p(\tilde{y}|\theta)p(y_1,...,y_n | \theta)\pi(\theta) d\theta}{p(y_1,...,y_n)}\nonumber\\
   &\nonumber\\
-  &= \frac{\int p(\tilde{y}|\theta)p(\theta|y_1,...,y_n) p(y_1,...,y_n) d\theta}{\int p(y_1,...,y_n | \theta)\pi(\theta) d\theta}\nonumber\\
+  &= \frac{\int p(\tilde{y}|\theta)p(\theta|y_1,...,y_n) p(y_1,...,y_n) d\theta}{p(y_1,...,y_n)}\nonumber\\
   &\nonumber\\
   &= \int p(\tilde{y}|\theta) p(\theta|y_1,...,y_n) d\theta \label{BayesianPredictiveFormat}
 \end{flalign}
 
-For prediction, we need only to characterize the observed data $(y_1,...,y_n)$ conditional on the relevant parameter(s) $(\theta)$ and supply a suitable prior distribution for the relevant parameter(s) $\theta$.  From there we compute
+For prediction, we need only to characterize the observed data $(y_1,...,y_n)$ conditional $\theta$ and supply a suitable prior distribution $\pi(\theta)$.  From there we compute posterior
 
-$$p(\theta|y) = \frac{p(\theta)p(y|\theta)}{\int_\theta p(\theta)p(y|\theta)d\theta}$$
+$$p(\theta|y) = \frac{p(y|\theta)\pi(\theta)}{\int_\theta p(\theta)p(y|\theta)d\theta}$$
 
 and make our prediction using (\ref{BayesianPredictiveFormat}).
-
-
-
-  % Exchangeability means that $p(y_1,...,y_n) = p(y_{a_1},...,y_{a_n})$ for all permutations $\{a_1,...,a_n\}$ of $\{1,...,n\}$.  In other words the order of the $y_i$s does not convey any information about their joint density.  From de Finetti's representation theorem, then, $Y_1,...,Y_n$ are conditionally independent and identically distributed (i.i.d.) given $\theta$ (Hoff p. 27), and we can write the joint density
-  %
-  % $$p(y_1,...,y_n) = \int\left\{\prod_1^n p(y_i|\theta)\right\}\pi(\theta)d\theta$$.
-  %
-  % Get to:  We can predict $\tilde{Y}$ using
-  %
-  % $$p(\tilde{Y} = \tilde{y} | Y_1 = y_1,...,Y_n = y_n) = \int p(\tilde{y}|\theta) p(\theta|y_1,...,y_n) d\theta$$
-
-
-
-
-
-%     \textbf{Definition} (Hoff p. 27) Let $p(y_1,...,y_n)$ be the joint density of $Y_1,...,Y_n$.  If $p(y_1,...,y_n) = p(y_{\pi_1},...,y_{\pi_n})$ for all permutations $\{\pi_1,...,\pi_n\}$ of $\{1,...,n\}$, then $Y_1,...,Y_n$ are \textit{exchangeable}.
-%
-%   Given joint density $p(y_1,...,y_n)$ of $Y_1,...,Y_n$ and some parameter $\theta$ with prior distribution $\pi(\theta)$, de Finetti' Representation Theorem (1937) enables us to write
-%
-%   $$p(y_1,...,y_n) = \int$$
-%
-%   This thesis and the accompanying set of tools (R package) employs a Bayesian approach to predictive inference relying on the de Finetti representation theorem (de Finetti 1937).
-%
-% %   ``Roughly speaking, $Y_1,...,Y_n$ are exchangeable if the subscript labels convey no information about the outcomes."
-% %
-% % The examples presented in this thesis start with an assumption of exchangeability.
-%
-%
-%   \textcolor{red}{State the de Finetti theorem here?} We can write
-%
-% \begin{equation}
-%   g(x_{n+1}|\mathbf{x}_n) = \frac{\int_\Theta f(\mathbf{x}_{n+1}|\boldsymbol\theta)\pi(\boldsymbol\theta)d\boldsymbol\theta}{\int_\Theta f(\mathbf{x}_n|\boldsymbol\theta)\pi(\boldsymbol\theta)d\boldsymbol\theta} = \frac{h(\mathbf{x}_{n+1})}{h(\mathbf{x}_n)} \label{generalPredictiveDistributionFormula}
-% \end{equation}
-%
-% \noindent where $h(\mathbf{x}_k)$ is the marginal density of $\mathbf{x}_k$, $\boldsymbol\theta$ has prior distribution $\pi(\boldsymbol\theta)$, and $\Theta$ is the parameter space for $\boldsymbol\theta$.  Then the predictive density $g(\cdot)$ can be written:
-%
-% \begin{equation}
-%   g(x_{n+1}|\mathbf{x}_n) = \int_\Theta f(\mathbf{x}_{n+1}|\boldsymbol\theta)\pi(\boldsymbol\theta | \mathbf{x}_n)d\boldsymbol\theta \label{concisePredictiveDistributionFormula}
-% \end{equation}
-%
-% \noindent where $x_{n+1}$ is conditionally independent of $\mathbf{x}_n$ given $\boldsymbol\theta$, and $\pi(\boldsymbol\theta | \mathbf{x}_n)d\boldsymbol\theta)$ is the posterior distribution of $\mathbf{x}_n$ given $\boldsymbol\theta$.
-%
-% \textcolor{red}{Originally I used Geisser's notation, carrying it through the two examples I used from his book.  For the remaining cases I imitated Hoff's notation.  I think I should standardize everything with one kind of notation.}
-%     [Geisser p. 49]\\
-%
-%         Let $$f\left(x^{(N)},x_{(M)}|\theta\right) = f\left(x_{(M)}|x^{(N)},\theta\right)f\left(x^{(N)}|\theta\right).$$
-%
-%     Here $x^{(N)}$ represents observed events and $x_{(M)}$ are future events.  We calculate
-%
-%     $$f\left(x_{(M)},x^{(N)}\right) = \int f\left(x^{(N)},x_{(M)}|\theta\right)p(\theta)d\theta$$
-%
-%     where $p(\theta)$ is the prior density and
-%
-%     $$f\left(x_{(M)}|x^{(N)}\right) = \frac{f\left(x_{(M)},x^{(N)}\right)}{f\left(x^{(N)}\right)} = \int f\left(x_{(M)}|\theta\right)p\left(\theta|x^{(N)}\right)d\theta$$
-%
-%     where
-%
-%     $$p\left(\theta|x^{(N)}\right) \propto f\left(x^{(N)}|\theta\right)p(\theta).$$
-%
-
-
 
 \clearpage
 
 \section{Chapter 1:  Predictive Problems with Conjugate Priors}
 
-  [Problems with closed-form solutions.  These problems will be what the R package is designed for.  Use problems from Geisser, Casella \& Berger (Bayesian chapter), other sources.  Regression problem--predictive distributions of models that include and exclude some predictor]\\
+\textcolor{red}{paragraph introducting this section?}
+  % [Problems with closed-form solutions.  These problems will be what the R package is designed for.  Use problems from Geisser, Casella \& Berger (Bayesian chapter), other sources.  Regression problem--predictive distributions of models that include and exclude some predictor]\\
 
-  \textcolor{red}{write up background for each model:  What are they useful for? (2-4 sentence paragraph for each)}\\
-  \textcolor{red}{ need to create ``good" examples for Geisser's models}
+  % \textcolor{red}{write up background for each model:  What are they useful for? (2-4 sentence paragraph for each)}\\
+  % \textcolor{red}{ need to create ``good" examples for Geisser's models}
 
   \subsection{Prediction of Future Successes:  Beta-Binomial (Geisser p. 73)}
 
-
     \subsubsection{Derivation}
 
-      Let $X_i$ be independent binary variables with Pr$(X_i = 1) = \theta$, and let $T = \sum X_i$.  Then $T$ has probability
+      Let $Y_1,...,Y_n$ be independent binary variables with Pr$(Y_i = 1) = \theta$, with $Y_i = 1$ indicating success and $Y_i = 0$ indicating failure.  The number of observed successes can be represented by $T = \sum Y_i$, which is sufficient for $\theta$ and has a binomial$(n,\theta)$ distribution.  That is,
 
-      $${N\choose t}\theta^t(1-\theta)^{N-t}.$$
-
-      \vspace{5mm}
-
-      Assume $\theta\sim\text{Beta}(\alpha,\boldsymbol\beta)$, so
+      $$Pr(T = t|\theta) = {n\choose t}\theta^t(1-\theta)^{n-t}.$$
 
       \vspace{5mm}
 
-      $$p(\theta) = \frac{\Gamma(\alpha + \beta)\theta^{\alpha - 1}(1 - \theta)^{\beta - 1}}{\Gamma(\alpha)\Gamma(\beta)}.$$
+\noindent Assuming $\theta\sim\text{Beta}(\alpha,\boldsymbol\beta)$, we have prior distribution
 
       \vspace{5mm}
 
-      Then
+      $$\pi(\theta) = \frac{\Gamma(\alpha + \beta)\theta^{\alpha - 1}(1 - \theta)^{\beta - 1}}{\Gamma(\alpha)\Gamma(\beta)}.$$
 
       \vspace{5mm}
 
-      $$p\left(\theta|X^{(N)}\right) = \frac{\Gamma(N+\alpha+\beta)\theta^{t+\alpha-1}(1-\theta)^{N-t+\beta-1}}{\Gamma(t+\alpha)\Gamma(N-t+\beta)}$$
+\noindent The posterior distribution of $\theta$ given $Y_1,...,Y_n$, then, is
 
       \vspace{5mm}
 
-      \noindent So for $R = \sum_{i=1}^M X_{N+i}$ we have Beta-Binomial predictive distribution
+\begin{flalign}
+  p(\theta|Y_1,...,Y_n) = p(\theta|T) &= \frac{p(T|\theta)\pi(\theta)}{\int p(T|\theta)\pi(\theta)d\theta}\nonumber\\
+  &\nonumber\\
+  &= \frac{{n\choose t}\theta^t(1-\theta)^{n-t}\frac{\Gamma(\alpha + \beta)\theta^{\alpha - 1}(1 - \theta)^{\beta - 1}}{\Gamma(\alpha)\Gamma(\beta)}}{\int{n\choose t}\theta^t(1-\theta)^{n-t}\frac{\Gamma(\alpha + \beta)\theta^{\alpha - 1}(1 - \theta)^{\beta - 1}}{\Gamma(\alpha)\Gamma(\beta)}d\theta}\nonumber\\
+  &\nonumber\\
+  &= \frac{\theta^{t+\alpha-1}(1-\theta)^{n-t+\beta-1}}{\int \theta^{t+\alpha-1}(1-\theta)^{n-t+\beta-1}d\theta}\nonumber\\
+  &\nonumber\\
+  &= \frac{\Gamma(n+\alpha+\beta)}{\Gamma(t+\alpha)\Gamma(n-t+\beta)}\theta^{t+\alpha-1}(1-\theta)^{n-t+\beta-1}
+\end{flalign}
 
-\begin{flalign*}
-  \text{Pr}[R=r|t]
-  &= \int {M\choose r}\theta^r(1-\theta)^{M-r}p\left(\theta|X^{(N)}\right)d\theta\\
-  &\\
-  &= {M\choose r}\int \theta^r(1-\theta)^{M-r}\frac{\Gamma(N+\alpha+\beta)}{\Gamma(t+\alpha)\Gamma(N-t+\beta)}\theta^{t+\alpha-1}(1-\theta)^{N-t+\beta-1}d\theta\\
-  &\\
-  &= \frac{M!}{r!(M-r)!}\frac{\Gamma(N+\alpha+\beta)}{\Gamma(t+\alpha)\Gamma(N-t+\beta)}\int\theta^{r+t+\alpha-1}(1-\theta)^{M-r+N-t+\beta-1}d\theta\\
-  &\\
-  &= \frac{\Gamma(M+1)\Gamma(N+\alpha+\beta)\Gamma(r+t+\alpha)\Gamma(M-r+N-t+\beta)}{\Gamma(r+1)\Gamma(M-r+1)\Gamma(t+\alpha)\Gamma(N-t+\beta)\Gamma(M+N+\alpha+\beta)}
-\end{flalign*}
+Note that the ratio of Gamma functions in the final step appears as a scaling constant that enables the Beta$(t+\alpha,n-t+\beta)$ density function under the integrand to resolve to 1.
+
+      \vspace{5mm}
+
+      \noindent We want to predict the number of successes out of $m$ future observations.  So for $R = \sum_{i=1}^m Y_{n+i}$ we have Beta-Binomial predictive distribution
+
+
+\begin{flalign}
+  \text{Pr}[R=r|T=t]
+  &= \int p(R=r|\theta)p(\theta|T)d\theta\nonumber\\
+  &\nonumber\\
+  &= \int {m\choose r}\theta^r(1-\theta)^{m-r}\frac{\Gamma(n+\alpha+\beta)}{\Gamma(t+\alpha)\Gamma(n-t+\beta)}\theta^{t+\alpha-1}(1-\theta)^{n-t+\beta-1}d\theta\nonumber\\
+  &\nonumber\\
+  &= \frac{m!}{r!(m-r)!}\frac{\Gamma(n+\alpha+\beta)}{\Gamma(t+\alpha)\Gamma(n-t+\beta)}\int\theta^{r+t+\alpha-1}(1-\theta)^{m+n-r-t+\beta-1}d\theta\nonumber  \\
+  &\nonumber\\
+  &= \frac{\Gamma(m+1)\Gamma(n+\alpha+\beta)\Gamma(r+t+\alpha)\Gamma(m+n-r-t+\beta)}{\Gamma(r+1)\Gamma(m-r+1)\Gamma(t+\alpha)\Gamma(n-t+\beta)\Gamma(m+n+\alpha+\beta)},\label{betaBinomial_pred}
+\end{flalign}
+
+\noindent an impressive combination of Gamma functions.  Note that the last two factors in the numerator together with the final factor in the denominator comprise the reciprocal of the scale factor corresponding with the Beta$(r+t+\alpha,m+n-r-t+\beta)$ kernel in the integrand, enabling the integral to resolve to 1.
+
 
 \clearpage
 
     \subsubsection{R Implementation}
 
-This result has been used to create ``standard" R functions dpredBB(), ppredBB(), and rpredBB() for the Beta-Binomial distribtuion for density, cumulative probability, and random sampling, respectively (see appendix).  These functions are exercised in the following example.
+This result has been used to create R functions dpredBB(), ppredBB(), and rpredBB() for the Beta-Binomial predictive distribtuion for density, cumulative probability, and random sampling, respectively (see appendix for the R code).  dpredBB() and rpredBB() were used in the Pass the Pigs example in the introduction.  The following generic example exercises all three functions.
 
 
     \subsubsection{Example}
 
-Suppose $t=5$ successes have been observed out of $N=10$ binary events, $\alpha = 2$ and $\beta = 8$.  For $M = 1000$ future observations, how many successes are predicted?  The figures below show the predictive distribution from dpredBB(), the cumulative distribution from ppredBB(), and a histogram of random draws from rpredBB().
+Suppose $t=5$ successes have been observed out of $n=10$ binary events, and the researcher has settled on $\alpha = 2$ and $\beta = 8$ for the Beta$(\alpha,\beta)$ prior distribution of probability of success $\theta$.  For $n = 1000$ future observations, how many successes are predicted?  The figures below show the predictive distribution from dpredBB(), the cumulative distribution from ppredBB(), and a histogram of random draws from rpredBB().
 
 
 \includegraphics{Thesis_v1-003}
 
 
-
     \subsection{Survival Time:  Exponential-Gamma (Geisser p. 74)}
-
-
     \subsubsection{Derivation}
 
-      Suppose $X^{(N)} = \left(X^{(d)},X^{(N-d)}\right)$ where $X^{(d)}$ represents copies fully observed from an exponential survival time density
-          $$f(x|\theta) = \theta e^{-\theta x}$$
-      and $X^{(N-d)}$ represents copies censored at $x_{d+1},...,x_N$, respectively.  Hence
-          $$L(\theta)\propto\theta^d e^{-\theta N\bar{x}}$$
-      when $N\bar{x} = \sum_1^N{x_i}$, as shown below.\\
+      Suppose $Y_1,...,Y_d$ represent fully observed copies from an exponential survival time density
+          $$p(y|\theta) = \theta e^{-\theta y}$$
+      and $Y_{d+1},...,Y_n$ represent censored copies surviving beyond the experimental time limit.  Then
 
-      The usual exponential likelihood is used for the fully observed copies, whereas for the censored copies we need Pr$(x > \theta) = 1 - \text{Pr}(x\leq\theta) = 1 - F(x|\theta) = 1 - (1 - e^{-\theta x}) = e^{-\theta x}$.  Thus the overall likelihood is
+      \textcolor{red}{Dean:  Is there a need to switch to talking in terms of likelihood here (see next several lines)?  Can't we just keep to the context of the conditional $p(Y_1,...,Y_n|\theta)$ without changing the math?}
+          $$L(\theta)\propto\theta^d e^{-\theta n\bar{y}}$$
 
-      $$L(\theta|x) = \prod_{i=1}^d\theta e^{-\theta x_i}\prod_{i=d+1}^N e^{-\theta x_i} = \theta^d e^{-\theta N\bar{x}}$$
+          \textcolor{red}{Can't I just say $p(Y_1,...,Y_n|\theta)\propto\theta^d e^{-\theta n\bar{y}}$?}\\
+
+      when $n\bar{y} = \sum_1^n{y_i}$, as shown here:\\
+
+      The usual exponential likelihood is used for the fully observed copies, whereas for the censored copies we need Pr$(y > \theta) = 1 - \text{Pr}(y\leq\theta) = 1 - F(y|\theta) = 1 - (1 - e^{-\theta y}) = e^{-\theta y}$.  Here $F$ denotes the cumulative distribution function. \textcolor{red}{I did all that last bit of math in terms of $p(Y|\theta)$, but now I start talking $L(\theta|y)$ again:} Thus the overall likelihood is
+
+      $$\textcolor{red}{?p(Y_1,...,Y_n|\theta) =?}$$
+
+      $$L(\theta|y) = \prod_{i=1}^d\theta e^{-\theta y_i}\prod_{i=d+1}^n e^{-\theta y_i} = \theta^d e^{-\theta N\bar{y}}$$
 
       Assuming a Gamma$(\delta,\gamma)$ prior for $\theta$,
 
-       $$p(\theta) = \frac{\gamma^\delta\theta^{\delta - 1}e^{-\gamma\theta}}{\Gamma(\delta)}$$
+       $$\pi(\theta) = \frac{\gamma^\delta\theta^{\delta - 1}e^{-\gamma\theta}}{\Gamma(\delta)}$$
 
        we obtain the posterior
 
-       %$$p\left(\theta|X^{(N)}\right) = \frac{p\left(x^{(N)}|\theta\right)p(\theta)}{\int p\left(X^{(N)}|\theta\right)p(\theta)d\theta} = \frac{(\gamma+N\bar{x})^{d+\delta}\theta^{d+\delta - 1}e^{-\theta(\gamma+N\bar{x})}}{\Gamma(d+\delta)}$$
-
         \begin{flalign*}
-          p\left(\theta|X^{(N)}\right)
-          &= \frac{p\left(x^{(N)}|\theta\right)p(\theta)}{\int p\left(X^{(N)}|\theta\right)p(\theta)d\theta}\\
+          p(\theta|Y_1,...,Y_n)
+          &= \frac{p(Y_1,...,Y_n|\theta)\pi(\theta)}{\int p(Y_1,...,Y_n|\theta)\pi(\theta)d\theta}\\
           &\\
-          &= \frac{\theta^d e^{-\theta N\bar{x}}\cdot\frac{\gamma^\delta\theta^{\delta - 1}e^{-\gamma\theta}}{\Gamma(\delta)}}{\int\left(\theta^d e^{-\theta N\bar{x}}\cdot\frac{\gamma^\delta\theta^{\delta - 1}e^{-\gamma\theta}}{\Gamma(\delta)}\right)d\theta}\\
+          &= \frac{\theta^d e^{-\theta n\bar{y}}\cdot\frac{\gamma^\delta\theta^{\delta - 1}e^{-\gamma\theta}}{\Gamma(\delta)}}{\int\left(\theta^d e^{-\theta n\bar{y}}\cdot\frac{\gamma^\delta\theta^{\delta - 1}e^{-\gamma\theta}}{\Gamma(\delta)}\right)d\theta}\\
           &\\
-          &= \frac{\cancel{\frac{\gamma^\delta}{\Gamma(\delta)}}\left(\theta^{d+\delta - 1}e^{-\theta(\gamma+N\bar{x})}\right)}{\cancel{\frac{\gamma^\delta}{\Gamma(\delta)}}\int\left(\theta^{d+\delta - 1}e^{-\theta(\gamma+N\bar{x})}\right)d\theta}\\
+          &= \frac{\cancel{\frac{\gamma^\delta}{\Gamma(\delta)}}\left(\theta^{d+\delta - 1}e^{-\theta(\gamma+n\bar{y})}\right)}{\cancel{\frac{\gamma^\delta}{\Gamma(\delta)}}\int\left(\theta^{d+\delta - 1}e^{-\theta(\gamma+n\bar{y})}\right)d\theta}\\
           &\\
-          &= \frac{\frac{(\gamma+N\bar{x})^{d+\delta}}{\Gamma(d+\delta)}\left(\theta^{d+\delta - 1}e^{-\theta(\gamma+N\bar{x})}\right)}{\cancel{\frac{(\gamma+N\bar{x})^{d+\delta}}{\Gamma(d+\delta)}\int\left(\theta^{d+\delta - 1}e^{-\theta(\gamma+N\bar{x})}\right)d\theta}}\\
+          &= \frac{\frac{(\gamma+n\bar{y})^{d+\delta}}{\Gamma(d+\delta)}\left(\theta^{d+\delta - 1}e^{-\theta(\gamma+n\bar{y})}\right)}{\cancel{\frac{(\gamma+n\bar{y})^{d+\delta}}{\Gamma(d+\delta)}\int\left(\theta^{d+\delta - 1}e^{-\theta(\gamma+n\bar{y})}\right)d\theta}}\\
           &\\
-          &= \frac{(\gamma+N\bar{x})^{d+\delta}\theta^{d+\delta - 1}e^{-\theta(\gamma+N\bar{x})}}{\Gamma(d+\delta)}
+          &= \frac{(\gamma+n\bar{y})^{d+\delta}\theta^{d+\delta - 1}e^{-\theta(\gamma+n\bar{y})}}{\Gamma(d+\delta)}
         \end{flalign*}
 
-    with the Gamma$(d+\delta,\gamma+N\bar{x})$ density in the next to last step integrating to $1$.\\
+    with the Gamma$(d+\delta,\gamma+n\bar{y})$ density in the next to last step integrating to $1$.\\
 
     Thus the survival time predictive probability is
 
-    \begin{flalign*}
-      P\left(X = x|\theta,X^{(N)}\right)
-      &= \int p\left(\theta|X^{(N)}\right)p(x|\theta)d\theta\\
-      &\\
-      &= \int\frac{(\gamma+N\bar{x})^{d+\delta}\theta^{d+\delta - 1}e^{-\theta(\gamma+N\bar{x})}}{\Gamma(d+\delta)}\cdot\theta e^{-\theta x}d\theta\\
-      &\\
-      &= (d+\delta)(\gamma+N\bar{x})^{d+\delta}\int\frac{\theta^{(d+\delta + 1) - 1}e^{-\theta(\gamma+N\bar{x} + x)}}{(d+\delta)\Gamma(d+\delta)}d\theta\\
-      &\\
-      &= \frac{(d+\delta)(\gamma+N\bar{x})^{d+\delta}}{\left(\gamma+N\bar{x}+x\right)^{d+\delta+1}}\int\frac{\left(\gamma+N\bar{x}+x\right)^{d+\delta+1}\theta^{(d+\delta + 1) - 1}e^{-\theta(\gamma+N\bar{x} + x)}}{\Gamma(d+\delta+1)}d\theta\\
-      &\\
-      &= \frac{(d+\delta)(\gamma+N\bar{x})^{d+\delta}}{\left(\gamma+N\bar{x}+x\right)^{d+\delta+1}}
-    \end{flalign*}
+    \begin{flalign}
+      p(\tilde{Y} = \tilde{y}|Y_1,...,Y_n)
+      &= \int p(\tilde{y}|\theta)p(\theta|y_1,...,y_n)d\theta\nonumber\\
+      &\nonumber\\
+      &= \int \theta e^{-\theta y} \cdot \frac{(\gamma+n\bar{y})^{d+\delta}\theta^{d+\delta - 1}e^{-\theta(\gamma+n\bar{y})}}{\Gamma(d+\delta)}d\theta\nonumber\\
+      &\nonumber\\
+      &= (d+\delta)(\gamma+n\bar{y})^{d+\delta}\int\frac{\theta^{(d+\delta + 1) - 1}e^{-\theta(\gamma+n\bar{y} + y)}}{(d+\delta)\Gamma(d+\delta)}d\theta\nonumber\\
+      &\nonumber\\
+      &= \frac{(d+\delta)(\gamma+n\bar{y})^{d+\delta}}{\left(\gamma+n\bar{y}+y\right)^{d+\delta+1}}\int\frac{\left(\gamma+n\bar{y}+y\right)^{d+\delta+1}\theta^{(d+\delta + 1) - 1}e^{-\theta(\gamma+n\bar{y} + y)}}{\Gamma(d+\delta+1)}d\theta\nonumber\\
+      &\nonumber\\
+      &= \frac{(d+\delta)(\gamma+n\bar{y})^{d+\delta}}{\left(\gamma+n\bar{y}+y\right)^{d+\delta+1}}\label{exponentialGamma_pred}
+    \end{flalign}
 
-    (simplifying by constructing a Gamma$(d+\delta+1,\gamma+N\bar{x}+x)$ density in the final integrand.)\\
+    (simplifying by constructing a Gamma$(d+\delta+1,\gamma+n\bar{y}+y)$ density in the final integrand.)\\
 
 
 
     \subsubsection{R Implementation}
 
-This result has been used to create standard format R functions dpredEG(), ppredEG(), and rpredEG() for the Gamma-Exponential distribtuion for density, cumulative probability, and random sampling, respectively (see appendix).  These functions are exercised in the following example.
+This result has been used to create R functions dpredEG(), ppredEG(), and rpredEG() for the Gamma-Exponential distribtuion for density, cumulative probability, and random sampling, respectively (see appendix for R code).  These functions are exercised in the following example.
 
 
     \subsubsection{Example}
@@ -372,7 +340,7 @@ Suppose $d=800$ out of $N = 1000$ copies have been observed, and the remaining $
 
   \subsection{Poisson-Gamma Model (Hoff p. 43ff)}
     \subsubsection{Derivation}
-    [using Hoff's notation and variable names below.  Should I convert this to Geisser's $x^{(N)},x_{(M)}$ convention for uniformity throughout my thesis?]\\\\
+
       Suppose $Y_1,...,Y_n|\theta\overset{i.i.d.}{\sim}\text{Poisson}(\theta)$ with Gamma prior $\theta\sim\text{Gamma}(\alpha,\beta)$.  That is,
 
       \begin{flalign*}
@@ -388,7 +356,7 @@ Suppose $d=800$ out of $N = 1000$ copies have been observed, and the remaining $
 
       and
 
-      $$p(\theta) = \dfrac{\beta^\alpha}{\Gamma(\alpha)}\theta^{\alpha-1}e^{-\beta\theta}, \theta, \alpha, \beta > 0.$$
+      $$\pi(\theta) = \dfrac{\beta^\alpha}{\Gamma(\alpha)}\theta^{\alpha-1}e^{-\beta\theta} \text{ with } \theta, \alpha, \beta > 0.$$
 
 \bigskip
 
@@ -396,9 +364,9 @@ Suppose $d=800$ out of $N = 1000$ copies have been observed, and the remaining $
 
       \begin{flalign*}
         p\left(\theta|y_1,...,y_n\right)
-        &= \dfrac{p\left(y_1,...,y_n|\theta\right)p(\theta)}{\int_\theta p\left(y_1,...,y_n|\theta\right)p(\theta)}\\
+        &= \dfrac{p\left(y_1,...,y_n|\theta\right)\pi(\theta)}{\int_\theta p\left(y_1,...,y_n|\theta\right)p(\theta)}\\
         &\\
-        &= \dfrac{p\left(y_1,...,y_n|\theta\right)p(\theta)}{p\left(y_1,...,y_n\right)}\\
+        &= \dfrac{p\left(y_1,...,y_n|\theta\right)\pi(\theta)}{p\left(y_1,...,y_n\right)}\\
         &\\
         &= \dfrac{1}{p\left(y_1,...,y_n\right)}\theta^{\sum y_i}e^{-n\theta}\dfrac{\beta^\alpha}{\Gamma(\alpha)}\theta^{\alpha - 1}e^{-\beta\theta}\\
         &\\
@@ -414,7 +382,7 @@ Suppose $d=800$ out of $N = 1000$ copies have been observed, and the remaining $
         C\left(y_1,...,y_n,\alpha,\beta\right)
         &= \dfrac{1}{p\left(y_1,...,y_n\right)}\cdot\dfrac{\beta^\alpha}{\Gamma(\alpha)}\\
         &\\
-        &= \dfrac{1}{\int_\theta p\left(y_1,...,y_n|\theta\right)p(\theta)}\cdot\dfrac{\beta^\alpha}{\Gamma(\alpha)}\\
+        &= \dfrac{1}{\int_\theta p\left(y_1,...,y_n|\theta\right)\pi(\theta)}\cdot\dfrac{\beta^\alpha}{\Gamma(\alpha)}\\
         &\\
         &= \dfrac{1}{\int_\theta\left(\prod\frac{1}{y_i!}\right)\theta^{\sum y_i}e^{-n\theta}\cancel{\left(\frac{\beta^\alpha}{\Gamma(\alpha)}\right)}\theta^{\alpha-1}e^{-\beta\theta}}\cdot\cancel{\left(\frac{\beta^\alpha}{\Gamma(\alpha)}\right)}
         &\\
@@ -427,96 +395,34 @@ Suppose $d=800$ out of $N = 1000$ copies have been observed, and the remaining $
 
 \bigskip
 
-      Note that an additional observation $y_{n+1} = \tilde{y}$ the constant becomes
+      Note that with an additional observation $y_{n+1} = \tilde{y}$ the constant becomes
 
       $$C_{n+1} = \dfrac{\prod_{i=1}^{n+1} y_i!(\beta+n+1)^{\alpha+\sum_{i=1}^{n+1} y_i}}{\Gamma(\alpha+\sum_{i=1}^{n+1} y_i)}.$$
 
       Also note that the marginal joint distribution of $k$ observations is
 
-      $$p\left(\tilde{y}|y_1,...,y_k\right) = \dfrac{1}{C_k}\dfrac{\beta^\alpha}{\Gamma(\alpha)}.$$
+      $$p(y_1,...,y_k) = \dfrac{1}{C_k}\dfrac{\beta^\alpha}{\Gamma(\alpha)}.$$
 
       For future observation $\tilde{y}$, then, we compute predictive distribution
 
-      \begin{flalign*}
+      \begin{flalign}
         p\left(\tilde{y}|y_1,...,y_n\right)
         &= \dfrac{p\left(y_1,...,y_n,\tilde{y}\right)}{p\left(y_1,...,y_n\right)} = \dfrac{p\left(y_1,...,y_{n+1}\right)}{p\left(y_1,...,y_n\right)}
         = \dfrac{\frac{1}{C_{n+1}}\cancel{\frac{\beta^\alpha}{\Gamma(\alpha)}}}{\frac{1}{C_n}\cancel{\frac{\beta^\alpha}{\Gamma(\alpha)}}}
-        = \dfrac{C_n}{C_{n+1}}\\
-        &\\
-        &= \dfrac{\dfrac{\prod_{i=1}^n y_i!(\beta+n)^{\alpha+\sum_{i=1}^n y_i}}{\Gamma(\alpha+\sum_{i=1}^n y_i)}}{\dfrac{\prod_{i=1}^{n+1} y_i!(\beta+n+1)^{\alpha+\sum_{i=1}^{n+1} y_i}}{\Gamma(\alpha+\sum_{i=1}^{n+1} y_i)}}\\
-        &\\
-        &= \dfrac{\Gamma\left(\alpha+\sum_{i=1}^{n+1}y_i\right)(\beta+n)^{\alpha+\sum_{i=1}^n y_i}}{\left(y_{n+1}!\right)\Gamma\left(\alpha+\sum_{i=1}^n y_i\right)(\beta+n+1)^{\alpha+\sum_{i=1}^{n+1}y_i}}\\
-        &\\
-        &= \dfrac{\Gamma\left(\alpha+\sum_{i=1}^n y_i + \tilde{y}\right)(\beta+n)^{\alpha+\sum_{i=1}^n y_i}}{\left(\tilde{y}!\right)\Gamma\left(\alpha+\sum_{i=1}^n y_i\right)(\beta+n+1)^{\alpha+\sum_{i=1}^n y_i + \tilde{y}}}\\
-        &\\
-        &= \dfrac{\Gamma\left(\alpha+\sum y_i+\tilde{y}\right)}{\Gamma(\tilde{y}+1)\Gamma(\alpha+\sum y_i)}\cdot \left(\dfrac{\beta+n}{\beta+n+1}\right)^{\alpha+\sum y_i} \cdot \left(\dfrac{1}{\beta+n+1}\right)^{\tilde{y}}\\
-      \end{flalign*}
+        = \dfrac{C_n}{C_{n+1}}\nonumber\\
+        &\nonumber\\
+        &= \dfrac{\dfrac{\prod_{i=1}^n y_i!(\beta+n)^{\alpha+\sum_{i=1}^n y_i}}{\Gamma(\alpha+\sum_{i=1}^n y_i)}}{\dfrac{\prod_{i=1}^{n+1} y_i!(\beta+n+1)^{\alpha+\sum_{i=1}^{n+1} y_i}}{\Gamma(\alpha+\sum_{i=1}^{n+1} y_i)}}\nonumber\\
+        &\nonumber\\
+        &= \dfrac{\Gamma\left(\alpha+\sum_{i=1}^{n+1}y_i\right)(\beta+n)^{\alpha+\sum_{i=1}^n y_i}}{\left(y_{n+1}!\right)\Gamma\left(\alpha+\sum_{i=1}^n y_i\right)(\beta+n+1)^{\alpha+\sum_{i=1}^{n+1}y_i}}\nonumber\\
+        &\nonumber\\
+        &= \dfrac{\Gamma\left(\alpha+\sum_{i=1}^n y_i + \tilde{y}\right)(\beta+n)^{\alpha+\sum_{i=1}^n y_i}}{\left(\tilde{y}!\right)\Gamma\left(\alpha+\sum_{i=1}^n y_i\right)(\beta+n+1)^{\alpha+\sum_{i=1}^n y_i + \tilde{y}}}\nonumber\\
+        &\nonumber\\
+        &= \dfrac{\Gamma\left(\alpha+\sum y_i+\tilde{y}\right)}{\Gamma(\tilde{y}+1)\Gamma(\alpha+\sum y_i)}\cdot \left(\dfrac{\beta+n}{\beta+n+1}\right)^{\alpha+\sum y_i} \cdot \left(\dfrac{1}{\beta+n+1}\right)^{\tilde{y}}\label{poissonGamma_pred}
+      \end{flalign}
 
-This is a negative binomial distribution:  $\tilde{y}\sim NB\left(\alpha+\sum y_i,\beta+n\right)$, for which
-
-\begin{flalign*}
-  E\left[\tilde{Y}|y_1,...,y_n\right] &= \dfrac{a+\sum{y_i}}{b+n} = E\left[\theta|y_1,...,y_n\right];\\
-  &\\
-  \text{Var}\left[\tilde{Y}|y_1,...,y_n\right] &= \dfrac{a+\sum{y_i}}{b+n}\dfrac{b+n+1}{b+n}\\
-  &\\
-  &=\text{Var}\left[\theta|y_1,...,y_n\right]\times(b+n+1)\\
-  &\\
-  &=E\left[\theta|y_1,...,y_n\right]\times\dfrac{b+n+1}{b+n}\\
-\end{flalign*}
-
-\vspace{5mm}
-
-\hrule
-
-\vspace{5mm}
-
-[Showing here that it is indeed a NB distribution]
-
-$$\theta\sim NB(\alpha,\beta)\Rightarrow p(\theta) = \binom{\theta+\alpha-1}{\alpha - 1}\left(\dfrac{\beta}{\beta+1}\right)^\alpha\left(\dfrac{1}{\beta+1}\right)^\theta$$
-
-\begin{center}so\end{center}
-
-\begin{flalign*}
-  \tilde{y}\sim NB\left(\alpha + \sum{y_i}),\beta+n\right)\Rightarrow p(\tilde{y})
-  &= \binom{\tilde{y}+\alpha+\sum{y_i}-1}{\alpha+\sum{y_i}-1}\left(\dfrac{\beta+n}{\beta+n+1}\right)^{\alpha+\sum{y_i}}\left(\dfrac{1}{\beta+n+1}\right)^{\tilde{y}}\\
-  &\\
-  &= \dfrac{\left(\alpha + \sum{y_i} + \tilde{y} - 1\right)!}{\left(\alpha + \sum{y_i} - 1\right)!\left(\tilde{y}\right)!}\left(\dfrac{\beta+n}{\beta+n+1}\right)^{\alpha+\sum{y_i}}\left(\dfrac{1}{\beta+n+1}\right)^{\tilde{y}}\\
-  &\\
-  &= \dfrac{\Gamma\left(\alpha + \sum{y_i} + \tilde{y}\right)}{\Gamma\left(\alpha + \sum{y_i}\right)\Gamma\left(\tilde{y}+1\right)}\left(\dfrac{\beta+n}{\beta+n+1}\right)^{\alpha+\sum{y_i}}\left(\dfrac{1}{\beta+n+1}\right)^{\tilde{y}}
-\end{flalign*}
-
-\vspace{5mm}
-
-\hrule
-
-\vspace{5mm}
-
-      \bigskip
+This is a negative binomial distribution:  $\tilde{y}\sim NB\left(\alpha+\sum y_i,\beta+n\right)$
 
 
-
-      [This is the result in Hoff.  The straightforward derivation below is off by a constant multiple.  Need to figure out what went awry.]
-
-
-
-      \begin{flalign*}
-        p\left(\tilde{y}|y_1,...,y_n\right)
-        &= \int_0^\infty p\left(\tilde{y}|\theta,y_1,...,y_n\right)p\left(\theta|y_1,...,y_n\right)d\theta\\
-        &\\
-        &= \int p\left(\tilde{y}|\theta\right)p\left(\theta|y_1,...,y_n\right)d\theta\\
-        &\\
-        &= C\int\left(\dfrac{1}{\tilde{y}!}\theta^{\tilde{y}}e^{-\theta}\right)\theta^{\alpha+\sum y_i - 1}e^{-(\beta+n)\theta}d\theta\\
-        &\\
-        &= \dfrac{C}{\tilde{y}!}\int\theta^{\tilde{y}+\alpha+\sum y_i - 1}e^{-(\beta+n+1)\theta}d\theta\\
-        &\\
-        &= \dfrac{C\Gamma\left(\tilde{y}+\alpha+\sum y_i\right)}{\Gamma\left(\tilde{y}+1\right)(\beta+n+1)^{\tilde{y}+\alpha+\sum y_i}}\int\dfrac{(\beta+n+1)^{\tilde{y}+\alpha+\sum y_i}}{\Gamma\left(\tilde{y}+\alpha+\sum y_i\right)}\theta^{\tilde{y}+\alpha+\sum y_i - 1}e^{-(\beta+n+1)\theta)}d\theta\\
-        &\\
-        &= C\cdot\dfrac{\Gamma\left(\tilde{y}+\alpha+\sum y_i\right)}{\Gamma\left(\tilde{y}+1\right)(\beta+n+1)^{\tilde{y}+\alpha+\sum y_i}}\\
-        &\\
-        &= \dfrac{\prod_{i=1}^n y_i!(\beta+n)^{\alpha+\sum y_i}}{\Gamma(\alpha+\sum y_i)}\cdot\dfrac{\Gamma\left(\tilde{y}+\alpha+\sum y_i\right)}{\Gamma\left(\tilde{y}+1\right)(\beta+n+1)^{\tilde{y}+\alpha+\sum y_i}}\\
-        &\\
-        &= \prod_{i=1}^n y_i! \cdot \dfrac{\Gamma\left(\tilde{y}+\alpha+\sum y_i\right)}{\Gamma(\tilde{y}+1)\Gamma(\alpha+\sum y_i)}\cdot \left(\dfrac{\beta+n}{\beta+n+1}\right)^{\alpha+\sum y_i} \cdot \left(\dfrac{1}{\beta+n+1}\right)^{\tilde{y}}\\
-      \end{flalign*}
 
 \textcolor{red}{Hoff p.47:
   \begin{itemize}
