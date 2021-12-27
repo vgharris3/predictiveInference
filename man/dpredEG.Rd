@@ -2,7 +2,7 @@
 % Please edit documentation in R/dpredEG.R
 \name{dpredEG}
 \alias{dpredEG}
-\title{Title}
+\title{The Exponential-Gamma Predictive Distribution}
 \usage{
 dpredEG(x, XN, d, dt, gm)
 }
@@ -21,7 +21,7 @@ dpredEG(x, XN, d, dt, gm)
 Exponential-Gamma predictive probability
 }
 \description{
-Title
+The Exponential-Gamma Predictive Distribution
 }
 \examples{
 1

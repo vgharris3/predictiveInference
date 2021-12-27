@@ -151,5 +151,25 @@ $$\theta\sim NB(\alpha,\beta)\Rightarrow p(\theta) = \binom{\theta+\alpha-1}{\al
 \end{flalign*}
 
 
+\vspace{10mm}
+
+
+       we obtain the posterior
+
+        \begin{flalign*}
+          p(\theta|Y_1,...,Y_n)
+          &= \frac{p(Y_1,...,Y_n|\theta)\pi(\theta)}{\int p(Y_1,...,Y_n|\theta)\pi(\theta)d\theta}\\
+          &\\
+          &= \frac{\theta^d e^{-\theta n\bar{y}}\cdot\frac{\gamma^\delta\theta^{\delta - 1}e^{-\gamma\theta}}{\Gamma(\delta)}}{\int\left(\theta^d e^{-\theta n\bar{y}}\cdot\frac{\gamma^\delta\theta^{\delta - 1}e^{-\gamma\theta}}{\Gamma(\delta)}\right)d\theta}\\
+          &\\
+          &= \frac{\cancel{\frac{\gamma^\delta}{\Gamma(\delta)}}\left(\theta^{d+\delta - 1}e^{-\theta(\gamma+n\bar{y})}\right)}{\cancel{\frac{\gamma^\delta}{\Gamma(\delta)}}\int\left(\theta^{d+\delta - 1}e^{-\theta(\gamma+n\bar{y})}\right)d\theta}\\
+          &\\
+          &= \frac{\frac{(\gamma+n\bar{y})^{d+\delta}}{\Gamma(d+\delta)}\left(\theta^{d+\delta - 1}e^{-\theta(\gamma+n\bar{y})}\right)}{\cancel{\frac{(\gamma+n\bar{y})^{d+\delta}}{\Gamma(d+\delta)}\int\left(\theta^{d+\delta - 1}e^{-\theta(\gamma+n\bar{y})}\right)d\theta}}\\
+          &\\
+          &= \frac{(\gamma+n\bar{y})^{d+\delta}\theta^{d+\delta - 1}e^{-\theta(\gamma+n\bar{y})}}{\Gamma(d+\delta)}
+        \end{flalign*}
+
+    with the Gamma$(d+\delta,\gamma+n\bar{y})$ density in the next to last step integrating to $1$.\\
+
 
 \end{document}

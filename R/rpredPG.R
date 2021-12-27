@@ -1,4 +1,4 @@
-#' Title
+#' The Poisson-Gamma Predictive Distribution
 #'
 #' rpredPG returns a random sample of size n from the Poisson-Gamma predictive probability distribution given observations obs~Poi(theta)
 #' and theta~Gamma(alpha,beta)

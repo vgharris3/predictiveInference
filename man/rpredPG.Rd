@@ -2,7 +2,7 @@
 % Please edit documentation in R/rpredPG.R
 \name{rpredPG}
 \alias{rpredPG}
-\title{Title}
+\title{The Poisson-Gamma Predictive Distribution}
 \usage{
 rpredPG(n, obs, alpha = 1, beta = 1)
 }

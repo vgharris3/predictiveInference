@@ -1,4 +1,4 @@
-#' Title
+#' The Beta-Binomial Predictive Distribution
 #'
 #' rpredBB returns a random sample of size n from the Beta-Binomial predictive probability distribution computed
 #' from s observed successes out of a sample of size N, M future observations, and user input shape parameters for Beta prior on Pr(success)

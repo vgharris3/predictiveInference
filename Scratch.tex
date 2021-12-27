@@ -106,29 +106,68 @@ Explanation:
 \end{enumerate}
 
 
-\begin{flalign}
-  \text{Pr}[R=r|T=t] &= \int p(\R=r|\theta)p(\theta|T)d\theta\nonumber\\
-  &= 1
-  % &\nonumber\\
-  % &= \int {m\choose r}\theta^r(1-\theta)^{m-r}\frac{\Gamma(n+\alpha+\beta)}{\Gamma(t+\alpha)\Gamma(n-t+\beta)}\theta^{t+\alpha-1}(1-\theta)^{n-t+\beta-1}d\theta\nonumber\\
-  % &\nonumber\\
-  % &= \frac{m!}{r!(m-r)!}\frac{\Gamma(n+\alpha+\beta)}{\Gamma(t+\alpha)\Gamma(n-t+\beta)}\int\theta^{r+t+\alpha-1}(1-\theta)^{m+n-r-t+\beta-1}d\theta\\
-  % &\nonumber\\
-  % &= \frac{\Gamma(m+1)\Gamma(n+\alpha+\beta)\Gamma(r+t+\alpha)\Gamma(m+n-r-t+\beta)}{\Gamma(r+1)\Gamma(m-r+1)\Gamma(t+\alpha)\Gamma(n-t+\beta)\Gamma(m+n+\alpha+\beta)},\label{betaBinomial_pred}
-\end{flalign}
 
-% \begin{flalign}
-%   \text{Pr}[R=r|T=t]
-%   &= \int p(\R=r|\theta)p(\theta|T)d\theta\nonumber\\
-%   &\nonumber\\
-%   &= \int {m\choose r}\theta^r(1-\theta)^{m-r}\frac{\Gamma(n+\alpha+\beta)}{\Gamma(t+\alpha)\Gamma(n-t+\beta)}\theta^{t+\alpha-1}(1-\theta)^{n-t+\beta-1}d\theta\nonumber\\
-%   &\nonumber\\
-%   &= \frac{m!}{r!(m-r)!}\frac{\Gamma(n+\alpha+\beta)}{\Gamma(t+\alpha)\Gamma(n-t+\beta)}\int\theta^{r+t+\alpha-1}(1-\theta)^{m+n-r-t+\beta-1}d\theta\\
-%   &\nonumber\\
-%   &= \frac{\Gamma(m+1)\Gamma(n+\alpha+\beta)\Gamma(r+t+\alpha)\Gamma(m+n-r-t+\beta)}{\Gamma(r+1)\Gamma(m-r+1)\Gamma(t+\alpha)\Gamma(n-t+\beta)\Gamma(m+n+\alpha+\beta)},\label{betaBinomial_pred}
-% \end{flalign}
+\vspace{5mm}
+
+\hrule
+
+\vspace{5mm}
+
+[Showing here that it is indeed a NB distribution]
+
+$$\theta\sim NB(\alpha,\beta)\Rightarrow p(\theta) = \binom{\theta+\alpha-1}{\alpha - 1}\left(\dfrac{\beta}{\beta+1}\right)^\alpha\left(\dfrac{1}{\beta+1}\right)^\theta$$
+
+\begin{center}so\end{center}
+
+\begin{flalign*}
+  \tilde{y}\sim NB\left(\alpha + \sum{y_i}),\beta+n\right)\Rightarrow p(\tilde{y})
+  &= \binom{\tilde{y}+\alpha+\sum{y_i}-1}{\alpha+\sum{y_i}-1}\left(\dfrac{\beta+n}{\beta+n+1}\right)^{\alpha+\sum{y_i}}\left(\dfrac{1}{\beta+n+1}\right)^{\tilde{y}}\\
+  &\\
+  &= \dfrac{\left(\alpha + \sum{y_i} + \tilde{y} - 1\right)!}{\left(\alpha + \sum{y_i} - 1\right)!\left(\tilde{y}\right)!}\left(\dfrac{\beta+n}{\beta+n+1}\right)^{\alpha+\sum{y_i}}\left(\dfrac{1}{\beta+n+1}\right)^{\tilde{y}}\\
+  &\\
+  &= \dfrac{\Gamma\left(\alpha + \sum{y_i} + \tilde{y}\right)}{\Gamma\left(\alpha + \sum{y_i}\right)\Gamma\left(\tilde{y}+1\right)}\left(\dfrac{\beta+n}{\beta+n+1}\right)^{\alpha+\sum{y_i}}\left(\dfrac{1}{\beta+n+1}\right)^{\tilde{y}}
+\end{flalign*}
+
+\vspace{5mm}
+
+\hrule
+
+\vspace{5mm}
+
+      \bigskip
+
+, for which
+
+\begin{flalign*}
+  E\left[\tilde{Y}|y_1,...,y_n\right] &= \dfrac{a+\sum{y_i}}{b+n} = E\left[\theta|y_1,...,y_n\right];\\
+  &\\
+  \text{Var}\left[\tilde{Y}|y_1,...,y_n\right] &= \dfrac{a+\sum{y_i}}{b+n}\dfrac{b+n+1}{b+n}\\
+  &\\
+  &=\text{Var}\left[\theta|y_1,...,y_n\right]\times(b+n+1)\\
+  &\\
+  &=E\left[\theta|y_1,...,y_n\right]\times\dfrac{b+n+1}{b+n}\\
+\end{flalign*}
 
 
+\vspace{10mm}
+
+
+       we obtain the posterior
+
+        \begin{flalign*}
+          p(\theta|Y_1,...,Y_n)
+          &= \frac{p(Y_1,...,Y_n|\theta)\pi(\theta)}{\int p(Y_1,...,Y_n|\theta)\pi(\theta)d\theta}\\
+          &\\
+          &= \frac{\theta^d e^{-\theta n\bar{y}}\cdot\frac{\gamma^\delta\theta^{\delta - 1}e^{-\gamma\theta}}{\Gamma(\delta)}}{\int\left(\theta^d e^{-\theta n\bar{y}}\cdot\frac{\gamma^\delta\theta^{\delta - 1}e^{-\gamma\theta}}{\Gamma(\delta)}\right)d\theta}\\
+          &\\
+          &= \frac{\cancel{\frac{\gamma^\delta}{\Gamma(\delta)}}\left(\theta^{d+\delta - 1}e^{-\theta(\gamma+n\bar{y})}\right)}{\cancel{\frac{\gamma^\delta}{\Gamma(\delta)}}\int\left(\theta^{d+\delta - 1}e^{-\theta(\gamma+n\bar{y})}\right)d\theta}\\
+          &\\
+          &= \frac{\frac{(\gamma+n\bar{y})^{d+\delta}}{\Gamma(d+\delta)}\left(\theta^{d+\delta - 1}e^{-\theta(\gamma+n\bar{y})}\right)}{\cancel{\frac{(\gamma+n\bar{y})^{d+\delta}}{\Gamma(d+\delta)}\int\left(\theta^{d+\delta - 1}e^{-\theta(\gamma+n\bar{y})}\right)d\theta}}\\
+          &\\
+          &= \frac{(\gamma+n\bar{y})^{d+\delta}\theta^{d+\delta - 1}e^{-\theta(\gamma+n\bar{y})}}{\Gamma(d+\delta)}
+        \end{flalign*}
+
+    with the Gamma$(d+\delta,\gamma+n\bar{y})$ density in the next to last step integrating to $1$.\\
 
 
 \end{document}

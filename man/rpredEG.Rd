@@ -2,7 +2,7 @@
 % Please edit documentation in R/rpredEG.R
 \name{rpredEG}
 \alias{rpredEG}
-\title{Title}
+\title{The Exponential-Gamma Predictive Distribution}
 \usage{
 rpredEG(n, XN, d, dt, gm)
 }
@@ -21,7 +21,7 @@ rpredEG(n, XN, d, dt, gm)
 random sample of size n from the Exponential-Gamma predictive probability distribution
 }
 \description{
-Title
+The Exponential-Gamma Predictive Distribution
 }
 \examples{
 1

@@ -2,7 +2,7 @@
 % Please edit documentation in R/ppredBB.R
 \name{ppredBB}
 \alias{ppredBB}
-\title{Title}
+\title{The Beta-Binomial Predictive Distribution}
 \usage{
 ppredBB(x, N, s, M, alpha = 1, beta = 1, lower = TRUE)
 }

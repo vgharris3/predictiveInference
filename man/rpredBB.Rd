@@ -2,7 +2,7 @@
 % Please edit documentation in R/rpredBB.R
 \name{rpredBB}
 \alias{rpredBB}
-\title{Title}
+\title{The Beta-Binomial Predictive Distribution}
 \usage{
 rpredBB(n, N, s, M, alpha = 1, beta = 1)
 }
@@ -13,9 +13,9 @@ rpredBB(n, N, s, M, alpha = 1, beta = 1)
 
 \item{s}{number of observed successes out of N}
 
-\item{M}{number of future observations for which prediction is desired (note x <= M)}
+\item{M}{number of future observations for which prediction is desired}
 
-\item{alpha}{shape factors for prior Beta distribution on theta}
+\item{alpha}{shape factor for prior Beta distribution on theta}
 
 \item{beta}{rate factor for prior Beta distribution on theta}
 }

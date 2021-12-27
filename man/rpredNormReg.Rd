@@ -2,12 +2,22 @@
 % Please edit documentation in R/rpredNormReg.R
 \name{rpredNormReg}
 \alias{rpredNormReg}
-\title{Normal Regression Predictive Inference}
+\title{Normal Regression Predictive Distribution}
 \usage{
-rpredNormReg(N = 1, Xpred, X, y, nu0 = 1, s20 = 1, gprior = TRUE)
+rpredNormReg(
+  S = 1,
+  Xpred,
+  X,
+  y,
+  beta0,
+  Sigma0,
+  nu0 = 1,
+  s20 = 1,
+  gprior = TRUE
+)
 }
 \arguments{
-\item{N}{desired random sample size}
+\item{S}{desired random sample size}
 
 \item{Xpred}{predictor vector(s) for which predictions are desired}
 
@@ -15,9 +25,13 @@ rpredNormReg(N = 1, Xpred, X, y, nu0 = 1, s20 = 1, gprior = TRUE)
 
 \item{y}{Vector of prior observations}
 
+\item{beta0}{vector of prior regression coefficients}
+
+\item{Sigma0}{prior variance-covariance matrix}
+
 \item{nu0}{number of prior observations}
 
-\item{s20}{ols estimate of variance \link{perform regression and compute this instead of user input?}}
+\item{s20}{prior variance}
 
 \item{gprior}{flag to use Zellner's g-prior.  Default to TRUE}
 }

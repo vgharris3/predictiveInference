@@ -297,17 +297,19 @@ and make our prediction using (\ref{BayesianPredictiveFormat}).
 
       \vspace{5mm}
 
-\begin{flalign}
-  p(\theta|Y_1,...,Y_n) = p(\theta|T) &= \frac{p(T|\theta)\pi(\theta)}{\int p(T|\theta)\pi(\theta)d\theta}\nonumber\\
-  &\nonumber\\
-  &= \frac{{n\choose t}\theta^t(1-\theta)^{n-t}\frac{\Gamma(\alpha + \beta)\theta^{\alpha - 1}(1 - \theta)^{\beta - 1}}{\Gamma(\alpha)\Gamma(\beta)}}{\int{n\choose t}\theta^t(1-\theta)^{n-t}\frac{\Gamma(\alpha + \beta)\theta^{\alpha - 1}(1 - \theta)^{\beta - 1}}{\Gamma(\alpha)\Gamma(\beta)}d\theta}\nonumber\\
-  &\nonumber\\
-  &= \frac{\theta^{t+\alpha-1}(1-\theta)^{n-t+\beta-1}}{\int \theta^{t+\alpha-1}(1-\theta)^{n-t+\beta-1}d\theta}\nonumber\\
-  &\nonumber\\
-  &= \frac{\Gamma(n+\alpha+\beta)}{\Gamma(t+\alpha)\Gamma(n-t+\beta)}\theta^{t+\alpha-1}(1-\theta)^{n-t+\beta-1}
-\end{flalign}
+\begin{flalign*}
+  p(\theta|Y_1,...,Y_n) = p(\theta|T) &= \frac{p(T|\theta)\pi(\theta)}{\int p(T|\theta)\pi(\theta)d\theta}\\
+  &\\
+  &= \frac{{n\choose t}\theta^t(1-\theta)^{n-t}\frac{\Gamma(\alpha + \beta)\theta^{\alpha - 1}(1 - \theta)^{\beta - 1}}{\Gamma(\alpha)\Gamma(\beta)}}{\int{n\choose t}\theta^t(1-\theta)^{n-t}\frac{\Gamma(\alpha + \beta)\theta^{\alpha - 1}(1 - \theta)^{\beta - 1}}{\Gamma(\alpha)\Gamma(\beta)}d\theta}\\
+  &\\
+  &= \frac{\theta^{t+\alpha-1}(1-\theta)^{n-t+\beta-1}}{\int \theta^{t+\alpha-1}(1-\theta)^{n-t+\beta-1}d\theta}\\
+  &\\
+  &= \frac{\Gamma(n+\alpha+\beta)}{\Gamma(t+\alpha)\Gamma(n-t+\beta)}\theta^{t+\alpha-1}(1-\theta)^{n-t+\beta-1}\\
+  &\\
+  &= \text{Beta}(t+\alpha,n-t+\beta)
+\end{flalign*}
 
-Note that the ratio of Gamma functions in the final step appears as a scaling constant that enables the Beta$(t+\alpha,n-t+\beta)$ density function under the integrand to resolve to 1.
+Note that the ratio of Gamma functions in the final step appears as a scaling constant that enables the Beta$(t+\alpha,n-t+\beta)$ density function under the integrand in the denominator of the previous step to resolve to 1.
 
       \vspace{5mm}
 
@@ -328,11 +330,16 @@ Note that the ratio of Gamma functions in the final step appears as a scaling co
 \noindent an impressive combination of Gamma functions.  Note that the last two factors in the numerator together with the final factor in the denominator comprise the reciprocal of the scale factor corresponding with the Beta$(r+t+\alpha,m+n-r-t+\beta)$ kernel in the integrand, enabling the integral to resolve to 1.
 
 
-\clearpage
+% \clearpage
 
     \subsubsection{R Implementation}
 
-This result has been used to create R functions dpredBB(), ppredBB(), and rpredBB() for the Beta-Binomial predictive distribtuion for density, cumulative probability, and random sampling, respectively (see appendix for the R code).  dpredBB() and rpredBB() were used in the Pass the Pigs example in the introduction.  The following generic example exercises all three functions.
+This result has been used to create R functions dpredBB(), ppredBB(), and rpredBB() for the Beta-Binomial predictive distribtuion for density, cumulative probability, and random sampling, respectively (see appendix for the R code).  dpredBB() and rpredBB() were used in the Pass the Pigs example in the introduction.  The following generic example exercises all three functions.\\
+
+The density function dpredBB() relies on the R function lgamma() to evaluate the numerator and denominator factor by factor logarithmically, and then exponentiates for the final result, evaluated at each integer value from 1 to the total number of future trials.  The cdf ppredBB() simply calls dpredBB() and returns the cumulative sum of that discrete set of results.  The random sampler rpredBB() makes use of the inverse transform method and the output from the cdf ppredBB().\\
+
+\textcolor{red}{In reviewing my functions I noticed that for the Exponential-Gamma random sampler (next section) I simply drew posterior $\theta|y_1,...,y_i\sim\text{Gamma}(d+\delta,\gamma+\sum y_i)$ and then drew predictions from Exp$(\theta)$.  This works nicely because of the convenient form of the posterior distribution of $\theta$.  Well, for the Beta-Binomial I have a nice Beta distribution for the posterior of $\theta$, but for my random sampler I used the inverse transform method.  I just now tried doing posterior draws followed by predictions for the Beta-Binomial, but could not replicate the density curve with my random sample.  So--either I'm implementing my draws incorrectly or there's some reason this method doesn't apply in this case.  The commented section at the bottom of the R chunk that follows the next paragraph has my attempt at this.  Any feedback?}
+
 
 
     \subsubsection{Example}
@@ -372,6 +379,23 @@ res = hist(random_sample, prob = TRUE, main = "Histogram of Sample with Density 
 #res = hist(random_sample, main = "Histogram of Sample with Density Curve Overlay",ylim = c(0,max(f_x)*1.5),xlim = c(0,M))#, breaks = breaks)
 lines(0:m,f_x)
 
+
+
+##########################
+##trying draw using posterior distribution of theta
+# theta = rbeta(n,t+a,n-t+b)
+# rs2 = rbinom(10000,m,theta)
+#
+# random_sample = rpredBB(10000,n,t,m,a,b)
+#
+# par(mfrow = c(2,1))
+#
+# hist(random_sample, prob = TRUE, main = "Histogram of Sample with Density Curve Overlay",ylim = c(0,max(f_x)*1.5),xlim = c(0,m))
+# lines(0:m,f_x)
+#
+# hist(rs2, prob = TRUE, main = "Histogram of Sample with Density Curve Overlay",ylim = c(0,max(f_x)*1.5),xlim = c(0,m))
+# lines(0:m,f_x)
+
 @
 
 
@@ -407,14 +431,17 @@ lines(0:m,f_x)
           &\\
           &= \frac{\theta^d e^{-\theta n\bar{y}}\cdot\frac{\gamma^\delta\theta^{\delta - 1}e^{-\gamma\theta}}{\Gamma(\delta)}}{\int\left(\theta^d e^{-\theta n\bar{y}}\cdot\frac{\gamma^\delta\theta^{\delta - 1}e^{-\gamma\theta}}{\Gamma(\delta)}\right)d\theta}\\
           &\\
-          &= \frac{\cancel{\frac{\gamma^\delta}{\Gamma(\delta)}}\left(\theta^{d+\delta - 1}e^{-\theta(\gamma+n\bar{y})}\right)}{\cancel{\frac{\gamma^\delta}{\Gamma(\delta)}}\int\left(\theta^{d+\delta - 1}e^{-\theta(\gamma+n\bar{y})}\right)d\theta}\\
+          % &= \frac{\cancel{\frac{\gamma^\delta}{\Gamma(\delta)}}\left(\theta^{d+\delta - 1}e^{-\theta(\gamma+n\bar{y})}\right)}{\cancel{\frac{\gamma^\delta}{\Gamma(\delta)}}\int\left(\theta^{d+\delta - 1}e^{-\theta(\gamma+n\bar{y})}\right)d\theta}\\
+          &= \frac{\left(\theta^{d+\delta - 1}e^{-\theta(\gamma+n\bar{y})}\right)}{\int\left(\theta^{d+\delta - 1}e^{-\theta(\gamma+n\bar{y})}\right)d\theta}\\
           &\\
-          &= \frac{\frac{(\gamma+n\bar{y})^{d+\delta}}{\Gamma(d+\delta)}\left(\theta^{d+\delta - 1}e^{-\theta(\gamma+n\bar{y})}\right)}{\cancel{\frac{(\gamma+n\bar{y})^{d+\delta}}{\Gamma(d+\delta)}\int\left(\theta^{d+\delta - 1}e^{-\theta(\gamma+n\bar{y})}\right)d\theta}}\\
+          % &= \frac{\frac{(\gamma+n\bar{y})^{d+\delta}}{\Gamma(d+\delta)}\left(\theta^{d+\delta - 1}e^{-\theta(\gamma+n\bar{y})}\right)}{\cancel{\frac{(\gamma+n\bar{y})^{d+\delta}}{\Gamma(d+\delta)}\int\left(\theta^{d+\delta - 1}e^{-\theta(\gamma+n\bar{y})}\right)d\theta}}\\
           &\\
-          &= \frac{(\gamma+n\bar{y})^{d+\delta}\theta^{d+\delta - 1}e^{-\theta(\gamma+n\bar{y})}}{\Gamma(d+\delta)}
+          &= \frac{(\gamma+n\bar{y})^{d+\delta}}{\Gamma(d+\delta)}\theta^{d+\delta - 1}e^{-\theta(\gamma+n\bar{y})}\\
+          &\\
+          &=\text{Gamma}(d+\delta,\gamma+n\bar{y})
         \end{flalign*}
 
-    with the Gamma$(d+\delta,\gamma+n\bar{y})$ density in the next to last step integrating to $1$.\\
+    with the Gamma$(d+\delta,\gamma+n\bar{y})$ density in the denominator of next to last step integrating to $1$.\\
 
     Thus the survival time predictive probability is
 
@@ -437,7 +464,9 @@ lines(0:m,f_x)
 
     \subsubsection{R Implementation}
 
-This result has been used to create R functions dpredEG(), ppredEG(), and rpredEG() for the Gamma-Exponential distribtuion for density, cumulative probability, and random sampling, respectively (see appendix for R code).  These functions are exercised in the following example.
+This result has been used to create R functions dpredEG(), ppredEG(), and rpredEG() for the Gamma-Exponential distribtuion for density, cumulative probability, and random sampling, respectively (see appendix for R code).  These functions are exercised in the following example. \\
+
+The density function dpredEG() evaluates the numerator and denominator of the predictive density logarithmically (simply using the R function log()) and then exponentiates to produce the result.  The cdf ppredEG() integrates the pdf at each discrete value using the R function integrate().  The random sampler rpredEG() draws posterior $\theta|y_1,...,y_i\sim\text{Gamma}(d+\delta,\gamma+\sum y_i)$ and then draws predictions from Exp$(\theta)$.
 
 
     \subsubsection{Example}
@@ -490,6 +519,27 @@ n = 1000
 random_sample = rpredEG(n, XNminusd, d, dt, gm)
 hist(random_sample,prob = TRUE,main = "Histogram of Sample with Density Curve Overlay", ylim = c(0,max(f_x)*1.1))
 lines(1:1000,f_x)
+
+
+
+################################################
+##drawing new theta from posterior for each prediction
+
+  # a = d + dt
+  # b = gm + sum(XNminusd)
+  # theta = stats::rgamma(n,shape=a,rate=b)
+  #
+  # random_sample = rpredEG(n, XNminusd, d, dt, gm)
+  # rs2 = rexp(n,theta)
+  #
+  # par(mfrow=c(1,2))
+  #
+  # hist(random_sample,breaks=seq(0,100,5),prob = TRUE,main = "Histogram of Sample with Density Curve Overlay", ylim = c(0,max(f_x)*1.1))
+  # lines(1:1000,f_x)
+  # hist(rs2,breaks=seq(0,100,5),prob = TRUE,main = "Histogram of Sample with Density Curve Overlay", ylim = c(0,max(f_x)*1.1))
+  # lines(1:1000,f_x)
+
+
 @
 
 \clearpage
@@ -528,7 +578,7 @@ lines(1:1000,f_x)
         &\\
         &= C\left(y_1,...,y_n,\alpha,\beta\right)\theta^{\alpha+\sum y_i - 1}e^{-(\beta + n)\theta}\\
         &\\
-        &\sim \text{Gamma}\left(\alpha+\sum y_i,\beta + n\right).
+        &\propto \text{Gamma}\left(\alpha+\sum y_i,\beta + n\right).
       \end{flalign*}
 
 
@@ -580,6 +630,25 @@ This is a negative binomial distribution:  $\tilde{y}\sim NB\left(\alpha+\sum y_
 
 
 
+
+
+    \subsubsection{R Implementation}
+
+This result has been used to create R functions dpredPG(), ppredPG(), and rpredPG() for the Poisson-Gamma distribution for density, cumulative probability, and random sampling, respectively (see appendix for R code).  These functions are exercised in the example below.\\
+
+The density function dpredPG() simply makes use of the R function dnbinom().  The cdf ppredPG() returns a cumulative sum of the results of dpredPG().  The random sampler rpredPG() is a bit more complicated. The difficulty is that the upper bound of the support of the predictive distribution $p(\tilde{y}|y_1,...,y_n)$ is not known.  Since $p()$ is negative binomial, we can count on it approaching $0$ at the upper end.  To establish the support, then, a method was employed to find where $p$ comes ``sufficiently close" to $0$.  Initially the R function uniroot() was investigated, but it kept feeding non-integer values to dnbinom(), causing it to return errors.  Instead, a modified bisection method was devised as follows:\\
+
+    \begin{enumerate}
+      \item Set a desired tolerance $\epsilon$ for the distance of the predictive distribution above zero at the upper end of its support.  Currently the function uses $\epsilon = 10^{-7}$.
+      \item Find the expected value $E = E(\tilde{Y}|y_1,...,y_n) = \dfrac{\alpha+\sum{y_i}}{\beta+n}$ (negative binomial).
+      \item Step to the right of $E$ by increments in the sequence $E + \{1,2,4,...2^n\}$, stopping when $U=\text{dpredPG}\left(E + 2^n\right) < 0$.  This is the upper bound for the bisection method.
+      \item Bisect the interval, rounding to the nearest integer.  Call the resulting mid-interval number $B$.
+      \item If $B$ is positive, test whether $0 \leq \text{dpredPG}(B) \leq \epsilon$.  If so, accept $B$ as the upper end of the support.  If not:
+      \item Establish new interval, choosing endpoints from $E$, $B$, and $U$ so that the interval straddles $0$, and repeat the steps until the condition in step 5 is reached.
+    \end{enumerate}
+
+    \subsubsection{Example}
+
 \textcolor{red}{Hoff p.47:
   \begin{itemize}
     \item $b$ is interpreted as the number of prior observations
@@ -589,23 +658,7 @@ This is a negative binomial distribution:  $\tilde{y}\sim NB\left(\alpha+\sum y_
 
 \textcolor{red}{  Hoff p. 49 (Birth rate example):  $a = 2, b = 1$. }
 
-
-    \subsubsection{R Implementation}
-
-This result has been used to create standard format R functions dpredPG(), ppredPG(), and rpredPG() for the Poisson-Gamma distribution for density, cumulative probability, and random sampling, respectively (see appendix).  These functions are exercised in the following example.\\
-
-    Developing the random sample function rpredPG():  I need to establish the support of the predictive distribution $f_x$ from which to sample.  the uniroot() function is not working because it keeps feeding non-integer values to dnbinom().  Strategy: a modified bisection method as follows:\\
-
-    \begin{enumerate}
-      \item set a desired tolerance $\epsilon$.
-      \item Find the expected value $E_x$ (closed formula, see above).
-      \item Step to the right of $E_x$ by whole integers, in the sequence $E_x + \{1,2,4,...2^n\}$, stopping at $U=f_x\left(E_x + 2^n\right) < 0$.  This is the upper bound for the bisection method.
-      \item Bisect the interval, rounding to the nearest integer.  Call the resulting mid-interval number $B$.
-      \item If B is positive, test whether $0 \leq f_x(B) \leq \epsilon$.  If so, DONE.  If not:
-      \item Establish new interval, choosing endpoints from $E_x$, $B$, and $U$ so that the interval straddles $0$, and repeat the steps until the condition in step 5 is reached.
-    \end{enumerate}
-
-    \subsubsection{Example}
+\textcolor{red}{I don't know where I got the example below.  It doesn't appear to be the birthrate example.  It also doesn't look like something I just made up.}
 
 Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15, 3, 97.  Let $\alpha = 11$ and $\beta = 3$.  For $\tilde{y} = 1:100$ possible future occurrences, the figures below show the predictive distribution from dpredPG(), the cumulative distribution from ppredPG(), and a histogram of random draws from rpredPG().
 
@@ -661,7 +714,7 @@ if(0){
 
   \subsection{Normal Observation with Normal-Inverse Gamma Prior}
 
-    \textcolor{red}{also created rpredNormIG2() and rpredNormIGk() for samples comparing 2 groups and k groups, respectively.  I need to look into combining them into one function.  maybe do away with dpredNormIG() and ppredNormIG()?}
+    \textcolor{red}{I created rpredNormIG(), rpredNormIG2() and rpredNormIGk() for one-sample, samples comparing 2 groups and k groups, respectively.  Maybe combine them into one function?}
     \subsubsection{One sample}
       \paragraph{Derivation}
       [Hoff p. 69ff]\\
@@ -681,7 +734,7 @@ if(0){
 
         %\vdots
 
-        Following Hoff (p. 74ff), for joint inference on both $\theta$ and $\sigma$, assume priors
+\noindent Following Hoff (p. 74ff), for joint inference on both $\theta$ and $\sigma$, assume priors
 
         \begin{flalign*}
           \frac{1}{\sigma^2} &\sim \text{gamma}\left(\sfrac{\nu_0}{2},\sfrac{\nu_0\sigma_0^2}{2}\right)\\
@@ -689,9 +742,9 @@ if(0){
           \theta|\sigma^2 &\sim \text{normal}\left(\mu_0,\sfrac{\sigma^2}{\kappa_0}\right)\\
         \end{flalign*}
 
-        where $\left(\sigma_0^2,\nu_0\right)$ are the sample variance and sample size of prior observations, and $\left(\mu_o, \kappa_0\right)$ are the sample mean and sample size of prior observations.\\
+\noindent where $\left(\sigma_0^2,\nu_0\right)$ are the sample variance and sample size of prior observations, and $\left(\mu_o, \kappa_0\right)$ are the sample mean and sample size of prior observations.\\
 
-        Note:  $\mu_0$, $\kappa_0$, $\nu_0$, and $\sigma_0^2$ come from prior knowledge. [in the Hoff example (Midge Wing Length), $\kappa_0$ and $\nu_0$ are both set to $1$ so that ``our prior distributions are only weakly centered around these estimates from other populations."]\\
+        % Note:  $\mu_0$, $\kappa_0$, $\nu_0$, and $\sigma_0^2$ come from prior knowledge. [in the Hoff example (Midge Wing Length), $\kappa_0$ and $\nu_0$ are both set to $1$ so that ``our prior distributions are only weakly centered around these estimates from other populations."]\\
 
         From this we derive joint posterior distribution
 
@@ -754,7 +807,7 @@ if(0){
 
         \textit{Example (Hoff p. 72ff, using data from Grogan and Wirth (1981)):  Midge wing length}\\
 
-        Grogan and Wirth (1981) provide 9 measurements of midge wing length, in millimeters:  $y = \{1.64, 1.7, 1.72, 1.74, 1.82, 1.82, 1.82, 1.90, 2.08\}$. Previous studies suggest values $\mu_0 = 1.9$ and $\sigma_0^2 = 0.01$.  We choose $\kappa_0 = \nu_0 = 1$ ``...so that our prior distributions are only weakly centered around these estimates from other populations" (Hoff p. 76).  We compute
+        Grogan and Wirth (1981) provide 9 measurements of midge wing length, in millimeters:  $y = \{1.64, 1.7, 1.72, 1.74, 1.82, 1.82, 1.82, 1.90, 2.08\}$. Previous studies suggest values $\mu_0 = 1.9$ and $\sigma_0^2 = 0.01$.  We choose $\kappa_0 = \nu_0 = 1$ ``...so that our prior distributions are only weakly centered around these estimates from other populations" (Hoff p. 76).  \textcolor{red}{Should I explore other values for $\kappa_0$ and $\nu_0$ and show plots with comparisons?} We compute
 
         \begin{flalign*}
           \bar{y} &= 1.804\\
@@ -903,7 +956,7 @@ legend("bottomright", inset = 0.05, bg="transparent",
     \subsubsection{Two samples}
       \paragraph{Derivation}
 
-        For a Bayesian analysis comparing two groups we use the following sampling model (Hoff p. 127):
+        For a Bayesian analysis comparing two groups $Y_{1,1},...,Y_{n_1,1}$ and $Y_{1,2},...,Y_{n_2,2}$ we use the following sampling model (Hoff p. 127):
 
         \begin{flalign*}
           Y_{i,1} &= \mu + \delta + \epsilon_{i,1}\\
@@ -961,7 +1014,7 @@ legend("bottomright", inset = 0.05, bg="transparent",
 
       \paragraph{Example}
 
-      Hoff p. 128-129 \textit{Analysis of math score data}\\
+      Hoff p. 128-129 \textit{Analysis of math score data}\textcolor{red}{This next paragraph is almost a direct word-for-word lift from Hoff.  Should I simplify this to just introduce the example without all the explanation, and refer the reader to Hoff?}\\
       Math score data for two schools were based on results of a national exam in the United States, standardized to produce a nationwide mean of 50 and a standard deviation of 10.  Unless the two schools were known in advance to be extremely exceptional, reasonable prior parameters can be based on this information.  For the prior distributions of $\mu$ and $\sigma^2$, we'll take $\mu_0 = 50$ and $\sigma^2_0 = 10^2 = 100$, although this latter value is likely to be an overestimate of the within-school sampling variability.  We'll make these prior distributions somewhat diffuse, with $\gamma^2_0 = 25^2 = 625$ and $\nu_0 = 1$.  For the prior distribution on $\delta$, choosing $\delta_0 = 0$ represents the prior opinion that $\theta_1 > \theta_2$ and $\theta_2 > \theta_1$ are equally probable.  Finally, since the scores are bounded between 0 and 100, half the difference between $\theta_1$ and $\theta_2$ must be less than 50 in absolute value, so a value of $\tau^2_0 = 25^2 = 625$ seems reasonably diffuse.\\\\
       The results of a call to rpredNormIG2$\left(\mathbf{y}_1,\mathbf{y}_2,\mu_0,\sigma^2_0,\delta_0,\tau^2_0,N\right)$ are summarized in the following plot.\\
 
@@ -984,7 +1037,9 @@ RS = rpredNormIG2(n,y1,y2,mu0,g20,d0,t20,s20,nu0)
 
 vertMax = max(max(density(RS[,1])$y),max(density(RS[,2])$y),max(density(y1)$y),max(density(y2)$y))
 
-plot(density(y1),ylim = c(0,vertMax),
+par(mfrow = c(1,1))
+
+plot(density(y1),lwd=2,ylim = c(0,vertMax),
      main="2-samples:  Density of Data and Predictions",
      xlab = "")
 legend("topright", inset = 0.05,bg="transparent",
@@ -1001,7 +1056,7 @@ lines(density(RS[,2]),lwd=2,col="red",lty=2)
     \subsubsection{$k$ samples:  Comparing multiple groups}
     For two-level data consisting of groups and units within groups, denote $y_{i,j}$ as the data on the $i$th unit in group $j$. We have the hierarchical normal model (Hoff p. 132ff):
     $$\phi_j = \left\{\theta_j,\sigma^2\right\}, p\left(y|\phi_j\right) = \text{normal}\left(\theta_j,\sigma^2\right) \text{ (within-group model)}$$
-    $$\psi_j = \left\{\mu,\tau^2\right\}, p\left(\theta_j|\psi\right) = \text{normal}\left(\mu,\tau^2\right) \text{ (between-group model)}$$
+    $$\psi_j = \left\{\mu,\tau^2\right\}, p\left(\theta_j|\psi\right) = \text{normal}\left(\mu,\tau^2\right) \text{ (between-groups model)}$$
     We use standard semiconjugate normal and inverse-gamma prior distributions for the fixed but unknown parameters in the model:
     \begin{flalign*}
       \sigma^2 &\sim \text{inverse-gamma}\left(\frac{\nu_0}{2},\frac{\nu_0\sigma^2_0}{2}\right)\\
@@ -1137,7 +1192,7 @@ source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredNormIGk.R')
 library(profvis)
 # result = rpredNormIGk(N=2,Y,nu0=1,s20=100,eta0=1,t20=100,mu0=50,g20=25)
 
-for(dean in 3:4){
+for(dean in 3:3){
 
 toplot=dean
 
@@ -1145,15 +1200,26 @@ maxy = 1.5*max(density(Y[[toplot]])$y)
 plot(density(Y[[toplot]]),col="black",main="School 1 Data and Prediction",
      xlab="Grade",ylim=c(0,maxy))
 
-for(i in 1:1){
-  result = rpredNormIGk(N=5000,Y,nu0=1,s20=100,eta0=1,t20=100,mu0=50,g20=25)
-  lines(density(result$YTILDE[1001:5000,1]),col="red")
+result = rpredNormIGk(N=5000,Y,nu0=1,s20=100,eta0=1,t20=100,mu0=50,g20=25)
+
+for(i in 1:10){
+  lines(density(result$YTILDE[1001:5000,i]),col=i+1)
+  nextleg = eval(bquote(expression(tilde(y)*" (School "*.(i)*")")))
+  if(i == 1){
+    leg = nextleg
+  } else {
+    leg = c(leg,nextleg)
+  }
+
+# leg1 = eval(bquote(expression("Beta-Binomial with "*theta*" ~ Beta("*.(a1)*","*.(b1)*")")))
 }
 
 legend("topright", inset = 0.05,bg="transparent",
-       legend=c(expression(y[toplot]),expression(tilde(y)[toplot])),
+       # legend=c(expression(y[toplot]),expression(tilde(y)[toplot])),
+       legend = c(expression(y),leg[1],leg[2],leg[3],leg[4],leg[5],leg[6],leg[7],leg[8],leg[9],leg[10]),
        lwd=1,
-       col=c("black","red"),
+       # col=c("black","red"),
+       col=1:11,
        box.col="white")
 
 pause(2)
@@ -1161,9 +1227,13 @@ pause(2)
 #Note: in result[] each row contains a single prediction for each separate data set.
 #The number of rows is the number of desired predictions (input N).
 #The ith column therefore contains all the predictions for the ith data set.
+
+#Specifically, in this example, there are 100 columns corresponding to the 100 schools.
+  #Each column contains 5000 predictions for that school
+
 @
 
-      \paragraph{Ranking Treatments}
+      % \paragraph{Ranking Treatments}
 
 \clearpage
 
@@ -1533,9 +1603,7 @@ sig20.disp = round(sig20,2)
   S &= \Sexpr{S} \text{ (sample size for predictive distribution random draw)}
 \end{flalign*}
 
-\textcolor{red}{To do:  clean up write-up; make plots comparing g-prior and non-g-prior results;  circle back with Dean about appropriate priors for non-g-prior case; why is Hoff looking at the difference between the two cases with prior info very close to the sample characteristics? }
-
-\textcolor{red}{ALSO INCLUDE IN WRITE-UP EXPLICIT PREDICTION STEP, E.G. "Y = ..."}
+\textcolor{red}{I need to get rid of some of the plots below.  Maybe just keep the one on page 43 comparing the use of Zellner's g-prior to Hoff's semi-conjugate prior?  What do you suggest?}
 
 <<fig=TRUE,echo=FALSE>>=
 source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredNormReg.R')

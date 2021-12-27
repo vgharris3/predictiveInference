@@ -1,4 +1,4 @@
-#' Normal Regression Predictive Inference
+#' Normal Regression Predictive Distribution
 #'
 #' rpredNormReg returns a random sample of size ? from ? predictive probability distribution
 #'

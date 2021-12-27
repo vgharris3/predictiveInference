@@ -1,4 +1,4 @@
-#' Title
+#' The Beta-Binomial Predictive Distribution
 #'
 #' ppredBB returns the predictive probability of <= x future successes out of M trials, given s observed successes out of a sample of
 #size N, and user input shape parameters for Beta prior on Pr(success)

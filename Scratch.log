@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  21 DEC 2021 14:21
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  22 DEC 2021 14:53
 entering extended mode
 **./Scratch.tex
 (Scratch.tex
@@ -940,53 +940,43 @@ LaTeX Font Info:    Trying to load font information for U+rsfs on input line 67
 
 ("C:\MiKTeX 2.9\tex/latex/jknappen\ursfs.fd"
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
-)
-! Undefined control sequence.
-<argument>  \text {Pr}[R=r|T=t] &= \int p(\R 
-                                             =r|\theta )p(\theta |T)d\theta ...
-l.118 \end{flalign}
-                   
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
+) [1
 
-! Undefined control sequence.
-<argument>  \text {Pr}[R=r|T=t] &= \int p(\R 
-                                             =r|\theta )p(\theta |T)d\theta ...
-l.118 \end{flalign}
-                   
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
+{C:/Users/gabe/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
+Overfull \hbox (41.8812pt too wide) detected at line 129
+[]
+ []
 
-[1
+[2]
+Underfull \hbox (badness 10000) in paragraph at lines 170--171
 
-{C:/Users/gabe/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [2]
-(Scratch.aux)
+ []
+
+[3] (Scratch.aux)
 Package rerunfilecheck Info: File `Scratch.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
  29568 strings out of 479696
- 694448 string characters out of 2881701
- 1150551 words of memory out of 3000000
+ 694442 string characters out of 2881701
+ 1155551 words of memory out of 3000000
  46055 multiletter control sequences out of 15000+200000
  420149 words of font info for 68 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  94i,19n,98p,706b,609s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/MiKTeX 2.9/fonts
-/type1/public/amsfonts/cm/cmmi12.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts
-/cm/cmmi8.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/MiKTe
-X 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/MiKTeX 2.9/fonts/type1/public
-/amsfonts/cm/cmsy10.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pf
-b><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/latxfont/line10.pfb>
-Output written on Scratch.pdf (2 pages, 78966 bytes).
+/type1/public/amsfonts/cmextra/cmex8.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsf
+onts/cm/cmmi12.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/
+MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/MiKTeX 2.9/fonts/type1/
+public/amsfonts/cm/cmr12.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6
+.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/MiKTeX 2.9/font
+s/type1/public/amsfonts/cm/cmsy10.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfont
+s/cm/cmsy6.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/MiKT
+eX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/MiKTeX 2.9/fonts/type1/pub
+lic/amsfonts/latxfont/line10.pfb>
+Output written on Scratch.pdf (3 pages, 130642 bytes).
 PDF statistics:
- 67 PDF objects out of 1000 (max. 8388607)
+ 90 PDF objects out of 1000 (max. 8388607)
  16 named destinations out of 1000 (max. 500000)
  17 words of extra memory for PDF output out of 10000 (max. 10000000)
 

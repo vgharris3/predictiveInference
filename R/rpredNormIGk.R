@@ -1,6 +1,6 @@
 #' The Normal-Inverse Gamma Predictive Distribution for k Samples
 #'
-#' rpredNormIGk returns a random sample of size n from the Normal-Inverse Gamma predictive probability distribution for 2 samples
+#' rpredNormIGk returns a random sample of size N from the Normal-Inverse Gamma predictive probability distribution for each of the k samples, along with N posterior draws of the within-group and between-groups unknown parameters.
 #'
 #' @param N desired random sample size
 #' @param Y 2-column matrix of multiple samples of observed Normally-distributed values.  Column 1:  integer indices identifying the samples.  Column 2:  data values for the sample indicated by the corresponding index in column 1.
@@ -176,6 +176,10 @@ rpredNormIGk = function(N=1,Y,nu0=1,s20=1,eta0=1,t20=1,mu0=0,g20=1){
 #Note: in mcmc1 each row contains a single prediction for each separate data set.
 #The number of rows is the number of desired predictions (input N).
 #The ith column therefore contains all the predictions for the ith data set.
+
+  #YTILDE:  Nxm matrix of predictions (N predictions for each of the m data sets in Y)
+  #THETA:  Nxm matrix of drawn within-group posterior means
+  #MST:  Nx3 matrix of drawn posterior within-group variance and between-groups mean and variance
 
   return(mcmc1)
 }

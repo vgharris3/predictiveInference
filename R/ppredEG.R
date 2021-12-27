@@ -1,4 +1,4 @@
-#' Title
+#' The Exponential-Gamma Predictive Distribution
 #'
 #' @param x survival time
 #' @param XN (x1,...,xN), xi ~ exp(theta), theta ~ Gamma(dt, gm)

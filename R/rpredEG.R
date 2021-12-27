@@ -1,4 +1,4 @@
-#' Title
+#' The Exponential-Gamma Predictive Distribution
 #'
 #' @param n desired random sample size
 #' @param XN (x1,...,xN), xi ~ exp(theta), theta ~ Gamma(dt, gm)
@@ -13,7 +13,8 @@
 rpredEG = function(n, XN, d, dt, gm){
   a = d + dt
   b = gm + sum(XN)
-  theta = stats::rgamma(1,shape=a,rate=b)
+  # theta = stats::rgamma(1,shape=a,rate=b)
+  theta = stats::rgamma(n,shape=a,rate=b)
 
   return(stats::rexp(n,theta))
 }

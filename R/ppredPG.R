@@ -1,4 +1,4 @@
-#' Title
+#' The Poisson-Gamma Predictive Distribution
 #'
 #' ppredPG returns the cumulative predictive probability of future observation having value {1,...,xmax} given observations obs~Poi(theta)
 #' and theta~Gamma(alpha,beta)
