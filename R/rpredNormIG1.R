@@ -1,6 +1,6 @@
 #' The Normal-Inverse Gamma Predictive Distribution
 #'
-#' rpredNormIG returns a random sample of size n from the Normal-Inverse Gamma predictive probability distribution
+#' rpredNormIG1 returns a random sample of size n from the Normal-Inverse Gamma predictive probability distribution
 #'
 #' @param n desired random sample size
 #' @param obs vector of (observed) Normally-distributed values
@@ -14,7 +14,7 @@
 #' @export
 #'
 #' @examples 1
-rpredNormIG = function(n,obs,mu0=0,k0=1,sig20=1,nu0=1,Jeffreys=FALSE){
+rpredNormIG1 = function(n,obs,mu0=0,k0=1,sig20=1,nu0=1,Jeffreys=FALSE){
 
   #ERROR HANDLING
 

@@ -44,6 +44,7 @@
 \newcommand*{\fontCourier}{\fontfamily{pcr}\selectfont}
 \newcommand*\mean[1]{\overline{#1}}
 \newcommand\scalemath[2]{\scalebox{#1}{\mbox{\ensuremath{\displaystyle #2}}}}
+\newcommand{\R}{R}
 
 \setcounter{tocdepth}{5}
 \setcounter{secnumdepth}{5}
@@ -194,5 +195,10 @@ ybar = 1:10
 \end{center}
 
 
+%No need to do this
+\R{asdf}\\
+\R{}\\
+\R\\
+R
 
 \end{document}

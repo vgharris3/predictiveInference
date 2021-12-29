@@ -1,6 +1,6 @@
 #' The Normal-Inverse Gamma Predictive Distribution
 #'
-#' ppredNormIG returns the cumulative predictive probability of future observations based on
+#' ppredNormIG1 returns the cumulative predictive probability of future observations based on
 #'
 #' @param x vector of values for which predictive probability is desired
 #' @param obs vector of (observed) Normally-distributed values
@@ -15,7 +15,7 @@
 #' @export
 #'
 #' @examples 1
-ppredNormIG = function(x,obs,mu0=0,k0=1,sig20=1,nu0=1,S = 100000,Jeffreys=FALSE){
+ppredNormIG1 = function(x,obs,mu0=0,k0=1,sig20=1,nu0=1,S = 100000,Jeffreys=FALSE){
 
   #ERROR HANDLING
 
@@ -63,7 +63,7 @@ ppredNormIG = function(x,obs,mu0=0,k0=1,sig20=1,nu0=1,S = 100000,Jeffreys=FALSE)
   } else {
 
   #Obtain a random sample from which to approximate the density
-  rs = rpredNormIG(S,obs,mu0,k0,sig20,nu0,Jeffreys=FALSE)
+  rs = rpredNormIG1(S,obs,mu0,k0,sig20,nu0,Jeffreys=FALSE)
   #rsmat = matrix(rpredNormIG(S*length(x),obs,mu0,k0,sig20,nu0,Jeffreys=FALSE),nrow = length(x))
 
   #xrsmat = cbind(x,rsmat)

@@ -66,7 +66,7 @@ setwd("C:/Users/gabe/Documents/tmp/predictiveInference/Thesis_Files")
 
 An obstacle to widespread employment of Bayesian predictive inference in scientific research is the lack of suitable computing tools.  In this thesis I document several established useful models, and provide an applicable set of tools for statisticians.  For each of the included models, some basic notes on mathematical derivation are presented, and predictive inference is illustrated with examples.  Note that throughout this thesis the terms ``predictive inference," ``Bayesian inference," and ``Bayesian prediction" are used interchangeably.  For the details of the models and some of the examples we relied primarily on Seymour Geisser's \underline{Predictive Inference:  An Introduction} (1993) and Peter D. Hoff's \underline{A First Course in Bayesian Predictive Methods} (2009).
 
-    An R package has been developed, the main purpose of which is to provide the researcher with a means of producing random samples from predictive distributions.  For all the models, the package includes random sample generators.  For those models with analytical solutions, density and distribution functions are also provided.  The standard R naming convention has been adopted:  density functions are prefixed with the letter ``d," distribution functions with the letter ``p," and random generation functions with the letter ``r."  Also included in all function names is the abbreviation ``pred" (for predictive) and an initialism or abbreviation identifying the model itself.  For example, the density function for the Beta-Binomial model is named ``dpredBB()."  The R code for each function is included in Appendix \textcolor{red}{X-insert link to appendix here}.
+    An R package has been developed, the main purpose of which is to provide the researcher with a means of producing random samples from predictive distributions.  For all the models, the package includes random sample generators.  For those models with analytical solutions, density and distribution functions are also provided.  The standard R naming convention has been adopted:  density functions are prefixed with the letter ``d," distribution functions with the letter ``p," and random generation functions with the letter ``r."  Also included in all function names is the abbreviation ``pred" (for predictive) and an initialism or abbreviation identifying the model itself.  For example, the density function for the Beta-Binomial model is named ``\texttt{dpredBB()}."  The R code for each function is included in Appendix \textcolor{red}{X-insert link to appendix here}.
 
 
 
@@ -332,11 +332,11 @@ Note that the ratio of Gamma functions in the final step appears as a scaling co
 
 % \clearpage
 
-    \subsubsection{R Implementation}
+    \subsubsection{R Implementation (Beta-Binomial)}
 
-This result has been used to create R functions dpredBB(), ppredBB(), and rpredBB() for the Beta-Binomial predictive distribtuion for density, cumulative probability, and random sampling, respectively (see appendix for the R code).  dpredBB() and rpredBB() were used in the Pass the Pigs example in the introduction.  The following generic example exercises all three functions.\\
+This result has been used to create R functions \texttt{dpredBB()}, \texttt{ppredBB()}, and \texttt{rpredBB()} for the Beta-Binomial predictive distribtuion for density, cumulative probability, and random sampling, respectively (see appendix for the R code).  \texttt{dpredBB()} and \texttt{rpredBB()} were used in the Pass the Pigs example in the introduction.  The following generic example exercises all three functions.\\
 
-The density function dpredBB() relies on the R function lgamma() to evaluate the numerator and denominator factor by factor logarithmically, and then exponentiates for the final result, evaluated at each integer value from 1 to the total number of future trials.  The cdf ppredBB() simply calls dpredBB() and returns the cumulative sum of that discrete set of results.  The random sampler rpredBB() makes use of the inverse transform method and the output from the cdf ppredBB().\\
+The density function \texttt{dpredBB()} relies on the R function \texttt{lgamma()} to evaluate the numerator and denominator factor by factor logarithmically, and then exponentiates for the final result, evaluated at each integer value from 1 to the total number of future trials.  The cdf \texttt{ppredBB()} simply calls \texttt{dpredBB()} and returns the cumulative sum of that discrete set of results.  The random sampler \texttt{rpredBB()} makes use of the inverse transform method and the output from the cdf \texttt{ppredBB()}.\\
 
 \textcolor{red}{In reviewing my functions I noticed that for the Exponential-Gamma random sampler (next section) I simply drew posterior $\theta|y_1,...,y_i\sim\text{Gamma}(d+\delta,\gamma+\sum y_i)$ and then drew predictions from Exp$(\theta)$.  This works nicely because of the convenient form of the posterior distribution of $\theta$.  Well, for the Beta-Binomial I have a nice Beta distribution for the posterior of $\theta$, but for my random sampler I used the inverse transform method.  I just now tried doing posterior draws followed by predictions for the Beta-Binomial, but could not replicate the density curve with my random sample.  So--either I'm implementing my draws incorrectly or there's some reason this method doesn't apply in this case.  The commented section at the bottom of the R chunk that follows the next paragraph has my attempt at this.  Any feedback?}
 
@@ -344,7 +344,7 @@ The density function dpredBB() relies on the R function lgamma() to evaluate the
 
     \subsubsection{Example}
 
-Suppose $t=5$ successes have been observed out of $n=10$ binary events, and the researcher has settled on $\alpha = 2$ and $\beta = 8$ for the Beta$(\alpha,\beta)$ prior distribution of probability of success $\theta$.  For $n = 1000$ future observations, how many successes are predicted?  The figures below show the predictive distribution from dpredBB(), the cumulative distribution from ppredBB(), and a histogram of random draws from rpredBB().
+Suppose $t=5$ successes have been observed out of $n=10$ binary events, and the researcher has settled on $\alpha = 2$ and $\beta = 8$ for the Beta$(\alpha,\beta)$ prior distribution of probability of success $\theta$.  For $n = 1000$ future observations, how many successes are predicted?  The figures below show the predictive distribution from \texttt{dpredBB()}, the cumulative distribution from \texttt{ppredBB()}, and a histogram of random draws from \texttt{rpredBB()}.
 
 
 <<fig=TRUE, echo=FALSE>>=
@@ -462,16 +462,16 @@ lines(0:m,f_x)
 
 
 
-    \subsubsection{R Implementation}
+    \subsubsection{R Implementation (Exponential-Gamma)}
 
-This result has been used to create R functions dpredEG(), ppredEG(), and rpredEG() for the Gamma-Exponential distribtuion for density, cumulative probability, and random sampling, respectively (see appendix for R code).  These functions are exercised in the following example. \\
+This result has been used to create R functions \texttt{dpredEG()}, \texttt{ppredEG()}, and \texttt{rpredEG()} for the Gamma-Exponential distribtuion for density, cumulative probability, and random sampling, respectively (see appendix for R code).  These functions are exercised in the following example. \\
 
-The density function dpredEG() evaluates the numerator and denominator of the predictive density logarithmically (simply using the R function log()) and then exponentiates to produce the result.  The cdf ppredEG() integrates the pdf at each discrete value using the R function integrate().  The random sampler rpredEG() draws posterior $\theta|y_1,...,y_i\sim\text{Gamma}(d+\delta,\gamma+\sum y_i)$ and then draws predictions from Exp$(\theta)$.
+The density function \texttt{dpredEG()} evaluates the numerator and denominator of the predictive density logarithmically (using the R function \texttt{log()}) and then exponentiates to produce the result.  The cdf \texttt{ppredEG()} integrates the pdf at each discrete value using the R function \texttt{integrate()}.  The random sampler \texttt{rpredEG()} draws posterior $\theta|y_1,...,y_i\sim\text{Gamma}(d+\delta,\gamma+\sum y_i)$ and then draws predictions from Exp$(\theta)$.
 
 
     \subsubsection{Example}
 
-Suppose $d=800$ out of $N = 1000$ copies have been observed, and the remaining $200$ censored.  Say $\delta = 20$, $\gamma=5$, and we are interested in the number of survivors out of $M = 1000$ future observations.  The figures below illustrate the predictive probability using dpredEG() and rpredEG(), along with a histogram of a random sample taken using rpredEG().
+Suppose $d=800$ out of $N = 1000$ copies have been observed, and the remaining $200$ censored.  Say $\delta = 20$, $\gamma=5$, and we are interested in the number of survivors out of $M = 1000$ future observations.  The figures below illustrate the predictive probability using \texttt{dpredEG()} and \texttt{rpredEG()}, along with a histogram of a random sample taken using \texttt{rpredEG()}.
 
 
 <<fig=TRUE, echo=FALSE>>=
@@ -632,11 +632,13 @@ This is a negative binomial distribution:  $\tilde{y}\sim NB\left(\alpha+\sum y_
 
 
 
-    \subsubsection{R Implementation}
+    \subsubsection{R Implementation (Poisson-Gamma)}
 
-This result has been used to create R functions dpredPG(), ppredPG(), and rpredPG() for the Poisson-Gamma distribution for density, cumulative probability, and random sampling, respectively (see appendix for R code).  These functions are exercised in the example below.\\
+This result has been used to create R functions \texttt{dpredPG()}, \texttt{ppredPG()}, and \texttt{rpredPG()} for the Poisson-Gamma distribution for density, cumulative probability, and random sampling, respectively (see appendix for R code).  These functions are exercised in the example below.\\
 
-The density function dpredPG() simply makes use of the R function dnbinom().  The cdf ppredPG() returns a cumulative sum of the results of dpredPG().  The random sampler rpredPG() is a bit more complicated. The difficulty is that the upper bound of the support of the predictive distribution $p(\tilde{y}|y_1,...,y_n)$ is not known.  Since $p()$ is negative binomial, we can count on it approaching $0$ at the upper end.  To establish the support, then, a method was employed to find where $p$ comes ``sufficiently close" to $0$.  Initially the R function uniroot() was investigated, but it kept feeding non-integer values to dnbinom(), causing it to return errors.  Instead, a modified bisection method was devised as follows:\\
+The density function \texttt{dpredPG()} simply makes use of the R function \texttt{dnbinom()}.  The cdf \texttt{ppredPG()} returns a cumulative sum of the results of \texttt{dpredPG()}.  The random sampler \texttt{rpredPG()} is a bit more complicated. The difficulty is that the upper bound of the support of the predictive distribution $p(\tilde{y}|y_1,...,y_n)$ is not known.  Since $p()$ is negative binomial, we can count on it approaching $0$ at the upper end.  To establish the support, then, a method was employed to find where $p$ comes ``sufficiently close" to $0$.  Initially the R function \texttt{uniroot()} was considered, but ultimately a modified bisection method was devised as follows:\\
+
+% but it kept feeding non-integer values to \texttt{dnbinom()}, causing it to return errors.  Instead, a modified bisection method was devised as follows:\\
 
     \begin{enumerate}
       \item Set a desired tolerance $\epsilon$ for the distance of the predictive distribution above zero at the upper end of its support.  Currently the function uses $\epsilon = 10^{-7}$.
@@ -660,7 +662,7 @@ The density function dpredPG() simply makes use of the R function dnbinom().  Th
 
 \textcolor{red}{I don't know where I got the example below.  It doesn't appear to be the birthrate example.  It also doesn't look like something I just made up.}
 
-Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15, 3, 97.  Let $\alpha = 11$ and $\beta = 3$.  For $\tilde{y} = 1:100$ possible future occurrences, the figures below show the predictive distribution from dpredPG(), the cumulative distribution from ppredPG(), and a histogram of random draws from rpredPG().
+Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15, 3, 97.  Let $\alpha = 11$ and $\beta = 3$.  For $\tilde{y} = 1:100$ possible future occurrences, the figures below show the predictive distribution from \texttt{dpredPG()}, the cumulative distribution from \texttt{ppredPG()}, and a histogram of random draws from \texttt{rpredPG()}.
 
 <<fig=TRUE, echo=FALSE>>=
 source('C:/Users/gabe/Documents/tmp/predictiveInference/R/dpredPG.R')
@@ -714,7 +716,6 @@ if(0){
 
   \subsection{Normal Observation with Normal-Inverse Gamma Prior}
 
-    \textcolor{red}{I created rpredNormIG(), rpredNormIG2() and rpredNormIGk() for one-sample, samples comparing 2 groups and k groups, respectively.  Maybe combine them into one function?}
     \subsubsection{One sample}
       \paragraph{Derivation}
       [Hoff p. 69ff]\\
@@ -785,19 +786,19 @@ if(0){
         The resulting predictive distribution for $\tilde{y}$ is a t-distribution with location $\bar{y}$ and scale $s\sqrt{1+1/n}$ and $n-1$ degrees of freedom (Gelman et. al. p. 66).
 
 
-      \paragraph{R Implementation}
-      Standard format R functions dpredNormIG(), ppredNormIG(), and rpredNormIG() have been created for the Normal-Inverse Gamma distribution for density, cumulative probability, and random sampling, respectively (see appendix).  These functions all include options for implementation with or without previous knowledge as desired.  If Jeffreys prior is used, the functions simply implement R's Student's t-distribution functions rt(), dt(), and pt(), applying the location and scale parameters as described above.  For predictions using previous knowledge, the functions work as follows:  For the random sampler rpredNormIG(), the Monte-Carlo method described above is directly employed.  The predictive density and cumulative predictive density functions (dpredNormIG() and ppredNormID(), respectively) depend on the random sample.  ppredNormIG() utilizes the empirical cumulative density function ecdf() from R's stats package.  dpredNormIG() utilizes a Kernel Density Estimation (KDE) method and R's built-in density() function.  The KDE is computed by definition, using a normal kernel:
+      \paragraph{R Implementation (Normal-Inverse Gamma, 1-sample)}
+      R functions \texttt{dpredNormIG1()}, \texttt{ppredNormIG1()}, and \texttt{rpredNormIG1()} have been created for the Normal-Inverse Gamma distribution for density, cumulative probability, and random sampling, respectively (see appendix).  These functions all include options for implementation with or without previous knowledge as desired.  If Jeffreys prior is used, the functions simply implement R's Student's t-distribution functions \texttt{rt()}, \texttt{dt()}, and \texttt{pt()}, applying the location and scale parameters as described above.  For predictions using previous knowledge, the functions work as follows:  For the random sampler \texttt{rpredNormIG1()}, the Monte-Carlo method described above is directly employed.  The predictive density and cumulative predictive density functions (\texttt{dpredNormIG1()} and \texttt{ppredNormID1()}, respectively) depend on the random sample.  \texttt{ppredNormIG1()} utilizes the empirical cumulative density function \texttt{ecdf()} from R's stats package.  \texttt{dpredNormIG1()} utilizes a Kernel Density Estimation (KDE) method and R's built-in \texttt{density()} function.  The KDE is computed by definition, using a normal kernel:
 
       $$\hat{f}_K(x) = \frac{1}{n}\sum_{i=1}^n\frac{1}{h}K\left(\frac{x-X_i}{h}\right),$$
 
       where
 
       \begin{flalign*}
-        X_i & \text{ is the random sample generated using rpredNormIG()}\\
+        X_i & \text{ is the random sample generated using }\texttt{rpredNormIG1()}\\
         &\\
         K & \text{ is Normal(0,1)}\\
         &\\
-        h & \text{ is the bandwidth from R's density() function (that is, } h = \text{ density}(X_i)\text{\$bw)}\\
+        h & \text{ is the bandwidth from R's }\texttt{density()}\text{ function (that is, } h = \text{ density}(X_i)\text{\$bw)}\\
       \end{flalign*}
 
       These functions are exercised in the following example.\\
@@ -834,9 +835,9 @@ if(0){
       The plot below illustrates the influence of previous knowledge of the population mean, and compares to the predictions resulting from Jeffreys prior.
 
 <<fig=TRUE, echo=FALSE>>=
-source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredNormIG.R')
-source('C:/Users/gabe/Documents/tmp/predictiveInference/R/dpredNormIG.R')
-source('C:/Users/gabe/Documents/tmp/predictiveInference/R/ppredNormIG.R')
+source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredNormIG1.R')
+source('C:/Users/gabe/Documents/tmp/predictiveInference/R/dpredNormIG1.R')
+source('C:/Users/gabe/Documents/tmp/predictiveInference/R/ppredNormIG1.R')
 knitr::opts_chunk$set(fig.height = 11, fig.width = 7) #not apparently doing anything
 set.seed(1234)
 
@@ -862,7 +863,7 @@ mun = (k0*mu0+n*ybar)/kn
 sig2n = (nu0*sig20 + (n-1)*s2 + k0*n*(ybar-mu0)^2/kn)/nun
 
 ####
-####RANDOM SAMPLE:  rpredNormIG()
+####RANDOM SAMPLE:  rpredNormIG1()
 ####
 
 S = 10000
@@ -873,7 +874,7 @@ set.seed(1234)
 random_sample_MC = matrix(0,S,length(mu0))
 densities_x = densities_y = matrix(0,512,length(mu0))
 for(i in 1:length(mu0)){
-  random_sample_MC[,i] = rpredNormIG(S,y,mu0[i],k0,sig20,nu0)
+  random_sample_MC[,i] = rpredNormIG1(S,y,mu0[i],k0,sig20,nu0)
   densities_x[,i] = density(random_sample_MC[,i])$x
   densities_y[,i] = density(random_sample_MC[,i])$y
 
@@ -881,11 +882,11 @@ for(i in 1:length(mu0)){
 
 #Use Jeffrey's prior
 
-random_sample_J = rpredNormIG(S,y,Jeffreys=TRUE)
+random_sample_J = rpredNormIG1(S,y,Jeffreys=TRUE)
 
 #Combine on one plot for comparison
 
-plotTitle_rp = "Normal-Inverse Gamma Density\nof Samples Generated by rpredNormIG()"
+plotTitle_rp = "Normal-Inverse Gamma Density\nof Samples Generated by rpredNormIG1()"
 matplot(densities_x,densities_y,
         type="l",lty=1,
         lwd = c(rep(1.5,pos1.9-1),2,rep(1.5,length(mu0) - pos1.9)),
@@ -918,14 +919,14 @@ xlim0 = floor(min(densities_x))
 xlim1 = ceiling(max(densities_x))
 x = sort(runif(1000,min = xlim0,max = xlim1))
 
-#Predictive density using dpredNormIG()
+#Predictive density using dpredNormIG1()
 
-plotTitle_dp = "Normal-Inverse Gamma Density\nUsing dpredNormIG()"
+plotTitle_dp = "Normal-Inverse Gamma Density\nUsing dpredNormIG1()"
 
-xd = dpredNormIG(x,y,mu0[pos1.9],k0,sig20,nu0,Jeffreys=FALSE)
-plot(x,xd,type="l",col="blue",lwd=2,main=plotTitle_dp,xlab="y",ylab = "dpredNormIG(y)",xlim=c(1,3))
+xd = dpredNormIG1(x,y,mu0[pos1.9],k0,sig20,nu0,Jeffreys=FALSE)
+plot(x,xd,type="l",col="blue",lwd=2,main=plotTitle_dp,xlab="y",ylab = "dpredNormIG1(y)",xlim=c(1,3))
 
-xd_J = dpredNormIG(x,y,Jeffreys=TRUE)
+xd_J = dpredNormIG1(x,y,Jeffreys=TRUE)
 lines(x,xd_J,col="red",lwd=2)
 
 legend("topright", inset = 0.05,bg="transparent",
@@ -933,14 +934,14 @@ legend("topright", inset = 0.05,bg="transparent",
        lwd=2, col=c("blue","red"),
        cex = 1, box.col="white")
 
-#Cumulative predictive density using ppredNormIG()
+#Cumulative predictive density using ppredNormIG1()
 
-plotTitle_pp = "Normal-Inverse Gamma Cumulative Density\nUsing ppredNormIG()"
+plotTitle_pp = "Normal-Inverse Gamma Cumulative Density\nUsing ppredNormIG1()"
 
-xp = ppredNormIG(x,y,mu0[pos1.9],k0,sig20,nu0,Jeffreys=FALSE)
-plot(x,xp,type="l",col="blue",lwd=2,main=plotTitle_pp,xlab="y",ylab = "ppredNormIG(y)",xlim=c(1,3))
+xp = ppredNormIG1(x,y,mu0[pos1.9],k0,sig20,nu0,Jeffreys=FALSE)
+plot(x,xp,type="l",col="blue",lwd=2,main=plotTitle_pp,xlab="y",ylab = "ppredNormIG1(y)",xlim=c(1,3))
 
-xp_J = ppredNormIG(x,y,Jeffreys=TRUE)
+xp_J = ppredNormIG1(x,y,Jeffreys=TRUE)
 lines(x,xp_J,col="red",lwd=2)
 
 legend("bottomright", inset = 0.05, bg="transparent",
@@ -999,9 +1000,9 @@ legend("bottomright", inset = 0.05, bg="transparent",
           \nu_n\sigma^2_n &= \nu_0\sigma^2_0 + \sum_{i=1}^{n_1}\left(y_{i,1} - [\mu + \delta]\right)^2 + \sum_{i=1}^{n_2}\left(y_{i,2} - [\mu - \delta]\right)^2\\
         \end{flalign*}
 
-      \paragraph{R Implementation}
+      \paragraph{R Implementation (Normal-Inverse Gamma, 2-sample)}
 
-      The standard format R function rpredNormIG2() implements a Gibbs sampler to approximate the posterior distribution $p\left(\mu,\delta,\sigma^2|\mathbf{y}_1,\mathbf{y}_2\right)$, from which to generate predictions for the two populations as follows:
+      The R function \texttt{rpredNormIG2()} implements a Gibbs sampler to approximate the posterior distribution $p\left(\mu,\delta,\sigma^2|\mathbf{y}_1,\mathbf{y}_2\right)$, from which to generate predictions for the two populations as follows:
       \begin{enumerate}
         \item Set initial values $\mu = \frac{\theta_1 + \theta_2}{2}$ and $\delta = \frac{\theta_1 - \theta_2}{2}$
         \item Generate a single $\sigma^2|\mathbf{y_1},\mathbf{y_2},\mu,\delta$
@@ -1079,9 +1080,9 @@ lines(density(RS[,2]),lwd=2,col="red",lty=2)
       Note that $\sum\sum\left(y_{i,j}-\theta_j\right)^2$ is the sum of squared residuals across all groups, conditional on the within-group means, and so the conditional distribution concentrates probability around a pooled-sample estimate of the variance.
 
 
-      \paragraph{R Implementation}
+      \paragraph{R Implementation (Normal-Inverse Gamma, k-samples)}
 
-      The standard format R function rpredNormIGk() implements a Gibbs sampler for posterior approximation of each unknown quantity by sampling from its full conditional distribution.  From these posteriors, predictions are generated, as follows:
+      The R function \texttt{rpredNormIGk()} implements a Gibbs sampler for posterior approximation of each unknown quantity by sampling from its full conditional distribution.  From these posteriors, predictions are generated, as follows:
 
       \begin{enumerate}
         \item Set prior parameter values:
@@ -1107,6 +1108,7 @@ lines(density(RS[,2]),lwd=2,col="red",lty=2)
         \item For $s\in\{1,...,S\}$, generate prediction $\tilde{y}_j^{(s)} \sim \text{normal}\left(\theta_j^{(s)},\sigma^{2(s)}\right)$
       \end{enumerate}
 
+\textcolor{red}{Look at the form in which \texttt{rpredNormIGk()} takes the data in.  Currently Y is a list of vectors of varying lengths.  The raw data is a long two-column numeric table with indices in the first column.  It's called Y.school.mathscore.  It would take a little re-work but if the 2-column format is preferred it's probably worth making the change.  Let me know.}
 
       \paragraph{Example}
       Returning to the math scores example, data for 10th-grade students from 100 large urban schools (each having 10th-grade enrollment of at least 400) is summarized in the following plots.
@@ -1229,9 +1231,7 @@ colnames(school_table) <- c("school index","average")
   \end{tabular}
 \end{center}
 
-The plot below shows the density curves of the math scores for these three schools and their predictions.  The observed data is shown using solid lines, and the predictive densities are displayed with dashed lines.
-
-\textcolor{red}{look at the form in which rpredNormIGk() takes in the data.  Ask Dean what he prefers.  Currently taking it as a list of vectors of varying lengths.  Maybe prefers long two-column dataframe with indices in the first column, like the raw data Y.school.mathscore?}
+The plot below shows the density curves of the math scores for these three schools and their predictions.  The observed data is shown using solid lines, and the predictive densities are displayed with dashed lines.  The predictions are ``pulled" toward the overall mean, which is indicated on the plot with the dotted gray vertical line.
 
 <<fig=TRUE,echo=FALSE>>=
 source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredNormIGk.R')
@@ -1242,7 +1242,7 @@ par(mfrow=c(1,1))
 
 result = rpredNormIGk(N=5000,Y,nu0=1,s20=100,eta0=1,t20=100,mu0=50,g20=25)
 
-toplot = c(5,67,100)
+toplot = c(5,100,67)
 
 maxy = 1.5*max(density(Y[[toplot[1]]])$y,density(Y[[toplot[2]]])$y,density(Y[[toplot[3]]])$y)
 minx = min(density(Y[[toplot[1]]])$x,density(Y[[toplot[2]]])$x,density(Y[[toplot[3]]])$x)
@@ -1268,9 +1268,11 @@ for(pltInd in toplot){
 
 }
 
+abline(v=overall_mean,col="darkgray",lty=3,lwd=2)
+
 for(legInd in 1:length(toplot)){
-  nextlegObs = eval(bquote(expression(tilde(y)*" ("*.(toplot[legInd])*")")))
-  nextlegPred = eval(bquote(expression(y*" ("*.(toplot[legInd])*")")))
+  nextlegObs = eval(bquote(expression(y*" (School "*.(toplot[legInd])*")")))
+  nextlegPred = eval(bquote(expression(tilde(y)*" (School "*.(toplot[legInd])*")")))
   if(legInd == 1){
     leg = c(nextlegObs,nextlegPred)
   } else {
@@ -1280,13 +1282,15 @@ for(legInd in 1:length(toplot)){
 # leg1 = eval(bquote(expression("Beta-Binomial with "*theta*" ~ Beta("*.(a1)*","*.(b1)*")")))
 }
 
-legend("topright", inset = 0.05,bg="transparent",
+legend("topleft",
+       inset = 0.01,
+       bg="transparent",
        # legend=c(expression(y[toplot]),expression(tilde(y)[toplot])),
-       legend = c(leg[1],leg[2],leg[3],leg[4],leg[5],leg[6]),
+       legend = c(leg[1],leg[2],leg[3],leg[4],leg[5],leg[6],"overall mean"),
        lwd=2,
        # col=c("black","red"),
-       col=c(toplot[1],toplot[1],toplot[2],toplot[2],toplot[3],toplot[3]),
-       lty=c(1,2,1,2,1,2),
+       col=c(toplot[1],toplot[1],toplot[2],toplot[2],toplot[3],toplot[3],"darkgray"),
+       lty=c(1,2,1,2,1,2,3),
        box.col="white")
 
 # pause(2)
@@ -1636,9 +1640,9 @@ To create a sample from the predictive distribution of responses, draw $\epsilon
 
 $$y = \boldsymbol\beta^T\mathbf{X} + \epsilon.$$
 
-  \subsubsection{R Implementation}
+  \subsubsection{R Implementation (Normal Regression)}
 
-The standard format R function
+The R function
 
 \begin{center}\texttt{rpredNormReg(S=1,Xpred,X,y,beta0,Sigma0,nu0=1,s20=1,gprior = TRUE)}\end{center}
 

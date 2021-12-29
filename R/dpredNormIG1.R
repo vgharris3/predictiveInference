@@ -1,6 +1,6 @@
 #' The Normal-Inverse Gamma Predictive Distribution
 #'
-#' dpredNormIG returns the predictive probability of future observations based on
+#' dpredNormIG1 returns the predictive probability of future observations based on
 #'
 #' @param x vector of values for which predictive probability is desired
 #' @param obs vector of (observed) Normally-distributed values
@@ -15,7 +15,7 @@
 #' @export
 #'
 #' @examples 1
-dpredNormIG = function(x,obs,mu0=0,k0=1,sig20=1,nu0=1,S = 100000,Jeffreys=FALSE){
+dpredNormIG1 = function(x,obs,mu0=0,k0=1,sig20=1,nu0=1,S = 100000,Jeffreys=FALSE){
 
   #ERROR HANDLING
 
@@ -68,7 +68,7 @@ dpredNormIG = function(x,obs,mu0=0,k0=1,sig20=1,nu0=1,S = 100000,Jeffreys=FALSE)
   } else {
 
     #Obtain a random sample from which to approximate the density
-    rs = rpredNormIG(S,obs,mu0,k0,sig20,nu0,Jeffreys=FALSE)
+    rs = rpredNormIG1(S,obs,mu0,k0,sig20,nu0,Jeffreys=FALSE)
 
     #Estimating density using R's density() function on random sample
     #(taken from https://stackoverflow.com/questions/28077500/find-the-probability-density-of-a-new-data-point-using-density-function-in-r)
