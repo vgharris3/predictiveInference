@@ -27,7 +27,7 @@ rpredNormIGk(N = 1, Y, nu0 = 1, s20 = 1, eta0 = 1, t20 = 1, mu0 = 0, g20 = 1)
 random sample of size n Normal - Inverse Gamma predictive probability for each population sample
 }
 \description{
-rpredNormIGk returns a random sample of size n from the Normal-Inverse Gamma predictive probability distribution for 2 samples
+rpredNormIGk returns a random sample of size N from the Normal-Inverse Gamma predictive probability distribution for each of the k samples, along with N posterior draws of the within-group and between-groups unknown parameters.
 }
 \examples{
 1

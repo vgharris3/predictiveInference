@@ -1305,53 +1305,6 @@ legend("topleft",
 @
 
 
-
-<<fig=TRUE,echo=FALSE>>=
-source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredNormIGk.R')
-library(profvis)
-# result = rpredNormIGk(N=2,Y,nu0=1,s20=100,eta0=1,t20=100,mu0=50,g20=25)
-
-for(dean in 3:3){
-
-toplot=dean
-
-maxy = 1.5*max(density(Y[[toplot]])$y)
-plot(density(Y[[toplot]]),col="black",main="School 1 Data and Prediction",
-     xlab="Grade",ylim=c(0,maxy))
-
-result = rpredNormIGk(N=5000,Y,nu0=1,s20=100,eta0=1,t20=100,mu0=50,g20=25)
-
-for(i in 1:10){
-  lines(density(result$YTILDE[1001:5000,i]),col=i+1)
-  nextleg = eval(bquote(expression(tilde(y)*" (School "*.(i)*")")))
-  if(i == 1){
-    leg = nextleg
-  } else {
-    leg = c(leg,nextleg)
-  }
-
-# leg1 = eval(bquote(expression("Beta-Binomial with "*theta*" ~ Beta("*.(a1)*","*.(b1)*")")))
-}
-
-legend("topright", inset = 0.05,bg="transparent",
-       # legend=c(expression(y[toplot]),expression(tilde(y)[toplot])),
-       legend = c(expression(y),leg[1],leg[2],leg[3],leg[4],leg[5],leg[6],leg[7],leg[8],leg[9],leg[10]),
-       lwd=1,
-       # col=c("black","red"),
-       col=1:11,
-       box.col="white")
-
-pause(2)
-}
-#Note: in result[] each row contains a single prediction for each separate data set.
-#The number of rows is the number of desired predictions (input N).
-#The ith column therefore contains all the predictions for the ith data set.
-
-#Specifically, in this example, there are 100 columns corresponding to the 100 schools.
-  #Each column contains 5000 predictions for that school
-
-@
-
       % \paragraph{Ranking Treatments}
 
 \clearpage

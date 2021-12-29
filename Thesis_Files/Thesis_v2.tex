@@ -138,11 +138,11 @@ An obstacle to widespread employment of Bayesian predictive inference in scienti
      % \rowcolor{lightgray}
      $\textbf{(}\boldsymbol\alpha,\boldsymbol\beta\textbf{)}$ & $\textbf{E(}\boldsymbol\theta\textbf{)}$ & \textbf{mean(Razorbacks Predicted)} & \textbf{SD(Razorbacks Predicted)} \\
      \hline
-     (2,8) & 0.2 & 30.21 & 11.43 \\
+     (2,8) & 0.2 & 29.53 & 10.94 \\
      \hline
-     (22,78) & 0.22 & 23.53 & 5.75 \\
+     (22,78) & 0.22 & 23.21 & 5.69 \\
      \hline
-     (224,776) & 0.224 & 22.36 & 4.43 \\
+     (224,776) & 0.224 & 22.41 & 4.29 \\
      \hline
   \end{tabular}
 \end{center}
@@ -780,9 +780,6 @@ The plot below shows the density curves of the math scores for these three schoo
 \includegraphics{Thesis_v2-011}
 
 
-
-\includegraphics{Thesis_v2-012}
-
       % \paragraph{Ranking Treatments}
 
 \clearpage
@@ -856,7 +853,7 @@ $$\hat{\sigma}^2_{ols} = \frac{SSR\left(\hat{\boldsymbol\beta}_{ols}\right)}{(n-
 
 Twelve healthy men who did not exercise regularly were recruited to take part in a study of the effects of two different exercise regimens on oxygen uptake.  Six of the twelve men were randomly assigned to a 12-week flat-terrain running program, and the remaining six were assigned to a 12-week step aerobics program.  The maximum oxygen uptake of each subject was measured (in liters per minute) while running on an inclined treadmill, both before and after the 12-week program.  Of interest is how a subject's change in maximal oxygen uptake may depend on which program they were assigned to.  However, other factors, such as age, are expected to affect the change in maximal uptake as well.  The results are shown here:
 
-\includegraphics{Thesis_v2-013}
+\includegraphics{Thesis_v2-012}
 
 Hoff's regression model:
 
@@ -877,7 +874,7 @@ Under this model the conditional expectations of $Y$ for the two different level
 
 In other words, the model assumes that the relationship is linear in age for both exercise groups, with the difference in intercepts given by $\beta_2$ and the difference in slopes given by $\beta_4$.  If we assumed that $\beta_2 = \beta_4 = 0$, then we would have identical lines for both groups.  If we assumed $\beta_2 \ne 0$ and $\beta_4 =  0$ then we would have a different line for each group but they would be parallel.  Allowing all coefficients to be non-zero gives us two unrelated lines.  Some different possibilities are depicted graphically below:\\\\
 
-\includegraphics{Thesis_v2-014}
+\includegraphics{Thesis_v2-013}
 
 Let's find the least squares regression estimates for the model (\ref{example_regression_model}), and use the results to evaluate the differences between the two exercise groups.  The ages of the 12 subjects, along with their observed changes in maximal oxygen uptake, are
 
@@ -1055,7 +1052,7 @@ In the example below (Hoff data and code found \href{https://pdhoff.github.io/bo
 
 \textcolor{red}{I need to get rid of some of the plots below.  Maybe just keep the one on page 43 comparing the use of Zellner's g-prior to Hoff's semi-conjugate prior?  What do you suggest?}
 
-\includegraphics{Thesis_v2-017}
+\includegraphics{Thesis_v2-016}
 
 %\textcolor{red}{MAYBE DO BOTH IN THE SAME BLOCK AND PLOT ON ONE PLOT?}
 
@@ -1063,24 +1060,24 @@ In the example below (Hoff data and code found \href{https://pdhoff.github.io/bo
 
 %For the same example without prior information, we use Zellner's g-prior with $g =$ length$(y) =$ 12.
 
+\includegraphics{Thesis_v2-017}
+
 \includegraphics{Thesis_v2-018}
+
+\clearpage
+
 
 \includegraphics{Thesis_v2-019}
 
 \clearpage
 
+Comparing predictions using semi-conjugate prior vs. Zellner's g-prior:
 
 \includegraphics{Thesis_v2-020}
 
-\clearpage
-
-Comparing predictions using semi-conjugate prior vs. Zellner's g-prior:
-
-\includegraphics{Thesis_v2-021}
-
 Inspection of the graphs shows the predicted distributions using Zellner's g-prior shrink toward 0, and have greater variance than those predicted using Hoff's semi-conjugate prior.
 
-\includegraphics{Thesis_v2-022}
+\includegraphics{Thesis_v2-021}
 
 \textcolor{red}{EXPLAIN WHY SCP PREDICTIONS HAVE TALLER DISTRIBUTIONS THAN ZGP PREDICTIONS.  ALSO WHY ZGP PREDICTIONS SHRINK TOWARD 0}
 
@@ -1088,13 +1085,15 @@ Inspection of the graphs shows the predicted distributions using Zellner's g-pri
 
 Comparing observed values to predictive distributions:
 
-\includegraphics{Thesis_v2-023}
+\includegraphics{Thesis_v2-022}
 
 
 
 
 
 The following plots exhibit the influence of varying the prior info with the semi-conjugate prior.
+
+\includegraphics{Thesis_v2-023}
 
 \includegraphics{Thesis_v2-024}
 
@@ -1103,8 +1102,6 @@ The following plots exhibit the influence of varying the prior info with the sem
 \includegraphics{Thesis_v2-026}
 
 \includegraphics{Thesis_v2-027}
-
-\includegraphics{Thesis_v2-028}
 
 \clearpage
 
