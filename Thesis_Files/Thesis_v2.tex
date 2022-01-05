@@ -24,6 +24,9 @@
 \usepackage{array}
 \setcounter{MaxMatrixCols}{40}
 
+\usepackage{ulem} %just so I can strike through using \sout{text to be struck through}
+  %also available:  \xout{text to be crossed out} for short diagonal lines crossing out each letter
+
 \usepackage{enumerate}
 \usepackage{enumitem}
 \usepackage{multirow}
@@ -62,9 +65,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Thesis Abstract}
 
-An obstacle to widespread employment of Bayesian predictive inference in scientific research is the lack of suitable computing tools.  In this thesis I document several established useful models, and provide an applicable set of tools for statisticians.  For each of the included models, some basic notes on mathematical derivation are presented, and predictive inference is illustrated with examples.  Note that throughout this thesis the terms ``predictive inference," ``Bayesian inference," and ``Bayesian prediction" are used interchangeably.  For the details of the models and some of the examples we relied primarily on Seymour Geisser's \underline{Predictive Inference:  An Introduction} (1993) and Peter D. Hoff's \underline{A First Course in Bayesian Predictive Methods} (2009).
+An obstacle to widespread employment of Bayesian predictive inference in scientific research is the lack of suitable computing tools.  In this thesis I document several established useful models, and provide an applicable set of tools for statisticians.  For each of the included models, some basic notes on mathematical derivation are presented, and predictive inference is illustrated with examples.  \sout{Note that throughout this thesis the terms ``predictive inference," ``Bayesian inference," and ``Bayesian prediction" are used interchangeably.}  For the details of the models and some of the examples I relied primarily on Seymour Geisser's \underline{Predictive Inference:  An Introduction} (1993) and Peter D. Hoff's \underline{A First Course in Bayesian Predictive Methods} (2009).
 
-    An R package has been developed, the main purpose of which is to provide the researcher with a means of producing random samples from predictive distributions.  For all the models, the package includes random sample generators.  For those models with analytical solutions, density and distribution functions are also provided.  The standard R naming convention has been adopted:  density functions are prefixed with the letter ``d," distribution functions with the letter ``p," and random generation functions with the letter ``r."  Also included in all function names is the abbreviation ``pred" (for predictive) and an initialism or abbreviation identifying the model itself.  For example, the density function for the Beta-Binomial model is named ``\texttt{dpredBB()}."  The R code for each function is included in Appendix \textcolor{red}{X-insert link to appendix here}.
+    An R package has been developed, the main purpose of which is to provide the researcher with a means of producing random samples from predictive distributions.  For all the models, the package includes random sample generators.  For those models with analytical solutions, density and distribution functions are also provided.  The standard R naming convention for these function classes has been adopted:  density functions are prefixed with the letter ``d," distribution functions with the letter ``p," and random generation functions with the letter ``r."  Also included in all function names is the abbreviation ``pred" (for predictive) and an initialism or abbreviation identifying the model itself.  For example, the density function for the Beta-Binomial model is named ``\texttt{dpredBB()}."  The R code for each function is included in Appendix \textcolor{red}{X-insert link to appendix here}.
 
 
 
@@ -123,9 +126,13 @@ An obstacle to widespread employment of Bayesian predictive inference in scienti
 
   For the purpose of this example, consider the probability of a single pig landing in the ``Razorback" position, which occurs when the pig is lying on its back with its legs extended upward.  The irregular shape of the pig makes it difficult to assign probabilities to results other than by means of experimentation.  Such an experiment was conducted at Duquesne University, and an article describing the experiment as well as Bayesian predictive inference performed on the results appeared in the \textit{Journal of Statistics Education} Volume 14, Number 3, in 2006.  The article can be accessed here:  \url{http://jse.amstat.org/v14n3/datasets.kern.html}. Of the $11,954$ recorded results for individual pigs, approximately $22.4\%$ were Razorbacks.
 
-  Suppose $t=4$ Razorbacks have been observed out of $N=10$ tosses of a single pig die, suggesting a straightforward binomial distribution with $\theta =$ Pr(Razorback) $= t/N = 0.4$. Taking the Duquesne experiment into consideration, we'll perform Bayesian prediction using three Beta prior distributions for $\theta$: $\theta\sim\text{Beta}(2,8)$, $\theta\sim\text{Beta}(22,78)$, and $\theta\sim\text{Beta}(224,776)$, and compare these results to predictions obtained from the plug-in estimator $\theta = 0.4$.   Any number of prior distributions on $\theta$ would satisfy the condition that $E(\theta) \approx 0.224$, suggested by the prior information.  The specific choice of a Beta prior is made largely for computational convenience.
+  Suppose $t=4$ Razorbacks have been observed out of $N=10$ tosses of a single pig die, suggesting a straightforward binomial distribution with $\theta =$ Pr(Razorback) $= t/N = 0.4$. Taking the Duquesne experiment into consideration, we'll perform Bayesian prediction using three prior distributions for $\theta$: $\theta\sim\text{Beta}(2,8)$, $\theta\sim\text{Beta}(22,78)$, and $\theta\sim\text{Beta}(224,776)$, and compare these results to predictions obtained from the plug-in estimator $\theta = 0.4$.   Any number of prior distributions on $\theta$ would satisfy the condition that $E(\theta) \approx 0.224$, suggested by the prior information.  The specific choice of a Beta prior is made largely for computational convenience.
 
-  In this example the question asked by the researcher is, ``For $M = 100$ future observations, how many Razorbacks are predicted?"  The density curves in the plot below show the influence of the details of the choice of prior on the location and variance of the predictive distribution.  Essentially, each pair of shape parameters $(\alpha,\beta)$ in the Beta prior reflects the prior knowledge about the results of the Duquesne experiment, with the ``weight" given to that knowledge increasing with the shape parameters by orders of magnitude.  The choice of shape parameters might be influenced by such things as pig throwing method (perhaps the researcher is throwing them by hand rather than by the carefully controlled method used in the Duquesne experiment, e.g.), or by a need to account for pig-to-pig variation, or anything else the researcher believes introduces a deviation from the events upon which the prior information is based.  Notice in the graph and table below that the choice of prior parameters has a significant effect on the variance of the predictive distribution.
+  In this example the question asked by the researcher is, ``For $M = 100$ future observations, how many Razorbacks are predicted?"  The density curves in the plot below show the influence of the details of the choice of prior on the location and variance of the predictive distribution.  Essentially, each pair of shape parameters $(\alpha,\beta)$ in the Beta prior reflects \sout{prior knowledge about} the researcher's level of reliance on the results of the Duquesne experiment, with the ``weight" given to that knowledge increasing with the shape parameters by orders of magnitude.  The choice of shape parameters might be influenced by such things as pig throwing method (perhaps the researcher is throwing them by hand rather than by the carefully controlled method used in the Duquesne experiment, e.g.), or by a need to account for pig-to-pig variation, or anything else the researcher believes introduces a deviation from the events upon which the prior information is based.
+
+  The plot and table below illustrate the effects of the Bayesian prediction method. Perhaps most notable is the location disparity between the plug-in (Binomial) predictive distribution and the family of Bayesian (Beta-binomial) prediction results.  The consideration of prior knowledge has a significant effect.  In this example, the Duquesne results act like ``additional" information in an updating iteration of an ongoing set of experiments, and plainly show the dominance of data in Bayesian prediction.
+
+  The choice of prior clearly has a significant effect on the resulting predictive distribution.  In this case the Beta shape factors strongly influence the mean and variance of the prediction.  This provides options for the future prognosticator with regard to choice of predictive distribution. If nearly duplication of the Duquesne experimental conditions, base predictions on the Beta$(224,776)$ result, for example.  If making a prediction for the general mass of future Pass the Pigs\texttrademark players, use the lower-weighted prior.
 
 
 \includegraphics{Thesis_v2-002}
@@ -138,11 +145,13 @@ An obstacle to widespread employment of Bayesian predictive inference in scienti
      % \rowcolor{lightgray}
      $\textbf{(}\boldsymbol\alpha,\boldsymbol\beta\textbf{)}$ & $\textbf{E(}\boldsymbol\theta\textbf{)}$ & \textbf{mean(Razorbacks Predicted)} & \textbf{SD(Razorbacks Predicted)} \\
      \hline
-     (2,8) & 0.2 & 29.53 & 10.94 \\
+     (2,8) & 0.2 & 30.03 & 10.77 \\
      \hline
-     (22,78) & 0.22 & 23.21 & 5.69 \\
+     (22,78) & 0.22 & 23.54 & 5.89 \\
      \hline
-     (224,776) & 0.224 & 22.41 & 4.29 \\
+     (224,776) & 0.224 & 22.62 & 4.38 \\
+     \hline
+     -- & -- & 40 & 4.9 \\
      \hline
   \end{tabular}
 \end{center}
@@ -188,7 +197,7 @@ and make our prediction using (\ref{BayesianPredictiveFormat}).
 
 \clearpage
 
-\section{Chapter 1:  Predictive Problems with Conjugate Priors}
+\section{Predictive Problems with Conjugate Priors}
 
 \textcolor{red}{paragraph introducting this section?}
   % [Problems with closed-form solutions.  These problems will be what the R package is designed for.  Use problems from Geisser, Casella \& Berger (Bayesian chapter), other sources.  Regression problem--predictive distributions of models that include and exclude some predictor]\\
@@ -785,7 +794,7 @@ The plot below shows the density curves of the math scores for these three schoo
 \clearpage
 
 
-\section{Chapter 2:  Normal Regression with Zellner's $g$-prior}
+\section{Normal Regression with Zellner's $g$-prior}
 
 \subsection{Least Squares Estimation with Example (Hoff p. 149ff.)}
 

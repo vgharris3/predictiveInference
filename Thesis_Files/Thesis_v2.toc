@@ -2,7 +2,7 @@
 \contentsline {section}{\numberline {2}Introduction: Predictive Inference}{4}{section.2}%
 \contentsline {subsection}{\numberline {2.1}Why Predictive Inference?}{4}{subsection.2.1}%
 \contentsline {subsection}{\numberline {2.2}The Bayesian Parametric Prediction Format}{7}{subsection.2.2}%
-\contentsline {section}{\numberline {3}Chapter 1: Predictive Problems with Conjugate Priors}{8}{section.3}%
+\contentsline {section}{\numberline {3}Predictive Problems with Conjugate Priors}{8}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Prediction of Future Successes: Beta-Binomial (Geisser p. 73)}{8}{subsection.3.1}%
 \contentsline {subsubsection}{\numberline {3.1.1}Derivation}{8}{subsubsection.3.1.1}%
 \contentsline {subsubsection}{\numberline {3.1.2}R Implementation (Beta-Binomial)}{9}{subsubsection.3.1.2}%
@@ -28,7 +28,7 @@
 \contentsline {paragraph}{\numberline {3.4.3.1}Derivation}{26}{paragraph.3.4.3.1}%
 \contentsline {paragraph}{\numberline {3.4.3.2}R Implementation (Normal-Inverse Gamma, k-samples)}{26}{paragraph.3.4.3.2}%
 \contentsline {paragraph}{\numberline {3.4.3.3}Example}{27}{paragraph.3.4.3.3}%
-\contentsline {section}{\numberline {4}Chapter 2: Normal Regression with Zellner's $g$-prior}{30}{section.4}%
+\contentsline {section}{\numberline {4}Normal Regression with Zellner's $g$-prior}{30}{section.4}%
 \contentsline {subsection}{\numberline {4.1}Least Squares Estimation with Example (Hoff p. 149ff.)}{30}{subsection.4.1}%
 \contentsline {subsection}{\numberline {4.2}Bayesian Estimation for a Regression Model (Hoff p. 154ff)}{34}{subsection.4.2}%
 \contentsline {subsubsection}{\numberline {4.2.1}Derivation}{34}{subsubsection.4.2.1}%

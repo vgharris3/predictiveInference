@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  22 DEC 2021 07:04
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  5 JAN 2022 08:50
 entering extended mode
 **./ToDoList.tex
 (ToDoList.tex
@@ -962,16 +962,65 @@ o _ Write _ a _ Thesis _ in _ LaTeX _ (Part _
 [1
 
 {C:/Users/gabe/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-(ToDoList.aux)
+Underfull \hbox (badness 10000) in paragraph at lines 99--103
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 105--109
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 110--112
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 110--112
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 113--114
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 113--114
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 115--118
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 115--118
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 119--120
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 119--120
+
+ []
+
+[2] [3] (ToDoList.aux)
 Package rerunfilecheck Info: File `ToDoList.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 29646 strings out of 479696
- 695551 string characters out of 2881701
- 1149551 words of memory out of 3000000
- 46119 multiletter control sequences out of 15000+200000
- 432775 words of font info for 110 fonts, out of 3000000 for 9000
+ 29671 strings out of 479696
+ 695747 string characters out of 2881701
+ 1150552 words of memory out of 3000000
+ 46122 multiletter control sequences out of 15000+200000
+ 436143 words of font info for 117 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  94i,7n,98p,707b,609s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\gabe\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\t
@@ -981,9 +1030,9 @@ amsfonts/cm/cmr12.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><
 C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/MiKTeX 2.9/fonts/type
 1/public/amsfonts/cm/cmsy10.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
 mtt12.pfb>
-Output written on ToDoList.pdf (1 page, 75091 bytes).
+Output written on ToDoList.pdf (3 pages, 87600 bytes).
 PDF statistics:
- 50 PDF objects out of 1000 (max. 8388607)
- 2 named destinations out of 1000 (max. 500000)
+ 75 PDF objects out of 1000 (max. 8388607)
+ 18 named destinations out of 1000 (max. 500000)
  17 words of extra memory for PDF output out of 10000 (max. 10000000)
 
