@@ -18,7 +18,16 @@
 \usepackage{cancel}
 \usepackage{bm}
 \usepackage{dsfont}
+
+\usepackage{booktabs,siunitx}
+
 \usepackage{graphicx}
+\graphicspath{ {./Graphics/} }
+\usepackage{wrapfig}
+\usepackage[font=scriptsize]{caption}
+\setlength{\abovecaptionskip}{5pt plus 1pt minus 1pt} % Chosen fairly arbitrarily
+% \captionsetup[figure]{font=small}
+
 \usepackage{graphics}
 \usepackage{xfrac}
 \usepackage{array}
@@ -48,6 +57,7 @@
 
 \setcounter{tocdepth}{5}
 \setcounter{secnumdepth}{5}
+% \setlength\parindent{0pt}
 
 \usepackage{pdfpages}
 \begin{document}
@@ -67,7 +77,7 @@ setwd("C:/Users/gabe/Documents/tmp/predictiveInference/Thesis_Files")
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Thesis Abstract}
 
-An obstacle to widespread employment of Bayesian predictive inference in scientific research is the lack of suitable computing tools.  In this thesis I document several established useful models, and provide an applicable set of tools for statisticians.  For each of the included models, some basic notes on mathematical derivation are presented, and predictive inference is illustrated with examples.  \sout{Note that throughout this thesis the terms ``predictive inference," ``Bayesian inference," and ``Bayesian prediction" are used interchangeably.}  For the details of the models and some of the examples I relied primarily on Seymour Geisser's \underline{Predictive Inference:  An Introduction} (1993) and Peter D. Hoff's \underline{A First Course in Bayesian Predictive Methods} (2009).
+An obstacle to widespread employment of Bayesian predictive inference in scientific research is the lack of suitable computing tools.  In this thesis I document several established useful models, and provide an applicable set of tools for statisticians.  For each of the included models, some basic notes on mathematical derivation are presented, and predictive inference is illustrated with examples.  For the details of the models and some of the examples I relied primarily on Seymour Geisser's \underline{Predictive Inference:  An Introduction} (1993) and Peter D. Hoff's \underline{A First Course in Bayesian Statistical Methods} (2009).
 
     An R package has been developed, the main purpose of which is to provide the researcher with a means of producing random samples from predictive distributions.  For all the models, the package includes random sample generators.  For those models with analytical solutions, density and distribution functions are also provided.  The standard R naming convention for these function classes has been adopted:  density functions are prefixed with the letter ``d," distribution functions with the letter ``p," and random generation functions with the letter ``r."  Also included in all function names is the abbreviation ``pred" (for predictive) and an initialism or abbreviation identifying the model itself.  For example, the density function for the Beta-Binomial model is named ``\texttt{dpredBB()}."  The R code for each function is included in Appendix \textcolor{red}{X-insert link to appendix here}.
 
@@ -77,54 +87,24 @@ An obstacle to widespread employment of Bayesian predictive inference in scienti
 
 \section{Introduction:  Predictive Inference}
 
+My understanding of Bayesian Predictive Inference began with the University of Arizona course ``Bayesian Statistical Theory and Applications" under \textcolor{red}{[appropriate/necessary to put ``Dr." here and elsewhere?]} Edward Bedrick.  Since then it has been shaped by exposure to various sources, including articles by Bedrick and Dean Billheimer, and to a greater extent the aforementioned texts by Hoff and Geisser, and others, including \underline{Bayesian Data Analysis} by Andrew Gelman et. al., and \underline{Statistical Prediction Analysis} by J. Aitchison and I.R. Dunsmore.  In the next section and what follows, the ideas expressed are an amalgam of what was learned from this body of scholarship.
+
   \subsection{Why Predictive Inference?}
 
-
-% \textcolor{red}{
-%     \begin{itemize}
-%       \item Intro:  ~3 paragraphs, < 2 pages
-%       \item Audience:  my classmates (persuade), my committee (demonstrate that \textit{I} get it)
-%     \end{itemize}
-% }
-%
-% \textcolor{red}{
-%     Sources:
-%     \begin{itemize}
-%       \item Nate Silver's book (1st chapter or intro)
-%       \item Geyser's book (1st chapter or intro)
-%       \item Aitchison and Dunsmore (1st chapter or intro)
-%       \item Dean's paper
-%       \item maybe some googling
-%     \end{itemize}
-% }
-    The main purpose of statistics is to predict future events based on observed data.  Prediction about meaningful quantities that are relevant to the object of study facilitates scientific progress in multiple ways.  Advantages include enhancing scientific reproducibility, enabling corroboration or refutation of current hypotheses through future experimentation, informing decision-making by summarizing quantities of direct interest to the researcher, and shifting the focus of statistical analysis from estimation of hypothetical parameters to statements about concrete observables.
+The main purpose of statistics is to predict future events based on observed data.  Prediction about meaningful quantities that are relevant to the object of study facilitates scientific progress in multiple ways.  Advantages include enhancing scientific reproducibility, enabling corroboration or refutation of current hypotheses through future experimentation, informing decision-making by summarizing quantities of direct interest to the researcher, and shifting the focus of statistical analysis from estimation of hypothetical parameters to statements about concrete observables.\\
 
     It is not the intent of this thesis to suggest that parametric inference should be abandoned in statistical analyses.  Conventional statistical inference techniques are useful for summarizing information about large quantities of data in a handful of usable values, and leveraging such summaries to determine whether a particular problem merits continued attention.  Indeed, the scientific discipline of statistics developed along frequentist lines, and the evolution of Bayesian methods has occurred atop that foundation.
-  %
-  %
-  % Settings in which parametric inference will continue to be needed include:
-  % \begin{itemize}
-  %   \item Summarizing in a handful of useful quantities a maximum amount of information about a data set
-  %   \item Leveraging such summaries to whether a particular problem is worth continued attention.
-  %   \item ``In some instances, a parameter may be conceived as the limit of a function of an infinite sequence of observations (Geisser 1993), and can be a useful concept when our object of interest is approximated as a large sample limit." (Dean Billheimer 2019)
-  % \end{itemize}
-  % \subsection{Difference between parametric inference and predictive inference}
 
-%  \textcolor{red}{paragraph or two about the difference between parametric inference and predictive inference}
-
-    % \subsubsection{When is predictive inference more useful?}
-    % \textcolor{red}{redo next paragraph and then segue to the example without the subsection split}\\
     Prediction is a means of discriminating between scientific hypotheses.  Generally, a model may be judged by the quality of its predictions.  Given competing models, the better predictor will be given more weight, and a useful model increases in utility as it its predictive capability improves.
 
-    % If a model doesn't predict well, why use it at all?\\
+\begin{wrapfigure}{r}{0.25\textwidth}
+  \begin{center}
+    \includegraphics[width=0.23\textwidth]{PtPBox}
+  \end{center}
+  \caption{Pass The Pigs\textsuperscript{\circledR}}
+\end{wrapfigure}
 
-    % \subsubsection{When is parametric inference more useful?}
-%    \textcolor{red}{When is parametric inference more useful?}\\
-
-
-  % \subsection{Example of Difference between results from Plug-in estimator and results using Predictive Inference}
-
-  To illustrate the potential difference between results from Bayesian prediction and using plug-in estimators, consider the game Pass the Pigs\texttrademark, a push-your-luck dice game in which the ``dice" are actually rubber pig figures.  Two pig dice are thrown, and points are scored according to the combination of positions in which they come to rest.  Details about the game can be found on Wikipedia here: \url{https://en.wikipedia.org/wiki/Pass_the_Pigs}
+  To illustrate the potential difference between results from Bayesian prediction and using plug-in estimators, consider the game Pass the Pigs\textsuperscript{\circledR}, a push-your-luck dice game in which the ``dice" are actually rubber pig figures.  Two pig dice are thrown, and points are scored according to the combination of positions in which they come to rest.  Details about the game can be found on Wikipedia here: \url{https://en.wikipedia.org/wiki/Pass_the_Pigs}
 
   For the purpose of this example, consider the probability of a single pig landing in the ``Razorback" position, which occurs when the pig is lying on its back with its legs extended upward.  The irregular shape of the pig makes it difficult to assign probabilities to results other than by means of experimentation.  Such an experiment was conducted at Duquesne University, and an article describing the experiment as well as Bayesian predictive inference performed on the results appeared in the \textit{Journal of Statistics Education} Volume 14, Number 3, in 2006.  The article can be accessed here:  \url{http://jse.amstat.org/v14n3/datasets.kern.html}. Of the $11,954$ recorded results for individual pigs, approximately $22.4\%$ were Razorbacks.
 
@@ -134,8 +114,10 @@ An obstacle to widespread employment of Bayesian predictive inference in scienti
 
   The plot and table below illustrate the effects of the Bayesian prediction method. Perhaps most notable is the location disparity between the plug-in (Binomial) predictive distribution and the family of Bayesian (Beta-binomial) prediction results.  The consideration of prior knowledge has a significant effect.  In this example, the Duquesne results act like ``additional" information in an updating iteration of an ongoing set of experiments, and plainly show the dominance of data in Bayesian prediction.
 
-  The choice of prior clearly has a significant effect on the resulting predictive distribution.  In this case the Beta shape factors strongly influence the mean and variance of the prediction.  This provides options for the future prognosticator with regard to choice of predictive distribution. If nearly duplication of the Duquesne experimental conditions, base predictions on the Beta$(224,776)$ result, for example.  If making a prediction for the general mass of future Pass the Pigs\texttrademark players, use the lower-weighted prior.
+  The choice of prior clearly has a significant effect on the resulting predictive distribution.  In this case the Beta shape factors strongly influence the mean and variance of the prediction.  This provides options for the future prognosticator with regard to choice of predictive distribution. If nearly duplication of the Duquesne experimental conditions, base predictions on the Beta$(224,776)$ result, for example.  If making a prediction for the general mass of future Pass the Pigs\textsuperscript{\circledR} players, use the lower-weighted prior.
 
+
+\vspace{1cm}
 
 <<fig=TRUE, echo=FALSE>>=
 source('C:/Users/gabe/Documents/tmp/predictiveInference/R/dpredBB.R')
@@ -178,7 +160,7 @@ fmat = cbind(f_x_BB28,f_x_BB2278,f_x_BB224776,f_x_PIE)
 ymax = max(fmat)*1.2
 
 matplot(x,fmat,type="l",lty=c(1,2,3,1),lwd = 2, col = c(1,1,1,2), ylim = c(0,ymax),
-     main = expression(atop("Pass the Pigs"^"TM", "Beta-Binomial Prediction vs. Binomial with Plug-in Estimator")),
+     main = expression(atop("Razorback Prediction", "Beta-Binomial Prediction vs. Binomial with Plug-in Estimator")),
      xlab = "Number of Razorbacks out of 100 Pig Tosses", ylab = "Density")
 
 leg1 = eval(bquote(expression("Beta-Binomial with "*theta*" ~ Beta("*.(a1)*","*.(b1)*")")))
@@ -219,21 +201,41 @@ PIESD = sqrt(M*t/N*(1-t/N))
 @
 
 
-% Table of prior parameter values and resulting effect on location and variance of prediction
+% Table of prior parameter values and resulting effect on location and variance of prediction\\
+% \begin{center}
+%   \begin{tabular}{ c c c c c }
+%      \hline
+%      \textbf{Prediction Method} & $\textbf{(}\boldsymbol\alpha,\boldsymbol\beta\textbf{)}$ & $\textbf{E(}\boldsymbol\theta\textbf{)}$ & \textbf{mean & \textbf{SD} \\
+%      \hline
+%      Beta-Binomial & (\Sexpr{a1},\Sexpr{b1}) & \Sexpr{a1/(a1+b1)} & \Sexpr{round(PtPMean2_8,2)} & \Sexpr{round(PtPSD2_8,2)} \\
+%      \hline
+%      Beta-Binomial & (\Sexpr{a2},\Sexpr{b2}) & \Sexpr{a2/(a2+b2)} & \Sexpr{round(PtPMean22_78,2)} & \Sexpr{round(PtPSD22_78,2)} \\
+%      \hline
+%      Beta-Binomial & (\Sexpr{a3},\Sexpr{b3}) & \Sexpr{a3/(a3+b3)} & \Sexpr{round(PtPMean224_776,2)} & \Sexpr{round(PtPSD224_776,2)} \\
+%      \hline
+%      Binomial & -- & -- & \Sexpr{PIEMean} & \Sexpr{round(PIESD,2)} \\
+%      \hline
+%   \end{tabular}
+% \end{center}
+
+\vspace{1cm}
+
 \begin{center}
-  \begin{tabular}{ |c|c|c|c| }
-     \hline
-     % \rowcolor{lightgray}
-     $\textbf{(}\boldsymbol\alpha,\boldsymbol\beta\textbf{)}$ & $\textbf{E(}\boldsymbol\theta\textbf{)}$ & \textbf{mean(Razorbacks Predicted)} & \textbf{SD(Razorbacks Predicted)} \\
-     \hline
-     (\Sexpr{a1},\Sexpr{b1}) & \Sexpr{a1/(a1+b1)} & \Sexpr{round(PtPMean2_8,2)} & \Sexpr{round(PtPSD2_8,2)} \\
-     \hline
-     (\Sexpr{a2},\Sexpr{b2}) & \Sexpr{a2/(a2+b2)} & \Sexpr{round(PtPMean22_78,2)} & \Sexpr{round(PtPSD22_78,2)} \\
-     \hline
-     (\Sexpr{a3},\Sexpr{b3}) & \Sexpr{a3/(a3+b3)} & \Sexpr{round(PtPMean224_776,2)} & \Sexpr{round(PtPSD224_776,2)} \\
-     \hline
-     -- & -- & \Sexpr{PIEMean} & \Sexpr{round(PIESD,2)} \\
-     \hline
+  \begin{tabular}{l c c c c }
+  \toprule
+  % \multicolumn{1}{c}{} &     \multicolumn{3}{c}{\large \#Razorbacks Predicted out of 100 Tosses}          \\
+  %                             & \multicolumn{1}{c}{$\textbf{(}\boldsymbol\alpha,\boldsymbol\beta\textbf{)}$}  & \multicolumn{1}{c}{$\textbf{E(}\boldsymbol\theta\textbf{)}$}  & \multicolumn{1}{c}{\textbf{mean}} & \multicolumn{1}{c}{\textbf{SD}}\\
+  \multicolumn{5}{c}{\large \#Razorbacks Predicted out of 100 Tosses}          \\
+  \multicolumn{1}{c}{\textbf{Prediction Method}} & \multicolumn{1}{c}{$\textbf{(}\boldsymbol\alpha,\boldsymbol\beta\textbf{)}$}  & \multicolumn{1}{c}{$\textbf{E(}\boldsymbol\theta\textbf{)}$}  & \multicolumn{1}{c}{\textbf{mean}} & \multicolumn{1}{c}{\textbf{SD}}\\
+        \midrule
+        Beta-Binomial & (\Sexpr{a1},\Sexpr{b1}) & \Sexpr{a1/(a1+b1)} & \Sexpr{round(PtPMean2_8,2)} & \Sexpr{round(PtPSD2_8,2)} \\
+        \midrule
+        Beta-Binomial & (\Sexpr{a2},\Sexpr{b2}) & \Sexpr{a2/(a2+b2)} & \Sexpr{round(PtPMean22_78,2)} & \Sexpr{round(PtPSD22_78,2)}\\
+        \midrule
+        Beta-Binomial & (\Sexpr{a3},\Sexpr{b3}) & \Sexpr{a3/(a3+b3)} & \Sexpr{round(PtPMean224_776,2)} & \Sexpr{round(PtPSD224_776,2)} \\
+        \midrule
+        Binomial & -- & -- & \Sexpr{PIEMean} & \Sexpr{round(PIESD,2)} \\
+  \bottomrule
   \end{tabular}
 \end{center}
 
@@ -824,7 +826,7 @@ if(0){
         &\\
         K & \text{ is Normal(0,1)}\\
         &\\
-        h & \text{ is the bandwidth from R's }\texttt{density()}\text{ function (that is, } h = \text{ density}(X_i)\text{\$bw)}\\
+        h & \text{ is the bandwidth from R's }\texttt{density()}\text{ function (that is, } \texttt{h = density(X}_\texttt{i}\texttt{)\$bw)}\\
       \end{flalign*}
 
       These functions are exercised in the following example.\\
@@ -834,7 +836,7 @@ if(0){
 
         \textit{Example (Hoff p. 72ff, using data from Grogan and Wirth (1981)):  Midge wing length}\\
 
-        Grogan and Wirth (1981) provide 9 measurements of midge wing length, in millimeters:  $y = \{1.64, 1.7, 1.72, 1.74, 1.82, 1.82, 1.82, 1.90, 2.08\}$. Previous studies suggest values $\mu_0 = 1.9$ and $\sigma_0^2 = 0.01$.  We choose $\kappa_0 = \nu_0 = 1$ ``...so that our prior distributions are only weakly centered around these estimates from other populations" (Hoff p. 76).  \textcolor{red}{Should I explore other values for $\kappa_0$ and $\nu_0$ and show plots with comparisons?} We compute
+        Grogan and Wirth (1981) provide 9 measurements of midge wing length, in millimeters:  $y = \{1.64, 1.7, 1.72, 1.74, 1.82, 1.82, 1.82, 1.90, 2.08\}$. Previous studies suggest values $\mu_0 = 1.9$ and $\sigma_0^2 = 0.01$.  We choose $\kappa_0 = \nu_0 = 1$ ``...so that our prior distributions are only weakly centered around these estimates from other populations" (Hoff p. 76). We compute
 
         \begin{flalign*}
           \bar{y} &= 1.804\\
@@ -1039,11 +1041,11 @@ legend("bottomright", inset = 0.05, bg="transparent",
 
       The user provides the two samples $\mathbf{y_1}$ and $\mathbf{y_2}$ along with values for $\mu_0, \sigma^2_0, \delta_0, \tau^2_0, \nu_0$, and desired prediction sample size $N$.  The function returns $N$ predictions for each population and the vectors of generated values for $\mu$, $\delta$, and $\sigma^2$.
 
-      \paragraph{Example}
-
-      Hoff p. 128-129 \textit{Analysis of math score data}\textcolor{red}{This next paragraph is almost a direct word-for-word lift from Hoff.  Should I simplify this to just introduce the example without all the explanation, and refer the reader to Hoff?}\\
+      \paragraph{Example} (Hoff p. 128-129 \textit{Analysis of math score data})\\
+      Hoff provides the following example, which we reproduce here.\\\\
       Math score data for two schools were based on results of a national exam in the United States, standardized to produce a nationwide mean of 50 and a standard deviation of 10.  Unless the two schools were known in advance to be extremely exceptional, reasonable prior parameters can be based on this information.  For the prior distributions of $\mu$ and $\sigma^2$, we'll take $\mu_0 = 50$ and $\sigma^2_0 = 10^2 = 100$, although this latter value is likely to be an overestimate of the within-school sampling variability.  We'll make these prior distributions somewhat diffuse, with $\gamma^2_0 = 25^2 = 625$ and $\nu_0 = 1$.  For the prior distribution on $\delta$, choosing $\delta_0 = 0$ represents the prior opinion that $\theta_1 > \theta_2$ and $\theta_2 > \theta_1$ are equally probable.  Finally, since the scores are bounded between 0 and 100, half the difference between $\theta_1$ and $\theta_2$ must be less than 50 in absolute value, so a value of $\tau^2_0 = 25^2 = 625$ seems reasonably diffuse.\\\\
-      The results of a call to rpredNormIG2$\left(\mathbf{y}_1,\mathbf{y}_2,\mu_0,\sigma^2_0,\delta_0,\tau^2_0,N\right)$ are summarized in the following plot.\\
+      % The results of a call to rpredNormIG2$\left(\mathbf{y}_1,\mathbf{y}_2,\mu_0,\sigma^2_0,\delta_0,\tau^2_0,N\right)$ are summarized in the following plot.\\
+      The results of a call to \texttt{rpredNormIG2()} with the above input values for $\mathbf{y}_1,\mathbf{y}_2,\mu_0,\sigma^2_0,\delta_0,\tau^2_0,\text{ and } N$ are summarized in the following plot.\\
 
 <<fig=TRUE, echo=FALSE>>=
 #### Two sample comparison
@@ -1134,7 +1136,7 @@ lines(density(RS[,2]),lwd=2,col="red",lty=2)
         \item For $s\in\{1,...,S\}$, generate prediction $\tilde{y}_j^{(s)} \sim \text{normal}\left(\theta_j^{(s)},\sigma^{2(s)}\right)$
       \end{enumerate}
 
-\textcolor{red}{Look at the form in which \texttt{rpredNormIGk()} takes the data in.  Currently Y is a list of vectors of varying lengths.  The raw data is a long two-column numeric table with indices in the first column.  It's called Y.school.mathscore.  It would take a little re-work but if the 2-column format is preferred it's probably worth making the change.  Let me know.}
+% \textcolor{red}{Look at the form in which \texttt{rpredNormIGk()} takes the data in.  Currently Y is a list of vectors of varying lengths.  The raw data is a long two-column numeric table with indices in the first column.  It's called Y.school.mathscore.  It would take a little re-work but if the 2-column format is preferred it's probably worth making the change.  Let me know.}
 
       \paragraph{Example}
       Returning to the math scores example, data for 10th-grade students from 100 large urban schools (each having 10th-grade enrollment of at least 400) is summarized in the following plots.
@@ -1266,7 +1268,7 @@ library(profvis)
 
 par(mfrow=c(1,1))
 
-result = rpredNormIGk(N=5000,Y,nu0=1,s20=100,eta0=1,t20=100,mu0=50,g20=25)
+result = rpredNormIGk(N=5000,Y.school.mathscore,nu0=1,s20=100,eta0=1,t20=100,mu0=50,g20=25)
 
 toplot = c(5,100,67)
 

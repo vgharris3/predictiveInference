@@ -1,6 +1,6 @@
 #' The Normal-Inverse Gamma Predictive Distribution for k Samples
 #'
-#' rpredNormIGk returns a random sample of size N from the Normal-Inverse Gamma predictive probability distribution for each of the k samples, along with N posterior draws of the within-group and between-groups unknown parameters.
+#' rpredNormIGk_old returns a random sample of size N from the Normal-Inverse Gamma predictive probability distribution for each of the k samples, along with N posterior draws of the within-group and between-groups unknown parameters.
 #'
 #' @param N desired random sample size
 #' @param Y 2-column matrix of multiple samples of observed Normally-distributed values.  Column 1:  integer indices identifying the samples.  Column 2:  data values for the sample indicated by the corresponding index in column 1.
@@ -15,7 +15,7 @@
 #' @export
 #'
 #' @examples 1
-rpredNormIGk = function(N=1,Y,nu0=1,s20=1,eta0=1,t20=1,mu0=0,g20=1){
+rpredNormIGk_old = function(N=1,Y,nu0=1,s20=1,eta0=1,t20=1,mu0=0,g20=1){
 
   #ERROR HANDLING
 
@@ -60,30 +60,63 @@ rpredNormIGk = function(N=1,Y,nu0=1,s20=1,eta0=1,t20=1,mu0=0,g20=1){
     return(1)
   }
 
+#   n1<-length(y1) ; n2<-length(y2)
+#
+#   ## prior parameters
+# #  mu0<-50 ; g20<-625
+# #  d0<-0 ; t20<-625
+# #  s20<-100; nu0<-1
+#
+#   ## starting values
+#   mu<- ( mean(y1) + mean(y2) )/2
+#   del<- ( mean(y1) - mean(y2) )/2
+#
+#   ## Gibbs sampler
+#   MU<-DEL<-S2<-NULL
+#   Y12<-NULL
+# #  set.seed(1)
+#   for(s in 1:n)
+#   {
+#
+#     ##update s2
+#     s2<-1/stats::rgamma(1,(nu0+n1+n2)/2,
+#                  (nu0*s20+sum((y1-mu-del)^2)+sum((y2-mu+del)^2) )/2)
+#     ##
+#
+#     ##update mu
+#     var.mu<-  1/(1/g20+ (n1+n2)/s2 ) #this is gamma^2_n -- call it g2n
+#     mean.mu<- var.mu*( mu0/g20 + sum(y1-del)/s2 + sum(y2+del)/s2 )  #this is mu_n -- call it mun
+#     mu<-stats::rnorm(1,mean.mu,sqrt(var.mu))
+#     ##
+#
+#     ##update del
+#     var.del<-  1/(1/t20+ (n1+n2)/s2 )
+#     mean.del<- var.del*( d0/t20 + sum(y1-mu)/s2 - sum(y2-mu)/s2 )
+#     del<-stats::rnorm(1,mean.del,sqrt(var.del))
+#     ##
+#
+#     ##save parameter values
+#     MU<-c(MU,mu) ; DEL<-c(DEL,del) ; S2<-c(S2,s2)
+#     Y12<-rbind(Y12,c(stats::rnorm(2,mu+c(1,-1)*del,sqrt(s2) ) ) )
+#   }
+#
+#   rs = Y12
+  #HOW TO RETURN SEVERAL THINGS ACCESSIBLE VIA $??
   #### MCMC approximation to posterior for the hierarchical normal model
 
-  ## Put data in list form
-  Ylist<-list()
-  # YM<-NULL
-  J<-max(Y[,1]) #col. 1 of Y is an index identifying the data in col. 2
-  n<-ybar<-ymed<-s2<-rep(0,J)
-  for(j in 1:J) {
-    Ylist[[j]]<-Y[ Y[,1]==j,2] #separate out data into separate vectors by index.  Y is a list of those vectors, which need not be all the same length
-    ybar[j]<-mean(Ylist[[j]]) #record mean of each data set
-    ymed[j]<-median(Ylist[[j]]) #record median of each data set
-    n[j]<-length(Ylist[[j]]) #record number data points in each data set
-    s2[j]<-var(Ylist[[j]]) #record variance of each data set
-    # YM<-rbind( YM, cbind( rep(j,n[j]), Ylist[[j]] )) #first column is data set index, second column is scores matched to those indices
-  }
+  ## weakly informative priors
+  # nu0<-1  ; s20<-100
+  # eta0<-1 ; t20<-100
+  # mu0<-50 ; g20<-25
 
   ## starting values
-  m<-length(Ylist)
+  m<-length(Y)
   ytilde<-n<-sv<-ybar<-rep(NA,m)
   for(j in 1:m)
   {
-    ybar[j]<-mean(Ylist[[j]])
-    sv[j]<-var(Ylist[[j]])
-    n[j]<-length(Ylist[[j]])
+    ybar[j]<-mean(Y[[j]])
+    sv[j]<-var(Y[[j]])
+    n[j]<-length(Y[[j]])
   }
   theta<-ybar
   sigma2<-mean(sv)
