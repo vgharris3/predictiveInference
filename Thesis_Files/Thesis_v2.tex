@@ -97,7 +97,7 @@ The main purpose of statistics is to predict future events based on observed dat
 
 \begin{wrapfigure}{r}{0.25\textwidth}
   \begin{center}
-    \includegraphics[width=0.23\textwidth]{PtPBox}
+    \includegraphics[width=0.23\textwidth]{./Graphics/PassThePigs/PtPBox}
   \end{center}
   \caption{Pass The Pigs\textsuperscript{\circledR}}
 \end{wrapfigure}
@@ -108,52 +108,37 @@ The main purpose of statistics is to predict future events based on observed dat
 
   Suppose $t=4$ Razorbacks have been observed out of $N=10$ tosses of a single pig die, suggesting a straightforward binomial distribution with $\theta =$ Pr(Razorback) $= t/N = 0.4$. Taking the Duquesne experiment into consideration, we'll perform Bayesian prediction using three prior distributions for $\theta$: $\theta\sim\text{Beta}(2,8)$, $\theta\sim\text{Beta}(22,78)$, and $\theta\sim\text{Beta}(224,776)$, and compare these results to predictions obtained from the plug-in estimator $\theta = 0.4$.   Any number of prior distributions on $\theta$ would satisfy the condition that $E(\theta) \approx 0.224$, suggested by the prior information.  The specific choice of a Beta prior is made largely for computational convenience.
 
-  In this example the question asked by the researcher is, ``For $M = 100$ future observations, how many Razorbacks are predicted?"  The density curves in the plot below show the influence of the details of the choice of prior on the location and variance of the predictive distribution.  Essentially, each pair of shape parameters $(\alpha,\beta)$ in the Beta prior reflects \sout{prior knowledge about} the researcher's level of reliance on the results of the Duquesne experiment, with the ``weight" given to that knowledge increasing with the shape parameters by orders of magnitude.  The choice of shape parameters might be influenced by such things as pig throwing method (perhaps the researcher is throwing them by hand rather than by the carefully controlled method used in the Duquesne experiment, e.g.), or by a need to account for pig-to-pig variation, or anything else the researcher believes introduces a deviation from the events upon which the prior information is based.
+  In this example the question asked by the researcher is, ``For $M = 100$ future observations, how many Razorbacks are predicted?"  The density curves in the plot below show the influence of the details of the choice of prior on the location and variance of the predictive distribution.  Essentially, each pair of shape parameters $(\alpha,\beta)$ in the Beta prior reflects \sout{prior knowledge about} the researcher's level of reliance on the results of the Duquesne experiment, with the ``weight" given to that knowledge increasing with the shape parameters by orders of magnitude.  The choice of shape parameters might be influenced by such things as pig tossing method (perhaps the researcher is throwing them by hand rather than dropping them by the carefully controlled method used in the Duquesne experiment), or by a need to account for pig-to-pig variation, or anything else the researcher believes introduces a deviation from the events upon which the prior information is based.  Use of the scaled-up Big Pigs\texttrademark variant, for example might give reason to use a very low-weighted prior such as $\theta\sim\text{Beta}(2,8)$.
 
-  The plot and table below illustrate the effects of the Bayesian prediction method. Perhaps most notable is the location disparity between the plug-in (Binomial) predictive distribution and the family of Bayesian (Beta-binomial) prediction results.  The consideration of prior knowledge has a significant effect.  In this example, the Duquesne results act like ``additional" information in an updating iteration of an ongoing set of experiments, and plainly show the dominance of data in Bayesian prediction.
+\begin{wrapfigure}{l}{0.65\textwidth}
+  \begin{center}
+    \includegraphics[width=0.63\textwidth]{./Graphics/PassThePigs/PigSize}
+  \end{center}
+  \caption{Original to Big Pigs\texttrademark Approximate Scale}
+\end{wrapfigure}
 
-  The choice of prior clearly has a significant effect on the resulting predictive distribution.  In this case the Beta shape factors strongly influence the mean and variance of the prediction.  This provides options for the future prognosticator with regard to choice of predictive distribution. If nearly duplication of the Duquesne experimental conditions, base predictions on the Beta$(224,776)$ result, for example.  If making a prediction for the general mass of future Pass the Pigs\textsuperscript{\circledR} players, use the lower-weighted prior.
+  The plot and table below illustrate the effects of the Bayesian prediction method. Perhaps most notable is the location disparity between the plug-in (Binomial) prediction and the family of Bayesian (Beta-binomial) predictive distributions.  The consideration of prior knowledge has a significant effect.  In this example, the strong influence of the choice of shape factors for the Beta prior on the mean and variance of the predictive distribution provides options for the future prognosticator. If closely duplicating the Duquesne experimental conditions, for example, predictions might be based on the result from the Beta$(224,776)$ prior.  A lower-weighted prior might be used for any experimental element the researcher believes introduces a deviation from the knowledge upon which the prior information is based.
 
 
 \vspace{1cm}
 
 \includegraphics{Thesis_v2-002}
 
-
-% Table of prior parameter values and resulting effect on location and variance of prediction\\
-% \begin{center}
-%   \begin{tabular}{ c c c c c }
-%      \hline
-%      \textbf{Prediction Method} & $\textbf{(}\boldsymbol\alpha,\boldsymbol\beta\textbf{)}$ & $\textbf{E(}\boldsymbol\theta\textbf{)}$ & \textbf{mean & \textbf{SD} \\
-%      \hline
-%      Beta-Binomial & (2,8) & 0.2 & 29.72 & 10.74 \\
-%      \hline
-%      Beta-Binomial & (22,78) & 0.22 & 23.52 & 5.67 \\
-%      \hline
-%      Beta-Binomial & (224,776) & 0.224 & 22.5 & 4.47 \\
-%      \hline
-%      Binomial & -- & -- & 40 & 4.9 \\
-%      \hline
-%   \end{tabular}
-% \end{center}
-
 \vspace{1cm}
 
 \begin{center}
   \begin{tabular}{l c c c c }
   \toprule
-  % \multicolumn{1}{c}{} &     \multicolumn{3}{c}{\large \#Razorbacks Predicted out of 100 Tosses}          \\
-  %                             & \multicolumn{1}{c}{$\textbf{(}\boldsymbol\alpha,\boldsymbol\beta\textbf{)}$}  & \multicolumn{1}{c}{$\textbf{E(}\boldsymbol\theta\textbf{)}$}  & \multicolumn{1}{c}{\textbf{mean}} & \multicolumn{1}{c}{\textbf{SD}}\\
   \multicolumn{5}{c}{\large \#Razorbacks Predicted out of 100 Tosses}          \\
   \multicolumn{1}{c}{\textbf{Prediction Method}} & \multicolumn{1}{c}{$\textbf{(}\boldsymbol\alpha,\boldsymbol\beta\textbf{)}$}  & \multicolumn{1}{c}{$\textbf{E(}\boldsymbol\theta\textbf{)}$}  & \multicolumn{1}{c}{\textbf{mean}} & \multicolumn{1}{c}{\textbf{SD}}\\
         \midrule
-        Beta-Binomial & (2,8) & 0.2 & 29.72 & 10.74 \\
+        Beta-Binomial & (2,8) & 0.2 & 30.42 & 10.95 \\
         \midrule
-        Beta-Binomial & (22,78) & 0.22 & 23.52 & 5.67\\
+        Beta-Binomial & (22,78) & 0.22 & 23.68 & 5.85\\
         \midrule
-        Beta-Binomial & (224,776) & 0.224 & 22.5 & 4.47 \\
+        Beta-Binomial & (224,776) & 0.224 & 22.76 & 4.46 \\
         \midrule
-        Binomial & -- & -- & 40 & 4.9 \\
+        Binomial$(100,0.4)$ & -- & -- & 40 & 4.9 \\
   \bottomrule
   \end{tabular}
 \end{center}
@@ -161,9 +146,6 @@ The main purpose of statistics is to predict future events based on observed dat
 \clearpage
 
   \subsection{The Bayesian Parametric Prediction Format}
-  %
-  % \textcolor{red}{Use Dean's setup from his article, start of section 3}\\
-  % \textcolor{red}{talk about exchangeability and di Finetti (reread Hoff's intro, also Geisser?)}
 
   We want to predict future outcomes based on current knowledge.  Specifically we're asking: for observed values $Y_1 = y_1,...,Y_n = y_n$, what is likely to be the value of the next observation, $\tilde{Y}=\tilde{y}$?  We want to compute $Pr(\tilde{Y}|y_1,...,y_n)$, where $y_1,...,y_n$ are conditionally independent and identically distributed (i.i.d.) with respect to a population parameter (or parameters) $\theta$.  We assign prior distribution $\pi(\theta)$ based on some existing knowledge or beliefs.  Here we are careful to satisfy ourselves that $Y_1,...,Y_n$ are \textit{exchangeable}, which enables us to rely on de Finetti's representation theorem for the i.i.d. assumption.  Thus we can write
 
