@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  29 DEC 2021 12:02
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  21 JAN 2022 06:32
 entering extended mode
 **./Scratch.tex
 (Scratch.tex
@@ -952,16 +952,30 @@ Underfull \hbox (badness 10000) in paragraph at lines 171--172
 
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 193--197
+
+ []
+
+LaTeX Font Info:    Trying to load font information for T1+aett on input line 1
+99.
+("C:\MiKTeX 2.9\tex/latex/ae\t1aett.fd"
+File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
+)
+Underfull \hbox (badness 10000) in paragraph at lines 199--202
+
+ []
+
 [3] (Scratch.aux)
 Package rerunfilecheck Info: File `Scratch.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 29568 strings out of 479696
- 694442 string characters out of 2881701
- 1155551 words of memory out of 3000000
- 46055 multiletter control sequences out of 15000+200000
- 420149 words of font info for 68 fonts, out of 3000000 for 9000
+ 29595 strings out of 479696
+ 694828 string characters out of 2881701
+ 1155550 words of memory out of 3000000
+ 46076 multiletter control sequences out of 15000+200000
+ 420997 words of font info for 71 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  94i,19n,98p,706b,609s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/MiKTeX 2.9/fonts
@@ -973,10 +987,11 @@ public/amsfonts/cm/cmr12.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6
 s/type1/public/amsfonts/cm/cmsy10.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfont
 s/cm/cmsy6.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/MiKT
 eX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/MiKTeX 2.9/fonts/type1/pub
-lic/amsfonts/latxfont/line10.pfb>
-Output written on Scratch.pdf (3 pages, 131543 bytes).
+lic/amsfonts/cm/cmtt12.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/latxfont/
+line10.pfb>
+Output written on Scratch.pdf (3 pages, 137234 bytes).
 PDF statistics:
- 90 PDF objects out of 1000 (max. 8388607)
+ 94 PDF objects out of 1000 (max. 8388607)
  16 named destinations out of 1000 (max. 500000)
  17 words of extra memory for PDF output out of 10000 (max. 10000000)
 

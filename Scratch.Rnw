@@ -199,6 +199,11 @@ ybar = 1:10
 \R{asdf}\\
 \R{}\\
 \R\\
-R
+R\\
+
+%trying to write a $ in \texttt{} font for rcode in document
+\texttt{function(x)}\\
+\texttt{function(x) = y}\\
+\texttt{function(x) = y\$asdf}\\
 
 \end{document}
