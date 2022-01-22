@@ -44,8 +44,7 @@ rpredPG = function(n,obs, alpha = 1, beta=1){
   #Along the way, always round the middle value to the nearest integer
 
   #Set desired tolerance epsilon for root function
-  eps = 0.0000001
-  eps = .Machine$double.eps^0.5
+  eps = sqrt(.Machine$double.eps)
   #Compute predictive expected value of x
   E_x = round((alpha + sum(obs))/(beta + length(obs)))
   Lower = E_x

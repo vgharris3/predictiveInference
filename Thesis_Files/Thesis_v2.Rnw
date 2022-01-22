@@ -615,20 +615,22 @@ This is a negative binomial distribution:  $\tilde{y}\sim NB\left(\alpha+\sum y_
 
 This result has been used to create R functions \texttt{dpredPG()}, \texttt{ppredPG()}, and \texttt{rpredPG()} for the Poisson-Gamma distribution for density, cumulative probability, and random sampling, respectively (see appendix for R code).  These functions are exercised in the example below.\\
 
-The density function \texttt{dpredPG()} simply makes use of the R function \texttt{dnbinom()}.  The cdf \texttt{ppredPG()} returns a cumulative sum of the results of \texttt{dpredPG()}.  The random sampler \texttt{rpredPG()} is a bit more complicated. The difficulty is that the upper bound of the support of the predictive distribution $p(\tilde{y}|y_1,...,y_n)$ is not known.  Since $p(\cdot)$ is negative binomial, we can count on it approaching $0$ at the upper end.  To establish the support, then, a method was employed to find where $p$ comes ``sufficiently close" to $0$.  To accomplish this a modified bisection method was devised as follows:\\
+The density function \texttt{dpredPG()} simply makes use of the R function \texttt{dnbinom()}.  The cdf \texttt{ppredPG()} returns a cumulative sum of the results of \texttt{dpredPG()}.  The random sampler \texttt{rpredPG()} is a bit more complicated. The difficulty is that the upper bound of the support of the predictive distribution $p(\tilde{y}|y_1,...,y_n)$ is not known.  Since $p(\cdot)$ is negative binomial, we can count on it eventually decreasing toward $0$ asymptotically.  To establish the support, then, a method was employed to find where $p$ comes ``sufficiently close" to $0$.  To accomplish this a modified bisection method was devised as follows:\\
 
 % Initially the R function \texttt{uniroot()} was considered, but ultimately a modified bisection method was devised as follows:\\
 
     \begin{enumerate}
-      \item Set a desired tolerance $\epsilon$ for the distance of the predictive distribution above zero at the upper end of its support.  Currently the function leverages the local device's numerical precision with $\epsilon = $ \texttt{.Machine\$double.eps}\textcolor{red}{fix this}%$\$$\texttt{double.eps^0.5}.
-      \item Set lower bound $L$ equal to the expected value of $\tilde{Y}$.  that is, $L = E(\tilde{Y}|y_1,...,y_N) = \dfrac{\alpha+\sum{y_i}}{\beta+N}$ (negative binomial). \textcolor{red}{is L guaranteed to be an integer here?  Does it matter?}
-      \item Step to the right of $L$ by increments in the sequence $L+1,L+2,L+4,...,L+2^k,...$, setting upper bound $U_{test} = 2^k$ with the first value of $k$ for which $\texttt{dpredPG}\left(L + 2^k\right) < 0$.
-      \item Bisect the interval $[L,U_{test}]$ letting $B$ be the integer nearest to the middle of the interval.
+      \item Set a desired tolerance $\epsilon$ for the distance of the predictive distribution above zero at the upper end of its support.  Currently the function leverages the local device's numerical precision with $\epsilon = $ \texttt{sqrt(.Machine\$double.eps)}.
+      \item Set lower endpoint $L$ equal to the expected value of $\tilde{Y}$.  That is, $L = E(\tilde{Y}|y_1,...,y_N) = \dfrac{\alpha+\sum{y_i}}{\beta+N}$ (negative binomial). % L is not likely to be an integer, which doesn't matter, because L will not be fed back into the NB distribution
+      \item Step to the right of $L$ by increments in the sequence $\{L+2^k:k=1,2,...\}$, setting upper endpoint $U_{test} = L+2^k$ using the first value of $k$ for which $\texttt{dpredPG}\left(L + 2^k\right) < 0$.
+      \item Bisect $[L,U_{test}]$ letting $B$ be the integer nearest to the middle of the interval.
       \item Test whether $0 \leq \texttt{dpredPG}(B) \leq \epsilon$.  If so, accept $U = B$ as the upper end of the support.  If not:
       \item Establish a new interval $[L',U'_{test}]$ as follows:
-        \subitem if $[\texttt{dpredPG}(L),\texttt{dpredPG}(B)]$ straddles $0$, then $[L',U'_{test}] = [L,B]$.
-        \subitem if $[\texttt{dpredPG}(B),\texttt{dpredPG}(U_{test})]$ straddles $0$, then $[L',U'_{test}] = [B,U_{test}]$.
-      \item Repeat steps 3 - 5 above with the updated interval $[L,U_{test}] = [L',U'_{test}]$ until the condition in step 5 is reached.
+      \begin{enumerate}
+        \item if $[\texttt{dpredPG}(L),\texttt{dpredPG}(B)]$ straddles $0$, then $[L',U'_{test}] = [L,B]$.
+        \item if $[\texttt{dpredPG}(B),\texttt{dpredPG}(U_{test})]$ straddles $0$, then $[L',U'_{test}] = [B,U_{test}]$.
+      \end{enumerate}
+      \item Repeat steps 3 - 5 above with the updated interval $[L,U_{test}] = [L',U'_{test}]$ until the condition in step 5 is reached, establishing upper bound $U$.
       \item Use $[0,U]$ as the support upon which to draw a random sample.
     \end{enumerate}
 
@@ -665,13 +667,13 @@ par(mfrow=c(3,1))
 
 #Predictive density
 f_x = dpredPG(ytilde, obs, alpha, beta)
-plot(1:length(f_x),f_x,type = "l", col = "blue", lwd = 2, main = "Poisson-Gamma Predictive Density",xlab = expression(y[n+1]),
-     ylab = expression(f(y[n+1])))
+plot(1:length(f_x),f_x,type = "l", col = "blue", lwd = 2, main = "Poisson-Gamma Predictive Density",xlab = expression(y[N+1]),
+     ylab = expression(f(y[N+1])))
 
 #Cumulative predictive probability
 F_x = ppredPG(ytilde, obs, alpha, beta)
-plot(1:length(F_x),F_x,type = "l", col = "red", lwd = 2, main = "Poisson-Gamma Cumulative Predictive Probability",xlab = expression(y[n+1]),
-     ylab = expression(F(y[n+1])))
+plot(1:length(F_x),F_x,type = "l", col = "red", lwd = 2, main = "Poisson-Gamma Cumulative Predictive Probability",xlab = expression(y[N+1]),
+     ylab = expression(F(y[N+1])))
 
 #Random sample
 random_sample = rpredPG(100000,obs, alpha, beta)
@@ -702,15 +704,15 @@ if(0){
     \subsubsection{One sample}
       \paragraph{Derivation}
       [Hoff p. 69ff]\\
-        Let $\left\{Y_1,...,Y_n|\theta,\sigma^2\right\}\overset{i.i.d.}{\sim}N\left(\theta,\sigma^2\right)$.  Then the joint sampling density is
+        Let $\left\{Y_1,...,Y_N|\theta,\sigma^2\right\}\overset{i.i.d.}{\sim}Normal\left(\theta,\sigma^2\right)$.  Then the joint sampling density is
 
         \begin{flalign*}
-          p\left(y_1,...,y_n|\theta,\sigma^2\right)
-          &= \prod_{i=1}^n p\left(y_i|\theta,\sigma^2\right)\\
+          p\left(y_1,...,y_N|\theta,\sigma^2\right)
+          &= \prod_{i=1}^N p\left(y_i|\theta,\sigma^2\right)\\
           &\\
-          &= \prod_{i=1}^n \dfrac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{1}{2}\left(\frac{y_i - \theta}{\sigma}\right)^2}\\
+          &= \prod_{i=1}^N \dfrac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{1}{2}\left(\frac{y_i - \theta}{\sigma}\right)^2}\\
           &\\
-          &= \left(2\pi\sigma^2\right)^{-\sfrac{n}{2}}e^{-\frac{1}{2}\sum_{i=1}^n\left(\frac{y_i - \theta}{\sigma}\right)^2}.\\
+          &= \left(2\pi\sigma^2\right)^{-\sfrac{N}{2}}e^{-\frac{1}{2}\sum_{i=1}^N\left(\frac{y_i - \theta}{\sigma}\right)^2}.\\
         \end{flalign*}
 
         %It can be shown that $\left\{\sum{y_i^2},\sum{y_i}\right\}$ and hence $\left\{\bar{y},s^2\right\}$ are sufficient statistics, where $\bar{y} = \sum{y_i}/n$ and $s^2 = \sum\left(y_i - \bar{y}\right)^2/(n-1)$.\\
@@ -721,9 +723,9 @@ if(0){
 \noindent Following Hoff (p. 74ff), for joint inference on both $\theta$ and $\sigma$, assume priors
 
         \begin{flalign*}
-          \frac{1}{\sigma^2} &\sim \text{gamma}\left(\sfrac{\nu_0}{2},\sfrac{\nu_0\sigma_0^2}{2}\right)\\
+          \frac{1}{\sigma^2} &\sim \text{Gamma}\left(\sfrac{\nu_0}{2},\sfrac{\nu_0\sigma_0^2}{2}\right)\\
           &\\
-          \theta|\sigma^2 &\sim \text{normal}\left(\mu_0,\sfrac{\sigma^2}{\kappa_0}\right)\\
+          \theta|\sigma^2 &\sim \text{Normal}\left(\mu_0,\sfrac{\sigma^2}{\kappa_0}\right)\\
         \end{flalign*}
 
 \noindent where $\left(\sigma_0^2,\nu_0\right)$ are the sample variance and sample size of prior observations, and $\left(\mu_o, \kappa_0\right)$ are the sample mean and sample size of prior observations.\\
@@ -733,46 +735,46 @@ if(0){
         From this we derive joint posterior distribution
 
         \begin{flalign*}
-          \left\{\theta|y_1,...,y_n,\sigma^2\right\} &\sim \text{normal}\left(\mu_n,\sfrac{\sigma^2}{\kappa_n}\right)\\
+          \left\{\theta|y_1,...,y_N,\sigma^2\right\} &\sim \text{Normal}\left(\mu_N,\sfrac{\sigma^2}{\kappa_N}\right)\\
           &\\
-          \left\{\sigma^2|y_1,...,y_n\right\} &\sim \text{inverse-gamma}\left(\sfrac{\nu_n}{2},\sfrac{\sigma^2_n\nu_n}{2}\right).
+          \left\{\sigma^2|y_1,...,y_N\right\} &\sim \text{Inverse-Gamma}\left(\sfrac{\nu_N}{2},\sfrac{\sigma^2_N\nu_N}{2}\right).
         \end{flalign*}
 
         where
 
         \begin{flalign*}
-          \kappa_n &= \kappa_0 + n\\
+          \kappa_N &= \kappa_0 + N\\
           &\\
-          \mu_n &= \frac{\kappa_0\mu_0+n\bar{y}}{\kappa_n}\\
+          \mu_N &= \frac{\kappa_0\mu_0+N\bar{y}}{\kappa_N}\\
           &\\
-          \nu_n &= \nu_0 + n\\
+          \nu_n &= \nu_0 + N\\
           &\\
-          \sigma_n^2 &= \frac{1}{\nu_n}\left[\nu_0\sigma_0^2 + (n-1)s^2 + \frac{\kappa_0 n}{\kappa_n}\left(\bar{y}-\mu_0\right)^2\right].\\
+          \sigma_N^2 &= \frac{1}{\nu_N}\left[\nu_0\sigma_0^2 + (N-1)s^2 + \frac{\kappa_0 N}{\kappa_N}\left(\bar{y}-\mu_0\right)^2\right].\\
         \end{flalign*}
 
-        Here $\bar{y} = \frac{1}{n}\sum_{i=1}^n y_i$ is the sample mean and $s^2 = \frac{1}{n-1}\sum_{i=1}^n\left(y_i - \bar{y}\right)^2$ is the sample variance.\\
+        Here $\bar{y} = \frac{1}{N}\sum_{i=1}^N y_i$ is the sample mean and $s^2 = \frac{1}{N-1}\sum_{i=1}^N\left(y_i - \bar{y}\right)^2$ is the sample variance.\\
 
         From the joint posterior distribution we generate marginal samples by means of the Monte Carlo method (Hoff, p. 77):
 
         \begin{flalign*}
           \begin{matrix}
-            \sigma^{2(1)}\sim \text{inverse-gamma}\left(\nu_n/2,\sigma^2_n\nu_n/2\right), & \theta^{(1)}\sim \text{normal}\left(\mu_n,\sigma^{2(1)}/\kappa_n\right) \\
+            \sigma^{2(1)}\sim \text{inverse-gamma}\left(\nu_N/2,\sigma^2_N\nu_N/2\right), & \theta^{(1)}\sim \text{normal}\left(\mu_N,\sigma^{2(1)}/\kappa_N\right) \\
             \vdots  & \vdots  \\
-            \sigma^{2(S)}\sim \text{inverse-gamma}\left(\nu_n/2,\sigma^2_n\nu_n/2\right), & \theta^{(S)}\sim \text{normal}\left(\mu_n,\sigma^{2(S)}/\kappa_n\right) \\
+            \sigma^{2(S)}\sim \text{inverse-gamma}\left(\nu_N/2,\sigma^2_N\nu_N/2\right), & \theta^{(S)}\sim \text{normal}\left(\mu_N,\sigma^{2(S)}/\kappa_N\right) \\
           \end{matrix}
         \end{flalign*}
 
-        For prediction of future $\tilde{y}|y_1,...,y_n,\theta,\sigma^2$, generate $\tilde{y}_i \sim \text{normal}\left(\theta^{(i)},\sigma^{2(i)}\right)$.\\
+        For prediction of future $\tilde{y}|y_1,...,y_N,\theta,\sigma^2$, generate $\tilde{y}_i \sim \text{normal}\left(\theta^{(i)},\sigma^{2(i)}\right)$.\\
 
-        For prediction without the influence of any previous knowledge (Hoff p. 79), we can employ Jeffreys prior $\tilde{p}\left(\theta,\sigma^2\right) = 1/\sigma^2$.  This leads to the same conditional distribution for $\theta$ but a gamma$\left(\frac{n-1}{2},\frac{1}{2}\sum\left(y_i - \bar{y}\right)^2\right)$ distribution for $1/\sigma^2$.  This joint posterior distribution can be used to predict future $\tilde{y}$ by first drawing $\theta,\sigma^2$ and then simulating $\tilde{y}\sim\text{normal}\left(\theta,\sigma^2\right)$.   Alternatively, the joint posterior can be integrated to show that
-        $$\dfrac{\theta-\bar{y}}{s/\sqrt{n}}|y_1,...,y_n\sim t_{n-1}.$$
-        The resulting predictive distribution for $\tilde{y}$ is a t-distribution with location $\bar{y}$ and scale $s\sqrt{1+1/n}$ and $n-1$ degrees of freedom (Gelman et. al. p. 66).
+        For prediction without the influence of any previous knowledge (Hoff p. 79), we can employ Jeffreys prior $\tilde{p}\left(\theta,\sigma^2\right) = 1/\sigma^2$.  This leads to the same conditional distribution for $\theta$ but a gamma$\left(\frac{N-1}{2},\frac{1}{2}\sum\left(y_i - \bar{y}\right)^2\right)$ distribution for $1/\sigma^2$.  This joint posterior distribution can be used to predict future $\tilde{y}$ by first drawing $\theta,\sigma^2$ and then simulating $\tilde{y}\sim\text{Normal}\left(\theta,\sigma^2\right)$.   Alternatively, the joint posterior can be integrated to show that
+        $$\dfrac{\theta-\bar{y}}{s/\sqrt{N}}|y_1,...,y_N\sim t_{N-1}.$$
+        The resulting predictive distribution for $\tilde{y}$ is a t-distribution with location $\bar{y}$ and scale $s\sqrt{1+1/N}$ and $N-1$ degrees of freedom (Gelman et. al. p. 66).
 
 
       \paragraph{R Implementation (Normal-Inverse Gamma, 1-sample)}
       R functions \texttt{dpredNormIG1()}, \texttt{ppredNormIG1()}, and \texttt{rpredNormIG1()} have been created for the Normal-Inverse Gamma distribution for density, cumulative probability, and random sampling, respectively (see appendix).  These functions all include options for implementation with or without previous knowledge as desired.  If Jeffreys prior is used, the functions simply implement R's Student's t-distribution functions \texttt{rt()}, \texttt{dt()}, and \texttt{pt()}, applying the location and scale parameters as described above.  For predictions using previous knowledge, the functions work as follows:  For the random sampler \texttt{rpredNormIG1()}, the Monte-Carlo method described above is directly employed.  The predictive density and cumulative predictive density functions (\texttt{dpredNormIG1()} and \texttt{ppredNormID1()}, respectively) depend on the random sample.  \texttt{ppredNormIG1()} utilizes the empirical cumulative density function \texttt{ecdf()} from R's stats package.  \texttt{dpredNormIG1()} utilizes a Kernel Density Estimation (KDE) method and R's built-in \texttt{density()} function.  The KDE is computed by definition, using a normal kernel:
 
-      $$\hat{f}_K(x) = \frac{1}{n}\sum_{i=1}^n\frac{1}{h}K\left(\frac{x-X_i}{h}\right),$$
+      $$\hat{f}_K(x) = \frac{1}{N}\sum_{i=1}^N\frac{1}{h}K\left(\frac{x-X_i}{h}\right),$$
 
       where
 
@@ -798,21 +800,21 @@ if(0){
           &\\
           \text{var}(y) &= 0.0169\\
           &\\
-          \kappa_n &= 1 + 9 = 10\\
+          \kappa_N &= 1 + 9 = 10\\
           &\\
-          \mu_n &= \frac{1 \cdot 1.9 + 9 \cdot 1.804}{10} = 1.814\\
+          \mu_N &= \frac{1 \cdot 1.9 + 9 \cdot 1.804}{10} = 1.814\\
           &\\
-          \nu_n &= 1 + 9 = 10\\
+          \nu_N &= 1 + 9 = 10\\
           &\\
-          \sigma_n^2 &= \frac{1}{10}\left[1 \cdot 0.01 + (9-1) \cdot 0.0169 + \frac{1 \cdot 9}{10}\left(1.804 - 1\right)^2\right] = 0.0153\\
+          \sigma_N^2 &= \frac{1}{10}\left[1 \cdot 0.01 + (9-1) \cdot 0.0169 + \frac{1 \cdot 9}{10}\left(1.804 - 1\right)^2\right] = 0.0153\\
         \end{flalign*}
 
-        Thus $\sfrac{\nu_n}{2} = 5$ and $\sfrac{\nu_n\sigma_n^2}{2} = 0.7662$ and we have posteriors
+        Thus $\sfrac{\nu_N}{2} = 5$ and $\sfrac{\nu_N\sigma_N^2}{2} = 0.7662$ and we have posteriors
 
         \begin{flalign*}
-          \left\{\theta|y_1,...,y_n,\sigma^2\right\} &\sim \text{normal}\left(1.814,\sfrac{\sigma^2}{10}\right)\\
+          \left\{\theta|y_1,...,y_N,\sigma^2\right\} &\sim \text{normal}\left(1.814,\sfrac{\sigma^2}{10}\right)\\
           &\\
-          \left\{\sigma^2|y_1,...,y_n\right\} &\sim \text{inverse-gamma}(5,0.7662)\\
+          \left\{\sigma^2|y_1,...,y_N\right\} &\sim \text{inverse-gamma}(5,0.7662)\\
         \end{flalign*}
 
       The plot below illustrates the influence of previous knowledge of the population mean, and compares to the predictions resulting from Jeffreys prior.
@@ -837,13 +839,13 @@ sig20 = 0.010; nu0 = 1
 #sig20 = 10;
 
 y = c(1.64,1.7,1.72,1.74,1.82,1.82,1.82,1.90,2.08)
-n = length(y);
+N = length(y);
 ybar = mean(y);
 s2 = var(y);
 
-kn = k0 + n; nun = nu0 + n
-mun = (k0*mu0+n*ybar)/kn
-sig2n = (nu0*sig20 + (n-1)*s2 + k0*n*(ybar-mu0)^2/kn)/nun
+kN = k0 + N; nuN = nu0 + N
+muN = (k0*mu0+N*ybar)/kN
+sig2N = (nu0*sig20 + (N-1)*s2 + k0*N*(ybar-mu0)^2/kN)/nuN
 
 ####
 ####RANDOM SAMPLE:  rpredNormIG1()
