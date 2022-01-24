@@ -206,4 +206,9 @@ R\\
 \texttt{function(x) = y}\\
 \texttt{function(x) = y\$asdf}\\
 
+
+$$some math$$
+$$\sout{some math}$$
+\sout{$$some math$$}
+
 \end{document}

@@ -132,11 +132,11 @@ The main purpose of statistics is to predict future events based on observed dat
   \multicolumn{5}{c}{\large \#Razorbacks Predicted out of 100 Tosses}          \\
   \multicolumn{1}{c}{\textbf{Prediction Method}} & \multicolumn{1}{c}{$\textbf{(}\boldsymbol\alpha,\boldsymbol\beta\textbf{)}$}  & \multicolumn{1}{c}{$\textbf{E(}\boldsymbol\theta\textbf{)}$}  & \multicolumn{1}{c}{\textbf{mean}} & \multicolumn{1}{c}{\textbf{SD}}\\
         \midrule
-        Beta-Binomial & (2,8) & 0.2 & 30.73 & 11.13 \\
+        Beta-Binomial & (2,8) & 0.2 & 29.98 & 10.56 \\
         \midrule
-        Beta-Binomial & (22,78) & 0.22 & 23.42 & 5.83\\
+        Beta-Binomial & (22,78) & 0.22 & 23.27 & 5.89\\
         \midrule
-        Beta-Binomial & (224,776) & 0.224 & 22.81 & 4.38 \\
+        Beta-Binomial & (224,776) & 0.224 & 22.56 & 4.52 \\
         \midrule
         Binomial$(100,0.4)$ & -- & -- & 40 & 4.9 \\
   \bottomrule
@@ -176,7 +176,7 @@ When data can be modeled with a distribution that suggests a conjugate prior for
   \item Beta-Binomial ($T = \sum Y\sim$Binom$(N,\theta)$ with $\theta\sim$Beta)
   \item Exponential-Gamma ($Y\sim$Exp$(\theta)$ data with $\theta\sim$Gamma)
   \item Poisson-Gamma ($Y\sim$Poi$(\theta)$ data $\theta\sim$Gamma)
-  \item Normal-Inverse Gamma ($Y\sim$Normal$(\theta,\sigma)$ data with $\theta\sim$Normal and $\sigma\sim$Inverse-Gamma)
+  \item Normal-Inverse Gamma ($Y\sim$Normal$(\theta,\sigma)$ data with $\theta\sim$Normal and $\sigma\sim$Inverse Gamma)
 \end{itemize}
 
 Throughout what follows, $N$ is used for the data sample size and $M$ is the number of predictions desired.  Parameter variable names should be clearly indicated as they appear.
@@ -459,7 +459,7 @@ Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15,
 
   \subsection{Normal Observation with Normal-Inverse Gamma Prior}
 
-    \subsubsection{One sample}
+    \subsubsection{One sample Normal-Inverse Gamma}
       \paragraph{Derivation}
       [Hoff p. 69ff]\\
         Let $\left\{Y_1,...,Y_N|\theta,\sigma^2\right\}\overset{i.i.d.}{\sim}Normal\left(\theta,\sigma^2\right)$.  Then the joint sampling density is
@@ -495,7 +495,7 @@ Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15,
         \begin{flalign*}
           \left\{\theta|y_1,...,y_N,\sigma^2\right\} &\sim \text{Normal}\left(\mu_N,\sfrac{\sigma^2}{\kappa_N}\right)\\
           &\\
-          \left\{\sigma^2|y_1,...,y_N\right\} &\sim \text{Inverse-Gamma}\left(\sfrac{\nu_N}{2},\sfrac{\sigma^2_N\nu_N}{2}\right).
+          \left\{\sigma^2|y_1,...,y_N\right\} &\sim \text{Inverse Gamma}\left(\sfrac{\nu_N}{2},\sfrac{\sigma^2_N\nu_N}{2}\right).
         \end{flalign*}
 
         where
@@ -516,9 +516,9 @@ Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15,
 
         \begin{flalign*}
           \begin{matrix}
-            \sigma^{2(1)}\sim \text{inverse-gamma}\left(\nu_N/2,\sigma^2_N\nu_N/2\right), & \theta^{(1)}\sim \text{normal}\left(\mu_N,\sigma^{2(1)}/\kappa_N\right) \\
+            \sigma^{2(1)}\sim \text{Inverse Gamma}\left(\nu_N/2,\sigma^2_N\nu_N/2\right), & \theta^{(1)}\sim \text{normal}\left(\mu_N,\sigma^{2(1)}/\kappa_N\right) \\
             \vdots  & \vdots  \\
-            \sigma^{2(S)}\sim \text{inverse-gamma}\left(\nu_N/2,\sigma^2_N\nu_N/2\right), & \theta^{(S)}\sim \text{normal}\left(\mu_N,\sigma^{2(S)}/\kappa_N\right) \\
+            \sigma^{2(S)}\sim \text{Inverse Gamma}\left(\nu_N/2,\sigma^2_N\nu_N/2\right), & \theta^{(S)}\sim \text{normal}\left(\mu_N,\sigma^{2(S)}/\kappa_N\right) \\
           \end{matrix}
         \end{flalign*}
 
@@ -572,7 +572,7 @@ Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15,
         \begin{flalign*}
           \left\{\theta|y_1,...,y_N,\sigma^2\right\} &\sim \text{normal}\left(1.814,\sfrac{\sigma^2}{10}\right)\\
           &\\
-          \left\{\sigma^2|y_1,...,y_N\right\} &\sim \text{inverse-gamma}(5,0.7662)\\
+          \left\{\sigma^2|y_1,...,y_N\right\} &\sim \text{Inverse Gamma}(5,0.7662)\\
         \end{flalign*}
 
       The plot below illustrates the influence of previous knowledge of the population mean, and compares to the predictions resulting from Jeffreys prior.
@@ -581,50 +581,50 @@ Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15,
 
         \clearpage
 
-    \subsubsection{Two samples}
+    \subsubsection{Two-sample Normal-Inverse Gamma}
       \paragraph{Derivation}
 
-        For a Bayesian analysis comparing two groups $Y_{1,1},...,Y_{n_1,1}$ and $Y_{1,2},...,Y_{n_2,2}$ we use the following sampling model (Hoff p. 127):
+        For a Bayesian analysis comparing two groups $Y_{1,1},...,Y_{N_1,1}$ and $Y_{1,2},...,Y_{N_2,2}$ we use the following sampling model (Hoff p. 127):
 
         \begin{flalign*}
           Y_{i,1} &= \mu + \delta + \epsilon_{i,1}\\
           Y_{i,2} &= \mu - \delta + \epsilon_{i,2}\\
-          \left\{\epsilon_{i,j}\right\} &\sim\text{i.i.d. normal}\left(0,\sigma^2\right).
+          \left\{\epsilon_{i,j}\right\} &\sim\text{i.i.d. Normal}\left(0,\sigma^2\right).
         \end{flalign*}
 
-        Letting $\theta_1 = \mu + \delta$ and $\theta_2 = \mu - \delta$ we see that $\delta = \left(\theta_1 - \theta_2\right)/2$ is half the population difference in means, and $\mu = \left(\theta_1 + \theta_2\right)/2$ is the pooled average.  We'll assume conjugate prior distributions
+\noindent Letting $\theta_1 = \mu + \delta$ and $\theta_2 = \mu - \delta$ we see that $\delta = \left(\theta_1 - \theta_2\right)/2$ is half the population difference in means, and $\mu = \left(\theta_1 + \theta_2\right)/2$ is the pooled average.  We'll assume conjugate prior distributions
 
         \begin{flalign*}
           p\left(\mu,\delta,\sigma^2\right) &= p(\mu) \times p(\delta) \times p\left(\sigma^2\right)\\
-          \mu &\sim \text{normal}\left(\mu_0,\gamma^2_0\right)\\
-          \delta &\sim \text{normal}\left(\delta_0,\tau^2_0\right)\\
-          \sigma^2 &\sim \text{inverse-gamma}\left(\nu_0/2,\nu_0\sigma^2_0/2\right),
+          \mu &\sim \text{Normal}\left(\mu_0,\gamma^2_0\right)\\
+          \delta &\sim \text{Normal}\left(\delta_0,\tau^2_0\right)\\
+          \sigma^2 &\sim \text{Inverse Gamma}\left(\nu_0/2,\nu_0\sigma^2_0/2\right),
         \end{flalign*}
 
 \noindent where $\nu_0$ as before is the assumed prior sample size.  The full conditional distributions follow:\\
 
-        \indent $\left\{\mu|\mathbf{y}_1,\mathbf{y}_2,\delta,\sigma^2\right\} \sim \text{normal}\left(\mu_n,\gamma^2_n\right)$, where
+        \indent $\left\{\mu|\mathbf{y}_1,\mathbf{y}_2,\delta,\sigma^2\right\} \sim \text{Normal}\left(\mu_N,\gamma^2_N\right)$, where
 
         \begin{flalign*}
-          \mu_n &= \gamma^2_n \times \left[\dfrac{\mu_0}{\gamma^2_0} + \dfrac{\sum_{i=1}^{n_1}\left(y_{i,1}-\delta\right) + \sum_{i=1}^{n_2}\left(y_{i,2}+\delta\right)}{\sigma^2}\right]\\
+          \mu_N &= \gamma^2_N \times \left[\dfrac{\mu_0}{\gamma^2_0} + \dfrac{\sum_{i=1}^{N_1}\left(y_{i,1}-\delta\right) + \sum_{i=1}^{N_2}\left(y_{i,2}+\delta\right)}{\sigma^2}\right]\\
           &\\
-          \gamma^2_n &=\left[\dfrac{1}{\gamma^2_0} + \dfrac{\left(n_1 + n_2\right)}{\sigma^2}\right]^{-1}
+          \gamma^2_N &=\left[\dfrac{1}{\gamma^2_0} + \dfrac{\left(N_1 + N_2\right)}{\sigma^2}\right]^{-1}
         \end{flalign*}
 
-        \indent $\left\{\delta|\mathbf{y}_1,\mathbf{y}_2,\mu,\sigma^2\right\} \sim \text{normal}\left(\delta_n,\tau^2_n\right)$, where
+        \indent $\left\{\delta|\mathbf{y}_1,\mathbf{y}_2,\mu,\sigma^2\right\} \sim \text{Normal}\left(\delta_N,\tau^2_N\right)$, where
 
         \begin{flalign*}
-          \delta_n &= \tau^2_n \times \left[\dfrac{\delta_0}{\tau^2_0} + \dfrac{\sum_{i=1}^{n_1}\left(y_{i,1}-\mu\right) - \sum_{i=1}^{n_2}\left(y_{i,2}-\mu\right)}{\sigma^2}\right]\\
+          \delta_N &= \tau^2_N \times \left[\dfrac{\delta_0}{\tau^2_0} + \dfrac{\sum_{i=1}^{N_1}\left(y_{i,1}-\mu\right) - \sum_{i=1}^{N_2}\left(y_{i,2}-\mu\right)}{\sigma^2}\right]\\
           &\\
-          \tau^2_n &=\left[\dfrac{1}{\tau^2_0} + \dfrac{\left(n_1 + n_2\right)}{\sigma^2}\right]^{-1}
+          \tau^2_N &=\left[\dfrac{1}{\tau^2_0} + \dfrac{\left(N_1 + N_2\right)}{\sigma^2}\right]^{-1}
         \end{flalign*}
 
-        \indent $\left\{\sigma^2|\mathbf{y}_1,\mathbf{y}_2,\mu,\delta\right\} \sim \text{inverse-gamma}\left(\frac{\nu_n}{2},\frac{\nu_n\sigma^2_n}{2}\right)$, where
+        \indent $\left\{\sigma^2|\mathbf{y}_1,\mathbf{y}_2,\mu,\delta\right\} \sim \text{Inverse Gamma}\left(\frac{\nu_N}{2},\frac{\nu_N\sigma^2_N}{2}\right)$, where
 
         \begin{flalign*}
-          \nu_n &= \nu_0 + n_1 + n_2\\
+          \nu_N &= \nu_0 + N_1 + N_2\\
           \\
-          \nu_n\sigma^2_n &= \nu_0\sigma^2_0 + \sum_{i=1}^{n_1}\left(y_{i,1} - [\mu + \delta]\right)^2 + \sum_{i=1}^{n_2}\left(y_{i,2} - [\mu - \delta]\right)^2\\
+          \nu_N\sigma^2_N &= \nu_0\sigma^2_0 + \sum_{i=1}^{N_1}\left(y_{i,1} - [\mu + \delta]\right)^2 + \sum_{i=1}^{N_2}\left(y_{i,2} - [\mu - \delta]\right)^2\\
         \end{flalign*}
 
       \paragraph{R Implementation (Normal-Inverse Gamma, 2-sample)}
@@ -635,10 +635,10 @@ Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15,
         \item Generate a single $\sigma^2|\mathbf{y_1},\mathbf{y_2},\mu,\delta$
         \item Generate a single $\mu|\mathbf{y_1},\mathbf{y_2},\delta,\sigma^2$
         \item Generate a single $\delta|\mathbf{y_1},\mathbf{y_2},\mu,\sigma^2$
-        \item Predict $\tilde{y}_1\sim \text{normal}\left(\mu+\delta,\sigma^2\right)$ and $\tilde{y}_2\sim \text{normal}\left(\mu-\delta,\sigma^2\right)$
+        \item Predict $\tilde{y}_1\sim \text{Normal}\left(\mu+\delta,\sigma^2\right)$ and $\tilde{y}_2\sim \text{Normal}\left(\mu-\delta,\sigma^2\right)$
       \end{enumerate}
 
-      The user provides the two samples $\mathbf{y_1}$ and $\mathbf{y_2}$ along with values for $\mu_0, \sigma^2_0, \delta_0, \tau^2_0, \nu_0$, and desired prediction sample size $N$.  The function returns $N$ predictions for each population and the vectors of generated values for $\mu$, $\delta$, and $\sigma^2$.
+      The user provides the two samples $\mathbf{y_1}$ and $\mathbf{y_2}$ along with values for $\mu_0, \sigma^2_0, \delta_0, \tau^2_0, \nu_0$, and desired prediction sample size $M$.  The function returns $M$ predictions for each population and the vectors of generated values for $\mu$, $\delta$, and $\sigma^2$.
 
       \paragraph{Example} (Hoff p. 128-129 \textit{Analysis of math score data})\\
       Hoff provides the following example, which we reproduce here.\\\\
@@ -649,28 +649,32 @@ Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15,
 \includegraphics{Thesis_v2-007}
 
 
-    \subsubsection{$k$ samples:  Comparing multiple groups}
-    For two-level data consisting of groups and units within groups, denote $y_{i,j}$ as the data on the $i$th unit in group $j$. We have the hierarchical normal model (Hoff p. 132ff):
-    $$\phi_j = \left\{\theta_j,\sigma^2\right\}, p\left(y|\phi_j\right) = \text{normal}\left(\theta_j,\sigma^2\right) \text{ (within-group model)}$$
-    $$\psi_j = \left\{\mu,\tau^2\right\}, p\left(\theta_j|\psi\right) = \text{normal}\left(\mu,\tau^2\right) \text{ (between-groups model)}$$
-    We use standard semiconjugate normal and inverse-gamma prior distributions for the fixed but unknown parameters in the model:
+    \subsubsection{$k$-sample Normal-Inverse Gamma:  Comparing multiple groups}
+    For two-level data consisting of groups and units within groups, denote data $\mathbf{Y}_1,...,\mathbf{Y_m}$ where $\mathbf{Y}_j = \{Y_{1,j},...,Y_{N_j,j}\}$. We have the hierarchical Normal model (Hoff p. 132ff):
+    $$\phi_j = \left\{\theta_j,\sigma^2\right\}, p\left(y|\phi_j\right) = \text{Normal}\left(\theta_j,\sigma^2\right) \text{ (within-group model)}$$
+    $$\psi_j = \left\{\mu,\tau^2\right\}, p\left(\theta_j|\psi\right) = \text{Normal}\left(\mu,\tau^2\right) \text{ (between-groups model)}$$
+    We use standard semiconjugate Normal and Inverse Gamma prior distributions for the fixed but unknown parameters in the model:
     \begin{flalign*}
-      \sigma^2 &\sim \text{inverse-gamma}\left(\frac{\nu_0}{2},\frac{\nu_0\sigma^2_0}{2}\right)\\
+      \sigma^2 &\sim \text{Inverse Gamma}\left(\frac{\nu_0}{2},\frac{\nu_0\sigma^2_0}{2}\right)\\
       &\\
-      \tau^2 &\sim \text{inverse-gamma}\left(\frac{\eta_0}{2},\frac{\eta_0\tau^2_0}{2}\right)\\
+      \tau^2 &\sim \text{Inverse Gamma}\left(\frac{\eta_0}{2},\frac{\eta_0\tau^2_0}{2}\right)\\
       &\\
-      \mu &\sim \text{normal}\left(\mu_0,\gamma^2_0\right)\\
+      \mu &\sim \text{Normal}\left(\mu_0,\gamma^2_0\right)\\
     \end{flalign*}
 
       \paragraph{Derivation}
-      As with the two-sample problem, joint posterior inferences for the unknown parameters can be made by constructing a Gibbs sampler to approximate the posterior distribution $p\left(\theta_1,...,\theta_m,\mu,\tau^2,\sigma^2|\mathbf{y}_1,...,\mathbf{y}_m\right)$.  For this we need the full conditional distribution of each parameter (Hoff pp. 134-135):
+      As with the two-sample problem, joint posterior inferences for the unknown parameters can be made by constructing a Gibbs sampler to approximate the posterior distribution $p\left(\theta_1,...,\theta_m,\mu,\tau^2,\sigma^2|\mathbf{y_1,...,y_m}\right)$.  For this we need the full conditional distribution of each parameter (Hoff pp. 134-135):
       %%$$\left\{\mu|\theta_1,...,\theta_m,\tau^2\right\} \sim \text{normal}\left(\dfrac{m\bar{\theta}/\tau^2 + \mu_0/\gamma^2_0}{m/\tau^2 + 1/\gamma^2_0},\dfrac{1}{m/\tau^2+1/\gamma^2_0}\right)$$
-      $$\left\{\mu|\theta_1,...,\theta_m,\tau^2\right\} \sim \text{normal}\left(\dfrac{\frac{m\bar{\theta}}{\tau^2} + \frac{\mu_0}{\gamma^2_0}}{\frac{m}{\tau^2} + \frac{1}{\gamma^2_0}},\dfrac{1}{\frac{m}{\tau^2}+\frac{1}{\gamma^2_0}}\right)$$
-      $$\left\{\tau^2|\theta_1,...,\theta_m,\mu\right\} \sim \text{inverse-gamma}\left(\dfrac{\eta_0 + m}{2},\dfrac{\eta_0\tau^2_0 + \sum\left(\theta_j-\mu\right)^2}{2}\right)$$
+      $$\left\{\mu|\theta_1,...,\theta_m,\tau^2\right\} \sim \text{Normal}\left(\dfrac{\frac{m\bar{\theta}}{\tau^2} + \frac{\mu_0}{\gamma^2_0}}{\frac{m}{\tau^2} + \frac{1}{\gamma^2_0}},\dfrac{1}{\frac{m}{\tau^2}+\frac{1}{\gamma^2_0}}\right)$$
+      $$\left\{\tau^2|\theta_1,...,\theta_m,\mu\right\} \sim \text{Inverse Gamma}\left(\dfrac{\eta_0 + m}{2},\dfrac{\eta_0\tau^2_0 + \sum\left(\theta_j-\mu\right)^2}{2}\right)$$
 
-      $$\left\{\theta_j|y_{1,j},...,y_{n,j},\sigma^2\right\} \sim \text{normal}\left(\dfrac{\frac{n_j\bar{y}_j}{\sigma^2} + \frac{1}{\tau^2}}{\frac{n_j}{\sigma^2}+\frac{1}{\tau^2}},\dfrac{1}{\frac{n_j}{\sigma^2}+\frac{1}{\tau^2}}\right)$$
+      $$\left\{\theta_j|y_{1,j},...,y_{n,j},\sigma^2\right\} \sim \text{Normal}\left(\dfrac{\frac{n_j\bar{y}_j}{\sigma^2} + \frac{1}{\tau^2}}{\frac{n_j}{\sigma^2}+\frac{1}{\tau^2}},\dfrac{1}{\frac{n_j}{\sigma^2}+\frac{1}{\tau^2}}\right)$$
 
-      $$\left\{\sigma^2|\mathbf{\theta,y_1,...,y_n}\right\} \sim \text{inverse-gamma}\left(\dfrac{1}{2}\left[\nu_0 + \sum_{j=1}^m n_j\right],\dfrac{1}{2}\left[\nu_0\sigma^2_0 + \sum_{j=1}^m\sum_{i=1}^{n_j}\left(y_{i,j}-\theta_j\right)^2\right]\right).$$
+      % $$\left\{\sigma^2|\mathbf{\theta,y_1,...,y_n}\right\} \sim \text{Inverse Gamma}\left(\dfrac{1}{2}\left[\nu_0 + \sum_{j=1}^m n_j\right],\dfrac{1}{2}\left[\nu_0\sigma^2_0 + \sum_{j=1}^m\sum_{i=1}^{n_j}\left(y_{i,j}-\theta_j\right)^2\right]\right).$$
+
+      $$\left\{\sigma^2|\mathbf{\theta,y_1,...,y_m}\right\} \sim \text{Inverse Gamma}\left(\dfrac{1}{2}\left[\nu_0 + \sum_{j=1}^m n_j\right],\dfrac{1}{2}\left[\nu_0\sigma^2_0 + \sum_{j=1}^m\sum_{i=1}^{n_j}\left(y_{i,j}-\theta_j\right)^2\right]\right).$$
+
+      \textcolor{red}{Note:  In the above, Hoff has $\left\{\sigma^2|\mathbf{\theta,y_1,...,y_n}\right\}$. I believe the subscript $n$ is a typo, and should be $m$, the number of observed data groups.}
 
       Note that $\sum\sum\left(y_{i,j}-\theta_j\right)^2$ is the sum of squared residuals across all groups, conditional on the within-group means, and so the conditional distribution concentrates probability around a pooled-sample estimate of the variance.
 
@@ -934,7 +938,7 @@ x4  -0.3182438  0.6498086  -1.7661075   1.129620
 
 As usual, we can gain some understanding of these formulae by considering some limiting cases.  If the elements of the prior precision matrix $\Sigma_0^{-1}$ are small in magnitude, then the conditional expectation E$[\boldsymbol\beta|\mathbf{y,X},\sigma^2]$ is approximately equal to $(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{y}$, the least squares estimate. On the other hand, if the measurement precision is very small ($\sigma^2$ is very large), then the expectation is approximately $\boldsymbol\beta_0$, the prior expectation.\\
 
-As in most normal sampling problems, the semiconjugate prior distribution for $\sigma^2$ is an inverse-gamma distribution.  Letting $\gamma = 1/\sigma^2$ be the measurement precision, if $\gamma \sim \text{gamma}(\nu_0/2,\nu_0\sigma^2_0/2)$, then
+As in most normal sampling problems, the semiconjugate prior distribution for $\sigma^2$ is an Inverse Gamma distribution.  Letting $\gamma = 1/\sigma^2$ be the measurement precision, if $\gamma \sim \text{gamma}(\nu_0/2,\nu_0\sigma^2_0/2)$, then
 
 
 \begin{flalign*}
@@ -946,7 +950,7 @@ As in most normal sampling problems, the semiconjugate prior distribution for $\
 
 \noindent which we recognize as a gamma density, so that
 
-$$\{\sigma^2|\mathbf{y,X},\boldsymbol\beta\} \sim \text{inverse-gamma}([\nu_0 + n]/2,[\nu_0\sigma^2_0 + \text{SSR}(\boldsymbol\beta)]/2).$$
+$$\{\sigma^2|\mathbf{y,X},\boldsymbol\beta\} \sim \text{Inverse Gamma}([\nu_0 + n]/2,[\nu_0\sigma^2_0 + \text{SSR}(\boldsymbol\beta)]/2).$$
 
 \noindent Constructing a Gibbs sampler to approximate the joint posterior distribution $p(\boldsymbol\beta,\sigma^2|\mathbf{y,X})$ is then straightforward:  given current values $\{\boldsymbol\beta^{(s)},\sigma^{2(s)}\}$, new values can be generated by
 
@@ -959,7 +963,7 @@ $$\{\sigma^2|\mathbf{y,X},\boldsymbol\beta\} \sim \text{inverse-gamma}([\nu_0 + 
     \item updating $\sigma^2$:
     \begin{enumerate}
         \item compute SSR$(\boldsymbol\beta^{(s+1)})$
-        \item sample $\sigma^{2(s+1)} \sim \text{inverse-gamma}([\nu_0 + n]/2,[\nu_0\sigma_0^2 + \text{SSR}(\boldsymbol\beta^{(s+1)})]/2)$.
+        \item sample $\sigma^{2(s+1)} \sim \text{Inverse Gamma}([\nu_0 + n]/2,[\nu_0\sigma_0^2 + \text{SSR}(\boldsymbol\beta^{(s+1)})]/2)$.
     \end{enumerate}
 \end{enumerate}
 
@@ -982,7 +986,7 @@ $$\mathbf{V} = \frac{g}{g+1}\sigma^2(\mathbf{X^TX})^{-1} \text{ and } \mathbf{m}
 we arrive at posteriors
 
 \begin{flalign}
-    \{\sigma^2|\mathbf{y,X}\} &\sim \text{inverse-gamma}([\nu_0 + n]/2,[\nu_0\sigma^2_0 + \text{SSR}_g]/2) \label{regression_noninf_sig2_post}\\
+    \{\sigma^2|\mathbf{y,X}\} &\sim \text{Inverse Gamma}([\nu_0 + n]/2,[\nu_0\sigma^2_0 + \text{SSR}_g]/2) \label{regression_noninf_sig2_post}\\
     \{\boldsymbol\beta|\mathbf{y,X},\sigma^2\} &\sim \text{multivariate normal}\left(\frac{g}{g+1}\hat{\boldsymbol\beta}_{ols},\frac{g}{g+1}\sigma^2[\mathbf{X^TX}]^{-1}\right).\label{regression_noninf_beta_post}
 \end{flalign}
 
@@ -991,7 +995,7 @@ Here $\text{SSR}_g = \mathbf{y^Ty - m^TV^{-1}m = y^T(I - }\frac{g}{g+1}\mathbf{X
 Simple Monte Carlo approximation can be used to sample from the joint posterior density $p(\sigma^2,\boldsymbol\beta|\mathbf{y,X})$ as follows.  Here $g$ is typically set to the number of prior observations.  Then:
 
 \begin{enumerate}
-    \item sample $\sigma^2 \sim \text{inverse-gamma}([\nu_0 + n]/2,[\nu_0\sigma^2_0 + \text{SSR}_g]/2)$
+    \item sample $\sigma^2 \sim \text{Inverse Gamma}([\nu_0 + n]/2,[\nu_0\sigma^2_0 + \text{SSR}_g]/2)$
     \item sample $\boldsymbol\beta \sim \text{multivariate normal}\left(\frac{g}{g+1}\hat{\boldsymbol\beta}_{ols},\frac{g}{g+1}\sigma^2[\mathbf{X^TX}]^{-1}\right)$.
 \end{enumerate}
 

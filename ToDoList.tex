@@ -88,6 +88,9 @@
 \begin{itemize}
   \item Exponential-Gamma random sampler:  draw a single theta from posterior or draw a new one for each prediction?  (Can't tell the difference from histograms)
   \item Beta-Binomial:  Use posterior of theta (which is a gamma) and then make prediction based on draw(s) of theta (like I'm doing for Exponential-Gamma?)  Why did I go to the trouble of using the inverse transform method before?
+  \item Work through the math for the 2-sample Normal-Inverse Gamma full conditional distributions (see Hoff p. 128)
+  \item Beta-binomial:  try drawing $\theta\sim\text{Beta}(t+\alpha,N-t+\beta)$ and then predict t using \texttt{rbinom(S,N,theta)}.
+  \item Review use of $\pi(\cdot)$ to denote prior distributions of parameters.  Right now my intro says I'm doing that but at least ing the k-sample Normal-Inverse Gamma I'm not doing that.
 \end{itemize}
 
 
@@ -134,7 +137,10 @@
 
 \end{enumerate}
 
-
+{\huge Questions for Dean 1/28/2022}
+\begin{enumerate}
+  \item NormIG2():  Subscript $N$ in the parameters $\mu_N,\gamma^2_N,\delta_N,\tau^2_N$. Interpret these as $N = N_1 + N_2$?
+\end{enumerate}
 
 
 

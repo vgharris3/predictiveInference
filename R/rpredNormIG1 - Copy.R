@@ -2,7 +2,7 @@
 #'
 #' rpredNormIG1 returns a random sample of size n from the Normal-Inverse Gamma predictive probability distribution
 #'
-#' @param S desired random sample size
+#' @param n desired random sample size
 #' @param obs vector of (observed) Normally-distributed values
 #' @param mu0 mean of prior observations (set default)
 #' @param k0 number of prior observations (default is 1)
@@ -14,13 +14,13 @@
 #' @export
 #'
 #' @examples 1
-rpredNormIG1 = function(S,obs,mu0=0,k0=1,sig20=1,nu0=1,Jeffreys=FALSE){
+rpredNormIG1 = function(n,obs,mu0=0,k0=1,sig20=1,nu0=1,Jeffreys=FALSE){
 
   #ERROR HANDLING
 
   ##########################
   ##########################
-  #NOT ENOUGH / TOO FEW PARASETERS
+  #NOT ENOUGH / TOO FEW PARAMETERS
   ##########################
   ##########################
 
@@ -45,23 +45,40 @@ rpredNormIG1 = function(S,obs,mu0=0,k0=1,sig20=1,nu0=1,Jeffreys=FALSE){
   s2 = stats::var(obs);
 
   if(Jeffreys){
+    #s2 = var(y)
+    #meanobs = mean(obs)
+    #n = length(y)
     location = meanobs
     scale = sqrt(s2)*sqrt(1+1/nobs)
-    rs = location + scale * stats::rt(S,nobs-1)
+    #xt = seq(1,2.5,len=100)
+    #yt = (1/scale) * dt((xt - location)/scale,df = nobs-1)
+
+    #rs = metRology::rt.scaled(n,nobs-1,location,scale)
+    rs = location + scale * stats::rt(n,nobs-1)
   }
 
   else{
+
+    #nobs = length(obs);
+    #meanobs = mean(obs);
+    #s2 = stats::var(obs);
 
     kn = k0 + nobs; nun = nu0 + nobs
     mun = (k0*mu0+nobs*meanobs)/kn
     sig2n = (nu0*sig20 + (nobs-1)*s2 + k0*nobs*(meanobs-mu0)^2/kn)/nun
 
-    sig2.postsample = 1/stats::rgamma(S,nun/2,sig2n*nun/2)
-    theta.postsample = stats::rnorm(S,mun,sqrt(sig2.postsample/kn))
+    sig2.postsample = 1/stats::rgamma(n,nun/2,sig2n*nun/2)
+    theta.postsample = stats::rnorm(n,mun,sqrt(sig2.postsample/kn))
 
-    rs = numeric(S)
+    #plot(theta.postsample,sig2.postsample,pch = 20)
 
-    rs = stats::rnorm(S,theta.postsample,sqrt(sig2.postsample))
+    rs = numeric(n)
+
+   # for(i in 1:n){
+    #  rs[i] = rnorm(1,theta.postsample,sqrt(sig2.postsample))
+    #}
+
+    rs = stats::rnorm(n,theta.postsample,sqrt(sig2.postsample))
 
   }
 

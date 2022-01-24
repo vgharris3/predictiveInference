@@ -2,7 +2,7 @@
 #'
 #' rpredNormIGk returns a random sample of size N from the Normal-Inverse Gamma predictive probability distribution for each of the k samples, along with N posterior draws of the within-group and between-groups unknown parameters.
 #'
-#' @param S desired random sample size
+#' @param N desired random sample size
 #' @param Y 2-column matrix of multiple samples of observed Normally-distributed values.  Column 1:  integer indices identifying the samples.  Column 2:  data values for the sample indicated by the corresponding index in column 1.
 #' @param nu0 number of prior observations
 #' @param s20 within-sample variance from prior knowledge
@@ -11,11 +11,11 @@
 #' @param mu0 mean of pooled average from prior knowledge
 #' @param g20 variance of pooled average from prior knowledge
 #'
-#' @return random sample of size S Normal - Inverse Gamma predictive probability for each population sample
+#' @return random sample of size n Normal - Inverse Gamma predictive probability for each population sample
 #' @export
 #'
 #' @examples 1
-rpredNormIGk = function(S=1,Y,nu0=1,s20=1,eta0=1,t20=1,mu0=0,g20=1){
+rpredNormIGk = function(N=1,Y,nu0=1,s20=1,eta0=1,t20=1,mu0=0,g20=1){
 
   #ERROR HANDLING
 
@@ -25,14 +25,14 @@ rpredNormIGk = function(S=1,Y,nu0=1,s20=1,eta0=1,t20=1,mu0=0,g20=1){
   ##########################
   ##########################
 
-  if(S <= 0){
-    warning("S <= 0.  Setting S = 1.")
-    S = 1
+  if(N <= 0){
+    warning("N <= 0.  Setting N = 1.")
+    N = 1
   }
 
-  if(S!=round(S)){
-    warning("S is not a whole number.  Setting S = round(S).")
-    S = round(S)
+  if(N!=round(N)){
+    warning("N is not a whole number.  Setting N = round(n).")
+    N = round(N)
   }
 
   if(g20 <= 0){
@@ -93,7 +93,7 @@ rpredNormIGk = function(S=1,Y,nu0=1,s20=1,eta0=1,t20=1,mu0=0,g20=1){
   ## setup MCMC
   # set.seed(1)
   #S<-5000
-  # S<-N
+  S<-N
   YTILDE<-matrix(nrow=S,ncol=m)
   THETA<-matrix( nrow=S,ncol=m)
   MST<-matrix( nrow=S,ncol=3)
