@@ -132,11 +132,11 @@ The main purpose of statistics is to predict future events based on observed dat
   \multicolumn{5}{c}{\large \#Razorbacks Predicted out of 100 Tosses}          \\
   \multicolumn{1}{c}{\textbf{Prediction Method}} & \multicolumn{1}{c}{$\textbf{(}\boldsymbol\alpha,\boldsymbol\beta\textbf{)}$}  & \multicolumn{1}{c}{$\textbf{E(}\boldsymbol\theta\textbf{)}$}  & \multicolumn{1}{c}{\textbf{mean}} & \multicolumn{1}{c}{\textbf{SD}}\\
         \midrule
-        Beta-Binomial & (2,8) & 0.2 & 29.98 & 10.56 \\
+        Beta-Binomial & (2,8) & 0.2 & 29.6 & 10.82 \\
         \midrule
-        Beta-Binomial & (22,78) & 0.22 & 23.27 & 5.89\\
+        Beta-Binomial & (22,78) & 0.22 & 23.31 & 5.66\\
         \midrule
-        Beta-Binomial & (224,776) & 0.224 & 22.56 & 4.52 \\
+        Beta-Binomial & (224,776) & 0.224 & 22.35 & 4.33 \\
         \midrule
         Binomial$(100,0.4)$ & -- & -- & 40 & 4.9 \\
   \bottomrule
@@ -710,25 +710,22 @@ Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15,
 % \textcolor{red}{Look at the form in which \texttt{rpredNormIGk()} takes the data in.  Currently Y is a list of vectors of varying lengths.  The raw data is a long two-column numeric table with indices in the first column.  It's called Y.school.mathscore.  It would take a little re-work but if the 2-column format is preferred it's probably worth making the change.  Let me know.}
 
       \paragraph{Example}
-      Returning to the math scores example, data for 10th-grade students from 100 large urban schools (each having 10th-grade enrollment of at least 400) is summarized in the following plots.
+      Returning to the math scores example, data for 10th-grade students from 100 large urban schools (each having 10th-grade enrollment of at least 400) is summarized in the following plot. Each school's results are represented by a vertical segment, with points plotted at the individual students' math scores. The horizontal line is drawn at the grand mean of the individual school means.
 
 \includegraphics{Thesis_v2-008}
 
-\includegraphics{Thesis_v2-009}
 
-      % The prior parameters that need to be specified are
 
-      % \begin{flalign*}
-      %   \left(\nu_0,\sigma^2_0\right) \text{ for } p\left(\sigma^2\right)\\
-      %   \left(\eta_0,\tau^2_0\right) \text{ for } p\left(\tau^2\right)\\
-      %   \left(\mu_0,\gamma^2_0\right) \text{ for } p\left(\mu\right).
-      % \end{flalign*}
+% <<fig=TRUE,echo=FALSE>>=
+% #Histogram of school mean scores, and relationship between sample mean and sample size
+%
+% #pdf("fig8_5.pdf",family="Times",height=3.5,width=7)
+% par(mfrow=c(1,2),mar=c(3,3,1,1),mgp=c(1.75,.75,0))
+% hist(ybar,main="",xlab="sample mean")
+% plot(n,ybar,xlab="sample size",ylab="sample mean")
+% #dev.off()
 
-      % \begin{flalign*}
-      %   \nu_0,\sigma^2_0 \text{ for } p\left(\sigma^2\right)\\
-      %   \eta_0,\tau^2_0 \text{ for } p\left(\tau^2\right)\\
-      %   \mu_0,\gamma^2_0 \text{ for } p\left(\mu\right).
-      % \end{flalign*}
+% Note:  to comment out the above chunk, I had to leave the @ uncommented.  Otherwise all that follows gets treated like it's within the chunk starting with the top line here, even though that line is commented.  I don't know why this is the case.
 
       For prediction, we'll use the following prior values (Hoff p. 137):
 
@@ -740,8 +737,6 @@ Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15,
         \mu_0&:  50 \text{ (prior mean of school means)}\\
         \gamma^2_0&:  25 \text{ (prior variance of school means)}
       \end{flalign*}
-
-% \textcolor{red}{Below:  Pick a couple of schools that show different relationships between teh data and the prediction}
 
 In the example below the observed test score data from three individual schools are compared with their predictions.  The schools chosen were numbers 5, 67, and 100 from the study, which had the minimum average math score, maximum average math score, and closest to the overall average math score, respectively.
 
@@ -755,16 +750,16 @@ In the example below the observed test score data from three individual schools 
     \hline
     min average & 5 & 36.58 \\
     \hline
-    overall mean & -- & 48.07 \\
+    grand mean & -- & 48.13 \\
     \hline
-    closest to overall & 100 & 47.99\\
+    closest to overall & 92 & 48.18\\
     \hline
   \end{tabular}
 \end{center}
 
 The plot below shows the density curves of the math scores for these three schools and their predictions.  The observed data is shown using solid lines, and the predictive densities are displayed with dashed lines.  The predictions are ``pulled" toward the overall mean, which is indicated on the plot with the dotted gray vertical line.
 
-\includegraphics{Thesis_v2-011}
+\includegraphics{Thesis_v2-010}
 
 
       % \paragraph{Ranking Treatments}
@@ -774,14 +769,17 @@ The plot below shows the density curves of the math scores for these three schoo
 
 \section{Normal Regression with Zellner's $g$-prior}
 
+\textcolor{red}{intro here}\\
+\textcolor{red}{stipulate variable naming convention here (x is the observed data now).  Modify previous intro to indicate variable convention was for the exponential family set of models}
+
 \subsection{Least Squares Estimation with Example (Hoff p. 149ff.)}
 
-Regression modeling is concerned with describing how the sampling distribution of one random variable $Y$ varies with another variable or set of variables $\mathbf{x} = \left(x_1,...,x_p\right)$.  Specifically, a regression model postulates a form for $p(y|\mathbf{x})$, the conditional distribution of $Y$ given $\mathbf{x}$.  Estimation of $p(y|\mathbf{x})$ is made using data $y_1,...,y_n$ that are gathered under a variety of conditions $\mathbf{x}_1,...,\mathbf{x}_n$.
+Regression modeling is concerned with describing how the sampling distribution of one random variable $Y$ varies with another variable or set of variables $\mathbf{x} = \left(x_1,...,x_p\right)$.  Specifically, a regression model postulates a form for $p(y|\mathbf{x})$, the conditional distribution of $Y$ given $\mathbf{x}$.  Estimation of $p(y|\mathbf{x})$ is made using data $y_1,...,y_n$ that are gathered under a variety of conditions $\mathbf{x}_1,...,\mathbf{x}_n$. (Hoff p. 149)
 
 The normal linear regression model specifies that, in addition to $E[Y|\mathbf{x}]$ being linear, the sampling variability around the mean is i.i.d. normal:
 
 \begin{flalign*}
-    \epsilon_1,...,\epsilon_n &\overset{\text{i.i.d}}{\sim} \text{normal}\left(0,\sigma^2\right)\\
+    \epsilon_1,...,\epsilon_n &\overset{\text{i.i.d.}}{\sim} \text{Normal}\left(0,\sigma^2\right)\\
     Y_i &= \boldsymbol\beta^T \mathbf{x}_i + \epsilon_i
 \end{flalign*}
 
@@ -834,15 +832,15 @@ and
 
 $$\hat{\sigma}^2_{ols} = \frac{SSR\left(\hat{\boldsymbol\beta}_{ols}\right)}{(n-p)} = \frac{\sum\left(y_i - \hat{\boldsymbol\beta}_{ols}^T x_i\right)^2}{(n-p)}.$$
 
-\clearpage
+% \clearpage
 
-\textit{Example:  Oxygen uptake (from Kuehl (2000), Hoff p. 149ff)}
+\noindent\textit{Example:  Oxygen uptake (from Kuehl (2000), Hoff p. 149ff)}
 
-Twelve healthy men who did not exercise regularly were recruited to take part in a study of the effects of two different exercise regimens on oxygen uptake.  Six of the twelve men were randomly assigned to a 12-week flat-terrain running program, and the remaining six were assigned to a 12-week step aerobics program.  The maximum oxygen uptake of each subject was measured (in liters per minute) while running on an inclined treadmill, both before and after the 12-week program.  Of interest is how a subject's change in maximal oxygen uptake may depend on which program they were assigned to.  However, other factors, such as age, are expected to affect the change in maximal uptake as well.  The results are shown here:
+\noindent Twelve healthy men who did not exercise regularly were recruited to take part in a study of the effects of two different exercise regimens on oxygen uptake.  Six of the twelve men were randomly assigned to a 12-week flat-terrain running program, and the remaining six were assigned to a 12-week step aerobics program.  The maximum oxygen uptake of each subject was measured (in liters per minute) while running on an inclined treadmill, both before and after the 12-week program.  Of interest is how a subject's change in maximal oxygen uptake may depend on which program they were assigned to.  However, other factors, such as age, are expected to affect the change in maximal uptake as well.  The results are shown here:
 
-\includegraphics{Thesis_v2-012}
+\includegraphics{Thesis_v2-011}
 
-Hoff's regression model:
+\noindent Hoff's regression model:
 
     \begin{align}
         Y_i &= \beta_1x_{i,1} + \beta_2x_{i,2} + \beta_3x_{i,3} + \beta_4x_{i,4} + \epsilon_i, \text{ where} \label{example_regression_model}\\
@@ -852,7 +850,7 @@ Hoff's regression model:
         x_{i,4} &= x_{i,2} \times x_{i,3} \nonumber
     \end{align}
 
-Under this model the conditional expectations of $Y$ for the two different levels of $x_{i,1}$ are
+\noindent Under this model the conditional expectations of $Y$ for the two different levels of $x_{i,1}$ are
 
 \begin{flalign*}
     E[Y|\mathbf{x}] &= \beta_1 + \beta_3 \times (age) \text{ if } x_1 = 0, \text{ and}\\
@@ -861,7 +859,7 @@ Under this model the conditional expectations of $Y$ for the two different level
 
 In other words, the model assumes that the relationship is linear in age for both exercise groups, with the difference in intercepts given by $\beta_2$ and the difference in slopes given by $\beta_4$.  If we assumed that $\beta_2 = \beta_4 = 0$, then we would have identical lines for both groups.  If we assumed $\beta_2 \ne 0$ and $\beta_4 =  0$ then we would have a different line for each group but they would be parallel.  Allowing all coefficients to be non-zero gives us two unrelated lines.  Some different possibilities are depicted graphically below:\\\\
 
-\includegraphics{Thesis_v2-013}
+\includegraphics{Thesis_v2-012}
 
 Let's find the least squares regression estimates for the model (\ref{example_regression_model}), and use the results to evaluate the differences between the two exercise groups.  The ages of the 12 subjects, along with their observed changes in maximal oxygen uptake, are
 
@@ -1039,7 +1037,7 @@ In the example below (Hoff data and code found \href{https://pdhoff.github.io/bo
 
 \textcolor{red}{I need to get rid of some of the plots below.  Maybe just keep the one on page 43 comparing the use of Zellner's g-prior to Hoff's semi-conjugate prior?  What do you suggest?}
 
-\includegraphics{Thesis_v2-016}
+\includegraphics{Thesis_v2-015}
 
 %\textcolor{red}{MAYBE DO BOTH IN THE SAME BLOCK AND PLOT ON ONE PLOT?}
 
@@ -1047,24 +1045,24 @@ In the example below (Hoff data and code found \href{https://pdhoff.github.io/bo
 
 %For the same example without prior information, we use Zellner's g-prior with $g =$ length$(y) =$ 12.
 
+\includegraphics{Thesis_v2-016}
+
 \includegraphics{Thesis_v2-017}
+
+\clearpage
+
 
 \includegraphics{Thesis_v2-018}
 
 \clearpage
 
+Comparing predictions using semi-conjugate prior vs. Zellner's g-prior:
 
 \includegraphics{Thesis_v2-019}
 
-\clearpage
-
-Comparing predictions using semi-conjugate prior vs. Zellner's g-prior:
-
-\includegraphics{Thesis_v2-020}
-
 Inspection of the graphs shows the predicted distributions using Zellner's g-prior shrink toward 0, and have greater variance than those predicted using Hoff's semi-conjugate prior.
 
-\includegraphics{Thesis_v2-021}
+\includegraphics{Thesis_v2-020}
 
 \textcolor{red}{EXPLAIN WHY SCP PREDICTIONS HAVE TALLER DISTRIBUTIONS THAN ZGP PREDICTIONS.  ALSO WHY ZGP PREDICTIONS SHRINK TOWARD 0}
 
@@ -1072,13 +1070,15 @@ Inspection of the graphs shows the predicted distributions using Zellner's g-pri
 
 Comparing observed values to predictive distributions:
 
-\includegraphics{Thesis_v2-022}
+\includegraphics{Thesis_v2-021}
 
 
 
 
 
 The following plots exhibit the influence of varying the prior info with the semi-conjugate prior.
+
+\includegraphics{Thesis_v2-022}
 
 \includegraphics{Thesis_v2-023}
 
@@ -1087,8 +1087,6 @@ The following plots exhibit the influence of varying the prior info with the sem
 \includegraphics{Thesis_v2-025}
 
 \includegraphics{Thesis_v2-026}
-
-\includegraphics{Thesis_v2-027}
 
 \clearpage
 

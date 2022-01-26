@@ -78,55 +78,60 @@ setwd("C:/Users/gabe/Documents/tmp/predictiveInference")
     \end{itemize}
   \item \sout{Create example comparing predictive inference result with plug in parameter result}
     \subitem \sout{Dean's suggestion:  1-sample binomial with small sample size.  E.g. 3 successes, 7 failures (Pr(success) < 0.5).  Difference will be more pronounced with smaller sample sizes.}
-  \item \textcolor{red}{(1)} Combine rpredNormIG(), rpredNormIG2(), and rpredNormIGk() into one function
+  \item No do not \sout{Combine rpredNormIG(), rpredNormIG2(), and rpredNormIGk() into one function}
   \item Read up on convergence in probability and justification for MCMC (Hoff, Casella \& Berger)
   \item Compare variance computations: var() function on MCMC sample vs direct computation from theory ($EX^2 - (EX)^2$)
-  \item \textcolor{red}{(2)}  General guidance:  Read up on ``How to write a thesis in Latex," for example \url{https://www.overleaf.com/learn/latex/How_to_Write_a_Thesis_in_LaTeX_(Part_1)%3A_Basic_Structure}
-  \item \textcolor{red}{(3)} Figure formatting:  save figures as .png files and insert?  Or what?  Need better control over how figure appears in resulting pdf.
+  \item General guidance:  Read up on ``How to write a thesis in Latex," for example \url{https://www.overleaf.com/learn/latex/How_to_Write_a_Thesis_in_LaTeX_(Part_1)%3A_Basic_Structure}
+  \item Figure formatting:  save figures as .png files and insert?  Or what?  Need better control over how figure appears in resulting pdf.
   \item \textcolor{red}{(0)} Incorporate any guidance from Dean.
   \item Write up explanation of how each function works
 \end{itemize}
 
 \begin{itemize}
   \item Exponential-Gamma random sampler:  draw a single theta from posterior or draw a new one for each prediction?  (Can't tell the difference from histograms)
-  \item Beta-Binomial:  Use posterior of theta (which is a gamma) and then make prediction based on draw(s) of theta (like I'm doing for Exponential-Gamma?)  Why did I go to the trouble of using the inverse transform method before?
+  \item Beta-Binomial:  Use posterior of theta (which is a gamma) and then make prediction based on draw(s) of theta (like I'm doing for Exponential-Gamma?)  Why did I go to the trouble of using the inverse transform method before?  Try drawing $\theta\sim\text{Beta}(t+\alpha,N-t+\beta)$ and then predict t using \texttt{rbinom(S,N,theta)}.
   \item Work through the math for the 2-sample Normal-Inverse Gamma full conditional distributions (see Hoff p. 128)
-  \item Beta-binomial:  try drawing $\theta\sim\text{Beta}(t+\alpha,N-t+\beta)$ and then predict t using \texttt{rbinom(S,N,theta)}.
-  \item Review use of $\pi(\cdot)$ to denote prior distributions of parameters.  Right now my intro says I'm doing that but at least ing the k-sample Normal-Inverse Gamma I'm not doing that.
+  \item Section 3 intro:  mention split of NormIG into 1, 2, and k sample models.
+  \item Establish S as random sample size throughout.
+  \item In ``R Implementation" sections, put function parameters into function at beginning of intros
+  \item Make sure consistent with use of $\tilde{y}$ for single prediction throughout.  Also mention this in intro.
+  \item Figure out E-G example
+  \item Add intro to each model?
+  \item check $\int_\theta$ for consistent use throughout
+  \item Am I numbering all the formulas that need numbering?
+  \item Review use of $\pi(\cdot)$ to denote prior distributions of parameters.  Right now my intro says I'm doing that but at least in the k-sample Normal-Inverse Gamma I'm not doing that.
+  \item \textcolor{red}{(1)} Review Normal Regression section and pare down for draft.
 \end{itemize}
 
 
 {\huge Dean's Notes 1/4/2022}
 \begin{enumerate}
   \item \sout{Remove the ``Chapter 1” and “Chapter 2” from the chapter titles.}
-  \item \textcolor{red}{question sent back to Dean 1/5}\\
-    p 4, Abstract - You know that Bayesian inference need not be predictive.
+  \item \sout{p 4, Abstract - You know that Bayesian inference need not be predictive.}
   \item p 4, section 2.1 \\
     I think you may need a citation for that first  sentence.\\
-    I feel like you need several citation in this first paragraph.\\
-    How many of these assertions are your original ideas, and how many are borrowed?\\
+    \sout{I feel like you need several citation in this first paragraph.}\\
+    \sout{How many of these assertions are your original ideas, and how many are borrowed?}\\
 
-  \item \textcolor{red}{sent update to Dean 1/5/2022} p 5  What are the take-aways from this example?
-  \item p 8 Ch3  intro paragraph\\
-    Yes - add an intro paragraph\\
-    What about these problems makes them unique? or simple?\\
-    Also, describe (list) the problems you are going to address.\\
+  \item \sout{p 5  What are the take-aways from this example?}
+  \item \sout{p 8 Ch3  intro paragraph}\\
+    \sout{Yes - add an intro paragraph}\\
+    \sout{What about these problems makes them unique? or simple?}\\
+    \sout{Also, describe (list) the problems you are going to address.}\\
   \item p9, bottom - The random sampling should work the same either way.  \textcolor{red}{Is one method preferable?}
-  \item p10, bottom \\
-    The likelihood is a function of the parameter conditional on the data.\\\\
+  \item \sout{p10, bottom} \\
+    \sout{The likelihood is a function of the parameter conditional on the data.}\\\\
 
-\textcolor{blue}{Ok is the point that we're talking about a posterior distribution of $\theta$?  This is the only place in the paper that I talk in terms of Likelihood, and the only reason I do it is that Geisser made the switch here.}\\\\
+    \sout{The conventional use of upper and lower case values for variables you know that Y is unobserved, y is observed.}\\\\
 
-    The conventional use of upper and lower case values for variables you know that Y is unobserved, y is observed.\\\\
+    \sout{Switching to the likelihood notation is a little less cumbersome.}  \\
+    \sout{For discrete PMFs (like the binomial), the expression would be}\\
+    \sout{Pr$(Y1 = y1,...,Yn=yn | \theta)$}\\\\
 
-    Switching to the likelihood notation is a little less cumbersome.  \\
-    For discrete PMFs (like the binomial), the expression would be\\
-    Pr$(Y1 = y1,...,Yn=yn | \theta)$\\\\
+    \sout{For continuous pdfs its trickier.}\\\\
 
-    For continuous pdfs its trickier.\\\\
-
-    You can use whichever notation you like - but you have to define it if it’s unusual.  It needs to be clear what you are conditioning on, and what is unknown (or random)\\\\
-    \textcolor{blue}{By ``whichever notation" do you mean choosing between $p(\theta|data)$ and $L(\theta)$?  Also, if I go with likelihood, do I need to say $L(\theta|data)$ or is there no need because ``given the data" is understood by definition of likelihood?}
+    \sout{You can use whichever notation you like - but you have to define it if it’s unusual.  It needs to be clear what you are conditioning on, and what is unknown (or random)}\\\\
+    \sout{\textcolor{blue}{By ``whichever notation" do you mean choosing between $p(\theta|data)$ and $L(\theta)$?  Also, if I go with likelihood, do I need to say $L(\theta|data)$ or is there no need because ``given the data" is understood by definition of likelihood?}}
   \item \sout{p 11 - first para.  For the sentences above, I presume you want some censoring value and not a parameter theta?}
   \item p17 - section 3.3.3  I also don't know where you got this example. \textcolor{blue}{Discuss over Zoom}
   \item \sout{p21 3.4.1.3 - I don't think you need other values for kappa or nu.}
