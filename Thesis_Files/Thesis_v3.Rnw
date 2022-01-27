@@ -1288,30 +1288,19 @@ legend("topleft",
 \clearpage
 
 
-\section{Normal Regression with Zellner's $g$-prior}
+\section{Normal Regression}% with Zellner's $g$-prior}
 
-\textcolor{red}{intro here}\\
-\textcolor{red}{stipulate variable naming convention here (x is the observed data now).  Modify previous intro to indicate variable convention was for the exponential family set of models}
+% \textcolor{red}{intro here}\\
+% \textcolor{red}{stipulate variable naming convention here (x is the observed data now).  Modify previous intro to indicate variable convention was for the exponential family set of models}
 
-\subsection{Least Squares Estimation with Example (Hoff p. 149ff.)}
-
-Regression modeling is concerned with describing how the sampling distribution of one random variable $Y$ varies with another variable or set of variables $\mathbf{x} = \left(x_1,...,x_p\right)$.  Specifically, a regression model postulates a form for $p(y|\mathbf{x})$, the conditional distribution of $Y$ given $\mathbf{x}$.  Estimation of $p(y|\mathbf{x})$ is made using data $y_1,...,y_n$ that are gathered under a variety of conditions $\mathbf{x}_1,...,\mathbf{x}_n$. (Hoff p. 149)
-
-The normal linear regression model specifies that, in addition to $E[Y|\mathbf{x}]$ being linear, the sampling variability around the mean is i.i.d. normal:
-
-\begin{flalign*}
-    \epsilon_1,...,\epsilon_n &\overset{\text{i.i.d.}}{\sim} \text{Normal}\left(0,\sigma^2\right)\\
-    Y_i &= \boldsymbol\beta^T \mathbf{x}_i + \epsilon_i
-\end{flalign*}
-
-This model provides a complete specification of the joint probability density of observed data $y_1,...,y_n$ conditional upon $\mathbf{x}_1,...,\mathbf{x}_n$ and values of $\boldsymbol\beta$ and $\sigma^2$:
+\noindent Starting with observations $Y_1,...,Y_N$ and explanatory variables $\mathbf{x}_1,...,\mathbf{x}_n$, with $\mathbf{x}_i = \left\{ x_{i,1}, x_{i,2}, ..., x_{i,p} \right\}$ where $Y_i = \boldsymbol\beta^T \mathbf{x}_i + \epsilon_i$ and $\epsilon_1,...,\epsilon_n\overset{\text{i.i.d.}}{\sim} \text{Normal}\left(0,\sigma^2\right)$, we have joint probability density
 
 \begin{flalign}
     p\left(y_1,...y_n|\mathbf{x}_1,...,\mathbf{x}_n,\boldsymbol\beta,\sigma^2\right) &= \prod_{i=1}^n p\left(y_i|\mathbf{x}_i,\boldsymbol\beta,\sigma^2\right) \nonumber\\
-    &= \left(2\pi\sigma^2\right)^{-n/2}\text{exp}\left\{-\frac{1}{2\sigma^2}\sum_{i=1}^n\left(y_i - \boldsymbol\beta^T\mathbf{x}_i\right)^2\right\} \label{regressionJointNorm}
+    &= \left(2\pi\sigma^2\right)^{-n/2}\text{exp}\left\{-\frac{1}{2\sigma^2}\sum_{i=1}^n\left(y_i - \boldsymbol\beta^T\mathbf{x}_i\right)^2\right\}. \label{regressionJointNorm}
 \end{flalign}
 
-Another way to write this joint probability density is in terms of the multivariate normal distribution:  Let $\mathbf{y}$ be the $n$-dimensional column vector $\left(y_1,...,y_n\right)^T$ and let $\mathbf{X}$ be the $n \times p$ matrix whose $i$th row is $\mathbf{x}_i = \left\{ x_{i,1}, x_{i,2}, ..., x_{i,p} \right\}$.  Then the normal regression model is
+\noindent If we let $\mathbf{y}=(y_1,...,y_n)^T$ and let $\mathbf{X}$ be the $n \times p$ matrix whose $i$th row is $\mathbf{x}_i$, then we can express this joint probability in terms of the multivariate normal distribution.  The normal regression model is
 
 $$\{\mathbf{y}|\mathbf{X},\boldsymbol\beta,\sigma^2\} \sim \text{multivariate normal}\left(\mathbf{X}\boldsymbol\beta,\sigma^2\mathbf{I}\right),$$
 
@@ -1353,7 +1342,12 @@ and
 
 $$\hat{\sigma}^2_{ols} = \frac{SSR\left(\hat{\boldsymbol\beta}_{ols}\right)}{(n-p)} = \frac{\sum\left(y_i - \hat{\boldsymbol\beta}_{ols}^T x_i\right)^2}{(n-p)}.$$
 
-% \clearpage
+
+
+
+\subsection{Least Squares Estimation Example (Hoff p. 149ff.)}
+
+\noindent Here we reproduce the example provided by Hoff, which will be used to illustrate Bayesian prediction for a regression model.\\
 
 \noindent\textit{Example:  Oxygen uptake (from Kuehl (2000), Hoff p. 149ff)}
 
@@ -1378,10 +1372,12 @@ legend(27,0,legend=c("aerobic","running"),pch=c(16,16),col=c("gray","black"))
     \begin{align}
         Y_i &= \beta_1x_{i,1} + \beta_2x_{i,2} + \beta_3x_{i,3} + \beta_4x_{i,4} + \epsilon_i, \text{ where} \label{example_regression_model}\\
         x_{i,1} &= 1 \text{ for each subject } i \nonumber \\
-        x_{i,2} &= 0 \text{ if subject } j \text{ is on the running program, } 1 \text{ if on aerobic} \nonumber \\
+        x_{i,2} &= 0 \text{ if subject } i \text{ is on the running program, } 1 \text{ if on aerobic} \nonumber \\
         x_{i,3} &= \text{ age of subject } i \nonumber \\
         x_{i,4} &= x_{i,2} \times x_{i,3} \nonumber
     \end{align}
+
+\textcolor{red}{Here Hoff has this:}
 
 \noindent Under this model the conditional expectations of $Y$ for the two different levels of $x_{i,1}$ are
 
@@ -1390,7 +1386,16 @@ legend(27,0,legend=c("aerobic","running"),pch=c(16,16),col=c("gray","black"))
     E[Y|\mathbf{x}] &= \left(\beta_1 + \beta_2\right) + \left(\beta_3 + \beta_4\right) \times (age) \text{ if } x_1 = 1
 \end{flalign*}
 
-In other words, the model assumes that the relationship is linear in age for both exercise groups, with the difference in intercepts given by $\beta_2$ and the difference in slopes given by $\beta_4$.  If we assumed that $\beta_2 = \beta_4 = 0$, then we would have identical lines for both groups.  If we assumed $\beta_2 \ne 0$ and $\beta_4 =  0$ then we would have a different line for each group but they would be parallel.  Allowing all coefficients to be non-zero gives us two unrelated lines.  Some different possibilities are depicted graphically below:\\\\
+\textcolor{red}{But I think he means this:}
+
+\noindent Under this model the conditional expectations of $Y$ for the two different levels of $x_{i,2}$ are
+
+\begin{flalign*}
+    E[Y|\mathbf{x}] &= \beta_1 + \beta_3 \times (age) \text{ if } x_{i,2} = 0 \text{ (running program), and}\\
+    E[Y|\mathbf{x}] &= \left(\beta_1 + \beta_2\right) + \left(\beta_3 + \beta_4\right) \times (age) \text{ if } x_{i,2} = 1 \text{ (aerobic program)}
+\end{flalign*}
+
+\noindent In other words, the model assumes that the relationship is linear in age for both exercise groups, with the difference in intercepts given by $\beta_2$ and the difference in slopes given by $\beta_4$.  If we assumed that $\beta_2 = \beta_4 = 0$, then we would have identical lines for both groups.  If we assumed $\beta_2 \ne 0$ and $\beta_4 =  0$ then we would have a different line for each group but they would be parallel.  Allowing all coefficients to be non-zero gives us two unrelated lines.  Some different possibilities are depicted graphically below:\\\\
 
 <<fig=TRUE,echo=FALSE>>=
 #### Figure 9.2

@@ -28,13 +28,13 @@
 \contentsline {paragraph}{\numberline {3.4.3.1}Derivation}{26}{paragraph.3.4.3.1}%
 \contentsline {paragraph}{\numberline {3.4.3.2}R Implementation (Normal-Inverse Gamma, k-samples)}{26}{paragraph.3.4.3.2}%
 \contentsline {paragraph}{\numberline {3.4.3.3}Example}{27}{paragraph.3.4.3.3}%
-\contentsline {section}{\numberline {4}Normal Regression with Zellner's $g$-prior}{30}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Least Squares Estimation with Example (Hoff p. 149ff.)}{30}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Bayesian Estimation for a Regression Model (Hoff p. 154ff)}{35}{subsection.4.2}%
-\contentsline {subsubsection}{\numberline {4.2.1}Derivation}{35}{subsubsection.4.2.1}%
-\contentsline {paragraph}{\numberline {4.2.1.1}A semiconjugate prior distribution}{35}{paragraph.4.2.1.1}%
-\contentsline {paragraph}{\numberline {4.2.1.2}Default and weakly informative prior distributions}{36}{paragraph.4.2.1.2}%
-\contentsline {subsubsection}{\numberline {4.2.2}R Implementation (Normal Regression)}{37}{subsubsection.4.2.2}%
-\contentsline {subsubsection}{\numberline {4.2.3}Example}{37}{subsubsection.4.2.3}%
-\contentsline {section}{\numberline {5}Conclusion}{50}{section.5}%
-\contentsline {section}{\numberline {6}References}{50}{section.6}%
+\contentsline {section}{\numberline {4}Normal Regression}{30}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Least Squares Estimation Example (Hoff p. 149ff.)}{30}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Bayesian Estimation for a Regression Model (Hoff p. 154ff)}{34}{subsection.4.2}%
+\contentsline {subsubsection}{\numberline {4.2.1}Derivation}{34}{subsubsection.4.2.1}%
+\contentsline {paragraph}{\numberline {4.2.1.1}A semiconjugate prior distribution}{34}{paragraph.4.2.1.1}%
+\contentsline {paragraph}{\numberline {4.2.1.2}Default and weakly informative prior distributions}{35}{paragraph.4.2.1.2}%
+\contentsline {subsubsection}{\numberline {4.2.2}R Implementation (Normal Regression)}{36}{subsubsection.4.2.2}%
+\contentsline {subsubsection}{\numberline {4.2.3}Example}{36}{subsubsection.4.2.3}%
+\contentsline {section}{\numberline {5}Conclusion}{49}{section.5}%
+\contentsline {section}{\numberline {6}References}{49}{section.6}%
