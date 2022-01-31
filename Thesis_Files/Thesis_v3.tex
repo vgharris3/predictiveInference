@@ -132,11 +132,11 @@ The main purpose of statistics is to predict future events based on observed dat
   \multicolumn{5}{c}{\large \#Razorbacks Predicted out of 100 Tosses}          \\
   \multicolumn{1}{c}{\textbf{Prediction Method}} & \multicolumn{1}{c}{$\textbf{(}\boldsymbol\alpha,\boldsymbol\beta\textbf{)}$}  & \multicolumn{1}{c}{$\textbf{E(}\boldsymbol\theta\textbf{)}$}  & \multicolumn{1}{c}{\textbf{mean}} & \multicolumn{1}{c}{\textbf{SD}}\\
         \midrule
-        Beta-Binomial & (2,8) & 0.2 & 30.39 & 10.77 \\
+        Beta-Binomial & (2,8) & 0.2 & 29.3 & 11.2 \\
         \midrule
-        Beta-Binomial & (22,78) & 0.22 & 23.67 & 5.9\\
+        Beta-Binomial & (22,78) & 0.22 & 23.42 & 5.74\\
         \midrule
-        Beta-Binomial & (224,776) & 0.224 & 22.66 & 4.29 \\
+        Beta-Binomial & (224,776) & 0.224 & 22.63 & 4.19 \\
         \midrule
         Binomial$(100,0.4)$ & -- & -- & 40 & 4.9 \\
   \bottomrule
@@ -650,7 +650,7 @@ Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15,
 
 
     \subsubsection{$k$-sample Normal-Inverse Gamma:  Comparing multiple groups}
-    For two-level data consisting of groups and units within groups, denote data $\mathbf{Y}_1,...,\mathbf{Y_m}$ where $\mathbf{Y}_j = \{Y_{1,j},...,Y_{N_j,j}\}$. We have the hierarchical Normal model (Hoff p. 132ff):
+    For two-level data consisting of groups and units within groups, denote data $\mathbf{Y}_1,...,\mathbf{Y_k}$ where $\mathbf{Y}_j = \{Y_{1,j},...,Y_{N_j,j}\}$. We have the hierarchical Normal model (Hoff p. 132ff):
     $$\phi_j = \left\{\theta_j,\sigma^2\right\}, p\left(y|\phi_j\right) = \text{Normal}\left(\theta_j,\sigma^2\right) \text{ (within-group model)}$$
     $$\psi_j = \left\{\mu,\tau^2\right\}, p\left(\theta_j|\psi\right) = \text{Normal}\left(\mu,\tau^2\right) \text{ (between-groups model)}$$
     We use standard semiconjugate Normal and Inverse Gamma prior distributions for the fixed but unknown parameters in the model:
@@ -663,18 +663,16 @@ Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15,
     \end{flalign*}
 
       \paragraph{Derivation}
-      As with the two-sample problem, joint posterior inferences for the unknown parameters can be made by constructing a Gibbs sampler to approximate the posterior distribution $p\left(\theta_1,...,\theta_m,\mu,\tau^2,\sigma^2|\mathbf{y_1,...,y_m}\right)$.  For this we need the full conditional distribution of each parameter (Hoff pp. 134-135):
+      As with the two-sample problem, joint posterior inferences for the unknown parameters can be made by constructing a Gibbs sampler to approximate the posterior distribution $p\left(\theta_1,...,\theta_k,\mu,\tau^2,\sigma^2|\mathbf{y_1,...,y_k}\right)$.  For this we need the full conditional distribution of each parameter (Hoff pp. 134-135):
       %%$$\left\{\mu|\theta_1,...,\theta_m,\tau^2\right\} \sim \text{normal}\left(\dfrac{m\bar{\theta}/\tau^2 + \mu_0/\gamma^2_0}{m/\tau^2 + 1/\gamma^2_0},\dfrac{1}{m/\tau^2+1/\gamma^2_0}\right)$$
-      $$\left\{\mu|\theta_1,...,\theta_m,\tau^2\right\} \sim \text{Normal}\left(\dfrac{\frac{m\bar{\theta}}{\tau^2} + \frac{\mu_0}{\gamma^2_0}}{\frac{m}{\tau^2} + \frac{1}{\gamma^2_0}},\dfrac{1}{\frac{m}{\tau^2}+\frac{1}{\gamma^2_0}}\right)$$
-      $$\left\{\tau^2|\theta_1,...,\theta_m,\mu\right\} \sim \text{Inverse Gamma}\left(\dfrac{\eta_0 + m}{2},\dfrac{\eta_0\tau^2_0 + \sum\left(\theta_j-\mu\right)^2}{2}\right)$$
+      $$\left\{\mu|\theta_1,...,\theta_k,\tau^2\right\} \sim \text{Normal}\left(\dfrac{\frac{k\bar{\theta}}{\tau^2} + \frac{\mu_0}{\gamma^2_0}}{\frac{k}{\tau^2} + \frac{1}{\gamma^2_0}},\dfrac{1}{\frac{k}{\tau^2}+\frac{1}{\gamma^2_0}}\right)$$
+      $$\left\{\tau^2|\theta_1,...,\theta_k,\mu\right\} \sim \text{Inverse Gamma}\left(\dfrac{\eta_0 + k}{2},\dfrac{\eta_0\tau^2_0 + \sum\left(\theta_j-\mu\right)^2}{2}\right)$$
 
       $$\left\{\theta_j|y_{1,j},...,y_{n,j},\sigma^2\right\} \sim \text{Normal}\left(\dfrac{\frac{n_j\bar{y}_j}{\sigma^2} + \frac{1}{\tau^2}}{\frac{n_j}{\sigma^2}+\frac{1}{\tau^2}},\dfrac{1}{\frac{n_j}{\sigma^2}+\frac{1}{\tau^2}}\right)$$
 
       % $$\left\{\sigma^2|\mathbf{\theta,y_1,...,y_n}\right\} \sim \text{Inverse Gamma}\left(\dfrac{1}{2}\left[\nu_0 + \sum_{j=1}^m n_j\right],\dfrac{1}{2}\left[\nu_0\sigma^2_0 + \sum_{j=1}^m\sum_{i=1}^{n_j}\left(y_{i,j}-\theta_j\right)^2\right]\right).$$
 
-      $$\left\{\sigma^2|\mathbf{\theta,y_1,...,y_m}\right\} \sim \text{Inverse Gamma}\left(\dfrac{1}{2}\left[\nu_0 + \sum_{j=1}^m n_j\right],\dfrac{1}{2}\left[\nu_0\sigma^2_0 + \sum_{j=1}^m\sum_{i=1}^{n_j}\left(y_{i,j}-\theta_j\right)^2\right]\right).$$
-
-      \textcolor{red}{Note:  In the above, Hoff has $\left\{\sigma^2|\mathbf{\theta,y_1,...,y_n}\right\}$. I believe the subscript $n$ is a typo, and should be $m$, the number of observed data groups.}
+      $$\left\{\sigma^2|\mathbf{\theta,y_1,...,y_k}\right\} \sim \text{Inverse Gamma}\left(\dfrac{1}{2}\left[\nu_0 + \sum_{j=1}^k n_j\right],\dfrac{1}{2}\left[\nu_0\sigma^2_0 + \sum_{j=1}^k\sum_{i=1}^{n_j}\left(y_{i,j}-\theta_j\right)^2\right]\right).$$
 
       Note that $\sum\sum\left(y_{i,j}-\theta_j\right)^2$ is the sum of squared residuals across all groups, conditional on the within-group means, and so the conditional distribution concentrates probability around a pooled-sample estimate of the variance.
 
@@ -692,22 +690,21 @@ Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15,
           \end{flalign*}
         \item Set initial states for the unknown parameters:
           \begin{flalign*}
-            \theta_1^{(1)} &= \mathbf{\bar{y}_1},...,\theta_m^{(1)} = \mathbf{\bar{y}_m}\\
-            \mu^{(1)} &= \text{mean}\left(\theta_1^{(1)},...,\theta_m^{(1)}\right)\\
-            \tau^{2(1)} &= \text{var}\left(\theta_1^{(1)},...,\theta_m^{(1)}\right)\\
-            \sigma^{2(1)} &= \text{mean}\left(\text{var}\left(\mathbf{y}_1\right),...,\text{var}\left(\mathbf{y}_m\right)\right))
+            \theta_1^{(1)} &= \mathbf{\bar{y}_1},...,\theta_k^{(1)} = \mathbf{\bar{y}_k}\\
+            \mu^{(1)} &= \text{mean}\left(\theta_1^{(1)},...,\theta_k^{(1)}\right)\\
+            \tau^{2(1)} &= \text{var}\left(\theta_1^{(1)},...,\theta_k^{(1)}\right)\\
+            \sigma^{2(1)} &= \text{mean}\left(\text{var}\left(\mathbf{y}_1\right),...,\text{var}\left(\mathbf{y}_k\right)\right))
           \end{flalign*}
         \item For $s\in\{1,...,S\}$, sample
           \begin{enumerate}
-            \item $\mu^{(s+1)} \sim p\left(\mu|\theta_1^{(s)},...,\theta_m^{(s)},\tau^{2(s)}\right)$
-            \item $\tau^{2(s+1)} \sim p\left(\tau^2|\theta_1^{(s)},...,\theta_m^{(s)},\mu^{(s+1)}\right)$
-            \item $\sigma^{2(s+1)} \sim p\left(\sigma^2|\theta_1^{(s)},...,\theta_m^{(s)},\mathbf{y}_1,...,\mathbf{y}_m\right)$
-            \item $\theta_j^{(s+1)} \sim p\left(\theta_j|\mu^{(s+1)},\tau^{2(s+1)},\sigma^{2(s+1)},\mathbf{y}_j\right)$ for $j \in \{1,...,m\}$
+            \item $\mu^{(s+1)} \sim p\left(\mu|\theta_1^{(s)},...,\theta_k^{(s)},\tau^{2(s)}\right)$
+            \item $\tau^{2(s+1)} \sim p\left(\tau^2|\theta_1^{(s)},...,\theta_k^{(s)},\mu^{(s+1)}\right)$
+            \item $\sigma^{2(s+1)} \sim p\left(\sigma^2|\theta_1^{(s)},...,\theta_k^{(s)},\mathbf{y}_1,...,\mathbf{y}_k\right)$
+            \item $\theta_j^{(s+1)} \sim p\left(\theta_j|\mu^{(s+1)},\tau^{2(s+1)},\sigma^{2(s+1)},\mathbf{y}_j\right)$ for $j \in \{1,...,k\}$
           \end{enumerate}
         \item For $s\in\{1,...,S\}$, generate prediction $\tilde{y}_j^{(s)} \sim \text{normal}\left(\theta_j^{(s)},\sigma^{2(s)}\right)$
       \end{enumerate}
 
-% \textcolor{red}{Look at the form in which \texttt{rpredNormIGk()} takes the data in.  Currently Y is a list of vectors of varying lengths.  The raw data is a long two-column numeric table with indices in the first column.  It's called Y.school.mathscore.  It would take a little re-work but if the 2-column format is preferred it's probably worth making the change.  Let me know.}
 
       \paragraph{Example}
       Returning to the math scores example, data for 10th-grade students from 100 large urban schools (each having 10th-grade enrollment of at least 400) is summarized in the following plot. Each school's results are represented by a vertical segment, with points plotted at the individual students' math scores. The horizontal line is drawn at the grand mean of the individual school means.
@@ -859,7 +856,7 @@ $$\hat{\sigma}^2_{ols} = \frac{SSR\left(\hat{\boldsymbol\beta}_{ols}\right)}{(n-
 
 \begin{flalign*}
     E[Y|\mathbf{x}] &= \beta_1 + \beta_3 \times (age) \text{ if } x_{i,2} = 0 \text{ (running program), and}\\
-    E[Y|\mathbf{x}] &= \left(\beta_1 + \beta_2\right) + \left(\beta_3 + \beta_4\right) \times (age) \text{ if } x_{i,2} = 1 \text{ (aerobic program)}
+    E[Y|\mathbf{x}] &= \left(\beta_1 + \beta_2\right) + \left(\beta_3 + \beta_4\right) \times (age) \text{ if } x_{i,2} = 1 \text{ (aerobic program) }
 \end{flalign*}
 
 \noindent In other words, the model assumes that the relationship is linear in age for both exercise groups, with the difference in intercepts given by $\beta_2$ and the difference in slopes given by $\beta_4$.  If we assumed that $\beta_2 = \beta_4 = 0$, then we would have identical lines for both groups.  If we assumed $\beta_2 \ne 0$ and $\beta_4 =  0$ then we would have a different line for each group but they would be parallel.  Allowing all coefficients to be non-zero gives us two unrelated lines.  Some different possibilities are depicted graphically below:\\\\
@@ -879,7 +876,7 @@ This means that the estimated linear relationship between uptake and age has an 
 
 \hrulefill \\
 
-\textcolor{red}{``Comparing the values of $\hat{\boldsymbol\beta}_{ols}$ to their standard errors:"}\\
+% \textcolor{red}{``Comparing the values of $\hat{\boldsymbol\beta}_{ols}$ to their standard errors:"}\\
 Difference in Intercept:\\
 $$H_0:  Intercept_{running} - Intercept_{aerobic} = 0; H_A:  Intercept_{running} - Intercept_{aerobic} \ne 0$$
 $$H_0:  \beta_1 - (\beta_1 + \beta_2) = -\beta_2 = 0 \text{ (that is } \beta_2 = 0); H_A:  \beta_2 \ne 0$$
@@ -921,9 +918,9 @@ x4  -0.3182438  0.6498086  -1.7661075   1.129620
 
     % (Equation \ref{conditional_density}) is
 
-    $$p(\mathbf{y}|\mathbf{X},\boldsymbol\beta,\sigma^2) \propto \text{exp}\{-\frac{1}{2\sigma^2}\text{SSR}(\boldsymbol\beta)\} = \text{exp}\{-\frac{1}{2\sigma^2}[\mathbf{y}^T\mathbf{y} - 2\boldsymbol\beta^T\mathbf{X}^T\mathbf{y}+\boldsymbol\beta^T\mathbf{X}^T\mathbf{X}\boldsymbol\beta]\}.$$
+    $$p(\mathbf{y}|\mathbf{X},\boldsymbol\beta,\sigma^2) \propto \text{exp}\{-\frac{1}{2\sigma^2}\text{SSR}(\boldsymbol\beta)\} = \text{exp}\{-\frac{1}{2\sigma^2}[\mathbf{y}^T\mathbf{y} - 2\boldsymbol\beta^T\mathbf{X}^T\mathbf{y}+\boldsymbol\beta^T\mathbf{X}^T\mathbf{X}\boldsymbol\beta]\},$$
 
-    The role that $\boldsymbol\beta$ plays in the exponent looks very similar to that played by $\mathbf{y}$, and the distribution of $\mathbf{y}$ is multivariate normal.  This suggests that a multivariate normal prior distribution for $\boldsymbol\beta$ is conjugate:  if $\boldsymbol\beta \sim \text{multivariate normal}(\boldsymbol\beta_0,\Sigma_0)$, then
+\noindent and for priors we choose $\boldsymbol\beta \sim \text{multivariate normal}(\boldsymbol\beta_0,\Sigma_0)$ and $1/\sigma^2 = \gamma\sim \text{gamma}(\nu_0/2,\nu_0\sigma^2_0/2)$.  Thus we have
 
     \begin{flalign*}
         p&(\boldsymbol\beta|\mathbf{y,X},\sigma^2)\\
@@ -932,16 +929,8 @@ x4  -0.3182438  0.6498086  -1.7661075   1.129620
         &=\text{exp}\{\boldsymbol\beta^T(\Sigma_0^{-1}\boldsymbol\beta_0 + \mathbf{X}^T\mathbf{y}/\sigma^2) - \frac{1}{2}\boldsymbol\beta^T(\Sigma_0^{-1} + \mathbf{X}^T\mathbf{X}/\sigma^2)\boldsymbol\beta\}
     \end{flalign*}
 
-    This is proportional to a multivariate normal density, with
 
-    \begin{flalign}
-        Var[\boldsymbol\beta|\mathbf{y,X},\sigma^2] &= (\Sigma_0^{-1} + \mathbf{X}^T\mathbf{X}/\sigma^2)^{-1} \label{regression_semiconj_var}\\
-        \text{E}[\boldsymbol\beta|\mathbf{y,X},\sigma^2] &= (\Sigma_0^{-1} + \mathbf{X}^T\mathbf{X}/\sigma^2)^{-1} (\Sigma_0^{-1}\boldsymbol\beta_0 + \mathbf{X}^T\mathbf{y}/\sigma^2). \label{regression_semiconj_expec}
-    \end{flalign}
-
-As usual, we can gain some understanding of these formulae by considering some limiting cases.  If the elements of the prior precision matrix $\Sigma_0^{-1}$ are small in magnitude, then the conditional expectation E$[\boldsymbol\beta|\mathbf{y,X},\sigma^2]$ is approximately equal to $(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{y}$, the least squares estimate. On the other hand, if the measurement precision is very small ($\sigma^2$ is very large), then the expectation is approximately $\boldsymbol\beta_0$, the prior expectation.\\
-
-As in most normal sampling problems, the semiconjugate prior distribution for $\sigma^2$ is an Inverse Gamma distribution.  Letting $\gamma = 1/\sigma^2$ be the measurement precision, if $\gamma \sim \text{gamma}(\nu_0/2,\nu_0\sigma^2_0/2)$, then
+and
 
 
 \begin{flalign*}
@@ -954,6 +943,8 @@ As in most normal sampling problems, the semiconjugate prior distribution for $\
 \noindent which we recognize as a gamma density, so that
 
 $$\{\sigma^2|\mathbf{y,X},\boldsymbol\beta\} \sim \text{Inverse Gamma}([\nu_0 + n]/2,[\nu_0\sigma^2_0 + \text{SSR}(\boldsymbol\beta)]/2).$$
+
+\vspace{5mm}
 
 \noindent Constructing a Gibbs sampler to approximate the joint posterior distribution $p(\boldsymbol\beta,\sigma^2|\mathbf{y,X})$ is then straightforward:  given current values $\{\boldsymbol\beta^{(s)},\sigma^{2(s)}\}$, new values can be generated by
 
@@ -1040,58 +1031,11 @@ In the example below (Hoff data and code found \href{https://pdhoff.github.io/bo
   S &= 5000 \text{ (sample size for predictive distribution random draw)}
 \end{flalign*}
 
-\textcolor{red}{I need to get rid of some of the plots below.  Maybe just keep the one on page 43 comparing the use of Zellner's g-prior to Hoff's semi-conjugate prior?  What do you suggest?}
-
-\includegraphics{Thesis_v3-015}
-
-%\textcolor{red}{MAYBE DO BOTH IN THE SAME BLOCK AND PLOT ON ONE PLOT?}
-
-%\clearpage
-
-%For the same example without prior information, we use Zellner's g-prior with $g =$ length$(y) =$ 12.
-
-\includegraphics{Thesis_v3-016}
-
-\includegraphics{Thesis_v3-017}
-
-\clearpage
-
-
-\includegraphics{Thesis_v3-018}
-
-\clearpage
-
-Comparing predictions using semi-conjugate prior vs. Zellner's g-prior:
-
-\includegraphics{Thesis_v3-019}
 
 Inspection of the graphs shows the predicted distributions using Zellner's g-prior shrink toward 0, and have greater variance than those predicted using Hoff's semi-conjugate prior.
 
-\includegraphics{Thesis_v3-020}
+\includegraphics{Thesis_v3-015}
 
-\textcolor{red}{EXPLAIN WHY SCP PREDICTIONS HAVE TALLER DISTRIBUTIONS THAN ZGP PREDICTIONS.  ALSO WHY ZGP PREDICTIONS SHRINK TOWARD 0}
-
-\clearpage
-
-Comparing observed values to predictive distributions:
-
-\includegraphics{Thesis_v3-021}
-
-
-
-
-
-The following plots exhibit the influence of varying the prior info with the semi-conjugate prior.
-
-\includegraphics{Thesis_v3-022}
-
-\includegraphics{Thesis_v3-023}
-
-\includegraphics{Thesis_v3-024}
-
-\includegraphics{Thesis_v3-025}
-
-\includegraphics{Thesis_v3-026}
 
 \clearpage
 
