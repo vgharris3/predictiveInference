@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  26 JAN 2022 05:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  1 FEB 2022 10:15
 entering extended mode
 **./ToDoList.tex
 (ToDoList.tex
@@ -962,73 +962,60 @@ Overfull \hbox (8.16354pt too wide) in paragraph at lines 82--83
 [1
 
 {C:/Users/gabe/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 109--113
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 115--119
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 120--122
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 120--122
+Underfull \hbox (badness 10000) in paragraph at lines 117--121
 
  []
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 123--124
+Underfull \hbox (badness 10000) in paragraph at lines 123--127
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 123--124
+Underfull \hbox (badness 10000) in paragraph at lines 128--130
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 125--128
+Underfull \hbox (badness 10000) in paragraph at lines 128--130
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 125--128
+Underfull \hbox (badness 10000) in paragraph at lines 131--132
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 129--130
+Underfull \hbox (badness 10000) in paragraph at lines 131--132
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 129--130
+Underfull \hbox (badness 10000) in paragraph at lines 133--136
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 131--133
+Underfull \hbox (badness 10000) in paragraph at lines 133--136
 
  []
 
-
-Overfull \hbox (701.41441pt too wide) in paragraph at lines 131--133
-|   [] 
+[3]
+Overfull \hbox (37.05475pt too wide) in paragraph at lines 153--154
+[][]\T1/aer/m/n/12 NormIG2():[] [][][]Sub[]-[]script[] [][][][][] [][][]in[] []
+[][]the[] [][][]pa[]-[]ram[]-[]e[]-[]ters[] [][][][].[] [][][]In[]-[]ter[]-[]pr
+et[] [][][]these[] [][][]as[] [][][][]?[]
  []
 
-[3] (ToDoList.aux)
+[4] (ToDoList.aux)
 Package rerunfilecheck Info: File `ToDoList.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 29676 strings out of 479696
- 695786 string characters out of 2881701
- 1173551 words of memory out of 3000000
+ 29677 strings out of 479696
+ 695792 string characters out of 2881701
+ 1187552 words of memory out of 3000000
  46124 multiletter control sequences out of 15000+200000
  439144 words of font info for 119 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1041,9 +1028,9 @@ amsfonts/cm/cmmi12.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb>
 pe1/public/amsfonts/cm/cmr17.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/
 cmr8.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/MiKTeX 2.
 9/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on ToDoList.pdf (3 pages, 116058 bytes).
+Output written on ToDoList.pdf (4 pages, 117594 bytes).
 PDF statistics:
- 86 PDF objects out of 1000 (max. 8388607)
- 19 named destinations out of 1000 (max. 500000)
+ 90 PDF objects out of 1000 (max. 8388607)
+ 20 named destinations out of 1000 (max. 500000)
  17 words of extra memory for PDF output out of 10000 (max. 10000000)
 

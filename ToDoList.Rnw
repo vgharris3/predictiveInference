@@ -24,7 +24,7 @@
 \usepackage{array}
 \setcounter{MaxMatrixCols}{40}
 
-\usepackage{ulem} %just so I can strike through items on my todo list using \sout{text to be struck through}
+\usepackage{ulem} %just so I can strike through items on my todo list using \hl{text to be struck through}
 
 \usepackage{enumerate}
 \usepackage{enumitem}
@@ -70,73 +70,79 @@ setwd("C:/Users/gabe/Documents/tmp/predictiveInference")
   \item Read intros to listed texts (See Thesis section 2.1 Why Predictive Inference?) and summarize answers to that question in WhyPredictiveInference.Rnw
     \begin{itemize}
       \item Nate Silver's book (1st chapter or intro)
-      \item \sout{Hoff's book}
+      \item \hl{Hoff's book}
       \item Geyser's book (1st chapter or intro)
       \item Aitchison and Dunsmore (1st chapter or intro)
-      \item \sout{Dean's paper}
+      \item \hl{Dean's paper}
       \item maybe some googling
     \end{itemize}
-  \item \sout{Create example comparing predictive inference result with plug in parameter result}
-    \subitem \sout{Dean's suggestion:  1-sample binomial with small sample size.  E.g. 3 successes, 7 failures (Pr(success) < 0.5).  Difference will be more pronounced with smaller sample sizes.}
-  \item No do not \sout{Combine rpredNormIG(), rpredNormIG2(), and rpredNormIGk() into one function}
+  \item \hl{Create example comparing predictive inference result with plug in parameter result}
+    \subitem \hl{Dean's suggestion:  1-sample binomial with small sample size.  E.g. 3 successes, 7 failures (Pr(success) < 0.5).  Difference will be more pronounced with smaller sample sizes.}
+  \item No do not \hl{Combine rpredNormIG(), rpredNormIG2(), and rpredNormIGk() into one function}
   \item Read up on convergence in probability and justification for MCMC (Hoff, Casella \& Berger)
   \item Compare variance computations: var() function on MCMC sample vs direct computation from theory ($EX^2 - (EX)^2$)
   \item General guidance:  Read up on ``How to write a thesis in Latex," for example \url{https://www.overleaf.com/learn/latex/How_to_Write_a_Thesis_in_LaTeX_(Part_1)%3A_Basic_Structure}
   \item Figure formatting:  save figures as .png files and insert?  Or what?  Need better control over how figure appears in resulting pdf.
   \item \textcolor{red}{(0)} Incorporate any guidance from Dean.
   \item Write up explanation of how each function works
+  \item Ask Melanie for ``Master's Thesis Style File"
 \end{itemize}
 
 \begin{itemize}
+  \item Not unless Dean asks for it:  write intro paragraph (couple of sentences) for each model
   \item Exponential-Gamma random sampler:  draw a single theta from posterior or draw a new one for each prediction?  (Can't tell the difference from histograms)
   \item Beta-Binomial:  Use posterior of theta (which is a gamma) and then make prediction based on draw(s) of theta (like I'm doing for Exponential-Gamma?)  Why did I go to the trouble of using the inverse transform method before?  Try drawing $\theta\sim\text{Beta}(t+\alpha,N-t+\beta)$ and then predict t using \texttt{rbinom(S,N,theta)}.
+  \item Establish S as random sample size, make sure consistent throughout
+  \item Make sure consistent with $\tilde{y}$ for predicted value throughout
   \item Work through the math for the 2-sample Normal-Inverse Gamma full conditional distributions (see Hoff p. 128)
   \item Section 3 intro:  mention split of NormIG into 1, 2, and k sample models.
   \item Establish S as random sample size throughout.
   \item In ``R Implementation" sections, put function parameters into function at beginning of intros
   \item Make sure consistent with use of $\tilde{y}$ for single prediction throughout.  Also mention this in intro.
   \item Figure out E-G example
-  \item Add intro to each model?
   \item check $\int_\theta$ for consistent use throughout
   \item Am I numbering all the formulas that need numbering?
   \item Review use of $\pi(\cdot)$ to denote prior distributions of parameters.  Right now my intro says I'm doing that but at least in the k-sample Normal-Inverse Gamma I'm not doing that.
-  \item \textcolor{red}{(1)} Review Normal Regression section and pare down for draft.
+  \item \hl{Review Normal Regression section and pare down for draft.}
+  \item List of Figures
+  \item List of Tables
+  \item Citations guidance:  you should use the citation style appropriate for your discipline, following
+the guidance of your committee.  Ask Melanie.
+  \item Create appendix containing R code for functions and for examples.
 \end{itemize}
 
 
 {\huge Dean's Notes 1/4/2022}
 \begin{enumerate}
-  \item \sout{Remove the ``Chapter 1” and “Chapter 2” from the chapter titles.}
-  \item \sout{p 4, Abstract - You know that Bayesian inference need not be predictive.}
+  \item \hl{Remove the Chapter 1 and Chapter 2 from the chapter titles.}
+  \item \hl{p 4, Abstract - You know that Bayesian inference need not be predictive.}
   \item p 4, section 2.1 \\
     I think you may need a citation for that first  sentence.\\
-    \sout{I feel like you need several citation in this first paragraph.}\\
-    \sout{How many of these assertions are your original ideas, and how many are borrowed?}\\
+    \hl{I feel like you need several citation in this first paragraph.}\\
+    \hl{How many of these assertions are your original ideas, and how many are borrowed?}\\
 
-  \item \sout{p 5  What are the take-aways from this example?}
-  \item \sout{p 8 Ch3  intro paragraph}\\
-    \sout{Yes - add an intro paragraph}\\
-    \sout{What about these problems makes them unique? or simple?}\\
-    \sout{Also, describe (list) the problems you are going to address.}\\
+  \item \hl{p 5  What are the take-aways from this example?}
+  \item \hl{p 8 Ch3  intro paragraph}\\
+    \hl{Yes - add an intro paragraph}\\
+    \hl{What about these problems makes them unique? or simple?}\\
+    \hl{Also, describe (list) the problems you are going to address.}\\
   \item p9, bottom - The random sampling should work the same either way.  \textcolor{red}{Is one method preferable?}
-  \item \sout{p10, bottom} \\
-    \sout{The likelihood is a function of the parameter conditional on the data.}\\\\
+  \item \hl{p10, bottom} \\
+    \hl{The likelihood is a function of the parameter conditional on the data.}\\\\
 
-    \sout{The conventional use of upper and lower case values for variables you know that Y is unobserved, y is observed.}\\\\
+    \hl{The conventional use of upper and lower case values for variables you know that Y is unobserved, y is observed.}\\\\
 
-    \sout{Switching to the likelihood notation is a little less cumbersome.}  \\
-    \sout{For discrete PMFs (like the binomial), the expression would be}\\
-    \sout{Pr$(Y1 = y1,...,Yn=yn | \theta)$}\\\\
+    \hl{Switching to the likelihood notation is a little less cumbersome.}  \\
+    \hl{For discrete PMFs (like the binomial), the expression would be}\\
+    \hl{Pr$(Y1 = y1,...,Yn=yn | \theta)$}\\\\
 
-    \sout{For continuous pdfs its trickier.}\\\\
+    \hl{For continuous pdfs its trickier.}
 
-    \sout{You can use whichever notation you like - but you have to define it if it’s unusual.  It needs to be clear what you are conditioning on, and what is unknown (or random)}\\\\
-    \sout{\textcolor{blue}{By ``whichever notation" do you mean choosing between $p(\theta|data)$ and $L(\theta)$?  Also, if I go with likelihood, do I need to say $L(\theta|data)$ or is there no need because ``given the data" is understood by definition of likelihood?}}
-  \item \sout{p 11 - first para.  For the sentences above, I presume you want some censoring value and not a parameter theta?}
+  \item \hl{p 11 - first para.  For the sentences above, I presume you want some censoring value and not a parameter theta?}
   \item p17 - section 3.3.3  I also don't know where you got this example. \textcolor{blue}{Discuss over Zoom}
-  \item \sout{p21 3.4.1.3 - I don't think you need other values for kappa or nu.}
-  \item \sout{p24. 3.4.2.3 - I would probably just say that Hoff provides the following example and we reproduce his description.}
-  \item \sout{p27. The two-column format would be more standard, and would fit better with the “tidy” data format.  It would be easier to use.}
+  \item \hl{p21 3.4.1.3 - I don't think you need other values for kappa or nu.}
+  \item \hl{p24. 3.4.2.3 - I would probably just say that Hoff provides the following example and we reproduce his description.}
+  \item \hl{p27. The two-column format would be more standard, and would fit better with the tidy data format.  It would be easier to use.}
   \item p 33.  ``Comparing the values of βˆols to their standard errors:”\\
     This is the usual regression t-statistic for regression parameter estimates.
   \item This is as far as I got.\\
@@ -146,7 +152,7 @@ setwd("C:/Users/gabe/Documents/tmp/predictiveInference")
 
 {\huge Questions for Dean 1/28/2022}
 \begin{enumerate}
-  \item NormIG2():  Subscript $N$ in the parameters $\mu_N,\gamma^2_N,\delta_N,\tau^2_N$. Interpret these as $N = N_1 + N_2$?
+  \item \hl{NormIG2():  Subscript $N$ in the parameters $\mu_N,\gamma^2_N,\delta_N,\tau^2_N$. Interpret these as $N = N_1 + N_2$?  Sure.  Maybe add an explanation}
 \end{enumerate}
 
 

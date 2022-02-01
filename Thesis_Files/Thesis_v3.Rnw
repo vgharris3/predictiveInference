@@ -254,10 +254,10 @@ and make our prediction using (\ref{BayesianPredictiveFormat}).
 
 When data can be modeled with a distribution that suggests a conjugate prior for the parameter(s) of interest, and those parameters can reasonably be represented by that conjugate prior, the posterior calculations are greatly simplified.  The four classes of models addressed in this section all exhibit this feature.  The first three are single-parameter exponential families and have closed-form solutions for prediction.  The fourth is a two-parameter exponential family with unkown mean and variance.  While this one does not admit an analytical solution, prediction is easily accomplished by means of simple monte carlo (MC) sampling.  The four classes of predictive models presented in this section are:
 \begin{itemize}
-  \item Beta-Binomial ($T = \sum Y\sim$Binom$(N,\theta)$ with $\theta\sim$Beta)
-  \item Exponential-Gamma ($Y\sim$Exp$(\theta)$ data with $\theta\sim$Gamma)
-  \item Poisson-Gamma ($Y\sim$Poi$(\theta)$ data $\theta\sim$Gamma)
-  \item Normal-Inverse Gamma ($Y\sim$Normal$(\theta,\sigma)$ data with $\theta\sim$Normal and $\sigma\sim$Inverse Gamma)
+  \item Beta-Binomial ($T = \sum Y\sim$ Binom$(N,\theta)$ with $\theta\sim$ Beta)
+  \item Exponential-Gamma ($Y\sim$ Exp$(\theta)$ data with $\theta\sim$ Gamma)
+  \item Poisson-Gamma ($Y\sim$ Poi$(\theta)$ data $\theta\sim$Gamma)
+  \item Normal-Inverse Gamma ($Y\sim$ Normal$(\theta,\sigma)$ data with $\theta\sim$ Normal and $\sigma\sim$ Inverse Gamma)
 \end{itemize}
 
 Throughout what follows, $N$ is used for the data sample size and $M$ is the number of predictions desired.  Parameter variable names should be clearly indicated as they appear.
@@ -605,7 +605,7 @@ lines(1:1000,f_x)
         &= \dfrac{\Gamma\left(\alpha+\sum y_i+\tilde{y}\right)}{\Gamma(\tilde{y}+1)\Gamma(\alpha+\sum y_i)}\cdot \left(\dfrac{\beta+N}{\beta+N+1}\right)^{\alpha+\sum y_i} \cdot \left(\dfrac{1}{\beta+N+1}\right)^{\tilde{y}}\label{poissonGamma_pred}
       \end{flalign}
 
-This is a negative binomial distribution:  $\tilde{y}\sim NB\left(\alpha+\sum y_i,\beta+N\right)$
+This is a negative binomial distribution:  $\tilde{y}\sim\text{NB}\left(\alpha+\sum y_i,\beta+N\right)$
 
 
 
@@ -704,7 +704,7 @@ if(0){
     \subsubsection{One sample Normal-Inverse Gamma}
       \paragraph{Derivation}
       [Hoff p. 69ff]\\
-        Let $\left\{Y_1,...,Y_N|\theta,\sigma^2\right\}\overset{i.i.d.}{\sim}Normal\left(\theta,\sigma^2\right)$.  Then the joint sampling density is
+        Let $\left\{Y_1,...,Y_N|\theta,\sigma^2\right\}\overset{i.i.d.}{\sim}\text{Normal}\left(\theta,\sigma^2\right)$.  Then the joint sampling density is
 
         \begin{flalign*}
           p\left(y_1,...,y_N|\theta,\sigma^2\right)
@@ -758,13 +758,13 @@ if(0){
 
         \begin{flalign*}
           \begin{matrix}
-            \sigma^{2(1)}\sim \text{Inverse Gamma}\left(\nu_N/2,\sigma^2_N\nu_N/2\right), & \theta^{(1)}\sim \text{normal}\left(\mu_N,\sigma^{2(1)}/\kappa_N\right) \\
+            \sigma^{2(1)}\sim \text{Inverse Gamma}\left(\nu_N/2,\sigma^2_N\nu_N/2\right), & \theta^{(1)}\sim \text{Normal}\left(\mu_N,\sigma^{2(1)}/\kappa_N\right) \\
             \vdots  & \vdots  \\
-            \sigma^{2(S)}\sim \text{Inverse Gamma}\left(\nu_N/2,\sigma^2_N\nu_N/2\right), & \theta^{(S)}\sim \text{normal}\left(\mu_N,\sigma^{2(S)}/\kappa_N\right) \\
+            \sigma^{2(S)}\sim \text{Inverse Gamma}\left(\nu_N/2,\sigma^2_N\nu_N/2\right), & \theta^{(S)}\sim \text{Normal}\left(\mu_N,\sigma^{2(S)}/\kappa_N\right) \\
           \end{matrix}
         \end{flalign*}
 
-        For prediction of future $\tilde{y}|y_1,...,y_N,\theta,\sigma^2$, generate $\tilde{y}_i \sim \text{normal}\left(\theta^{(i)},\sigma^{2(i)}\right)$.\\
+        For prediction of future $\tilde{y}|y_1,...,y_N,\theta,\sigma^2$, generate $\tilde{y}_i \sim \text{Normal}\left(\theta^{(i)},\sigma^{2(i)}\right)$.\\
 
         For prediction without the influence of any previous knowledge (Hoff p. 79), we can employ Jeffreys prior $\tilde{p}\left(\theta,\sigma^2\right) = 1/\sigma^2$.  This leads to the same conditional distribution for $\theta$ but a gamma$\left(\frac{N-1}{2},\frac{1}{2}\sum\left(y_i - \bar{y}\right)^2\right)$ distribution for $1/\sigma^2$.  This joint posterior distribution can be used to predict future $\tilde{y}$ by first drawing $\theta,\sigma^2$ and then simulating $\tilde{y}\sim\text{Normal}\left(\theta,\sigma^2\right)$.   Alternatively, the joint posterior can be integrated to show that
         $$\dfrac{\theta-\bar{y}}{s/\sqrt{N}}|y_1,...,y_N\sim t_{N-1}.$$
@@ -772,7 +772,7 @@ if(0){
 
 
       \paragraph{R Implementation (Normal-Inverse Gamma, 1-sample)}
-      R functions \texttt{dpredNormIG1()}, \texttt{ppredNormIG1()}, and \texttt{rpredNormIG1()} have been created for the Normal-Inverse Gamma distribution for density, cumulative probability, and random sampling, respectively (see appendix).  These functions all include options for implementation with or without previous knowledge as desired.  If Jeffreys prior is used, the functions simply implement R's Student's t-distribution functions \texttt{rt()}, \texttt{dt()}, and \texttt{pt()}, applying the location and scale parameters as described above.  For predictions using previous knowledge, the functions work as follows:  For the random sampler \texttt{rpredNormIG1()}, the Monte-Carlo method described above is directly employed.  The predictive density and cumulative predictive density functions (\texttt{dpredNormIG1()} and \texttt{ppredNormID1()}, respectively) depend on the random sample.  \texttt{ppredNormIG1()} utilizes the empirical cumulative density function \texttt{ecdf()} from R's stats package.  \texttt{dpredNormIG1()} utilizes a Kernel Density Estimation (KDE) method and R's built-in \texttt{density()} function.  The KDE is computed by definition, using a normal kernel:
+      R functions \texttt{dpredNormIG1()}, \texttt{ppredNormIG1()}, and \texttt{rpredNormIG1()} have been created for the Normal-Inverse Gamma distribution for density, cumulative probability, and random sampling, respectively (see appendix).  These functions all include options for implementation with or without previous knowledge as desired.  If Jeffreys prior is used, the functions simply implement R's Student's t-distribution functions \texttt{rt()}, \texttt{dt()}, and \texttt{pt()}, applying the location and scale parameters as described above.  For predictions using previous knowledge, the functions work as follows:  For the random sampler \texttt{rpredNormIG1()}, the Monte-Carlo method described above is directly employed.  The predictive density and cumulative predictive density functions (\texttt{dpredNormIG1()} and \texttt{ppredNormID1()}, respectively) depend on the random sample.  \texttt{ppredNormIG1()} utilizes the empirical cumulative density function \texttt{ecdf()} from R's stats package.  \texttt{dpredNormIG1()} utilizes a Kernel Density Estimation (KDE) method and R's built-in \texttt{density()} function.  The KDE is computed by definition, using a Normal kernel:
 
       $$\hat{f}_K(x) = \frac{1}{N}\sum_{i=1}^N\frac{1}{h}K\left(\frac{x-X_i}{h}\right),$$
 
@@ -781,7 +781,7 @@ if(0){
       \begin{flalign*}
         X_i & \text{ is the random sample generated using }\texttt{rpredNormIG1()}\\
         &\\
-        K & \text{ is Normal(0,1)}\\
+        K & \text{ is Normal}(0,1)\\
         &\\
         h & \text{ is the bandwidth from R's }\texttt{density()}\text{ function (that is, } \texttt{h = density(X}_\texttt{i}\texttt{)\$bw)}\\
       \end{flalign*}
@@ -812,7 +812,7 @@ if(0){
         Thus $\sfrac{\nu_N}{2} = 5$ and $\sfrac{\nu_N\sigma_N^2}{2} = 0.7662$ and we have posteriors
 
         \begin{flalign*}
-          \left\{\theta|y_1,...,y_N,\sigma^2\right\} &\sim \text{normal}\left(1.814,\sfrac{\sigma^2}{10}\right)\\
+          \left\{\theta|y_1,...,y_N,\sigma^2\right\} &\sim \text{Normal}\left(1.814,\sfrac{\sigma^2}{10}\right)\\
           &\\
           \left\{\sigma^2|y_1,...,y_N\right\} &\sim \text{Inverse Gamma}(5,0.7662)\\
         \end{flalign*}
@@ -1054,13 +1054,10 @@ lines(density(RS[,2]),lwd=2,col="red",lty=2)
 
       \paragraph{Derivation}
       As with the two-sample problem, joint posterior inferences for the unknown parameters can be made by constructing a Gibbs sampler to approximate the posterior distribution $p\left(\theta_1,...,\theta_k,\mu,\tau^2,\sigma^2|\mathbf{y_1,...,y_k}\right)$.  For this we need the full conditional distribution of each parameter (Hoff pp. 134-135):
-      %%$$\left\{\mu|\theta_1,...,\theta_m,\tau^2\right\} \sim \text{normal}\left(\dfrac{m\bar{\theta}/\tau^2 + \mu_0/\gamma^2_0}{m/\tau^2 + 1/\gamma^2_0},\dfrac{1}{m/\tau^2+1/\gamma^2_0}\right)$$
       $$\left\{\mu|\theta_1,...,\theta_k,\tau^2\right\} \sim \text{Normal}\left(\dfrac{\frac{k\bar{\theta}}{\tau^2} + \frac{\mu_0}{\gamma^2_0}}{\frac{k}{\tau^2} + \frac{1}{\gamma^2_0}},\dfrac{1}{\frac{k}{\tau^2}+\frac{1}{\gamma^2_0}}\right)$$
       $$\left\{\tau^2|\theta_1,...,\theta_k,\mu\right\} \sim \text{Inverse Gamma}\left(\dfrac{\eta_0 + k}{2},\dfrac{\eta_0\tau^2_0 + \sum\left(\theta_j-\mu\right)^2}{2}\right)$$
 
       $$\left\{\theta_j|y_{1,j},...,y_{n,j},\sigma^2\right\} \sim \text{Normal}\left(\dfrac{\frac{n_j\bar{y}_j}{\sigma^2} + \frac{1}{\tau^2}}{\frac{n_j}{\sigma^2}+\frac{1}{\tau^2}},\dfrac{1}{\frac{n_j}{\sigma^2}+\frac{1}{\tau^2}}\right)$$
-
-      % $$\left\{\sigma^2|\mathbf{\theta,y_1,...,y_n}\right\} \sim \text{Inverse Gamma}\left(\dfrac{1}{2}\left[\nu_0 + \sum_{j=1}^m n_j\right],\dfrac{1}{2}\left[\nu_0\sigma^2_0 + \sum_{j=1}^m\sum_{i=1}^{n_j}\left(y_{i,j}-\theta_j\right)^2\right]\right).$$
 
       $$\left\{\sigma^2|\mathbf{\theta,y_1,...,y_k}\right\} \sim \text{Inverse Gamma}\left(\dfrac{1}{2}\left[\nu_0 + \sum_{j=1}^k n_j\right],\dfrac{1}{2}\left[\nu_0\sigma^2_0 + \sum_{j=1}^k\sum_{i=1}^{n_j}\left(y_{i,j}-\theta_j\right)^2\right]\right).$$
 
@@ -1092,7 +1089,7 @@ lines(density(RS[,2]),lwd=2,col="red",lty=2)
             \item $\sigma^{2(s+1)} \sim p\left(\sigma^2|\theta_1^{(s)},...,\theta_k^{(s)},\mathbf{y}_1,...,\mathbf{y}_k\right)$
             \item $\theta_j^{(s+1)} \sim p\left(\theta_j|\mu^{(s+1)},\tau^{2(s+1)},\sigma^{2(s+1)},\mathbf{y}_j\right)$ for $j \in \{1,...,k\}$
           \end{enumerate}
-        \item For $s\in\{1,...,S\}$, generate prediction $\tilde{y}_j^{(s)} \sim \text{normal}\left(\theta_j^{(s)},\sigma^{2(s)}\right)$
+        \item For $s\in\{1,...,S\}$, generate prediction $\tilde{y}_j^{(s)} \sim \text{Normal}\left(\theta_j^{(s)},\sigma^{2(s)}\right)$
       \end{enumerate}
 
 
@@ -1297,9 +1294,9 @@ legend("topleft",
     &= \left(2\pi\sigma^2\right)^{-n/2}\text{exp}\left\{-\frac{1}{2\sigma^2}\sum_{i=1}^n\left(y_i - \boldsymbol\beta^T\mathbf{x}_i\right)^2\right\}. \label{regressionJointNorm}
 \end{flalign}
 
-\noindent If we let $\mathbf{y}=(y_1,...,y_n)^T$ and let $\mathbf{X}$ be the $n \times p$ matrix whose $i$th row is $\mathbf{x}_i$, then we can express this joint probability in terms of the multivariate normal distribution.  The normal regression model is
+\noindent If we let $\mathbf{y}=(y_1,...,y_n)^T$ and let $\mathbf{X}$ be the $n \times p$ matrix whose $i$th row is $\mathbf{x}_i$, then we can express this joint probability in terms of the Multivariate Normal distribution.  The Normal regression model is
 
-$$\{\mathbf{y}|\mathbf{X},\boldsymbol\beta,\sigma^2\} \sim \text{multivariate normal}\left(\mathbf{X}\boldsymbol\beta,\sigma^2\mathbf{I}\right),$$
+$$\{\mathbf{y}|\mathbf{X},\boldsymbol\beta,\sigma^2\} \sim \text{Multivariate Normal}\left(\mathbf{X}\boldsymbol\beta,\sigma^2\mathbf{I}\right),$$
 
 where $\mathbf{I}$ is the $p \times p$ identity matrix and
 
@@ -1493,7 +1490,7 @@ betadata
 
     $$p(\mathbf{y}|\mathbf{X},\boldsymbol\beta,\sigma^2) \propto \text{exp}\{-\frac{1}{2\sigma^2}\text{SSR}(\boldsymbol\beta)\} = \text{exp}\{-\frac{1}{2\sigma^2}[\mathbf{y}^T\mathbf{y} - 2\boldsymbol\beta^T\mathbf{X}^T\mathbf{y}+\boldsymbol\beta^T\mathbf{X}^T\mathbf{X}\boldsymbol\beta]\},$$
 
-\noindent and for priors we choose $\boldsymbol\beta \sim \text{multivariate normal}(\boldsymbol\beta_0,\Sigma_0)$ and $1/\sigma^2 = \gamma\sim \text{gamma}(\nu_0/2,\nu_0\sigma^2_0/2)$.  Thus we have
+\noindent and for priors we choose $\boldsymbol\beta \sim \text{Multivariate Normal}(\boldsymbol\beta_0,\Sigma_0)$ and $1/\sigma^2 = \gamma\sim \text{gamma}(\nu_0/2,\nu_0\sigma^2_0/2)$.  Thus we have
 
     \begin{flalign*}
         p&(\boldsymbol\beta|\mathbf{y,X},\sigma^2)\\
@@ -1525,7 +1522,7 @@ $$\{\sigma^2|\mathbf{y,X},\boldsymbol\beta\} \sim \text{Inverse Gamma}([\nu_0 + 
     \item updating $\boldsymbol\beta$:
     \begin{enumerate}
         \item compute $\mathbf{V} = \text{Var}[\boldsymbol\beta|\mathbf{y,X},\sigma^{2(s)}]$ and $\mathbf{m} = \text{E}[\boldsymbol\beta|\mathbf{y,X},\sigma^{2(s)}]$
-        \item sample $\boldsymbol\beta^{(s+1)} \sim \text{multivariate normal}(\mathbf{m,V})$
+        \item sample $\boldsymbol\beta^{(s+1)} \sim \text{Multivariate Normal}(\mathbf{m,V})$
     \end{enumerate}
     \item updating $\sigma^2$:
     \begin{enumerate}
@@ -1534,7 +1531,7 @@ $$\{\sigma^2|\mathbf{y,X},\boldsymbol\beta\} \sim \text{Inverse Gamma}([\nu_0 + 
     \end{enumerate}
 \end{enumerate}
 
-To create a sample from the predictive distribution of responses:  for each $s\in\{1,...,S\}$, draw $\epsilon^{(s)} \sim N(0,\sigma^{2(s)})$.  Then compute
+To create a sample from the predictive distribution of responses:  for each $s\in\{1,...,S\}$, draw $\epsilon^{(s)} \sim \text{Normal}(0,\sigma^{2(s)})$.  Then compute
 
 $$y^{(s)} = \boldsymbol\beta^{(s)T}\mathbf{X} + \epsilon.$$
 
@@ -1554,7 +1551,7 @@ we arrive at posteriors
 
 \begin{flalign}
     \{\sigma^2|\mathbf{y,X}\} &\sim \text{Inverse Gamma}([\nu_0 + n]/2,[\nu_0\sigma^2_0 + \text{SSR}_g]/2) \label{regression_noninf_sig2_post}\\
-    \{\boldsymbol\beta|\mathbf{y,X},\sigma^2\} &\sim \text{multivariate normal}\left(\frac{g}{g+1}\hat{\boldsymbol\beta}_{ols},\frac{g}{g+1}\sigma^2[\mathbf{X^TX}]^{-1}\right).\label{regression_noninf_beta_post}
+    \{\boldsymbol\beta|\mathbf{y,X},\sigma^2\} &\sim \text{Multivariate Normal}\left(\frac{g}{g+1}\hat{\boldsymbol\beta}_{ols},\frac{g}{g+1}\sigma^2[\mathbf{X^TX}]^{-1}\right).\label{regression_noninf_beta_post}
 \end{flalign}
 
 Here $\text{SSR}_g = \mathbf{y^Ty - m^TV^{-1}m = y^T(I - }\frac{g}{g+1}\mathbf{X(X^TX)^{-1}X^T)y}$.\\
@@ -1563,10 +1560,10 @@ Simple Monte Carlo approximation can be used to sample from the joint posterior 
 
 \begin{enumerate}
     \item sample $\sigma^2 \sim \text{Inverse Gamma}([\nu_0 + n]/2,[\nu_0\sigma^2_0 + \text{SSR}_g]/2)$
-    \item sample $\boldsymbol\beta \sim \text{multivariate normal}\left(\frac{g}{g+1}\hat{\boldsymbol\beta}_{ols},\frac{g}{g+1}\sigma^2[\mathbf{X^TX}]^{-1}\right)$.
+    \item sample $\boldsymbol\beta \sim \text{Multivariate Normal}\left(\frac{g}{g+1}\hat{\boldsymbol\beta}_{ols},\frac{g}{g+1}\sigma^2[\mathbf{X^TX}]^{-1}\right)$.
 \end{enumerate}
 
-To create a sample from the predictive distribution of responses, draw $\epsilon \sim N(0,\sigma^2)$.  Then for each triplet $(\beta,\sigma^2,\epsilon)$ we have
+To create a sample from the predictive distribution of responses, draw $\epsilon \sim \text{Normal}(0,\sigma^2)$.  Then for each triplet $(\beta,\sigma^2,\epsilon)$ we have
 
 $$y = \boldsymbol\beta^T\mathbf{X} + \epsilon.$$
 
@@ -1576,7 +1573,7 @@ The R function
 
 \begin{center}\texttt{rpredNormReg(S=1,Xpred,X,y,beta0,Sigma0,nu0=1,s20=1,gprior = TRUE)}\end{center}
 
-\noindent approximates the joint posterior density $p(\sigma^2,\boldsymbol\beta|\mathbf{y,X})$ using one of the two methods described above, generates $S$ triplets $(\boldsymbol\beta^{(s)}, \sigma^{2(s)},\epsilon^{(s)} \sim N(0,\sigma^{2(s)})$ , and returns $S$ predictions $y = X_{pred}\boldsymbol\beta^{(s)} + \epsilon^{(s)}$.\\\\
+\noindent approximates the joint posterior density $p(\sigma^2,\boldsymbol\beta|\mathbf{y,X})$ using one of the two methods described above, generates $S$ triplets $(\boldsymbol\beta^{(s)}, \sigma^{2(s)},\epsilon^{(s)} \sim \text{Normal}(0,\sigma^{2(s)})$ , and returns $S$ predictions $y = X_{pred}\boldsymbol\beta^{(s)} + \epsilon^{(s)}$.\\\\
 
 The function defaults to Zellner's location-invariant g-prior, in which case input values for \texttt{beta0, Sigma0, nu0}, and \texttt{s20} are ignored.  If the user wants to employ Hoff's semi-conjugate prior as defined in section \ref{normRegSemiconjugatePrior} above, all input variables must be specified, with gprior = FALSE.
 
@@ -1771,6 +1768,8 @@ for(i in 1:numcases){
 \clearpage
 
 \section{Conclusion}
+
+\section{Appendix}
 
 \section{References}
 
