@@ -3,7 +3,7 @@
 #' rpredPG returns a random sample of size n from the Poisson-Gamma predictive probability distribution given observations obs~Poi(theta)
 #' and theta~Gamma(alpha,beta)
 #'
-#' @param n desired random sample size
+#' @param S desired random sample size
 #' @param obs vector of (observed) Poisson-distributed counts
 #' @param alpha sum of counts from beta prior observations for gamma prior distribution on theta
 #' @param beta number of prior observations for gamma prior distribution on theta
@@ -12,7 +12,7 @@
 #' @export
 #'
 #' @examples 1
-rpredPG = function(n,obs, alpha = 1, beta=1){
+rpredPG = function(S,obs, alpha = 1, beta=1){
 
   #ERROR HANDLING
 
@@ -86,11 +86,11 @@ rpredPG = function(n,obs, alpha = 1, beta=1){
 
   F_x = ppredPG(x, obs, alpha, beta)
 
-  u = stats::runif(n)
+  u = stats::runif(S)
 
-  rank_list = numeric(n)
+  rank_list = numeric(S)
 
-  for(i in 1:n) {
+  for(i in 1:S) {
     rankF = which(abs(F_x - u[i]) == min(abs(F_x - u[i])))
 
     if(F_x[rankF] > u[i]){ rankF = rankF - 1 }

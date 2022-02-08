@@ -99,7 +99,7 @@ setwd("C:/Users/gabe/Documents/tmp/predictiveInference")
   \item Establish S as random sample size throughout.
   \item In ``R Implementation" sections, put function parameters into function at beginning of intros
   \item Make sure consistent with use of $\tilde{y}$ for single prediction throughout.  Also mention this in intro.
-  \item Figure out E-G example
+  \item \hl{Figure out E-G example}
   \item check $\int_\theta$ for consistent use throughout
   \item Am I numbering all the formulas that need numbering?
   \item Review use of $\pi(\cdot)$ to denote prior distributions of parameters.  Right now my intro says I'm doing that but at least in the k-sample Normal-Inverse Gamma I'm not doing that.
@@ -109,6 +109,13 @@ setwd("C:/Users/gabe/Documents/tmp/predictiveInference")
   \item Citations guidance:  you should use the citation style appropriate for your discipline, following
 the guidance of your committee.  Ask Melanie.
   \item Create appendix containing R code for functions and for examples.
+  \item Check boxes for graduation
+  \begin{itemize}
+    \item schedule thesis defense (must be April 29 or earlier--Try for earlier--4/8 and 4/22 are off Fridays for me)
+    \item change address at UAccess once we have closed on the house
+    \item confirm/change info for graduation at \url{https://grad.arizona.edu/commencement} (see email from Guadalupe Estrella on January 31)
+    \item Thesis submission:  create account here and submit thesis by deadline (May 13 so earlier) \url{http://www.etdadmin.com/arizona}
+  \end{itemize}
 \end{itemize}
 
 
@@ -139,20 +146,28 @@ the guidance of your committee.  Ask Melanie.
     \hl{For continuous pdfs its trickier.}
 
   \item \hl{p 11 - first para.  For the sentences above, I presume you want some censoring value and not a parameter theta?}
-  \item p17 - section 3.3.3  I also don't know where you got this example. \textcolor{blue}{Discuss over Zoom}
+  \item \hl{p17 - section 3.3.3  I also don't know where you got this example. See note in red in theses text:  My data was made up (random) and the example is completely abstract}
   \item \hl{p21 3.4.1.3 - I don't think you need other values for kappa or nu.}
   \item \hl{p24. 3.4.2.3 - I would probably just say that Hoff provides the following example and we reproduce his description.}
   \item \hl{p27. The two-column format would be more standard, and would fit better with the tidy data format.  It would be easier to use.}
-  \item p 33.  ``Comparing the values of βˆols to their standard errors:”\\
-    This is the usual regression t-statistic for regression parameter estimates.
-  \item This is as far as I got.\\
-    dean
+  \item \hl{p 33.  Comparing the values of beta-ols to their standard errors}\\
+    \hl{This is the usual regression t-statistic for regression parameter estimates.}
+  \item \hl{This is as far as I got.  dean}
 
 \end{enumerate}
 
 {\huge Questions for Dean 1/28/2022}
 \begin{enumerate}
   \item \hl{NormIG2():  Subscript $N$ in the parameters $\mu_N,\gamma^2_N,\delta_N,\tau^2_N$. Interpret these as $N = N_1 + N_2$?  Sure.  Maybe add an explanation}
+  \item annotating and numbering figures and tables?
+  \item spacing?
+  \item Poisson-Gamma example--use Hoff's? (see 3.3.3)
+  \item Should I use "Dr." with  your name and others? (In intro, throughout, in bibliography)
+  \item Scheduling defense
+  \begin{itemize}
+    \item Date, time, place
+    \item Invite people (I'd rather not)
+  \end{itemize}
 \end{enumerate}
 
 

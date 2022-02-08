@@ -4,7 +4,7 @@
 #' and theta~Gamma(alpha,beta)
 #'
 #'
-#' @param x vector of integers for which predictive probability is desired
+#' @param y vector of integers for which predictive probability is desired
 #' @param obs vector of (observed) Poisson-distributed counts
 #' @param alpha sum of counts from beta prior observations for gamma prior distribution on theta
 #' @param beta number of prior observations for gamma prior distribution on theta
@@ -13,7 +13,7 @@
 #' @export
 #'
 #' @examples 1
-dpredPG <- function(x, obs, alpha = 1, beta=1){
+dpredPG <- function(y, obs, alpha = 1, beta=1){
 
   #d+pred+PG
   #d = density (like R distribution functions)
@@ -22,8 +22,8 @@ dpredPG <- function(x, obs, alpha = 1, beta=1){
 
   #ERROR HANDLING
 
-  if(min(x) < 0){
-    stop("x < 0:  values of x must be non-negative integers")
+  if(min(y) < 0){
+    stop("y < 0:  values of y must be non-negative integers")
     return (1)
   }
 
@@ -46,7 +46,7 @@ dpredPG <- function(x, obs, alpha = 1, beta=1){
   sobs = sum(obs);
   n = length(obs);
 
-  f_x = stats::dnbinom(x,size = a + sobs, mu = (a + sobs)/(b + n));
+  f_y = stats::dnbinom(y,size = a + sobs, mu = (a + sobs)/(b + n));
 
   # checking with formula
   #num1 = lgamma(alpha + sobs + ytilde);
@@ -59,6 +59,6 @@ dpredPG <- function(x, obs, alpha = 1, beta=1){
 
   #f_x2 = fact1*fact2*fact3;
 
-  return(f_x);
+  return(f_y);
 
 }

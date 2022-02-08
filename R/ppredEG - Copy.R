@@ -1,8 +1,8 @@
 #' The Exponential-Gamma Predictive Distribution
 #'
-#' @param y survival time for which predictive density is desired
-#' @param YN ordered list of observed survival times and censored survival times (y1,...,yN), yi ~ exp(theta), theta ~ Gamma(dt, gm)
-#' @param d < N s.t. (yd+1, ..., yN) are censored
+#' @param x survival time
+#' @param XN (x1,...,xN), xi ~ exp(theta), theta ~ Gamma(dt, gm)
+#' @param d < n s.t. (x1,...,xd) are fully observed and (xd+1, ..., xN) are censored
 #' @param dt Gamma shape parameter for distribution of theta
 #' @param gm Gamma rate parameter for distribution of theta
 #'
@@ -10,7 +10,7 @@
 #' @export
 #'
 #' @examples 1
-ppredEG = function(y, YN, d, dt, gm){
+ppredEG = function(x, XN, d, dt, gm){
 
   #ppredEG returns the cumulative predictive probability of surviving to [OR RATHER DYING BY] any time up to max(x) (i.e. Pr(X <= x)),
     #given d observed and N-d censored copies out of XN total events
@@ -26,7 +26,7 @@ ppredEG = function(y, YN, d, dt, gm){
 
   #ERROR HANDLING
 
-  if(d > length(YN)){
+  if(d > length(XN)){
     stop("d > length(XN):  The number of observed copies cannot exceed the total number of copies")
     return (1)
   }
@@ -46,10 +46,10 @@ ppredEG = function(y, YN, d, dt, gm){
 #  }
 
 
-  Freturn = numeric(length(y))
+  Freturn = numeric(length(x))
 
-  for (i in 1:length(y)){
-    Freturn[i] = stats::integrate(dpredEG,lower = 0,upper = y[i],YN = YN, d = d, dt = dt, gm = gm)
+  for (i in 1:length(x)){
+    Freturn[i] = stats::integrate(dpredEG,lower = 0,upper = x[i],XN = XN, d = d, dt = dt, gm = gm)
   }
 
   return(Freturn)
