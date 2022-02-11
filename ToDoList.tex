@@ -92,12 +92,16 @@
   \item Beta-Binomial:  Use posterior of theta (which is a gamma) and then make prediction based on draw(s) of theta (like I'm doing for Exponential-Gamma?)  Why did I go to the trouble of using the inverse transform method before?  Try drawing $\theta\sim\text{Beta}(t+\alpha,N-t+\beta)$ and then predict t using \texttt{rbinom(S,N,theta)}.
   \item Establish S as random sample size, make sure consistent throughout
   \item Make sure consistent with $\tilde{y}$ for predicted value throughout
+  \item add sample function calls to R Implementation sections (see end of BB right before example) \hl{done through Poisson-Gamma}
+  \item add (model name) to example section headings
   \item Work through the math for the 2-sample Normal-Inverse Gamma full conditional distributions (see Hoff p. 128)
   \item Section 3 intro:  mention split of NormIG into 1, 2, and k sample models.
+  \item Section 3 intro:  mention NormIG2() and NormIGk() only offer random sample functions.
   \item Establish S as random sample size throughout.
   \item In ``R Implementation" sections, put function parameters into function at beginning of intros
   \item Make sure consistent with use of $\tilde{y}$ for single prediction throughout.  Also mention this in intro.
-  \item \hl{Figure out E-G example}
+  \item Come up with real EG example
+  \item Come up with real PG example
   \item check $\int_\theta$ for consistent use throughout
   \item Am I numbering all the formulas that need numbering?
   \item Review use of $\pi(\cdot)$ to denote prior distributions of parameters.  Right now my intro says I'm doing that but at least in the k-sample Normal-Inverse Gamma I'm not doing that.
@@ -160,7 +164,7 @@ the guidance of your committee.  Ask Melanie.
   \item annotating and numbering figures and tables?
   \item spacing?
   \item Poisson-Gamma example--use Hoff's? (see 3.3.3)
-  \item Should I use "Dr." with  your name and others? (In intro, throughout, in bibliography)
+  \item Should I use "Dr." with  your name and others? (In intro, throughout, in bibliography) \textcolor{red}{yes--for my profs when first mentioned.  No for authors.}
   \item Scheduling defense
   \begin{itemize}
     \item Date, time, place

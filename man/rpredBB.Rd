@@ -4,14 +4,14 @@
 \alias{rpredBB}
 \title{The Beta-Binomial Predictive Distribution}
 \usage{
-rpredBB(n, N, s, M, alpha = 1, beta = 1)
+rpredBB(S, N, t, M, alpha = 1, beta = 1)
 }
 \arguments{
-\item{n}{desired random sample size}
+\item{S}{desired random sample size}
 
 \item{N}{number of observed independent binary variables}
 
-\item{s}{number of observed successes out of N}
+\item{t}{number of observed successes out of N observations}
 
 \item{M}{number of future observations for which prediction is desired}
 

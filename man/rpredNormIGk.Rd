@@ -4,10 +4,10 @@
 \alias{rpredNormIGk}
 \title{The Normal-Inverse Gamma Predictive Distribution for k Samples}
 \usage{
-rpredNormIGk(N = 1, Y, nu0 = 1, s20 = 1, eta0 = 1, t20 = 1, mu0 = 0, g20 = 1)
+rpredNormIGk(S = 1, Y, nu0 = 1, s20 = 1, eta0 = 1, t20 = 1, mu0 = 0, g20 = 1)
 }
 \arguments{
-\item{N}{desired random sample size}
+\item{S}{desired random sample size}
 
 \item{Y}{2-column matrix of multiple samples of observed Normally-distributed values.  Column 1:  integer indices identifying the samples.  Column 2:  data values for the sample indicated by the corresponding index in column 1.}
 
@@ -24,7 +24,7 @@ rpredNormIGk(N = 1, Y, nu0 = 1, s20 = 1, eta0 = 1, t20 = 1, mu0 = 0, g20 = 1)
 \item{g20}{variance of pooled average from prior knowledge}
 }
 \value{
-random sample of size n Normal - Inverse Gamma predictive probability for each population sample
+random sample of size S Normal - Inverse Gamma predictive probability for each population sample
 }
 \description{
 rpredNormIGk returns a random sample of size N from the Normal-Inverse Gamma predictive probability distribution for each of the k samples, along with N posterior draws of the within-group and between-groups unknown parameters.

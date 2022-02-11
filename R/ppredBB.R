@@ -3,9 +3,9 @@
 #' ppredBB returns the predictive probability of <= x future successes out of M trials, given s observed successes out of a sample of
 #size N, and user input shape parameters for Beta prior on Pr(success)
 #'
-#' @param x vector of integers
+#' @param tpred vector of integers: number(s) of successes for which prediction is desired
 #' @param N number of observed independent binary variables
-#' @param s number of observed successes out of N
+#' @param t number of observed successes out of N
 #' @param M number of future observations for which prediction is desired (note x <= M)
 #' @param alpha shape factors for prior Beta distribution on theta
 #' @param beta rate factor for prior Beta distribution on theta
@@ -15,7 +15,7 @@
 #' @export
 #'
 #' @examples 1
-ppredBB = function(x, N, s, M, alpha = 1, beta=1, lower=TRUE){
+ppredBB = function(tpred, N, t, M, alpha = 1, beta=1, lower=TRUE){
 
   #ppredBB returns the predictive probability of <= x future successes out of M trials, given s observed successes out of a sample of
   #size N, and user input shape parameters for Beta prior on Pr(success)
@@ -26,7 +26,7 @@ ppredBB = function(x, N, s, M, alpha = 1, beta=1, lower=TRUE){
   #BB = BetaBinomial
   #FF = Future Fraction
 
-  #x is a vector of integers, for which the function will compute P(X<=x)
+  #tpred is a vector of integers, for which the function will compute P(X<=x)
   #N is the number of observed independent binary variables
   #s is the number of observed successes out of N
   #M is the number of future observations for which prediction is desired (note x <= M)
@@ -38,8 +38,8 @@ ppredBB = function(x, N, s, M, alpha = 1, beta=1, lower=TRUE){
 
   #ERROR HANDLING
 
-  if(s > N){
-    stop("s > N:  The number of successes (s) cannot exceed the number of observations (N)")
+  if(t > N){
+    stop("t > N:  The number of successes (t) cannot exceed the number of observations (N)")
     return (1)
   }
 
@@ -53,31 +53,25 @@ ppredBB = function(x, N, s, M, alpha = 1, beta=1, lower=TRUE){
     return(1)
   }
 
-  if(min(x) < 0){
+  if(min(tpred) < 0){
     stop("min(x) < 0")
   }
 
-  if(max(x) > M){
-    stop("max(x) > M:  The number of successes (x) for which P(X<=x) will be computed cannot exceed the number of future observations (M)")
+  if(max(tpred) > M){
+    stop("max(tpred) > M:  The number of successes (x) for which P(Tpred<=tpred) will be computed cannot exceed the number of future observations (M)")
     return (1)
   }
 
   #r[] is the number of successes in the M future observations
 
-  #r = 1:max(x);
+  f_t = dpredBB(0:max(tpred), N, t, M, alpha, beta)
 
-  #numerator = lgamma(M+1) + lgamma(N+alpha+beta) + lgamma(r+s+alpha) + lgamma(M+N-r-s+beta)
-  #denominator = lgamma(r+1) + lgamma(M-r+1) + lgamma(alpha+s) + lgamma(N-s+beta) + lgamma(M+N+alpha+beta)
-  #f_x2 = exp(numerator - denominator)
+  F_t = cumsum(f_t)
 
-  f_x = dpredBB(0:max(x), N, s, M, alpha, beta)
+  return_index = which(tpred == tpred)
 
-  F_x = cumsum(f_x)
-
-  return_index = which(x == x)
-
-  if(lower){return(F_x[return_index])}
-  else {return(1 - F_x[return_index])}
+  if(lower){return(F_t[return_index])}
+  else {return(1 - F_t[return_index])}
 
 
 }

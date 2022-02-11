@@ -3,8 +3,8 @@
 #' ppredPG returns the cumulative predictive probability of future observation having value {1,...,xmax} given observations obs~Poi(theta)
 #' and theta~Gamma(alpha,beta)
 #'
-#' @param y non-negative integer count for which predictive probability is desired
-#' @param obs vector of (observed) Poisson-distributed counts
+#' @param ypred non-negative integer count for which predictive probability is desired
+#' @param y vector of (observed) Poisson-distributed counts
 #' @param alpha sum of counts from beta prior observations for gamma prior distribution on theta
 #' @param beta number of prior observations for gamma prior distribution on theta
 #' @param lower logical; if TRUE (default), probabilities are P(R<=q) otherwise P(R>q)
@@ -13,7 +13,7 @@
 #' @export
 #'
 #' @examples 1
-ppredPG = function(y, obs, alpha = 1, beta=1, lower=TRUE){
+ppredPG = function(ypred, y, alpha = 1, beta=1, lower=TRUE){
 
   #d+pred+PG
   #d = density (like R distribution functions)
@@ -22,8 +22,8 @@ ppredPG = function(y, obs, alpha = 1, beta=1, lower=TRUE){
 
   #ERROR HANDLING
 
-  if(min(y) < 0){
-    stop("y < 0:  values of y must be non-negative integers")
+  if(min(ypred) < 0){
+    stop("ypred < 0:  values of ypred must be non-negative integers")
     return (1)
   }
 
@@ -37,11 +37,11 @@ ppredPG = function(y, obs, alpha = 1, beta=1, lower=TRUE){
     return(1)
   }
 
-  if(min(obs) < 0){
+  if(min(y) < 0){
     stop("All observations must be non-negative")
   }
 
-  f_y = dpredPG(y,obs,alpha,beta)
+  f_y = dpredPG(ypred,y,alpha,beta)
 
   F_y = cumsum(f_y)
 

@@ -4,12 +4,12 @@
 \alias{rpredPG}
 \title{The Poisson-Gamma Predictive Distribution}
 \usage{
-rpredPG(n, obs, alpha = 1, beta = 1)
+rpredPG(S, y, alpha = 1, beta = 1)
 }
 \arguments{
-\item{n}{desired random sample size}
+\item{S}{desired random sample size}
 
-\item{obs}{vector of (observed) Poisson-distributed counts}
+\item{y}{vector of (observed) Poisson-distributed counts}
 
 \item{alpha}{sum of counts from beta prior observations for gamma prior distribution on theta}
 

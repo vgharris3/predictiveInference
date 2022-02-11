@@ -3,9 +3,9 @@
 #' rpredBB returns a random sample of size n from the Beta-Binomial predictive probability distribution computed
 #' from s observed successes out of a sample of size N, M future observations, and user input shape parameters for Beta prior on Pr(success)
 #'
-#' @param n desired random sample size
+#' @param S desired random sample size
 #' @param N number of observed independent binary variables
-#' @param s number of observed successes out of N
+#' @param t number of observed successes out of N observations
 #' @param M number of future observations for which prediction is desired
 #' @param alpha shape factor for prior Beta distribution on theta
 #' @param beta rate factor for prior Beta distribution on theta
@@ -14,7 +14,7 @@
 #' @export
 #'
 #' @examples 1
-rpredBB = function(n, N, s, M, alpha = 1, beta = 1){
+rpredBB = function(S, N, t, M, alpha = 1, beta = 1){
   #rpredBB returns a random sample of size n from the Beta-Binomial predictive probability distribution computed from s observed
   #successes out of a sample of size N, M future observations, and user input shape parameters for Beta prior on Pr(success)
 
@@ -32,8 +32,8 @@ rpredBB = function(n, N, s, M, alpha = 1, beta = 1){
   ##########################
   ##########################
 
-  if(s > N){
-    stop("s > N:  The number of successes (s) cannot exceed the number of observations (N)")
+  if(t > N){
+    stop("t > N:  The number of observed successes (t) cannot exceed the number of observations (N)")
     return (1)
   }
 
@@ -48,13 +48,13 @@ rpredBB = function(n, N, s, M, alpha = 1, beta = 1){
   }
 
 
-  F_x = ppredBB(0:M,N,s,M,alpha,beta)
+  F_x = ppredBB(0:M,N,t,M,alpha,beta)
 
-  u = stats::runif(n)
+  u = stats::runif(S)
 
-  rank_list = numeric(n)
+  rank_list = numeric(S)
 
-  for(i in 1:n) {
+  for(i in 1:S) {
     rankF = which(abs(F_x - u[i]) == min(abs(F_x - u[i])))
 
     if(F_x[rankF] > u[i]){ rankF = rankF - 1 }

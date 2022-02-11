@@ -4,7 +4,7 @@
 #' and theta~Gamma(alpha,beta)
 #'
 #' @param S desired random sample size
-#' @param obs vector of (observed) Poisson-distributed counts
+#' @param y vector of (observed) Poisson-distributed counts
 #' @param alpha sum of counts from beta prior observations for gamma prior distribution on theta
 #' @param beta number of prior observations for gamma prior distribution on theta
 #'
@@ -12,7 +12,7 @@
 #' @export
 #'
 #' @examples 1
-rpredPG = function(S,obs, alpha = 1, beta=1){
+rpredPG = function(S,y, alpha = 1, beta=1){
 
   #ERROR HANDLING
 
@@ -32,7 +32,7 @@ rpredPG = function(S,obs, alpha = 1, beta=1){
     return(1)
   }
 
-  if(min(obs) <= 0){
+  if(min(y) <= 0){
     stop("All observations must be non-negative")
   }
 
@@ -46,10 +46,10 @@ rpredPG = function(S,obs, alpha = 1, beta=1){
   #Set desired tolerance epsilon for root function
   eps = sqrt(.Machine$double.eps)
   #Compute predictive expected value of x
-  E_x = round((alpha + sum(obs))/(beta + length(obs)))
+  E_x = round((alpha + sum(y))/(beta + length(y)))
   Lower = E_x
   #Reach right to find upper bound of starting interval for Bisection Method
-  fLower = dpredPG(E_x,obs,alpha,beta) - eps
+  fLower = dpredPG(E_x,y,alpha,beta) - eps
   if(fLower <= 0){ stop("Density at Expected Value computed to be less than epsilon.")}
 
   fUpper = fLower
@@ -57,7 +57,7 @@ rpredPG = function(S,obs, alpha = 1, beta=1){
   while(fUpper > 0){
     reachExp = reachExp + 1
     Upper = E_x + 10^reachExp
-    fUpper = dpredPG(Upper,obs,alpha,beta) - eps
+    fUpper = dpredPG(Upper,y,alpha,beta) - eps
   }
 
   limit_found = 0
@@ -66,16 +66,16 @@ rpredPG = function(S,obs, alpha = 1, beta=1){
   while(!limit_found){
     #Establish new interval
     Mid = round(mean(c(Lower,Upper)))
-    fMid = dpredPG(Mid,obs,alpha,beta) - eps
+    fMid = dpredPG(Mid,y,alpha,beta) - eps
     if(fMid > 0){
       Lower = Mid #Upper is still Upper
-      if(dpredPG(Mid+1,obs,alpha,beta) - eps <= 0){ #if f(Mid) and f(Mid+1) are straddling 0
+      if(dpredPG(Mid+1,y,alpha,beta) - eps <= 0){ #if f(Mid) and f(Mid+1) are straddling 0
         limit_found = 1
         right_end = Mid + 1
       }
     } else { #fMid <= 0
       Upper = Mid #Lower is still Lower
-      if(dpredPG(Mid-1,obs,alpha,beta) - eps > 0){ #if f(Mid) and f(Mid-1) are straddling 0
+      if(dpredPG(Mid-1,y,alpha,beta) - eps > 0){ #if f(Mid) and f(Mid-1) are straddling 0
         limit_found = 1
         right_end = Mid
       }
@@ -84,7 +84,7 @@ rpredPG = function(S,obs, alpha = 1, beta=1){
 
   x = 0:right_end
 
-  F_x = ppredPG(x, obs, alpha, beta)
+  F_x = ppredPG(x, y, alpha, beta)
 
   u = stats::runif(S)
 

@@ -3,18 +3,18 @@
 #' dpredBB returns the predictive probability of x future successes out of M trials, given s observed successes out of a sample of size
 #' N, and user input shape parameters for Beta prior on Pr(success)
 #'
-#' @param x vector of integers
+#' @param tpred vector of integers: number(s) of successes for which prediction is desired
 #' @param N number of observed independent binary variables
-#' @param s number of observed successes out of N
-#' @param M number of future observations for which prediction is desired (note x <= M)
-#' @param alpha shape factors for prior Beta distribution on theta
-#' @param beta rate factor for prior Beta distribution on theta
+#' @param t number of observed successes out of N observations
+#' @param M number of future observations (note tpred <= M)
+#' @param alpha first shape factor for prior Beta distribution on theta
+#' @param beta second shape factor for prior Beta distribution on theta
 #'
 #' @return Beta-Binomial predictive probability
 #' @export
 #'
 #' @examples 1
-dpredBB <- function(x, N, s, M, alpha = 1, beta=1){
+dpredBB <- function(tpred, N, t, M, alpha = 1, beta=1){
 
   #dpredBB returns the predictive probability of x future successes out of M trials, given s observed successes out of a sample of
   #size N, and user input shape parameters for Beta prior on Pr(success)
@@ -24,9 +24,9 @@ dpredBB <- function(x, N, s, M, alpha = 1, beta=1){
   #pred = prediction
   #BB = BetaBinomial
 
-  #x is a vector of integers, for which the function will compute P(X=x)
+  #tpred is a vector of integers, for which the function will compute P(X=x)
   #N is the number of observed independent binary variables
-  #s is the number of observed successes out of N
+  #t is the number of observed successes out of N
   #M is the number of future observations for which prediction is desired (note x <= M)
 
   #alpha, beta:  shape factors for prior Beta distribution on theta, default is (1,1) (equiv. to Uniform dist.)
@@ -36,8 +36,8 @@ dpredBB <- function(x, N, s, M, alpha = 1, beta=1){
 
   #ERROR HANDLING
 
-  if(s > N){
-    stop("s > N:  The number of successes (s) cannot exceed the number of observations (N)")
+  if(t > N){
+    stop("t > N:  The number of observed successes (t) cannot exceed the number of observations (N)")
     return (1)
   }
 
@@ -51,23 +51,23 @@ dpredBB <- function(x, N, s, M, alpha = 1, beta=1){
     return(1)
   }
 
-  if(min(x) < 0){
-    stop("min(x) < 0")
+  if(min(tpred) < 0){
+    stop("min(y) < 0")
   }
 
-  if(max(x) > M){
-    stop("max(x) > M:  The number of successes (x) for which P(X<=x) will be computed cannot exceed the number of future observations (M)")
+  if(max(tpred) > M){
+    stop("max(y) > M:  The number of observations (tpred) for which P(Tpred<=tpred) will be computed cannot exceed the number of future observations (M)")
     return (1)
   }
 
   #r[] is the number of successes in the M future observations
 
-  r = x;
+  r = tpred;
 
-  numerator = lgamma(M+1) + lgamma(N+alpha+beta) + lgamma(r+s+alpha) + lgamma(M+N-r-s+beta);
-  denominator = lgamma(r+1) + lgamma(M-r+1) + lgamma(alpha+s) + lgamma(N-s+beta) + lgamma(M+N+alpha+beta);
-  f_x = exp(numerator - denominator)
+  numerator = lgamma(M+1) + lgamma(N+alpha+beta) + lgamma(r+t+alpha) + lgamma(M+N-r-t+beta);
+  denominator = lgamma(r+1) + lgamma(M-r+1) + lgamma(alpha+t) + lgamma(N-t+beta) + lgamma(M+N+alpha+beta);
+  f_t = exp(numerator - denominator)
 
-  return(f_x)
+  return(f_t)
 
 }

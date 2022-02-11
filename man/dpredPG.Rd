@@ -4,12 +4,12 @@
 \alias{dpredPG}
 \title{The Poisson-Gamma Predictive Distribution}
 \usage{
-dpredPG(x, obs, alpha = 1, beta = 1)
+dpredPG(ypred, y, alpha = 1, beta = 1)
 }
 \arguments{
-\item{x}{vector of integers for which predictive probability is desired}
+\item{ypred}{vector of integers for which predictive probability is desired}
 
-\item{obs}{vector of (observed) Poisson-distributed counts}
+\item{y}{vector of (observed) Poisson-distributed counts}
 
 \item{alpha}{sum of counts from beta prior observations for gamma prior distribution on theta}
 

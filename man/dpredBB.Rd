@@ -4,20 +4,20 @@
 \alias{dpredBB}
 \title{The Beta-Binomial Predictive Distribution}
 \usage{
-dpredBB(x, N, s, M, alpha = 1, beta = 1)
+dpredBB(tpred, N, t, M, alpha = 1, beta = 1)
 }
 \arguments{
-\item{x}{vector of integers}
+\item{tpred}{vector of integers: number(s) of successes for which prediction is desired}
 
 \item{N}{number of observed independent binary variables}
 
-\item{s}{number of observed successes out of N}
+\item{t}{number of observed successes out of N observations}
 
-\item{M}{number of future observations for which prediction is desired (note x <= M)}
+\item{M}{number of future observations (note tpred <= M)}
 
-\item{alpha}{shape factors for prior Beta distribution on theta}
+\item{alpha}{first shape factor for prior Beta distribution on theta}
 
-\item{beta}{rate factor for prior Beta distribution on theta}
+\item{beta}{second shape factor for prior Beta distribution on theta}
 }
 \value{
 Beta-Binomial predictive probability

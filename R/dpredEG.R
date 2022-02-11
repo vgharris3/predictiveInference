@@ -1,8 +1,8 @@
 #' The Exponential-Gamma Predictive Distribution
 #'
-#' @param y survival time for which predictive density is desired
-#' @param YN ordered list of observed survival times and censored survival times (y1,...,yN), yi ~ exp(theta), theta ~ Gamma(dt, gm)
-#' @param d < N s.t. (yd+1, ..., yN) are censored
+#' @param ypred survival time for which predictive density is desired
+#' @param y ordered list of observed survival times and censored survival times (y1,...,yN), yi ~ exp(theta), theta ~ Gamma(dt, gm)
+#' @param c censoring indicator (vector of 0s and 1s for censored and fully observed, respectively)
 #' @param dt Gamma shape parameter for distribution of theta
 #' @param gm Gamma rate parameter for distribution of theta
 #'
@@ -10,7 +10,7 @@
 #' @export
 #'
 #' @examples 1
-dpredEG = function(y, YN, d, dt, gm){
+dpredEG = function(ypred, y, c, dt, gm){
 
   #dpredEG returns the predictive probability of surviving past [OR RATHER DYING AT] time x, given d observed and N-d censored copies out of XN total events
   #XN = (x1,...,xN), xi ~ exp(theta)
@@ -28,8 +28,8 @@ dpredEG = function(y, YN, d, dt, gm){
 
   #ERROR HANDLING
 
-  if(d > length(YN)){
-    stop("d > length(XN):  The number of observed copies cannot exceed the total number of copies")
+  if(d > length(y)){
+    stop("d > length(y):  The number of observed copies cannot exceed the total number of copies")
     return (1)
   }
 
@@ -43,20 +43,13 @@ dpredEG = function(y, YN, d, dt, gm){
     return(1)
   }
 
-  #if(min(x) <= 0){
-   # stop("x_i < - for some i:  x_i must be greater than or equal to zero for all i")
-  #}
+  N = length(y)
+  ybar = mean(y)
 
-  N = length(YN)
-  ybar = mean(YN)
-
-  #numerator = (d + dt)*(gm + N*xbar)^(d + dt)
-  #denominator = (gm + N*xbar + x)^(d + dt + 1)
-
-  #f_x = numerator/denominator;
+  d = sum(c) # number of fully observed copies
 
   numerator = log(d+dt) + (d+dt)*log(gm+N*ybar)
-  denominator = (d+dt+1)*log(gm+N*ybar+y)
+  denominator = (d+dt+1)*log(gm+N*ybar+ypred)
 
   f_y = exp(numerator - denominator)
 

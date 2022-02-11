@@ -133,11 +133,11 @@ The main purpose of statistics is to predict future events based on observed dat
   \multicolumn{5}{c}{\large \#Razorbacks Predicted out of 100 Tosses}          \\
   \multicolumn{1}{c}{\textbf{Prediction Method}} & \multicolumn{1}{c}{$\textbf{(}\boldsymbol\alpha,\boldsymbol\beta\textbf{)}$}  & \multicolumn{1}{c}{$\textbf{E(}\boldsymbol\theta\textbf{)}$}  & \multicolumn{1}{c}{\textbf{mean}} & \multicolumn{1}{c}{\textbf{SD}}\\
         \midrule
-        Beta-Binomial & (2,8) & 0.2 & 30.19 & 11.01 \\
+        Beta-Binomial & (2,8) & 0.2 & 29.68 & 10.92 \\
         \midrule
-        Beta-Binomial & (22,78) & 0.22 & 23.42 & 5.82\\
+        Beta-Binomial & (22,78) & 0.22 & 23.7 & 5.81\\
         \midrule
-        Beta-Binomial & (224,776) & 0.224 & 22.68 & 4.53 \\
+        Beta-Binomial & (224,776) & 0.224 & 22.63 & 4.58 \\
         \midrule
         Binomial$(100,0.4)$ & -- & -- & 40 & 4.9 \\
   \bottomrule
@@ -243,9 +243,24 @@ and make our prediction using (\ref{BayesianPredictiveFormat}).
 
     \subsubsection{R Implementation (Beta-Binomial)}
 
-This result has been used to create R functions \texttt{dpredBB()}, \texttt{ppredBB()}, and \texttt{rpredBB()} for the Beta-Binomial predictive distribtuion for density, cumulative probability, and random sampling, respectively (see appendix for the R code).  \texttt{dpredBB()} and \texttt{rpredBB()} were used in the Pass the Pigs example in the introduction.  The following generic example exercises all three functions.\\
+This result has been used to create R functions \texttt{dpredBB()}, \texttt{ppredBB()}, and \texttt{rpredBB()} for the Beta-Binomial predictive distribtuion for density, cumulative probability, and random sampling, respectively (see appendix for the R code).  The density function \texttt{dpredBB()} relies on the R function \texttt{lgamma()} to evaluate the numerator and denominator of the predictive distribution (\ref{betaBinomial_pred}) factor by factor logarithmically, and then exponentiates for the final result, evaluated at the desired integer value (or vector of values) $\tilde{y}$ input by the user.  The cdf \texttt{ppredBB()} simply calls \texttt{dpredBB()} and returns the cumulative sum of that discrete set of results.  The random sampler \texttt{rpredBB()} makes use of the inverse transform method and the output from the cdf \texttt{ppredBB()}.  Calls to these functions appear as follows:
 
-The density function \texttt{dpredBB()} relies on the R function \texttt{lgamma()} to evaluate the numerator and denominator factor by factor logarithmically, and then exponentiates for the final result, evaluated at each integer value from 1 to the total number of future trials.  The cdf \texttt{ppredBB()} simply calls \texttt{dpredBB()} and returns the cumulative sum of that discrete set of results.  The random sampler \texttt{rpredBB()} makes use of the inverse transform method and the output from the cdf \texttt{ppredBB()}.\\
+\begin{center}
+  \texttt{dpredBB(tpred,N,t,M,a,b)}\\
+  \texttt{ppredBB(tpred,N,t,M,a,b)}\\
+  \texttt{rpredBB(S,N,t,M,a,b)}\\
+\end{center}
+
+\noindent where
+
+\begin{flalign*}
+  \texttt{tpred} &= \tilde{t} \text{, the number(s) of future successes for which prediction is desired}\\
+  \texttt{N} &= \text{the number of observations}\\
+  \texttt{t} &= \text{the observed number of successes out of M future observatioins}\\
+  \texttt{M} &= \text{the number of future observations}\\
+  \texttt{a} &= \alpha \text{, the first shape parameter of the Beta prior}\\
+  \texttt{b} &= \beta \text{, the second shape parameter of the Beta prior}\\
+\end{flalign*}
 
 % \textcolor{red}{In reviewing my functions I noticed that for the Exponential-Gamma random sampler (next section) I simply drew posterior $\theta|y_1,...,y_i\sim\text{Gamma}(d+\delta,\gamma+\sum y_i)$ and then drew predictions from Exp$(\theta)$.  This works nicely because of the convenient form of the posterior distribution of $\theta$.  Well, for the Beta-Binomial I have a nice Beta distribution for the posterior of $\theta$, but for my random sampler I used the inverse transform method.  I just now tried doing posterior draws followed by predictions for the Beta-Binomial, but could not replicate the density curve with my random sample.  So--either I'm implementing my draws incorrectly or there's some reason this method doesn't apply in this case.  The commented section at the bottom of the R chunk that follows the next paragraph has my attempt at this.  Any feedback?}
 
@@ -253,10 +268,11 @@ The density function \texttt{dpredBB()} relies on the R function \texttt{lgamma(
 
     \subsubsection{Example}
 
-Recapitulating the Pass the Pigs\textsuperscript{\circledR} example, suppose $t=7$ Razorbacks have been observed out of $n=10$ tosses of Big Pigs\texttrademark, and the researcher has settled on prior Pr(Razorback) = $\theta\sim\text{Beta}(2,8)$.  For $N = 1000$ future observations, how many successes are predicted?  The figures below show the predictive distribution from \texttt{dpredBB()}, the cumulative distribution from \texttt{ppredBB()}, and a histogram of random draws from \texttt{rpredBB()}.
+The functions \texttt{dpredBB()} and \texttt{rpredBB()} were used in the Pass The Pigs\textsuperscript{\circledR} example in the introduction.  Here, all three functions are exercised in an imagined experiment using the Big Pigs\texttrademark variant.  Suppose $t=7$ Razorbacks have been observed out of $n=10$ tosses of Big Pigs\texttrademark, and the researcher has settled on prior distribution Pr(Razorback) = $\theta\sim\text{Beta}(2,8)$.  For $N = 1000$ future observations, how many successes are predicted?  The figures below show the predictive distribution from \texttt{dpredBB()}, the cumulative distribution from \texttt{ppredBB()}, and a histogram of random draws from \texttt{rpredBB()}.
 
 
 \includegraphics{Thesis_v3-003}
+
 
 
     \subsection{Survival Time:  Exponential-Gamma (Geisser p. 74)}
@@ -319,10 +335,29 @@ Recapitulating the Pass the Pigs\textsuperscript{\circledR} example, suppose $t=
 
 This result has been used to create R functions \texttt{dpredEG()}, \texttt{ppredEG()}, and \texttt{rpredEG()} for the Gamma-Exponential distribtuion for density, cumulative probability, and random sampling, respectively (see appendix for R code).  These functions are exercised in the following example. \\
 
-\noindent The density function \texttt{dpredEG()} evaluates the numerator and denominator of the predictive density logarithmically (using the R function \texttt{log()}) and then exponentiates to produce the result.  The cdf \texttt{ppredEG()} integrates the pdf at each discrete value using the R function \texttt{integrate()}.  The random sampler \texttt{rpredEG()} draws posterior $\theta|y_1,...,y_i\sim\text{Gamma}(d+\delta,\gamma+\sum y_i)$ and then draws predictions from Exp$(\theta)$.
+\noindent The density function \texttt{dpredEG()} evaluates the numerator and denominator of the predictive density logarithmically (using the R function \texttt{log()}) and then exponentiates to produce the result.  The cdf \texttt{ppredEG()} integrates the pdf at each discrete value using the R function \texttt{integrate()}.  The random sampler \texttt{rpredEG()} draws posterior $\theta|y_1,...,y_i\sim\text{Gamma}(d+\delta,\gamma+\sum y_i)$ and then draws predictions from Exp$(\theta)$. Calls to these functions appear as follows:
+
+\begin{center}
+  \texttt{dpredEG(ypred,y,d,dt,gm)}\\
+  \texttt{ppredEG(ypred,y,d,dt,gm)}\\
+  \texttt{rpredEG(S,y,d,dt,gm)}\\
+\end{center}
+
+\noindent where
+
+\begin{flalign*}
+  \texttt{ypred} &= \tilde{y} \text{, the survival time(s) in future experiments for which prediction is desired}\\
+  \texttt{y} &= \text{a vector of } N \text{ survival times, } d \text{ observed, } N-d \text{ censored}\\
+  \texttt{d} &= \text{the number of censored survival times}\\
+  \texttt{dt} &= \delta \text{, the shape parameter of the Gamma prior}\\
+  \texttt{gm} &= \gamma \text{, the rate parameter of the Gamma prior}\\
+  \texttt{S} &= \text{the desired random sample size}\\
+\end{flalign*}
 
 
     \subsubsection{Example}
+
+    \textcolor{red}{I will come up with a different example to replace the one below.}
 
 \noindent Suppose $d=797$ out of $N = 1000$ copies have been observed, and the remaining $203$ censored. We are interested in the number of survivors out of $M = 1000$ future observations.  For the sake of this example, survival times were generated randomly as $y_i \sim \text{Exp}(0.01)$, with all times exceeding an arbitrary predetermined time cutoff of 160 being set to that time.  These reset times are the censored copies.  We know the value of the exponential parameter ($\theta = 0.01$) used to generate the data, because of the artificial way we have constructed this example.  If we did not have that information, we could consider the mean of the generated survival times (observed and censored), which was $79.9$.  This indicates that the expected value $1/\theta$ of survival times must be greater than $79.9$, and thus we can assume $\theta < 1/79.9 \approx 0.0125$ with some margin.  This is all to say that aiming for $\theta = 0.01$ when choosing parameters for the prior distribution of $\theta$ is reasonable.  Since we are assuming prior $\theta\sim\text{Gamma}(\delta,\gamma)$ we want $\delta/\gamma \approx 0.01$.   For this example, say $\delta = 0.5$ and $\gamma=50$.  The figures below illustrate the predictive probability using \texttt{dpredEG()} and \texttt{rpredEG()}, along with a histogram of a random sample taken using \texttt{rpredEG()}.
 
@@ -444,13 +479,35 @@ This result has been used to create R functions \texttt{dpredPG()}, \texttt{ppre
       \item Use $[0,U]$ as the support upon which to draw a random sample.
     \end{enumerate}
 
+
+\noindent Calls to these functions will appear as follows:
+
+\begin{center}
+  \texttt{dpredPG(ypred,y,alpha,beta)}\\
+  \texttt{ppredPG(ypred,y,alpha,beta)}\\
+  \texttt{rpredPG(S,y,alpha,beta)}\\
+\end{center}
+
+\noindent where
+
+\begin{flalign*}
+  \texttt{ypred} &= \tilde{y} \text{, future count(s) for which prediction is desired}\\
+  \texttt{y} &= y \text{, the observed counts}\\
+  \texttt{alpha} &= \alpha \text{, the shape parameter of the Gamma prior}\\
+  \texttt{beta} &= \beta \text{, the rate parameter of the Gamma prior}\\
+  \texttt{S} &= S \text{, the desired random sample size}\\
+\end{flalign*}
+
     \subsubsection{Example}
 
-\textcolor{red}{I figured out the source of this example.  I originally picked 10 random integers for the counts and liked the way the curves came out, so I kept them.  My prior parameter choices were equally arbitrary.  I could reproduce Hoff's birthrate example (p. 49) instead, which would be nicer than this completely abstracted example, but I hesitate to do that just because of the extra work.  Thoughts?}
+\textcolor{red}{I will come up with a different example to replace the one below.}
 
 Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15, 3, 97.  Let $\alpha = 11$ and $\beta = 3$.  For $\tilde{y} = 1:100$ possible future occurrences, the figures below show the predictive distribution from \texttt{dpredPG()}, the cumulative distribution from \texttt{ppredPG()}, and a histogram of random draws from \texttt{rpredPG()}.
 
+
 \includegraphics{Thesis_v3-005}
+
+
 
 \clearpage
 

@@ -4,14 +4,14 @@
 \alias{ppredEG}
 \title{The Exponential-Gamma Predictive Distribution}
 \usage{
-ppredEG(x, XN, d, dt, gm)
+ppredEG(ypred, y, c, dt, gm)
 }
 \arguments{
-\item{x}{survival time}
+\item{ypred}{survival time(s) for which predictive density is desired}
 
-\item{XN}{(x1,...,xN), xi ~ exp(theta), theta ~ Gamma(dt, gm)}
+\item{y}{ordered list of observed survival times and censored survival times (y1,...,yN), yi ~ exp(theta), theta ~ Gamma(dt, gm)}
 
-\item{d}{< n s.t. (x1,...,xd) are fully observed and (xd+1, ..., xN) are censored}
+\item{c}{censoring indicator (vector of 0s and 1s for censored and fully observed, respectively)}
 
 \item{dt}{Gamma shape parameter for distribution of theta}
 
