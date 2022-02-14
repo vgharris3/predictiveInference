@@ -3,7 +3,7 @@
 #' rpredNormIG1 returns a random sample of size n from the Normal-Inverse Gamma predictive probability distribution
 #'
 #' @param S desired random sample size
-#' @param obs vector of (observed) Normally-distributed values
+#' @param y vector of (observed) Normally-distributed values
 #' @param mu0 mean of prior observations (set default)
 #' @param k0 number of prior observations (default is 1)
 #' @param sig20 variance of prior observations (set default)
@@ -14,7 +14,7 @@
 #' @export
 #'
 #' @examples 1
-rpredNormIG1 = function(S,obs,mu0=0,k0=1,sig20=1,nu0=1,Jeffreys=FALSE){
+rpredNormIG1 = function(S,y,mu0=0,k0=1,sig20=1,nu0=1,Jeffreys=FALSE){
 
   #ERROR HANDLING
 
@@ -40,9 +40,9 @@ rpredNormIG1 = function(S,obs,mu0=0,k0=1,sig20=1,nu0=1,Jeffreys=FALSE){
   }
 
 
-  nobs = length(obs);
-  meanobs = mean(obs);
-  s2 = stats::var(obs);
+  nobs = length(y);
+  meanobs = mean(y);
+  s2 = stats::var(y);
 
   if(Jeffreys){
     location = meanobs

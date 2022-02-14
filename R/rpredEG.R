@@ -12,6 +12,9 @@
 #' @examples 1
 rpredEG = function(S, y, c, dt, gm){
 
+
+  d = sum(c) # number of fully observed copies
+
   a = d + dt
   b = gm + sum(y)
   # theta = stats::rgamma(1,shape=a,rate=b)

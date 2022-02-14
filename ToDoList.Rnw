@@ -102,6 +102,7 @@ setwd("C:/Users/gabe/Documents/tmp/predictiveInference")
   \item Establish S as random sample size throughout.
   \item In ``R Implementation" sections, put function parameters into function at beginning of intros
   \item Make sure consistent with use of $\tilde{y}$ for single prediction throughout.  Also mention this in intro.
+  \item Modify R Implementation section for EG to describe c = censoring indicator vector
   \item Come up with real EG example
   \item Come up with real PG example
   \item check $\int_\theta$ for consistent use throughout

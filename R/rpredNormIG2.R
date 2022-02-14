@@ -9,14 +9,14 @@
 #' @param g20 variance of pooled average from prior knowledge (default is 1)
 #' @param d0 mean of delta from prior knowledge, where delta is half the population difference in means (default is 0)
 #' @param t20 variance of delta from prior knowledge (default is 1)
-#' @param s20 variance of sample from prior knowledge (default is 1)
 #' @param nu0 number of prior observations (default is 1)
+#' @param s20 variance of sample from prior knowledge (default is 1)
 #'
 #' @return random sample of size n Normal - Inverse Gamma predictive probability for each population sample
 #' @export
 #'
 #' @examples 1
-rpredNormIG2 = function(n=1,y1,y2,mu0=0,g20=1,d0=0,t20=1,s20=1,nu0=1){
+rpredNormIG2 = function(n=1,y1,y2,mu0=0,g20=1,d0=0,t20=1,nu0=1,s20=1){
 
   #ERROR HANDLING
 

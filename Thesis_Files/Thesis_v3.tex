@@ -133,11 +133,11 @@ The main purpose of statistics is to predict future events based on observed dat
   \multicolumn{5}{c}{\large \#Razorbacks Predicted out of 100 Tosses}          \\
   \multicolumn{1}{c}{\textbf{Prediction Method}} & \multicolumn{1}{c}{$\textbf{(}\boldsymbol\alpha,\boldsymbol\beta\textbf{)}$}  & \multicolumn{1}{c}{$\textbf{E(}\boldsymbol\theta\textbf{)}$}  & \multicolumn{1}{c}{\textbf{mean}} & \multicolumn{1}{c}{\textbf{SD}}\\
         \midrule
-        Beta-Binomial & (2,8) & 0.2 & 29.68 & 10.92 \\
+        Beta-Binomial & (2,8) & 0.2 & 29.54 & 10.99 \\
         \midrule
-        Beta-Binomial & (22,78) & 0.22 & 23.7 & 5.81\\
+        Beta-Binomial & (22,78) & 0.22 & 23.64 & 5.88\\
         \midrule
-        Beta-Binomial & (224,776) & 0.224 & 22.63 & 4.58 \\
+        Beta-Binomial & (224,776) & 0.224 & 22.67 & 4.42 \\
         \midrule
         Binomial$(100,0.4)$ & -- & -- & 40 & 4.9 \\
   \bottomrule
@@ -338,9 +338,9 @@ This result has been used to create R functions \texttt{dpredEG()}, \texttt{ppre
 \noindent The density function \texttt{dpredEG()} evaluates the numerator and denominator of the predictive density logarithmically (using the R function \texttt{log()}) and then exponentiates to produce the result.  The cdf \texttt{ppredEG()} integrates the pdf at each discrete value using the R function \texttt{integrate()}.  The random sampler \texttt{rpredEG()} draws posterior $\theta|y_1,...,y_i\sim\text{Gamma}(d+\delta,\gamma+\sum y_i)$ and then draws predictions from Exp$(\theta)$. Calls to these functions appear as follows:
 
 \begin{center}
-  \texttt{dpredEG(ypred,y,d,dt,gm)}\\
-  \texttt{ppredEG(ypred,y,d,dt,gm)}\\
-  \texttt{rpredEG(S,y,d,dt,gm)}\\
+  \texttt{dpredEG(ypred,y,c,dt,gm)}\\
+  \texttt{ppredEG(ypred,y,c,dt,gm)}\\
+  \texttt{rpredEG(S,y,c,dt,gm)}\\
 \end{center}
 
 \noindent where
@@ -348,7 +348,7 @@ This result has been used to create R functions \texttt{dpredEG()}, \texttt{ppre
 \begin{flalign*}
   \texttt{ypred} &= \tilde{y} \text{, the survival time(s) in future experiments for which prediction is desired}\\
   \texttt{y} &= \text{a vector of } N \text{ survival times, } d \text{ observed, } N-d \text{ censored}\\
-  \texttt{d} &= \text{the number of censored survival times}\\
+  \texttt{c} &= \text{an indicator vector of length } N.\texttt{  c[i]=1}\text{ if the corresponding data element }\texttt{y[i]}\text{ is fully }\\ &\text{   observed, otherwise }\texttt{c[i]=0.}  \text{  Note }\texttt{d = sum(c).}\\
   \texttt{dt} &= \delta \text{, the shape parameter of the Gamma prior}\\
   \texttt{gm} &= \gamma \text{, the rate parameter of the Gamma prior}\\
   \texttt{S} &= \text{the desired random sample size}\\
@@ -480,7 +480,7 @@ This result has been used to create R functions \texttt{dpredPG()}, \texttt{ppre
     \end{enumerate}
 
 
-\noindent Calls to these functions will appear as follows:
+\noindent Calls to these functions appear as follows:
 
 \begin{center}
   \texttt{dpredPG(ypred,y,alpha,beta)}\\
@@ -598,6 +598,28 @@ Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15,
         h & \text{ is the bandwidth from R's }\texttt{density()}\text{ function (that is, } \texttt{h = density(X}_\texttt{i}\texttt{)\$bw)}\\
       \end{flalign*}
 
+Calls to these functions appear as follows:
+
+\begin{center}
+  \texttt{dpredNormIG1(ypred,y,mu0,k0,sig20,nu0,S,Jeffreys)}\\
+  \texttt{ppredNormIG1(ypred,y,mu0,k0,sig20,nu0,S,Jeffreys)}\\
+  \texttt{rpredNormIG1(S,y,mu0,k0,sig20,nu0,Jeffreys)}\\
+\end{center}
+
+\noindent where
+
+\begin{flalign*}
+  \texttt{ypred} &= \tilde{y} \text{, value(s) for which prediction is desired}\\
+  \texttt{y} &= \mathbf{y} \text{, the observed data}\\
+  \texttt{mu0} &= \mu_0 \text{, prior parameter for }\theta\text{, representing the mean of prior observations}\\
+  \texttt{k0} &= \kappa_0 \text{, prior parameter for }\theta\text{, representing the sample size of prior observations}\\
+  \texttt{sig20} &= \sigma^2_0 \text{, prior parameter for }\sigma^2\text{, representing the variance of prior observations}\\
+  \texttt{nu0} &= \nu_0 \text{, prior parameter for }\sigma^2\text{, representing the sample size of prior observations}\\
+  \texttt{S} &= S \text{, the desired random sample size}\\
+  \texttt{Jeffreys} &= \text{ flag (defaulting to }\texttt{FALSE}\text{), controlling the decision to use Jeffrey's prior}
+\end{flalign*}
+
+
 \noindent These functions are exercised in the following example.\\
 
 
@@ -652,10 +674,10 @@ Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15,
           p\left(\mu,\delta,\sigma^2\right) &= p(\mu) \times p(\delta) \times p\left(\sigma^2\right)\\
           \mu &\sim \text{Normal}\left(\mu_0,\gamma^2_0\right)\\
           \delta &\sim \text{Normal}\left(\delta_0,\tau^2_0\right)\\
-          \sigma^2 &\sim \text{Inverse Gamma}\left(\nu_0/2,\nu_0\sigma^2_0/2\right),
+          \sigma^2 &\sim \text{Inverse Gamma}\left(\nu_0/2,\nu_0\sigma^2_0/2\right).
         \end{flalign*}
 
-\noindent where $\nu_0$ as before is the assumed prior sample size.  The full conditional distributions follow:\\
+\noindent Here $\nu_0$ as before represents the prior sample size.   The full conditional distributions follow:\\
 
         \indent $\left\{\mu|\mathbf{y}_1,\mathbf{y}_2,\delta,\sigma^2\right\} \sim \text{Normal}\left(\mu_N,\gamma^2_N\right)$, where
 
@@ -681,6 +703,8 @@ Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15,
           \nu_N\sigma^2_N &= \nu_0\sigma^2_0 + \sum_{i=1}^{N_1}\left(y_{i,1} - [\mu + \delta]\right)^2 + \sum_{i=1}^{N_2}\left(y_{i,2} - [\mu - \delta]\right)^2\\
         \end{flalign*}
 
+
+
       \paragraph{R Implementation (Normal-Inverse Gamma, 2-sample)}
 
       The R function \texttt{rpredNormIG2()} implements a Gibbs sampler to approximate the posterior distribution $p\left(\mu,\delta,\sigma^2|\mathbf{y}_1,\mathbf{y}_2\right)$, from which to generate predictions for the two populations as follows:
@@ -692,7 +716,21 @@ Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15,
         \item Predict $\tilde{y}_1\sim \text{Normal}\left(\mu+\delta,\sigma^2\right)$ and $\tilde{y}_2\sim \text{Normal}\left(\mu-\delta,\sigma^2\right)$
       \end{enumerate}
 
-\noindent The user provides the two samples $\mathbf{y_1}$ and $\mathbf{y_2}$ along with values for $\mu_0, \sigma^2_0, \delta_0, \tau^2_0, \nu_0$, and desired prediction sample size $M$.  The function returns $M$ predictions for each population and the vectors of generated values for $\mu$, $\delta$, and $\sigma^2$.
+\noindent The user provides the two samples $\mathbf{y_1}$ and $\mathbf{y_2}$ along with values for $\mu_0, \sigma^2_0, \delta_0, \tau^2_0, \nu_0$, and desired prediction sample size $M$.  The function returns $M$ predictions for each population and the vectors of generated values for $\mu$, $\delta$, and $\sigma^2$.  Calls to this functions appear as follows:
+
+\begin{center}
+  \texttt{rpredNormIG2(S,y1,y2,mu0,g20,d0,t20,nu0,s20)}\\
+\end{center}
+
+\noindent where
+
+\begin{flalign*}
+  \texttt{S} &= S \text{, the desired random sample size}\\
+  \texttt{y1, y2} &= \mathbf{y_1, y_2} \text{, the two sets of observed data}\\
+  \texttt{mu0,g20} &= \mu_0,\gamma^2_0 \text{, prior mean and variance for }\mu\\
+  \texttt{d0,t20} &= \delta,\tau^2_0 \text{, prior mean and variance for }\delta\\
+  \texttt{nu0,s20} &= \nu_0,\sigma^2_0 \text{, prior parameters for the variance of the Normal data error terms}\\
+\end{flalign*}
 
       \paragraph{Example} (Hoff p. 128-129 \textit{Analysis of math score data})\\
       Hoff provides the following example, which we reproduce here.\\\\
@@ -755,6 +793,27 @@ Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15,
           \end{enumerate}
         \item For $s\in\{1,...,S\}$, generate prediction $\tilde{y}_j^{(s)} \sim \text{Normal}\left(\theta_j^{(s)},\sigma^{2(s)}\right)$
       \end{enumerate}
+
+\noindent Calls to this functions appear as follows:
+
+
+\begin{center}
+  \texttt{rpredNormIGk(S,Y,nu0,s20,eta0,t20,mu0,g20)}\\
+\end{center}
+
+\noindent where
+
+\begin{flalign*}
+  \texttt{S} &= S \text{, the desired random sample size}\\
+  \texttt{Y} &= \text{ the } k \text{ sets of observed data (one column of data and one column of}\\ &\text{group indices)}\\
+  \texttt{nu0} &= \nu_0 \text{, prior parameter for } \sigma^2 \text{ representing prior sample size}\\
+  \texttt{s20} &=  \text{, prior parameter for } \sigma^2 \text{ representing within-sample variance}\\
+  \texttt{eta0} &= \eta_0 \text{, prior parameter for } \tau^2 \text{ representing prior sample size}\\
+  \texttt{t20} &= \tau^2_0 \text{, prior parameter for } \tau^2 \text{ representing between-sample variance}\\
+  \texttt{mu0} &= \mu_0 \text{, prior parameter for } \mu \text{ representing the mean of the pooled average}\\ &\text{from prior knowledge}\\
+  \texttt{g20} &= \gamma^2_0 \text{, prior parameter for } \mu \text{ representing the variance of the pooled average}\\ &\text{from prior knowledge}\\
+\end{flalign*}
+
 
 
       \paragraph{Example}
@@ -1040,13 +1099,29 @@ $$y = \boldsymbol\beta^T\mathbf{X} + \epsilon.$$
 
   \subsubsection{R Implementation (Normal Regression)}
 
-The R function
+The R function \texttt{rpredNormReg(S,Xpred,X,y,beta0,Sigma0,nu0,s20,gprior)}
 
-\begin{center}\texttt{rpredNormReg(S=1,Xpred,X,y,beta0,Sigma0,nu0=1,s20=1,gprior = TRUE)}\end{center}
+\noindent approximates the joint posterior density $p(\sigma^2,\boldsymbol\beta|\mathbf{y,X})$ using one of the two methods described above, generates $S$ triplets $(\boldsymbol\beta^{(s)}, \sigma^{2(s)},\epsilon^{(s)} \sim \text{Normal}(0,\sigma^{2(s)})$ , and returns $S$ predictions $y = X_{pred}\boldsymbol\beta^{(s)} + \epsilon^{(s)}$.  Calls to this functions appear as follows:
 
-\noindent approximates the joint posterior density $p(\sigma^2,\boldsymbol\beta|\mathbf{y,X})$ using one of the two methods described above, generates $S$ triplets $(\boldsymbol\beta^{(s)}, \sigma^{2(s)},\epsilon^{(s)} \sim \text{Normal}(0,\sigma^{2(s)})$ , and returns $S$ predictions $y = X_{pred}\boldsymbol\beta^{(s)} + \epsilon^{(s)}$.\\\\
 
-\noindent The function defaults to Zellner's location-invariant g-prior, in which case input values for \texttt{beta0, Sigma0, nu0}, and \texttt{s20} are ignored.  If the user wants to employ Hoff's semi-conjugate prior as defined in section \ref{normRegSemiconjugatePrior} above, all input variables must be specified, with gprior = FALSE.
+\begin{center}
+  \texttt{rpredNormReg(S,Xpred,X,y,beta0,Sigma0,nu0,s20,gprior)}\\
+\end{center}
+
+\noindent where
+
+\begin{flalign*}
+  \texttt{S} &= S \text{, the desired random sample size}\\
+  \texttt{Xpred} &= \text{ the vector or matrix of vectors of explanatory variables upon which to base}\\ &\text{prediction }\\
+  \texttt{X} &= \mathbf{X} \text{, the design matrix associated with the observed data}\\
+  \texttt{y} &= \mathbf{y} \text{, the observed response vector}\\
+  \texttt{beta0} &= \beta_0 \text{, location vector for the Multivariate Normal prior distribution of } \mathbf{\beta}\\
+  \texttt{Sigma0} &= \Sigma_0 \text{, covariance matrix for the Multivariate Normal prior distribution of } \mathbf{\beta}\\
+  \texttt{nu0,s20} &= \nu_0,\sigma^2_0 \text{, prior parameters for the Inverse-Gamma prior distribution of }\sigma^2\\
+  \texttt{gprior} &= \text{ a flag controlling the decision to use Zellner's location-invariant g-prior}
+\end{flalign*}
+
+\noindent Note:  the function defaults to \texttt{gprior=TRUE}, in which case input values for \texttt{beta0, Sigma0, nu0}, and \texttt{s20} are ignored.  If the user wants to employ Hoff's semi-conjugate prior as defined in section \ref{normRegSemiconjugatePrior} above, all input variables must be specified, with \texttt{gprior = FALSE}.
 
 
 
@@ -1066,7 +1141,7 @@ In the example below (Hoff data and code found \href{https://pdhoff.github.io/bo
       -77.02 & 77.02 & 3.32 & -3.32 \\
       77.02 & -122.03 & -3.32 & 5.07
     \end{pmatrix}
-    \text{ (sampling variance of } \hat{\boldsymbol\beta}_{ols} \text{)}\text{WHY TIMES n????}\\
+    \text{ (sampling variance of } \hat{\boldsymbol\beta}_{ols} %\text{)}\text{WHY TIMES n????}\\
   \nu_0 &= 1 \text{ (prior sample size)}\\
   \sigma^2_0 &= \frac{\sum e_i}{n-1} = 6.21 \text{ (variance of the residuals)}\\
   S &= 5000 \text{ (sample size for predictive distribution random draw)}
