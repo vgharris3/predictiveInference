@@ -1,0 +1,57 @@
+In addition to what is described in the notes, I think you need more of a justification/motivation for prediction (e.g., in section 2.1)  The current description of the advantages is pretty thin.   Similarly with the examples. Frequently it is unclear what you are predicting and why.
+
+==============================
+
+These notes start with page 16 of your thesis. The notes for earlier pages are
+embedded in you Rnw file.
+
+p. 15 - example 3.2.3 This needs updating.  Also, think about the number of new
+observations to be predicted.  Why would we (you) choose M=1000?
+
+p.17. Section 3.3 title -- why the ff after the page number?
+
+Again - iid or conditionally independent. de Finetti uses the term exchangeable
+Why not this?
+
+p 18. - you dropped d\theta from the integral 2nd 3rd and 4th lines of equation
+
+p22. again, why the ff?
+p 22,  - mid page - what do you mean sample variance and sample size of the
+prior observations?  these are parameters of the prior distribution.  If you are
+using the idea of an "equivalent" prior sample, you need to describe this in
+some detail.
+
+p. 23. 3.4.1.2 - are you saying that the predictive density and cumulative
+distribitions are approximated from a random sample generated from the sampler
+function? Make this clearer.
+
+p.28.  I'm confused. What are M and S?  I presume one of these must be the number
+of MCMC realizations? Do you automatically generate for a single predicted
+random variable?
+
+p 29 Are there data for example 3.4.2.3? You haven't described any. Maybe a plot?
+Also - what is being predicted here? Is it a future single student from each of
+the selected schools?
+
+p.30 - Define \bar{\theta}?
+p.31 Again. S is the number of MCMC realizations. "random sample size" is too generic
+
+p. 32. check the school number that you selected.  school 100 or school 92 
+
+p.33. As before, what is being predicted?
+
+p.35. Your example 4.1 is much better described than the other examples. You
+should try to bring the others up to this standard.
+
+p. 38. define SSR(beta)
+I think you should write out the full conditional distributions for the
+different parts of the updating scheme, or at least the expressions for V and m.  
+Similar to what you did in Chapter 3.
+
+p. 39. First three sentences of 4.2.1.2 need some editing.
+
+You say "g is typically set to the number of prior observations". I don't konw
+what you mean by "prior observations".
+
+p. 40. Again S is the number of Monte Carlo realizations.
+Fix your equation near bottom of the page.
