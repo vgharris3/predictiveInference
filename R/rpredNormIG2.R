@@ -2,7 +2,7 @@
 #'
 #' rpredNormIG2 returns a random sample of size n from the Normal-Inverse Gamma predictive probability distribution for 2 samples
 #'
-#' @param n desired random sample size (default is 1)
+#' @param S desired random sample size (default is 1)
 #' @param y1 vector of (observed) Normally-distributed values (sample 1)
 #' @param y2 vector of (observed) Normally-distributed values (sample 2)
 #' @param mu0 mean of pooled average from prior knowledge (default is 0)
@@ -16,7 +16,7 @@
 #' @export
 #'
 #' @examples 1
-rpredNormIG2 = function(n=1,y1,y2,mu0=0,g20=1,d0=0,t20=1,nu0=1,s20=1){
+rpredNormIG2 = function(S=1,y1,y2,mu0=0,g20=1,d0=0,t20=1,nu0=1,s20=1){
 
   #ERROR HANDLING
 
@@ -26,14 +26,14 @@ rpredNormIG2 = function(n=1,y1,y2,mu0=0,g20=1,d0=0,t20=1,nu0=1,s20=1){
   ##########################
   ##########################
 
-  if(n <= 0){
-    warning("n <= 0.  Setting n = 1.")
-    n = 1
+  if(S <= 0){
+    warning("S <= 0.  Setting S = 1.")
+    S = 1
   }
 
-  if(n!=round(n)){
-    warning("n is not a whole number.  Setting n = round(n).")
-    n = round(n)
+  if(S!=round(S)){
+    warning("S is not a whole number.  Setting S = round(S).")
+    S = round(S)
   }
 
   if(g20 <= 0){
@@ -71,7 +71,7 @@ rpredNormIG2 = function(n=1,y1,y2,mu0=0,g20=1,d0=0,t20=1,nu0=1,s20=1){
   MU<-DEL<-S2<-NULL
   Y12<-NULL
 #  set.seed(1)
-  for(s in 1:n)
+  for(s in 1:S)
   {
 
     ##update s2

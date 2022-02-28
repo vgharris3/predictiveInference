@@ -154,11 +154,11 @@ $t=4$ Razorbacks have been observed out of $N=10$ tosses of a single pig die, su
   \multicolumn{5}{c}{\large \#Razorbacks Predicted out of 100 Tosses}          \\
   \multicolumn{1}{c}{\textbf{Prediction Method}} & \multicolumn{1}{c}{$\textbf{(}\boldsymbol\alpha,\boldsymbol\beta\textbf{)}$}  & \multicolumn{1}{c}{$\textbf{E(}\boldsymbol\theta\textbf{)}$}  & \multicolumn{1}{c}{\textbf{mean}} & \multicolumn{1}{c}{\textbf{SD}}\\
         \midrule
-        Beta-Binomial & (2,8) & 0.2 & 29.79 & 10.97 \\
+        Beta-Binomial & (2,8) & 0.2 & 30.23 & 10.8 \\
         \midrule
-        Beta-Binomial & (22,78) & 0.22 & 23.72 & 5.79\\
+        Beta-Binomial & (22,78) & 0.22 & 23.56 & 5.72\\
         \midrule
-        Beta-Binomial & (224,776) & 0.224 & 22.54 & 4.41 \\
+        Beta-Binomial & (224,776) & 0.224 & 22.46 & 4.26 \\
         \midrule
         Binomial$(100,0.4)$ & -- & -- & 40 & 4.9 \\
   \bottomrule
@@ -467,7 +467,7 @@ This result has been used to create R functions \texttt{dpredEG()}, \texttt{ppre
 
   \subsection{Poisson-Gamma Model (Hoff p. 43ff)}
 
-  \textcolor{red}{why the ff after the page number?}\textcolor{blue}{That just means ``and following".  I could change that to pp. 43-50}
+  \textcolor{red}{why the ff after the page number?}\textcolor{blue}{That just means ``and following".  I could change that to pp. 43-50, or get rid of this citation and just call it out below?}
 
     \subsubsection{Derivation}
 
@@ -621,6 +621,8 @@ Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15,
     \subsubsection{One sample Normal-Inverse Gamma}
       \paragraph{Derivation}
       [Hoff p. 69ff]\\
+      \textcolor{red}{dean-again, why the ff?}\\
+      \textcolor{blue}{change to (Hoff Chapter 5)?  Or get rid of this citation because I cite Hoff by page number below, as well as Gelman?}
         Let $\left\{Y_1,...,Y_N|\theta,\sigma^2\right\}\overset{i.i.d.}{\sim}\text{Normal}\left(\theta,\sigma^2\right)$.  Then the joint sampling density is
 
         \begin{flalign*}
@@ -637,7 +639,7 @@ Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15,
 
         %\vdots
 
-\noindent Following Hoff (p. 74ff), for joint inference on both $\theta$ and $\sigma$, assume priors
+\noindent Following Hoff (p. 74-75), for joint inference on both $\theta$ and $\sigma$, assume priors
 
         \begin{flalign*}
           \frac{1}{\sigma^2} &\sim \text{Gamma}\left(\sfrac{\nu_0}{2},\sfrac{\nu_0\sigma_0^2}{2}\right)\\
@@ -646,6 +648,9 @@ Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15,
         \end{flalign*}
 
 \noindent where $\left(\sigma_0^2,\nu_0\right)$ are the sample variance and sample size of prior observations, and $\left(\mu_o, \kappa_0\right)$ are the sample mean and sample size of prior observations.\\
+
+\textcolor{red}{dean-what do you mean sample variance and sample size of the prior observations?  these are parameters of the prior distribution.  If you are using the idea of an "equivalent" prior sample, you need to describe this in some detail.}\\
+\textcolor{blue}{What do you mean by an ``equivalent" prior sample?  Hoff suggests thinking of these prior parameters in this way.  p. 75:  ``Therefore, if $\mu_0$ is the mean of $\kappa_0$ prior observations,..." and  ``These formulae suggest an interpretation of $\nu_0$ as a prior sample size, from which a prior sample variance of $\sigma^2_0$ has been obtained."}
 
         % Note:  $\mu_0$, $\kappa_0$, $\nu_0$, and $\sigma_0^2$ come from prior knowledge. [in the Hoff example (Midge Wing Length), $\kappa_0$ and $\nu_0$ are both set to $1$ so that ``our prior distributions are only weakly centered around these estimates from other populations."]\\
 
@@ -689,7 +694,15 @@ Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15,
 
 
       \paragraph{R Implementation (Normal-Inverse Gamma, 1-sample)}
-      R functions \texttt{dpredNormIG1()}, \texttt{ppredNormIG1()}, and \texttt{rpredNormIG1()} have been created for the Normal-Inverse Gamma distribution for density, cumulative probability, and random sampling, respectively (see appendix).  These functions all include options for implementation with or without previous knowledge as desired.  If Jeffreys prior is used, the functions simply implement R's Student's t-distribution functions \texttt{rt()}, \texttt{dt()}, and \texttt{pt()}, applying the location and scale parameters as described above.  For predictions using previous knowledge, the functions work as follows:  For the random sampler \texttt{rpredNormIG1()}, the Monte-Carlo method described above is directly employed.  The predictive density and cumulative predictive density functions (\texttt{dpredNormIG1()} and \texttt{ppredNormID1()}, respectively) depend on the random sample.  \texttt{ppredNormIG1()} utilizes the empirical cumulative density function \texttt{ecdf()} from R's stats package.  \texttt{dpredNormIG1()} utilizes a Kernel Density Estimation (KDE) method and R's built-in \texttt{density()} function.  The KDE is computed by definition, using a Normal kernel:
+      R functions \texttt{dpredNormIG1()}, \texttt{ppredNormIG1()}, and \texttt{rpredNormIG1()} have been created for the Normal-Inverse Gamma distribution for density, cumulative probability, and random sampling, respectively (see appendix).  These functions all include options for implementation with or without previous knowledge as desired.  If Jeffreys prior is used, the functions simply implement R's Student's t-distribution functions \texttt{rt()}, \texttt{dt()}, and \texttt{pt()}, applying the location and scale parameters as described above.  For predictions using previous knowledge, the functions work as follows:  For the random sampler \texttt{rpredNormIG1()}, the Monte-Carlo method described above is directly employed.  The predictive density and cumulative predictive density functions (\texttt{dpredNormIG1()} and \texttt{ppredNormID1()}, respectively) depend on the random sample.
+
+\textcolor{red}{dean-are you saying that the predictive density and cumulative
+distribitions are approximated from a random sample generated from the sampler
+function? Make this clearer.}
+
+\textcolor{blue}{Insert:  That is, the distributions generated by these two functions are approximated from a random sample returned by \texttt{rpredNormIG1()}.}
+
+\texttt{ppredNormIG1()} utilizes the empirical cumulative density function \texttt{ecdf()} from R's stats package.  \texttt{dpredNormIG1()} utilizes a Kernel Density Estimation (KDE) method and R's built-in \texttt{density()} function.  The KDE is computed by definition, using a Normal kernel:
 
       $$\hat{f}_K(x) = \frac{1}{N}\sum_{i=1}^N\frac{1}{h}K\left(\frac{x-X_i}{h}\right),$$
 
@@ -812,7 +825,7 @@ Calls to these functions appear as follows:
 
       \paragraph{R Implementation (Normal-Inverse Gamma, 2-sample)}
 
-      The R function \texttt{rpredNormIG2()} implements a Gibbs sampler to approximate the posterior distribution $p\left(\mu,\delta,\sigma^2|\mathbf{y}_1,\mathbf{y}_2\right)$, from which to generate predictions for the two populations as follows:
+      The random sample generator R function \texttt{rpredNormIG2()} implements a Gibbs sampler to approximate the posterior distribution $p\left(\mu,\delta,\sigma^2|\mathbf{y}_1,\mathbf{y}_2\right)$, from which to generate predictions for the two populations as follows:
       \begin{enumerate}
         \item Set initial values $\mu = \frac{\theta_1 + \theta_2}{2}$ and $\delta = \frac{\theta_1 - \theta_2}{2}$
         \item Generate a single $\sigma^2|\mathbf{y_1},\mathbf{y_2},\mu,\delta$
@@ -821,7 +834,11 @@ Calls to these functions appear as follows:
         \item Predict $\tilde{y}_1\sim \text{Normal}\left(\mu+\delta,\sigma^2\right)$ and $\tilde{y}_2\sim \text{Normal}\left(\mu-\delta,\sigma^2\right)$
       \end{enumerate}
 
-\noindent The user provides the two samples $\mathbf{y_1}$ and $\mathbf{y_2}$ along with values for $\mu_0, \sigma^2_0, \delta_0, \tau^2_0, \nu_0$, and desired prediction sample size $M$.  The function returns $M$ predictions for each population and the vectors of generated values for $\mu$, $\delta$, and $\sigma^2$.  Calls to this functions appear as follows:
+\noindent The user provides the two samples $\mathbf{y_1}$ and $\mathbf{y_2}$ along with values for $\mu_0, \sigma^2_0, \delta_0, \tau^2_0, \nu_0$, and desired prediction random sample size $S$.  The function returns $S$ predictions for each population and the vectors of generated values for $\mu$, $\delta$, and $\sigma^2$.  Calls to this functions appear as follows:
+
+\textcolor{red}{I'm confused. What are M and S?  I presume one of these must be the number
+of MCMC realizations? Do you automatically generate for a single predicted
+random variable?} \textcolor{blue}{changed M to S above.  The function implements a Gibbs sampler.  Should I include burn-in or let the user do that on their own?}
 
 \begin{center}
   \texttt{rpredNormIG2(S,y1,y2,mu0,g20,d0,t20,nu0,s20)}\\
@@ -839,7 +856,11 @@ Calls to these functions appear as follows:
 
       \paragraph{Example} (Hoff p. 128-129 \textit{Analysis of math score data})\\
       Hoff provides the following example, which we reproduce here.\\\\
-      Math score data for two schools were based on results of a national exam in the United States, standardized to produce a nationwide mean of 50 and a standard deviation of 10.  Unless the two schools were known in advance to be extremely exceptional, reasonable prior parameters can be based on this information.  For the prior distributions of $\mu$ and $\sigma^2$, we'll take $\mu_0 = 50$ and $\sigma^2_0 = 10^2 = 100$, although this latter value is likely to be an overestimate of the within-school sampling variability.  We'll make these prior distributions somewhat diffuse, with $\gamma^2_0 = 25^2 = 625$ and $\nu_0 = 1$.  For the prior distribution on $\delta$, choosing $\delta_0 = 0$ represents the prior opinion that $\theta_1 > \theta_2$ and $\theta_2 > \theta_1$ are equally probable.  Finally, since the scores are bounded between 0 and 100, half the difference between $\theta_1$ and $\theta_2$ must be less than 50 in absolute value, so a value of $\tau^2_0 = 25^2 = 625$ seems reasonably diffuse.\\\\
+      Math score data for two schools (we'll call them School 1 and School 2) were based on results of a national exam in the United States, standardized to produce a nationwide mean of 50 and a standard deviation of 10.  The data consisted of 31 individual scores for School 1 and 28 for School 2.  We're interested in predicting a future math score by a student from each school.  Unless the two schools were known in advance to be extremely exceptional, reasonable prior parameters can be based on this information.  (The mean scores for Schools 1 and 2 were 50.8 and 46.2, and the standard deviations were 11.3 and 9.1, respectively).  For the prior distributions of $\mu$ and $\sigma^2$, we'll take $\mu_0 = 50$ and $\sigma^2_0 = 10^2 = 100$, although this latter value is likely to be an overestimate of the within-school sampling variability.  We'll make these prior distributions somewhat diffuse, with $\gamma^2_0 = 25^2 = 625$ and $\nu_0 = 1$.  For the prior distribution on $\delta$, choosing $\delta_0 = 0$ represents the prior opinion that $\theta_1 > \theta_2$ and $\theta_2 > \theta_1$ are equally probable.  Finally, since the scores are bounded between 0 and 100, half the difference between $\theta_1$ and $\theta_2$ must be less than 50 in absolute value, so a value of $\tau^2_0 = 25^2 = 625$ seems reasonably diffuse.\\\\
+
+\textcolor{red}{Are there data for example 3.4.2.3? You haven't described any. Maybe a plot?
+Also - what is being predicted here? Is it a future single student from each of
+the selected schools?}\textcolor{blue}{See additional words added above--does this suffice?  Or do should I also include a plot?}
       % The results of a call to rpredNormIG2$\left(\mathbf{y}_1,\mathbf{y}_2,\mu_0,\sigma^2_0,\delta_0,\tau^2_0,N\right)$ are summarized in the following plot.\\
       The results of a call to \texttt{rpredNormIG2()} with the above input values for $\mathbf{y}_1,\mathbf{y}_2,\mu_0,\sigma^2_0,\delta_0,\tau^2_0,\text{ and } N$ are summarized in the following plot.\\
 
@@ -868,7 +889,9 @@ Calls to these functions appear as follows:
 
       $$\left\{\sigma^2|\mathbf{\theta,y_1,...,y_k}\right\} \sim \text{Inverse Gamma}\left(\dfrac{1}{2}\left[\nu_0 + \sum_{j=1}^k n_j\right],\dfrac{1}{2}\left[\nu_0\sigma^2_0 + \sum_{j=1}^k\sum_{i=1}^{n_j}\left(y_{i,j}-\theta_j\right)^2\right]\right).$$
 
-\noindent Note that $\sum\sum\left(y_{i,j}-\theta_j\right)^2$ is the sum of squared residuals across all groups, conditional on the within-group means, and so the conditional distribution concentrates probability around a pooled-sample estimate of the variance.
+\textcolor{red}{Define $\bar{\theta}$?} \textcolor{blue}{See next sentence.  Does that suffice?}\\
+
+\noindent Here $\bar{\theta} = \text{mean}(\theta_1,...,\theta_k)$ Note that $\sum\sum\left(y_{i,j}-\theta_j\right)^2$ is the sum of squared residuals across all groups, conditional on the within-group means, and so the conditional distribution concentrates probability around a pooled-sample estimate of the variance.
 
 
       \paragraph{R Implementation (Normal-Inverse Gamma, k-samples)}
@@ -908,8 +931,12 @@ Calls to these functions appear as follows:
 
 \noindent where
 
+\textcolor{red}{Again. S is the number of MCMC realizations. "random sample size" is too generic
+}
+
 \begin{flalign*}
-  \texttt{S} &= S \text{, the desired random sample size}\\
+  \texttt{S} &= S \text{, the desired random sample size}\textcolor{blue}{\text{replace with next line?}}\\
+  \texttt{S} &= S \text{, the number of MCMC realizations to be generated}\\
   \texttt{Y} &= \text{ the } k \text{ sets of observed data (one column of data and one column of}\\ &\text{group indices)}\\
   \texttt{nu0} &= \nu_0 \text{, prior parameter for } \sigma^2 \text{ representing prior sample size}\\
   \texttt{s20} &=  \text{, prior parameter for } \sigma^2 \text{ representing within-sample variance}\\
@@ -950,7 +977,7 @@ Calls to these functions appear as follows:
         \gamma^2_0&:  25 \text{ (prior variance of school means)}
       \end{flalign*}
 
-\noindent In the example below the observed test score data from three individual schools are compared with their predictions.  The schools chosen were numbers 5, 67, and 100 from the study, which had the minimum average math score, maximum average math score, and closest to the overall average math score, respectively.
+\noindent In the example below the observed test score data from three individual schools are compared with their predictions.  The schools chosen were numbers 5, 67, and 92 from the study, which had the minimum average math score, maximum average math score, and closest to the overall average math score, respectively.
 
 
 \begin{center}
@@ -958,9 +985,9 @@ Calls to these functions appear as follows:
     \hline
     & school & average \\
     \hline
-    max average & 67 & 65.02 \\
-    \hline
     min average & 5 & 36.58 \\
+    \hline
+    max average & 67 & 65.02 \\
     \hline
     grand mean & -- & 48.13 \\
     \hline
@@ -969,7 +996,10 @@ Calls to these functions appear as follows:
   \end{tabular}
 \end{center}
 
-\noindent The plot below shows the density curves of the math scores for these three schools and their predictions.  The observed data is shown using solid lines, and the predictive densities are displayed with dashed lines.  The predictions are ``pulled" toward the overall mean, which is indicated on the plot with the dotted gray vertical line.
+\noindent The plot below shows the density curves of the observed math scores for these three schools and the predictions of future math scores.  The observed data is shown using solid lines, and the predictive densities are displayed with dashed lines.  The predictions are ``pulled" toward the overall mean, which is indicated on the plot with the dotted gray vertical line.
+
+\textcolor{red}{As before, what is being predicted?}\\
+\textcolor{blue}{See expansion of first sentence in above paragraph.  Does that suffice?}
 
 \includegraphics{Thesis_v4-010}
 
@@ -1037,6 +1067,9 @@ $$\hat{\sigma}^2_{ols} = \frac{SSR\left(\hat{\boldsymbol\beta}_{ols}\right)}{(n-
 
 
 \subsection{Least Squares Estimation Example (Hoff p. 149ff.)}
+
+\textcolor{red}{Your example 4.1 is much better described than the other examples. You
+should try to bring the others up to this standard.}
 
 \noindent Here we reproduce the example provided by Hoff, which will be used to illustrate Bayesian prediction for a regression model.\\
 
@@ -1119,7 +1152,10 @@ $$\hat{\sigma}^2_{ols} = \frac{SSR\left(\hat{\boldsymbol\beta}_{ols}\right)}{(n-
     \paragraph{A semiconjugate prior distribution}\label{normRegSemiconjugatePrior}
     Hoff proposes a semiconjugate prior distribution for $\boldsymbol\beta$ and $\sigma^2$ to be used when there is information available about the parameters.  The sampling density of the data is
 
-    % (Equation \ref{conditional_density}) is
+\textcolor{red}{define SSR(beta)
+I think you should write out the full conditional distributions for the
+different parts of the updating scheme, or at least the expressions for V and m.
+Similar to what you did in Chapter 3.}
 
     $$p(\mathbf{y}|\mathbf{X},\boldsymbol\beta,\sigma^2) \propto \text{exp}\{-\frac{1}{2\sigma^2}\text{SSR}(\boldsymbol\beta)\} = \text{exp}\{-\frac{1}{2\sigma^2}[\mathbf{y}^T\mathbf{y} - 2\boldsymbol\beta^T\mathbf{X}^T\mathbf{y}+\boldsymbol\beta^T\mathbf{X}^T\mathbf{X}\boldsymbol\beta]\},$$
 
@@ -1171,6 +1207,7 @@ To create a sample from the predictive distribution of responses:  for each $s\i
 $$y^{(s)} = \boldsymbol\beta^{(s)T}\mathbf{X} + \epsilon.$$
 
     \paragraph{Default and weakly informative prior distributions}
+    \textcolor{red}{First three sentences of 4.2.1.2 need some editing.}\\
     In situations where prior information is unavailable or difficult to quantify, an alternative ``default" class of prior distributions is given. Specification of the prior parameters $(\boldsymbol\beta_0, \Sigma_0)$ and $(\nu_0,\sigma^2_0)$ that represent actual prior information for a Bayesian analysis can be difficult.  For a prior distribution that is not going to represent real prior information about the parameters, we choose one that is as minimally informative as possible.  The resulting posterior distribution, then, will represent the posterior information of someone who began with little knowledge of the population being studied.  Here we will employ Zellner's ``$g$-prior" (Zellner, 1986).  We choose $\boldsymbol\beta_0 = \mathbf{0}$ and $\Sigma_0 = k(\mathbf{X}^T\mathbf{X})^{-1}, k = g\sigma^2, g > 0$, which satisfies a desired condition that the regression parameter estimation be invariant to changes in the scale of the regressors.  With this, equations \ref{regression_semiconj_var} and \ref{regression_semiconj_expec} reduce to
 
 \begin{flalign}
@@ -1191,7 +1228,7 @@ $$\mathbf{V} = \frac{g}{g+1}\sigma^2(\mathbf{X^TX})^{-1} \text{ and } \mathbf{m}
 
 \noindent Here $\text{SSR}_g = \mathbf{y^Ty - m^TV^{-1}m = y^T(I - }\frac{g}{g+1}\mathbf{X(X^TX)^{-1}X^T)y}$.\\
 
-Simple monte carlo approximation can be used to sample from the joint posterior density $p(\sigma^2,\boldsymbol\beta|\mathbf{y,X})$ as follows.  Here $g$ is typically set to the number of prior observations.  Then:
+Simple monte carlo approximation can be used to sample from the joint posterior density $p(\sigma^2,\boldsymbol\beta|\mathbf{y,X})$ as follows.  Here $g$ is typically set to the number of prior observations.  \textcolor{red}{You say "g is typically set to the number of prior observations". I don't konw what you mean by "prior observations".} Then:
 
 \begin{enumerate}
     \item sample $\sigma^2 \sim \text{Inverse Gamma}([\nu_0 + n]/2,[\nu_0\sigma^2_0 + \text{SSR}_g]/2)$
@@ -1216,7 +1253,8 @@ The R function \texttt{rpredNormReg(S,Xpred,X,y,beta0,Sigma0,nu0,s20,gprior)}
 \noindent where
 
 \begin{flalign*}
-  \texttt{S} &= S \text{, the desired random sample size}\\
+  \texttt{S} &= S \text{, the desired random sample size}\textcolor{blue}{\text{replace with below}}\\
+  \texttt{S} &= S \text{, the number of MCMC realizations}\\
   \texttt{Xpred} &= \text{ the vector or matrix of vectors of explanatory variables upon which to base}\\ &\text{prediction }\\
   \texttt{X} &= \mathbf{X} \text{, the design matrix associated with the observed data}\\
   \texttt{y} &= \mathbf{y} \text{, the observed response vector}\\
@@ -1246,7 +1284,7 @@ In the example below (Hoff data and code found \href{https://pdhoff.github.io/bo
       -77.02 & 77.02 & 3.32 & -3.32 \\
       77.02 & -122.03 & -3.32 & 5.07
     \end{pmatrix}
-    \text{ (sampling variance of } \hat{\boldsymbol\beta}_{ols} %\text{)}\text{WHY TIMES n????}\\
+    \text{ (sampling variance of } \hat{\boldsymbol\beta}_{ols}\text{)}\\%\text{WHY TIMES n????}\\
   \nu_0 &= 1 \text{ (prior sample size)}\\
   \sigma^2_0 &= \frac{\sum e_i}{n-1} = 6.21 \text{ (variance of the residuals)}\\
   S &= 5000 \text{ (sample size for predictive distribution random draw)}
