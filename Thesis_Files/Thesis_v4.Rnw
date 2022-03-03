@@ -93,22 +93,27 @@ An obstacle to widespread employment of Bayesian predictive inference in scienti
 
 \section{Introduction:  Predictive Inference}
 
-My understanding of Bayesian Predictive Inference began with the University of Arizona course ``Bayesian Statistical Theory and Applications" under Dr. Edward Bedrick.  Since then it has been shaped by exposure to various sources, including articles by Bedrick and Dr. Dean Billheimer, and to a greater extent the aforementioned texts by Hoff and Geisser, and others, including \underline{Bayesian Data Analysis} by Andrew Gelman et. al., and \underline{Statistical Prediction Analysis} by J. Aitchison and I.R. Dunsmore.  In the next section and what follows, the ideas expressed are an amalgam of what was learned from this body of scholarship.
+My understanding of Bayesian Predictive Inference began with the University of Arizona course ``Bayesian Statistical Theory and Applications" under Dr. Edward Bedrick.  Since then it has been shaped by exposure to various sources, including articles by Bedrick and Dr. Dean Billheimer, and to a greater extent the aforementioned texts by Hoff and Geisser, and others, including \underline{Bayesian Data Analysis} by Andrew Gelman et. al., \underline{Statistical Prediction Analysis} by J. Aitchison and I.R. Dunsmore, and excerpts from \underline{The Signal and the Noise} by Nate Silver.  In the next section and what follows, the ideas expressed are an amalgam of what was learned from this body of scholarship.
 
   \subsection{Why Predictive Inference?}
 %
 % The main purpose of statistics is to predict future events based on observed data.  Prediction about meaningful quantities that are relevant to the object of study facilitates scientific progress in multiple ways.  Advantages include enhancing scientific reproducibility, enabling corroboration or refutation of current hypotheses through future experimentation, informing decision-making by summarizing quantities of direct interest to the researcher, and shifting the focus of statistical analysis from estimation of hypothetical parameters to statements about concrete observables.\\
 
-I find persuasive the assertion that the main purpose of statistics is to predict future events based on observed data, and moreover that a statistical model may be judged chiefly by the quality of its predictions.  Prediction about meaningful quantities that are relevant to the object of study facilitates scientific progress in multiple ways.
+I find persuasive the assertion that the main purpose of statistics is to predict future events based on observed data, and moreover that a statistical model may be judged chiefly by the quality of its predictions.  Predictions about meaningful quantities that are relevant to the object of study facilitate scientific progress in multiple ways.  Nate Silver notes:
 
-Billheimer underscores the improvement of scientific accuracy and reproducibility to be had by ``shifting our focus from `finding differences' among hypothetical parametrs to predicting observable events based on our current scientific understanding.
-
-enabling corroboration or refutation of current hypotheses through future experimentation, informing decision-making by summarizing quantities of direct interest to the researcher, and shifting the focus of statistical analysis from estimation of hypothetical parameters to statements about concrete observables.\\
-
-\noindent It is not the intent of this thesis to suggest that parametric inference should be abandoned in statistical analyses.  Important uses for conventional statistical inference techniques include summarizing information about large quantities of data in a handful of usable values, and leveraging such summaries to determine whether a particular problem merits continued attention.  In favor of Bayesian methods, I return to Nate Silver:\\
 \begin{quote}
-Making predictions based on our beliefs is the best (and perhaps even the only) way to test ourselves. If objectivity is the concern for a greater truth beyond our personal circumstances, and prediction is the best way to examine how closely aligned our personal perceptions are with that greater truth, the most objective among us are those who make the most accurate predictions. Fisher’s statistical method, which saw objectivity as residing within the confines of a laboratory experiment, is less suitable to this task than Bayesian reasoning."
+Prediction is important because it connects subjective and objective reality. Karl Popper, the philosopher of science, recognized this view. [45] \textcolor{blue}{$\leftarrow$ I don't need this citation within a citation, do I?}For Popper, a hypothesis was not scientific unless it was falsifiable—meaning that it could be tested in the real world by means of a prediction.
 \end{quote}
+
+\noindent Billheimer emphasizes the improvement of scientific accuracy and reproducibility to be had by ``shifting our focus from `finding differences' among hypothetical parameters to predicting observable events based on our current scientific understanding."  Focus on observed data enables corroboration or refutation of current hypotheses through future experimentation, and informs decision-making by summarizing quantities of direct interest to the researcher.  Bayesian predictive inference shifts the focus of statistical analysis from estimation of hypothetical parameters to statements about concrete observables.\\
+
+\noindent It is not the intent of this thesis to suggest that parametric inference should be abandoned in statistical analyses.  Conventional statistical inference techniques are useful for summarizing information about large quantities of data in a small number of usable values (parameter estimates), and leveraging such summaries to determine whether a particular problem merits continued attention. Indeed, the scientific discipline of mathematical statistics has developed along parametric lines, imparting greater efficiency to the solving of idealized versions of problems. However, this focus on parameters has largely ignored the impact of observable quantities which may exhibit distributions very different from our (idealized) standard models. In support of prediction in general, and Bayesian prediction in particular, I return to Nate Silver:\\
+
+\begin{quote}
+Making predictions based on our beliefs is the best (and perhaps even the only) way to test ourselves. If objectivity is the concern for a greater truth beyond our personal circumstances, and prediction is the best way to examine how closely aligned our personal perceptions are with that greater truth, the most objective among us are those who make the most accurate predictions. Fisher’s statistical method, which saw objectivity as residing within the confines of a laboratory experiment, is less suitable to this task than Bayesian reasoning.
+\end{quote}
+
+%% DONE
 %% dean - this last sentence is not true. Bayesian inference predated
 %% frequentist. Instead, how about, ``... conventional statistical inference
 %% techniques are useful for summarizing (?concentrating?) information about
@@ -119,15 +124,17 @@ Making predictions based on our beliefs is the best (and perhaps even the only) 
 %% impact on observable quantities which may exhibit distributions very
 %% different from our standared models.  Or something like that.
 
-\noindent Prediction is a means of discriminating between scientific hypotheses.
 
-Generally, a model may be judged by the quality of its predictions.  Given competing models, the better predictor will be given more weight, and a useful model increases in utility as its predictive capability improves.
+\textcolor{red}{dean - [regarding the following paragraph] you need to finish the section on discriminating scientific hypotheses. As written, it just stops. }\\
+\textcolor{blue}{The carriage return and new paragraph were inadvertent.}\\
 
-%% dean - you need to finish the section on discriminating scientific
-%% hypotheses. As written, it just stops.
-%% You also need a transition ?a paragraph? to Bayesian prediciton vs. plug-in estimators.
+\textcolor{red}{You also need a transition ?a paragraph? to Bayesian prediciton vs. plug-in estimators.}\\
+\textcolor{blue}{See additional sentences added to the paragraph below. Does that suffice?}\\
 
-\begin{wrapfigure}{r}{0.30\textwidth}
+\noindent Prediction is a means of discriminating between scientific hypotheses. Generally, a model may be judged by the quality of its predictions.  Given competing models, the better predictor will be given more weight, and a useful model increases in utility as its predictive capability improves.  With Bayesian inference, prior informed opinion about parameter distributions, updated with knowledge gained through observations, yields better predictions with each update.\\
+
+
+\begin{wrapfigure}{R}{0.30\textwidth}
   \begin{center}
     \includegraphics[width=0.28\textwidth]{./Graphics/PassThePigs/PtPBox}
   \end{center}
@@ -137,6 +144,13 @@ Generally, a model may be judged by the quality of its predictions.  Given compe
 \noindent To illustrate the potential difference between results from Bayesian prediction and using plug-in estimators, consider the game Pass the Pigs\textsuperscript{\circledR}, a push-your-luck dice game in which the ``dice" are actually rubber pig figures.  Two pig dice are thrown, and points are scored according to the combination of positions in which they come to rest.  Details about the game can be found on Wikipedia here: \url{https://en.wikipedia.org/wiki/Pass_the_Pigs}\\
 
 %% how about a picture of a pig in razorback position?  e.g. via cell phone?
+
+\begin{wrapfigure}{L}{0.30\textwidth}
+  \begin{center}
+    \includegraphics[width=0.28\textwidth]{./Graphics/PassThePigs/Razorback}
+  \end{center}
+  \caption{Razorback}
+\end{wrapfigure}
 
 \noindent For the purpose of this example, consider the probability of a single pig landing in the ``Razorback" position, which occurs when the pig is lying on its back with its legs extended upward.  The irregular shape of the pig makes it difficult to assign probabilities to results other than by means of experimentation.  Such an experiment was conducted at Duquesne University, and an article describing the experiment as well as Bayesian predictive inference performed on the results appeared in the \textit{Journal of Statistics Education} Volume 14, Number 3, in 2006.  The article can be accessed here:  \url{http://jse.amstat.org/v14n3/datasets.kern.html}. Of the $11,954$ recorded results for individual pigs, approximately $22.4\%$ were Razorbacks.\\
 
