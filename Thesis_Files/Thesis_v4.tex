@@ -94,16 +94,15 @@ An obstacle to widespread employment of Bayesian predictive inference in scienti
 My understanding of Bayesian Predictive Inference began with the University of Arizona course ``Bayesian Statistical Theory and Applications" under Dr. Edward Bedrick.  Since then it has been shaped by exposure to various sources, including articles by Bedrick and Dr. Dean Billheimer, and to a greater extent the aforementioned texts by Hoff and Geisser, and others, including \underline{Bayesian Data Analysis} by Andrew Gelman et. al., \underline{Statistical Prediction Analysis} by J. Aitchison and I.R. Dunsmore, and excerpts from \underline{The Signal and the Noise} by Nate Silver.  In the next section and what follows, the ideas expressed are an amalgam of what was learned from this body of scholarship.
 
   \subsection{Why Predictive Inference?}
-%
-% The main purpose of statistics is to predict future events based on observed data.  Prediction about meaningful quantities that are relevant to the object of study facilitates scientific progress in multiple ways.  Advantages include enhancing scientific reproducibility, enabling corroboration or refutation of current hypotheses through future experimentation, informing decision-making by summarizing quantities of direct interest to the researcher, and shifting the focus of statistical analysis from estimation of hypothetical parameters to statements about concrete observables.\\
+
 
 I find persuasive the assertion that the main purpose of statistics is to predict future events based on observed data, and moreover that a statistical model may be judged chiefly by the quality of its predictions.  Predictions about meaningful quantities that are relevant to the object of study facilitate scientific progress in multiple ways.  Nate Silver notes:
 
 \begin{quote}
-Prediction is important because it connects subjective and objective reality. Karl Popper, the philosopher of science, recognized this view. [45] \textcolor{blue}{$\leftarrow$ I don't need this citation within a citation, do I?}For Popper, a hypothesis was not scientific unless it was falsifiable—meaning that it could be tested in the real world by means of a prediction.
+Prediction is important because it connects subjective and objective reality. Karl Popper, the philosopher of science, recognized this view. For Popper, a hypothesis was not scientific unless it was falsifiable—meaning that it could be tested in the real world by means of a prediction.
 \end{quote}
 
-\noindent Billheimer emphasizes the improvement of scientific accuracy and reproducibility to be had by ``shifting our focus from `finding differences' among hypothetical parameters to predicting observable events based on our current scientific understanding."  Focus on observed data enables corroboration or refutation of current hypotheses through future experimentation, and informs decision-making by summarizing quantities of direct interest to the researcher.  Bayesian predictive inference shifts the focus of statistical analysis from estimation of hypothetical parameters to statements about concrete observables.\\
+\noindent Billheimer emphasizes the improvement of scientific accuracy and reproducibility Bayesian prediction provides by ``shifting our focus from `finding differences' among hypothetical parameters to predicting observable events based on our current scientific understanding."  Focus on observed data enables corroboration or refutation of current hypotheses through future experimentation, and informs decision-making by summarizing quantities of direct interest to the researcher.  Bayesian predictive inference shifts the focus of statistical analysis from estimation of hypothetical parameters to statements about concrete observables.\\
 
 \noindent It is not the intent of this thesis to suggest that parametric inference should be abandoned in statistical analyses.  Conventional statistical inference techniques are useful for summarizing information about large quantities of data in a small number of usable values (parameter estimates), and leveraging such summaries to determine whether a particular problem merits continued attention. Indeed, the scientific discipline of mathematical statistics has developed along parametric lines, imparting greater efficiency to the solving of idealized versions of problems. However, this focus on parameters has largely ignored the impact of observable quantities which may exhibit distributions very different from our (idealized) standard models. In support of prediction in general, and Bayesian prediction in particular, I return to Nate Silver:\\
 
@@ -111,23 +110,7 @@ Prediction is important because it connects subjective and objective reality. Ka
 Making predictions based on our beliefs is the best (and perhaps even the only) way to test ourselves. If objectivity is the concern for a greater truth beyond our personal circumstances, and prediction is the best way to examine how closely aligned our personal perceptions are with that greater truth, the most objective among us are those who make the most accurate predictions. Fisher’s statistical method, which saw objectivity as residing within the confines of a laboratory experiment, is less suitable to this task than Bayesian reasoning.
 \end{quote}
 
-%% DONE
-%% dean - this last sentence is not true. Bayesian inference predated
-%% frequentist. Instead, how about, ``... conventional statistical inference
-%% techniques are useful for summarizing (?concentrating?) information about
-%% large quantities of data in a small number of parameter estimates, .....,
-%% Indeed, the scientific discipline of mathematical statistics has developed along
-%% parametric lines, imparting greater efficiency in solving idealized
-%% versions of problems. However, this focus on parameters has largely ignored the
-%% impact on observable quantities which may exhibit distributions very
-%% different from our standared models.  Or something like that.
 
-
-\textcolor{red}{dean - [regarding the following paragraph] you need to finish the section on discriminating scientific hypotheses. As written, it just stops. }\\
-\textcolor{blue}{The carriage return and new paragraph were inadvertent.}\\
-
-\textcolor{red}{You also need a transition ?a paragraph? to Bayesian prediciton vs. plug-in estimators.}\\
-\textcolor{blue}{See additional sentences added to the paragraph below. Does that suffice?}\\
 
 \noindent Prediction is a means of discriminating between scientific hypotheses. Generally, a model may be judged by the quality of its predictions.  Given competing models, the better predictor will be given more weight, and a useful model increases in utility as its predictive capability improves.  With Bayesian inference, prior informed opinion about parameter distributions, updated with knowledge gained through observations, yields better predictions with each update.\\
 
@@ -139,9 +122,9 @@ Making predictions based on our beliefs is the best (and perhaps even the only) 
   \caption{Pass The Pigs\textsuperscript{\circledR}}
 \end{wrapfigure}
 
-\noindent To illustrate the potential difference between results from Bayesian prediction and using plug-in estimators, consider the game Pass the Pigs\textsuperscript{\circledR}, a push-your-luck dice game in which the ``dice" are actually rubber pig figures.  Two pig dice are thrown, and points are scored according to the combination of positions in which they come to rest.  Details about the game can be found on Wikipedia here: \url{https://en.wikipedia.org/wiki/Pass_the_Pigs}\\
+\noindent To illustrate the potential difference between Bayesian prediction and the use of plug-in estimators, consider the game Pass the Pigs\textsuperscript{\circledR}, a push-your-luck dice game in which the ``dice" are actually rubber pig figures.  Two pig dice are thrown, and points are scored according to the combination of positions in which they come to rest.  Details about the game can be found on Wikipedia here: \url{https://en.wikipedia.org/wiki/Pass_the_Pigs}\\
 
-%% how about a picture of a pig in razorback position?  e.g. via cell phone?
+%% DONE how about a picture of a pig in razorback position?  e.g. via cell phone?
 
 \begin{wrapfigure}{L}{0.30\textwidth}
   \begin{center}
@@ -152,21 +135,18 @@ Making predictions based on our beliefs is the best (and perhaps even the only) 
 
 \noindent For the purpose of this example, consider the probability of a single pig landing in the ``Razorback" position, which occurs when the pig is lying on its back with its legs extended upward.  The irregular shape of the pig makes it difficult to assign probabilities to results other than by means of experimentation.  Such an experiment was conducted at Duquesne University, and an article describing the experiment as well as Bayesian predictive inference performed on the results appeared in the \textit{Journal of Statistics Education} Volume 14, Number 3, in 2006.  The article can be accessed here:  \url{http://jse.amstat.org/v14n3/datasets.kern.html}. Of the $11,954$ recorded results for individual pigs, approximately $22.4\%$ were Razorbacks.\\
 
-\noindent Suppose % dean
-in new data %%
-$t=4$ Razorbacks have been observed out of $N=10$ tosses of a single pig die, suggesting a straightforward binomial distribution with $\theta =$ Pr(Razorback) $= t/N = 0.4$. Taking the Duquesne experiment into consideration, we'll perform Bayesian prediction using three prior distributions for $\theta$: $\theta\sim\text{Beta}(2,8)$, $\theta\sim\text{Beta}(22,78)$, and $\theta\sim\text{Beta}(224,776)$, and compare these results to predictions obtained from the plug-in estimator $\theta = 0.4$.   Any number of prior distributions on $\theta$ would satisfy the condition that $E(\theta) \approx 0.224$, suggested by the prior information.  The specific choice of a Beta prior is made largely for computational convenience.\\
+\noindent Suppose in new data $t=4$ Razorbacks have been observed out of $N=10$ tosses of a single pig die, suggesting a straightforward binomial distribution with $\theta =$ Pr(Razorback) $= t/N = 0.4$. Taking the Duquesne experiment into consideration, we'll perform Bayesian prediction using various Beta prior distributions for $\theta$: $\theta\sim\text{Beta}(2,8)$, $\theta\sim\text{Beta}(22,78)$, and $\theta\sim\text{Beta}(224,776)$, and compare these results to predictions obtained from the plug-in estimator $\theta = 0.4$.   Any number of prior distributions on $\theta$ would satisfy the condition that $E(\theta) \approx 0.224$, suggested by the prior information.  The specific choice of a Beta prior is made largely for computational convenience.\\
 
-\noindent In this example the question asked by the researcher is, ``For $M = 100$ future observations, how many Razorbacks are predicted?"  The density curves in the plot below show the influence of the details of the choice of prior on the location and variance of the predictive distribution.  Essentially, each pair of shape parameters $(\alpha,\beta)$ in the Beta prior reflects the researcher's level of reliance on the results of the Duquesne experiment, with the ``weight" given to that knowledge increasing with the shape parameters by orders of magnitude.  The choice of shape parameters might be influenced by such things as pig tossing method (perhaps the researcher is throwing them by hand rather than dropping them by the carefully controlled method used in the Duquesne experiment), or by a need to account for pig-to-pig variation, or anything else the researcher believes introduces a deviation from the events upon which the prior information is based.  Use of the scaled-up Big Pigs\texttrademark variant, for example might give reason to use a very low-weighted prior such as $\theta\sim\text{Beta}(2,8)$.
-%% can you add a ruler or some other scale figure to show relative size?
+\noindent The researcher wants to predict how many Razorbacks will result from some number $M$ of future pig die rolls.  In this example, $M=100$ was used.  The density curves in the plot below show the influence of the choice of prior parameters on the location and variance of the predictive distribution.  Essentially, each pair of shape parameters $(\alpha,\beta)$ in the Beta prior reflects the researcher's level of reliance on the results of the Duquesne experiment, with the ``weight" given to that knowledge increasing with the shape parameters by orders of magnitude.  The choice of parameters might be influenced by such things as pig tossing method (perhaps the researcher is throwing them by hand rather than dropping them by the carefully controlled method used in the Duquesne experiment), or by a need to account for pig-to-pig variation, or anything else the researcher believes introduces a deviation from the events upon which the prior information is based.  Use of the scaled-up Big Pigs\texttrademark variant, for example might give reason to use a very low-weighted prior such as $\theta\sim\text{Beta}(2,8)$.
+
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.9\textwidth]{./Graphics/PassThePigs/PigSize}
-  \caption{Big Pigs\texttrademark to Original Approximate Scale}
+  \includegraphics[width=0.9\textwidth]{./Graphics/PassThePigs/PigSize_wRuler}
+  \caption{Big Pigs\texttrademark to Original (Approximate Scale)}
 \end{figure}
 
 
-\noindent The plot and table below illustrate the effects of the Bayesian prediction method. Perhaps most notable is the location disparity between the plug-in (Binomial) prediction and the family of Bayesian (Beta-binomial) predictive distributions.  The consideration of prior knowledge has a significant effect.  In this example, the strong influence of the choice of shape factors for the Beta prior on the mean and variance of the predictive distribution provides options for the future prognosticator. If closely duplicating the Duquesne experimental conditions, for example, predictions might be based on the result from the Beta$(224,776)$ prior.  A lower-weighted prior might be used for any experimental element the researcher believes introduces a deviation from the knowledge upon which the prior information is based.
-%% dean - in the paragraph above - are these shape factors or scale factors?
+\noindent The plot and table below illustrate the effects of the Bayesian prediction method. Perhaps most notable is the location disparity between the plug-in (Binomial) prediction and the family of Bayesian (Beta-binomial) predictive distributions.  The consideration of prior knowledge is also shown to have a significant effect.  In this example, the strong influence of the choice of shape parameters for the Beta prior on the mean and variance of the predictive distribution provides options for the future prognosticator. If a new set of trials closely duplicates the Duquesne experimental conditions, for example, predictions might be based on the result from the Beta$(224,776)$ prior.  A lower-weighted prior might be used for any experimental element the researcher believes introduces a deviation from the knowledge upon which the prior information is based.
 
 \vspace{1cm}
 
@@ -178,25 +158,23 @@ $t=4$ Razorbacks have been observed out of $N=10$ tosses of a single pig die, su
   \begin{tabular}{l c c c c }
   \toprule
   \multicolumn{5}{c}{\large \#Razorbacks Predicted out of 100 Tosses}          \\
-  \multicolumn{1}{c}{\textbf{Prediction Method}} & \multicolumn{1}{c}{$\textbf{(}\boldsymbol\alpha,\boldsymbol\beta\textbf{)}$}  & \multicolumn{1}{c}{$\textbf{E(}\boldsymbol\theta\textbf{)}$}  & \multicolumn{1}{c}{\textbf{mean}} & \multicolumn{1}{c}{\textbf{SD}}\\
+  \multicolumn{1}{c}{\textbf{Prediction Method}} & \multicolumn{1}{c}{$\textbf{(}\boldsymbol\alpha,\boldsymbol\beta\textbf{)}$}  & \multicolumn{1}{c}{\textbf{Prior Mean }$\textbf{E(}\boldsymbol\theta\textbf{)}$}  & \multicolumn{1}{c}{\textbf{Prediction Mean}} & \multicolumn{1}{c}{\textbf{SD}}\\
         \midrule
-        Beta-Binomial & (2,8) & 0.2 & 30.29 & 11.1 \\
+        Beta-Binomial & (2,8) & 0.2 & 31.11 & 10.69 \\
         \midrule
-        Beta-Binomial & (22,78) & 0.22 & 23.6 & 5.96\\
+        Beta-Binomial & (22,78) & 0.22 & 23.61 & 5.68\\
         \midrule
-        Beta-Binomial & (224,776) & 0.224 & 22.7 & 4.34 \\
+        Beta-Binomial & (224,776) & 0.224 & 22.36 & 4.37 \\
         \midrule
         Binomial$(100,0.4)$ & -- & -- & 40 & 4.9 \\
   \bottomrule
   \end{tabular}
 \end{center}
 
+\vspace{1cm}
 
-%% dean - write about your conclusion from the Big pig experiment and what it
-%% has to say about preditcion????
-%%  this is a really nice example, but you need to motivate it better - e.g. the
-%%  note above, and you need to have a conclusion that describes the benefits of
-%%  the predictive approach
+\noindent The differences in the results of the two prediction methods are easy to see in this case. Unlike the Bayesian approach, the binomial-only model uses only the observed data, does not account for any uncertainty in the binomial parameter ($\theta$), and ignores historical info about Razorback frequency.  If speculating whether the proportion of future razorbacks will be greater than, say, 30\%, the indications of the two analysis approaches contradict each other.  The statistically savvy wagerer of course realizes that the 10 die throws informing the plug-in results do not guarantee high confidence.  A much less risky option for the bettor is the Bayesian method with a suitable prior parameterization.
+
 
 \clearpage
 
@@ -204,25 +182,34 @@ $t=4$ Razorbacks have been observed out of $N=10$ tosses of a single pig die, su
 
 \noindent We want to predict future outcomes based on current knowledge.
 Specifically we're asking: for observed values $Y_1 = y_1,...,Y_n = y_n$, what
-is likely to be the value of the next observation,
-%% dean  - this needs to be just $\tilde{Y}$ DONE
-$\tilde{Y}$?
-%%=\tilde{y}$?
-We want to compute $Pr(\tilde{Y}|y_1,...,y_n)$, where $y_1,...,y_n$ are
-conditionally independent and identically distributed (i.i.d.)
-%% dean with respect to DONE
-with respect to
-%conditional on
- a population parameter (or parameters) $\theta$.  We assign prior distribution
- $\pi(\theta)$ based on some existing knowledge or beliefs.  Here we are careful
- to satisfy ourselves that $Y_1,...,Y_n$ are \textit{exchangeable}, which
- enables us to rely on de Finetti's representation theorem for the
-%% dean
- \textcolor{red}{dean i.i.d.  -- also cite de Finetti's theorem e.g. from Hoff's book.
-  You probably want to state the definition of exchangeability, and use that
-  throughout the thesis, rather than the iid description.}
+is likely to be the value of the next observation, $\tilde{Y}$?  We want to compute $Pr(\tilde{Y}|y_1,...,y_n)$, where $y_1,...,y_n$ are
+conditionally independent and identically distributed (i.i.d.) with respect to  a population parameter (or parameters) $\theta$.  We assign prior distribution
+ $\pi(\theta)$ based on some existing knowledge or beliefs.  Here we are careful to satisfy ourselves that $Y_1,...,Y_n$ are \textit{exchangeable}, which
+ enables us to rely on de Finetti's representation theorem for the conditional independence assumption.  Exchangeability means essentially that the order of the observations conveys no information affecting the distribution of the data.  That is, $p(Y_1,...,Y_n) = p(Y_{\pi_1},...,Y_{\pi_n})$ for any permutation $\pi_1,...,\pi_n$ of the indices $1,...,n$.\\
 
- conditional independence assumption.  Thus we can write
+\begin{quote}
+  \textbf{De Finetti's Theorem:  } Let $Y_i\in\mathcal{Y}$ for all $i\in\{1,2,...\}$.  Suppose that, for any $n$, our belief model for $Y_1,...,Y_n$ is exchangeable. Then our model can be written as
+
+  $$p(y_1,...,y_n) = \int\left\{\prod_1^n p(y_i|\theta)\right\}p(\theta)d\theta$$
+
+  for some parameter $\theta$, some prior distribution on $\theta$ and some sampling model $p(y|\theta)$.  The prior and sampling model depend on the form of the belief model $p(y_1,...,y_n)$.\\
+\end{quote}
+
+\textcolor{blue}{How is the following paragraph?}
+
+\noindent Simply put, exchangeability implies (conditional) independence and identical distribution (i.i.d.). The converse is immediate by definition of marginal probability and the commutative property of multiplication. Hoff summarizes these ideas like this (p. 29):\\
+
+
+\[
+\begin{rcases}
+Y_1,...,Y_n|\theta \text{ are i.i.d}\\
+\theta\sim\pi(\theta)
+\end{rcases} \Leftrightarrow Y_1,...,Y_n \text{ are exchangeable for all } n
+\]
+
+\vspace{5mm}
+
+\noindent The derivations throughout this thesis assume exchangeability, so we can formulate predictive probability as follows:
 
 \begin{flalign}
   p(\tilde{Y} = \tilde{y} | Y_1 = y_1,...,Y_n = y_n) &= \frac{p(\tilde{y},y_1,...,y_n)}{p(y_1,...,y_n)}\nonumber\\
@@ -236,38 +223,15 @@ with respect to
   &= \int p(\tilde{y}|\theta) p(\theta|y_1,...,y_n) d\theta \label{BayesianPredictiveFormat}
 \end{flalign}
 
-%% dean -
-\textcolor{red}{so what does equation 1 tell you? describe this result}\\
+\noindent For prediction, we need only to characterize the observed data $(y_1,...,y_n)$, conditionally independent with respect to  $\theta$, and supply a suitable prior distribution $\pi(\theta)$.  Then we compute posterior $p(\theta|y) = p(y|\theta)\pi(\theta)/\int_\theta p(\theta)p(y|\theta)d\theta$ and generate a prediction using   (\ref{BayesianPredictiveFormat}).  In some cases the integral has an analytical solution, while in others we evaluate it through monte carlo (MC) sampling.
 
-\textcolor{red}{for the sentence below - isn't it characterizing theta given the observed data?}\\
 
-\noindent For prediction, we need only to characterize the observed data $(y_1,...,y_n)$ conditional $\theta$ and supply a suitable prior distribution $\pi(\theta)$.  From there we compute posterior
-
-$$p(\theta|y) = \frac{p(y|\theta)\pi(\theta)}{\int_\theta p(\theta)p(y|\theta)d\theta}$$
-
-and make our prediction using (\ref{BayesianPredictiveFormat}).
-%% dean -
-\textcolor{red}{I think the paragraaph above needs a little more explanation.}
 
 \clearpage
 
 \section{Predictive Problems with Conjugate Priors}
 
-\noindent When data can be modeled with a distribution that
-%% dean suggests DONE
-suggests
-%admits %%
-a conjugate prior for the parameter(s) of interest, and those parameters can
-reasonably be represented by that conjugate prior, the posterior calculations
-are greatly simplified.  The four classes of models addressed in this section
-all exhibit this feature.  The first three are single-parameter exponential
-families and have closed-form solutions for prediction.  The fourth is a
-two-parameter exponential family with unkown mean and variance.  While this one
-does not admit an analytical solution, prediction is easily accomplished by
-means of simple
-%% dean monte carlo DONE
-monte carlo %% it's a proper noun
-(MC) sampling.  The four classes of predictive models presented in this section are:
+\noindent When data can be modeled with a distribution that suggests a conjugate prior for the parameter(s) of interest, and those parameters can reasonably be represented by that conjugate prior, the posterior calculations are greatly simplified.  The four classes of models addressed in this section all exhibit this feature.  The first three are single-parameter exponential families and have closed-form solutions for prediction.  The fourth is a two-parameter exponential family with unkown mean and variance.  While this one does not admit an analytical solution, prediction is easily accomplished by means of simple monte carlo sampling.  The four classes of predictive models presented in this section are:
 \begin{itemize}
   \item Beta-Binomial ($T = \sum Y\sim$ Binom$(N,\theta)$ with $\theta\sim$ Beta)
   \item Exponential-Gamma ($Y\sim$ Exp$(\theta)$ data with $\theta\sim$ Gamma)
@@ -276,14 +240,8 @@ monte carlo %% it's a proper noun
 \end{itemize}
 
 \noindent Throughout this section, $N$ is used for the observed data sample
-size, and $S$ is the size of the desired random sample of predictions \sout{number of predictions desired}. The predicted future result
-is indicated by surmounting the
-%% dean data
-%random %% random variable??
-variable name with a tilde.  For example, when the observed data is represented by $y$, the prediction is designated $\tilde{y}$.  %Parameter variable names are clearly identified as they appear.
-Parameter names are clearly indicated as they appear.
-%% dean ?? parameter variable?  what are you trying to say? Parameters are
-%% defined as they appear?
+size, and $S$ is the size of the desired random sample of predictions. The predicted future result
+is indicated by surmounting the variable name with a tilde.  For example, when the observed data is represented by $y$, the prediction is designated $\tilde{y}$. Parameter names are clearly indicated as they appear.
 
   \subsection{Prediction of Future Successes:  Beta-Binomial (Geisser p. 73)}
 
@@ -296,7 +254,7 @@ conditionally \textcolor{red}{Check for this in the remainder of the thesis.  Ob
   are conditinally independent give some theta. - Or observations are
   ``modeled'' as exchangeable}\textcolor{blue}{Discuss:  Hoff defines exchangeability and cites De Finetti but then introduces all of his models with ``i.i.d."}
 
-independent binary variables with Pr$(Y_i = 1) = \theta$, with $Y_i = 1$ indicating success and $Y_i = 0$ indicating failure.  The number of observed successes can be represented by $T = \sum Y_i$, which is sufficient for $\theta$ and has a binomial$(N,\theta)$ distribution.  That is,
+i.i.d. binary variables with respect to $\theta$. That is, Pr$(Y_i = 1) = \theta$, with $Y_i = 1$ indicating success and $Y_i = 0$ indicating failure.  The number of observed successes can be represented by $T = \sum Y_i$, which is sufficient for $\theta$ and has a binomial$(N,\theta)$ distribution.  That is,
 
       $$Pr(T = t|\theta) = {N\choose t}\theta^t(1-\theta)^{N-t}.$$
 
@@ -397,12 +355,10 @@ The functions \texttt{dpredBB()} and \texttt{rpredBB()} were used in the Pass Th
 % \textcolor{red}{explain context}
 
     \subsubsection{Derivation}
-%% dean -
 
-\textcolor{red}{the work copies is kind of weird here?  realizations? observations?}
-      Suppose $Y_1,...,Y_d$ represent fully observed copies from an exponential survival time density
+Suppose $Y_1,...,Y_d$ represent fully observed realizations from an exponential survival time density
           $$p(y|\theta) = \theta e^{-\theta y}$$
-      and $Y_{d+1},...,Y_N$ represent censored copies surviving beyond the experimental time limit.  \\
+      and $Y_{d+1},...,Y_N$ represent censored copies surviving beyond the experimental time limit.  We assume $Y_1,...,Y_d$ are conditionally i.i.d. with respect to $\theta$.\\
 
 \noindent The usual exponential likelihood is used for the fully observed copies, whereas for the censored copies we need Pr$(Y > y | \theta) = 1 - \text{Pr}(Y\leq y | \theta) = 1 - F(y|\theta) = 1 - (1 - e^{-\theta y}) = e^{-\theta y}$.  Here $F$ denotes the cumulative distribution function.\\
 
@@ -500,7 +456,7 @@ This result has been used to create R functions \texttt{dpredEG()}, \texttt{ppre
     \subsubsection{Derivation}
 
 \textcolor{red}{Again - iid or conditionally independent. de Finetti uses the term exchangeable
-Why not this?}\textcolor{blue}{Hoff p. 46}
+Why not this?}\textcolor{blue}{does the surmounting i.i.d. take care of this?}
 
       Suppose we have count data observations $Y_1,...,Y_N|\theta\overset{i.i.d.}{\sim}\text{Poisson}(\theta)$, with $\theta$ assumed to have prior Gamma$(\alpha,\beta)$ distribution.  That is,
 
@@ -523,8 +479,6 @@ Why not this?}\textcolor{blue}{Hoff p. 46}
 
 \noindent Then we have posterior
 
-\textcolor{red}{you dropped $d\theta$ from the integral 2nd 3rd and 4th lines of equation}\textcolor{blue}{and line 1 of the first equation.  Double-check.}
-
       \begin{flalign*}
         p\left(\theta|y_1,...,y_N\right)
         &= \dfrac{p\left(y_1,...,y_N|\theta\right)\pi(\theta)}{\int_\theta p\left(y_1,...,y_N|\theta\right)p(\theta)d\theta}\\
@@ -538,8 +492,7 @@ Why not this?}\textcolor{blue}{Hoff p. 46}
         &\propto \text{Gamma}\left(\alpha+\sum y_i,\beta + N\right).
       \end{flalign*}
 
-
-      Here
+\noindent Here
 
       \begin{flalign*}
         C\left(y_1,...,y_N,\alpha,\beta\right)
@@ -650,7 +603,8 @@ Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15,
       \paragraph{Derivation}
       [Hoff p. 69ff]\\
       \textcolor{red}{dean-again, why the ff?}\\
-      \textcolor{blue}{change to (Hoff Chapter 5)?  Or get rid of this citation because I cite Hoff by page number below, as well as Gelman?}
+      \textcolor{blue}{change to (Hoff Chapter 5)?  Or get rid of this citation because I cite Hoff by page number below, as well as Gelman?}\\
+      \textcolor{blue}{surmounting i.i.d. sufficient for the conditionally i.i.d. assumption?}
         Let $\left\{Y_1,...,Y_N|\theta,\sigma^2\right\}\overset{i.i.d.}{\sim}\text{Normal}\left(\theta,\sigma^2\right)$.  Then the joint sampling density is
 
         \begin{flalign*}
@@ -722,13 +676,11 @@ Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15,
 
 
       \paragraph{R Implementation (Normal-Inverse Gamma, 1-sample)}
-      R functions \texttt{dpredNormIG1()}, \texttt{ppredNormIG1()}, and \texttt{rpredNormIG1()} have been created for the Normal-Inverse Gamma distribution for density, cumulative probability, and random sampling, respectively (see appendix).  These functions all include options for implementation with or without previous knowledge as desired.  If Jeffreys prior is used, the functions simply implement R's Student's t-distribution functions \texttt{rt()}, \texttt{dt()}, and \texttt{pt()}, applying the location and scale parameters as described above.  For predictions using previous knowledge, the functions work as follows:  For the random sampler \texttt{rpredNormIG1()}, the Monte-Carlo method described above is directly employed.  The predictive density and cumulative predictive density functions (\texttt{dpredNormIG1()} and \texttt{ppredNormID1()}, respectively) depend on the random sample.
+      R functions \texttt{dpredNormIG1()}, \texttt{ppredNormIG1()}, and \texttt{rpredNormIG1()} have been created for the Normal-Inverse Gamma distribution for density, cumulative probability, and random sampling, respectively (see appendix).  These functions all include options for implementation with or without previous knowledge as desired.  If Jeffreys prior is used, the functions simply implement R's Student's t-distribution functions \texttt{rt()}, \texttt{dt()}, and \texttt{pt()}, applying the location and scale parameters as described above.  For predictions using previous knowledge, the functions work as follows:  For the random sampler \texttt{rpredNormIG1()}, the Monte-Carlo method described above is directly employed.  The predictive density and cumulative predictive density functions (\texttt{dpredNormIG1()} and \texttt{ppredNormID1()}, respectively) depend on the random sample.\textcolor{blue}{  That is, the distributions generated by these two functions are approximated from a random sample returned by \texttt{rpredNormIG1()}.}
 
 \textcolor{red}{dean-are you saying that the predictive density and cumulative
 distribitions are approximated from a random sample generated from the sampler
-function? Make this clearer.}
-
-\textcolor{blue}{Insert:  That is, the distributions generated by these two functions are approximated from a random sample returned by \texttt{rpredNormIG1()}.}
+function? Make this clearer.}\textcolor{blue}{  See blue sentence above.  Does that suffice?}
 
 \texttt{ppredNormIG1()} utilizes the empirical cumulative density function \texttt{ecdf()} from R's stats package.  \texttt{dpredNormIG1()} utilizes a Kernel Density Estimation (KDE) method and R's built-in \texttt{density()} function.  The KDE is computed by definition, using a Normal kernel:
 
@@ -813,6 +765,8 @@ Calls to these functions appear as follows:
           Y_{i,2} &= \mu - \delta + \epsilon_{i,2}\\
           \left\{\epsilon_{i,j}\right\} &\sim\text{i.i.d. Normal}\left(0,\sigma^2\right).
         \end{flalign*}
+
+\textcolor{blue}{does the i.i.d. above suffice for stating conditional i.i.d. assumption?}\\
 
 \noindent Letting $\theta_1 = \mu + \delta$ and $\theta_2 = \mu - \delta$ we see that $\delta = \left(\theta_1 - \theta_2\right)/2$ is half the population difference in means, and $\mu = \left(\theta_1 + \theta_2\right)/2$ is the pooled average.  We'll assume conjugate prior distributions
 
@@ -899,6 +853,10 @@ the selected schools?}\textcolor{blue}{See additional words added above--does th
     For two-level data consisting of groups and units within groups, denote data $\mathbf{Y}_1,...,\mathbf{Y_k}$ where $\mathbf{Y}_j = \{Y_{1,j},...,Y_{N_j,j}\}$. We have the hierarchical Normal model (Hoff p. 132ff):
     $$\phi_j = \left\{\theta_j,\sigma^2\right\}, p\left(y|\phi_j\right) = \text{Normal}\left(\theta_j,\sigma^2\right) \text{ (within-group model)}$$
     $$\psi_j = \left\{\mu,\tau^2\right\}, p\left(\theta_j|\psi\right) = \text{Normal}\left(\mu,\tau^2\right) \text{ (between-groups model)}$$
+
+\textcolor{blue}{See Hoff p. 131 and 132 for how we get exchangeability.  Properly state that here.\\
+Here $y$ is assumed to be conditionally i.i.d with respect to $\phi_j$}
+
     We use standard semiconjugate Normal and Inverse Gamma prior distributions for the fixed but unknown parameters in the model:
     \begin{flalign*}
       \sigma^2 &\sim \text{Inverse Gamma}\left(\frac{\nu_0}{2},\frac{\nu_0\sigma^2_0}{2}\right)\\

@@ -36,7 +36,7 @@ the selected schools?
 p.30 - Define \bar{\theta}?
 p.31 Again. S is the number of MCMC realizations. "random sample size" is too generic
 
-p. 32. check the school number that you selected.  school 100 or school 92 
+p. 32. check the school number that you selected.  school 100 or school 92 [FIXED]
 
 p.33. As before, what is being predicted?
 
