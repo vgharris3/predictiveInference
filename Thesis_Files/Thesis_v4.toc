@@ -11,7 +11,7 @@
 \contentsline {subsubsection}{\numberline {3.2.1}Derivation}{15}{subsubsection.3.2.1}%
 \contentsline {subsubsection}{\numberline {3.2.2}R Implementation (Exponential-Gamma)}{17}{subsubsection.3.2.2}%
 \contentsline {subsubsection}{\numberline {3.2.3}Example}{17}{subsubsection.3.2.3}%
-\contentsline {subsection}{\numberline {3.3}Poisson-Gamma Model (Hoff p. 43ff)}{19}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.3}Poisson-Gamma Model (Hoff p. 43 - 50)}{19}{subsection.3.3}%
 \contentsline {subsubsection}{\numberline {3.3.1}Derivation}{19}{subsubsection.3.3.1}%
 \contentsline {subsubsection}{\numberline {3.3.2}R Implementation (Poisson-Gamma)}{21}{subsubsection.3.3.2}%
 \contentsline {subsubsection}{\numberline {3.3.3}Example}{22}{subsubsection.3.3.3}%

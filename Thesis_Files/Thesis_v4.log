@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  9 MAR 2022 07:02
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  10 MAR 2022 11:28
 entering extended mode
 **./Thesis_v4.tex
 (Thesis_v4.tex
@@ -1484,7 +1484,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 200--201
 
 Package amsmath Warning: Foreign command \atopwithdelims;
 (amsmath)                \frac or \genfrac should be used instead
-(amsmath)                 on input line 259.
+(amsmath)                 on input line 253.
 
 [12
 
@@ -1492,40 +1492,40 @@ Package amsmath Warning: Foreign command \atopwithdelims;
 <Thesis_v4-003.pdf, id=398, 433.62pt x 433.62pt>
 File: Thesis_v4-003.pdf Graphic file (type pdf)
 <use Thesis_v4-003.pdf>
-Package pdftex.def Info: Thesis_v4-003.pdf  used on input line 349.
+Package pdftex.def Info: Thesis_v4-003.pdf  used on input line 343.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
  [14]
-Underfull \hbox (badness 10000) in paragraph at lines 360--362
+Underfull \hbox (badness 10000) in paragraph at lines 352--354
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 363--364
+Underfull \hbox (badness 10000) in paragraph at lines 355--356
 
  []
 
 [15 <./Thesis_v4-003.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 393--394
+Underfull \hbox (badness 10000) in paragraph at lines 380--381
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 411--412
+Underfull \hbox (badness 10000) in paragraph at lines 397--398
 
  []
 
 [16]
-Underfull \hbox (badness 10000) in paragraph at lines 417--418
+Underfull \hbox (badness 10000) in paragraph at lines 403--404
 
  []
 
 
-Overfull \hbox (47.755pt too wide) detected at line 436
+Overfull \hbox (47.755pt too wide) detected at line 422
 []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 441--442
+Underfull \hbox (badness 10000) in paragraph at lines 427--428
 
  []
 
@@ -1533,22 +1533,22 @@ Underfull \hbox (badness 10000) in paragraph at lines 441--442
 <Thesis_v4-004.pdf, id=422, 433.62pt x 433.62pt>
 File: Thesis_v4-004.pdf Graphic file (type pdf)
 <use Thesis_v4-004.pdf>
-Package pdftex.def Info: Thesis_v4-004.pdf  used on input line 447.
+Package pdftex.def Info: Thesis_v4-004.pdf  used on input line 433.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
  [18 <./Thesis_v4-004.pdf>] [19
 
 ] [20]
-Underfull \hbox (badness 10000) in paragraph at lines 547--548
+Underfull \hbox (badness 10000) in paragraph at lines 528--529
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 549--550
+Underfull \hbox (badness 10000) in paragraph at lines 530--531
 
  []
 
 
-Overfull \hbox (4.88312pt too wide) in paragraph at lines 555--556
+Overfull \hbox (4.88312pt too wide) in paragraph at lines 536--537
 []\T1/aer/m/n/12 Set lower end-point $\OML/cmm/m/it/12 L$ \T1/aer/m/n/12 equal 
 to the ex-pected value of $[]$. That is, $\OML/cmm/m/it/12 L \OT1/cmr/m/n/12 = 
 \OML/cmm/m/it/12 E\OT1/cmr/m/n/12 ([]\OMS/cmsy/m/n/12 j\OML/cmm/m/it/12 y[]; ::
@@ -1559,72 +1559,68 @@ to the ex-pected value of $[]$. That is, $\OML/cmm/m/it/12 L \OT1/cmr/m/n/12 =
 <Thesis_v4-005.pdf, id=451, 433.62pt x 433.62pt>
 File: Thesis_v4-005.pdf Graphic file (type pdf)
 <use Thesis_v4-005.pdf>
-Package pdftex.def Info: Thesis_v4-005.pdf  used on input line 594.
+Package pdftex.def Info: Thesis_v4-005.pdf  used on input line 575.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
  [22] [23 <./Thesis_v4-005.pdf>]
-Overfull \hbox (15.11646pt too wide) in paragraph at lines 604--609
-[]\T1/aer/m/n/12 surmounting i.i.d. suf-fi-cient for the con-di-tion-ally i.i.d
-. as-sump-tion?[] Let $[] []
- []
+LaTeX Font Info:    Calculating math sizes for size <8.4> on input line 595.
 
-LaTeX Font Info:    Calculating math sizes for size <8.4> on input line 617.
 
 LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <4.2> not available
-(Font)              size <5> substituted on input line 617.
+(Font)              size <5> substituted on input line 595.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <4.2> not available
-(Font)              size <5> substituted on input line 617.
+(Font)              size <5> substituted on input line 595.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <4.2> not available
-(Font)              size <5> substituted on input line 617.
+(Font)              size <5> substituted on input line 595.
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/bx/n' in size <4.2> not available
-(Font)              size <5> substituted on input line 617.
+(Font)              size <5> substituted on input line 595.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/b/it' in size <4.2> not available
-(Font)              size <5> substituted on input line 617.
+(Font)              size <5> substituted on input line 595.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/b/n' in size <4.2> not available
-(Font)              size <5> substituted on input line 617.
+(Font)              size <5> substituted on input line 595.
 
 
 LaTeX Font Warning: Font shape `U/rsfs/m/n' in size <4.2> not available
-(Font)              size <5> substituted on input line 617.
+(Font)              size <5> substituted on input line 595.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 632--633
+Underfull \hbox (badness 10000) in paragraph at lines 605--606
 
  []
 
 [24
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 659--660
+Underfull \hbox (badness 10000) in paragraph at lines 632--633
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 671--672
+Underfull \hbox (badness 10000) in paragraph at lines 644--645
 
  []
 
 [25]
-Overfull \hbox (4.50432pt too wide) detected at line 718
+Overfull \hbox (4.50432pt too wide) detected at line 691
 []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 721--722
+Underfull \hbox (badness 10000) in paragraph at lines 694--695
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 726--727
+Underfull \hbox (badness 10000) in paragraph at lines 699--700
 
  []
 
@@ -1632,61 +1628,75 @@ Underfull \hbox (badness 10000) in paragraph at lines 726--727
 <Thesis_v4-006.pdf, id=490, 433.62pt x 433.62pt>
 File: Thesis_v4-006.pdf Graphic file (type pdf)
 <use Thesis_v4-006.pdf>
-Package pdftex.def Info: Thesis_v4-006.pdf  used on input line 754.
+Package pdftex.def Info: Thesis_v4-006.pdf  used on input line 727.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
  [27] [28 <./Thesis_v4-006.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 769--770
-
+Overfull \hbox (25.64029pt too wide) in paragraph at lines 734--735
+ \T1/aer/b/n/12 3.4.2.1 Deriva-tion[][] \T1/aer/m/n/12 For a Bayesian anal-y-si
+s com-par-ing two ex-change-able groups $\OML/cmm/m/it/12 Y[]; :::; Y[]$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 780--781
+Underfull \hbox (badness 10000) in paragraph at lines 751--752
 
  []
 
 [29
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 839--842
+Underfull \hbox (badness 10000) in paragraph at lines 810--813
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 839--842
+Underfull \hbox (badness 10000) in paragraph at lines 810--813
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 839--842
+Underfull \hbox (badness 10000) in paragraph at lines 810--813
 
  []
 
 [30]
-Underfull \hbox (badness 10000) in paragraph at lines 845--848
+Underfull \hbox (badness 10000) in paragraph at lines 816--819
 
  []
 
 <Thesis_v4-007.pdf, id=519, 433.62pt x 433.62pt>
 File: Thesis_v4-007.pdf Graphic file (type pdf)
 <use Thesis_v4-007.pdf>
-Package pdftex.def Info: Thesis_v4-007.pdf  used on input line 849.
+Package pdftex.def Info: Thesis_v4-007.pdf  used on input line 820.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
 [31]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 852.
+(hyperref)                removing `math shift' on input line 823.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 852.
+(hyperref)                removing `math shift' on input line 823.
+
+
+Overfull \hbox (0.37712pt too wide) in paragraph at lines 824--826
+\T1/aer/m/n/12 where $\OT1/cmr/bx/n/12 Y[] \OT1/cmr/m/n/12 = \OMS/cmsy/m/n/12 f
+\OML/cmm/m/it/12 Y[]; :::; Y[]\OMS/cmsy/m/n/12 g\OML/cmm/m/it/12 ; j \OT1/cmr/m
+/n/12 = 1\OML/cmm/m/it/12 ; :::; k$\T1/aer/m/n/12 . Here we stip-u-late ex-chan
+ge-abil-ity of $\OML/cmm/m/it/12 Y[]; :::; Y[]$\T1/aer/m/n/12 ,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 824--826
+
+ []
 
 [32 <./Thesis_v4-007.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 878--879
+Underfull \hbox (badness 10000) in paragraph at lines 849--850
 
  []
 
 
-Overfull \hbox (10.67146pt too wide) in paragraph at lines 885--886
+Overfull \hbox (10.67146pt too wide) in paragraph at lines 856--857
  \T1/aer/b/n/12 3.4.3.2 R Im-ple-men-ta-tion (Normal-Inverse Gamma, k-samples)[
 ][] \T1/aer/m/n/12 The R func-tion \T1/aett/m/n/12 rpred-
  []
@@ -1695,16 +1705,16 @@ Overfull \hbox (10.67146pt too wide) in paragraph at lines 885--886
 <Thesis_v4-008.pdf, id=540, 433.62pt x 433.62pt>
 File: Thesis_v4-008.pdf Graphic file (type pdf)
 <use Thesis_v4-008.pdf>
-Package pdftex.def Info: Thesis_v4-008.pdf  used on input line 940.
+Package pdftex.def Info: Thesis_v4-008.pdf  used on input line 911.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
  [34] [35 <./Thesis_v4-008.pdf>]
 <Thesis_v4-010.pdf, id=561, 433.62pt x 433.62pt>
 File: Thesis_v4-010.pdf Graphic file (type pdf)
 <use Thesis_v4-010.pdf>
-Package pdftex.def Info: Thesis_v4-010.pdf  used on input line 990.
+Package pdftex.def Info: Thesis_v4-010.pdf  used on input line 961.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
  [36 <./Thesis_v4-010.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 1060--1061
+Underfull \hbox (badness 10000) in paragraph at lines 1031--1032
 
  []
 
@@ -1714,15 +1724,15 @@ Underfull \hbox (badness 10000) in paragraph at lines 1060--1061
 <Thesis_v4-011.pdf, id=579, 433.62pt x 433.62pt>
 File: Thesis_v4-011.pdf Graphic file (type pdf)
 <use Thesis_v4-011.pdf>
-Package pdftex.def Info: Thesis_v4-011.pdf  used on input line 1066.
+Package pdftex.def Info: Thesis_v4-011.pdf  used on input line 1037.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1096--1097
+Underfull \hbox (badness 10000) in paragraph at lines 1067--1068
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1096--1097
+Underfull \hbox (badness 10000) in paragraph at lines 1067--1068
 
  []
 
@@ -1730,15 +1740,15 @@ Underfull \hbox (badness 10000) in paragraph at lines 1096--1097
 <Thesis_v4-012.pdf, id=590, 433.62pt x 433.62pt>
 File: Thesis_v4-012.pdf Graphic file (type pdf)
 <use Thesis_v4-012.pdf>
-Package pdftex.def Info: Thesis_v4-012.pdf  used on input line 1098.
+Package pdftex.def Info: Thesis_v4-012.pdf  used on input line 1069.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1107--1108
+Underfull \hbox (badness 10000) in paragraph at lines 1078--1079
 
  []
 
 [39 <./Thesis_v4-012.pdf>] [40]
-Overfull \hbox (39.94238pt too wide) in paragraph at lines 1148--1149
+Overfull \hbox (39.94238pt too wide) in paragraph at lines 1119--1120
 \T1/aer/m/n/12 and for pri-ors we choose $\OML/cmm/b/it/12  \OMS/cmsy/m/n/12 
  []\OT1/cmr/m/n/12 (\OML/cmm/b/it/12 []\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 [])
 $ \T1/aer/m/n/12 and $\OT1/cmr/m/n/12 1\OML/cmm/m/it/12 =[] \OT1/cmr/m/n/12 = 
@@ -1747,24 +1757,24 @@ OT1/cmr/m/n/12 2\OML/cmm/m/it/12 ; [][]=\OT1/cmr/m/n/12 2)$\T1/aer/m/n/12 .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1148--1149
+Underfull \hbox (badness 10000) in paragraph at lines 1119--1120
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1148--1149
+Underfull \hbox (badness 10000) in paragraph at lines 1119--1120
 
  []
 
 
-Overfull \hbox (1.57745pt too wide) in paragraph at lines 1176--1177
+Overfull \hbox (1.57745pt too wide) in paragraph at lines 1147--1148
 \T1/aer/m/n/12 Constructing a Gibbs sam-pler to ap-prox-i-mate the joint pos-te
 -rior dis-tri-bu-tion $\OML/cmm/m/it/12 p\OT1/cmr/m/n/12 (\OML/cmm/b/it/12 \OM
 L/cmm/m/it/12 ; []\OMS/cmsy/m/n/12 j[]\OT1/cmr/m/n/12 )$
  []
 
 
-Overfull \hbox (0.347pt too wide) in paragraph at lines 1191--1192
+Overfull \hbox (0.347pt too wide) in paragraph at lines 1162--1163
 []\T1/aer/m/n/12 To cre-ate a sam-ple from the pre-dic-tive dis-tri-bu-tion of 
 re-sponses: for each $\OML/cmm/m/it/12 s \OMS/cmsy/m/n/12 2 f\OT1/cmr/m/n/12 1\
 OML/cmm/m/it/12 ; :::; S\OMS/cmsy/m/n/12 g$\T1/aer/m/n/12 ,
@@ -1775,19 +1785,19 @@ OML/cmm/m/it/12 ; :::; S\OMS/cmsy/m/n/12 g$\T1/aer/m/n/12 ,
 ]
 
 LaTeX Warning: Reference `regression_semiconj_var' on page 42 undefined on inpu
-t line 1197.
+t line 1168.
 
 
 LaTeX Warning: Reference `regression_semiconj_expec' on page 42 undefined on in
-put line 1197.
+put line 1168.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1215--1216
+Underfull \hbox (badness 10000) in paragraph at lines 1186--1187
 
  []
 
 [42]
-Overfull \hbox (15.32634pt too wide) detected at line 1277
+Overfull \hbox (15.32634pt too wide) detected at line 1248
 []
  []
 
@@ -1795,13 +1805,13 @@ Overfull \hbox (15.32634pt too wide) detected at line 1277
 <Thesis_v4-015.pdf, id=633, 433.62pt x 433.62pt>
 File: Thesis_v4-015.pdf Graphic file (type pdf)
 <use Thesis_v4-015.pdf>
-Package pdftex.def Info: Thesis_v4-015.pdf  used on input line 1282.
+Package pdftex.def Info: Thesis_v4-015.pdf  used on input line 1253.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
  [44 <./Thesis_v4-015.pdf>] [45
 
 ] (Thesis_v4.aux)
 Package rerunfilecheck Info: File `Thesis_v4.out' has not changed.
-(rerunfilecheck)             Checksum: E2775593D59B9F1A18D7FCFE68272E38;3366.
+(rerunfilecheck)             Checksum: 88BC6A680614E6802341AA7055204A77;3369.
 
 
 LaTeX Font Warning: Size substitutions with differences
@@ -1814,7 +1824,7 @@ LaTeX Warning: There were undefined references.
 Here is how much of TeX's memory you used:
  35945 strings out of 479696
  850352 string characters out of 2881701
- 1352007 words of memory out of 3000000
+ 1346008 words of memory out of 3000000
  52204 multiletter control sequences out of 15000+200000
  454971 words of font info for 148 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1839,7 +1849,7 @@ KTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/MiKTeX 2.9/fonts/type1/p
 ublic/amsfonts/cm/cmtt12.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt
 8.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/latxfont/line10.pfb><C:/MiKTeX
  2.9/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on Thesis_v4.pdf (45 pages, 1141086 bytes).
+Output written on Thesis_v4.pdf (45 pages, 1140510 bytes).
 PDF statistics:
  757 PDF objects out of 1000 (max. 8388607)
  132 named destinations out of 1000 (max. 500000)

@@ -160,11 +160,11 @@ Making predictions based on our beliefs is the best (and perhaps even the only) 
   \multicolumn{5}{c}{\large \#Razorbacks Predicted out of 100 Tosses}          \\
   \multicolumn{1}{c}{\textbf{Prediction Method}} & \multicolumn{1}{c}{$\textbf{(}\boldsymbol\alpha,\boldsymbol\beta\textbf{)}$}  & \multicolumn{1}{c}{\textbf{Prior Mean }$\textbf{E(}\boldsymbol\theta\textbf{)}$}  & \multicolumn{1}{c}{\textbf{Prediction Mean}} & \multicolumn{1}{c}{\textbf{SD}}\\
         \midrule
-        Beta-Binomial & (2,8) & 0.2 & 31.11 & 10.69 \\
+        Beta-Binomial & (2,8) & 0.2 & 29.98 & 10.8 \\
         \midrule
-        Beta-Binomial & (22,78) & 0.22 & 23.61 & 5.68\\
+        Beta-Binomial & (22,78) & 0.22 & 23.48 & 5.74\\
         \midrule
-        Beta-Binomial & (224,776) & 0.224 & 22.36 & 4.37 \\
+        Beta-Binomial & (224,776) & 0.224 & 22.67 & 4.45 \\
         \midrule
         Binomial$(100,0.4)$ & -- & -- & 40 & 4.9 \\
   \bottomrule
@@ -173,7 +173,7 @@ Making predictions based on our beliefs is the best (and perhaps even the only) 
 
 \vspace{1cm}
 
-\noindent The differences in the results of the two prediction methods are easy to see in this case. Unlike the Bayesian approach, the binomial-only model uses only the observed data, does not account for any uncertainty in the binomial parameter ($\theta$), and ignores historical info about Razorback frequency.  If speculating whether the proportion of future razorbacks will be greater than, say, 30\%, the indications of the two analysis approaches contradict each other.  The statistically savvy wagerer of course realizes that the 10 die throws informing the plug-in results do not guarantee high confidence.  A much less risky option for the bettor is the Bayesian method with a suitable prior parameterization.
+\noindent The differences in the results of the two prediction methods are easy to see in this case. Unlike the Bayesian approach, the binomial-only model uses only the observed data, does not account for any uncertainty in the binomial parameter ($\theta$), and ignores historical info about Razorback frequency.  If speculating whether the number of razorbacks out of the next 10 pig tosses will be greater than, say, 3, the indications of the two analysis approaches contradict each other.  The statistically savvy wagerer of course realizes that the 10 die throws informing the plug-in results do not guarantee high confidence.  A much less risky option for the bettor is the Bayesian method with a suitable prior parameterization.
 
 
 \clearpage
@@ -197,7 +197,7 @@ conditionally independent and identically distributed (i.i.d.) with respect to  
 
 \textcolor{blue}{How is the following paragraph?}
 
-\noindent Simply put, exchangeability implies (conditional) independence and identical distribution (i.i.d.). The converse is immediate by definition of marginal probability and the commutative property of multiplication. Hoff summarizes these ideas like this (p. 29):\\
+\noindent Simply put, exchangeability implies (conditional) independence and identical distribution (i.i.d.). The converse is immediate from the definition of marginal probability and the commutative property of multiplication. Hoff summarizes these ideas like this (p. 29):\\
 
 
 \[
@@ -248,13 +248,7 @@ is indicated by surmounting the variable name with a tilde.  For example, when t
 
     \subsubsection{Derivation}
 
-    \noindent Let $Y_1,...,Y_N$ be
-%% dean
-conditionally \textcolor{red}{Check for this in the remainder of the thesis.  Observations
-  are conditinally independent give some theta. - Or observations are
-  ``modeled'' as exchangeable}\textcolor{blue}{Discuss:  Hoff defines exchangeability and cites De Finetti but then introduces all of his models with ``i.i.d."}
-
-i.i.d. binary variables with respect to $\theta$. That is, Pr$(Y_i = 1) = \theta$, with $Y_i = 1$ indicating success and $Y_i = 0$ indicating failure.  The number of observed successes can be represented by $T = \sum Y_i$, which is sufficient for $\theta$ and has a binomial$(N,\theta)$ distribution.  That is,
+    \noindent Let $Y_1,...,Y_N$ be exchangeable binary variables, and therefore conditionally i.i.d.  with respect to some parameter $\theta$. That is, Pr$(Y_i = 1) = \theta$, with $Y_i = 1$ indicating success and $Y_i = 0$ indicating failure.  The number of observed successes can be represented by $T = \sum Y_i$, which is sufficient for $\theta$ and has a binomial$(N,\theta)$ distribution.  That is,
 
       $$Pr(T = t|\theta) = {N\choose t}\theta^t(1-\theta)^{N-t}.$$
 
@@ -352,20 +346,13 @@ The functions \texttt{dpredBB()} and \texttt{rpredBB()} were used in the Pass Th
 
     \subsection{Survival Time:  Exponential-Gamma (Geisser p. 74)}
 
-% \textcolor{red}{explain context}
-
     \subsubsection{Derivation}
 
 Suppose $Y_1,...,Y_d$ represent fully observed realizations from an exponential survival time density
           $$p(y|\theta) = \theta e^{-\theta y}$$
-      and $Y_{d+1},...,Y_N$ represent censored copies surviving beyond the experimental time limit.  We assume $Y_1,...,Y_d$ are conditionally i.i.d. with respect to $\theta$.\\
+      and $Y_{d+1},...,Y_N$ represent censored copies surviving beyond the experimental time limit.  We assume $Y_1,...,Y_d$ are exchangeable and therefore conditionally i.i.d. with respect to $\theta$.\\
 
 \noindent The usual exponential likelihood is used for the fully observed copies, whereas for the censored copies we need Pr$(Y > y | \theta) = 1 - \text{Pr}(Y\leq y | \theta) = 1 - F(y|\theta) = 1 - (1 - e^{-\theta y}) = e^{-\theta y}$.  Here $F$ denotes the cumulative distribution function.\\
-
-%% dean
-\textcolor{red}{I think you are confusing y - the observation, with the censoring value
-ususally this would be someting like Pr(Y > t | $\theta$) where t is the
- censoring value.}
 
 \noindent Thus, with $\bar{y} = \frac{1}{N}\sum_{i=1}^N y_i$, the overall likelihood is
 
@@ -393,10 +380,9 @@ ususally this would be someting like Pr(Y > t | $\theta$) where t is the
 \noindent with the Gamma$(d+\delta,\gamma+N\bar{y})$ density in the denominator of next to last step integrating to $1$.\\
 
 \noindent The survival time predictive probability density then is
-%% dean
-\textcolor{red}{this is a continuous preductuve density, we would yusually write this as $p(\tilde{y} | Y_1, ..)$}
+
     \begin{flalign}
-      p(\tilde{Y} = \tilde{y}|Y_1,...,Y_N)
+      p(\tilde{y}|Y_1,...,Y_N)
       &= \int p(\tilde{y}|\theta)p(\theta|y_1,...,y_N)d\theta\nonumber\\
       &\nonumber\\
       &= \int \theta e^{-\theta \tilde{y}} \cdot \frac{(\gamma+N\bar{y})^{d+\delta}\theta^{d+\delta - 1}e^{-\theta(\gamma+N\bar{y})}}{\Gamma(d+\delta)}d\theta\nonumber\\
@@ -449,16 +435,11 @@ This result has been used to create R functions \texttt{dpredEG()}, \texttt{ppre
 
 \clearpage
 
-  \subsection{Poisson-Gamma Model (Hoff p. 43ff)}
-
-  \textcolor{red}{why the ff after the page number?}\textcolor{blue}{That just means ``and following".  I could change that to pp. 43-50, or get rid of this citation and just call it out below?}
+  \subsection{Poisson-Gamma Model (Hoff p. 43 - 50)}
 
     \subsubsection{Derivation}
 
-\textcolor{red}{Again - iid or conditionally independent. de Finetti uses the term exchangeable
-Why not this?}\textcolor{blue}{does the surmounting i.i.d. take care of this?}
-
-      Suppose we have count data observations $Y_1,...,Y_N|\theta\overset{i.i.d.}{\sim}\text{Poisson}(\theta)$, with $\theta$ assumed to have prior Gamma$(\alpha,\beta)$ distribution.  That is,
+      Suppose we have exchangeable count data observations $Y_1,...,Y_N|\theta\overset{i.i.d.}{\sim}\text{Poisson}(\theta)$, with $\theta$ assumed to have prior Gamma$(\alpha,\beta)$ distribution.  That is,
 
       \begin{flalign*}
         P\left(Y_1 = y_1,...,Y_N = y_N|\theta\right)
@@ -600,12 +581,9 @@ Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15,
   \subsection{Normal Observation with Normal-Inverse Gamma Prior}
 
     \subsubsection{One sample Normal-Inverse Gamma}
-      \paragraph{Derivation}
-      [Hoff p. 69ff]\\
-      \textcolor{red}{dean-again, why the ff?}\\
-      \textcolor{blue}{change to (Hoff Chapter 5)?  Or get rid of this citation because I cite Hoff by page number below, as well as Gelman?}\\
-      \textcolor{blue}{surmounting i.i.d. sufficient for the conditionally i.i.d. assumption?}
-        Let $\left\{Y_1,...,Y_N|\theta,\sigma^2\right\}\overset{i.i.d.}{\sim}\text{Normal}\left(\theta,\sigma^2\right)$.  Then the joint sampling density is
+      \paragraph{Derivation} (Hoff Ch. 5)
+
+        Let $\left\{Y_1,...,Y_N|\theta,\sigma^2\right\}\overset{i.i.d.}{\sim}\text{Normal}\left(\theta,\sigma^2\right)$ (assuming $Y_1,...,Y_N$ are exchangeable).  Then the joint sampling density is
 
         \begin{flalign*}
           p\left(y_1,...,y_N|\theta,\sigma^2\right)
@@ -615,11 +593,6 @@ Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15,
           &\\
           &= \left(2\pi\sigma^2\right)^{-\sfrac{N}{2}}e^{-\frac{1}{2}\sum_{i=1}^N\left(\frac{y_i - \theta}{\sigma}\right)^2}.\\
         \end{flalign*}
-
-        %It can be shown that $\left\{\sum{y_i^2},\sum{y_i}\right\}$ and hence $\left\{\bar{y},s^2\right\}$ are sufficient statistics, where $\bar{y} = \sum{y_i}/n$ and $s^2 = \sum\left(y_i - \bar{y}\right)^2/(n-1)$.\\
-
-
-        %\vdots
 
 \noindent Following Hoff (p. 74-75), for joint inference on both $\theta$ and $\sigma$, assume priors
 
@@ -758,15 +731,13 @@ Calls to these functions appear as follows:
     \subsubsection{Two-sample Normal-Inverse Gamma}
       \paragraph{Derivation}
 
-        For a Bayesian analysis comparing two groups $Y_{1,1},...,Y_{N_1,1}$ and $Y_{1,2},...,Y_{N_2,2}$ we use the following sampling model (Hoff p. 127):
+        For a Bayesian analysis comparing two exchangeable groups $Y_{1,1},...,Y_{N_1,1}$ and $Y_{1,2},...,Y_{N_2,2}$ we use the following sampling model (Hoff p. 127):
 
         \begin{flalign*}
           Y_{i,1} &= \mu + \delta + \epsilon_{i,1}\\
           Y_{i,2} &= \mu - \delta + \epsilon_{i,2}\\
           \left\{\epsilon_{i,j}\right\} &\sim\text{i.i.d. Normal}\left(0,\sigma^2\right).
         \end{flalign*}
-
-\textcolor{blue}{does the i.i.d. above suffice for stating conditional i.i.d. assumption?}\\
 
 \noindent Letting $\theta_1 = \mu + \delta$ and $\theta_2 = \mu - \delta$ we see that $\delta = \left(\theta_1 - \theta_2\right)/2$ is half the population difference in means, and $\mu = \left(\theta_1 + \theta_2\right)/2$ is the pooled average.  We'll assume conjugate prior distributions
 
@@ -850,14 +821,14 @@ the selected schools?}\textcolor{blue}{See additional words added above--does th
 
 
     \subsubsection{$k$-sample Normal-Inverse Gamma:  Comparing multiple groups}
-    For two-level data consisting of groups and units within groups, denote data $\mathbf{Y}_1,...,\mathbf{Y_k}$ where $\mathbf{Y}_j = \{Y_{1,j},...,Y_{N_j,j}\}$. We have the hierarchical Normal model (Hoff p. 132ff):
+    \textcolor{blue}{I expanded this paragraph to explain exchangeability in the hierarchical model:}\\
+    For two-level data consisting of groups and units within groups, denote data $\mathbf{Y}_1,...,\mathbf{Y_k}$ where $\mathbf{Y}_j = \{Y_{1,j},...,Y_{N_j,j}\}, j=1,...,k$. Here we stipulate exchangeability of $Y_{1,j},...,Y_{N_j,j}$, and thus we can model the data within group $j$ as conditionally i.i.d. given some parameter $\phi_j$.  We also assume that $\phi_1,...,\phi_k$ are exchangeable and thus conditionally i.i.d. given a parameter $\psi$, which has prior distribution $\pi(\psi)$.\\
+
+\noindent We have the hierarchical Normal model (Hoff p. 132):
     $$\phi_j = \left\{\theta_j,\sigma^2\right\}, p\left(y|\phi_j\right) = \text{Normal}\left(\theta_j,\sigma^2\right) \text{ (within-group model)}$$
-    $$\psi_j = \left\{\mu,\tau^2\right\}, p\left(\theta_j|\psi\right) = \text{Normal}\left(\mu,\tau^2\right) \text{ (between-groups model)}$$
+    $$\psi = \left\{\mu,\tau^2\right\}, p\left(\theta_j|\psi\right) = \text{Normal}\left(\mu,\tau^2\right) \text{ (between-groups model)}$$
 
-\textcolor{blue}{See Hoff p. 131 and 132 for how we get exchangeability.  Properly state that here.\\
-Here $y$ is assumed to be conditionally i.i.d with respect to $\phi_j$}
-
-    We use standard semiconjugate Normal and Inverse Gamma prior distributions for the fixed but unknown parameters in the model:
+\noindent We use standard semiconjugate Normal and Inverse Gamma prior distributions for the fixed but unknown parameters in the model:
     \begin{flalign*}
       \sigma^2 &\sim \text{Inverse Gamma}\left(\frac{\nu_0}{2},\frac{\nu_0\sigma^2_0}{2}\right)\\
       &\\
@@ -921,7 +892,7 @@ Here $y$ is assumed to be conditionally i.i.d with respect to $\phi_j$}
 }
 
 \begin{flalign*}
-  \texttt{S} &= S \text{, the desired random sample size}\textcolor{blue}{\text{replace with next line?}}\\
+  \texttt{S} &= S \text{, the desired random sample size}\textcolor{blue}{\text{$\leftarrow$ replace that with the next line?}}\\
   \texttt{S} &= S \text{, the number of MCMC realizations to be generated}\\
   \texttt{Y} &= \text{ the } k \text{ sets of observed data (one column of data and one column of}\\ &\text{group indices)}\\
   \texttt{nu0} &= \nu_0 \text{, prior parameter for } \sigma^2 \text{ representing prior sample size}\\
