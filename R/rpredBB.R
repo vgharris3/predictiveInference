@@ -15,8 +15,10 @@
 #'
 #' @examples 1
 rpredBB = function(S, N, t, M, alpha = 1, beta = 1){
-  #rpredBB returns a random sample of size n from the Beta-Binomial predictive probability distribution computed from s observed
+  #rpredBB returns a random sample of size N from the Beta-Binomial predictive probability distribution computed from t observed
   #successes out of a sample of size N, M future observations, and user input shape parameters for Beta prior on Pr(success)
+
+  #The inverse transform method is used to generate the random sample
 
   #r+pred+BB
   #r = random sample (like R distribution functions)

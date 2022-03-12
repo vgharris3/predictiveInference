@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  10 MAR 2022 11:28
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  12 MAR 2022 10:59
 entering extended mode
 **./Thesis_v4.tex
 (Thesis_v4.tex
@@ -1610,17 +1610,17 @@ Underfull \hbox (badness 10000) in paragraph at lines 644--645
  []
 
 [25]
-Overfull \hbox (4.50432pt too wide) detected at line 691
+Overfull \hbox (4.50432pt too wide) detected at line 687
 []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 694--695
+Underfull \hbox (badness 10000) in paragraph at lines 690--691
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 699--700
+Underfull \hbox (badness 10000) in paragraph at lines 695--696
 
  []
 
@@ -1628,57 +1628,57 @@ Underfull \hbox (badness 10000) in paragraph at lines 699--700
 <Thesis_v4-006.pdf, id=490, 433.62pt x 433.62pt>
 File: Thesis_v4-006.pdf Graphic file (type pdf)
 <use Thesis_v4-006.pdf>
-Package pdftex.def Info: Thesis_v4-006.pdf  used on input line 727.
+Package pdftex.def Info: Thesis_v4-006.pdf  used on input line 723.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
  [27] [28 <./Thesis_v4-006.pdf>]
-Overfull \hbox (25.64029pt too wide) in paragraph at lines 734--735
+Overfull \hbox (25.64029pt too wide) in paragraph at lines 730--731
  \T1/aer/b/n/12 3.4.2.1 Deriva-tion[][] \T1/aer/m/n/12 For a Bayesian anal-y-si
 s com-par-ing two ex-change-able groups $\OML/cmm/m/it/12 Y[]; :::; Y[]$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 751--752
+Underfull \hbox (badness 10000) in paragraph at lines 747--748
 
  []
 
 [29
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 810--813
+Underfull \hbox (badness 10000) in paragraph at lines 806--809
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 810--813
+Underfull \hbox (badness 10000) in paragraph at lines 806--809
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 810--813
+Underfull \hbox (badness 10000) in paragraph at lines 806--809
 
  []
 
 [30]
-Underfull \hbox (badness 10000) in paragraph at lines 816--819
+Underfull \hbox (badness 10000) in paragraph at lines 812--815
 
  []
 
 <Thesis_v4-007.pdf, id=519, 433.62pt x 433.62pt>
 File: Thesis_v4-007.pdf Graphic file (type pdf)
 <use Thesis_v4-007.pdf>
-Package pdftex.def Info: Thesis_v4-007.pdf  used on input line 820.
+Package pdftex.def Info: Thesis_v4-007.pdf  used on input line 816.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
 [31]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 823.
+(hyperref)                removing `math shift' on input line 819.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 823.
+(hyperref)                removing `math shift' on input line 819.
 
 
-Overfull \hbox (0.37712pt too wide) in paragraph at lines 824--826
+Overfull \hbox (0.37712pt too wide) in paragraph at lines 820--822
 \T1/aer/m/n/12 where $\OT1/cmr/bx/n/12 Y[] \OT1/cmr/m/n/12 = \OMS/cmsy/m/n/12 f
 \OML/cmm/m/it/12 Y[]; :::; Y[]\OMS/cmsy/m/n/12 g\OML/cmm/m/it/12 ; j \OT1/cmr/m
 /n/12 = 1\OML/cmm/m/it/12 ; :::; k$\T1/aer/m/n/12 . Here we stip-u-late ex-chan
@@ -1686,17 +1686,17 @@ ge-abil-ity of $\OML/cmm/m/it/12 Y[]; :::; Y[]$\T1/aer/m/n/12 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 824--826
+Underfull \hbox (badness 10000) in paragraph at lines 820--822
 
  []
 
 [32 <./Thesis_v4-007.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 849--850
+Underfull \hbox (badness 10000) in paragraph at lines 845--846
 
  []
 
 
-Overfull \hbox (10.67146pt too wide) in paragraph at lines 856--857
+Overfull \hbox (10.67146pt too wide) in paragraph at lines 852--853
  \T1/aer/b/n/12 3.4.3.2 R Im-ple-men-ta-tion (Normal-Inverse Gamma, k-samples)[
 ][] \T1/aer/m/n/12 The R func-tion \T1/aett/m/n/12 rpred-
  []
@@ -1705,16 +1705,16 @@ Overfull \hbox (10.67146pt too wide) in paragraph at lines 856--857
 <Thesis_v4-008.pdf, id=540, 433.62pt x 433.62pt>
 File: Thesis_v4-008.pdf Graphic file (type pdf)
 <use Thesis_v4-008.pdf>
-Package pdftex.def Info: Thesis_v4-008.pdf  used on input line 911.
+Package pdftex.def Info: Thesis_v4-008.pdf  used on input line 907.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
  [34] [35 <./Thesis_v4-008.pdf>]
 <Thesis_v4-010.pdf, id=561, 433.62pt x 433.62pt>
 File: Thesis_v4-010.pdf Graphic file (type pdf)
 <use Thesis_v4-010.pdf>
-Package pdftex.def Info: Thesis_v4-010.pdf  used on input line 961.
+Package pdftex.def Info: Thesis_v4-010.pdf  used on input line 957.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
  [36 <./Thesis_v4-010.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 1031--1032
+Underfull \hbox (badness 10000) in paragraph at lines 1027--1028
 
  []
 
@@ -1724,15 +1724,15 @@ Underfull \hbox (badness 10000) in paragraph at lines 1031--1032
 <Thesis_v4-011.pdf, id=579, 433.62pt x 433.62pt>
 File: Thesis_v4-011.pdf Graphic file (type pdf)
 <use Thesis_v4-011.pdf>
-Package pdftex.def Info: Thesis_v4-011.pdf  used on input line 1037.
+Package pdftex.def Info: Thesis_v4-011.pdf  used on input line 1033.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1067--1068
+Underfull \hbox (badness 10000) in paragraph at lines 1063--1064
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1067--1068
+Underfull \hbox (badness 10000) in paragraph at lines 1063--1064
 
  []
 
@@ -1740,15 +1740,15 @@ Underfull \hbox (badness 10000) in paragraph at lines 1067--1068
 <Thesis_v4-012.pdf, id=590, 433.62pt x 433.62pt>
 File: Thesis_v4-012.pdf Graphic file (type pdf)
 <use Thesis_v4-012.pdf>
-Package pdftex.def Info: Thesis_v4-012.pdf  used on input line 1069.
+Package pdftex.def Info: Thesis_v4-012.pdf  used on input line 1065.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1078--1079
+Underfull \hbox (badness 10000) in paragraph at lines 1074--1075
 
  []
 
 [39 <./Thesis_v4-012.pdf>] [40]
-Overfull \hbox (39.94238pt too wide) in paragraph at lines 1119--1120
+Overfull \hbox (39.94238pt too wide) in paragraph at lines 1115--1116
 \T1/aer/m/n/12 and for pri-ors we choose $\OML/cmm/b/it/12  \OMS/cmsy/m/n/12 
  []\OT1/cmr/m/n/12 (\OML/cmm/b/it/12 []\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 [])
 $ \T1/aer/m/n/12 and $\OT1/cmr/m/n/12 1\OML/cmm/m/it/12 =[] \OT1/cmr/m/n/12 = 
@@ -1757,24 +1757,24 @@ OT1/cmr/m/n/12 2\OML/cmm/m/it/12 ; [][]=\OT1/cmr/m/n/12 2)$\T1/aer/m/n/12 .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1119--1120
+Underfull \hbox (badness 10000) in paragraph at lines 1115--1116
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1119--1120
+Underfull \hbox (badness 10000) in paragraph at lines 1115--1116
 
  []
 
 
-Overfull \hbox (1.57745pt too wide) in paragraph at lines 1147--1148
+Overfull \hbox (1.57745pt too wide) in paragraph at lines 1143--1144
 \T1/aer/m/n/12 Constructing a Gibbs sam-pler to ap-prox-i-mate the joint pos-te
 -rior dis-tri-bu-tion $\OML/cmm/m/it/12 p\OT1/cmr/m/n/12 (\OML/cmm/b/it/12 \OM
 L/cmm/m/it/12 ; []\OMS/cmsy/m/n/12 j[]\OT1/cmr/m/n/12 )$
  []
 
 
-Overfull \hbox (0.347pt too wide) in paragraph at lines 1162--1163
+Overfull \hbox (0.347pt too wide) in paragraph at lines 1158--1159
 []\T1/aer/m/n/12 To cre-ate a sam-ple from the pre-dic-tive dis-tri-bu-tion of 
 re-sponses: for each $\OML/cmm/m/it/12 s \OMS/cmsy/m/n/12 2 f\OT1/cmr/m/n/12 1\
 OML/cmm/m/it/12 ; :::; S\OMS/cmsy/m/n/12 g$\T1/aer/m/n/12 ,
@@ -1785,19 +1785,19 @@ OML/cmm/m/it/12 ; :::; S\OMS/cmsy/m/n/12 g$\T1/aer/m/n/12 ,
 ]
 
 LaTeX Warning: Reference `regression_semiconj_var' on page 42 undefined on inpu
-t line 1168.
+t line 1164.
 
 
 LaTeX Warning: Reference `regression_semiconj_expec' on page 42 undefined on in
-put line 1168.
+put line 1164.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1186--1187
+Underfull \hbox (badness 10000) in paragraph at lines 1182--1183
 
  []
 
 [42]
-Overfull \hbox (15.32634pt too wide) detected at line 1248
+Overfull \hbox (15.32634pt too wide) detected at line 1244
 []
  []
 
@@ -1805,7 +1805,7 @@ Overfull \hbox (15.32634pt too wide) detected at line 1248
 <Thesis_v4-015.pdf, id=633, 433.62pt x 433.62pt>
 File: Thesis_v4-015.pdf Graphic file (type pdf)
 <use Thesis_v4-015.pdf>
-Package pdftex.def Info: Thesis_v4-015.pdf  used on input line 1253.
+Package pdftex.def Info: Thesis_v4-015.pdf  used on input line 1249.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
  [44 <./Thesis_v4-015.pdf>] [45
 
@@ -1849,7 +1849,7 @@ KTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/MiKTeX 2.9/fonts/type1/p
 ublic/amsfonts/cm/cmtt12.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt
 8.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/latxfont/line10.pfb><C:/MiKTeX
  2.9/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on Thesis_v4.pdf (45 pages, 1140510 bytes).
+Output written on Thesis_v4.pdf (45 pages, 1141973 bytes).
 PDF statistics:
  757 PDF objects out of 1000 (max. 8388607)
  132 named destinations out of 1000 (max. 500000)
