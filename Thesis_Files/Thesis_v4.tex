@@ -160,11 +160,11 @@ Making predictions based on our beliefs is the best (and perhaps even the only) 
   \multicolumn{5}{c}{\large \#Razorbacks Predicted out of 100 Tosses}          \\
   \multicolumn{1}{c}{\textbf{Prediction Method}} & \multicolumn{1}{c}{$\textbf{(}\boldsymbol\alpha,\boldsymbol\beta\textbf{)}$}  & \multicolumn{1}{c}{\textbf{Prior Mean }$\textbf{E(}\boldsymbol\theta\textbf{)}$}  & \multicolumn{1}{c}{\textbf{Prediction Mean}} & \multicolumn{1}{c}{\textbf{SD}}\\
         \midrule
-        Beta-Binomial & (2,8) & 0.2 & 29.92 & 11.1 \\
+        Beta-Binomial & (2,8) & 0.2 & 29.57 & 11.04 \\
         \midrule
-        Beta-Binomial & (22,78) & 0.22 & 23.8 & 5.72\\
+        Beta-Binomial & (22,78) & 0.22 & 23.73 & 5.65\\
         \midrule
-        Beta-Binomial & (224,776) & 0.224 & 22.48 & 4.33 \\
+        Beta-Binomial & (224,776) & 0.224 & 22.6 & 4.28 \\
         \midrule
         Binomial$(100,0.4)$ & -- & -- & 40 & 4.9 \\
   \bottomrule
@@ -738,7 +738,7 @@ Calls to these functions appear as follows:
 \noindent Letting $\theta_1 = \mu + \delta$ and $\theta_2 = \mu - \delta$ we see that $\delta = \left(\theta_1 - \theta_2\right)/2$ is half the population difference in means, and $\mu = \left(\theta_1 + \theta_2\right)/2$ is the pooled average.  We'll assume conjugate prior distributions
 
         \begin{flalign*}
-          p\left(\mu,\delta,\sigma^2\right) &= p(\mu) \times p(\delta) \times p\left(\sigma^2\right)\\
+          \pi\left(\mu,\delta,\sigma^2\right) &= \pi(\mu) \times \pi(\delta) \times \pi\left(\sigma^2\right)\\
           \mu &\sim \text{Normal}\left(\mu_0,\gamma^2_0\right)\\
           \delta &\sim \text{Normal}\left(\delta_0,\tau^2_0\right)\\
           \sigma^2 &\sim \text{Inverse Gamma}\left(\nu_0/2,\nu_0\sigma^2_0/2\right).
@@ -805,15 +805,21 @@ random variable?} \textcolor{blue}{changed M to S above.  The function implement
 
       \paragraph{Example} (Hoff p. 128-129 \textit{Analysis of math score data})\\
       Hoff provides the following example, which we reproduce here.\\\\
-      Math score data for two schools (we'll call them School 1 and School 2) were based on results of a national exam in the United States, standardized to produce a nationwide mean of 50 and a standard deviation of 10.  The data consisted of 31 individual scores for School 1 and 28 for School 2.  We're interested in predicting a future math score by a student from each school.  Unless the two schools were known in advance to be extremely exceptional, reasonable prior parameters can be based on this information.  (The mean scores for Schools 1 and 2 were 50.8 and 46.2, and the standard deviations were 11.3 and 9.1, respectively).  For the prior distributions of $\mu$ and $\sigma^2$, we'll take $\mu_0 = 50$ and $\sigma^2_0 = 10^2 = 100$, although this latter value is likely to be an overestimate of the within-school sampling variability.  We'll make these prior distributions somewhat diffuse, with $\gamma^2_0 = 25^2 = 625$ and $\nu_0 = 1$.  For the prior distribution on $\delta$, choosing $\delta_0 = 0$ represents the prior opinion that $\theta_1 > \theta_2$ and $\theta_2 > \theta_1$ are equally probable.  Finally, since the scores are bounded between 0 and 100, half the difference between $\theta_1$ and $\theta_2$ must be less than 50 in absolute value, so a value of $\tau^2_0 = 25^2 = 625$ seems reasonably diffuse.\\\\
+      Math score data for two public high schools in the United States (we'll call them School 1 and School 2) were based on results of a national exam, standardized to produce a nationwide mean of 50 and a standard deviation of 10.  The data consisted of 31 individual scores for School 1 and 28 for School 2. The plots below show give a visual summary of the two data sets.
 
-\textcolor{red}{Are there data for example 3.4.2.3? You haven't described any. Maybe a plot?
+\includegraphics{Thesis_v4-007}
+
+\noindent The mean scores of the two samples are $\bar{y}_1 = 50.81$ and $\bar{y}_2 = 46.15$ for School 1 and School 2, and the standard deviations were $11.3$ and $9.1$, respectively.  A standard t-test yields a $p$-value of $p = 0.087$, in response to which we would fail to reject the hypothesis that the population means $\theta_1$ and $\theta_2$ are different. Hoff points out that it is easy to imagine that re-sampling might result in a few more low scores from School 1 and a few more high scores from School 2--enough perhaps to result in a $p$-value below $0.05$ and the opposite conclusion. Why not employ a Bayesian analysis that allows information to be shared across the groups and relies on prior knowledge of the similarities of the two groups?\\
+
+\noindent We're interested in predicting a future math score by a student from each school.  Unless the two schools were known in advance to be extremely exceptional, reasonable prior parameters can be based on this information.  For the prior distributions of $\mu$ and $\sigma^2$, we'll take $\mu_0 = 50$ and $\sigma^2_0 = 10^2 = 100$, although this latter value is likely to be an overestimate of the within-school sampling variability.  We'll make these prior distributions somewhat diffuse, with $\gamma^2_0 = 25^2 = 625$ and $\nu_0 = 1$.  For the prior distribution on $\delta$, choosing $\delta_0 = 0$ represents the prior opinion that $\theta_1 > \theta_2$ and $\theta_2 > \theta_1$ are equally probable.  Finally, since the scores are bounded between 0 and 100, half the difference between $\theta_1$ and $\theta_2$ must be less than 50 in absolute value, so a value of $\tau^2_0 = 25^2 = 625$ seems reasonably diffuse.\\\\
+
+\textcolor{red}{Are there data for example 3.4.2.3? You haven't described any. Maybe a plot?\textcolor{blue}{See additional words and plots added above--does this suffice?}
 Also - what is being predicted here? Is it a future single student from each of
-the selected schools?}\textcolor{blue}{See additional words added above--does this suffice?  Or do should I also include a plot?}
+the selected schools?\textcolor{blue}{yes--see first sentence in the last paragraph above.  Does that suffice?}}
       % The results of a call to rpredNormIG2$\left(\mathbf{y}_1,\mathbf{y}_2,\mu_0,\sigma^2_0,\delta_0,\tau^2_0,N\right)$ are summarized in the following plot.\\
       The results of a call to \texttt{rpredNormIG2()} with the above input values for $\mathbf{y}_1,\mathbf{y}_2,\mu_0,\sigma^2_0,\delta_0,\tau^2_0,\text{ and } N$ are summarized in the following plot.\\
 
-\includegraphics{Thesis_v4-007}
+\includegraphics{Thesis_v4-008}
 
 
     \subsubsection{$k$-sample Normal-Inverse Gamma:  Comparing multiple groups}
@@ -904,7 +910,7 @@ the selected schools?}\textcolor{blue}{See additional words added above--does th
       \paragraph{Example}
       Returning to the math scores example, data for 10th-grade students from 100 large urban schools (each having 10th-grade enrollment of at least 400) is summarized in the following plot. Each school's results are represented by a vertical segment, with points plotted at the individual students' math scores. The horizontal line is drawn at the grand mean of the individual school means.
 
-\includegraphics{Thesis_v4-008}
+\includegraphics{Thesis_v4-009}
 
 
 
@@ -954,7 +960,7 @@ the selected schools?}\textcolor{blue}{See additional words added above--does th
 \textcolor{red}{As before, what is being predicted?}\\
 \textcolor{blue}{See expansion of first sentence in above paragraph.  Does that suffice?}
 
-\includegraphics{Thesis_v4-010}
+\includegraphics{Thesis_v4-011}
 
 
       % \paragraph{Ranking Treatments}
@@ -1030,7 +1036,7 @@ should try to bring the others up to this standard.}
 
 \noindent Twelve healthy men who did not exercise regularly were recruited to take part in a study of the effects of two different exercise regimens on oxygen uptake.  Six of the twelve men were randomly assigned to a 12-week flat-terrain running program, and the remaining six were assigned to a 12-week step aerobics program.  The maximum oxygen uptake of each subject was measured (in liters per minute) while running on an inclined treadmill, both before and after the 12-week program.  Of interest is how a subject's change in maximal oxygen uptake may depend on which program they were assigned to.  However, other factors, such as age, are expected to affect the change in maximal uptake as well.  The results are shown here:
 
-\includegraphics{Thesis_v4-011}
+\includegraphics{Thesis_v4-012}
 
 \noindent Hoff's regression model:
 
@@ -1062,7 +1068,7 @@ should try to bring the others up to this standard.}
 
 \noindent In other words, the model assumes that the relationship is linear in age for both exercise groups, with the difference in intercepts given by $\beta_2$ and the difference in slopes given by $\beta_4$.  If we assumed that $\beta_2 = \beta_4 = 0$, then we would have identical lines for both groups.  If we assumed $\beta_2 \ne 0$ and $\beta_4 =  0$ then we would have a different line for each group but they would be parallel.  Allowing all coefficients to be non-zero gives us two unrelated lines.  Some different possibilities are depicted graphically below:\\\\
 
-\includegraphics{Thesis_v4-012}
+\includegraphics{Thesis_v4-013}
 
 \noindent Let's find the least squares regression estimates for the model (\ref{example_regression_model}), and use the results to evaluate the differences between the two exercise groups.  The ages of the 12 subjects, along with their observed changes in maximal oxygen uptake, are
 
@@ -1246,7 +1252,7 @@ In the example below (Hoff data and code found \href{https://pdhoff.github.io/bo
 
 \noindent Inspection of the plot below shows the predicted distributions using Zellner's g-prior shrink toward 0, and have greater variance than those predicted using Hoff's semi-conjugate prior.
 
-\includegraphics{Thesis_v4-015}
+\includegraphics{Thesis_v4-016}
 
 
 \clearpage

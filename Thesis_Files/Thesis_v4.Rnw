@@ -458,7 +458,7 @@ breaks = seq(-1.5,M+1.5,1)
 res = hist(random_sample, prob = TRUE, breaks = breaks,main = "Histogram of Sample with Probability Mass Overlay",ylim = c(0,max(f_t)*1.5),xlim = c(0,M),xlab = xlabel,ylab = "Count")
 
 # lines(0:M,f_t)
-points(0:M,f_t, col = "red", pch = 16)
+points(0:M,f_t, col = "blue", pch = 16)
 
 
 
@@ -763,23 +763,23 @@ source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredPG.R')
 
 #load_all()
 
-set.seed(1234)
+set.seed(3)
 y = c(27, 79, 21, 100, 8, 4, 37, 15, 3, 97)
 ypred = 0:60
 alpha = 11
 beta = 3
 par(mfrow=c(3,1))
 
-#Predictive density
+#Predictive mass function
 f_y = dpredPG(ypred, y, alpha, beta)
 
 xlabel = eval(bquote(expression(tilde(y)*" = Future Occurences")))
 
-plot(1:length(f_y),f_y,type = "l", col = "blue", lwd = 2, main = "Poisson-Gamma Predictive Density", xlab = xlabel, ylab = "dpredPG()")
+plot(1:length(f_y),f_y,type = "p", col = "blue", pch = 16, cex = 1, main = "Poisson-Gamma Predictive Probability Mass", xlab = xlabel, ylab = "dpredPG()")
 
 #Cumulative predictive probability
 F_y = ppredPG(ypred, y, alpha, beta)
-plot(1:length(F_y),F_y,type = "l", col = "red", lwd = 2, main = "Poisson-Gamma Cumulative Predictive Probability", xlab = xlabel, ylab = "ppredPG()")
+plot(1:length(F_y),F_y,type = "p", col = "red", pch = 16, main = "Poisson-Gamma Cumulative Predictive Probability", xlab = xlabel, ylab = "ppredPG()")
 
 #Random sample
 S = 100000 #random sample size
@@ -787,8 +787,9 @@ random_sample = rpredPG(S,y, alpha, beta)
 range_Rand = min(random_sample):max(random_sample)
 f_Rand = dpredPG(range_Rand,y,alpha,beta)
 breaks = seq(min(random_sample)-0.5,max(random_sample)+0.5,1)
-res = hist(random_sample,prob = TRUE, main = "Histogram of Sample with Density Curve Overlay",ylim = c(0,max(f_Rand)*1.1),breaks = breaks, xlab = xlabel, ylab = "Count")
-lines(range_Rand,f_Rand)
+res = hist(random_sample,prob = TRUE, main = "Histogram of Sample with Probability Mass Overlay",xlim = c(0,length(F_y)),ylim = c(0,max(f_Rand)*1.1),breaks = breaks, xlab = xlabel, ylab = "Count")
+# lines(range_Rand,f_Rand)
+points(range_Rand,f_Rand, col = "blue", pch = 16)
 
 if(0){
   #diagnostics
@@ -1084,7 +1085,7 @@ legend("bottomright", inset = 0.05, bg="transparent",
 \noindent Letting $\theta_1 = \mu + \delta$ and $\theta_2 = \mu - \delta$ we see that $\delta = \left(\theta_1 - \theta_2\right)/2$ is half the population difference in means, and $\mu = \left(\theta_1 + \theta_2\right)/2$ is the pooled average.  We'll assume conjugate prior distributions
 
         \begin{flalign*}
-          p\left(\mu,\delta,\sigma^2\right) &= p(\mu) \times p(\delta) \times p\left(\sigma^2\right)\\
+          \pi\left(\mu,\delta,\sigma^2\right) &= \pi(\mu) \times \pi(\delta) \times \pi\left(\sigma^2\right)\\
           \mu &\sim \text{Normal}\left(\mu_0,\gamma^2_0\right)\\
           \delta &\sim \text{Normal}\left(\delta_0,\tau^2_0\right)\\
           \sigma^2 &\sim \text{Inverse Gamma}\left(\nu_0/2,\nu_0\sigma^2_0/2\right).
@@ -1151,11 +1152,46 @@ random variable?} \textcolor{blue}{changed M to S above.  The function implement
 
       \paragraph{Example} (Hoff p. 128-129 \textit{Analysis of math score data})\\
       Hoff provides the following example, which we reproduce here.\\\\
-      Math score data for two schools (we'll call them School 1 and School 2) were based on results of a national exam in the United States, standardized to produce a nationwide mean of 50 and a standard deviation of 10.  The data consisted of 31 individual scores for School 1 and 28 for School 2.  We're interested in predicting a future math score by a student from each school.  Unless the two schools were known in advance to be extremely exceptional, reasonable prior parameters can be based on this information.  (The mean scores for Schools 1 and 2 were 50.8 and 46.2, and the standard deviations were 11.3 and 9.1, respectively).  For the prior distributions of $\mu$ and $\sigma^2$, we'll take $\mu_0 = 50$ and $\sigma^2_0 = 10^2 = 100$, although this latter value is likely to be an overestimate of the within-school sampling variability.  We'll make these prior distributions somewhat diffuse, with $\gamma^2_0 = 25^2 = 625$ and $\nu_0 = 1$.  For the prior distribution on $\delta$, choosing $\delta_0 = 0$ represents the prior opinion that $\theta_1 > \theta_2$ and $\theta_2 > \theta_1$ are equally probable.  Finally, since the scores are bounded between 0 and 100, half the difference between $\theta_1$ and $\theta_2$ must be less than 50 in absolute value, so a value of $\tau^2_0 = 25^2 = 625$ seems reasonably diffuse.\\\\
+      Math score data for two public high schools in the United States (we'll call them School 1 and School 2) were based on results of a national exam, standardized to produce a nationwide mean of 50 and a standard deviation of 10.  The data consisted of 31 individual scores for School 1 and 28 for School 2. The plots below show give a visual summary of the two data sets.
 
-\textcolor{red}{Are there data for example 3.4.2.3? You haven't described any. Maybe a plot?
+<<fig=TRUE, echo=FALSE>>=
+#### Two sample comparison
+source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredNormIG2.R')
+load('C:/Users/gabe/Documents/tmp/predictiveInference/R/sysdata.rda')
+## data
+y1<-y.school1 ; y2<-y.school2
+n1<-length(y1) ; n2<-length(y2)
+
+# par(mfrow=c(1,2),mar=c(3,3,1,1),mgp=c(1.75,.75,0))
+# par(mfrow=c(1,2),mgp=c(1.75,.75,0))
+par(mfrow=c(1,2),mar=c(3,3,1,1))
+
+plot(1:length(y1),y1,type="p",col="red",pch=16,xaxt = "n", xlab = "",ylab="Score")
+points(1:length(y2),y2,col="blue",pch=16)
+
+op <- par(cex = .7)
+
+legend("topleft",
+       c("School 1", "School 2"),
+       inset = 0.01,
+       col = c("red", "blue"),
+       pch = 16,
+       cex = 1)
+#bty="n" gets rid of the box
+
+par(op)
+
+boxplot(list(y1,y2),range=0,col=c("red","blue"),ylab="score",names=c("school 1","school 2"))
+
+@
+
+\noindent The mean scores of the two samples are $\bar{y}_1 = 50.81$ and $\bar{y}_2 = 46.15$ for School 1 and School 2, and the standard deviations were $11.3$ and $9.1$, respectively.  A standard t-test yields a $p$-value of $p = 0.087$, in response to which we would fail to reject the hypothesis that the population means $\theta_1$ and $\theta_2$ are different. Hoff points out that it is easy to imagine that re-sampling might result in a few more low scores from School 1 and a few more high scores from School 2--enough perhaps to result in a $p$-value below $0.05$ and the opposite conclusion. Why not employ a Bayesian analysis that allows information to be shared across the groups and relies on prior knowledge of the similarities of the two groups?\\
+
+\noindent We're interested in predicting a future math score by a student from each school.  Unless the two schools were known in advance to be extremely exceptional, reasonable prior parameters can be based on this information.  For the prior distributions of $\mu$ and $\sigma^2$, we'll take $\mu_0 = 50$ and $\sigma^2_0 = 10^2 = 100$, although this latter value is likely to be an overestimate of the within-school sampling variability.  We'll make these prior distributions somewhat diffuse, with $\gamma^2_0 = 25^2 = 625$ and $\nu_0 = 1$.  For the prior distribution on $\delta$, choosing $\delta_0 = 0$ represents the prior opinion that $\theta_1 > \theta_2$ and $\theta_2 > \theta_1$ are equally probable.  Finally, since the scores are bounded between 0 and 100, half the difference between $\theta_1$ and $\theta_2$ must be less than 50 in absolute value, so a value of $\tau^2_0 = 25^2 = 625$ seems reasonably diffuse.\\\\
+
+\textcolor{red}{Are there data for example 3.4.2.3? You haven't described any. Maybe a plot?\textcolor{blue}{See additional words and plots added above--does this suffice?}
 Also - what is being predicted here? Is it a future single student from each of
-the selected schools?}\textcolor{blue}{See additional words added above--does this suffice?  Or do should I also include a plot?}
+the selected schools?\textcolor{blue}{yes--see first sentence in the last paragraph above.  Does that suffice?}}
       % The results of a call to rpredNormIG2$\left(\mathbf{y}_1,\mathbf{y}_2,\mu_0,\sigma^2_0,\delta_0,\tau^2_0,N\right)$ are summarized in the following plot.\\
       The results of a call to \texttt{rpredNormIG2()} with the above input values for $\mathbf{y}_1,\mathbf{y}_2,\mu_0,\sigma^2_0,\delta_0,\tau^2_0,\text{ and } N$ are summarized in the following plot.\\
 
@@ -1182,7 +1218,7 @@ par(mfrow = c(1,1))
 
 plot(density(y1),lwd=2,ylim = c(0,vertMax),
      main="2-samples:  Density of Data and Predictions",
-     xlab = "")
+     xlab = "Math Score")
 legend("topright", inset = 0.05,bg="transparent",
        legend=c("y1","y2",expression(tilde(y)[1]), expression(tilde(y)[2])),
        lwd=2, lty=c(1,1,2,2),
