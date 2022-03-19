@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  18 MAR 2022 10:46
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  19 MAR 2022 11:04
 entering extended mode
 **./Thesis_v4.tex
 (Thesis_v4.tex
@@ -1710,34 +1710,29 @@ Overfull \hbox (31.85727pt too wide) detected at line 831
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 833--834
-
- []
-
-
-Overfull \hbox (10.67146pt too wide) in paragraph at lines 840--841
+Overfull \hbox (10.67146pt too wide) in paragraph at lines 838--839
  \T1/aer/b/n/12 3.4.3.2 R Im-ple-men-ta-tion (Normal-Inverse Gamma, k-samples)[
 ][] \T1/aer/m/n/12 The R func-tion \T1/aett/m/n/12 rpred-
  []
 
 [33]
-Overfull \hbox (36.70659pt too wide) detected at line 887
+Overfull \hbox (30.15889pt too wide) detected at line 884
 []
  []
 
 <Thesis_v4-009.pdf, id=546, 433.62pt x 433.62pt>
 File: Thesis_v4-009.pdf Graphic file (type pdf)
 <use Thesis_v4-009.pdf>
-Package pdftex.def Info: Thesis_v4-009.pdf  used on input line 894.
+Package pdftex.def Info: Thesis_v4-009.pdf  used on input line 891.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
 [34] [35 <./Thesis_v4-009.pdf>]
 <Thesis_v4-011.pdf, id=567, 433.62pt x 433.62pt>
 File: Thesis_v4-011.pdf Graphic file (type pdf)
 <use Thesis_v4-011.pdf>
-Package pdftex.def Info: Thesis_v4-011.pdf  used on input line 944.
+Package pdftex.def Info: Thesis_v4-011.pdf  used on input line 941.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
  [36 <./Thesis_v4-011.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 1014--1015
+Underfull \hbox (badness 10000) in paragraph at lines 1011--1012
 
  []
 
@@ -1747,15 +1742,15 @@ Underfull \hbox (badness 10000) in paragraph at lines 1014--1015
 <Thesis_v4-012.pdf, id=585, 433.62pt x 433.62pt>
 File: Thesis_v4-012.pdf Graphic file (type pdf)
 <use Thesis_v4-012.pdf>
-Package pdftex.def Info: Thesis_v4-012.pdf  used on input line 1020.
+Package pdftex.def Info: Thesis_v4-012.pdf  used on input line 1017.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1050--1051
+Underfull \hbox (badness 10000) in paragraph at lines 1047--1048
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1050--1051
+Underfull \hbox (badness 10000) in paragraph at lines 1047--1048
 
  []
 
@@ -1763,15 +1758,15 @@ Underfull \hbox (badness 10000) in paragraph at lines 1050--1051
 <Thesis_v4-013.pdf, id=596, 433.62pt x 433.62pt>
 File: Thesis_v4-013.pdf Graphic file (type pdf)
 <use Thesis_v4-013.pdf>
-Package pdftex.def Info: Thesis_v4-013.pdf  used on input line 1052.
+Package pdftex.def Info: Thesis_v4-013.pdf  used on input line 1049.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1061--1062
+Underfull \hbox (badness 10000) in paragraph at lines 1058--1059
 
  []
 
 [39 <./Thesis_v4-013.pdf>] [40]
-Overfull \hbox (39.94238pt too wide) in paragraph at lines 1102--1103
+Overfull \hbox (39.94238pt too wide) in paragraph at lines 1099--1100
 \T1/aer/m/n/12 and for pri-ors we choose $\OML/cmm/b/it/12  \OMS/cmsy/m/n/12 
  []\OT1/cmr/m/n/12 (\OML/cmm/b/it/12 []\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 [])
 $ \T1/aer/m/n/12 and $\OT1/cmr/m/n/12 1\OML/cmm/m/it/12 =[] \OT1/cmr/m/n/12 = 
@@ -1780,17 +1775,17 @@ OT1/cmr/m/n/12 2\OML/cmm/m/it/12 ; [][]=\OT1/cmr/m/n/12 2)$\T1/aer/m/n/12 .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1102--1103
+Underfull \hbox (badness 10000) in paragraph at lines 1099--1100
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1112--1113
+Underfull \hbox (badness 10000) in paragraph at lines 1109--1110
 
  []
 
 
-Overfull \hbox (1.57745pt too wide) in paragraph at lines 1138--1139
+Overfull \hbox (1.57745pt too wide) in paragraph at lines 1135--1136
 \T1/aer/m/n/12 Constructing a Gibbs sam-pler to ap-prox-i-mate the joint pos-te
 -rior dis-tri-bu-tion $\OML/cmm/m/it/12 p\OT1/cmr/m/n/12 (\OML/cmm/b/it/12 \OM
 L/cmm/m/it/12 ; []\OMS/cmsy/m/n/12 j[]\OT1/cmr/m/n/12 )$
@@ -1799,7 +1794,7 @@ L/cmm/m/it/12 ; []\OMS/cmsy/m/n/12 j[]\OT1/cmr/m/n/12 )$
 [41
 
 ]
-Overfull \hbox (0.347pt too wide) in paragraph at lines 1153--1154
+Overfull \hbox (0.347pt too wide) in paragraph at lines 1150--1151
 []\T1/aer/m/n/12 To cre-ate a sam-ple from the pre-dic-tive dis-tri-bu-tion of 
 re-sponses: for each $\OML/cmm/m/it/12 s \OMS/cmsy/m/n/12 2 f\OT1/cmr/m/n/12 1\
 OML/cmm/m/it/12 ; :::; S\OMS/cmsy/m/n/12 g$\T1/aer/m/n/12 ,
@@ -1807,26 +1802,26 @@ OML/cmm/m/it/12 ; :::; S\OMS/cmsy/m/n/12 g$\T1/aer/m/n/12 ,
 
 
 LaTeX Warning: Reference `regression_semiconj_var' on page 42 undefined on inpu
-t line 1159.
+t line 1156.
 
 
 LaTeX Warning: Reference `regression_semiconj_expec' on page 42 undefined on in
-put line 1159.
+put line 1156.
 
 [42]
-Underfull \hbox (badness 10000) in paragraph at lines 1177--1178
+Underfull \hbox (badness 10000) in paragraph at lines 1174--1175
 
  []
 
 [43]
-Overfull \hbox (15.32634pt too wide) detected at line 1238
+Overfull \hbox (15.32634pt too wide) detected at line 1235
 []
  []
 
 <Thesis_v4-016.pdf, id=639, 433.62pt x 433.62pt>
 File: Thesis_v4-016.pdf Graphic file (type pdf)
 <use Thesis_v4-016.pdf>
-Package pdftex.def Info: Thesis_v4-016.pdf  used on input line 1243.
+Package pdftex.def Info: Thesis_v4-016.pdf  used on input line 1240.
 (pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
 [44 <./Thesis_v4-016.pdf>] [45
 
@@ -1870,7 +1865,7 @@ KTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/MiKTeX 2.9/fonts/type1/p
 ublic/amsfonts/cm/cmtt12.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt
 8.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/latxfont/line10.pfb><C:/MiKTeX
  2.9/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on Thesis_v4.pdf (45 pages, 1159580 bytes).
+Output written on Thesis_v4.pdf (45 pages, 1160250 bytes).
 PDF statistics:
  763 PDF objects out of 1000 (max. 8388607)
  132 named destinations out of 1000 (max. 500000)
