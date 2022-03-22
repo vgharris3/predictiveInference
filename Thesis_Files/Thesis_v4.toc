@@ -29,13 +29,13 @@
 \contentsline {paragraph}{\numberline {3.4.3.2}R Implementation (Normal-Inverse Gamma, k-samples)}{33}{paragraph.3.4.3.2}%
 \contentsline {paragraph}{\numberline {3.4.3.3}Example}{35}{paragraph.3.4.3.3}%
 \contentsline {section}{\numberline {4}Normal Regression}{37}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Least Squares Estimation Example (Hoff p. 149ff.)}{37}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.1}Least Squares Estimation Example (Hoff p. 149ff.)}{38}{subsection.4.1}%
 \contentsline {subsection}{\numberline {4.2}Bayesian Estimation for a Regression Model (Hoff p. 154ff)}{41}{subsection.4.2}%
 \contentsline {subsubsection}{\numberline {4.2.1}Derivation}{41}{subsubsection.4.2.1}%
 \contentsline {paragraph}{\numberline {4.2.1.1}A semiconjugate prior distribution}{41}{paragraph.4.2.1.1}%
 \contentsline {paragraph}{\numberline {4.2.1.2}Default and weakly informative prior distributions}{42}{paragraph.4.2.1.2}%
 \contentsline {subsubsection}{\numberline {4.2.2}R Implementation (Normal Regression)}{43}{subsubsection.4.2.2}%
-\contentsline {subsubsection}{\numberline {4.2.3}Example}{44}{subsubsection.4.2.3}%
+\contentsline {subsubsection}{\numberline {4.2.3}Example}{43}{subsubsection.4.2.3}%
 \contentsline {section}{\numberline {5}Conclusion}{45}{section.5}%
 \contentsline {section}{\numberline {6}Appendix}{45}{section.6}%
 \contentsline {section}{\numberline {7}References}{45}{section.7}%

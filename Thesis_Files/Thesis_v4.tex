@@ -160,11 +160,11 @@ Making predictions based on our beliefs is the best (and perhaps even the only) 
   \multicolumn{5}{c}{\large \#Razorbacks Predicted out of 100 Tosses}          \\
   \multicolumn{1}{c}{\textbf{Prediction Method}} & \multicolumn{1}{c}{$\textbf{(}\boldsymbol\alpha,\boldsymbol\beta\textbf{)}$}  & \multicolumn{1}{c}{\textbf{Prior Mean }$\textbf{E(}\boldsymbol\theta\textbf{)}$}  & \multicolumn{1}{c}{\textbf{Prediction Mean}} & \multicolumn{1}{c}{\textbf{SD}}\\
         \midrule
-        Beta-Binomial & (2,8) & 0.2 & 29.83 & 11.01 \\
+        Beta-Binomial & (2,8) & 0.2 & 29.3 & 10.75 \\
         \midrule
-        Beta-Binomial & (22,78) & 0.22 & 23.98 & 5.99\\
+        Beta-Binomial & (22,78) & 0.22 & 23.48 & 5.74\\
         \midrule
-        Beta-Binomial & (224,776) & 0.224 & 22.43 & 4.51 \\
+        Beta-Binomial & (224,776) & 0.224 & 22.54 & 4.4 \\
         \midrule
         Binomial$(100,0.4)$ & -- & -- & 40 & 4.9 \\
   \bottomrule
@@ -573,7 +573,7 @@ Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15,
     \subsubsection{One sample Normal-Inverse Gamma}
       \paragraph{Derivation} (Hoff Ch. 5)
 
-        Let $\left\{Y_1,...,Y_N|\theta,\sigma^2\right\}\overset{i.i.d.}{\sim}\text{Normal}\left(\theta,\sigma^2\right)$ (assuming $Y_1,...,Y_N$ are exchangeable).  Then the joint sampling density is
+\noindent Let $\left\{Y_1,...,Y_N|\theta,\sigma^2\right\}\overset{i.i.d.}{\sim}\text{Normal}\left(\theta,\sigma^2\right)$ (assuming $Y_1,...,Y_N$ are exchangeable).  Then the joint sampling density is
 
         \begin{flalign*}
           p\left(y_1,...,y_N|\theta,\sigma^2\right)
@@ -593,8 +593,6 @@ Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15,
         \end{flalign*}
 
 \noindent Hoff suggests $\sigma_0^2$ and $\nu_0$ can be interpreted heuristically as sample variance and sample size, respectively, of prior observations, and that  $\mu_0$ and $\kappa_0$ can be thought of as the sample mean and sample size of prior observations.\\
-
-\textcolor{blue}{How's that $\uparrow$ ?}
 
 \noindent From this we derive joint posterior distribution
 
@@ -669,7 +667,7 @@ Calls to these functions appear as follows:
   \texttt{k0} &= \kappa_0 \text{, prior parameter for }\theta\text{, representing the sample size of prior observations}\\
   \texttt{sig20} &= \sigma^2_0 \text{, prior parameter for }\sigma^2\text{, representing the variance of prior observations}\\
   \texttt{nu0} &= \nu_0 \text{, prior parameter for }\sigma^2\text{, representing the sample size of prior observations}\\
-  \texttt{S} &= S \text{, the desired random sample size}\\
+  \texttt{S} &= S \text{, the desired number of predictions to be generated}\\
   \texttt{Jeffreys} &= \text{ flag (defaulting to }\texttt{FALSE}\text{), controlling the decision to use Jeffrey's prior}
 \end{flalign*}
 
@@ -708,6 +706,8 @@ Calls to these functions appear as follows:
 \noindent The plot below illustrates the influence of previous knowledge of the population mean, and compares to the predictions resulting from Jeffreys prior.
 
 \includegraphics{Thesis_v4-006}
+
+\noindent Clearly the prediction relying on prior knowledge heavily depends on the the quality of that prior knowledge.  Jeffrey's prior in this case produces results close to the case where the supplied prior mean is more informed.  \textcolor{blue}{Feedback on this paragraph?}
 
         \clearpage
 
@@ -805,7 +805,7 @@ Calls to these functions appear as follows:
 
 
     \subsubsection{$k$-sample Normal-Inverse Gamma:  Comparing multiple groups}
-    \textcolor{blue}{I expanded this paragraph to explain exchangeability in the hierarchical model:}\\
+
     For two-level data consisting of groups and units within groups, denote data $\mathbf{Y}_1,...,\mathbf{Y_k}$ where $\mathbf{Y}_j = \{Y_{1,j},...,Y_{N_j,j}\}, j=1,...,k$. Here we stipulate exchangeability of $Y_{1,j},...,Y_{N_j,j}$, and thus we can model the data within group $j$ as conditionally i.i.d. given some parameter $\phi_j$.  We also assume that $\phi_1,...,\phi_k$ are exchangeable and thus conditionally i.i.d. given a parameter $\psi$, which has prior distribution $\pi(\psi)$.\\
 
 \noindent We have the hierarchical Normal model (Hoff p. 132):
@@ -830,8 +830,10 @@ Calls to these functions appear as follows:
 
       $$\left\{\sigma^2|\theta_1,...,\theta_k,\mathbf{y_1,...,y_k}\right\} \sim \text{Inverse Gamma}\left(\dfrac{1}{2}\left[\nu_0 + \sum_{j=1}^k n_j\right],\dfrac{1}{2}\left[\nu_0\sigma^2_0 + \sum_{j=1}^k\sum_{i=1}^{n_j}\left(y_{i,j}-\theta_j\right)^2\right]\right).$$
 
-\noindent Here $\bar{\theta} = \frac{1}{k}\sum_{j=1}^k \theta_j$.  Note that $\sum\sum\left(y_{i,j}-\theta_j\right)^2$ is the sum of squared residuals across all groups, conditional on the within-group means, and so the conditional distribution concentrates probability around a pooled-sample estimate of the variance.
+\noindent Here $\bar{\theta} = \frac{1}{k}\sum_{j=1}^k \theta_j$.  Note that $\sum\sum\left(y_{i,j}-\theta_j\right)^2$ is the sum of squared residuals across all groups, conditional on the within-group means, and so the conditional distribution concentrates probability around a pooled-sample estimate of the variance.\\
 
+\noindent Finally, a prediction for the $j^{\text{th}}$ group is given by
+$$\tilde{y}_j \sim \text{Normal}(\theta_j, \sigma^2).$$
 
       \paragraph{R Implementation (Normal-Inverse Gamma, k-samples)}
 
@@ -858,7 +860,7 @@ Calls to these functions appear as follows:
             \item $\sigma^{2(s+1)} \sim p\left(\sigma^2|\theta_1^{(s)},...,\theta_k^{(s)},\mathbf{y}_1,...,\mathbf{y}_k\right)$
             \item $\theta_j^{(s+1)} \sim p\left(\theta_j|\mu^{(s+1)},\tau^{2(s+1)},\sigma^{2(s+1)},\mathbf{y}_j\right)$ for $j \in \{1,...,k\}$
           \end{enumerate}
-        \item For $s\in\{1,...,S\}$, generate prediction $\tilde{y}_j^{(s)} \sim \text{Normal}\left(\theta_j^{(s)},\sigma^{2(s)}\right)$
+        \item For $s\in\{1,...,S\}$, generate prediction $\tilde{y}_j^{(s)} \sim \text{Normal}\left(\theta_j^{(s)},\sigma^{2(s)}\right)$ for $j \in \{1,...,k\}$
       \end{enumerate}
 
 \noindent Calls to this functions appear as follows:
@@ -1001,6 +1003,15 @@ $$\hat{\boldsymbol\beta}_{ols} = \left(\mathbf{X}^T\mathbf{X}\right)^{-1}\mathbf
 $$\hat{\sigma}^2_{ols} = \frac{SSR\left(\hat{\boldsymbol\beta}_{ols}\right)}{(n-p)} = \frac{\sum\left(y_i - \hat{\boldsymbol\beta}_{ols}^T x_i\right)^2}{(n-p)}.$$
 
 
+\noindent Here
+
+\begin{flalign*}
+  SSR(\beta) &= \sum_{i=1}^n(y_i-\beta^T x_i)^2\\
+              &= \sum_{i=1}^n(\mathbf{y-X}\beta)^T(\mathbf{y-X}\beta)\\
+              &= \mathbf{y}^T\mathbf{y}-2\beta^T\mathbf{X}^T\mathbf{y} + \beta^T\mathbf{X}^T\mathbf{X}\beta
+\end{flalign*}
+
+\noindent is the sum of squared residuals, which is minimized by $\hat\beta_{ols} = (\mathbf{X^T X})^{-1}X^T y$.\\
 
 
 \subsection{Least Squares Estimation Example (Hoff p. 149ff.)}
@@ -1097,18 +1108,18 @@ Similar to what you did in Chapter 3.}  \textcolor{blue}{See below def of SSR an
     $$p(\mathbf{y}|\mathbf{X},\boldsymbol\beta,\sigma^2) \propto \text{exp}\{-\frac{1}{2\sigma^2}\text{SSR}(\boldsymbol\beta)\} = \text{exp}\{-\frac{1}{2\sigma^2}[\mathbf{y}^T\mathbf{y} - 2\boldsymbol\beta^T\mathbf{X}^T\mathbf{y}+\boldsymbol\beta^T\mathbf{X}^T\mathbf{X}\boldsymbol\beta]\},$$
 
 \noindent and for priors we choose $\boldsymbol\beta \sim \text{Multivariate Normal}(\boldsymbol\beta_0,\Sigma_0)$ and $1/\sigma^2 = \gamma\sim \text{Gamma}(\nu_0/2,\nu_0\sigma^2_0/2)$.  \\
+%
+% \noindent Here
+%
+% \begin{flalign*}
+%   SSR(\beta) &= \sum_{i=1}^n(y_i-\beta^T x_i)^2\\
+%               &= \sum_{i=1}^n(\mathbf{y-X}\beta)^T(\mathbf{y-X}\beta)\\
+%               &= \mathbf{y}^T\mathbf{y}-2\beta^T\mathbf{X}^T\mathbf{y} + \beta^T\mathbf{X}^T\mathbf{X}\beta
+% \end{flalign*}
+%
+% \noindent is the sum of squared residuals, which is minimized by the ordinary least squares estimate $\beta_{ols} = (\mathbf{X^T X})^{-1}X^T y$.\\
 
-\noindent Here
-
-\begin{flalign*}
-  SSR(\beta) &= \sum_{i=1}^n(y_i-\beta^T x_i)^2\\
-              &= \sum_{i=1}^n(\mathbf{y-X}\beta)^T(\mathbf{y-X}\beta)\\
-              &= \mathbf{y}^T\mathbf{y}-2\beta^T\mathbf{X}^T\mathbf{y} + \beta^T\mathbf{X}^T\mathbf{X}\beta
-\end{flalign*}
-
-\noindent is the sum of squared residuals, which is minimized by the ordinary least squares estimate $\beta_{ols} = (\mathbf{X^T X}^{-1}X^T y$.\\
-
-Thus we have
+\noindent Thus we have
 
     \begin{flalign*}
         p&(\boldsymbol\beta|\mathbf{y,X},\sigma^2)\\
@@ -1152,8 +1163,8 @@ To create a sample from the predictive distribution of responses:  for each $s\i
 $$y^{(s)} = \boldsymbol\beta^{(s)T}\mathbf{X} + \epsilon.$$
 
     \paragraph{Default and weakly informative prior distributions}
-    \textcolor{red}{First three sentences of 4.2.1.2 need some editing.}\\
-    In situations where prior information is unavailable or difficult to quantify, an alternative ``default" class of prior distributions is given. Specification of the prior parameters $(\boldsymbol\beta_0, \Sigma_0)$ and $(\nu_0,\sigma^2_0)$ that represent actual prior information for a Bayesian analysis can be difficult.  For a prior distribution that is not going to represent real prior information about the parameters, we choose one that is as minimally informative as possible.  The resulting posterior distribution, then, will represent the posterior information of someone who began with little knowledge of the population being studied.  Here we will employ Zellner's ``$g$-prior" (Zellner, 1986).  We choose $\boldsymbol\beta_0 = \mathbf{0}$ and $\Sigma_0 = k(\mathbf{X}^T\mathbf{X})^{-1}, k = g\sigma^2, g > 0$, which satisfies a desired condition that the regression parameter estimation be invariant to changes in the scale of the regressors.  With this, equations \ref{regression_semiconj_var} and \ref{regression_semiconj_expec} reduce to
+
+    In situations where prior information is unavailable or difficult to quantify, an alternative ``default" class of prior distributions is given. Here we will employ Zellner's ``$g$-prior" (Zellner, 1986).  We choose $\boldsymbol\beta_0 = \mathbf{0}$ and $\Sigma_0 = k(\mathbf{X}^T\mathbf{X})^{-1}, k = g\sigma^2, g > 0$, which satisfies a desired condition that the regression parameter estimation be invariant to changes in the scale of the regressors.  Note that this prior conditions on the observed $\mathbf{X}$ matrix.With this, equations \ref{regression_semiconj_var} and \ref{regression_semiconj_expec} reduce to
 
 \begin{flalign}
     \text{Var}[\boldsymbol\beta|\mathbf{y,X},\sigma^2] &= [\mathbf{X^TX}/(g\sigma^2) + \mathbf{X^TX}/\sigma^2]^{-1} = \frac{g}{g+1}\sigma^2(\mathbf{X^TX})^{-1} \label{regression_noninf_var}\\
@@ -1173,7 +1184,7 @@ $$\mathbf{V} = \frac{g}{g+1}\sigma^2(\mathbf{X^TX})^{-1} \text{ and } \mathbf{m}
 
 \noindent Here $\text{SSR}_g = \mathbf{y^Ty - m^TV^{-1}m = y^T(I - }\frac{g}{g+1}\mathbf{X(X^TX)^{-1}X^T)y}$.\\
 
-Simple monte carlo approximation can be used to sample from the joint posterior density $p(\sigma^2,\boldsymbol\beta|\mathbf{y,X})$ as follows.  Here $g$ is typically set to the size of the data sample \sout{number of prior observations}.  \textcolor{red}{You say "g is typically set to the number of prior observations". I don't konw what you mean by "prior observations".} \textcolor{blue}{Better?} Then:
+Simple monte carlo approximation can be used to sample from the joint posterior density $p(\sigma^2,\boldsymbol\beta|\mathbf{y,X})$ as follows.  Here $g$ is typically set to the size of the data sample. Then:
 
 \begin{enumerate}
     \item sample $\sigma^2 \sim \text{Inverse Gamma}([\nu_0 + n]/2,[\nu_0\sigma^2_0 + \text{SSR}_g]/2)$
