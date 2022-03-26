@@ -34,7 +34,7 @@
 % \usepackage[font=scriptsize]{caption}
 % \usepackage[font=small,justification=justified,singlelinecheck=false]{caption}
 \usepackage[font=small]{caption}
-\setlength{\abovecaptionskip}{5pt plus 1pt minus 1pt} % Chosen fairly arbitrarily
+\setlength{\abovecaptionskip}{3pt plus 1pt minus 1pt} % Chosen fairly arbitrarily
 % \captionsetup[figure]{font=small}
 
 \usepackage{graphics}
@@ -83,7 +83,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%INTRODUCTION
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Thesis Abstract}
+\section{Abstract}
 %% dean - I think you should include a bit more on predictive inferenc in the
 %% abstract - add 2-3 sentences about how it's different from parametric
 %% inference and why it's useful. You don't really need to much detail about the
@@ -122,39 +122,45 @@ Making predictions based on our beliefs is the best (and perhaps even the only) 
 
 \noindent Prediction is a means of discriminating between scientific hypotheses. Generally, a model may be judged by the quality of its predictions.  Given competing models, the better predictor will be given more weight, and a useful model increases in utility as its predictive capability improves.  With Bayesian inference, prior informed opinion about parameter distributions, updated with knowledge gained through observations, yields better predictions with each update.\\
 
+% \setlength{\intextsep}{20pt}
+% \begin{wrapfigure}{L}{0.35\textwidth}
+%   \begin{center}
+%     \includegraphics[width=0.28\textwidth]{./Graphics/PassThePigs/PtPBox}
+%   \end{center}
+%   \caption{Pass The Pigs\textsuperscript{\circledR}}
+% \end{wrapfigure}
 
-\begin{wrapfigure}{R}{0.30\textwidth}
-  \begin{center}
+\setlength{\intextsep}{20pt}
+\begin{wrapfigure}{L}{0.35\textwidth}
+  \centering
     \includegraphics[width=0.28\textwidth]{./Graphics/PassThePigs/PtPBox}
-  \end{center}
+  % \end{center}
   \caption{Pass The Pigs\textsuperscript{\circledR}}
 \end{wrapfigure}
 
 \noindent To illustrate the potential difference between Bayesian prediction and the use of plug-in estimators, consider the game Pass the Pigs\textsuperscript{\circledR}, a push-your-luck dice game in which the ``dice" are actually rubber pig figures.  Two pig dice are thrown, and points are scored according to the combination of positions in which they come to rest.  Details about the game can be found on Wikipedia here: \url{https://en.wikipedia.org/wiki/Pass_the_Pigs}\\
 
-%% DONE how about a picture of a pig in razorback position?  e.g. via cell phone?
-
-\begin{wrapfigure}{L}{0.30\textwidth}
-  \begin{center}
-    \includegraphics[width=0.28\textwidth]{./Graphics/PassThePigs/Razorback}
-  \end{center}
-  \caption{Razorback}
-\end{wrapfigure}
-
 \noindent For the purpose of this example, consider the probability of a single pig landing in the ``Razorback" position, which occurs when the pig is lying on its back with its legs extended upward.  The irregular shape of the pig makes it difficult to assign probabilities to results other than by means of experimentation.  Such an experiment was conducted at Duquesne University, and an article describing the experiment as well as Bayesian predictive inference performed on the results appeared in the \textit{Journal of Statistics Education} Volume 14, Number 3, in 2006.  The article can be accessed here:  \url{http://jse.amstat.org/v14n3/datasets.kern.html}. Of the $11,954$ recorded results for individual pigs, approximately $22.4\%$ were Razorbacks.\\
 
 \noindent Suppose in new data $t=4$ Razorbacks have been observed out of $N=10$ tosses of a single pig die, suggesting a straightforward binomial distribution with $\theta =$ Pr(Razorback) $= t/N = 0.4$. Taking the Duquesne experiment into consideration, we'll perform Bayesian prediction using various Beta prior distributions for $\theta$: $\theta\sim\text{Beta}(2,8)$, $\theta\sim\text{Beta}(22,78)$, and $\theta\sim\text{Beta}(224,776)$, and compare these results to predictions obtained from the plug-in estimator $\theta = 0.4$.   Any number of prior distributions on $\theta$ would satisfy the condition that $E(\theta) \approx 0.224$, suggested by the prior information.  The specific choice of a Beta prior is made largely for computational convenience.\\
 
-\noindent The researcher wants to predict how many Razorbacks will result from some number $M$ of future pig die rolls.  In this example, $M=100$ was used.  The density curves in the plot below show the influence of the choice of prior parameters on the location and variance of the predictive distribution.  Essentially, each pair of shape parameters $(\alpha,\beta)$ in the Beta prior reflects the researcher's level of reliance on the results of the Duquesne experiment, with the ``weight" given to that knowledge increasing with the shape parameters by orders of magnitude.  The choice of parameters might be influenced by such things as pig tossing method (perhaps the researcher is throwing them by hand rather than dropping them by the carefully controlled method used in the Duquesne experiment), or by a need to account for pig-to-pig variation, or anything else the researcher believes introduces a deviation from the events upon which the prior information is based.  Use of the scaled-up Big Pigs\texttrademark  variant, for example might give reason to use a very low-weighted prior such as $\theta\sim\text{Beta}(2,8)$.
+\begin{wrapfigure}{r}{0.30\textwidth}
+  \centering
+    \includegraphics[width=0.28\textwidth]{./Graphics/PassThePigs/Razorback}
+  % \end{center}
+  \caption{Razorback}
+\end{wrapfigure}
 
-\begin{figure}[ht]
+\noindent The researcher wants to predict how many Razorbacks will result from some number $M$ of future pig die rolls.  In this example, $M=100$ was used.  The density curves in the plot below show the influence of the choice of prior parameters on the location and variance of the predictive distribution.  Essentially, each pair of shape parameters $(\alpha,\beta)$ in the Beta prior reflects the researcher's level of reliance on the results of the Duquesne experiment, with the ``weight" given to that knowledge increasing with the shape parameters by orders of magnitude.  The choice of parameters might be influenced by such things as pig tossing method (perhaps the researcher is throwing them by hand rather than dropping them by the carefully controlled method used in the Duquesne experiment), or by a need to account for pig-to-pig variation, or anything else the researcher believes introduces a deviation from the events upon which the prior information is based.  Use of the scaled-up Big Pigs\texttrademark  variant, for example might give reason to use a very low-weighted prior such as $\theta\sim\text{Beta}(2,8)$.\\
+
+\noindent Figure \ref{fig:PtPBB} and the table below illustrate the effects of the Bayesian prediction method. Perhaps most notable is the location disparity between the plug-in (Binomial) prediction and the family of Bayesian (Beta-binomial) predictive distributions.  The consideration of prior knowledge is also shown to have a significant effect.  In this example, the strong influence of the choice of shape parameters for the Beta prior on the mean and variance of the predictive distribution provides options for the future prognosticator. If a new set of trials closely duplicates the Duquesne experimental conditions, for example, predictions might be based on the result from the Beta$(224,776)$ prior.  A lower-weighted prior might be used for any experimental element the researcher believes introduces a deviation from the knowledge upon which the prior information is based.
+
+\begin{figure}[h]
   \centering
   \includegraphics[width=0.9\textwidth]{./Graphics/PassThePigs/PigSize_wRuler}
   \caption{Big Pigs\texttrademark to Original (Approximate Scale)}
 \end{figure}
 
-
-\noindent Figure \ref{fig:PtPBB} and the table below illustrate the effects of the Bayesian prediction method. Perhaps most notable is the location disparity between the plug-in (Binomial) prediction and the family of Bayesian (Beta-binomial) predictive distributions.  The consideration of prior knowledge is also shown to have a significant effect.  In this example, the strong influence of the choice of shape parameters for the Beta prior on the mean and variance of the predictive distribution provides options for the future prognosticator. If a new set of trials closely duplicates the Duquesne experimental conditions, for example, predictions might be based on the result from the Beta$(224,776)$ prior.  A lower-weighted prior might be used for any experimental element the researcher believes introduces a deviation from the knowledge upon which the prior information is based.
 
 \vspace{1cm}
 
@@ -176,11 +182,11 @@ Making predictions based on our beliefs is the best (and perhaps even the only) 
   \multicolumn{5}{c}{\large \#Razorbacks Predicted out of 100 Tosses}          \\
   \multicolumn{1}{c}{\textbf{Prediction Method}} & \multicolumn{1}{c}{$\textbf{(}\boldsymbol\alpha,\boldsymbol\beta\textbf{)}$}  & \multicolumn{1}{c}{\textbf{Prior Mean }$\textbf{E(}\boldsymbol\theta\textbf{)}$}  & \multicolumn{1}{c}{\textbf{Prediction Mean}} & \multicolumn{1}{c}{\textbf{SD}}\\
         \midrule
-        Beta-Binomial & (2,8) & 0.2 & 30.06 & 11.04 \\
+        Beta-Binomial & (2,8) & 0.2 & 29.84 & 10.98 \\
         \midrule
-        Beta-Binomial & (22,78) & 0.22 & 23.79 & 5.8\\
+        Beta-Binomial & (22,78) & 0.22 & 23.92 & 5.97\\
         \midrule
-        Beta-Binomial & (224,776) & 0.224 & 22.48 & 4.38 \\
+        Beta-Binomial & (224,776) & 0.224 & 22.72 & 4.39 \\
         \midrule
         Binomial$(100,0.4)$ & -- & -- & 40 & 4.9 \\
   \bottomrule
@@ -257,10 +263,10 @@ Y_1,...,Y_n|\theta \text{ are i.i.d}\\
 size, and $S$ is the size of the desired predictive sample. The predicted future result
 is indicated by surmounting the variable name with a tilde.  For example, when the observed data is represented by $y$, the prediction is designated $\tilde{y}$. Parameter names are clearly indicated as they appear.
 
-  \subsection{Prediction of Future Successes:  Beta-Binomial (Geisser p. 73)}
+  \subsection{Prediction of Future Successes:  Beta-Binomial [3]}
 
 
-    \subsubsection{Derivation}
+    \subsubsection{Derivation (Beta-Binomial)}
 
     \noindent Let $Y_1,...,Y_N$ be exchangeable binary variables, and therefore conditionally i.i.d.  with respect to some parameter $\theta$. That is, Pr$(Y_i = 1) = \theta$, with $Y_i = 1$ indicating success and $Y_i = 0$ indicating failure.  The number of observed successes can be represented by $T = \sum Y_i$, which is sufficient for $\theta$ and has a binomial$(N,\theta)$ distribution.  That is,
 
@@ -339,7 +345,7 @@ This result has been used to create R functions \texttt{dpredBB()}, \texttt{ppre
   &\text{ of size } M \text{ for which a predicted number of successes is desired}\\
 \end{flalign*}
 
-    \subsubsection{Example}
+    \subsubsection{Example (Beta-Binomial)}
 
 The functions \texttt{dpredBB()} and \texttt{rpredBB()} were used in the Pass The Pigs\textsuperscript{\circledR} example in the introduction.  Here, all three functions are exercised in an imagined experiment using the Big Pigs\texttrademark  variant.  Suppose $t=7$ Razorbacks have been observed out of $n=10$ tosses of Big Pigs\texttrademark, and the researcher has settled on prior distribution Pr(Razorback) = $\theta\sim\text{Beta}(2,8)$.  For $M = 10$ future observations, how many successes are predicted?  Figure \ref{fig:BBdist} below shows the predictive distribution from \texttt{dpredBB()}, the cumulative distribution from \texttt{ppredBB()}, and a histogram of 1000 draws from \texttt{rpredBB()}.
 
@@ -355,9 +361,9 @@ The functions \texttt{dpredBB()} and \texttt{rpredBB()} were used in the Pass Th
 
 
 
-    \subsection{Survival Time:  Exponential-Gamma (Geisser p. 74)}
+    \subsection{Survival Time:  Exponential-Gamma [3]}
 
-    \subsubsection{Derivation}
+    \subsubsection{Derivation (Exponential-Gamma)}
 
 Suppose $Y_1,...,Y_d$ represent fully observed realizations from an exponential survival time density
           $$p(y|\theta) = \theta e^{-\theta y}$$
@@ -437,7 +443,7 @@ This result has been used to create R functions \texttt{dpredEG()}, \texttt{ppre
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-    \subsubsection{Example}
+    \subsubsection{Example (Exponential-Gamma)}
 
 \noindent Aitchison and Dunsmore [1] provide survival time data representing the lifetime in minutes of 24 machine tools of a particular type. Inspection and replacement costs depend on the machines' lifespans, so reliable predictions are financially relevant to the factory in which the machines are used. The observed machine lifetimes range from 4 to 290, with mean 74.71.  For this example, we'll assume the observations were censored at three hours, that is, censoring time $t_c = 180$ minutes.  The data set includes three survival times that exceed 180 minutes, so to construct our example we replace those with the censoring time, and the mean is reduced to 72.21.  The data are plotted in Figure \ref{fig:EG_Data} with the three censored values shown in red.  The gray horizontal line depicts the average (after censoring).
 
@@ -474,9 +480,9 @@ This result has been used to create R functions \texttt{dpredEG()}, \texttt{ppre
 
 \clearpage
 
-  \subsection{Poisson-Gamma Model (Hoff p. 43 - 50)}
+  \subsection{Poisson-Gamma Model [5]}
 
-    \subsubsection{Derivation}
+    \subsubsection{Derivation (Poisson-Gamma)}
 
       Suppose we have exchangeable count data observations $Y_1,...,Y_N|\theta\overset{i.i.d.}{\sim}\text{Poisson}(\theta)$, with $\theta$ assumed to have prior Gamma$(\alpha,\beta)$ distribution.  That is,
 
@@ -609,9 +615,15 @@ This result has been used to create R functions \texttt{dpredPG()}, \texttt{ppre
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-    \subsubsection{Example}
+    \subsubsection{Example (Poisson-Gamma)}
 
-The National Hurricane Center (\url{http://www.aoml.noaa.gov/hrd/hurdat/All_U.S._Hurricanes.html}) lists the number of hurricanes by category that made landfall in the United States each year from 1851 through 2020.  Suppose we want to predict how many large (category 3, 4, or 5) hurricanes will hit the U.S. in the 2020s.  The observed data by decade is
+The National Hurricane Center lists the number of hurricanes by category that made landfall in the United States each year from 1851 through 2020.  Suppose we want to predict how many large (category 3, 4, or 5) hurricanes will hit the U.S. in the 2020s.  The data is available at the National Hurricane center website, located at the following url:
+
+\begin{center}
+  \url{http://www.aoml.noaa.gov/hrd/hurdat/All_U.S._Hurricanes.html}
+\end{center}
+
+The observed data by decade is
 
 \begin{center}
   \begin{tabular}{cc}
@@ -656,10 +668,10 @@ Suppose we are told by a hurricane expert that the average number per decade can
 
 \clearpage
 
-  \subsection{Normal Observation with Normal-Inverse Gamma Prior}
+  \subsection{Normal Observation with Normal-Inverse Gamma Prior [5]}
 
-    \subsubsection{One sample Normal-Inverse Gamma}
-      \paragraph{Derivation} (Hoff Ch. 5)
+    \subsubsection{One Sample Normal-Inverse Gamma}
+      \paragraph{Derivation (Normal-Inverse Gamma, 1-sample)}
 
 \noindent Let $\left\{Y_1,...,Y_N|\theta,\sigma^2\right\}\overset{i.i.d.}{\sim}\text{Normal}\left(\theta,\sigma^2\right)$ (assuming $Y_1,...,Y_N$ are exchangeable).  Then the joint sampling density is
 
@@ -763,7 +775,7 @@ Calls to these functions appear as follows:
 \noindent These functions are exercised in the following example.\\
 
 
-      \paragraph{Example}
+      \paragraph{Example(Normal-Inverse Gamma, 1-sample) [5]}
 
         \textit{Example (Hoff p. 72ff, using data from Grogan and Wirth (1981)):  Midge wing length}\\
 
@@ -806,7 +818,7 @@ Calls to these functions appear as follows:
 \clearpage
 
     \subsubsection{Two-sample Normal-Inverse Gamma}
-      \paragraph{Derivation}
+      \paragraph{Derivation (Normal-Inverse Gamma, 2-Sample)}
 
         For a Bayesian analysis comparing two exchangeable groups $Y_{1,1},...,Y_{N_1,1}$ and $Y_{1,2},...,Y_{N_2,2}$ we use the following sampling model (Hoff p. 127):
 
@@ -881,8 +893,10 @@ Calls to these functions appear as follows:
   \texttt{nu0,s20} &= \nu_0,\sigma^2_0 \text{, prior parameters for the variance of the Normal data error terms}\\
 \end{flalign*}
 
-      \paragraph{Example} (Hoff p. 128-129 \textit{Analysis of math score data})\\
-      Hoff provides the following example, which we reproduce here.\\\\
+      \paragraph{Example (Normal-Inverse Gamma, 2-Sample) [5]}
+\vspace{1cm}
+      Hoff provides the following example, which we reproduce here.  (Hoff p. 128-129 \textit{Analysis of math score data})\\
+
       Math score data for two public high schools in the United States (we'll call them School 1 and School 2) were based on results of a national exam, standardized to produce a nationwide mean of 50 and a standard deviation of 10.  The data consisted of 31 individual scores for School 1 and 28 for School 2. Figure \ref{fig:NormIG2_SchoolData} gives a visual summary of the two data sets.\\
 
 \begin{figure}[ht]
@@ -902,7 +916,7 @@ Calls to these functions appear as follows:
 \begin{figure}[ht]
   \centering
   \includegraphics[width=0.8\textwidth]{./Graphics/ExamplePlots/NormIG2_Data_v_Prediction}
-  \caption{Estimated Densities: Observed vs. Predicted}
+  \caption{2-Sample Densities: Observed vs. Predicted}
   \label{fig:NormIG2_DvP}
 \end{figure}
 
@@ -1039,7 +1053,7 @@ $$\tilde{y}_j \sim \text{Normal}(\theta_j, \sigma^2).$$
 \begin{figure}[ht]
   \centering
   \includegraphics[width=0.8\textwidth]{./Graphics/ExamplePlots/NormIGk_Data_v_Prediction}
-  \caption{Estimated Densities: Observed vs. Predicted}
+  \caption{$k$-Sample Densities: Observed vs. Predicted}
   \label{fig:NormIGk_DvP}
 \end{figure}
 
@@ -1050,7 +1064,7 @@ $$\tilde{y}_j \sim \text{Normal}(\theta_j, \sigma^2).$$
 \clearpage
 
 
-\section{Normal Regression}% with Zellner's $g$-prior}
+\section{Normal Regression [5]}% with Zellner's $g$-prior}
 
 % \textcolor{red}{intro here}\\
 % \textcolor{red}{stipulate variable naming convention here (x is the observed data now).  Modify previous intro to indicate variable convention was for the exponential family set of models}
@@ -1116,14 +1130,11 @@ $$\hat{\sigma}^2_{ols} = \frac{SSR\left(\hat{\boldsymbol\beta}_{ols}\right)}{(n-
 \noindent is the sum of squared residuals, which is minimized by $\hat\beta_{ols}$.\\
 
 
-\subsection{Least Squares Estimation Example (Hoff p. 149ff.)}
+\subsection{Least Squares Estimation Example}
 
-\textcolor{red}{Your example 4.1 is much better described than the other examples. You
-should try to bring the others up to this standard.}
+\noindent Here we reproduce the example provided by Hoff (p. 149ff), which will be used to illustrate Bayesian prediction for a regression model.\\
 
-\noindent Here we reproduce the example provided by Hoff, which will be used to illustrate Bayesian prediction for a regression model.\\
-
-\noindent\textit{Example:  Oxygen uptake (from Kuehl (2000), Hoff p. 149ff)}
+\noindent\textit{Example:  Oxygen Uptake [5]}
 
 \noindent Twelve healthy men who did not exercise regularly were recruited to take part in a study of the effects of two different exercise regimens on oxygen uptake.  Six of the twelve men were randomly assigned to a 12-week flat-terrain running program, and the remaining six were assigned to a 12-week step aerobics program.  The maximum oxygen uptake of each subject was measured (in liters per minute) while running on an inclined treadmill, both before and after the 12-week program.  Of interest is how a subject's change in maximal oxygen uptake may depend on which program they were assigned to.  However, other factors, such as age, are expected to affect the change in maximal uptake as well.  The results are shown in Figure \ref{fig:OxygenData}:
 
@@ -1144,17 +1155,6 @@ should try to bring the others up to this standard.}
         x_{i,3} &= \text{ age of subject } i \nonumber \\
         x_{i,4} &= x_{i,2} \times x_{i,3} \nonumber
     \end{align}
-
-% \textcolor{red}{Here Hoff has this:}
-%
-% \noindent Under this model the conditional expectations of $Y$ for the two different levels of $x_{i,1}$ are
-%
-% \begin{flalign*}
-%     E[Y|\mathbf{x}] &= \beta_1 + \beta_3 \times (age) \text{ if } x_1 = 0, \text{ and}\\
-%     E[Y|\mathbf{x}] &= \left(\beta_1 + \beta_2\right) + \left(\beta_3 + \beta_4\right) \times (age) \text{ if } x_1 = 1
-% \end{flalign*}
-
-% \textcolor{red}{But I think he means this:}
 
 \noindent Under this model the conditional expectations of $Y$ for the two different levels of $x_{i,2}$ are
 
@@ -1184,54 +1184,22 @@ should try to bring the others up to this standard.}
 
 \noindent This means that the estimated linear relationship between uptake and age has an intercept and slope of -51.29 and 2.09 for the running group, and -51.29 + 13.11 = -38.18 and 2.09 - 0.32 = 1.77 for the aerobics group.  These two lines are plotted in the fourth panel of Figure XX.  We obtain unbiased estimate $\sigma^2 = SSR(\hat{\boldsymbol\beta}_{ols})/(n-p) = 8.54$, and use this to compute the standard error of the components of $\hat{\boldsymbol\beta}_{ols}$, which are 12.25, 15.76, 0.53, and 0.65, respectively.  Comparing the values of $\hat{\boldsymbol\beta}_{ols}$ to their standard errors suggests that the evidence for differences between the two exercise regimens is not very strong.
 
-% \hrulefill \\
-%
-% \textcolor{red}{``Comparing the values of $\hat{\boldsymbol\beta}_{ols}$ to their standard errors:"}\\
-% Difference in Intercept:\\
-% $$H_0:  Intercept_{running} - Intercept_{aerobic} = 0; H_A:  Intercept_{running} - Intercept_{aerobic} \ne 0$$
-% $$H_0:  \beta_1 - (\beta_1 + \beta_2) = -\beta_2 = 0 \text{ (that is } \beta_2 = 0); H_A:  \beta_2 \ne 0$$
-% $$T = \frac{\beta_2 - 0}{SE_{beta_2}} = \frac{13.11}{15.76} = 0.49$$
-% $$\longrightarrow p = 0.79\longrightarrow \text{ fail to reject } H_0 \text{ and conclude no significant difference in intercept}$$
-%
-% Difference in Slope:\\
-% $$H_0:  Slope_{running} - Slope_{aerobic} = 0; H_A:  Slope_{running} - Slope_{aerobic} \ne 0$$
-% $$H_0:  \beta_3 - (\beta_3 + \beta_4) = 0 \text{ (that is } \beta_4 = 0); H_A:  \beta_4 \ne 0$$
-% $$T = \frac{\beta_4 - 0}{SE_{beta_4}} = \frac{-0.32}{0.65} = 0.83$$
-% $$\longrightarrow p = 0.68\longrightarrow \text{ fail to reject } H_0 \text{ and conclude no significant difference in slope}$$
-%
-%
-% \hrulefill \\
 
 
 
 
 \clearpage
 
-  \subsection{Bayesian Estimation for a Regression Model (Hoff p. 154ff)}
+  \subsection{Bayesian Estimation for a Regression Model [5]}
 
-  \subsubsection{Derivation}
+  \subsubsection{Derivation (Normal Regression)}
 
     \paragraph{A semiconjugate prior distribution}\label{normRegSemiconjugatePrior}
     Hoff proposes a semiconjugate prior distribution for $\boldsymbol\beta$ and $\sigma^2$ to be used when there is information available about the parameters.  The sampling density of the data is
 
-% \textcolor{red}{define SSR(beta)
-% I think you should write out the full conditional distributions for the
-% different parts of the updating scheme, or at least the expressions for V and m.
-% Similar to what you did in Chapter 3.}  \textcolor{blue}{I put the definition of $SSR(\beta)$ above after its first appearance near the start of Section 4:  Normal Regression.  Review what follows below.}
-
     $$p(\mathbf{y}|\mathbf{X},\boldsymbol\beta,\sigma^2) \propto \text{exp}\{-\frac{1}{2\sigma^2}\text{SSR}(\boldsymbol\beta)\} = \text{exp}\{-\frac{1}{2\sigma^2}[\mathbf{y}^T\mathbf{y} - 2\boldsymbol\beta^T\mathbf{X}^T\mathbf{y}+\boldsymbol\beta^T\mathbf{X}^T\mathbf{X}\boldsymbol\beta]\},$$
 
 \noindent and for priors we choose $\boldsymbol\beta \sim \text{Multivariate Normal}(\boldsymbol\beta_0,\Sigma_0)$ and $1/\sigma^2 = \gamma\sim \text{Gamma}(\nu_0/2,\nu_0\sigma^2_0/2)$.  \\
-%
-% \noindent Here
-%
-% \begin{flalign*}
-%   SSR(\beta) &= \sum_{i=1}^n(y_i-\beta^T x_i)^2\\
-%               &= \sum_{i=1}^n(\mathbf{y-X}\beta)^T(\mathbf{y-X}\beta)\\
-%               &= \mathbf{y}^T\mathbf{y}-2\beta^T\mathbf{X}^T\mathbf{y} + \beta^T\mathbf{X}^T\mathbf{X}\beta
-% \end{flalign*}
-%
-% \noindent is the sum of squared residuals, which is minimized by the ordinary least squares estimate $\beta_{ols} = (\mathbf{X^T X})^{-1}X^T y$.\\
 
 \noindent Thus we have posterior for $\boldsymbol\beta$
 
@@ -1320,10 +1288,6 @@ $$y = \boldsymbol\beta^T\mathbf{X} + \epsilon.$$
 
   \subsubsection{R Implementation (Normal Regression)}
 
-% The R function \texttt{rpredNormReg(S,Xpred,X,y,beta0,Sigma0,nu0,s20,gprior)}
-%
-% \noindent approximates the joint posterior density $p(\sigma^2,\boldsymbol\beta|\mathbf{y,X})$ using one of the two methods described above, generates $S$ triplets $(\boldsymbol\beta^{(s)}, \sigma^{2(s)},\epsilon^{(s)}), s \in 1,...,S$ and returns a corresponding sample $y = X_{pred}\boldsymbol\beta^{(s)} + \epsilon^{(s)}$ for each $s$.  Calls to this functions appear as follows:
-
 The R function \texttt{rpredNormReg()} returns a sample from the predictive distribution $y = X_{pred}\boldsymbol\beta^{(s)} + \epsilon^{(s)}$ for each $s$.  It does this by approximating the joint posterior density $p(\sigma^2,\boldsymbol\beta|\mathbf{y,X})$ using one of the two methods described above and generating $S$ triplets $(\boldsymbol\beta^{(s)}, \sigma^{2(s)},\epsilon^{(s)}), s \in 1,...,S$.  Calls to this functions appear as follows:
 
 \begin{center}
@@ -1348,7 +1312,7 @@ The R function \texttt{rpredNormReg()} returns a sample from the predictive dist
 
 
 
-  \subsubsection{Example}
+  \subsubsection{Example (Normal Regression)}
 
 In the example below (Hoff data and code found \href{https://pdhoff.github.io/book/}{https://pdhoff.github.io/book/}) to employ Hoff's semi-conjugate prior we use
 
@@ -1393,8 +1357,6 @@ The need to forecast future events arises in a broad array of disciplines: acros
 
 \section{References}
 
-% \bibliography{References}
-% \printbibliography
 
 \begin{thebibliography}{6}
 \bibitem{Aitchison} Aitchison, J., Dunsmore, I. R. (1975), \textit{Statistical Prediction Analysis},
@@ -1406,8 +1368,6 @@ Cambridge, UK: Cambridge University Press.
 \bibitem{Silver} Silver, Nate (2015), The Signal and the Noise, New York, NY, Penguin Books.
 \end{thebibliography}
 
-
-% \autocite[1]{Billheimer:1}
 
 
 \section{Appendix}
