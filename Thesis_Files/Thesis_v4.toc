@@ -11,31 +11,31 @@
 \contentsline {subsubsection}{\numberline {3.2.1}Derivation}{15}{subsubsection.3.2.1}%
 \contentsline {subsubsection}{\numberline {3.2.2}R Implementation (Exponential-Gamma)}{17}{subsubsection.3.2.2}%
 \contentsline {subsubsection}{\numberline {3.2.3}Example}{17}{subsubsection.3.2.3}%
-\contentsline {subsection}{\numberline {3.3}Poisson-Gamma Model (Hoff p. 43 - 50)}{19}{subsection.3.3}%
-\contentsline {subsubsection}{\numberline {3.3.1}Derivation}{19}{subsubsection.3.3.1}%
-\contentsline {subsubsection}{\numberline {3.3.2}R Implementation (Poisson-Gamma)}{21}{subsubsection.3.3.2}%
-\contentsline {subsubsection}{\numberline {3.3.3}Example}{22}{subsubsection.3.3.3}%
-\contentsline {subsection}{\numberline {3.4}Normal Observation with Normal-Inverse Gamma Prior}{24}{subsection.3.4}%
-\contentsline {subsubsection}{\numberline {3.4.1}One sample Normal-Inverse Gamma}{24}{subsubsection.3.4.1}%
-\contentsline {paragraph}{\numberline {3.4.1.1}Derivation}{24}{paragraph.3.4.1.1}%
-\contentsline {paragraph}{\numberline {3.4.1.2}R Implementation (Normal-Inverse Gamma, 1-sample)}{25}{paragraph.3.4.1.2}%
-\contentsline {paragraph}{\numberline {3.4.1.3}Example}{27}{paragraph.3.4.1.3}%
-\contentsline {subsubsection}{\numberline {3.4.2}Two-sample Normal-Inverse Gamma}{29}{subsubsection.3.4.2}%
-\contentsline {paragraph}{\numberline {3.4.2.1}Derivation}{29}{paragraph.3.4.2.1}%
-\contentsline {paragraph}{\numberline {3.4.2.2}R Implementation (Normal-Inverse Gamma, 2-sample)}{30}{paragraph.3.4.2.2}%
-\contentsline {paragraph}{\numberline {3.4.2.3}Example}{30}{paragraph.3.4.2.3}%
-\contentsline {subsubsection}{\numberline {3.4.3}$k$-sample Normal-Inverse Gamma: Comparing multiple groups}{32}{subsubsection.3.4.3}%
-\contentsline {paragraph}{\numberline {3.4.3.1}Derivation}{33}{paragraph.3.4.3.1}%
-\contentsline {paragraph}{\numberline {3.4.3.2}R Implementation (Normal-Inverse Gamma, k-samples)}{33}{paragraph.3.4.3.2}%
-\contentsline {paragraph}{\numberline {3.4.3.3}Example}{35}{paragraph.3.4.3.3}%
-\contentsline {section}{\numberline {4}Normal Regression}{37}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Least Squares Estimation Example (Hoff p. 149ff.)}{38}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Bayesian Estimation for a Regression Model (Hoff p. 154ff)}{41}{subsection.4.2}%
-\contentsline {subsubsection}{\numberline {4.2.1}Derivation}{41}{subsubsection.4.2.1}%
-\contentsline {paragraph}{\numberline {4.2.1.1}A semiconjugate prior distribution}{41}{paragraph.4.2.1.1}%
-\contentsline {paragraph}{\numberline {4.2.1.2}Default and weakly informative prior distributions}{42}{paragraph.4.2.1.2}%
-\contentsline {subsubsection}{\numberline {4.2.2}R Implementation (Normal Regression)}{43}{subsubsection.4.2.2}%
-\contentsline {subsubsection}{\numberline {4.2.3}Example}{43}{subsubsection.4.2.3}%
-\contentsline {section}{\numberline {5}Conclusion}{45}{section.5}%
-\contentsline {section}{\numberline {6}References}{46}{section.6}%
-\contentsline {section}{\numberline {7}Appendix}{46}{section.7}%
+\contentsline {subsection}{\numberline {3.3}Poisson-Gamma Model (Hoff p. 43 - 50)}{20}{subsection.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.1}Derivation}{20}{subsubsection.3.3.1}%
+\contentsline {subsubsection}{\numberline {3.3.2}R Implementation (Poisson-Gamma)}{22}{subsubsection.3.3.2}%
+\contentsline {subsubsection}{\numberline {3.3.3}Example}{23}{subsubsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.4}Normal Observation with Normal-Inverse Gamma Prior}{26}{subsection.3.4}%
+\contentsline {subsubsection}{\numberline {3.4.1}One sample Normal-Inverse Gamma}{26}{subsubsection.3.4.1}%
+\contentsline {paragraph}{\numberline {3.4.1.1}Derivation}{26}{paragraph.3.4.1.1}%
+\contentsline {paragraph}{\numberline {3.4.1.2}R Implementation (Normal-Inverse Gamma, 1-sample)}{27}{paragraph.3.4.1.2}%
+\contentsline {paragraph}{\numberline {3.4.1.3}Example}{29}{paragraph.3.4.1.3}%
+\contentsline {subsubsection}{\numberline {3.4.2}Two-sample Normal-Inverse Gamma}{31}{subsubsection.3.4.2}%
+\contentsline {paragraph}{\numberline {3.4.2.1}Derivation}{31}{paragraph.3.4.2.1}%
+\contentsline {paragraph}{\numberline {3.4.2.2}R Implementation (Normal-Inverse Gamma, 2-sample)}{32}{paragraph.3.4.2.2}%
+\contentsline {paragraph}{\numberline {3.4.2.3}Example}{32}{paragraph.3.4.2.3}%
+\contentsline {subsubsection}{\numberline {3.4.3}$k$-sample Normal-Inverse Gamma: Comparing multiple groups}{34}{subsubsection.3.4.3}%
+\contentsline {paragraph}{\numberline {3.4.3.1}Derivation}{35}{paragraph.3.4.3.1}%
+\contentsline {paragraph}{\numberline {3.4.3.2}R Implementation (Normal-Inverse Gamma, k-samples)}{35}{paragraph.3.4.3.2}%
+\contentsline {paragraph}{\numberline {3.4.3.3}Example}{37}{paragraph.3.4.3.3}%
+\contentsline {section}{\numberline {4}Normal Regression}{39}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Least Squares Estimation Example (Hoff p. 149ff.)}{40}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Bayesian Estimation for a Regression Model (Hoff p. 154ff)}{43}{subsection.4.2}%
+\contentsline {subsubsection}{\numberline {4.2.1}Derivation}{43}{subsubsection.4.2.1}%
+\contentsline {paragraph}{\numberline {4.2.1.1}A semiconjugate prior distribution}{43}{paragraph.4.2.1.1}%
+\contentsline {paragraph}{\numberline {4.2.1.2}Default and weakly informative prior distributions}{44}{paragraph.4.2.1.2}%
+\contentsline {subsubsection}{\numberline {4.2.2}R Implementation (Normal Regression)}{45}{subsubsection.4.2.2}%
+\contentsline {subsubsection}{\numberline {4.2.3}Example}{45}{subsubsection.4.2.3}%
+\contentsline {section}{\numberline {5}Conclusion}{47}{section.5}%
+\contentsline {section}{\numberline {6}References}{48}{section.6}%
+\contentsline {section}{\numberline {7}Appendix}{48}{section.7}%

@@ -32,6 +32,7 @@
 \graphicspath{ {./Graphics/} }
 \usepackage{wrapfig}
 % \usepackage[font=scriptsize]{caption}
+% \usepackage[font=small,justification=justified,singlelinecheck=false]{caption}
 \usepackage[font=small]{caption}
 \setlength{\abovecaptionskip}{5pt plus 1pt minus 1pt} % Chosen fairly arbitrarily
 % \captionsetup[figure]{font=small}
@@ -422,7 +423,7 @@ This result has been used to create R functions \texttt{dpredBB()}, \texttt{ppre
 
     \subsubsection{Example}
 
-The functions \texttt{dpredBB()} and \texttt{rpredBB()} were used in the Pass The Pigs\textsuperscript{\circledR} example in the introduction.  Here, all three functions are exercised in an imagined experiment using the Big Pigs\texttrademark  variant.  Suppose $t=7$ Razorbacks have been observed out of $n=10$ tosses of Big Pigs\texttrademark, and the researcher has settled on prior distribution Pr(Razorback) = $\theta\sim\text{Beta}(2,8)$.  For $M = 10$ future observations, how many successes are predicted?  Figure \ref{fig:BBdist} below shows the predictive distribution from \texttt{dpredBB()}, the cumulative distribution from \texttt{ppredBB()}, and a histogram of draws from \texttt{rpredBB()}.
+The functions \texttt{dpredBB()} and \texttt{rpredBB()} were used in the Pass The Pigs\textsuperscript{\circledR} example in the introduction.  Here, all three functions are exercised in an imagined experiment using the Big Pigs\texttrademark  variant.  Suppose $t=7$ Razorbacks have been observed out of $n=10$ tosses of Big Pigs\texttrademark, and the researcher has settled on prior distribution Pr(Razorback) = $\theta\sim\text{Beta}(2,8)$.  For $M = 10$ future observations, how many successes are predicted?  Figure \ref{fig:BBdist} below shows the predictive distribution from \texttt{dpredBB()}, the cumulative distribution from \texttt{ppredBB()}, and a histogram of 1000 draws from \texttt{rpredBB()}.
 
 \begin{figure}[ht]
   \centering
@@ -442,7 +443,7 @@ t = 7 # number of successes
 M = 10 # number of future observations
 a = 2 # alpha parameter for the Bet(alpha, beta) prior distribution on theta
 b = 8 # beta parameter for the Bet(alpha, beta) prior distribution on theta
-S = 10000 # sample size desired
+S = 1000 # sample size desired
 
 par(mfrow=c(3,1))
 
@@ -451,7 +452,7 @@ par(mfrow=c(3,1))
 tpred = 0:M
 f_t = dpredBB(tpred,N,t,M,a,b)
 
-xlabel = eval(bquote(expression(tilde(t)*" = Number of Future Successes out of "*.(M))))
+xlabel = eval(bquote(expression(tilde(t)*" = Number of Future Big Pig Razorbacks out of "*.(M))))
 
 plot(tpred,f_t,type = "p", col = "blue", pch = 16, cex = 1, main = "Beta-Binomial Predictive Probability Mass",xlab = xlabel,ylab = "dpredBB()")
 
@@ -465,12 +466,12 @@ plot(tpred,F_t,type = "p", col = "red", pch = 16, main = "Beta-Binomial Cumulati
 f_t = dpredBB(0:M,N,t,M,a,b)
 pred_sample = rpredBB(S,N,t,M,a,b)
 breaks = seq(-1.5,M+1.5,1)
+# ylim = c(0,max(f_t)*1.5),
 
-
-res = hist(pred_sample, prob = TRUE, breaks = breaks,main = "Histogram of Sample with Probability Mass Overlay",ylim = c(0,max(f_t)*1.5),xlim = c(0,M),xlab = xlabel,ylab = "Count")
+res = hist(pred_sample, prob = FALSE, breaks = breaks,main = "Histogram of Predictive Sample",xlim = c(0,M),xlab = xlabel,ylab = "Count")
 
 # lines(0:M,f_t)
-points(0:M,f_t, col = "blue", pch = 16)
+# points(0:M,f_t, col = "blue", pch = 16)
 
 
 
@@ -483,10 +484,10 @@ points(0:M,f_t, col = "blue", pch = 16)
 #
 # par(mfrow = c(2,1))
 #
-# hist(pred_sample, prob = TRUE, main = "Histogram of Sample with Density Curve Overlay",ylim = c(0,max(f_x)*1.5),xlim = c(0,m))
+# hist(pred_sample, prob = TRUE, main = "Histogram of Predictive Sample",ylim = c(0,max(f_x)*1.5),xlim = c(0,m))
 # lines(0:m,f_x)
 #
-# hist(rs2, prob = TRUE, main = "Histogram of Sample with Density Curve Overlay",ylim = c(0,max(f_x)*1.5),xlim = c(0,m))
+# hist(rs2, prob = TRUE, main = "Histogram of Predictive Sample",ylim = c(0,max(f_x)*1.5),xlim = c(0,m))
 # lines(0:m,f_x)
 
 @
@@ -571,15 +572,49 @@ This result has been used to create R functions \texttt{dpredEG()}, \texttt{ppre
 \end{flalign*}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
     \subsubsection{Example}
 
-    \textcolor{red}{This needs updating.  Also, think about the number of new observations to be predicted.  Why would we (you) choose M=1000?}\\
-
-\noindent Suppose $d=797$ out of $N = 1000$ copies have been observed, and the remaining $203$ censored. We are interested in the number of survivors out of $M = 1000$ future observations.  For the sake of this example, survival times were generated randomly as $y_i \sim \text{Exp}(0.01)$, with all times exceeding an arbitrary predetermined time cutoff of 160 being set to that time.  These reset times are the censored copies.  We know the value of the exponential parameter ($\theta = 0.01$) used to generate the data, because of the artificial way we have constructed this example.  If we did not have that information, we could consider the mean of the generated survival times (observed and censored), which was $79.9$.  This indicates that the expected value $1/\theta$ of survival times must be greater than $79.9$, and thus we can assume $\theta < 1/79.9 \approx 0.0125$ with some margin.  This is all to say that aiming for $\theta = 0.01$ when choosing parameters for the prior distribution of $\theta$ is reasonable.  Since we are assuming prior $\theta\sim\text{Gamma}(\delta,\gamma)$ we want $\delta/\gamma \approx 0.01$.   For this example, say $\delta = 0.5$ and $\gamma=50$.  Figure \ref{fig:EGdist} below illustrates the predictive probability using \texttt{dpredEG()} and \texttt{rpredEG()}, along with a histogram of a predictive sample taken using \texttt{rpredEG()}.
+\noindent Aitchison and Dunsmore [1] provide survival time data representing the lifetime in minutes of 24 machine tools of a particular type. Inspection and replacement costs depend on the machines' lifespans, so reliable predictions are financially relevant to the factory in which the machines are used. The observed machine lifetimes range from 4 to 290, with mean 74.71.  For this example, we'll assume the observations were censored at three hours, that is, censoring time $t_c = 180$ minutes.  The data set includes three survival times that exceed 180 minutes, so to construct our example we replace those with the censoring time, and the mean is reduced to 72.21.  The data are plotted in Figure \ref{fig:EG_Data} with the three censored values shown in red.  The gray horizontal line depicts the average (after censoring).
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.8\textwidth]{./Graphics/DistributionPlots/ExponentialGamma}
+  \includegraphics[width=0.8\textwidth]{./Graphics/ExamplePlots/EG_TimeData}
+  \caption{Observed Machine Tool Lifetime Data}
+  \label{fig:EG_Data}
+\end{figure}
+
+\vspace{2cm}
+
+<<fig=FALSE, echo=FALSE>>=
+par(mfrow=c(1,1))
+
+y = c(47, 62, 111, 47, 57, 14, 290, 118, 19, 4, 17, 46, 5, 239, 9, 140, 89, 94, 217, 35, 103, 28, 37, 111)
+N = length(y)
+tcutoff = 180 #sensoring time
+yCensored = y[y>tcutoff]
+y[y > tcutoff] = tcutoff
+c = numeric(N)
+c[y < tcutoff] = 1 #vector of indicators:  1 = observed, 0 = censored
+
+ybar = mean(y)
+
+plot(1:length(y),y,type="p",pch=19,col = ifelse(y == 180,'red','black'),xlab="Machine Number",ylab="Time in Minutes",main="Machine Tool Lifetimes")
+lines(c(1,length(y)),c(ybar,ybar),col="gray")
+
+@
+
+\noindent We will assume the data are distributed exponentially with respect to some parameter $\theta$.  Suppose prior knowledge suggests that the average survival time is around 80 minutes.  In terms of the exponential distribution then $E(y) = 1/\theta \approx 80$, so $\theta \approx 0.01$ is a reasonable value on which to base our choices for the parameter values for the Gamma$(\delta,\gamma)$ prior for $\theta$.  We can assume that $\delta/\gamma \approx 0.01$.  For this example, say $\delta = 0.5$ and $\gamma=50$.  Figure \ref{fig:EGdist} below illustrates the predictive probability using \texttt{dpredEG()} and \texttt{rpredEG()}, along with a histogram of a predictive sample of size 1000 returned by \texttt{rpredEG()}.\\
+
+\noindent Under the assumptions of this model the mean of the predictive sample (86.85) is somewhat larger than that of the observed data, and this information will likely influence the factory budget.
+
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.9\textwidth]{./Graphics/DistributionPlots/ExponentialGamma}
   \caption{Exponential-Gamma Predictive Distribution}
   \label{fig:EGdist}
 \end{figure}
@@ -588,6 +623,7 @@ This result has been used to create R functions \texttt{dpredEG()}, \texttt{ppre
 
 
 <<fig=FALSE, echo=FALSE>>=
+##NEW EXAMPLE (Cancer)
 source('C:/Users/gabe/Documents/tmp/predictiveInference/R/dpredEG.R')
 source('C:/Users/gabe/Documents/tmp/predictiveInference/R/ppredEG.R')
 source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredEG.R')
@@ -599,26 +635,30 @@ par(mfrow=c(3,1))
 
 N = 1000;
 
-#Create observed and sensored copies
+#Cancer survival time data (Aitchison & Dunsmore p. 2)
+
 set.seed(1234)
-th = .01
-y = rexp(N,th) #vector of observed survival times
-tcutoff = 160 #experiment time cutoff
+
+y = c(47, 62, 111, 47, 57, 14, 290, 118, 19, 4, 17, 46, 5, 239, 9, 140, 89, 94, 217, 35, 103, 28, 37, 111)
+N = length(y)
+tcutoff = 180 #sensoring time
+yCensored = y[y>tcutoff]
 y[y > tcutoff] = tcutoff
 c = numeric(N)
-c[y < tcutoff] = 1
-d = length(y[y < tcutoff]) # number of fully observed copies
+c[y < tcutoff] = 1 #vector of indicators:  1 = observed, 0 = censored
+
+ybar = mean(y)
 
 dt = 0.5
 gm = 50
 
-plot_length = 500
+plot_length = 350
 
-ypred = 1:1000 #cutoff times for which prediction is desired
+ypred = 1:plot_length #cutoff times for which prediction is desired
 
 f_y = dpredEG(ypred, y, c, dt, gm)
 
-xlabel = eval(bquote(expression(tilde(y)*" = Survival Time")))
+xlabel = eval(bquote(expression(tilde(y)*" = Survival Time in Minutes")))
 
 plot(ypred[1:plot_length],f_y[1:plot_length],type = "l", lwd = 2, col = "blue", main = "Exponential-Gamma Predictive Density",xlab = xlabel,ylab = "dpredEG()")
 
@@ -628,14 +668,20 @@ plot(ypred[1:plot_length],F_y[1:plot_length],type = "l", lwd = 2, col = "red", m
 
 S = 1000
 
+# ylim = c(0,max(f_y)*1.1)
+
 pred_sample = rpredEG(S, y, c, dt, gm)
-hist(pred_sample,prob = TRUE,main = "Histogram of Sample with Density Curve Overlay", ylim = c(0,max(f_y)*1.1),xlab = xlabel,ylab = "Count")
-lines(1:1000,f_y)
+h = hist(pred_sample,prob = FALSE,main = "Histogram of Predictive Sample",xlim=c(0,plot_length),xlab = xlabel,ylab = "Count")
+# lines(1:length(f_y),f_y)
 
 
 
 @
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \clearpage
 
@@ -769,11 +815,40 @@ This result has been used to create R functions \texttt{dpredPG()}, \texttt{ppre
   \texttt{S} &= S \text{, the sample size to be generated by the predictive distribution}\\
 \end{flalign*}
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
     \subsubsection{Example}
 
-\textcolor{red}{I will come up with a different example to replace the one below.}
+The National Hurricane Center (\url{http://www.aoml.noaa.gov/hrd/hurdat/All_U.S._Hurricanes.html}) lists the number of hurricanes by category that made landfall in the United States each year from 1851 through 2020.  Suppose we want to predict how many large (category 3, 4, or 5) hurricanes will hit the U.S. in the 2020s.  The observed data by decade is
 
-Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15, 3, 97.  Let $\alpha = 11$ and $\beta = 3$.  For $\tilde{y} = 1:100$ possible future occurrences, Figure \ref{fig:PGdist} below shows the predictive distribution from \texttt{dpredPG()}, the cumulative distribution from \texttt{ppredPG()}, and a histogram of draws from \texttt{rpredPG()}.
+\begin{center}
+  \begin{tabular}{cc}
+    Decade & Large Hurricane Count \\
+    \hline
+    1851-1860 & 6 \\
+    1861-1870 & 1 \\
+    1871-1880 & 7 \\
+    1881-1890 & 4 \\
+    1891-1900 & 8 \\
+    1901-1910 & 4 \\
+    1911-1920 & 7 \\
+    1921-1930 & 5 \\
+    1931-1940 & 5 \\
+    1941-1950 & 10 \\
+    1951-1960 & 6 \\
+    1961-1970 & 6 \\
+    1971-1980 & 4 \\
+    1981-1990 & 4 \\
+    1991-2000 & 5 \\
+    2001-2010 & 7 \\
+    2011-2020 & 4
+  \end{tabular}
+\end{center}
+
+Suppose we are told by a hurricane expert that the average number per decade can be expected to be around 4, and based on that information we choose $\alpha = 12$ and $\beta = 3$ for the Gamma$(\alpha,\beta)$ prior on $\theta$.  For $\tilde{y} = 1:20$ possible large hurricanes making landfall in the U.S. in the 2020s, Figure \ref{fig:PGdist} below shows the predictive distribution from \texttt{dpredPG()}, the cumulative distribution from \texttt{ppredPG()}, and a histogram of a predictive sample of size 1000 returned by \texttt{rpredPG()}.
 
 \begin{figure}[ht]
   \centering
@@ -792,17 +867,18 @@ source('C:/Users/gabe/Documents/tmp/predictiveInference/R/rpredPG.R')
 
 #load_all()
 
-set.seed(3)
-y = c(27, 79, 21, 100, 8, 4, 37, 15, 3, 97)
-ypred = 0:60
-alpha = 11
+set.seed(12345678)
+y = c(6,1,7,4,8,4,7,5,5,10,6,6,4,4,5,7,4)
+ybar = mean(y)
+ypred = 0:20
+alpha = 12
 beta = 3
 par(mfrow=c(3,1))
 
 #Predictive mass function
 f_y = dpredPG(ypred, y, alpha, beta)
 
-xlabel = eval(bquote(expression(tilde(y)*" = Future Occurences")))
+xlabel = eval(bquote(expression(tilde(y)*" = Possible Number of Hurricanes in the 2020s")))
 
 plot(1:length(f_y),f_y,type = "p", col = "blue", pch = 16, cex = 1, main = "Poisson-Gamma Predictive Probability Mass", xlab = xlabel, ylab = "dpredPG()")
 
@@ -811,14 +887,15 @@ F_y = ppredPG(ypred, y, alpha, beta)
 plot(1:length(F_y),F_y,type = "p", col = "red", pch = 16, main = "Poisson-Gamma Cumulative Predictive Probability", xlab = xlabel, ylab = "ppredPG()")
 
 #Predictive sample
-S = 100000 #Predictive sample size
+S = 1000 #Predictive sample size
 pred_sample = rpredPG(S,y, alpha, beta)
 range_Rand = min(pred_sample):max(pred_sample)
 f_Rand = dpredPG(range_Rand,y,alpha,beta)
 breaks = seq(min(pred_sample)-0.5,max(pred_sample)+0.5,1)
-res = hist(pred_sample,prob = TRUE, main = "Histogram of Sample with Probability Mass Overlay",xlim = c(0,length(F_y)),ylim = c(0,max(f_Rand)*1.1),breaks = breaks, xlab = xlabel, ylab = "Count")
+# ylim = c(0,max(f_Rand)*1.1),
+res = hist(pred_sample,prob = FALSE, main = "Histogram of Predictive Sample",xlim = c(0,length(F_y)),breaks = breaks, xlab = xlabel, ylab = "Count")
 # lines(range_Rand,f_Rand)
-points(range_Rand,f_Rand, col = "blue", pch = 16)
+# points(range_Rand,f_Rand, col = "blue", pch = 16)
 
 if(0){
   #diagnostics
@@ -835,6 +912,8 @@ if(0){
 @
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \clearpage
 
@@ -1420,19 +1499,6 @@ abline(h=mean(ybar))
 #dev.off()
 @
 
-
-
-% <<fig=TRUE,echo=FALSE>>=
-% #Histogram of school mean scores, and relationship between sample mean and sample size
-%
-% #pdf("fig8_5.pdf",family="Times",height=3.5,width=7)
-% par(mfrow=c(1,2),mar=c(3,3,1,1),mgp=c(1.75,.75,0))
-% hist(ybar,main="",xlab="sample mean")
-% plot(n,ybar,xlab="sample size",ylab="sample mean")
-% #dev.off()
-@
-
-% Note:  to comment out the above chunk, I had to leave the @ uncommented.  Otherwise all that follows gets treated like it's within the chunk starting with the top line here, even though that line is commented.  I don't know why this is the case.
 
 \noindent For prediction, we'll use the following prior values (Hoff p. 137):
 

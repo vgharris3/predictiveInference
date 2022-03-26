@@ -26,8 +26,8 @@ ppredEG = function(ypred, y, c, dt, gm){
 
   #ERROR HANDLING
 
-  if(d > length(y)){
-    stop("d > length(y):  The number of observed copies cannot exceed the total number of copies")
+  if(sum(c) > length(y)){
+    stop("sum(c) > length(y):  The number of observed copies cannot exceed the total number of copies")
     return (1)
   }
 

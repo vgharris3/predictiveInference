@@ -1,0 +1,46 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Exponential-Gamma
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Aitchison and Dunsmore [1] provide survival time data representing the lifetime in minutes of 24 machine tools of a particular type. Inspection and replacement costs depend on the machines' lifespans, so reliable predictions are financially relevant to the factory in which the machines are used. The observed machine lifetimes range from 4 to 290, with mean 74.71.  For this example, suppose the observations were censored at three hours, that is, censoring time $t_c = 180$ minutes.  The data set includes three survival times that exceed 180 minutes, so to construct our example we replace those with the censoring time, and the mean is reduced to 72.21.  The data are plotted in Figure \ref{fig:EG_Data} with the three censored values shown in red.  The gray horizontal line depicts the average (after censoring).
+
+[Figure 6: Observed Machine Tool Lifetime Data]
+
+\noindent We will assume the data are distributed exponentially with respect to some parameter $\theta$.  Suppose prior knowledge suggests that the average survival time is around 80 minutes.  In terms of the exponential distribution then $E(y) = 1/\theta \approx 80$, so $\theta \approx 0.01$ is a reasonable value on which to base our choices for the parameter values for the Gamma$(\delta,\gamma)$ prior for $\theta$.  We can assume that $\delta/\gamma \approx 0.01$.  For this example, say $\delta = 0.5$ and $\gamma=50$.  Figure \ref{fig:EGdist} below illustrates the predictive probability using \texttt{dpredEG()} and \texttt{rpredEG()}, along with a histogram of a predictive sample taken using \texttt{rpredEG()}.\\
+
+\noindent Under the assumptions of this model the mean of the predictive sample (86.85) is somewhat larger than that of the observed data, and this information will likely influence the factory budget.
+
+[Figure 7: Exponential-Gamma Predictive Distribution]
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Poisson-Gamma
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The National Hurricane Center (\url{http://www.aoml.noaa.gov/hrd/hurdat/All_U.S._Hurricanes.html}) lists the number of hurricanes by category that made landfall in the United States each year from 1851 through 2020.  Suppose we want to predict how many large (category 3, 4, or 5) hurricanes will hit the U.S. in the 2020s.  The observed data by decade is
+
+\begin{center}
+  \begin{tabular}{cc}
+    Decade & Large Hurricane Count \\
+    \hline
+    1851-1860 & 6 \\
+    1861-1870 & 1 \\
+    1871-1880 & 7 \\
+    1881-1890 & 4 \\
+    1891-1900 & 8 \\
+    1901-1910 & 4 \\
+    1911-1920 & 7 \\
+    1921-1930 & 5 \\
+    1931-1940 & 5 \\
+    1941-1950 & 10 \\
+    1951-1960 & 6 \\
+    1961-1970 & 6 \\
+    1971-1980 & 4 \\
+    1981-1990 & 4 \\
+    1991-2000 & 5 \\
+    2001-2010 & 7 \\
+    2011-2020 & 4
+  \end{tabular}
+\end{center}
+
+Suppose we are told by a hurricane expert that the average number per decade can be expected to be around 4, and based on that information we choose $\alpha = 12$ and $\beta = 3$ for the Gamma$(\alpha,\beta)$ prior on $\theta$.  For $\tilde{y} = 1:20$ possible large hurricanes making landfall in the U.S. in the 2020s, Figure \ref{fig:PGdist} below shows the predictive distribution from \texttt{dpredPG()}, the cumulative distribution from \texttt{ppredPG()}, and a histogram of a predictive sample of size 1000 returned by \texttt{rpredPG()}.
+
+[Figure 8: Poisson-Gamma Predictive Distribution]
