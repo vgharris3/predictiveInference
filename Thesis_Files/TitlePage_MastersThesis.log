@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  1 FEB 2021 10:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  23 MAR 2022 12:45
 entering extended mode
 **./TitlePage_MastersThesis.tex
 (TitlePage_MastersThesis.tex
@@ -74,7 +74,7 @@ Package: iftex 2020/03/06 v1.0d TeX engine tests
 \Gm@dimlist=\toks16
 
 ("C:\MiKTeX 2.9\tex/latex/geometry\geometry.cfg"))
-(C:/PROGRA~1/R/R-40~1.3/share/texmf/tex/latex\Sweave.sty
+(C:/PROGRA~1/R/R-41~1.1/share/texmf/tex/latex\Sweave.sty
 Package: Sweave 
 
 ("C:\MiKTeX 2.9\tex/latex/base\ifthen.sty"
@@ -220,7 +220,7 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    Trying to load font information for TS1+aer on input line 2
 6.
 
-(C:/PROGRA~1/R/R-40~1.3/share/texmf/tex/latex\ts1aer.fd
+(C:/PROGRA~1/R/R-41~1.1/share/texmf/tex/latex\ts1aer.fd
 File: ts1aer.fd 
 )
 LaTeX Font Info:    Font shape `TS1/aer/m/n' in size <12> not available
@@ -241,7 +241,7 @@ Here is how much of TeX's memory you used:
 appen/ec/dpi600\tcrm1200.pk><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmcsc
 10.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/MiKTeX 2.9/f
 onts/type1/public/amsfonts/cm/cmr17.pfb>
-Output written on TitlePage_MastersThesis.pdf (1 page, 43603 bytes).
+Output written on TitlePage_MastersThesis.pdf (1 page, 43305 bytes).
 PDF statistics:
  24 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

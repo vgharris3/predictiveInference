@@ -22,7 +22,7 @@
 	%\begin{center}
 	%  \rule[-5mm]{75mm}{0.5mm}
 	%\end{center}
-	\textoverline{  Copyright \copyright \, Voyze G. Harris III 2021  }\\
+	\textoverline{  Copyright \copyright \, Voyze G. Harris III 2022  }\\
 	\vspace{1cm}
 	{\Large A Thesis Submitted to the Faculty of the\par}
 	\vspace{1cm}
@@ -37,7 +37,7 @@
 	\vspace{1cm}
 	{\scshape\LARGE The University of Arizona\par}
 	\vspace{1cm}
-	{\Large 2021\par}
+	{\Large 2022\par}
 
 
 %	Committee:\par

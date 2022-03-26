@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  21 MAR 2022 17:28
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  25 MAR 2022 16:45
 entering extended mode
 **./Thesis_v4.tex
 (Thesis_v4.tex
@@ -302,6 +302,10 @@ LaTeX3 Info: Defining command \setlipsum with sig. '+m' on line 357.
 
 
 ("C:\MiKTeX 2.9\tex/latex/lipsum\lipsum.ltd.tex"))
+("C:\MiKTeX 2.9\tex/latex/etoolbox\etoolbox.sty"
+Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count268
+)
 ("C:\MiKTeX 2.9\tex/latex/amsmath\amsmath.sty"
 Package: amsmath 2020/09/23 v2.17i AMS math features
 \@mathmargin=\skip50
@@ -322,13 +326,13 @@ Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 ("C:\MiKTeX 2.9\tex/latex/amsmath\amsopn.sty"
 Package: amsopn 2016/03/08 v2.02 operator names
 )
-\inf@bad=\count268
+\inf@bad=\count269
 LaTeX Info: Redefining \frac on input line 234.
-\uproot@=\count269
-\leftroot@=\count270
+\uproot@=\count270
+\leftroot@=\count271
 LaTeX Info: Redefining \overline on input line 399.
-\classnum@=\count271
-\DOTSCASE@=\count272
+\classnum@=\count272
+\DOTSCASE@=\count273
 LaTeX Info: Redefining \ldots on input line 496.
 LaTeX Info: Redefining \dots on input line 499.
 LaTeX Info: Redefining \cdots on input line 620.
@@ -337,15 +341,15 @@ LaTeX Info: Redefining \cdots on input line 620.
 \big@size=\dimen153
 LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
-\macc@depth=\count273
-\c@MaxMatrixCols=\count274
+\macc@depth=\count274
+\c@MaxMatrixCols=\count275
 \dotsspace@=\muskip17
-\c@parentequation=\count275
-\dspbrk@lvl=\count276
+\c@parentequation=\count276
+\dspbrk@lvl=\count277
 \tag@help=\toks18
-\row@=\count277
-\column@=\count278
-\maxfields@=\count279
+\row@=\count278
+\column@=\count279
+\maxfields@=\count280
 \andhelp@=\toks19
 \eqnshift@=\dimen154
 \alignsep@=\dimen155
@@ -365,15 +369,15 @@ Package: mathtools 2020/03/24 v1.24 mathematical typesetting tools
 
 ("C:\MiKTeX 2.9\tex/latex/tools\calc.sty"
 Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count280
-\calc@Bcount=\count281
+\calc@Acount=\count281
+\calc@Bcount=\count282
 \calc@Adimen=\dimen160
 \calc@Bdimen=\dimen161
 \calc@Askip=\skip53
 \calc@Bskip=\skip54
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count282
+\calc@Ccount=\count283
 \calc@Cskip=\skip55
 )
 ("C:\MiKTeX 2.9\tex/latex/mathtools\mhsetup.sty"
@@ -383,7 +387,7 @@ LaTeX Info: Thecontrolsequence`\('isalreadyrobust on input line 130.
 LaTeX Info: Thecontrolsequence`\)'isalreadyrobust on input line 130.
 LaTeX Info: Thecontrolsequence`\['isalreadyrobust on input line 130.
 LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 130.
-\g_MT_multlinerow_int=\count283
+\g_MT_multlinerow_int=\count284
 \l_MT_multwidth_dim=\dimen162
 \origjot=\skip56
 \l_MT_shortvdotswithinadjustabove_dim=\dimen163
@@ -432,12 +436,12 @@ Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \cmidrulesep=\dimen177
 \cmidrulekern=\dimen178
 \defaultaddspace=\dimen179
-\@cmidla=\count284
-\@cmidlb=\count285
+\@cmidla=\count285
+\@cmidlb=\count286
 \@aboverulesep=\dimen180
 \@belowrulesep=\dimen181
-\@thisruleclass=\count286
-\@lastruleclass=\count287
+\@thisruleclass=\count287
+\@lastruleclass=\count288
 \@thisrulewidth=\dimen182
 )
 ("C:\MiKTeX 2.9\tex/latex/siunitx\siunitx.sty"
@@ -445,16 +449,12 @@ Package: siunitx 2022-01-05 v3.0.39 A comprehensive (SI) units package
 \l__siunitx_angle_tmp_dim=\dimen183
 \l__siunitx_angle_marker_box=\box51
 \l__siunitx_angle_unit_box=\box52
-\l__siunitx_compound_count_int=\count288
+\l__siunitx_compound_count_int=\count289
 
 ("C:\MiKTeX 2.9\tex/latex/translations\translations.sty"
 Package: translations 2022/01/04 v1.11 internationalization of LaTeX2e packages
  (CN)
-
-("C:\MiKTeX 2.9\tex/latex/etoolbox\etoolbox.sty"
-Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count289
-))
+)
 \l__siunitx_number_exponent_fixed_int=\count290
 \l__siunitx_number_min_decimal_int=\count291
 \l__siunitx_number_min_integer_int=\count292
@@ -1148,8 +1148,8 @@ Package: ae 2001/02/12 1.3 Almost European Computer Modern
 Package: fontenc 2020/08/10 v2.0s Standard LaTeX package
 )))
 Package translations Info: No language package found. I am going to use `englis
-h' as default language. on input line 66.
-LaTeX Font Info:    Trying to load font information for T1+aer on input line 66
+h' as default language. on input line 72.
+LaTeX Font Info:    Trying to load font information for T1+aer on input line 72
 .
 
 ("C:\MiKTeX 2.9\tex/latex/ae\t1aer.fd"
@@ -1157,22 +1157,22 @@ File: t1aer.fd 1997/11/16 Font definitions for T1/aer.
 ) (Thesis_v4.aux)
 \openout1 = `Thesis_v4.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 66.
-LaTeX Font Info:    ... okay on input line 66.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 66.
-LaTeX Font Info:    ... okay on input line 66.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 66.
-LaTeX Font Info:    ... okay on input line 66.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 66.
-LaTeX Font Info:    ... okay on input line 66.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 66.
-LaTeX Font Info:    ... okay on input line 66.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 66.
-LaTeX Font Info:    ... okay on input line 66.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 66.
-LaTeX Font Info:    ... okay on input line 66.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 66.
-LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 72.
+LaTeX Font Info:    ... okay on input line 72.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1234,7 +1234,7 @@ Package grfext Info: Graphics extension search list:
 G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 504.
 )
-Package hyperref Info: Link coloring ON on input line 66.
+Package hyperref Info: Link coloring ON on input line 72.
 
 ("C:\MiKTeX 2.9\tex/latex/hyperref\nameref.sty"
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
@@ -1247,9 +1247,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count345
 )
-LaTeX Info: Redefining \ref on input line 66.
-LaTeX Info: Redefining \pageref on input line 66.
-LaTeX Info: Redefining \nameref on input line 66.
+LaTeX Info: Redefining \ref on input line 72.
+LaTeX Info: Redefining \pageref on input line 72.
+LaTeX Info: Redefining \nameref on input line 72.
  (Thesis_v4.out) (Thesis_v4.out)
 \@outlinefile=\write5
 \openout5 = `Thesis_v4.out'.
@@ -1267,7 +1267,7 @@ Package caption Info: End \AtBeginDocument code.
 Package pgfplots Warning: running in backwards compatibility mode (unsuitable t
 ick labels; missing features). Consider writing \pgfplotsset{compat=1.17} into 
 your preamble.
- on input line 66.
+ on input line 72.
 
 ("C:\MiKTeX 2.9\tex/latex/pdflscape\pdflscape.sty"
 Package: pdflscape 2019/12/05 v0.12 Display of landscape pages in PDF (HO)
@@ -1280,37 +1280,37 @@ Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 <TitlePage_MastersThesis.pdf, id=170, 597.50829pt x 845.0471pt>
 File: TitlePage_MastersThesis.pdf Graphic file (type pdf)
 <use TitlePage_MastersThesis.pdf>
-Package pdftex.def Info: TitlePage_MastersThesis.pdf  used on input line 67.
+Package pdftex.def Info: TitlePage_MastersThesis.pdf  used on input line 73.
 (pdftex.def)             Requested size: 362.37569pt x 512.49939pt.
 File: TitlePage_MastersThesis.pdf Graphic file (type pdf)
 <use TitlePage_MastersThesis.pdf>
-Package pdftex.def Info: TitlePage_MastersThesis.pdf  used on input line 67.
+Package pdftex.def Info: TitlePage_MastersThesis.pdf  used on input line 73.
 (pdftex.def)             Requested size: 362.37569pt x 512.49939pt.
 <TitlePage_MastersThesis.pdf, id=173, page=1, 597.50829pt x 845.0471pt>
 File: TitlePage_MastersThesis.pdf Graphic file (type pdf)
 <use TitlePage_MastersThesis.pdf, page 1>
 Package pdftex.def Info: TitlePage_MastersThesis.pdf , page1 used on input line
- 67.
+ 73.
 (pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
 File: TitlePage_MastersThesis.pdf Graphic file (type pdf)
 <use TitlePage_MastersThesis.pdf, page 1>
 Package pdftex.def Info: TitlePage_MastersThesis.pdf , page1 used on input line
- 67.
+ 73.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: TitlePage_MastersThesis.pdf Graphic file (type pdf)
 <use TitlePage_MastersThesis.pdf, page 1>
 Package pdftex.def Info: TitlePage_MastersThesis.pdf , page1 used on input line
- 67.
+ 73.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: TitlePage_MastersThesis.pdf Graphic file (type pdf)
 <use TitlePage_MastersThesis.pdf, page 1>
 Package pdftex.def Info: TitlePage_MastersThesis.pdf , page1 used on input line
- 67.
+ 73.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
 File: TitlePage_MastersThesis.pdf Graphic file (type pdf)
 <use TitlePage_MastersThesis.pdf, page 1>
 Package pdftex.def Info: TitlePage_MastersThesis.pdf , page1 used on input line
- 67.
+ 73.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
  [1
 
@@ -1322,7 +1322,7 @@ und PDF version <1.7>, but at most version <1.5> allowed
 <ThesisApprovalPage.pdf, id=200, 614.295pt x 794.97pt>
 File: ThesisApprovalPage.pdf Graphic file (type pdf)
 <use ThesisApprovalPage.pdf>
-Package pdftex.def Info: ThesisApprovalPage.pdf  used on input line 68.
+Package pdftex.def Info: ThesisApprovalPage.pdf  used on input line 74.
 (pdftex.def)             Requested size: 362.37569pt x 468.95546pt.
 
 
@@ -1330,7 +1330,7 @@ pdfTeX warning: pdflatex.exe (file ./ThesisApprovalPage.pdf): PDF inclusion: fo
 und PDF version <1.7>, but at most version <1.5> allowed
 File: ThesisApprovalPage.pdf Graphic file (type pdf)
 <use ThesisApprovalPage.pdf>
-Package pdftex.def Info: ThesisApprovalPage.pdf  used on input line 68.
+Package pdftex.def Info: ThesisApprovalPage.pdf  used on input line 74.
 (pdftex.def)             Requested size: 362.37569pt x 468.95546pt.
 
 
@@ -1343,23 +1343,23 @@ und PDF version <1.7>, but at most version <1.5> allowed
 <ThesisApprovalPage.pdf, id=203, page=1, 614.295pt x 794.97pt>
 File: ThesisApprovalPage.pdf Graphic file (type pdf)
 <use ThesisApprovalPage.pdf, page 1>
-Package pdftex.def Info: ThesisApprovalPage.pdf , page1 used on input line 68.
+Package pdftex.def Info: ThesisApprovalPage.pdf , page1 used on input line 74.
 (pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
 File: ThesisApprovalPage.pdf Graphic file (type pdf)
 <use ThesisApprovalPage.pdf, page 1>
-Package pdftex.def Info: ThesisApprovalPage.pdf , page1 used on input line 68.
+Package pdftex.def Info: ThesisApprovalPage.pdf , page1 used on input line 74.
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 File: ThesisApprovalPage.pdf Graphic file (type pdf)
 <use ThesisApprovalPage.pdf, page 1>
-Package pdftex.def Info: ThesisApprovalPage.pdf , page1 used on input line 68.
+Package pdftex.def Info: ThesisApprovalPage.pdf , page1 used on input line 74.
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 File: ThesisApprovalPage.pdf Graphic file (type pdf)
 <use ThesisApprovalPage.pdf, page 1>
-Package pdftex.def Info: ThesisApprovalPage.pdf , page1 used on input line 68.
+Package pdftex.def Info: ThesisApprovalPage.pdf , page1 used on input line 74.
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 File: ThesisApprovalPage.pdf Graphic file (type pdf)
 <use ThesisApprovalPage.pdf, page 1>
-Package pdftex.def Info: ThesisApprovalPage.pdf , page1 used on input line 68.
+Package pdftex.def Info: ThesisApprovalPage.pdf , page1 used on input line 74.
 (pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
 [2 <./ThesisApprovalPage.pdf>] (Thesis_v4-concordance.tex) (Thesis_v4.toc
 LaTeX Font Info:    Trying to load font information for U+msa on input line 3.
@@ -1381,100 +1381,109 @@ File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 \tf@toc=\write6
 \openout6 = `Thesis_v4.toc'.
 
- [3] [4]
-Underfull \hbox (badness 10000) in paragraph at lines 84--85
+ [3] (Thesis_v4.lof
+LaTeX Font Info:    Trying to load font information for TS1+aer on input line 3
+.
+
+(C:/PROGRA~1/R/R-41~1.1/share/texmf/tex/latex\ts1aer.fd
+File: ts1aer.fd 
+)
+LaTeX Font Info:    Font shape `TS1/aer/m/n' in size <12> not available
+(Font)              Font shape `TS1/cmr/m/n' tried instead on input line 3.
+)
+\tf@lof=\write7
+\openout7 = `Thesis_v4.lof'.
+
+ [4]
+Underfull \hbox (badness 10000) in paragraph at lines 91--92
 
  []
 
-LaTeX Font Info:    Trying to load font information for T1+aett on input line 8
-6.
+LaTeX Font Info:    Trying to load font information for T1+aett on input line 9
+3.
 ("C:\MiKTeX 2.9\tex/latex/ae\t1aett.fd"
 File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
 )
-Overfull \hbox (0.3892pt too wide) in paragraph at lines 105--106
+Overfull \hbox (0.3892pt too wide) in paragraph at lines 112--113
 \T1/aer/m/n/12 Billheimer em-pha-sizes the im-prove-ment of sci-en-tific ac-cu-
 racy and re-pro-ducibil-ity Bayesian
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 105--106
+Underfull \hbox (badness 10000) in paragraph at lines 112--113
 
  []
 
 [5]
-Underfull \hbox (badness 10000) in paragraph at lines 107--108
+Underfull \hbox (badness 10000) in paragraph at lines 114--115
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 115--116
+Underfull \hbox (badness 10000) in paragraph at lines 122--123
 
  []
 
-<./Graphics/PassThePigs/PtPBox.png, id=327, 164.11313pt x 351.56343pt>
+<./Graphics/PassThePigs/PtPBox.png, id=375, 164.11313pt x 351.56343pt>
 File: ./Graphics/PassThePigs/PtPBox.png Graphic file (type png)
 <use ./Graphics/PassThePigs/PtPBox.png>
 Package pdftex.def Info: ./Graphics/PassThePigs/PtPBox.png  used on input line 
-120.
+127.
 (pdftex.def)             Requested size: 126.83044pt x 271.69708pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 125--126
+Underfull \hbox (badness 10000) in paragraph at lines 132--133
 
  []
 
 
 Package wrapfig Warning: Collision between wrapping environments on input line 
-129.
+136.
 
-<./Graphics/PassThePigs/Razorback.png, id=330, 88.07906pt x 64.74188pt>
+<./Graphics/PassThePigs/Razorback.png, id=378, 88.07906pt x 64.74188pt>
 File: ./Graphics/PassThePigs/Razorback.png Graphic file (type png)
 <use ./Graphics/PassThePigs/Razorback.png>
 Package pdftex.def Info: ./Graphics/PassThePigs/Razorback.png  used on input li
-ne 131.
+ne 138.
 (pdftex.def)             Requested size: 126.83044pt x 93.22624pt.
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 136--137
+Underfull \hbox (badness 10000) in paragraph at lines 143--144
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 138--139
+Underfull \hbox (badness 10000) in paragraph at lines 145--146
 
  []
 
-LaTeX Font Info:    Trying to load font information for TS1+aer on input line 1
-40.
-(C:/PROGRA~1/R/R-41~1.1/share/texmf/tex/latex\ts1aer.fd
-File: ts1aer.fd 
-)
-LaTeX Font Info:    Font shape `TS1/aer/m/n' in size <12> not available
-(Font)              Font shape `TS1/cmr/m/n' tried instead on input line 140.
- [7 <./Graphics/PassThePigs/PtPBox.png> <./Graphics/PassThePigs/Razorback.png>]
-<./Graphics/PassThePigs/PigSize_wRuler.png, id=349, 341.77687pt x 232.61906pt>
+[7 <./Graphics/PassThePigs/PtPBox.png> <./Graphics/PassThePigs/Razorback.png>]
+<./Graphics/PassThePigs/PigSize_wRuler.png, id=394, 341.77687pt x 232.61906pt>
 File: ./Graphics/PassThePigs/PigSize_wRuler.png Graphic file (type png)
 <use ./Graphics/PassThePigs/PigSize_wRuler.png>
 Package pdftex.def Info: ./Graphics/PassThePigs/PigSize_wRuler.png  used on inp
-ut line 144.
+ut line 151.
 (pdftex.def)             Requested size: 407.66833pt x 277.48386pt.
 LaTeX Font Info:    Font shape `TS1/aer/m/n' in size <10.95> not available
-(Font)              Font shape `TS1/cmr/m/n' tried instead on input line 145.
-<Thesis_v4-002.pdf, id=350, 433.62pt x 433.62pt>
-File: Thesis_v4-002.pdf Graphic file (type pdf)
-<use Thesis_v4-002.pdf>
-Package pdftex.def Info: Thesis_v4-002.pdf  used on input line 153.
-(pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
- [8 <./Graphics/PassThePigs/PigSize_wRuler.png>] [9 <./Thesis_v4-002.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 183--189
+(Font)              Font shape `TS1/cmr/m/n' tried instead on input line 152.
+<./Graphics/PassThePigs/PTP_BBplot.png, id=396, 473.51906pt x 447.17062pt>
+File: ./Graphics/PassThePigs/PTP_BBplot.png Graphic file (type png)
+<use ./Graphics/PassThePigs/PTP_BBplot.png>
+Package pdftex.def Info: ./Graphics/PassThePigs/PTP_BBplot.png  used on input l
+ine 162.
+(pdftex.def)             Requested size: 362.37569pt x 342.22087pt.
+
+[8 <./Graphics/PassThePigs/PigSize_wRuler.png>] [9 <./Graphics/PassThePigs/PTP_
+BBplot.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 198--204
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 195--196
+Underfull \hbox (badness 10000) in paragraph at lines 210--211
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 200--201
+Underfull \hbox (badness 10000) in paragraph at lines 213--214
 
  []
 
@@ -1484,71 +1493,76 @@ Underfull \hbox (badness 10000) in paragraph at lines 200--201
 
 Package amsmath Warning: Foreign command \atopwithdelims;
 (amsmath)                \frac or \genfrac should be used instead
-(amsmath)                 on input line 253.
+(amsmath)                 on input line 266.
 
 [12
 
 ] [13]
-<Thesis_v4-003.pdf, id=398, 433.62pt x 433.62pt>
-File: Thesis_v4-003.pdf Graphic file (type pdf)
-<use Thesis_v4-003.pdf>
-Package pdftex.def Info: Thesis_v4-003.pdf  used on input line 333.
-(pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
+<./Graphics/DistributionPlots/BetaBinomial.png, id=438, 466.74374pt x 450.18187
+pt>
+File: ./Graphics/DistributionPlots/BetaBinomial.png Graphic file (type png)
+<use ./Graphics/DistributionPlots/BetaBinomial.png>
+Package pdftex.def Info: ./Graphics/DistributionPlots/BetaBinomial.png  used on
+ input line 347.
+(pdftex.def)             Requested size: 362.37569pt x 349.53305pt.
  [14]
-Underfull \hbox (badness 10000) in paragraph at lines 342--344
+Underfull \hbox (badness 10000) in paragraph at lines 362--364
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 345--346
+Underfull \hbox (badness 10000) in paragraph at lines 365--366
 
  []
 
-[15 <./Thesis_v4-003.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 370--371
+[15 <./Graphics/DistributionPlots/BetaBinomial.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 390--391
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 387--388
+Underfull \hbox (badness 10000) in paragraph at lines 407--408
 
  []
 
 [16]
-Underfull \hbox (badness 10000) in paragraph at lines 393--394
+Underfull \hbox (badness 10000) in paragraph at lines 413--414
 
  []
 
 
-Overfull \hbox (47.755pt too wide) detected at line 412
+Overfull \hbox (47.755pt too wide) detected at line 432
 []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 417--418
+Underfull \hbox (badness 10000) in paragraph at lines 437--438
 
  []
 
 [17]
-<Thesis_v4-004.pdf, id=422, 433.62pt x 433.62pt>
-File: Thesis_v4-004.pdf Graphic file (type pdf)
-<use Thesis_v4-004.pdf>
-Package pdftex.def Info: Thesis_v4-004.pdf  used on input line 423.
-(pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
- [18 <./Thesis_v4-004.pdf>] [19
+<./Graphics/DistributionPlots/ExponentialGamma.png, id=458, 459.21562pt x 441.9
+0094pt>
+File: ./Graphics/DistributionPlots/ExponentialGamma.png Graphic file (type png)
+
+<use ./Graphics/DistributionPlots/ExponentialGamma.png>
+Package pdftex.def Info: ./Graphics/DistributionPlots/ExponentialGamma.png  use
+d on input line 443.
+(pdftex.def)             Requested size: 362.37569pt x 348.72705pt.
+ [18 <./Graphics/DistributionPlots/ExponentialGamma.png>] [19
 
 ] [20]
-Underfull \hbox (badness 10000) in paragraph at lines 518--519
+Underfull \hbox (badness 10000) in paragraph at lines 545--546
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 520--521
+Underfull \hbox (badness 10000) in paragraph at lines 547--548
 
  []
 
 
-Overfull \hbox (4.88312pt too wide) in paragraph at lines 526--527
+Overfull \hbox (4.88312pt too wide) in paragraph at lines 553--554
 []\T1/aer/m/n/12 Set lower end-point $\OML/cmm/m/it/12 L$ \T1/aer/m/n/12 equal 
 to the ex-pected value of $[]$. That is, $\OML/cmm/m/it/12 L \OT1/cmr/m/n/12 = 
 \OML/cmm/m/it/12 E\OT1/cmr/m/n/12 ([]\OMS/cmsy/m/n/12 j\OML/cmm/m/it/12 y[]; ::
@@ -1556,143 +1570,173 @@ to the ex-pected value of $[]$. That is, $\OML/cmm/m/it/12 L \OT1/cmr/m/n/12 =
  []
 
 [21]
-<Thesis_v4-005.pdf, id=451, 433.62pt x 433.62pt>
-File: Thesis_v4-005.pdf Graphic file (type pdf)
-<use Thesis_v4-005.pdf>
-Package pdftex.def Info: Thesis_v4-005.pdf  used on input line 565.
-(pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
- [22] [23 <./Thesis_v4-005.pdf>]
-LaTeX Font Info:    Calculating math sizes for size <8.4> on input line 585.
+<./Graphics/DistributionPlots/PoissonGamma.png, id=483, 460.72125pt x 441.90094
+pt>
+File: ./Graphics/DistributionPlots/PoissonGamma.png Graphic file (type png)
+<use ./Graphics/DistributionPlots/PoissonGamma.png>
+Package pdftex.def Info: ./Graphics/DistributionPlots/PoissonGamma.png  used on
+ input line 593.
+(pdftex.def)             Requested size: 362.37569pt x 347.56729pt.
+ [22] [23 <./Graphics/DistributionPlots/PoissonGamma.png>]
+LaTeX Font Info:    Calculating math sizes for size <8.4> on input line 620.
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <4.2> not available
-(Font)              size <5> substituted on input line 585.
+(Font)              size <5> substituted on input line 620.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <4.2> not available
-(Font)              size <5> substituted on input line 585.
+(Font)              size <5> substituted on input line 620.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <4.2> not available
-(Font)              size <5> substituted on input line 585.
+(Font)              size <5> substituted on input line 620.
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/bx/n' in size <4.2> not available
-(Font)              size <5> substituted on input line 585.
+(Font)              size <5> substituted on input line 620.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/b/it' in size <4.2> not available
-(Font)              size <5> substituted on input line 585.
+(Font)              size <5> substituted on input line 620.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/b/n' in size <4.2> not available
-(Font)              size <5> substituted on input line 585.
+(Font)              size <5> substituted on input line 620.
 
 
 LaTeX Font Warning: Font shape `U/rsfs/m/n' in size <4.2> not available
-(Font)              size <5> substituted on input line 585.
+(Font)              size <5> substituted on input line 620.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 595--596
+Underfull \hbox (badness 10000) in paragraph at lines 630--631
 
  []
 
 [24
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 617--618
+Underfull \hbox (badness 10000) in paragraph at lines 652--653
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 629--630
+Underfull \hbox (badness 10000) in paragraph at lines 664--665
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 637--638
+Underfull \hbox (badness 10000) in paragraph at lines 672--673
 
  []
 
 [25]
-Overfull \hbox (4.50432pt too wide) detected at line 672
+Overfull \hbox (4.50432pt too wide) detected at line 707
 []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 675--676
+Underfull \hbox (badness 10000) in paragraph at lines 710--711
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 680--681
+Underfull \hbox (badness 10000) in paragraph at lines 715--716
 
  []
 
 [26]
-<Thesis_v4-006.pdf, id=490, 433.62pt x 433.62pt>
-File: Thesis_v4-006.pdf Graphic file (type pdf)
-<use Thesis_v4-006.pdf>
-Package pdftex.def Info: Thesis_v4-006.pdf  used on input line 708.
-(pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
- [27] [28 <./Thesis_v4-006.pdf>]
-Overfull \hbox (25.64029pt too wide) in paragraph at lines 717--718
+Underfull \hbox (badness 10000) in paragraph at lines 741--742
+
+ []
+
+<./Graphics/DistributionPlots/NormIG1.png, id=518, 457.71pt x 446.41782pt>
+File: ./Graphics/DistributionPlots/NormIG1.png Graphic file (type png)
+<use ./Graphics/DistributionPlots/NormIG1.png>
+Package pdftex.def Info: ./Graphics/DistributionPlots/NormIG1.png  used on inpu
+t line 745.
+(pdftex.def)             Requested size: 362.37569pt x 353.44955pt.
+[27] [28 <./Graphics/DistributionPlots/NormIG1.png>]
+Overfull \hbox (25.64029pt too wide) in paragraph at lines 758--759
  \T1/aer/b/n/12 3.4.2.1 Deriva-tion[][] \T1/aer/m/n/12 For a Bayesian anal-y-si
 s com-par-ing two ex-change-able groups $\OML/cmm/m/it/12 Y[]; :::; Y[]$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 734--735
+Underfull \hbox (badness 10000) in paragraph at lines 775--776
 
  []
 
 [29
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 790--793
+Underfull \hbox (badness 10000) in paragraph at lines 831--834
 
  []
 
-<Thesis_v4-007.pdf, id=509, 433.62pt x 433.62pt>
-File: Thesis_v4-007.pdf Graphic file (type pdf)
-<use Thesis_v4-007.pdf>
-Package pdftex.def Info: Thesis_v4-007.pdf  used on input line 794.
-(pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 831--834
+
+ []
+
+<./Graphics/ExamplePlots/NormIG2_SchoolData.png, id=533, 445.665pt x 360.59718p
+t>
+File: ./Graphics/ExamplePlots/NormIG2_SchoolData.png Graphic file (type png)
+<use ./Graphics/ExamplePlots/NormIG2_SchoolData.png>
+Package pdftex.def Info: ./Graphics/ExamplePlots/NormIG2_SchoolData.png  used o
+n input line 837.
+(pdftex.def)             Requested size: 362.37569pt x 293.21008pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 843--844
+
+ []
+
 [30]
-Underfull \hbox (badness 10000) in paragraph at lines 796--797
+Underfull \hbox (badness 10000) in paragraph at lines 845--846
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 798--799
+Underfull \hbox (badness 10000) in paragraph at lines 845--846
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 798--799
+Overfull \hbox (3.32913pt too wide) in paragraph at lines 847--848
+\T1/aer/m/n/12 The re-sults of a call to \T1/aett/m/n/12 rpred-NormIG2() \T1/ae
+r/m/n/12 with the above in-put val-ues for $\OT1/cmr/bx/n/12 y[]\OML/cmm/m/it/1
+2 ; \OT1/cmr/bx/n/12 y[]\OML/cmm/m/it/12 ; []; []; []; []$\T1/aer/m/n/12 ,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 847--848
 
  []
 
-[31 <./Thesis_v4-007.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 800--803
+[31 <./Graphics/ExamplePlots/NormIG2_SchoolData.png>]
+<./Graphics/ExamplePlots/NormIG2_Data_v_Prediction.png, id=551, 444.91219pt x 4
+28.35031pt>
+File: ./Graphics/ExamplePlots/NormIG2_Data_v_Prediction.png Graphic file (type 
+png)
+<use ./Graphics/ExamplePlots/NormIG2_Data_v_Prediction.png>
+Package pdftex.def Info: ./Graphics/ExamplePlots/NormIG2_Data_v_Prediction.png 
+ used on input line 851.
+(pdftex.def)             Requested size: 362.37569pt x 348.89pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 857--858
 
  []
 
-<Thesis_v4-008.pdf, id=530, 433.62pt x 433.62pt>
-File: Thesis_v4-008.pdf Graphic file (type pdf)
-<use Thesis_v4-008.pdf>
-Package pdftex.def Info: Thesis_v4-008.pdf  used on input line 804.
-(pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 807.
+(hyperref)                removing `math shift' on input line 859.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 807.
+(hyperref)                removing `math shift' on input line 859.
 
 
-Overfull \hbox (0.37712pt too wide) in paragraph at lines 809--810
+Overfull \hbox (0.37712pt too wide) in paragraph at lines 861--862
 \T1/aer/m/n/12 where $\OT1/cmr/bx/n/12 Y[] \OT1/cmr/m/n/12 = \OMS/cmsy/m/n/12 f
 \OML/cmm/m/it/12 Y[]; :::; Y[]\OMS/cmsy/m/n/12 g\OML/cmm/m/it/12 ; j \OT1/cmr/m
 /n/12 = 1\OML/cmm/m/it/12 ; :::; k$\T1/aer/m/n/12 . Here we stip-u-late ex-chan
@@ -1700,81 +1744,93 @@ ge-abil-ity of $\OML/cmm/m/it/12 Y[]; :::; Y[]$\T1/aer/m/n/12 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 809--810
+Underfull \hbox (badness 10000) in paragraph at lines 861--862
 
  []
 
-[32 <./Thesis_v4-008.pdf>]
-Overfull \hbox (31.85727pt too wide) detected at line 831
+[32 <./Graphics/ExamplePlots/NormIG2_Data_v_Prediction.png>]
+Overfull \hbox (31.85727pt too wide) detected at line 883
 [] \OMS/cmsy/m/n/12  [] [] \OML/cmm/m/it/12 :
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 833--834
+Underfull \hbox (badness 10000) in paragraph at lines 885--886
 
  []
 
 
-Overfull \hbox (10.67146pt too wide) in paragraph at lines 840--841
+Overfull \hbox (10.67146pt too wide) in paragraph at lines 892--893
  \T1/aer/b/n/12 3.4.3.2 R Im-ple-men-ta-tion (Normal-Inverse Gamma, k-samples)[
 ][] \T1/aer/m/n/12 The R func-tion \T1/aett/m/n/12 rpred-
  []
 
 [33]
-Overfull \hbox (30.15889pt too wide) detected at line 886
+Overfull \hbox (30.15889pt too wide) detected at line 938
 []
  []
 
-<Thesis_v4-009.pdf, id=546, 433.62pt x 433.62pt>
-File: Thesis_v4-009.pdf Graphic file (type pdf)
-<use Thesis_v4-009.pdf>
-Package pdftex.def Info: Thesis_v4-009.pdf  used on input line 893.
-(pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
-[34] [35 <./Thesis_v4-009.pdf>]
-<Thesis_v4-011.pdf, id=567, 433.62pt x 433.62pt>
-File: Thesis_v4-011.pdf Graphic file (type pdf)
-<use Thesis_v4-011.pdf>
-Package pdftex.def Info: Thesis_v4-011.pdf  used on input line 943.
-(pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
- [36 <./Thesis_v4-011.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 1014--1015
+[34]
+<./Graphics/ExamplePlots/NormIGk_MathScoreData.png, id=574, 446.41782pt x 444.1
+5938pt>
+File: ./Graphics/ExamplePlots/NormIGk_MathScoreData.png Graphic file (type png)
+
+<use ./Graphics/ExamplePlots/NormIGk_MathScoreData.png>
+Package pdftex.def Info: ./Graphics/ExamplePlots/NormIGk_MathScoreData.png  use
+d on input line 947.
+(pdftex.def)             Requested size: 362.37569pt x 360.54651pt.
+ [35 <./Graphics/ExamplePlots/NormIGk_MathScoreData.png>]
+<./Graphics/ExamplePlots/NormIGk_Data_v_Prediction.png, id=581, 430.60875pt x 4
+22.32782pt>
+File: ./Graphics/ExamplePlots/NormIGk_Data_v_Prediction.png Graphic file (type 
+png)
+<use ./Graphics/ExamplePlots/NormIGk_Data_v_Prediction.png>
+Package pdftex.def Info: ./Graphics/ExamplePlots/NormIGk_Data_v_Prediction.png 
+ used on input line 1000.
+(pdftex.def)             Requested size: 362.37569pt x 355.4167pt.
+ [36 <./Graphics/ExamplePlots/NormIGk_Data_v_Prediction.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 1075--1076
 
  []
 
 [37
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 1022--1023
+Underfull \hbox (badness 10000) in paragraph at lines 1083--1084
 
  []
 
-<Thesis_v4-012.pdf, id=585, 433.62pt x 433.62pt>
-File: Thesis_v4-012.pdf Graphic file (type pdf)
-<use Thesis_v4-012.pdf>
-Package pdftex.def Info: Thesis_v4-012.pdf  used on input line 1028.
-(pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
-[38 <./Thesis_v4-012.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 1058--1059
+<./Graphics/ExamplePlots/OxygenUptakeData.png, id=595, 453.94594pt x 446.41782p
+t>
+File: ./Graphics/ExamplePlots/OxygenUptakeData.png Graphic file (type png)
+<use ./Graphics/ExamplePlots/OxygenUptakeData.png>
+Package pdftex.def Info: ./Graphics/ExamplePlots/OxygenUptakeData.png  used on 
+input line 1091.
+(pdftex.def)             Requested size: 362.37569pt x 356.37181pt.
+[38 <./Graphics/ExamplePlots/OxygenUptakeData.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 1125--1126
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1058--1059
+Underfull \hbox (badness 10000) in paragraph at lines 1125--1126
 
  []
 
-<Thesis_v4-013.pdf, id=595, 433.62pt x 433.62pt>
-File: Thesis_v4-013.pdf Graphic file (type pdf)
-<use Thesis_v4-013.pdf>
-Package pdftex.def Info: Thesis_v4-013.pdf  used on input line 1060.
-(pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
-[39 <./Thesis_v4-013.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 1069--1070
+<./Graphics/ExamplePlots/RegressionModelVariations.png, id=602, 447.17062pt x 4
+59.96844pt>
+File: ./Graphics/ExamplePlots/RegressionModelVariations.png Graphic file (type 
+png)
+<use ./Graphics/ExamplePlots/RegressionModelVariations.png>
+Package pdftex.def Info: ./Graphics/ExamplePlots/RegressionModelVariations.png 
+ used on input line 1129.
+(pdftex.def)             Requested size: 362.37569pt x 372.75488pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1142--1143
 
  []
 
-[40]
-Overfull \hbox (39.94238pt too wide) in paragraph at lines 1110--1121
+[39] [40 <./Graphics/ExamplePlots/RegressionModelVariations.png>]
+Overfull \hbox (39.94238pt too wide) in paragraph at lines 1183--1194
 \T1/aer/m/n/12 and for pri-ors we choose $\OML/cmm/b/it/12  \OMS/cmsy/m/n/12 
  []\OT1/cmr/m/n/12 (\OML/cmm/b/it/12 []\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 [])
 $ \T1/aer/m/n/12 and $\OT1/cmr/m/n/12 1\OML/cmm/m/it/12 =[] \OT1/cmr/m/n/12 = 
@@ -1783,12 +1839,12 @@ OT1/cmr/m/n/12 2\OML/cmm/m/it/12 ; [][]=\OT1/cmr/m/n/12 2)$\T1/aer/m/n/12 .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1110--1121
+Underfull \hbox (badness 10000) in paragraph at lines 1183--1194
 
  []
 
 
-Overfull \hbox (1.57745pt too wide) in paragraph at lines 1146--1147
+Overfull \hbox (1.57745pt too wide) in paragraph at lines 1226--1227
 \T1/aer/m/n/12 Constructing a Gibbs sam-pler to ap-prox-i-mate the joint pos-te
 -rior dis-tri-bu-tion $\OML/cmm/m/it/12 p\OT1/cmr/m/n/12 (\OML/cmm/b/it/12 \OM
 L/cmm/m/it/12 ; []\OMS/cmsy/m/n/12 j[]\OT1/cmr/m/n/12 )$
@@ -1797,40 +1853,45 @@ L/cmm/m/it/12 ; []\OMS/cmsy/m/n/12 j[]\OT1/cmr/m/n/12 )$
 [41
 
 ]
-Overfull \hbox (0.347pt too wide) in paragraph at lines 1161--1162
-[]\T1/aer/m/n/12 To cre-ate a sam-ple from the pre-dic-tive dis-tri-bu-tion of 
-re-sponses: for each $\OML/cmm/m/it/12 s \OMS/cmsy/m/n/12 2 f\OT1/cmr/m/n/12 1\
-OML/cmm/m/it/12 ; :::; S\OMS/cmsy/m/n/12 g$\T1/aer/m/n/12 ,
- []
-
 
 LaTeX Warning: Reference `regression_semiconj_var' on page 42 undefined on inpu
-t line 1167.
+t line 1249.
 
 
 LaTeX Warning: Reference `regression_semiconj_expec' on page 42 undefined on in
-put line 1167.
+put line 1249.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1185--1186
+Underfull \hbox (badness 10000) in paragraph at lines 1267--1268
 
  []
 
 [42]
-Overfull \hbox (15.32634pt too wide) detected at line 1246
+Overfull \hbox (15.32634pt too wide) detected at line 1329
 []
  []
 
-<Thesis_v4-016.pdf, id=634, 433.62pt x 433.62pt>
-File: Thesis_v4-016.pdf Graphic file (type pdf)
-<use Thesis_v4-016.pdf>
-Package pdftex.def Info: Thesis_v4-016.pdf  used on input line 1251.
-(pdftex.def)             Requested size: 362.37569pt x 362.39232pt.
-[43] [44 <./Thesis_v4-016.pdf>] [45
+[43]
+<./Graphics/ExamplePlots/RegressionPriorComparison.png, id=642, 439.6425pt x 43
+2.11438pt>
+File: ./Graphics/ExamplePlots/RegressionPriorComparison.png Graphic file (type 
+png)
+<use ./Graphics/ExamplePlots/RegressionPriorComparison.png>
+Package pdftex.def Info: ./Graphics/ExamplePlots/RegressionPriorComparison.png 
+ used on input line 1336.
+(pdftex.def)             Requested size: 362.37569pt x 356.18227pt.
+ [44 <./Graphics/ExamplePlots/RegressionPriorComparison.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 1347--1348
+
+ []
+
+[45
+
+] [46
 
 ] (Thesis_v4.aux)
 Package rerunfilecheck Info: File `Thesis_v4.out' has not changed.
-(rerunfilecheck)             Checksum: 88BC6A680614E6802341AA7055204A77;3369.
+(rerunfilecheck)             Checksum: 75437F198119000B2EE3CD358F5E4817;3369.
 
 
 LaTeX Font Warning: Size substitutions with differences
@@ -1841,13 +1902,13 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 35951 strings out of 479696
- 850497 string characters out of 2881701
- 1346008 words of memory out of 3000000
- 52210 multiletter control sequences out of 15000+200000
+ 36022 strings out of 479696
+ 853938 string characters out of 2881701
+ 1346014 words of memory out of 3000000
+ 52242 multiletter control sequences out of 15000+200000
  454971 words of font info for 148 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 94i,20n,98p,1418b,997s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 94i,20n,98p,1435b,997s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\gabe\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\t
 crm1095.pk> <C:\Users\gabe\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec
 /dpi600\tcrm1200.pk><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmb10.pfb><C:
@@ -1868,9 +1929,9 @@ KTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/MiKTeX 2.9/fonts/type1/p
 ublic/amsfonts/cm/cmtt12.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt
 8.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/latxfont/line10.pfb><C:/MiKTeX
  2.9/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on Thesis_v4.pdf (45 pages, 1159091 bytes).
+Output written on Thesis_v4.pdf (46 pages, 1451461 bytes).
 PDF statistics:
- 763 PDF objects out of 1000 (max. 8388607)
- 132 named destinations out of 1000 (max. 500000)
+ 776 PDF objects out of 1000 (max. 8388607)
+ 152 named destinations out of 1000 (max. 500000)
  460 words of extra memory for PDF output out of 10000 (max. 10000000)
 

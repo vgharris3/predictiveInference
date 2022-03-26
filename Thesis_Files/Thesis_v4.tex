@@ -13,6 +13,12 @@
 
 \usepackage{lipsum}
 
+\usepackage{etoolbox}
+\patchcmd{\thebibliography}{\section*{\refname}}{}{}{}
+
+% \usepackage[backend=bibtex,style=verbose-trad2]{biblatex}
+% \bibliography{References}
+
 \usepackage{amsmath}
 \usepackage{mathtools}
 \usepackage{amssymb}
@@ -69,6 +75,7 @@
 \input{Thesis_v4-concordance}
 
 \tableofcontents
+\listoffigures
 \newpage
 
 
@@ -83,7 +90,7 @@
 
 An obstacle to widespread employment of Bayesian predictive inference in scientific research is the lack of suitable computing tools.  In this thesis I document several established useful models, and provide an applicable set of tools for statisticians.  For each of the included models, some basic notes on mathematical derivation are presented, and predictive inference is illustrated with examples.  For the details of the models and some of the examples I relied primarily on Seymour Geisser's \underline{Predictive Inference:  An Introduction} (1993) and Peter D. Hoff's \underline{A First Course in Bayesian Statistical Methods} (2009).\\
 
-\noindent An R package has been developed, the main purpose of which is to provide the researcher with a means of producing random samples from predictive distributions.  For all the models, the package includes random sample generators.  For those models with analytical solutions, density and distribution functions are also provided.  The standard R naming convention for these function classes has been adopted:  density functions are prefixed with the letter ``d," distribution functions with the letter ``p," and random generation functions with the letter ``r."  Also included in all function names is the abbreviation ``pred" (for predictive) and an initialism or abbreviation identifying the model itself.  For example, the density function for the Beta-Binomial model is named ``\texttt{dpredBB()}."  The R code for each function is included in Appendix \textcolor{red}{X-insert link to appendix here}.
+\noindent An R package has been developed, the main purpose of which is to provide the researcher with a means of generating samples from predictive distributions.  So for all the models, the package includes predictive sample generators.  For those models with analytical solutions, density and distribution functions are also provided.  The standard R naming convention for these function classes has been adopted:  density functions are prefixed with the letter ``d," distribution functions with the letter ``p," and sample generation functions with the letter ``r."  Also included in all function names is the abbreviation ``pred" (for predictive) and an initialism or abbreviation identifying the model itself.  For example, the density function for the Beta-Binomial model is named ``\texttt{dpredBB()}."  The R code for each function is included in Appendix \textcolor{red}{X-insert link to appendix here}.
 
 
 
@@ -91,7 +98,7 @@ An obstacle to widespread employment of Bayesian predictive inference in scienti
 
 \section{Introduction:  Predictive Inference}
 
-My understanding of Bayesian Predictive Inference began with the University of Arizona course ``Bayesian Statistical Theory and Applications" under Dr. Edward Bedrick.  Since then it has been shaped by exposure to various sources, including articles by Bedrick and Dr. Dean Billheimer, and to a greater extent the aforementioned texts by Hoff and Geisser, and others, including \underline{Bayesian Data Analysis} by Andrew Gelman et. al., \underline{Statistical Prediction Analysis} by J. Aitchison and I.R. Dunsmore, and excerpts from \underline{The Signal and the Noise} by Nate Silver.  In the next section and what follows, the ideas expressed are an amalgam of what was learned from this body of scholarship.
+My understanding of Bayesian Predictive Inference began with the University of Arizona course ``Bayesian Statistical Theory and Applications" under Dr. Edward Bedrick.  Since then it has been shaped by exposure to other sources, including various articles in academic journals, the aforementioned texts by Hoff and Geisser, and others including \underline{Bayesian Data Analysis} by Andrew Gelman et. al., \underline{Statistical Prediction Analysis} by J. Aitchison and I.R. Dunsmore, and excerpts from \underline{The Signal and the Noise} by Nate Silver.  In the next section and what follows, the ideas expressed are an amalgam of what was learned from this body of scholarship.
 
   \subsection{Why Predictive Inference?}
 
@@ -102,7 +109,7 @@ I find persuasive the assertion that the main purpose of statistics is to predic
 Prediction is important because it connects subjective and objective reality. Karl Popper, the philosopher of science, recognized this view. For Popper, a hypothesis was not scientific unless it was falsifiable—meaning that it could be tested in the real world by means of a prediction.
 \end{quote}
 
-\noindent Billheimer emphasizes the improvement of scientific accuracy and reproducibility Bayesian prediction provides by ``shifting our focus from `finding differences' among hypothetical parameters to predicting observable events based on our current scientific understanding."  Focus on observed data enables corroboration or refutation of current hypotheses through future experimentation, and informs decision-making by summarizing quantities of direct interest to the researcher.  Bayesian predictive inference shifts the focus of statistical analysis from estimation of hypothetical parameters to statements about concrete observables.\\
+\noindent Billheimer emphasizes the improvement of scientific accuracy and reproducibility Bayesian prediction provides by ``shifting our focus from `finding differences' among hypothetical parameters to predicting observable events based on our current scientific understanding." Focus on observed data enables corroboration or refutation of current hypotheses through future experimentation, and informs decision-making by summarizing quantities of direct interest to the researcher.  Bayesian predictive inference shifts the focus of statistical analysis from estimation of hypothetical parameters to statements about concrete observables.\\
 
 \noindent It is not the intent of this thesis to suggest that parametric inference should be abandoned in statistical analyses.  Conventional statistical inference techniques are useful for summarizing information about large quantities of data in a small number of usable values (parameter estimates), and leveraging such summaries to determine whether a particular problem merits continued attention. Indeed, the scientific discipline of mathematical statistics has developed along parametric lines, imparting greater efficiency to the solving of idealized versions of problems. However, this focus on parameters has largely ignored the impact of observable quantities which may exhibit distributions very different from our (idealized) standard models. In support of prediction in general, and Bayesian prediction in particular, I return to Nate Silver:\\
 
@@ -137,7 +144,7 @@ Making predictions based on our beliefs is the best (and perhaps even the only) 
 
 \noindent Suppose in new data $t=4$ Razorbacks have been observed out of $N=10$ tosses of a single pig die, suggesting a straightforward binomial distribution with $\theta =$ Pr(Razorback) $= t/N = 0.4$. Taking the Duquesne experiment into consideration, we'll perform Bayesian prediction using various Beta prior distributions for $\theta$: $\theta\sim\text{Beta}(2,8)$, $\theta\sim\text{Beta}(22,78)$, and $\theta\sim\text{Beta}(224,776)$, and compare these results to predictions obtained from the plug-in estimator $\theta = 0.4$.   Any number of prior distributions on $\theta$ would satisfy the condition that $E(\theta) \approx 0.224$, suggested by the prior information.  The specific choice of a Beta prior is made largely for computational convenience.\\
 
-\noindent The researcher wants to predict how many Razorbacks will result from some number $M$ of future pig die rolls.  In this example, $M=100$ was used.  The density curves in the plot below show the influence of the choice of prior parameters on the location and variance of the predictive distribution.  Essentially, each pair of shape parameters $(\alpha,\beta)$ in the Beta prior reflects the researcher's level of reliance on the results of the Duquesne experiment, with the ``weight" given to that knowledge increasing with the shape parameters by orders of magnitude.  The choice of parameters might be influenced by such things as pig tossing method (perhaps the researcher is throwing them by hand rather than dropping them by the carefully controlled method used in the Duquesne experiment), or by a need to account for pig-to-pig variation, or anything else the researcher believes introduces a deviation from the events upon which the prior information is based.  Use of the scaled-up Big Pigs\texttrademark variant, for example might give reason to use a very low-weighted prior such as $\theta\sim\text{Beta}(2,8)$.
+\noindent The researcher wants to predict how many Razorbacks will result from some number $M$ of future pig die rolls.  In this example, $M=100$ was used.  The density curves in the plot below show the influence of the choice of prior parameters on the location and variance of the predictive distribution.  Essentially, each pair of shape parameters $(\alpha,\beta)$ in the Beta prior reflects the researcher's level of reliance on the results of the Duquesne experiment, with the ``weight" given to that knowledge increasing with the shape parameters by orders of magnitude.  The choice of parameters might be influenced by such things as pig tossing method (perhaps the researcher is throwing them by hand rather than dropping them by the carefully controlled method used in the Duquesne experiment), or by a need to account for pig-to-pig variation, or anything else the researcher believes introduces a deviation from the events upon which the prior information is based.  Use of the scaled-up Big Pigs\texttrademark  variant, for example might give reason to use a very low-weighted prior such as $\theta\sim\text{Beta}(2,8)$.
 
 \begin{figure}[ht]
   \centering
@@ -146,11 +153,19 @@ Making predictions based on our beliefs is the best (and perhaps even the only) 
 \end{figure}
 
 
-\noindent The plot and table below illustrate the effects of the Bayesian prediction method. Perhaps most notable is the location disparity between the plug-in (Binomial) prediction and the family of Bayesian (Beta-binomial) predictive distributions.  The consideration of prior knowledge is also shown to have a significant effect.  In this example, the strong influence of the choice of shape parameters for the Beta prior on the mean and variance of the predictive distribution provides options for the future prognosticator. If a new set of trials closely duplicates the Duquesne experimental conditions, for example, predictions might be based on the result from the Beta$(224,776)$ prior.  A lower-weighted prior might be used for any experimental element the researcher believes introduces a deviation from the knowledge upon which the prior information is based.
+\noindent Figure \ref{fig:PtPBB} and the table below illustrate the effects of the Bayesian prediction method. Perhaps most notable is the location disparity between the plug-in (Binomial) prediction and the family of Bayesian (Beta-binomial) predictive distributions.  The consideration of prior knowledge is also shown to have a significant effect.  In this example, the strong influence of the choice of shape parameters for the Beta prior on the mean and variance of the predictive distribution provides options for the future prognosticator. If a new set of trials closely duplicates the Duquesne experimental conditions, for example, predictions might be based on the result from the Beta$(224,776)$ prior.  A lower-weighted prior might be used for any experimental element the researcher believes introduces a deviation from the knowledge upon which the prior information is based.
 
 \vspace{1cm}
 
-\includegraphics{Thesis_v4-002}
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{./Graphics/PassThePigs/PTP_BBplot}
+  \caption{Pass the Pigs\textsuperscript{\circledR} Prediction}
+  \label{fig:PtPBB}
+\end{figure}
+
+\vspace{2cm}
+
 
 \vspace{1cm}
 
@@ -160,11 +175,11 @@ Making predictions based on our beliefs is the best (and perhaps even the only) 
   \multicolumn{5}{c}{\large \#Razorbacks Predicted out of 100 Tosses}          \\
   \multicolumn{1}{c}{\textbf{Prediction Method}} & \multicolumn{1}{c}{$\textbf{(}\boldsymbol\alpha,\boldsymbol\beta\textbf{)}$}  & \multicolumn{1}{c}{\textbf{Prior Mean }$\textbf{E(}\boldsymbol\theta\textbf{)}$}  & \multicolumn{1}{c}{\textbf{Prediction Mean}} & \multicolumn{1}{c}{\textbf{SD}}\\
         \midrule
-        Beta-Binomial & (2,8) & 0.2 & 29.3 & 10.75 \\
+        Beta-Binomial & (2,8) & 0.2 & 29.93 & 10.94 \\
         \midrule
-        Beta-Binomial & (22,78) & 0.22 & 23.48 & 5.74\\
+        Beta-Binomial & (22,78) & 0.22 & 23.93 & 5.94\\
         \midrule
-        Beta-Binomial & (224,776) & 0.224 & 22.54 & 4.4 \\
+        Beta-Binomial & (224,776) & 0.224 & 22.58 & 4.4 \\
         \midrule
         Binomial$(100,0.4)$ & -- & -- & 40 & 4.9 \\
   \bottomrule
@@ -173,7 +188,7 @@ Making predictions based on our beliefs is the best (and perhaps even the only) 
 
 \vspace{1cm}
 
-\noindent The differences in the results of the two prediction methods are easy to see in this case. Unlike the Bayesian approach, the binomial-only model uses only the observed data, does not account for any uncertainty in the binomial parameter ($\theta$), and ignores historical info about Razorback frequency.  If speculating whether the number of razorbacks out of the next 10 pig tosses will be greater than, say, 3, the indications of the two analysis approaches contradict each other.  The statistically savvy wagerer of course realizes that the 10 die throws informing the plug-in results do not guarantee high confidence.  A much less risky option for the bettor is the Bayesian method with a suitable prior parameterization.
+\noindent The differences in the results of the two prediction methods are easy to see in this case. Unlike the Bayesian approach, the binomial-only model uses only the observed data, does not account for any uncertainty in the binomial parameter ($\theta$), and ignores historical info about Razorback frequency.  If speculating whether the number of razorbacks out of the next 10 pig tosses will be greater than, say, 3, the indications of the two analysis approaches contradict each other.  The statistically savvy wagerer of course realizes that the 10 die throws informing the plug-in results do not offer high predictive confidence.  A much less risky option for the bettor is the Bayesian method with a suitable prior parameterization.
 
 
 \clearpage
@@ -194,8 +209,6 @@ conditionally independent and identically distributed (i.i.d.) with respect to  
 
   for some parameter $\theta$, some prior distribution on $\theta$ and some sampling model $p(y|\theta)$.  The prior and sampling model depend on the form of the belief model $p(y_1,...,y_n)$.\\
 \end{quote}
-
-\textcolor{blue}{How is the following paragraph?}
 
 \noindent Simply put, exchangeability of data implies (conditional) independence and identical distribution (i.i.d.) with respect to a parameter with some prior distribution. The converse is immediate from the definition of marginal probability and the commutative property of multiplication. Hoff summarizes these ideas like this (p. 29):\\
 
@@ -240,7 +253,7 @@ Y_1,...,Y_n|\theta \text{ are i.i.d}\\
 \end{itemize}
 
 \noindent Throughout this section, $N$ is used for the observed data sample
-size, and $S$ is the size of the desired random sample of predictions. The predicted future result
+size, and $S$ is the size of the desired predictive sample. The predicted future result
 is indicated by surmounting the variable name with a tilde.  For example, when the observed data is represented by $y$, the prediction is designated $\tilde{y}$. Parameter names are clearly indicated as they appear.
 
   \subsection{Prediction of Future Successes:  Beta-Binomial (Geisser p. 73)}
@@ -303,7 +316,7 @@ is indicated by surmounting the variable name with a tilde.  For example, when t
 
     \subsubsection{R Implementation (Beta-Binomial)}
 
-This result has been used to create R functions \texttt{dpredBB()}, \texttt{ppredBB()}, and \texttt{rpredBB()} for the Beta-Binomial predictive distribtuion for density, cumulative probability, and random sampling, respectively (see appendix for the R code).  The density function \texttt{dpredBB()} relies on the R function \texttt{lgamma()} to evaluate the numerator and denominator of the predictive distribution (\ref{betaBinomial_pred}) factor by factor logarithmically, and then exponentiates for the final result, evaluated at the desired integer value (or vector of values) $\tilde{y}$ input by the user.  The cdf \texttt{ppredBB()} simply calls \texttt{dpredBB()} and returns the cumulative sum of that discrete set of results.  The random sampler \texttt{rpredBB()} makes use of the inverse transform method and the output from the cdf \texttt{ppredBB()}.  Calls to these functions appear as follows:
+This result has been used to create R functions \texttt{dpredBB()}, \texttt{ppredBB()}, and \texttt{rpredBB()} for the Beta-Binomial predictive distribtuion for density, cumulative probability, and predictive sampling, respectively (see appendix for the R code).  The density function \texttt{dpredBB()} relies on the R function \texttt{lgamma()} to evaluate the numerator and denominator of the predictive distribution (\ref{betaBinomial_pred}) factor by factor logarithmically, and then exponentiates for the final result, evaluated at the desired integer value (or vector of values) $\tilde{y}$ input by the user.  The cdf \texttt{ppredBB()} simply calls \texttt{dpredBB()} and returns the cumulative sum of that discrete set of results.  The predictive sampler \texttt{rpredBB()} makes use of the inverse transform method and the output from the cdf \texttt{ppredBB()}.  Calls to these functions appear as follows:
 
 \begin{center}
   \texttt{dpredBB(tpred,N,t,M,a,b)}\\
@@ -321,16 +334,23 @@ This result has been used to create R functions \texttt{dpredBB()}, \texttt{ppre
   \texttt{M} &= \text{the number of binary observations in a future experiment}\\
   \texttt{a} &= \alpha \text{, the first shape parameter of the Beta prior}\\
   \texttt{b} &= \beta \text{, the second shape parameter of the Beta prior}\\
-  \texttt{S} &= \text{the desired random sample size; that is, the number of future experiments }\\
+  \texttt{S} &= \text{the desired predictive sample size; that is, the number of future experiments }\\
   &\text{ of size } M \text{ for which a predicted number of successes is desired}\\
 \end{flalign*}
 
     \subsubsection{Example}
 
-The functions \texttt{dpredBB()} and \texttt{rpredBB()} were used in the Pass The Pigs\textsuperscript{\circledR} example in the introduction.  Here, all three functions are exercised in an imagined experiment using the Big Pigs\texttrademark variant.  Suppose $t=7$ Razorbacks have been observed out of $n=10$ tosses of Big Pigs\texttrademark, and the researcher has settled on prior distribution Pr(Razorback) = $\theta\sim\text{Beta}(2,8)$.  For $M = 10$ future observations, how many successes are predicted?  The figures below show the predictive distribution from \texttt{dpredBB()}, the cumulative distribution from \texttt{ppredBB()}, and a histogram of random draws from \texttt{rpredBB()}.
+The functions \texttt{dpredBB()} and \texttt{rpredBB()} were used in the Pass The Pigs\textsuperscript{\circledR} example in the introduction.  Here, all three functions are exercised in an imagined experiment using the Big Pigs\texttrademark  variant.  Suppose $t=7$ Razorbacks have been observed out of $n=10$ tosses of Big Pigs\texttrademark, and the researcher has settled on prior distribution Pr(Razorback) = $\theta\sim\text{Beta}(2,8)$.  For $M = 10$ future observations, how many successes are predicted?  Figure \ref{fig:BBdist} below shows the predictive distribution from \texttt{dpredBB()}, the cumulative distribution from \texttt{ppredBB()}, and a histogram of draws from \texttt{rpredBB()}.
 
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{./Graphics/DistributionPlots/BetaBinomial}
+  \caption{Beta-Binomial Predictive Distribution}
+  \label{fig:BBdist}
+\end{figure}
 
-\includegraphics{Thesis_v4-003}
+\vspace{2cm}
+
 
 
 
@@ -390,9 +410,9 @@ Suppose $Y_1,...,Y_d$ represent fully observed realizations from an exponential 
 
     \subsubsection{R Implementation (Exponential-Gamma)}
 
-This result has been used to create R functions \texttt{dpredEG()}, \texttt{ppredEG()}, and \texttt{rpredEG()} for the Gamma-Exponential distribtuion for density, cumulative probability, and random sampling, respectively (see appendix for R code).  These functions are exercised in the following example. \\
+This result has been used to create R functions \texttt{dpredEG()}, \texttt{ppredEG()}, and \texttt{rpredEG()} for the Gamma-Exponential distribtuion for density, cumulative probability, and predictive sampling, respectively (see appendix for R code).  These functions are exercised in the following example. \\
 
-\noindent The density function \texttt{dpredEG()} evaluates the numerator and denominator of the predictive density logarithmically (using the R function \texttt{log()}) and then exponentiates to produce the result.  The cdf \texttt{ppredEG()} integrates the pdf at each discrete value using the R function \texttt{integrate()}.  The random sampler \texttt{rpredEG()} draws posterior $\theta|y_1,...,y_i\sim\text{Gamma}(d+\delta,\gamma+\sum y_i)$ and then draws predictions from Exp$(\theta)$. Calls to these functions appear as follows:
+\noindent The density function \texttt{dpredEG()} evaluates the numerator and denominator of the predictive density logarithmically (using the R function \texttt{log()}) and then exponentiates to produce the result.  The cdf \texttt{ppredEG()} integrates the pdf at each discrete value using the R function \texttt{integrate()}.  The predictive sampler \texttt{rpredEG()} draws posterior $\theta|y_1,...,y_i\sim\text{Gamma}(d+\delta,\gamma+\sum y_i)$ and then draws predictions from Exp$(\theta)$. Calls to these functions appear as follows:
 
 \begin{center}
   \texttt{dpredEG(ypred,y,c,dt,gm)}\\
@@ -408,7 +428,7 @@ This result has been used to create R functions \texttt{dpredEG()}, \texttt{ppre
   \texttt{c} &= \text{an indicator vector of length } N.\texttt{  c[i]=1}\text{ if the corresponding data element }\texttt{y[i]}\text{ is fully }\\ &\text{   observed, otherwise }\texttt{c[i]=0.}  \text{  Note }\texttt{d = sum(c).}\\
   \texttt{dt} &= \delta \text{, the shape parameter of the Gamma prior}\\
   \texttt{gm} &= \gamma \text{, the rate parameter of the Gamma prior}\\
-  \texttt{S} &= \text{the desired random sample size}\\
+  \texttt{S} &= S \text{, the sample size to be generated by the predictive distribution}\\
 \end{flalign*}
 
 
@@ -416,11 +436,18 @@ This result has been used to create R functions \texttt{dpredEG()}, \texttt{ppre
 
     \textcolor{red}{This needs updating.  Also, think about the number of new observations to be predicted.  Why would we (you) choose M=1000?}\\
 
-\noindent Suppose $d=797$ out of $N = 1000$ copies have been observed, and the remaining $203$ censored. We are interested in the number of survivors out of $M = 1000$ future observations.  For the sake of this example, survival times were generated randomly as $y_i \sim \text{Exp}(0.01)$, with all times exceeding an arbitrary predetermined time cutoff of 160 being set to that time.  These reset times are the censored copies.  We know the value of the exponential parameter ($\theta = 0.01$) used to generate the data, because of the artificial way we have constructed this example.  If we did not have that information, we could consider the mean of the generated survival times (observed and censored), which was $79.9$.  This indicates that the expected value $1/\theta$ of survival times must be greater than $79.9$, and thus we can assume $\theta < 1/79.9 \approx 0.0125$ with some margin.  This is all to say that aiming for $\theta = 0.01$ when choosing parameters for the prior distribution of $\theta$ is reasonable.  Since we are assuming prior $\theta\sim\text{Gamma}(\delta,\gamma)$ we want $\delta/\gamma \approx 0.01$.   For this example, say $\delta = 0.5$ and $\gamma=50$.  The figures below illustrate the predictive probability using \texttt{dpredEG()} and \texttt{rpredEG()}, along with a histogram of a random sample taken using \texttt{rpredEG()}.
+\noindent Suppose $d=797$ out of $N = 1000$ copies have been observed, and the remaining $203$ censored. We are interested in the number of survivors out of $M = 1000$ future observations.  For the sake of this example, survival times were generated randomly as $y_i \sim \text{Exp}(0.01)$, with all times exceeding an arbitrary predetermined time cutoff of 160 being set to that time.  These reset times are the censored copies.  We know the value of the exponential parameter ($\theta = 0.01$) used to generate the data, because of the artificial way we have constructed this example.  If we did not have that information, we could consider the mean of the generated survival times (observed and censored), which was $79.9$.  This indicates that the expected value $1/\theta$ of survival times must be greater than $79.9$, and thus we can assume $\theta < 1/79.9 \approx 0.0125$ with some margin.  This is all to say that aiming for $\theta = 0.01$ when choosing parameters for the prior distribution of $\theta$ is reasonable.  Since we are assuming prior $\theta\sim\text{Gamma}(\delta,\gamma)$ we want $\delta/\gamma \approx 0.01$.   For this example, say $\delta = 0.5$ and $\gamma=50$.  Figure \ref{fig:EGdist} below illustrates the predictive probability using \texttt{dpredEG()} and \texttt{rpredEG()}, along with a histogram of a predictive sample taken using \texttt{rpredEG()}.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{./Graphics/DistributionPlots/ExponentialGamma}
+  \caption{Exponential-Gamma Predictive Distribution}
+  \label{fig:EGdist}
+\end{figure}
+
+\vspace{2cm}
 
 
-
-\includegraphics{Thesis_v4-004}
 
 
 \clearpage
@@ -515,9 +542,9 @@ This result has been used to create R functions \texttt{dpredEG()}, \texttt{ppre
 
     \subsubsection{R Implementation (Poisson-Gamma)}
 
-This result has been used to create R functions \texttt{dpredPG()}, \texttt{ppredPG()}, and \texttt{rpredPG()} for the Poisson-Gamma distribution for density, cumulative probability, and random sampling, respectively (see appendix for R code).  These functions are exercised in the example below.\\
+This result has been used to create R functions \texttt{dpredPG()}, \texttt{ppredPG()}, and \texttt{rpredPG()} for the Poisson-Gamma distribution for density, cumulative probability, and predictive sampling, respectively (see appendix for R code).  These functions are exercised in the example below.\\
 
-\noindent The density function \texttt{dpredPG()} simply makes use of the R function \texttt{dnbinom()}.  The cdf \texttt{ppredPG()} returns a cumulative sum of the results of \texttt{dpredPG()}.  The random sampler \texttt{rpredPG()} is a bit more complicated. The difficulty is that the upper bound of the support of the predictive distribution $p(\tilde{y}|y_1,...,y_n)$ is not known.  Since $p(\cdot)$ is negative binomial, we can count on it eventually decreasing toward $0$ asymptotically.  To establish the support, then, a method was employed to find where $p$ comes ``sufficiently close" to $0$.  To accomplish this a modified bisection method was devised as follows:\\
+\noindent The density function \texttt{dpredPG()} simply makes use of the R function \texttt{dnbinom()}.  The cdf \texttt{ppredPG()} returns a cumulative sum of the results of \texttt{dpredPG()}.  The predictive sampler \texttt{rpredPG()} is a bit more complicated. The difficulty is that the upper bound of the support of the predictive distribution $p(\tilde{y}|y_1,...,y_n)$ is not known.  Since $p(\cdot)$ is negative binomial, we can count on it eventually decreasing toward $0$ asymptotically.  To establish the support, then, a method was employed to find where $p$ comes ``sufficiently close" to $0$.  To accomplish this a modified bisection method was devised as follows:\\
 
 % Initially the R function \texttt{uniroot()} was considered, but ultimately a modified bisection method was devised as follows:\\
 
@@ -552,17 +579,25 @@ This result has been used to create R functions \texttt{dpredPG()}, \texttt{ppre
   \texttt{y} &= y \text{, the observed counts}\\
   \texttt{alpha} &= \alpha \text{, the shape parameter of the Gamma prior}\\
   \texttt{beta} &= \beta \text{, the rate parameter of the Gamma prior}\\
-  \texttt{S} &= S \text{, the desired random sample size}\\
+  \texttt{S} &= S \text{, the sample size to be generated by the predictive distribution}\\
 \end{flalign*}
 
     \subsubsection{Example}
 
 \textcolor{red}{I will come up with a different example to replace the one below.}
 
-Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15, 3, 97.  Let $\alpha = 11$ and $\beta = 3$.  For $\tilde{y} = 1:100$ possible future occurrences, the figures below show the predictive distribution from \texttt{dpredPG()}, the cumulative distribution from \texttt{ppredPG()}, and a histogram of random draws from \texttt{rpredPG()}.
+Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15, 3, 97.  Let $\alpha = 11$ and $\beta = 3$.  For $\tilde{y} = 1:100$ possible future occurrences, Figure \ref{fig:PGdist} below shows the predictive distribution from \texttt{dpredPG()}, the cumulative distribution from \texttt{ppredPG()}, and a histogram of draws from \texttt{rpredPG()}.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{./Graphics/DistributionPlots/PoissonGamma}
+  \caption{Poisson-Gamma Predictive Distribution}
+  \label{fig:PGdist}
+\end{figure}
+
+\vspace{2cm}
 
 
-\includegraphics{Thesis_v4-005}
 
 
 
@@ -634,7 +669,7 @@ Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15,
 
 
       \paragraph{R Implementation (Normal-Inverse Gamma, 1-sample)}
-      R functions \texttt{dpredNormIG1()}, \texttt{ppredNormIG1()}, and \texttt{rpredNormIG1()} have been created for the Normal-Inverse Gamma distribution for density, cumulative probability, and random sampling, respectively (see appendix).  These functions all include options for implementation with or without previous knowledge as desired.  If Jeffreys prior is used, the functions simply implement R's Student's t-distribution functions \texttt{rt()}, \texttt{dt()}, and \texttt{pt()}, applying the location and scale parameters as described above.  For predictions using previous knowledge, the functions work as follows:  For the random sampler \texttt{rpredNormIG1()}, the monte carlo method described above is directly employed.  The predictive density and cumulative predictive density functions (\texttt{dpredNormIG1()} and \texttt{ppredNormID1()}, respectively) depend on the random sample. That is, the distributions generated by these two functions are approximated from a random sample returned by \texttt{rpredNormIG1()}.\\
+      R functions \texttt{dpredNormIG1()}, \texttt{ppredNormIG1()}, and \texttt{rpredNormIG1()} have been created for the Normal-Inverse Gamma distribution for density, cumulative probability, and predictive sampling, respectively (see appendix).  These functions all include options for implementation with or without previous knowledge as desired.  If Jeffreys prior is used, the functions simply implement R's Student's t-distribution functions \texttt{rt()}, \texttt{dt()}, and \texttt{pt()}, applying the location and scale parameters as described above.  For predictions using previous knowledge, the functions work as follows:  For the predictive sampler \texttt{rpredNormIG1()}, the monte carlo method described above is directly employed.  The predictive density and cumulative predictive density functions (\texttt{dpredNormIG1()} and \texttt{ppredNormID1()}, respectively) depend on the predictive sample. That is, the distributions generated by these two functions are approximated from a sample returned by \texttt{rpredNormIG1()}.\\
 
 \noindent\texttt{ppredNormIG1()} utilizes the empirical cumulative density function \texttt{ecdf()} from R's stats package.  \texttt{dpredNormIG1()} utilizes a Kernel Density Estimation (KDE) method and R's built-in \texttt{density()} function.  The KDE is computed by definition, using a Normal kernel:
 
@@ -643,7 +678,7 @@ Suppose we have 10 prior observations with counts 27, 79, 21, 100, 8, 4, 37, 15,
 \noindent where
 
       \begin{flalign*}
-        X_i & \text{ is the random sample generated using }\texttt{rpredNormIG1()}\\
+        X_i & \text{ is the predictive sample generated using }\texttt{rpredNormIG1()}\\
         &\\
         K & \text{ is Normal}(0,1)\\
         &\\
@@ -703,13 +738,19 @@ Calls to these functions appear as follows:
           \left\{\sigma^2|y_1,...,y_N\right\} &\sim \text{Inverse Gamma}(5,0.7662)\\
         \end{flalign*}
 
-\noindent The plot below illustrates the influence of previous knowledge of the population mean, and compares to the predictions resulting from Jeffreys prior.
+\noindent In Figure \ref{fig:NormIG1dist} below, results from the use of prior knowledge about the population mean are compared to results from using Jeffrey's (non-informative) prior.  Note the robustness of the predictive distribution to the prior choice of mean.  In the top plot showing the estimated density of a predictive sample returned by \texttt{rpredNormIG1()} we see that even prior mean values completely below and completely above the observed data yield distributions with substantial overlap.\\
 
-\includegraphics{Thesis_v4-006}
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{./Graphics/DistributionPlots/NormIG1}
+  \caption{Normal-Inverse Gamma (One-Sample) Predictive Distribution}
+  \label{fig:NormIG1dist}
+\end{figure}
 
-\noindent Clearly the prediction relying on prior knowledge heavily depends on the the quality of that prior knowledge.  Jeffrey's prior in this case produces results close to the case where the supplied prior mean is more informed.  \textcolor{blue}{Feedback on this paragraph?}
+\vspace{2cm}
 
-        \clearpage
+
+\clearpage
 
     \subsubsection{Two-sample Normal-Inverse Gamma}
       \paragraph{Derivation}
@@ -761,7 +802,7 @@ Calls to these functions appear as follows:
 
       \paragraph{R Implementation (Normal-Inverse Gamma, 2-sample)}
 
-      The random sample generator R function \texttt{rpredNormIG2()} implements a Gibbs sampler to approximate the posterior distribution $p\left(\mu,\delta,\sigma^2|\mathbf{y}_1,\mathbf{y}_2\right)$, from which to generate predictions for the two populations as follows:
+      The predictive sample generator R function \texttt{rpredNormIG2()} implements a Gibbs sampler to approximate the posterior distribution $p\left(\mu,\delta,\sigma^2|\mathbf{y}_1,\mathbf{y}_2\right)$, from which to generate predictions for the two populations as follows:
       \begin{enumerate}
         \item Set initial values $\mu = \frac{\theta_1 + \theta_2}{2}$ and $\delta = \frac{\theta_1 - \theta_2}{2}$
         \item Generate a single $\sigma^2|\mathbf{y_1},\mathbf{y_2},\mu,\delta$
@@ -770,7 +811,7 @@ Calls to these functions appear as follows:
         \item Predict $\tilde{y}_1\sim \text{Normal}\left(\mu+\delta,\sigma^2\right)$ and $\tilde{y}_2\sim \text{Normal}\left(\mu-\delta,\sigma^2\right)$
       \end{enumerate}
 
-\noindent The user provides the two samples $\mathbf{y_1}$ and $\mathbf{y_2}$ along with values for $\mu_0, \sigma^2_0, \delta_0, \tau^2_0, \nu_0$, and desired prediction random sample size $S$.  The function returns $S$ predictions for each population and the vectors of generated values for $\mu$, $\delta$, and $\sigma^2$.  Calls to this functions appear as follows:
+\noindent The user provides the two samples $\mathbf{y_1}$ and $\mathbf{y_2}$ along with values for $\mu_0, \sigma^2_0, \delta_0, \tau^2_0, \nu_0$, and desired predictive sample size $S$.  The function returns $S$ predictions for each population and the vectors of generated values for $\mu$, $\delta$, and $\sigma^2$.  Calls to this functions appear as follows:
 
 
 \begin{center}
@@ -780,7 +821,7 @@ Calls to these functions appear as follows:
 \noindent where
 
 \begin{flalign*}
-  \texttt{S} &= S \text{, the desired random sample size}\\
+  \texttt{S} &= S \text{, the desired predictive sample size}\\
   \texttt{y1, y2} &= \mathbf{y_1, y_2} \text{, the two sets of observed data}\\
   \texttt{mu0,g20} &= \mu_0,\gamma^2_0 \text{, prior mean and variance for }\mu\\
   \texttt{d0,t20} &= \delta,\tau^2_0 \text{, prior mean and variance for }\delta\\
@@ -789,20 +830,31 @@ Calls to these functions appear as follows:
 
       \paragraph{Example} (Hoff p. 128-129 \textit{Analysis of math score data})\\
       Hoff provides the following example, which we reproduce here.\\\\
-      Math score data for two public high schools in the United States (we'll call them School 1 and School 2) were based on results of a national exam, standardized to produce a nationwide mean of 50 and a standard deviation of 10.  The data consisted of 31 individual scores for School 1 and 28 for School 2. The plots below show give a visual summary of the two data sets.
+      Math score data for two public high schools in the United States (we'll call them School 1 and School 2) were based on results of a national exam, standardized to produce a nationwide mean of 50 and a standard deviation of 10.  The data consisted of 31 individual scores for School 1 and 28 for School 2. Figure \ref{fig:NormIG2_SchoolData} gives a visual summary of the two data sets.\\
 
-\includegraphics{Thesis_v4-007}
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{./Graphics/ExamplePlots/NormIG2_SchoolData}
+  \caption{Observed Math Score Data for Two Schools}
+  \label{fig:NormIG2_SchoolData}
+\end{figure}
+
 
 \noindent The mean scores of the two samples are $\bar{y}_1 = 50.81$ and $\bar{y}_2 = 46.15$ for School 1 and School 2, and the standard deviations were $11.3$ and $9.1$, respectively.  A standard t-test yields a $p$-value of $p = 0.087$, in response to which we would fail to reject the hypothesis that the population means $\theta_1$ and $\theta_2$ are different. Hoff points out that it is easy to imagine that re-sampling might result in a few more low scores from School 1 and a few more high scores from School 2--enough perhaps to result in a $p$-value below $0.05$ and the opposite conclusion. Why not employ a Bayesian analysis that allows information to be shared across the groups and relies on prior knowledge of the similarities of the two groups?\\
 
 \noindent We're interested in predicting a future math score by a student from each school.  Unless the two schools were known in advance to be extremely exceptional, reasonable prior parameters can be based on this information.  For the prior distributions of $\mu$ and $\sigma^2$, we'll take $\mu_0 = 50$ and $\sigma^2_0 = 10^2 = 100$, although this latter value is likely to be an overestimate of the within-school sampling variability.  We'll make these prior distributions somewhat diffuse, with $\gamma^2_0 = 25^2 = 625$ and $\nu_0 = 1$.  For the prior distribution on $\delta$, choosing $\delta_0 = 0$ represents the prior opinion that $\theta_1 > \theta_2$ and $\theta_2 > \theta_1$ are equally probable.  Finally, since the scores are bounded between 0 and 100, half the difference between $\theta_1$ and $\theta_2$ must be less than 50 in absolute value, so a value of $\tau^2_0 = 25^2 = 625$ seems reasonably diffuse.\\\\
 
-\textcolor{blue}{Anything else needed here? -- yes something below the plot describing the results.  Mention shared variance so data from different groups influencing each other.}
-      % The results of a call to rpredNormIG2$\left(\mathbf{y}_1,\mathbf{y}_2,\mu_0,\sigma^2_0,\delta_0,\tau^2_0,N\right)$ are summarized in the following plot.\\
-      The results of a call to \texttt{rpredNormIG2()} with the above input values for $\mathbf{y}_1,\mathbf{y}_2,\mu_0,\sigma^2_0,\delta_0,\tau^2_0,\text{ and } N$ are summarized in the following plot.\\
+\noindent The results of a call to \texttt{rpredNormIG2()} with the above input values for $\mathbf{y}_1,\mathbf{y}_2,\mu_0,\sigma^2_0,\delta_0,\tau^2_0$, and $N$ are summarized in Figure \ref{fig:NormIG2_DvP}.\\
 
-\includegraphics{Thesis_v4-008}
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{./Graphics/ExamplePlots/NormIG2_Data_v_Prediction}
+  \caption{Estimated Densities: Observed vs. Predicted}
+  \label{fig:NormIG2_DvP}
+\end{figure}
 
+
+\noindent Note that the shared variance but different means from group to group results in predictive densities with very similar shape, but offset from each other in location.  The raw data suggests that it might be useful to explore a model that allows the variances to differ as well.\\
 
     \subsubsection{$k$-sample Normal-Inverse Gamma:  Comparing multiple groups}
 
@@ -888,9 +940,15 @@ $$\tilde{y}_j \sim \text{Normal}(\theta_j, \sigma^2).$$
 
 
       \paragraph{Example}
-      Returning to the math scores example, data for 10th-grade students from 100 large urban schools (each having 10th-grade enrollment of at least 400) is summarized in the following plot. Each school's results are represented by a vertical segment, with points plotted at the individual students' math scores. The horizontal line is drawn at the grand mean of the individual school means.
+      Returning to the math scores example, data for 10th-grade students from 100 large urban schools (each having 10th-grade enrollment of at least 400) is summarized in Figure \ref{fig:NormIGk_All100}. Each school's results are represented by a vertical segment, with points plotted at the individual students' math scores. The horizontal line is drawn at the grand mean of the individual school means.
 
-\includegraphics{Thesis_v4-009}
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{./Graphics/ExamplePlots/NormIGk_MathScoreData}
+  \caption{Math Score Data for 100 Schools}
+  \label{fig:NormIGk_All100}
+\end{figure}
+
 
 
 
@@ -935,12 +993,15 @@ $$\tilde{y}_j \sim \text{Normal}(\theta_j, \sigma^2).$$
   \end{tabular}
 \end{center}
 
-\noindent The plot below shows the density curves of the observed math scores for these three schools and the predictions of future math scores.  The observed data is shown using solid lines, and the predictive densities are displayed with dashed lines.  The predictions are ``pulled" toward the overall mean, which is indicated on the plot with the dotted gray vertical line.
+\noindent Figure \ref{fig:NormIGk_DvP} shows the estimated density curves of the observed math scores for these three schools and the predictive density of an unobserved student's score from each school.  The densities are represented with solid lines for observed data and dashed lines for predicted quantities.  The predictive densities are ``pulled" toward the overall mean, which is indicated on the plot with the dotted gray vertical line.
 
-\textcolor{red}{As before, what is being predicted?}\\
-\textcolor{blue}{See expansion of first sentence in above paragraph.  Does that suffice?}
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{./Graphics/ExamplePlots/NormIGk_Data_v_Prediction}
+  \caption{Estimated Densities: Observed vs. Predicted}
+  \label{fig:NormIGk_DvP}
+\end{figure}
 
-\includegraphics{Thesis_v4-011}
 
 
       % \paragraph{Ranking Treatments}
@@ -1011,7 +1072,7 @@ $$\hat{\sigma}^2_{ols} = \frac{SSR\left(\hat{\boldsymbol\beta}_{ols}\right)}{(n-
               &= \mathbf{y}^T\mathbf{y}-2\beta^T\mathbf{X}^T\mathbf{y} + \beta^T\mathbf{X}^T\mathbf{X}\beta
 \end{flalign*}
 
-\noindent is the sum of squared residuals, which is minimized by $\hat\beta_{ols} = (\mathbf{X^T X})^{-1}X^T y$.\\
+\noindent is the sum of squared residuals, which is minimized by $\hat\beta_{ols}$.\\
 
 
 \subsection{Least Squares Estimation Example (Hoff p. 149ff.)}
@@ -1023,11 +1084,17 @@ should try to bring the others up to this standard.}
 
 \noindent\textit{Example:  Oxygen uptake (from Kuehl (2000), Hoff p. 149ff)}
 
-\noindent Twelve healthy men who did not exercise regularly were recruited to take part in a study of the effects of two different exercise regimens on oxygen uptake.  Six of the twelve men were randomly assigned to a 12-week flat-terrain running program, and the remaining six were assigned to a 12-week step aerobics program.  The maximum oxygen uptake of each subject was measured (in liters per minute) while running on an inclined treadmill, both before and after the 12-week program.  Of interest is how a subject's change in maximal oxygen uptake may depend on which program they were assigned to.  However, other factors, such as age, are expected to affect the change in maximal uptake as well.  The results are shown here:
+\noindent Twelve healthy men who did not exercise regularly were recruited to take part in a study of the effects of two different exercise regimens on oxygen uptake.  Six of the twelve men were randomly assigned to a 12-week flat-terrain running program, and the remaining six were assigned to a 12-week step aerobics program.  The maximum oxygen uptake of each subject was measured (in liters per minute) while running on an inclined treadmill, both before and after the 12-week program.  Of interest is how a subject's change in maximal oxygen uptake may depend on which program they were assigned to.  However, other factors, such as age, are expected to affect the change in maximal uptake as well.  The results are shown in Figure \ref{fig:OxygenData}:
 
-\includegraphics{Thesis_v4-012}
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{./Graphics/ExamplePlots/OxygenUptakeData}
+  \caption{Oxygen Uptake Data}
+  \label{fig:OxygenData}
+\end{figure}
 
-\noindent Hoff's regression model:
+
+\noindent Hoff suggests the following regression model for this data:
 
     \begin{align}
         Y_i &= \beta_1x_{i,1} + \beta_2x_{i,2} + \beta_3x_{i,3} + \beta_4x_{i,4} + \epsilon_i, \text{ where} \label{example_regression_model}\\
@@ -1055,9 +1122,15 @@ should try to bring the others up to this standard.}
     E[Y|\mathbf{x}] &= \left(\beta_1 + \beta_2\right) + \left(\beta_3 + \beta_4\right) \times (age) \text{ if } x_{i,2} = 1 \text{ (aerobic program) }
 \end{flalign*}
 
-\noindent In other words, the model assumes that the relationship is linear in age for both exercise groups, with the difference in intercepts given by $\beta_2$ and the difference in slopes given by $\beta_4$.  If we assumed that $\beta_2 = \beta_4 = 0$, then we would have identical lines for both groups.  If we assumed $\beta_2 \ne 0$ and $\beta_4 =  0$ then we would have a different line for each group but they would be parallel.  Allowing all coefficients to be non-zero gives us two unrelated lines.  Some different possibilities are depicted graphically below:\\\\
+\noindent In other words, the model assumes that the relationship is linear in age for both exercise groups, with the difference in intercepts given by $\beta_2$ and the difference in slopes given by $\beta_4$.  If we assumed that $\beta_2 = \beta_4 = 0$, then we would have identical lines for both groups.  If we assumed $\beta_2 \ne 0$ and $\beta_4 =  0$ then we would have a different line for each group but they would be parallel.  Allowing all coefficients to be non-zero gives us two unrelated lines.  Some different possibilities are depicted graphically in Figure \ref{fig:RegModVar}:\\\\
 
-\includegraphics{Thesis_v4-013}
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{./Graphics/ExamplePlots/RegressionModelVariations}
+  \caption{Regression Model Variations}
+  \label{fig:RegModVar}
+\end{figure}
+
 
 \noindent Let's find the least squares regression estimates for the model (\ref{example_regression_model}), and use the results to evaluate the differences between the two exercise groups.  The ages of the 12 subjects, along with their observed changes in maximal oxygen uptake, are
 
@@ -1100,10 +1173,10 @@ should try to bring the others up to this standard.}
     \paragraph{A semiconjugate prior distribution}\label{normRegSemiconjugatePrior}
     Hoff proposes a semiconjugate prior distribution for $\boldsymbol\beta$ and $\sigma^2$ to be used when there is information available about the parameters.  The sampling density of the data is
 
-\textcolor{red}{define SSR(beta)
-I think you should write out the full conditional distributions for the
-different parts of the updating scheme, or at least the expressions for V and m.
-Similar to what you did in Chapter 3.}  \textcolor{blue}{See below def of SSR and Gibbs sampler steps with V and m written out.  Better?}
+% \textcolor{red}{define SSR(beta)
+% I think you should write out the full conditional distributions for the
+% different parts of the updating scheme, or at least the expressions for V and m.
+% Similar to what you did in Chapter 3.}  \textcolor{blue}{I put the definition of $SSR(\beta)$ above after its first appearance near the start of Section 4:  Normal Regression.  Review what follows below.}
 
     $$p(\mathbf{y}|\mathbf{X},\boldsymbol\beta,\sigma^2) \propto \text{exp}\{-\frac{1}{2\sigma^2}\text{SSR}(\boldsymbol\beta)\} = \text{exp}\{-\frac{1}{2\sigma^2}[\mathbf{y}^T\mathbf{y} - 2\boldsymbol\beta^T\mathbf{X}^T\mathbf{y}+\boldsymbol\beta^T\mathbf{X}^T\mathbf{X}\boldsymbol\beta]\},$$
 
@@ -1119,16 +1192,23 @@ Similar to what you did in Chapter 3.}  \textcolor{blue}{See below def of SSR an
 %
 % \noindent is the sum of squared residuals, which is minimized by the ordinary least squares estimate $\beta_{ols} = (\mathbf{X^T X})^{-1}X^T y$.\\
 
-\noindent Thus we have
+\noindent Thus we have posterior for $\boldsymbol\beta$
 
     \begin{flalign*}
         p&(\boldsymbol\beta|\mathbf{y,X},\sigma^2)\\
         &\propto p(\mathbf{y}|\mathbf{X},\boldsymbol\beta, \sigma^2) \times p(\boldsymbol\beta)\\
         &\propto \text{exp}\{-\frac{1}{2}(-2\boldsymbol\beta^T\mathbf{X}^T\mathbf{y}/\sigma^2 + \boldsymbol\beta^T\mathbf{X}^T\mathbf{X}\boldsymbol\beta/\sigma^2) - \frac{1}{2}(-2\boldsymbol\beta^T\Sigma_0^{-1}\boldsymbol\beta_0 + \boldsymbol\beta^T\Sigma_0^{-1}\boldsymbol\beta)\}\\
-        &=\text{exp}\{\boldsymbol\beta^T(\Sigma_0^{-1}\boldsymbol\beta_0 + \mathbf{X}^T\mathbf{y}/\sigma^2) - \frac{1}{2}\boldsymbol\beta^T(\Sigma_0^{-1} + \mathbf{X}^T\mathbf{X}/\sigma^2)\boldsymbol\beta\}
+        &=\text{exp}\{\boldsymbol\beta^T(\Sigma_0^{-1}\boldsymbol\beta_0 + \mathbf{X}^T\mathbf{y}/\sigma^2) - \frac{1}{2}\boldsymbol\beta^T(\Sigma_0^{-1} + \mathbf{X}^T\mathbf{X}/\sigma^2)\boldsymbol\beta\}\\
+        &\propto \text{MVN}(\mathbf{m,V})
     \end{flalign*}
 
-\noindent and
+\noindent where
+
+$$\mathbf{m} = \text{E}[\boldsymbol\beta|\mathbf{y,X},\sigma^2] = \left(\Sigma_0^{-1} + \mathbf{X}^T\mathbf{X}/\sigma^2\right)^{-1}\left(\Sigma_0^{-1}\boldsymbol\beta_0 + \mathbf{X}^T\mathbf{y}/\sigma^2\right)$$
+
+$$\mathbf{V} = \text{Var}[\boldsymbol\beta|\mathbf{y,X},\sigma^2] = \left(\Sigma_0^{-1} + \mathbf{X}^T\mathbf{X}/\sigma^2\right)^{-1},$$
+
+\noindent and posterior for $\gamma$
 
 \begin{flalign*}
     p(\gamma|\mathbf{y,X},\boldsymbol\beta) &\propto p(\gamma)p(\mathbf{y}|\mathbf{X},\boldsymbol\beta,\gamma)\\
@@ -1148,8 +1228,8 @@ $$\{\sigma^2|\mathbf{y,X},\boldsymbol\beta\} \sim \text{Inverse Gamma}([\nu_0 + 
 \begin{enumerate}
     \item updating $\boldsymbol\beta$:
     \begin{enumerate}
-        \item compute $\mathbf{V} = \text{Var}[\boldsymbol\beta|\mathbf{y,X},\sigma^{2(s)}] = \left(\Sigma_0^{-1} + \mathbf{X}^T\mathbf{X}/\sigma^{2(s)}\right)^{-1}$ and \\$\mathbf{m} = \text{E}[\boldsymbol\beta|\mathbf{y,X},\sigma^{2(s)}] = \left(\Sigma_0^{-1} + \mathbf{X}^T\mathbf{X}/\sigma^{2(s)}\right)^{-1}\left(\Sigma_0^{-1}\beta_0 + \mathbf{X}^T\mathbf{y}/\sigma^{2(s)}\right)$
-        \item sample $\boldsymbol\beta^{(s+1)} \sim \text{Multivariate Normal}(\mathbf{m,V})$
+        \item compute $\mathbf{m}^{(s)}$ and $\mathbf{V}^{(s)}$
+        \item sample $\boldsymbol\beta^{(s+1)} \sim \text{Multivariate Normal}(\mathbf{m^{(s)},V^{(s)}})$
     \end{enumerate}
     \item updating $\sigma^2$:
     \begin{enumerate}
@@ -1158,9 +1238,11 @@ $$\{\sigma^2|\mathbf{y,X},\boldsymbol\beta\} \sim \text{Inverse Gamma}([\nu_0 + 
     \end{enumerate}
 \end{enumerate}
 
-To create a sample from the predictive distribution of responses:  for each $s\in\{1,...,S\}$, draw $\epsilon^{(s)} \sim \text{Normal}(0,\sigma^{2(s)})$.  Then compute
+\noindent To create a sample from the predictive distribution of responses:  for each $s\in\{1,...,S\}$, draw $\epsilon^{(s)} \sim \text{Normal}(0,\sigma^{2(s)})$.  Then compute
 
-$$y^{(s)} = \boldsymbol\beta^{(s)T}\mathbf{X} + \epsilon.$$
+$$y^{(s)} = \boldsymbol\beta^{(s)T}\mathbf{X}_p + \epsilon^{(s)}$$
+
+\noindent for the $\mathbf{X}_p$ for which prediction is desired.
 
     \paragraph{Default and weakly informative prior distributions}
 
@@ -1197,10 +1279,11 @@ $$y = \boldsymbol\beta^T\mathbf{X} + \epsilon.$$
 
   \subsubsection{R Implementation (Normal Regression)}
 
-The R function \texttt{rpredNormReg(S,Xpred,X,y,beta0,Sigma0,nu0,s20,gprior)}
+% The R function \texttt{rpredNormReg(S,Xpred,X,y,beta0,Sigma0,nu0,s20,gprior)}
+%
+% \noindent approximates the joint posterior density $p(\sigma^2,\boldsymbol\beta|\mathbf{y,X})$ using one of the two methods described above, generates $S$ triplets $(\boldsymbol\beta^{(s)}, \sigma^{2(s)},\epsilon^{(s)}), s \in 1,...,S$ and returns a corresponding sample $y = X_{pred}\boldsymbol\beta^{(s)} + \epsilon^{(s)}$ for each $s$.  Calls to this functions appear as follows:
 
-\noindent approximates the joint posterior density $p(\sigma^2,\boldsymbol\beta|\mathbf{y,X})$ using one of the two methods described above, generates $S$ triplets $(\boldsymbol\beta^{(s)}, \sigma^{2(s)},\epsilon^{(s)} \sim \text{Normal}(0,\sigma^{2(s)})$ , and returns $S$ predictions $y = X_{pred}\boldsymbol\beta^{(s)} + \epsilon^{(s)}$.  Calls to this functions appear as follows:
-
+The R function \texttt{rpredNormReg()} returns a sample from the predictive distribution $y = X_{pred}\boldsymbol\beta^{(s)} + \epsilon^{(s)}$ for each $s$.  It does this by approximating the joint posterior density $p(\sigma^2,\boldsymbol\beta|\mathbf{y,X})$ using one of the two methods described above and generating $S$ triplets $(\boldsymbol\beta^{(s)}, \sigma^{2(s)},\epsilon^{(s)}), s \in 1,...,S$.  Calls to this functions appear as follows:
 
 \begin{center}
   \texttt{rpredNormReg(S,Xpred,X,y,beta0,Sigma0,nu0,s20,gprior)}\\
@@ -1209,7 +1292,7 @@ The R function \texttt{rpredNormReg(S,Xpred,X,y,beta0,Sigma0,nu0,s20,gprior)}
 \noindent where
 
 \begin{flalign*}
-  \texttt{S} &= S \text{, the number of MCMC realizations (the desired random sample size)}\\
+  \texttt{S} &= S \text{, the number of MCMC realizations (the desired predictive sample size)}\\
   \texttt{Xpred} &= \text{ the vector or matrix of vectors of explanatory variables upon which to base}\\ &\text{prediction }\\
   \texttt{X} &= \mathbf{X} \text{, the design matrix associated with the observed data}\\
   \texttt{y} &= \mathbf{y} \text{, the observed response vector}\\
@@ -1226,7 +1309,7 @@ The R function \texttt{rpredNormReg(S,Xpred,X,y,beta0,Sigma0,nu0,s20,gprior)}
 
   \subsubsection{Example}
 
-In the example below (Hoff data and code found \href{https://pdhoff.github.io/book/}{here}) to employ Hoff's semi-conjugate prior we use
+In the example below (Hoff data and code found \href{https://pdhoff.github.io/book/}{https://pdhoff.github.io/book/}) to employ Hoff's semi-conjugate prior we use
 
 
 
@@ -1242,21 +1325,50 @@ In the example below (Hoff data and code found \href{https://pdhoff.github.io/bo
     \text{ (sampling variance of } \hat{\boldsymbol\beta}_{ols}\text{)}\\%\text{WHY TIMES n????}\\
   \nu_0 &= 1 \text{ (prior sample size)}\\
   \sigma^2_0 &= \frac{\sum e_i}{n-1} = 6.21 \text{ (variance of the residuals)}\\
-  S &= 5000 \text{ (sample size for predictive distribution random draw)}
+  S &= 5000 \text{, the predictive sample size}
 \end{flalign*}
 
 
-\noindent Inspection of the plot below shows the predicted distributions using Zellner's g-prior shrink toward 0, and have greater variance than those predicted using Hoff's semi-conjugate prior.
+\noindent Inspection of the plot in Figure \ref{fig:RegPriorComp} shows the predicted distributions using Zellner's g-prior shrink toward 0, and have greater variance than those predicted using Hoff's semi-conjugate prior.
 
-\includegraphics{Thesis_v4-016}
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{./Graphics/ExamplePlots/RegressionPriorComparison}
+  \caption{Regression Prediction Comparison}
+  \label{fig:RegPriorComp}
+\end{figure}
+
 
 
 \clearpage
 
 \section{Conclusion}
 
-\section{Appendix}
+The need to forecast future events arises in a broad array of disciplines: across all the sciences, in politics, in sports, in business, in finance---the list goes on.  Decisions influenced by forecasting often have far-reaching impact.  Scientific research and technological progress can be greatly aided by accurate prediction, for example, for reproducibility, verification of hypotheses, and design cycle efficiency.  Clearly the parties involved in any forward-looking endeavor greatly benefit from a reliable means of prediction.  As such the importance of prediction as an inferential technique is evident, and it behooves the statistician to arrive at the consultation table with a dependable set of predictive tools in hand.\\
+
+\noindent The field of statistics does not lack a body of theory for predictive inference, and statisticians have at their fingertips exponentially expanding computing power.  Bayesian predictive techniques are ripe to be exercised on the mountains of existing data, if the right tools are available.  But the right tools are not generally available---so this thesis begins to respond to that need.  I have developed easy-to-use R functions that implement prediction for several standard classes of problems.  These functions are tested and ready to be used, providing a foundation for a statistical tool set ready to be applied to today's prediction problems.
+
+\clearpage
 
 \section{References}
+
+% \bibliography{References}
+% \printbibliography
+
+\begin{thebibliography}{6}
+\bibitem{Aitchison} Aitchison, J., Dunsmore, I. R. (1975), \textit{Statistical Prediction Analysis},
+Cambridge, UK: Cambridge University Press.
+\bibitem{Billheimer} Billheimer, Dean (2019), ``Predictive Inference and Scientific Reproducibility," \textit{The American Statistician}, 73:sup1, 291-295, DOI: 10.1080/00031305.2018.1518270
+\bibitem{Geisser} Geisser, Seymour (1993), \textit{Predictive Inference, an Introduction}, London, UK:  Chapman \& Hall.
+\bibitem{Gelman} Gelman, Andrew, Carlin, John B., Stern, Hal S., Dunson, David B., Vehtari, Aki, Rubin, Donald B. (2013), \textit{Bayesian Data Analysis} Third Edition, Boca Raton, FL, CRC Press, Taylor \& Francis Group.
+\bibitem{Hoff} Hoff, Peter D. (2009), A First Course in Bayesian Statistical Methods, New York, NY: Springer Science+Business Media.
+\bibitem{Silver} Silver, Nate (2015), The Signal and the Noise, New York, NY, Penguin Books.
+\end{thebibliography}
+
+
+% \autocite[1]{Billheimer:1}
+
+
+\section{Appendix}
 
 \end{document}
