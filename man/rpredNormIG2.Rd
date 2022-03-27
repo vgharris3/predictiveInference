@@ -5,19 +5,19 @@
 \title{The Normal-Inverse Gamma Predictive Distribution for Two Samples}
 \usage{
 rpredNormIG2(
-  n = 1,
+  S = 1,
   y1,
   y2,
   mu0 = 0,
   g20 = 1,
   d0 = 0,
   t20 = 1,
-  s20 = 1,
-  nu0 = 1
+  nu0 = 1,
+  s20 = 1
 )
 }
 \arguments{
-\item{n}{desired random sample size (default is 1)}
+\item{S}{desired random sample size (default is 1)}
 
 \item{y1}{vector of (observed) Normally-distributed values (sample 1)}
 
@@ -31,9 +31,9 @@ rpredNormIG2(
 
 \item{t20}{variance of delta from prior knowledge (default is 1)}
 
-\item{s20}{variance of sample from prior knowledge (default is 1)}
-
 \item{nu0}{number of prior observations (default is 1)}
+
+\item{s20}{variance of sample from prior knowledge (default is 1)}
 }
 \value{
 random sample of size n Normal - Inverse Gamma predictive probability for each population sample

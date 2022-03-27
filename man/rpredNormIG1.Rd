@@ -4,12 +4,12 @@
 \alias{rpredNormIG1}
 \title{The Normal-Inverse Gamma Predictive Distribution}
 \usage{
-rpredNormIG1(S, obs, mu0 = 0, k0 = 1, sig20 = 1, nu0 = 1, Jeffreys = FALSE)
+rpredNormIG1(S, y, mu0 = 0, k0 = 1, sig20 = 1, nu0 = 1, Jeffreys = FALSE)
 }
 \arguments{
 \item{S}{desired random sample size}
 
-\item{obs}{vector of (observed) Normally-distributed values}
+\item{y}{vector of (observed) Normally-distributed values}
 
 \item{mu0}{mean of prior observations (set default)}
 

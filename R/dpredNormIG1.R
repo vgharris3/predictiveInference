@@ -54,8 +54,6 @@ dpredNormIG1 = function(ypred,y,mu0=0,k0=1,sig20=1,nu0=1,S = 100000,Jeffreys=FAL
     location = meanobs
     scale = sqrt(s2)*sqrt(1+1/nobs)
 
-    ####DEVISE A MEANS OF ESTIMATING THE SUPPORT
-    ####ROOT FINDER?  LOOK AT rpredPG()
     xt = seq(1,2.5,len=100)
     yt = (1/scale) * stats::dt((xt - location)/scale,df = nobs-1)
 
@@ -72,15 +70,9 @@ dpredNormIG1 = function(ypred,y,mu0=0,k0=1,sig20=1,nu0=1,S = 100000,Jeffreys=FAL
     rs = rpredNormIG1(S,y,mu0,k0,sig20,nu0,Jeffreys=FALSE)
 
     #Estimating density using R's density() function on random sample
-    #(taken from https://stackoverflow.com/questions/28077500/find-the-probability-density-of-a-new-data-point-using-density-function-in-r)
+    #(obtained from https://stackoverflow.com/questions/28077500/find-the-probability-density-of-a-new-data-point-using-density-function-in-r)
     d <- stats::density(rs)
     h = d$bw
-    #myKDE <- function(t){
-    #  kernelValues <- rep(0,length(rs))
-    #  transformed = (t - rs)/h
-    #  kernelValues = stats::dnorm(transformed, mean = 0, sd = 1)/h
-    #  return(sum(kernelValues) / length(rs))
-    #}
 
     myKDE_vec <- function(tvec){
       kernelValues <- matrix(0, nrow = length(tvec), ncol = length(rs))

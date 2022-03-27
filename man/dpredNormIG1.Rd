@@ -5,8 +5,8 @@
 \title{The Normal-Inverse Gamma Predictive Distribution}
 \usage{
 dpredNormIG1(
-  x,
-  obs,
+  ypred,
+  y,
   mu0 = 0,
   k0 = 1,
   sig20 = 1,
@@ -16,9 +16,9 @@ dpredNormIG1(
 )
 }
 \arguments{
-\item{x}{vector of values for which predictive probability is desired}
+\item{ypred}{vector of values for which predictive probability is desired}
 
-\item{obs}{vector of (observed) Normally-distributed values}
+\item{y}{vector of (observed) Normally-distributed values}
 
 \item{mu0}{mean of prior observations (set default)}
 
@@ -28,7 +28,7 @@ dpredNormIG1(
 
 \item{nu0}{number of prior observations (default is 1)}
 
-\item{S}{size of random sample used for density approximation (default is 10^6)}
+\item{S}{size of random sample used for density approximation (default is 10^5)}
 
 \item{Jeffreys}{flag for use of Jeffrey's prior}
 }

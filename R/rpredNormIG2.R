@@ -58,11 +58,6 @@ rpredNormIG2 = function(S=1,y1,y2,mu0=0,g20=1,d0=0,t20=1,nu0=1,s20=1){
 
   n1<-length(y1) ; n2<-length(y2)
 
-  ## prior parameters
-#  mu0<-50 ; g20<-625
-#  d0<-0 ; t20<-625
-#  s20<-100; nu0<-1
-
   ## starting values
   mu<- ( mean(y1) + mean(y2) )/2
   del<- ( mean(y1) - mean(y2) )/2
@@ -70,14 +65,12 @@ rpredNormIG2 = function(S=1,y1,y2,mu0=0,g20=1,d0=0,t20=1,nu0=1,s20=1){
   ## Gibbs sampler
   MU<-DEL<-S2<-NULL
   Y12<-NULL
-#  set.seed(1)
+
   for(s in 1:S)
   {
-
     ##update s2
     s2<-1/stats::rgamma(1,(nu0+n1+n2)/2,
                  (nu0*s20+sum((y1-mu-del)^2)+sum((y2-mu+del)^2) )/2)
-    ##
 
     ##update mu
     var.mu<-  1/(1/g20+ (n1+n2)/s2 ) #this is gamma^2_n -- call it g2n

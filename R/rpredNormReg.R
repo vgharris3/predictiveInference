@@ -67,23 +67,16 @@ rpredNormReg = function(S=1,Xpred,X,y,beta0,Sigma0,nu0=1,s20=1,gprior = TRUE){
     #result$sigma2 = s2
 
     Vb = g*solve(t(X)%*%X)/(g+1)
-    Eb = Vb%*%t(X)%*%y    #Posterior means of the betas (matches Hoff p. 159 lower half)
-                          #using apply(beta,2,sd) shows sd of these parameters close to Hoff
+    Eb = Vb%*%t(X)%*%y
 
     E = matrix(rnorm(S*p,0,sqrt(sigma2)),S,p)
     betas = t( t(E%*%chol(Vb)) + c(Eb))
-
-    #result$betas = betas
 
     predictions = Xpred%*%t(betas)
 
     for(i in 1:nrow(Xpred)){
       predictions[i,] = predictions[i,] + rnorm(S,0,sqrt(sigma2))
     }
-
-    #result$predictions = predictions
-
-
 
   } else { #using Hoff's semi-conjugate prior
 
@@ -94,8 +87,6 @@ rpredNormReg = function(S=1,Xpred,X,y,beta0,Sigma0,nu0=1,s20=1,gprior = TRUE){
     }
 
     ## some convenient quantities
-    #n<-length(y)
-    #p<-length(beta.0)
     iSigma.0<-solve(Sigma.0)                            #iSigma.0 = inverse of Sigma.0
     XtX<-t(X)%*%X
 
@@ -104,7 +95,6 @@ rpredNormReg = function(S=1,Xpred,X,y,beta0,Sigma0,nu0=1,s20=1,gprior = TRUE){
     sigma2.post<-rep(NA,S)                              #storage for S instances of variance corresponding to the betas
 
     ## starting value
-    #set.seed(1)
     sig2<- s20                #starting value for sigma2
     beta.0 = beta0              #starting value for beta, which gets reused in computing E(beta|y,X,sig2)
 
@@ -128,11 +118,7 @@ rpredNormReg = function(S=1,Xpred,X,y,beta0,Sigma0,nu0=1,s20=1,gprior = TRUE){
 
     round( apply(beta.post,2,mean), 3)                  #compute mean of Gibbs sampled betas (for check)
 
-#    result = list(beta.post, Xpred%*%t(beta.post))
-
-    #result$betas = beta.post
     betas = beta.post
-    #result$sigma2 = sigma2.post
     sigma2 = sigma2.post
 
     predictions = Xpred%*%t(beta.post)
@@ -144,7 +130,6 @@ rpredNormReg = function(S=1,Xpred,X,y,beta0,Sigma0,nu0=1,s20=1,gprior = TRUE){
     result$predictions = predictions
 
   }
-
 
   result_list = list("betas" = betas, "sigma2" = sigma2, "predictions" = predictions)
   return(result_list)

@@ -64,7 +64,6 @@ rpredNormIGk = function(S=1,Y,nu0=1,s20=1,eta0=1,t20=1,mu0=0,g20=1){
 
   ## Put data in list form
   Ylist<-list()
-  # YM<-NULL
   J<-max(Y[,1]) #col. 1 of Y is an index identifying the data in col. 2
   n<-ybar<-ymed<-s2<-rep(0,J)
   for(j in 1:J) {
@@ -73,7 +72,6 @@ rpredNormIGk = function(S=1,Y,nu0=1,s20=1,eta0=1,t20=1,mu0=0,g20=1){
     ymed[j]<-median(Ylist[[j]]) #record median of each data set
     n[j]<-length(Ylist[[j]]) #record number data points in each data set
     s2[j]<-var(Ylist[[j]]) #record variance of each data set
-    # YM<-rbind( YM, cbind( rep(j,n[j]), Ylist[[j]] )) #first column is data set index, second column is scores matched to those indices
   }
 
   ## starting values
@@ -90,10 +88,6 @@ rpredNormIGk = function(S=1,Y,nu0=1,s20=1,eta0=1,t20=1,mu0=0,g20=1){
   mu<-mean(theta)
   tau2<-var(theta)
 
-  ## setup MCMC
-  # set.seed(1)
-  #S<-5000
-  # S<-N
   YTILDE<-matrix(nrow=S,ncol=m)
   THETA<-matrix( nrow=S,ncol=m)
   MST<-matrix( nrow=S,ncol=3)
@@ -137,12 +131,11 @@ rpredNormIGk = function(S=1,Y,nu0=1,s20=1,eta0=1,t20=1,mu0=0,g20=1){
 
   }
 
-
   mcmc1<-list(YTILDE=YTILDE,THETA=THETA,MST=MST)
 
-#Note: in mcmc1 each row contains a single prediction for each separate data set.
-#The number of rows is the number of desired predictions (input N).
-#The ith column therefore contains all the predictions for the ith data set.
+  #Note: in mcmc1 each row contains a single prediction for each separate data set.
+  #The number of rows is the number of desired predictions (input N).
+  #The ith column therefore contains all the predictions for the ith data set.
 
   #YTILDE:  Nxm matrix of predictions (N predictions for each of the m data sets in Y)
   #THETA:  Nxm matrix of drawn within-group posterior means

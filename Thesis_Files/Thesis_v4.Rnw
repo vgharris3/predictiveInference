@@ -93,7 +93,7 @@ setwd("C:/Users/gabe/Documents/tmp/predictiveInference/Thesis_Files")
 
 An obstacle to widespread employment of Bayesian predictive inference in scientific research is the lack of suitable computing tools.  In this thesis I document several established useful models, and provide an applicable set of tools for statisticians.  For each of the included models, some basic notes on mathematical derivation are presented, and predictive inference is illustrated with examples.  For the details of the models and some of the examples I relied primarily on Seymour Geisser's \underline{Predictive Inference:  An Introduction} (1993) and Peter D. Hoff's \underline{A First Course in Bayesian Statistical Methods} (2009).\\
 
-\noindent An R package has been developed, the main purpose of which is to provide the researcher with a means of generating samples from predictive distributions.  So for all the models, the package includes predictive sample generators.  For those models with analytical solutions, density and distribution functions are also provided.  The standard R naming convention for these function classes has been adopted:  density functions are prefixed with the letter ``d," distribution functions with the letter ``p," and sample generation functions with the letter ``r."  Also included in all function names is the abbreviation ``pred" (for predictive) and an initialism or abbreviation identifying the model itself.  For example, the density function for the Beta-Binomial model is named ``\texttt{dpredBB()}."  The R code for each function is included in Appendix \textcolor{red}{X-insert link to appendix here}.
+\noindent An R package has been developed, the main purpose of which is to provide the researcher with a means of generating samples from predictive distributions.  So for all the models, the package includes predictive sample generators.  For those models with analytical solutions, density and distribution functions are also provided.  The standard R naming convention for these function classes has been adopted:  density functions are prefixed with the letter ``d," distribution functions with the letter ``p," and sample generation functions with the letter ``r."  Also included in all function names is the abbreviation ``pred" (for predictive) and an initialism or abbreviation identifying the model itself.  For example, the density function for the Beta-Binomial model is named ``\texttt{dpredBB()}."  The R code for each function is included in the Appendix.
 
 
 
@@ -275,7 +275,7 @@ PIESD = sqrt(M*t/N*(1-t/N))
   \end{tabular}
 \end{center}
 
-\vspace{1cm}
+% \vspace{1cm}
 
 \noindent The differences in the results of the two prediction methods are easy to see in this case. Unlike the Bayesian approach, the binomial-only model uses only the observed data, does not account for any uncertainty in the binomial parameter ($\theta$), and ignores historical info about Razorback frequency.  If speculating whether the number of razorbacks out of the next 10 pig tosses will be greater than, say, 3, the indications of the two analysis approaches contradict each other.  The statistically savvy wagerer of course realizes that the 10 die throws informing the plug-in results do not offer high predictive confidence.  A much less risky option for the bettor is the Bayesian method with a suitable prior parameterization.
 
@@ -433,7 +433,7 @@ The functions \texttt{dpredBB()} and \texttt{rpredBB()} were used in the Pass Th
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.8\textwidth]{./Graphics/DistributionPlots/BetaBinomial}
+  \includegraphics[width=0.95\textwidth]{./Graphics/DistributionPlots/BetaBinomial}
   \caption{Beta-Binomial Predictive Distribution}
   \label{fig:BBdist}
 \end{figure}
@@ -571,6 +571,9 @@ This result has been used to create R functions \texttt{dpredEG()}, \texttt{ppre
 \begin{flalign*}
   \texttt{ypred} &= \tilde{y} \text{, the survival time(s) in future experiments for which prediction is desired}\\
   \texttt{y} &= \text{a vector of } N \text{ survival times, } d \text{ observed, } N-d \text{ censored}\\
+\end{flalign*}
+
+\begin{flalign*}
   \texttt{c} &= \text{an indicator vector of length } N.\texttt{  c[i]=1}\text{ if the corresponding data element }\texttt{y[i]}\text{ is fully }\\ &\text{   observed, otherwise }\texttt{c[i]=0.}  \text{  Note }\texttt{d = sum(c).}\\
   \texttt{dt} &= \delta \text{, the shape parameter of the Gamma prior}\\
   \texttt{gm} &= \gamma \text{, the rate parameter of the Gamma prior}\\
@@ -586,9 +589,9 @@ This result has been used to create R functions \texttt{dpredEG()}, \texttt{ppre
 
 \noindent Aitchison and Dunsmore [1] provide survival time data representing the lifetime in minutes of 24 machine tools of a particular type. Inspection and replacement costs depend on the machines' lifespans, so reliable predictions are financially relevant to the factory in which the machines are used. The observed machine lifetimes range from 4 to 290, with mean 74.71.  For this example, we'll assume the observations were censored at three hours, that is, censoring time $t_c = 180$ minutes.  The data set includes three survival times that exceed 180 minutes, so to construct our example we replace those with the censoring time, and the mean is reduced to 72.21.  The data are plotted in Figure \ref{fig:EG_Data} with the three censored values shown in red.  The gray horizontal line depicts the average (after censoring).
 
-\begin{figure}[ht]
+\begin{figure}[h]
   \centering
-  \includegraphics[width=0.8\textwidth]{./Graphics/ExamplePlots/EG_TimeData}
+  \includegraphics[width=0.7\textwidth]{./Graphics/ExamplePlots/EG_TimeData}
   \caption{Observed Machine Tool Lifetime Data}
   \label{fig:EG_Data}
 \end{figure}
@@ -620,7 +623,7 @@ lines(c(1,length(y)),c(ybar,ybar),col="gray")
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.9\textwidth]{./Graphics/DistributionPlots/ExponentialGamma}
+  \includegraphics[width=0.95\textwidth]{./Graphics/DistributionPlots/ExponentialGamma}
   \caption{Exponential-Gamma Predictive Distribution}
   \label{fig:EGdist}
 \end{figure}
@@ -764,9 +767,10 @@ h = hist(pred_sample,prob = FALSE,main = "Histogram of Predictive Sample",xlim=c
         = \dfrac{\frac{1}{C_{N+1}}\cancel{\frac{\beta^\alpha}{\Gamma(\alpha)}}}{\frac{1}{C_N}\cancel{\frac{\beta^\alpha}{\Gamma(\alpha)}}}
         = \dfrac{C_N}{C_{N+1}}\nonumber\\
         &\nonumber\\
-        &= \dfrac{\dfrac{\prod_{i=1}^N y_i!(\beta+N)^{\alpha+\sum_{i=1}^N y_i}}{\Gamma(\alpha+\sum_{i=1}^N y_i)}}{\dfrac{\prod_{i=1}^{N+1} y_i!(\beta+N+1)^{\alpha+\sum_{i=1}^{N+1} y_i}}{\Gamma(\alpha+\sum_{i=1}^{N+1} y_i)}}\nonumber\\
-        &\nonumber\\
-        &= \dfrac{\Gamma\left(\alpha+\sum_{i=1}^{N+1}y_i\right)(\beta+N)^{\alpha+\sum_{i=1}^N y_i}}{\left(y_{N+1}!\right)\Gamma\left(\alpha+\sum_{i=1}^N y_i\right)(\beta+N+1)^{\alpha+\sum_{i=1}^{N+1}y_i}}\nonumber\\
+        &= \dfrac{\dfrac{\prod_{i=1}^N y_i!(\beta+N)^{\alpha+\sum_{i=1}^N y_i}}{\Gamma(\alpha+\sum_{i=1}^N y_i)}}{\dfrac{\prod_{i=1}^{N+1} y_i!(\beta+N+1)^{\alpha+\sum_{i=1}^{N+1} y_i}}{\Gamma(\alpha+\sum_{i=1}^{N+1} y_i)}}\nonumber
+      \end{flalign}
+      \begin{flalign}
+        \,\,\,\,\,\,\,&= \dfrac{\Gamma\left(\alpha+\sum_{i=1}^{N+1}y_i\right)(\beta+N)^{\alpha+\sum_{i=1}^N y_i}}{\left(y_{N+1}!\right)\Gamma\left(\alpha+\sum_{i=1}^N y_i\right)(\beta+N+1)^{\alpha+\sum_{i=1}^{N+1}y_i}}\nonumber\\
         &\nonumber\\
         &= \dfrac{\Gamma\left(\alpha+\sum_{i=1}^N y_i + \tilde{y}\right)(\beta+N)^{\alpha+\sum_{i=1}^N y_i}}{\left(\tilde{y}!\right)\Gamma\left(\alpha+\sum_{i=1}^N y_i\right)(\beta+N+1)^{\alpha+\sum_{i=1}^N y_i + \tilde{y}}}\nonumber\\
         &\nonumber\\
@@ -818,13 +822,13 @@ This result has been used to create R functions \texttt{dpredPG()}, \texttt{ppre
   \texttt{y} &= y \text{, the observed counts}\\
   \texttt{alpha} &= \alpha \text{, the shape parameter of the Gamma prior}\\
   \texttt{beta} &= \beta \text{, the rate parameter of the Gamma prior}\\
-  \texttt{S} &= S \text{, the sample size to be generated by the predictive distribution}\\
+  \texttt{S} &= S \text{, the sample size to be generated by the predictive distribution}
 \end{flalign*}
 
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\clearpage
 
     \subsubsection{Example (Poisson-Gamma)}
 
@@ -834,7 +838,7 @@ The National Hurricane Center lists the number of hurricanes by category that ma
   \url{http://www.aoml.noaa.gov/hrd/hurdat/All_U.S._Hurricanes.html}
 \end{center}
 
-The observed data by decade is
+\noindent The observed data by decade is
 
 \begin{center}
   \begin{tabular}{cc}
@@ -864,7 +868,7 @@ Suppose we are told by a hurricane expert that the average number per decade can
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.8\textwidth]{./Graphics/DistributionPlots/PoissonGamma}
+  \includegraphics[width=0.95\textwidth]{./Graphics/DistributionPlots/PoissonGamma}
   \caption{Poisson-Gamma Predictive Distribution}
   \label{fig:PGdist}
 \end{figure}
@@ -1068,7 +1072,7 @@ Calls to these functions appear as follows:
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.8\textwidth]{./Graphics/DistributionPlots/NormIG1}
+  \includegraphics[width=0.95\textwidth]{./Graphics/DistributionPlots/NormIG1}
   \caption{Normal-Inverse Gamma (One-Sample) Predictive Distribution}
   \label{fig:NormIG1dist}
 \end{figure}
@@ -1749,6 +1753,8 @@ plot(y~x3,pch=16,xlab="age",ylab="change in maximal oxygen uptake",
 legend(27,0,legend=c("aerobic","running"),pch=c(16,16),col=c("gray","black"))
 @
 
+\clearpage
+
 \noindent Hoff suggests the following regression model for this data:
 
     \begin{align}
@@ -1766,7 +1772,7 @@ legend(27,0,legend=c("aerobic","running"),pch=c(16,16),col=c("gray","black"))
     E[Y|\mathbf{x}] &= \left(\beta_1 + \beta_2\right) + \left(\beta_3 + \beta_4\right) \times (age) \text{ if } x_{i,2} = 1 \text{ (aerobic program) }
 \end{flalign*}
 
-\noindent In other words, the model assumes that the relationship is linear in age for both exercise groups, with the difference in intercepts given by $\beta_2$ and the difference in slopes given by $\beta_4$.  If we assumed that $\beta_2 = \beta_4 = 0$, then we would have identical lines for both groups.  If we assumed $\beta_2 \ne 0$ and $\beta_4 =  0$ then we would have a different line for each group but they would be parallel.  Allowing all coefficients to be non-zero gives us two unrelated lines.  Some different possibilities are depicted graphically in Figure \ref{fig:RegModVar}:\\\\
+\noindent In other words, the model assumes that the relationship is linear in age for both exercise groups, with the difference in intercepts given by $\beta_2$ and the difference in slopes given by $\beta_4$.  If we assumed that $\beta_2 = \beta_4 = 0$, then we would have identical lines for both groups.  If we assumed $\beta_2 \ne 0$ and $\beta_4 =  0$ then we would have a different line for each group but they would be parallel.  Allowing all coefficients to be non-zero gives us two unrelated lines.  Some different possibilities are depicted graphically in Figure \ref{fig:RegModVar}:\\
 
 \begin{figure}[ht]
   \centering
@@ -2183,8 +2189,582 @@ Cambridge, UK: Cambridge University Press.
 \bibitem{Silver} Silver, Nate (2015), The Signal and the Noise, New York, NY, Penguin Books.
 \end{thebibliography}
 
-
+\clearpage
 
 \section{Appendix}
+  \subsection{Beta-Binomial R Functions}
+    \subsubsection{\texttt{dpredBB()}}
+
+        \begin{verbatim}
+          dpredBB <- function(tpred, N, t, M, alpha = 1, beta=1){
+            r = tpred
+
+            numerator = lgamma(M+1) + lgamma(N+alpha+beta) + lgamma(r+t+alpha)
+              + lgamma(M+N-r-t+beta)
+
+            denominator = lgamma(r+1) + lgamma(M-r+1) + lgamma(alpha+t)
+              + lgamma(N-t+beta) + lgamma(M+N+alpha+beta)
+
+            f_t = exp(numerator - denominator)
+
+            return(f_t)
+
+          }
+        \end{verbatim}
+
+    \subsubsection{\texttt{ppredBB()}}
+
+        \begin{verbatim}
+          ppredBB = function(tpred, N, t, M, alpha = 1, beta=1, lower=TRUE){
+
+            f_t = dpredBB(0:max(tpred), N, t, M, alpha, beta)
+
+            F_t = cumsum(f_t)
+
+            return_index = which(tpred == tpred)
+
+            if(lower){return(F_t[return_index])}
+            else {return(1 - F_t[return_index])}
+          }
+        \end{verbatim}
+
+    \subsubsection{\texttt{rpredBB()}}
+      \begin{verbatim}
+        rpredBB = function(S, N, t, M, alpha = 1, beta = 1){
+
+          F_x = ppredBB(0:M,N,t,M,alpha,beta)
+
+          u = stats::runif(S)
+
+          rank_list = numeric(S)
+
+          for(i in 1:S) {
+            rankF = which(abs(F_x - u[i]) == min(abs(F_x - u[i])))
+
+            if(F_x[rankF] > u[i]){ rankF = rankF - 1 }
+
+            rank_list[i] = rankF
+          }
+
+          return(rank_list)
+        }
+      \end{verbatim}
+  \subsection{Exponential-Gamma R Functions}
+    \subsubsection{\texttt{dpredEG()}}
+      \begin{verbatim}
+        dpredEG = function(ypred, y, c, dt, gm){
+
+          N = length(y)
+          ybar = mean(y)
+
+          d = sum(c) # number of fully observed copies
+
+          numerator = log(d+dt) + (d+dt)*log(gm+N*ybar)
+          denominator = (d+dt+1)*log(gm+N*ybar+ypred)
+
+          f_y = exp(numerator - denominator)
+
+          return(f_y)
+        }
+      \end{verbatim}
+    \subsubsection{\texttt{ppredEG()}}
+      \begin{verbatim}
+        ppredEG = function(ypred, y, c, dt, gm){
+
+          d = sum(c) # number of fully observed copies
+
+          Freturn = numeric(length(ypred))
+
+          for (i in 1:length(ypred)){
+            Freturn[i] = stats::integrate(dpredEG,lower = 0,upper = ypred[i],y = y, c = c, dt = dt, gm = gm)
+          }
+
+          return(Freturn)
+
+        }
+      \end{verbatim}
+    \subsubsection{\texttt{rpredEG()}}
+      \begin{verbatim}
+        rpredEG = function(S, y, c, dt, gm){
+
+
+          d = sum(c) # number of fully observed copies
+
+          a = d + dt
+          b = gm + sum(y)
+          # theta = stats::rgamma(1,shape=a,rate=b)
+          theta = stats::rgamma(S,shape=a,rate=b)
+
+          return(stats::rexp(S,theta))
+        }
+      \end{verbatim}
+  \subsection{Poisson-Gamma R Functions}
+    \subsubsection{\texttt{dpredPG()}}
+      \begin{verbatim}
+        dpredPG <- function(ypred, y, alpha = 1, beta=1){
+
+          a = alpha;
+          b = beta;
+          sobs = sum(y);
+          n = length(y);
+
+          f_y = stats::dnbinom(ypred,size = a + sobs, mu = (a + sobs)/(b + n));
+
+          return(f_y);
+
+        }
+      \end{verbatim}
+    \subsubsection{\texttt{ppredPG()}}
+      \begin{verbatim}
+        ppredPG = function(ypred, y, alpha = 1, beta=1, lower=TRUE){
+
+          f_y = dpredPG(ypred,y,alpha,beta)
+
+          F_y = cumsum(f_y)
+
+          if(lower){return(F_y)}
+          else {return(1 - F_y)}
+
+        }
+      \end{verbatim}
+    \subsubsection{\texttt{rpredPG()}}
+      \begin{verbatim}
+        rpredPG = function(S,y, alpha = 1, beta=1){
+
+          #Establish upper bound of support for sampling (lower bound is 0)
+          #Modified Bisection Method (rounding to integers)
+            #Computed midpoint values will be fed into the function
+              f_x(midpoint) - eps, which will feed midpoint into dnbinom,
+              which requires integers
+          #First reach to the right from the expected value E_x, until
+            f_x(U) - eps < 0
+          #Then employ Bisection Method, starting with E_x and U as the lower
+            and upper ends of the first interval
+          #Along the way, always round the middle value to the nearest integer
+
+          #Set desired tolerance epsilon for root function
+          eps = sqrt(.Machine$double.eps)
+          #Compute predictive expected value of x
+          E_x = round((alpha + sum(y))/(beta + length(y)))
+          Lower = E_x
+          #Reach right to find upper bound of starting interval for Bisection
+            Method
+          fLower = dpredPG(E_x,y,alpha,beta) - eps
+          if(fLower <= 0){ stop("Density at Expected Value computed to be less
+            than epsilon.")}
+
+          fUpper = fLower
+          reachExp = 0
+          while(fUpper > 0){
+            reachExp = reachExp + 1
+            Upper = E_x + 10^reachExp
+            fUpper = dpredPG(Upper,y,alpha,beta) - eps
+          }
+
+          limit_found = 0
+          right_end = E_x
+
+          while(!limit_found){
+            #Establish new interval
+            Mid = round(mean(c(Lower,Upper)))
+            fMid = dpredPG(Mid,y,alpha,beta) - eps
+            if(fMid > 0){
+              Lower = Mid #Upper is still Upper
+              if(dpredPG(Mid+1,y,alpha,beta) - eps <= 0){ #if f(Mid) and
+                f(Mid+1) are straddling 0
+                limit_found = 1
+                right_end = Mid + 1
+              }
+            } else { #fMid <= 0
+              Upper = Mid #Lower is still Lower
+              if(dpredPG(Mid-1,y,alpha,beta) - eps > 0){ #if f(Mid) and
+                f(Mid-1) are straddling 0
+                limit_found = 1
+                right_end = Mid
+              }
+            }
+          }
+
+          x = 0:right_end
+
+          F_x = ppredPG(x, y, alpha, beta)
+
+          u = stats::runif(S)
+
+          rank_list = numeric(S)
+
+          for(i in 1:S) {
+            rankF = which(abs(F_x - u[i]) == min(abs(F_x - u[i])))
+
+            if(F_x[rankF] > u[i]){ rankF = rankF - 1 }
+
+            rank_list[i] = rankF
+          }
+
+          return(rank_list)
+        }
+      \end{verbatim}
+  \subsection{Normal-Inverse Gamma R Functions}
+    \subsubsection{\texttt{dpredNormIG1()}}
+      \begin{verbatim}
+        dpredNormIG1 = function(ypred,y,mu0=0,k0=1,sig20=1,nu0=1,S = 100000,
+          Jeffreys=FALSE){
+
+          nobs = length(y);
+          meanobs = mean(y);
+          s2 = stats::var(y);
+
+          if(Jeffreys){
+
+            location = meanobs
+            scale = sqrt(s2)*sqrt(1+1/nobs)
+
+            xt = seq(1,2.5,len=100)
+            yt = (1/scale) * stats::dt((xt - location)/scale,df = nobs-1)
+
+            #Using t(n-1) distribution resulting from Jeffrey's prior:
+            #(theta - ybar)/(s/sqrt(n))|y1,...,yn ~ t(n-1)
+            #yields t distribution with location ybar and scale
+            #std(y)*sqrt(1+1/n)
+
+            xd = stats::dt((ypred-location)/scale,df=nobs-1)/scale
+
+          } else {
+
+            #Obtain a random sample from which to approximate the density
+            rs = rpredNormIG1(S,y,mu0,k0,sig20,nu0,Jeffreys=FALSE)
+
+            #Estimating density using R's density() function on random sample
+            #(obtained from https://stackoverflow.com/questions/28077500/find-
+              the-probability-density-of-a-new-data-point-using-density-
+              function-in-r)
+            d <- stats::density(rs)
+            h = d$bw
+
+            myKDE_vec <- function(tvec){
+              kernelValues <- matrix(0, nrow = length(tvec), ncol =
+                length(rs))
+              rsmat_old = do.call("rbind",replicate(length(tvec),rs,
+                simplify=FALSE))
+              rsmat = t(matrix(replicate(length(tvec),rs),ncol = length(tvec)))
+              transformed = (tvec - rsmat)/h
+              kernelValues = stats::dnorm(transformed, mean = 0, sd = 1)/h
+              return(apply(kernelValues,1,sum)/length(rs))
+            }
+
+            xd = myKDE_vec(ypred)
+            #xd = 1
+
+          }
+
+          return(xd)
+        }
+      \end{verbatim}
+    \subsubsection{\texttt{ppredNormIG1()}}
+      \begin{verbatim}
+        ppredNormIG1 = function(ypred,y,mu0=0,k0=1,sig20=1,nu0=1,S = 100000,
+          Jeffreys=FALSE){
+
+          nobs = length(y);
+          meanobs = mean(y);
+          s2 = stats::var(y);
+
+          if(Jeffreys){
+
+            #Using t(n-1) distribution resulting from Jeffrey's prior:
+            #(theta - ybar)/(s/sqrt(n))|y1,...,yn ~ t(n-1)
+            #yields t distribution with location ybar and scale
+            #std(y)*sqrt(1+1/n)
+
+            location = meanobs
+            scale = sqrt(s2)*sqrt(1+1/nobs)
+
+            xp = stats::pt((ypred-location)/scale,df=nobs-1)
+
+          } else {
+
+          #Obtain a random sample from which to approximate the density
+          rs = rpredNormIG1(S,y,mu0,k0,sig20,nu0,Jeffreys=FALSE)
+          #rsmat = matrix(rpredNormIG(S*length(x),obs,mu0,k0,sig20,nu0,
+            Jeffreys=FALSE),nrow = length(x))
+
+          #xrsmat = cbind(x,rsmat)
+
+          Frs = stats::ecdf(rs)
+          xp = Frs(ypred)
+
+          }
+
+          #return(apply(xrsmat,1,function(x) length(x[x<=x[1]])-1)/ncol(rsmat))
+
+          #return(Frs(x))
+          return(xp)
+
+        }
+      \end{verbatim}
+    \subsubsection{\texttt{rpredNormIG1()}}
+      \begin{verbatim}
+        rpredNormIG1 = function(S,y,mu0=0,k0=1,sig20=1,nu0=1,Jeffreys=FALSE){
+
+          nobs = length(y);
+          meanobs = mean(y);
+          s2 = stats::var(y);
+
+          if(Jeffreys){
+            location = meanobs
+            scale = sqrt(s2)*sqrt(1+1/nobs)
+            rs = location + scale * stats::rt(S,nobs-1)
+          }
+
+          else{
+
+            kn = k0 + nobs; nun = nu0 + nobs
+            mun = (k0*mu0+nobs*meanobs)/kn
+            sig2n = (nu0*sig20 + (nobs-1)*s2 + k0*nobs*(meanobs-mu0)^2/kn)/nun
+
+            sig2.postsample = 1/stats::rgamma(S,nun/2,sig2n*nun/2)
+            theta.postsample = stats::rnorm(S,mun,sqrt(sig2.postsample/kn))
+
+            rs = numeric(S)
+
+            rs = stats::rnorm(S,theta.postsample,sqrt(sig2.postsample))
+
+          }
+
+          return(rs)
+        }
+      \end{verbatim}
+    \subsubsection{\texttt{rpredNormIG2()}}
+      \begin{verbatim}
+        rpredNormIG2 = function(S=1,y1,y2,mu0=0,g20=1,d0=0,t20=1,nu0=1,s20=1){
+
+          for(s in 1:S)
+          {
+            ##update s2
+            s2<-1/stats::rgamma(1,(nu0+n1+n2)/2,
+                         (nu0*s20+sum((y1-mu-del)^2)+sum((y2-mu+del)^2) )/2)
+
+            ##update mu
+            var.mu<-  1/(1/g20+ (n1+n2)/s2 ) #this is gamma^2_n -- call it g2n
+            mean.mu<- var.mu*( mu0/g20 + sum(y1-del)/s2 + sum(y2+del)/s2 )
+              #this is mu_n -- call it mun
+            mu<-stats::rnorm(1,mean.mu,sqrt(var.mu))
+            ##
+
+            ##update del
+            var.del<-  1/(1/t20+ (n1+n2)/s2 )
+            mean.del<- var.del*( d0/t20 + sum(y1-mu)/s2 - sum(y2-mu)/s2 )
+            del<-stats::rnorm(1,mean.del,sqrt(var.del))
+            ##
+
+            ##save parameter values
+            MU<-c(MU,mu) ; DEL<-c(DEL,del) ; S2<-c(S2,s2)
+            Y12<-rbind(Y12,c(stats::rnorm(2,mu+c(1,-1)*del,sqrt(s2) ) ) )
+          }
+
+          rs = Y12
+          #HOW TO RETURN SEVERAL THINGS ACCESSIBLE VIA $??
+
+          return(rs)
+        }
+      \end{verbatim}
+    \subsubsection{\texttt{rpredNormIGk()}}
+              \begin{verbatim}
+        rpredNormIGk = function(S=1,Y,nu0=1,s20=1,eta0=1,t20=1,mu0=0,g20=1){
+
+          #### MCMC approximation to posterior for the hierarchical normal model
+
+          ## Put data in list form
+          Ylist<-list()
+          J<-max(Y[,1]) #col. 1 of Y is an index identifying the data in col. 2
+          n<-ybar<-ymed<-s2<-rep(0,J)
+          for(j in 1:J) {
+            Ylist[[j]]<-Y[ Y[,1]==j,2] #separate out data into separate vectors
+              by index.  Y is a list of those vectors, which need not be all
+              the same length
+            ybar[j]<-mean(Ylist[[j]]) #record mean of each data set
+            ymed[j]<-median(Ylist[[j]]) #record median of each data set
+            n[j]<-length(Ylist[[j]]) #record number data points in each data set
+            s2[j]<-var(Ylist[[j]]) #record variance of each data set
+          }
+
+          ## starting values
+          m<-length(Ylist)
+          ytilde<-n<-sv<-ybar<-rep(NA,m)
+          for(j in 1:m)
+          {
+            ybar[j]<-mean(Ylist[[j]])
+            sv[j]<-var(Ylist[[j]])
+            n[j]<-length(Ylist[[j]])
+          }
+          theta<-ybar
+          sigma2<-mean(sv)
+          mu<-mean(theta)
+          tau2<-var(theta)
+
+          YTILDE<-matrix(nrow=S,ncol=m)
+          THETA<-matrix( nrow=S,ncol=m)
+          MST<-matrix( nrow=S,ncol=3)
+
+          ## MCMC algorithm
+          for(s in 1:S)
+          {
+
+            # sample new values of the thetas
+            for(j in 1:m)
+            {
+              vtheta<-1/(n[j]/sigma2+1/tau2)
+              etheta<-vtheta*(ybar[j]*n[j]/sigma2+mu/tau2)
+              theta[j]<-rnorm(1,etheta,sqrt(vtheta))
+            }
+
+            #sample new value of sigma2
+            nun<-nu0+sum(n)
+            ss<-nu0*s20;for(j in 1:m){ss<-ss+sum((Y[[j]]-theta[j])^2)}
+            sigma2<-1/rgamma(1,nun/2,ss/2)
+
+            #predict ytilde_j for each theta_j
+            for(j in 1:m){
+              ytilde[j] = rnorm(1,mean=theta[j],sd=sqrt(sigma2))
+            }
+
+            #sample a new value of mu
+            vmu<- 1/(m/tau2+1/g20)
+            emu<- vmu*(m*mean(theta)/tau2 + mu0/g20)
+            mu<-rnorm(1,emu,sqrt(vmu))
+
+            # sample a new value of tau2
+            etam<-eta0+m
+            ss<- eta0*t20 + sum( (theta-mu)^2 )
+            tau2<-1/rgamma(1,etam/2,ss/2)
+
+            #store results
+            YTILDE[s,]<-ytilde
+            THETA[s,]<-theta
+            MST[s,]<-c(mu,sigma2,tau2)
+
+          }
+
+          mcmc1<-list(YTILDE=YTILDE,THETA=THETA,MST=MST)
+
+          #Note: in mcmc1 each row contains a single prediction for each
+            separate data set.
+          #The number of rows is the number of desired predictions (input N).
+          #The ith column therefore contains all the predictions for the ith
+            data set.
+
+          #YTILDE:  Nxm matrix of predictions (N predictions for each of the
+            m data sets in Y)
+          #THETA:  Nxm matrix of drawn within-group posterior means
+          #MST:  Nx3 matrix of drawn posterior within-group variance and
+            between-groups mean and variance
+
+          return(mcmc1)
+        }
+      \end{verbatim}
+  \subsection{Normal Regression R Function}
+    \subsubsection{\texttt{rpredNormIGkReg()}}
+      \begin{verbatim}
+        rpredNormReg = function(S=1,Xpred,X,y,beta0,Sigma0,nu0=1,s20=1,
+          gprior = TRUE){
+
+          if(is.vector(Xpred)){
+            Xpred = t(as.matrix(Xpred))
+          }
+
+          n = dim(X)[1] # = length(y)
+          p = dim(X)[2] # = length(beta)
+
+          if(gprior){
+
+            g = length(y) # Zellner's g-prior
+            Hg = (g/(g+1))*X%*%solve(t(X)%*%X)%*%t(X)
+            SSRg = t(y)%*%( diag(1,nrow=n) - Hg)%*%y
+
+            sigma2 = 1/rgamma(S, (nu0 + n)/2, (nu0*s20 + SSRg)/2 )
+            #result$sigma2 = s2
+
+            Vb = g*solve(t(X)%*%X)/(g+1)
+            Eb = Vb%*%t(X)%*%y
+
+            E = matrix(rnorm(S*p,0,sqrt(sigma2)),S,p)
+            betas = t( t(E%*%chol(Vb)) + c(Eb))
+
+            predictions = Xpred%*%t(betas)
+
+            for(i in 1:nrow(Xpred)){
+              predictions[i,] = predictions[i,] + rnorm(S,0,sqrt(sigma2))
+            }
+
+          } else { #using Hoff's semi-conjugate prior
+
+            rmvnorm<-function(n,mu,Sigma)
+            { # samples from the multivariate normal distribution
+              E<-matrix(rnorm(n*length(mu)),n,length(mu))
+              t(  t(E%*%chol(Sigma)) +c(mu))
+            }
+
+            ## some convenient quantities
+            iSigma.0<-solve(Sigma.0)  #iSigma.0 = inverse of Sigma.0
+            XtX<-t(X)%*%X
+
+            ## store mcmc samples in these objects
+            beta.post<-matrix(nrow=S,ncol=p)  #storage for S instances for
+              each coefficient of the p predictors
+            sigma2.post<-rep(NA,S)  #storage for S instances of variance
+              corresponding to the betas
+
+            ## starting value
+            sig2<- s20        #starting value for sigma2
+            beta.0 = beta0    #starting value for beta, which gets reused
+              in computing E(beta|y,X,sig2)
+
+            ## MCMC algorithm
+            for( scan in 1:S) {
+
+              #update beta
+              V.beta<- solve(  iSigma.0 + XtX/sig2 )  #Conditional variance
+                of the regression coefficients
+              E.beta<- V.beta%*%( iSigma.0%*%beta.0 + t(X)%*%y/sig2 )
+                #Conditional mean of the variance coefficients
+              beta<-t(rmvnorm(1, E.beta,V.beta) )   #Gibbs sampler step:
+                update beta
+
+              #update sigma2
+              nu.n<- nu.0+n             #numerator of 1st term of inverse
+                gamma sample
+              ss.n<-nu.0*sigma2.0 + sum(  (y-X%*%beta)^2 )  #numerator of
+                2nd term of inverse gamma sample
+              sig2<-1/rgamma(1,nu.n/2, ss.n/2)  #Gibbs sampler step:  update
+                sigma^2
+
+              #save results of this scan
+              beta.post[scan,]<-beta    #Store updated beta in current row of
+                beta matrix
+              sigma2.post[scan]<-sig2   #Store updated sigma^2 in current
+                position in sigma^2 vector
+            }
+
+            round( apply(beta.post,2,mean), 3)  #compute mean of Gibbs sampled
+              betas (for check)
+
+            betas = beta.post
+            sigma2 = sigma2.post
+
+            predictions = Xpred%*%t(beta.post)
+
+            for(i in 1:nrow(Xpred)){
+              predictions[i,] = predictions[i,] + rnorm(S,0,sqrt(sigma2.post))
+            }
+
+            result$predictions = predictions
+
+          }
+
+          result_list = list("betas" = betas, "sigma2" = sigma2,
+            "predictions" = predictions)
+          return(result_list)
+        }
+      \end{verbatim}
 
 \end{document}
