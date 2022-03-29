@@ -38,7 +38,7 @@
 \contentsline {subsubsection}{\numberline {4.2.3}Example (Normal Regression)}{46}{subsubsection.4.2.3}%
 \contentsline {section}{\numberline {5}Conclusion}{48}{section.5}%
 \contentsline {section}{\numberline {6}References}{49}{section.6}%
-\contentsline {section}{\numberline {7}Appendix}{50}{section.7}%
+\contentsline {section}{\numberline {7}Appendix (R Functions)}{50}{section.7}%
 \contentsline {subsection}{\numberline {7.1}Beta-Binomial R Functions}{50}{subsection.7.1}%
 \contentsline {subsubsection}{\numberline {7.1.1}\texttt {dpredBB()}}{50}{subsubsection.7.1.1}%
 \contentsline {subsubsection}{\numberline {7.1.2}\texttt {ppredBB()}}{50}{subsubsection.7.1.2}%
@@ -54,7 +54,7 @@
 \contentsline {subsection}{\numberline {7.4}Normal-Inverse Gamma R Functions}{54}{subsection.7.4}%
 \contentsline {subsubsection}{\numberline {7.4.1}\texttt {dpredNormIG1()}}{54}{subsubsection.7.4.1}%
 \contentsline {subsubsection}{\numberline {7.4.2}\texttt {ppredNormIG1()}}{56}{subsubsection.7.4.2}%
-\contentsline {subsubsection}{\numberline {7.4.3}\texttt {rpredNormIG1()}}{56}{subsubsection.7.4.3}%
+\contentsline {subsubsection}{\numberline {7.4.3}\texttt {rpredNormIG1()}}{57}{subsubsection.7.4.3}%
 \contentsline {subsubsection}{\numberline {7.4.4}\texttt {rpredNormIG2()}}{57}{subsubsection.7.4.4}%
 \contentsline {subsubsection}{\numberline {7.4.5}\texttt {rpredNormIGk()}}{58}{subsubsection.7.4.5}%
 \contentsline {subsection}{\numberline {7.5}Normal Regression R Function}{60}{subsection.7.5}%
