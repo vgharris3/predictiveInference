@@ -107,15 +107,15 @@ My understanding of Bayesian Predictive Inference began with the University of A
 I find persuasive the assertion that the main purpose of statistics is to predict future events based on observed data, and moreover that a statistical model may be judged chiefly by the quality of its predictions.  Predictions about meaningful quantities that are relevant to the object of study facilitate scientific progress in multiple ways.  Nate Silver notes:
 
 \begin{quote}
-Prediction is important because it connects subjective and objective reality. Karl Popper, the philosopher of science, recognized this view. For Popper, a hypothesis was not scientific unless it was falsifiable—meaning that it could be tested in the real world by means of a prediction.
+Prediction is important because it connects subjective and objective reality. Karl Popper, the philosopher of science, recognized this view. For Popper, a hypothesis was not scientific unless it was falsifiable—meaning that it could be tested in the real world by means of a prediction. [6]
 \end{quote}
 
 \noindent Billheimer emphasizes the improvement of scientific accuracy and reproducibility Bayesian prediction provides by ``shifting our focus from `finding differences' among hypothetical parameters to predicting observable events based on our current scientific understanding." Focus on observed data enables corroboration or refutation of current hypotheses through future experimentation, and informs decision-making by summarizing quantities of direct interest to the researcher.  Bayesian predictive inference shifts the focus of statistical analysis from estimation of hypothetical parameters to statements about concrete observables.\\
 
-\noindent It is not the intent of this thesis to suggest that parametric inference should be abandoned in statistical analyses.  Conventional statistical inference techniques are useful for summarizing information about large quantities of data in a small number of usable values (parameter estimates), and leveraging such summaries to determine whether a particular problem merits continued attention. Indeed, the scientific discipline of mathematical statistics has developed along parametric lines, imparting greater efficiency to the solving of idealized versions of problems. However, this focus on parameters has largely ignored the impact of observable quantities which may exhibit distributions very different from our (idealized) standard models. In support of prediction in general, and Bayesian prediction in particular, I return to Nate Silver:\\
+\noindent It is not the intent of this thesis to suggest that parametric inference should be abandoned in statistical analyses.  Conventional statistical inference techniques are useful for summarizing information about large quantities of data in a small number of usable values (parameter estimates), and leveraging such summaries to determine whether a particular problem merits continued attention. Indeed, the scientific discipline of mathematical statistics has developed along parametric lines, imparting greater efficiency to the solving of idealized versions of problems. However, this focus on parameters has largely ignored the impact of observable quantities which may exhibit distributions very different from our (idealized) standard models. In support of prediction in general, and Bayesian prediction in particular, I return to Nate Silver :\\
 
 \begin{quote}
-Making predictions based on our beliefs is the best (and perhaps even the only) way to test ourselves. If objectivity is the concern for a greater truth beyond our personal circumstances, and prediction is the best way to examine how closely aligned our personal perceptions are with that greater truth, the most objective among us are those who make the most accurate predictions. Fisher’s statistical method, which saw objectivity as residing within the confines of a laboratory experiment, is less suitable to this task than Bayesian reasoning.
+Making predictions based on our beliefs is the best (and perhaps even the only) way to test ourselves. If objectivity is the concern for a greater truth beyond our personal circumstances, and prediction is the best way to examine how closely aligned our personal perceptions are with that greater truth, the most objective among us are those who make the most accurate predictions. Fisher’s statistical method, which saw objectivity as residing within the confines of a laboratory experiment, is less suitable to this task than Bayesian reasoning [6].
 \end{quote}
 
 
@@ -182,11 +182,11 @@ Making predictions based on our beliefs is the best (and perhaps even the only) 
   \multicolumn{5}{c}{\large \#Razorbacks Predicted out of 100 Tosses}          \\
   \multicolumn{1}{c}{\textbf{Prediction Method}} & \multicolumn{1}{c}{$\textbf{(}\boldsymbol\alpha,\boldsymbol\beta\textbf{)}$}  & \multicolumn{1}{c}{\textbf{Prior Mean }$\textbf{E(}\boldsymbol\theta\textbf{)}$}  & \multicolumn{1}{c}{\textbf{Prediction Mean}} & \multicolumn{1}{c}{\textbf{SD}}\\
         \midrule
-        Beta-Binomial & (2,8) & 0.2 & 30.09 & 10.88 \\
+        Beta-Binomial & (2,8) & 0.2 & 30.02 & 10.93 \\
         \midrule
-        Beta-Binomial & (22,78) & 0.22 & 23.54 & 5.82\\
+        Beta-Binomial & (22,78) & 0.22 & 23.55 & 5.74\\
         \midrule
-        Beta-Binomial & (224,776) & 0.224 & 22.7 & 4.57 \\
+        Beta-Binomial & (224,776) & 0.224 & 22.6 & 4.47 \\
         \midrule
         Binomial$(100,0.4)$ & -- & -- & 40 & 4.9 \\
   \bottomrule
@@ -493,9 +493,9 @@ This result has been used to create R functions \texttt{dpredEG()}, \texttt{ppre
         P\left(Y_1 = y_1,...,Y_N = y_N|\theta\right)
         &= \prod_{i=1}^N p\left(y_i|\theta\right)\\
         &\\
-        &= \prod_{i=1}^N\frac{1}{y!}\theta^{y_i}e^{-\theta}\\
+        &= \prod_{i=1}^N\frac{1}{y_i!}\theta^{y_i}e^{-\theta}\\
         &\\
-        &= \left(\prod_{i=1}^N\frac{1}{y!}\right)\theta^{\sum y_i}e^{-N\theta}\\
+        &= \left(\prod_{i=1}^N\frac{1}{y_i!}\right)\theta^{\sum y_i}e^{-N\theta}\\
         &\\
         &= c\left(y_1,...,y_N\right)\theta^{\sum y_i}e^{-N\theta}
       \end{flalign*}

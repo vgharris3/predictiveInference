@@ -211,4 +211,11 @@ $$some math$$
 $$\sout{some math}$$
 \sout{$$some math$$}
 
+%%%%%%%%%%%%%%
+FOR THESIS PRESENTATION
+%%%%%%%%%%%%%%
+$$Y_1 = y_1,...,Y_n = y_n$$
+
+$$p(\tilde{Y} = \tilde{y} | Y_1 = y_1,...,Y_n = y_n) = \int p(\tilde{y}|\theta) p(\theta|y_1,...,y_n) d\theta$$
+
 \end{document}
