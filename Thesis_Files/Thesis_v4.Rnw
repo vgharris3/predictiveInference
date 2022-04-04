@@ -504,9 +504,9 @@ res = hist(pred_sample, prob = TRUE, breaks = breaks,main = "Histogram of Predic
 
     \subsubsection{Derivation (Exponential-Gamma)}
 
-Suppose $Y_1,...,Y_d$ represent fully observed realizations from an exponential survival time density
+Suppose $y_1,...,y_d$ represent fully observed realizations from an exponential survival time density
           $$p(y|\theta) = \theta e^{-\theta y}$$
-      and $Y_{d+1},...,Y_N$ represent censored copies surviving beyond the experimental time limit.  We assume $Y_1,...,Y_d$ are exchangeable and therefore conditionally i.i.d. with respect to $\theta$.\\
+      and $y_{d+1},...,y_N$ represent censored copies surviving beyond the experimental time limit.  We assume $Y_1,...,Y_d$ are exchangeable and therefore conditionally i.i.d. with respect to $\theta$.\\
 
 \noindent The usual exponential likelihood is used for the fully observed copies, whereas for the censored copies we need Pr$(Y > y | \theta) = 1 - \text{Pr}(Y\leq y | \theta) = 1 - F(y|\theta) = 1 - (1 - e^{-\theta y}) = e^{-\theta y}$.  Here $F$ denotes the cumulative distribution function.\\
 
@@ -521,8 +521,8 @@ Suppose $Y_1,...,Y_d$ represent fully observed realizations from an exponential 
 \noindent we obtain the posterior
 
         \begin{flalign*}
-          p(\theta|Y_1,...,Y_N)
-          &= \frac{p(Y_1,...,Y_N|\theta)\pi(\theta)}{\int p(Y_1,...,Y_N|\theta)\pi(\theta)d\theta}\\
+          p(\theta|y_1,...,y_N)
+          &= \frac{p(y_1,...,y_N|\theta)\pi(\theta)}{\int p(y_1,...,y_N|\theta)\pi(\theta)d\theta}\\
           &\\
           &= \frac{\theta^d e^{-\theta N\bar{y}}\cdot\frac{\gamma^\delta\theta^{\delta - 1}e^{-\gamma\theta}}{\Gamma(\delta)}}{\int\left(\theta^d e^{-\theta N\bar{y}}\cdot\frac{\gamma^\delta\theta^{\delta - 1}e^{-\gamma\theta}}{\Gamma(\delta)}\right)d\theta}\\
           &\\
@@ -538,7 +538,7 @@ Suppose $Y_1,...,Y_d$ represent fully observed realizations from an exponential 
 \noindent The survival time predictive probability density then is
 
     \begin{flalign}
-      p(\tilde{y}|Y_1,...,Y_N)
+      p(\tilde{Y}|y_1,...,y_N)
       &= \int p(\tilde{y}|\theta)p(\theta|y_1,...,y_N)d\theta\nonumber\\
       &\nonumber\\
       &= \int \theta e^{-\theta \tilde{y}} \cdot \frac{(\gamma+N\bar{y})^{d+\delta}\theta^{d+\delta - 1}e^{-\theta(\gamma+N\bar{y})}}{\Gamma(d+\delta)}d\theta\nonumber\\
@@ -762,7 +762,7 @@ h = hist(pred_sample,prob = TRUE,main = "Histogram of Predictive Sample",xlim=c(
 \noindent For future observation $\tilde{y}$, then, we compute predictive distribution
 
       \begin{flalign}
-        p\left(\tilde{y}|y_1,...,y_N\right)
+        p\left(\tilde{Y}|y_1,...,y_N\right)
         &= \dfrac{p\left(y_1,...,y_N,\tilde{y}\right)}{p\left(y_1,...,y_N\right)} = \dfrac{p\left(y_1,...,y_{N+1}\right)}{p\left(y_1,...,y_N\right)}
         = \dfrac{\frac{1}{C_{N+1}}\cancel{\frac{\beta^\alpha}{\Gamma(\alpha)}}}{\frac{1}{C_N}\cancel{\frac{\beta^\alpha}{\Gamma(\alpha)}}}
         = \dfrac{C_N}{C_{N+1}}\nonumber\\
@@ -803,7 +803,7 @@ This result has been used to create R functions \texttt{dpredPG()}, \texttt{ppre
         \item if $[\texttt{dpredPG}(B),\texttt{dpredPG}(U_{test})]$ straddles $0$, then $[L',U'_{test}] = [B,U_{test}]$.
       \end{enumerate}
       \item Repeat steps 3 - 5 above with the updated interval $[L,U_{test}] = [L',U'_{test}]$ until the condition in step 5 is reached, establishing upper bound $U$.
-      \item Use $[0,U]$ as the support upon which to draw a random sample.
+      \item Use $[0,U]$ as the support upon which to draw a random sample using the inverse transform method.
     \end{enumerate}
 
 
@@ -864,7 +864,7 @@ The National Hurricane Center lists the number of hurricanes by category that ma
   \end{tabular}
 \end{center}
 
-Suppose we are told by a hurricane expert that the average number per decade can be expected to be around 4, and based on that information we choose $\alpha = 12$ and $\beta = 3$ for the Gamma$(\alpha,\beta)$ prior on $\theta$.  For $\tilde{y} = 1:20$ possible large hurricanes making landfall in the U.S. in the 2020s, Figure \ref{fig:PGdist} below shows the predictive distribution from \texttt{dpredPG()}, the cumulative distribution from \texttt{ppredPG()}, and a histogram of a predictive sample of size 1000 returned by \texttt{rpredPG()}.
+Suppose we are told by a hurricane expert that the average number per decade can be expected to be around 4.  The historic data suggests about a 2-year gap between large hurricane landfalls on average.  Based on this information we choose $\alpha = 8$ and $\beta = 2$ for the Gamma$(\alpha,\beta)$ prior on $\theta$.  For $\tilde{y} = 1:20$ possible large hurricanes making landfall in the U.S. in the 2020s, Figure \ref{fig:PGdist} below shows the predictive distribution from \texttt{dpredPG()}, the cumulative distribution from \texttt{ppredPG()}, and a histogram of a predictive sample of size 1000 returned by \texttt{rpredPG()}.
 
 \begin{figure}[ht]
   \centering
@@ -887,8 +887,8 @@ set.seed(12345678)
 y = c(6,1,7,4,8,4,7,5,5,10,6,6,4,4,5,7,4)
 ybar = mean(y)
 ypred = 0:20
-alpha = 12
-beta = 3
+alpha = 8
+beta = 2
 par(mfrow=c(3,1))
 
 #Predictive mass function
@@ -974,7 +974,7 @@ if(0){
           &\\
           \mu_N &= \frac{\kappa_0\mu_0+N\bar{y}}{\kappa_N}\\
           &\\
-          \nu_n &= \nu_0 + N\\
+          \nu_N &= \nu_0 + N\\
           &\\
           \sigma_N^2 &= \frac{1}{\nu_N}\left[\nu_0\sigma_0^2 + (N-1)s^2 + \frac{\kappa_0 N}{\kappa_N}\left(\bar{y}-\mu_0\right)^2\right].\\
         \end{flalign*}
@@ -991,9 +991,9 @@ if(0){
           \end{matrix}
         \end{flalign*}
 
-\noindent For prediction of future $\tilde{y}|y_1,...,y_N,\theta,\sigma^2$, generate $\tilde{y}_i \sim \text{Normal}\left(\theta^{(i)},\sigma^{2(i)}\right)$.\\
+\noindent For prediction of future $\tilde{y}|y_1,...,y_N,\theta,\sigma^2$, generate $\tilde{y}_i \sim \text{Normal}\left(\theta^{(i)},\sigma^{2(i)}\right), i\in\{1,...,S\}$.\\
 
-\noindent For prediction without the influence of any previous knowledge (Hoff p. 79), we can employ Jeffreys prior $\tilde{p}\left(\theta,\sigma^2\right) = 1/\sigma^2$.  This leads to the same conditional distribution for $\theta$ but a gamma$\left(\frac{N-1}{2},\frac{1}{2}\sum\left(y_i - \bar{y}\right)^2\right)$ distribution for $1/\sigma^2$.  This joint posterior distribution can be used to predict future $\tilde{y}$ by first drawing $\theta,\sigma^2$ and then simulating $\tilde{y}\sim\text{Normal}\left(\theta,\sigma^2\right)$.   Alternatively, the joint posterior can be integrated to show that
+\noindent For prediction without the influence of any previous knowledge (Hoff p. 79), we can employ Jeffreys prior $\pi\left(\theta,\sigma^2\right) = 1/\sigma^2$.  This leads to the same conditional distribution for $\theta$ but a Gamma$\left(\frac{N-1}{2},\frac{1}{2}\sum\left(y_i - \bar{y}\right)^2\right)$ distribution for $1/\sigma^2$.  This joint posterior distribution can be used to predict future $\tilde{y}$ by first drawing $\theta,\sigma^2$ and then simulating $\tilde{y}\sim\text{Normal}\left(\theta,\sigma^2\right)$.   Alternatively, the joint posterior can be integrated to show that
         $$\dfrac{\theta-\bar{y}}{s/\sqrt{N}}|y_1,...,y_N\sim t_{N-1}.$$
 \noindent The resulting predictive distribution for $\tilde{y}$ is a t-distribution with location $\bar{y}$ and scale $s\sqrt{1+1/N}$ and $N-1$ degrees of freedom (Gelman et. al. p. 66).
 
@@ -1327,7 +1327,7 @@ boxplot(list(y1,y2),range=0,col=c("red","blue"),ylim = c(floor(min(y1,y2)),ceili
 
 @
 
-\noindent The mean scores of the two samples are $\bar{y}_1 = 50.81$ and $\bar{y}_2 = 46.15$ for School 1 and School 2, and the standard deviations were $11.3$ and $9.1$, respectively.  A standard t-test yields a $p$-value of $p = 0.087$, in response to which we would fail to reject the hypothesis that the population means $\theta_1$ and $\theta_2$ are different. Hoff points out that it is easy to imagine that re-sampling might result in a few more low scores from School 1 and a few more high scores from School 2--enough perhaps to result in a $p$-value below $0.05$ and the opposite conclusion. Why not employ a Bayesian analysis that allows information to be shared across the groups and relies on prior knowledge of the similarities of the two groups?\\
+\noindent The mean scores of the two samples are $\bar{y}_1 = 50.81$ and $\bar{y}_2 = 46.15$ for School 1 and School 2, and the standard deviations were $11.3$ and $9.1$, respectively.  A standard t-test yields a $p$-value of $p = 0.087$, in response to which we would fail to reject the hypothesis that the population means $\theta_1$ and $\theta_2$ are equal. Hoff points out that it is easy to imagine that re-sampling might result in a few more low scores from School 1 and a few more high scores from School 2--enough perhaps to result in a $p$-value below $0.05$ and the opposite conclusion. Why not employ a Bayesian analysis that allows information to be shared across the groups and relies on prior knowledge of the similarities of the two groups?\\
 
 \noindent We're interested in predicting a future math score by a student from each school.  Unless the two schools were known in advance to be extremely exceptional, reasonable prior parameters can be based on this information.  For the prior distributions of $\mu$ and $\sigma^2$, we'll take $\mu_0 = 50$ and $\sigma^2_0 = 10^2 = 100$, although this latter value is likely to be an overestimate of the within-school sampling variability.  We'll make these prior distributions somewhat diffuse, with $\gamma^2_0 = 25^2 = 625$ and $\nu_0 = 1$.  For the prior distribution on $\delta$, choosing $\delta_0 = 0$ represents the prior opinion that $\theta_1 > \theta_2$ and $\theta_2 > \theta_1$ are equally probable.  Finally, since the scores are bounded between 0 and 100, half the difference between $\theta_1$ and $\theta_2$ must be less than 50 in absolute value, so a value of $\tau^2_0 = 25^2 = 625$ seems reasonably diffuse.\\\\
 
