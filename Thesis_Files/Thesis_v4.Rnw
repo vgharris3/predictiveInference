@@ -616,7 +616,7 @@ lines(c(1,length(y)),c(ybar,ybar),col="gray")
 
 @
 
-\noindent We will assume the data are distributed exponentially with respect to some parameter $\theta$.  Suppose prior knowledge suggests that the average survival time is around 80 minutes.  In terms of the exponential distribution then $E(y) = 1/\theta \approx 80$, so $\theta \approx 0.01$ is a reasonable value on which to base our choices for the parameter values for the Gamma$(\delta,\gamma)$ prior for $\theta$.  We can assume that $\delta/\gamma \approx 0.01$.  For this example, say $\delta = 0.5$ and $\gamma=50$.  Figure \ref{fig:EGdist} below illustrates the predictive probability using \texttt{dpredEG()} and \texttt{rpredEG()}, along with a histogram of a predictive sample of size 1000 returned by \texttt{rpredEG()}.\\
+\noindent We will assume the data are distributed exponentially with respect to some parameter $\theta$.  Suppose prior knowledge suggests that the average survival time is around 80 minutes.  In terms of the exponential distribution then $E(y) = 1/\theta \approx 80$.  For the Gamma$(\delta,\gamma)$ prior, parameter values of $\delta = 0.5$ and $\gamma=50$ were chosen. These values correspond with a median Exponential parameter value of $1/80$ and assign about a 20\% probability to values of $\theta$ less than $1/120$. Figure \ref{fig:EGdist} below illustrates the predictive probability using \texttt{dpredEG()} and \texttt{rpredEG()}, along with a histogram of a predictive sample of size 1000 returned by \texttt{rpredEG()}.\\
 
 \noindent Under the assumptions of this model the mean of the predictive sample (86.85) is somewhat larger than that of the observed data, and this information will likely influence the factory budget.
 
@@ -658,8 +658,10 @@ c[y < tcutoff] = 1 #vector of indicators:  1 = observed, 0 = censored
 
 ybar = mean(y)
 
-dt = 0.5
-gm = 50
+# dt = 0.5
+# gm = 50
+dt = 5
+gm = 375
 
 plot_length = 350
 
@@ -864,7 +866,7 @@ The National Hurricane Center lists the number of hurricanes by category that ma
   \end{tabular}
 \end{center}
 
-Suppose we are told by a hurricane expert that the average number per decade can be expected to be around 4.  The historic data suggests about a 2-year gap between large hurricane landfalls on average.  Based on this information we choose $\alpha = 8$ and $\beta = 2$ for the Gamma$(\alpha,\beta)$ prior on $\theta$.  For $\tilde{y} = 1:20$ possible large hurricanes making landfall in the U.S. in the 2020s, Figure \ref{fig:PGdist} below shows the predictive distribution from \texttt{dpredPG()}, the cumulative distribution from \texttt{ppredPG()}, and a histogram of a predictive sample of size 1000 returned by \texttt{rpredPG()}.
+Suppose we are told by a hurricane expert that the average number per decade can be expected to be around 4.  Based on this information we choose $\alpha = 10$ and $\beta = 2.5$ for the Gamma$(\alpha,\beta)$ prior on $\theta$.  These prior values give about 95\% probability that the Poisson mean is between 1.8 and 6.8  For $\tilde{y} = 1:20$ possible large hurricanes making landfall in the U.S. in the 2020s, Figure \ref{fig:PGdist} below shows the predictive distribution from \texttt{dpredPG()}, the cumulative distribution from \texttt{ppredPG()}, and a histogram of a predictive sample of size 1000 returned by \texttt{rpredPG()}.
 
 \begin{figure}[ht]
   \centering
@@ -887,8 +889,8 @@ set.seed(12345678)
 y = c(6,1,7,4,8,4,7,5,5,10,6,6,4,4,5,7,4)
 ybar = mean(y)
 ypred = 0:20
-alpha = 8
-beta = 2
+alpha = 10
+beta = 2.5
 par(mfrow=c(3,1))
 
 #Predictive mass function
@@ -1271,7 +1273,7 @@ legend("bottomright", inset = 0.05, bg="transparent",
   \texttt{S} &= S \text{, the desired predictive sample size}\\
   \texttt{y1, y2} &= \mathbf{y_1, y_2} \text{, the two sets of observed data}\\
   \texttt{mu0,g20} &= \mu_0,\gamma^2_0 \text{, prior mean and variance for }\mu\\
-  \texttt{d0,t20} &= \delta,\tau^2_0 \text{, prior mean and variance for }\delta\\
+  \texttt{d0,t20} &= \delta_0,\tau^2_0 \text{, prior mean and variance for }\delta\\
   \texttt{nu0,s20} &= \nu_0,\sigma^2_0 \text{, prior parameters for the variance of the Normal data error terms}\\
 \end{flalign*}
 
@@ -1407,9 +1409,9 @@ lines(density(RS[,2]),lwd=2,col="red",lty=2)
       $$\left\{\mu|\theta_1,...,\theta_k,\tau^2\right\} \sim \text{Normal}\left(\dfrac{\frac{k\bar{\theta}}{\tau^2} + \frac{\mu_0}{\gamma^2_0}}{\frac{k}{\tau^2} + \frac{1}{\gamma^2_0}},\dfrac{1}{\frac{k}{\tau^2}+\frac{1}{\gamma^2_0}}\right)$$
       $$\left\{\tau^2|\theta_1,...,\theta_k,\mu\right\} \sim \text{Inverse Gamma}\left(\dfrac{\eta_0 + k}{2},\dfrac{\eta_0\tau^2_0 + \sum\left(\theta_j-\mu\right)^2}{2}\right)$$
 
-      $$\left\{\theta_j|y_{1,j},...,y_{n,j},\sigma^2\right\} \sim \text{Normal}\left(\dfrac{\frac{n_j\bar{y}_j}{\sigma^2} + \frac{1}{\tau^2}}{\frac{n_j}{\sigma^2}+\frac{1}{\tau^2}},\dfrac{1}{\frac{n_j}{\sigma^2}+\frac{1}{\tau^2}}\right)$$
+      $$\left\{\theta_j|y_{1,j},...,y_{N,j},\sigma^2\right\} \sim \text{Normal}\left(\dfrac{\frac{N_j\bar{y}_j}{\sigma^2} + \frac{1}{\tau^2}}{\frac{N_j}{\sigma^2}+\frac{1}{\tau^2}},\dfrac{1}{\frac{N_j}{\sigma^2}+\frac{1}{\tau^2}}\right)$$
 
-      $$\left\{\sigma^2|\theta_1,...,\theta_k,\mathbf{y_1,...,y_k}\right\} \sim \text{Inverse Gamma}\left(\dfrac{1}{2}\left[\nu_0 + \sum_{j=1}^k n_j\right],\dfrac{1}{2}\left[\nu_0\sigma^2_0 + \sum_{j=1}^k\sum_{i=1}^{n_j}\left(y_{i,j}-\theta_j\right)^2\right]\right).$$
+      $$\left\{\sigma^2|\theta_1,...,\theta_k,\mathbf{y_1,...,y_k}\right\} \sim \text{Inverse Gamma}\left(\dfrac{1}{2}\left[\nu_0 + \sum_{j=1}^k N_j\right],\dfrac{1}{2}\left[\nu_0\sigma^2_0 + \sum_{j=1}^k\sum_{i=1}^{N_j}\left(y_{i,j}-\theta_j\right)^2\right]\right).$$
 
 \noindent Here $\bar{\theta} = \frac{1}{k}\sum_{j=1}^k \theta_j$.  Note that $\sum\sum\left(y_{i,j}-\theta_j\right)^2$ is the sum of squared residuals across all groups, conditional on the within-group means, and so the conditional distribution concentrates probability around a pooled-sample estimate of the variance.\\
 
@@ -1423,16 +1425,16 @@ $$\tilde{y}_j \sim \text{Normal}(\theta_j, \sigma^2).$$
       \begin{enumerate}
         \item Set prior parameter values:
           \begin{flalign*}
-            \nu_0,\sigma^2_0 \text{ for } p\left(\sigma^2\right)\\
-            \eta_0,\tau^2_0 \text{ for } p\left(\tau^2\right)\\
-            \mu_0,\gamma^2_0 \text{ for } p\left(\mu\right).
+            \nu_0,\sigma^2_0 \text{ for } \pi\left(\sigma^2\right)\\
+            \eta_0,\tau^2_0 \text{ for } \pi\left(\tau^2\right)\\
+            \mu_0,\gamma^2_0 \text{ for } \pi\left(\mu\right).
           \end{flalign*}
         \item Set initial states for the unknown parameters:
           \begin{flalign*}
             \theta_1^{(1)} &= \mathbf{\bar{y}_1},...,\theta_k^{(1)} = \mathbf{\bar{y}_k}\\
             \mu^{(1)} &= \text{mean}\left(\theta_1^{(1)},...,\theta_k^{(1)}\right)\\
             \tau^{2(1)} &= \text{var}\left(\theta_1^{(1)},...,\theta_k^{(1)}\right)\\
-            \sigma^{2(1)} &= \text{mean}\left(\text{var}\left(\mathbf{y}_1\right),...,\text{var}\left(\mathbf{y}_k\right)\right))
+            \sigma^{2(1)} &= \text{mean}\left(\text{var}\left(\mathbf{y}_1\right),...,\text{var}\left(\mathbf{y}_k\right)\right)
           \end{flalign*}
         \item For $s\in\{1,...,S\}$, sample
           \begin{enumerate}
@@ -1459,7 +1461,7 @@ $$\tilde{y}_j \sim \text{Normal}(\theta_j, \sigma^2).$$
   & s\in\{1,...S\}.\\
   \texttt{Y} &= \text{ the } k \text{ sets of observed data (one column of data and one column of}\\ &\text{group indices)}\\
   \texttt{nu0} &= \nu_0 \text{, prior parameter for } \sigma^2 \text{ representing prior sample size}\\
-  \texttt{s20} &=  \text{, prior parameter for } \sigma^2 \text{ representing within-sample variance}\\
+  \texttt{s20} &= \sigma^2_0 \text{, prior parameter for } \sigma^2 \text{ representing within-sample variance}\\
   \texttt{eta0} &= \eta_0 \text{, prior parameter for } \tau^2 \text{ representing prior sample size}\\
   \texttt{t20} &= \tau^2_0 \text{, prior parameter for } \tau^2 \text{ representing between-sample variance}\\
   \texttt{mu0} &= \mu_0 \text{, prior parameter for } \mu \text{ representing the mean of the pooled average}\\ &\text{from prior knowledge}\\
@@ -1572,9 +1574,11 @@ colnames(school_table) <- c("school index","average")
   \end{tabular}
 \end{center}
 
+\clearpage
+
 \noindent Figure \ref{fig:NormIGk_DvP} shows the estimated density curves of the observed math scores for these three schools and the predictive density of an unobserved student's score from each school.  The densities are represented with solid lines for observed data and dashed lines for predicted quantities.  The predictive densities are ``pulled" toward the overall mean, which is indicated on the plot with the dotted gray vertical line.
 
-\begin{figure}[ht]
+\begin{figure}[h]
   \centering
   \includegraphics[width=0.8\textwidth]{./Graphics/ExamplePlots/NormIGk_Data_v_Prediction}
   \caption{$k$-Sample Densities: Observed vs. Predicted}
@@ -1590,7 +1594,7 @@ par(mfrow=c(1,1))
 
 result = rpredNormIGk(S=5000,Y.school.mathscore,nu0=1,s20=100,eta0=1,t20=100,mu0=50,g20=25)
 
-toplot = c(5,100,67)
+toplot = c(5,92,67)
 
 maxy = 1.5*max(density(Y[[toplot[1]]])$y,density(Y[[toplot[2]]])$y,density(Y[[toplot[3]]])$y)
 minx = min(density(Y[[toplot[1]]])$x,density(Y[[toplot[2]]])$x,density(Y[[toplot[3]]])$x)
@@ -1663,14 +1667,14 @@ legend("topleft",
 % \textcolor{red}{intro here}\\
 % \textcolor{red}{stipulate variable naming convention here (x is the observed data now).  Modify previous intro to indicate variable convention was for the exponential family set of models}
 
-\noindent Starting with observations $Y_1,...,Y_N$ and explanatory variables $\mathbf{x}_1,...,\mathbf{x}_n$, with $\mathbf{x}_i = \left\{ x_{i,1}, x_{i,2}, ..., x_{i,p} \right\}$ where $Y_i = \boldsymbol\beta^T \mathbf{x}_i + \epsilon_i$ and $\epsilon_1,...,\epsilon_n\overset{\text{i.i.d.}}{\sim} \text{Normal}\left(0,\sigma^2\right)$, we have joint probability density
+\noindent Starting with observations $Y_1,...,Y_N$ and explanatory variables $\mathbf{x}_1,...,\mathbf{x}_N$, with $\mathbf{x}_i = \left\{ x_{i,1}, x_{i,2}, ..., x_{i,p} \right\}$ where $Y_i = \boldsymbol\beta^T \mathbf{x}_i + \epsilon_i$ and $\epsilon_1,...,\epsilon_n\overset{\text{i.i.d.}}{\sim} \text{Normal}\left(0,\sigma^2\right)$, we have joint probability density
 
 \begin{flalign}
-    p\left(y_1,...y_n|\mathbf{x}_1,...,\mathbf{x}_n,\boldsymbol\beta,\sigma^2\right) &= \prod_{i=1}^n p\left(y_i|\mathbf{x}_i,\boldsymbol\beta,\sigma^2\right) \nonumber\\
-    &= \left(2\pi\sigma^2\right)^{-n/2}\text{exp}\left\{-\frac{1}{2\sigma^2}\sum_{i=1}^n\left(y_i - \boldsymbol\beta^T\mathbf{x}_i\right)^2\right\}. \label{regressionJointNorm}
+    p\left(y_1,...y_N|\mathbf{x}_1,...,\mathbf{x}_N,\boldsymbol\beta,\sigma^2\right) &= \prod_{i=1}^N p\left(y_i|\mathbf{x}_i,\boldsymbol\beta,\sigma^2\right) \nonumber\\
+    &= \left(2\pi\sigma^2\right)^{-N/2}\text{exp}\left\{-\frac{1}{2\sigma^2}\sum_{i=1}^n\left(y_i - \boldsymbol\beta^T\mathbf{x}_i\right)^2\right\}. \label{regressionJointNorm}
 \end{flalign}
 
-\noindent If we let $\mathbf{y}=(y_1,...,y_n)^T$ and let $\mathbf{X}$ be the $n \times p$ matrix whose $i$th row is $\mathbf{x}_i$, then we can express this joint probability in terms of the Multivariate Normal distribution.  The Normal regression model is
+\noindent If we let $\mathbf{y}=(y_1,...,y_N)^T$ and let $\mathbf{X}$ be the $n \times p$ matrix whose $i$th row is $\mathbf{x}_i$, then we can express this joint probability in terms of the Multivariate Normal distribution.  The Normal regression model is
 
 $$\{\mathbf{y}|\mathbf{X},\boldsymbol\beta,\sigma^2\} \sim \text{Multivariate Normal}\left(\mathbf{X}\boldsymbol\beta,\sigma^2\mathbf{I}\right),$$
 
@@ -1682,7 +1686,7 @@ $$\{\mathbf{y}|\mathbf{X},\boldsymbol\beta,\sigma^2\} \sim \text{Multivariate No
         \mathbf{x}_1 \\
         \mathbf{x}_2 \\
         \vdots  \\
-        \mathbf{x}_n
+        \mathbf{x}_N
     \end{pmatrix}
     \begin{pmatrix}
         \beta_1 \\
@@ -1694,13 +1698,13 @@ $$\{\mathbf{y}|\mathbf{X},\boldsymbol\beta,\sigma^2\} \sim \text{Multivariate No
     \begin{pmatrix}
         \beta_1 x_{1,1} + \cdots + \beta_p x_{1,p} \\
         \vdots \\
-        \beta_1 x_{n,1} + \cdots + \beta_p x_{n,p} \\
+        \beta_1 x_{N,1} + \cdots + \beta_p x_{N,p} \\
     \end{pmatrix}
     =
     \begin{pmatrix}
         E\left[Y_1|\mathbf{\boldsymbol\beta},\mathbf{x}_1\right] \\
         \vdots \\
-        E\left[Y_n|\mathbf{\boldsymbol\beta},\mathbf{x}_n\right] \\
+        E\left[Y_N|\mathbf{\boldsymbol\beta},\mathbf{x}_N\right] \\
     \end{pmatrix}
 \end{equation*}
 
@@ -1710,14 +1714,14 @@ $$\hat{\boldsymbol\beta}_{ols} = \left(\mathbf{X}^T\mathbf{X}\right)^{-1}\mathbf
 
 \noindent and
 
-$$\hat{\sigma}^2_{ols} = \frac{SSR\left(\hat{\boldsymbol\beta}_{ols}\right)}{(n-p)} = \frac{\sum\left(y_i - \hat{\boldsymbol\beta}_{ols}^T x_i\right)^2}{(n-p)}.$$
+$$\hat{\sigma}^2_{ols} = \frac{SSR\left(\hat{\boldsymbol\beta}_{ols}\right)}{(N-p)} = \frac{\sum\left(y_i - \hat{\boldsymbol\beta}_{ols}^T x_i\right)^2}{(N-p)}.$$
 
 
 \noindent Here
 
 \begin{flalign*}
-  SSR(\beta) &= \sum_{i=1}^n(y_i-\beta^T x_i)^2\\
-              &= \sum_{i=1}^n(\mathbf{y-X}\beta)^T(\mathbf{y-X}\beta)\\
+  SSR(\beta) &= \sum_{i=1}^N(y_i-\beta^T x_i)^2\\
+              &= \sum_{i=1}^N(\mathbf{y-X}\beta)^T(\mathbf{y-X}\beta)\\
               &= \mathbf{y}^T\mathbf{y}-2\beta^T\mathbf{X}^T\mathbf{y} + \beta^T\mathbf{X}^T\mathbf{X}\beta
 \end{flalign*}
 
@@ -1884,13 +1888,13 @@ $$\mathbf{V} = \text{Var}[\boldsymbol\beta|\mathbf{y,X},\sigma^2] = \left(\Sigma
 \begin{flalign*}
     p(\gamma|\mathbf{y,X},\boldsymbol\beta) &\propto p(\gamma)p(\mathbf{y}|\mathbf{X},\boldsymbol\beta,\gamma)\\
         &\propto \left[\gamma^{\nu_0/2-1}\text{exp}(-\gamma \times \nu_0\sigma^2_0/2)\right] \times
-                 \left[\gamma^{n/2}\text{exp}(-\gamma \times \text{SSR}(\boldsymbol\beta)/2)\right]\\
-        &= \gamma^{(\nu_0+n)/2-1} \text{exp}(-\gamma[\nu_0\sigma^2_0 + \text{SSR}(\boldsymbol\beta)]/2),
+                 \left[\gamma^{N/2}\text{exp}(-\gamma \times \text{SSR}(\boldsymbol\beta)/2)\right]\\
+        &= \gamma^{(\nu_0+N)/2-1} \text{exp}(-\gamma[\nu_0\sigma^2_0 + \text{SSR}(\boldsymbol\beta)]/2),
 \end{flalign*}
 
 \noindent which we recognize as a gamma density, so that
 
-$$\{\sigma^2|\mathbf{y,X},\boldsymbol\beta\} \sim \text{Inverse Gamma}([\nu_0 + n]/2,[\nu_0\sigma^2_0 + \text{SSR}(\boldsymbol\beta)]/2).$$
+$$\{\sigma^2|\mathbf{y,X},\boldsymbol\beta\} \sim \text{Inverse Gamma}([\nu_0 + N]/2,[\nu_0\sigma^2_0 + \text{SSR}(\boldsymbol\beta)]/2).$$
 
 \vspace{5mm}
 
@@ -1905,7 +1909,7 @@ $$\{\sigma^2|\mathbf{y,X},\boldsymbol\beta\} \sim \text{Inverse Gamma}([\nu_0 + 
     \item updating $\sigma^2$:
     \begin{enumerate}
         \item compute SSR$(\boldsymbol\beta^{(s+1)})$
-        \item sample $\sigma^{2(s+1)} \sim \text{Inverse Gamma}([\nu_0 + n]/2,[\nu_0\sigma_0^2 + \text{SSR}(\boldsymbol\beta^{(s+1)})]/2)$.
+        \item sample $\sigma^{2(s+1)} \sim \text{Inverse Gamma}([\nu_0 + N]/2,[\nu_0\sigma_0^2 + \text{SSR}(\boldsymbol\beta^{(s+1)})]/2)$.
     \end{enumerate}
 \end{enumerate}
 
@@ -1940,7 +1944,7 @@ $$\mathbf{V} = \frac{g}{g+1}\sigma^2(\mathbf{X^TX})^{-1} \text{ and } \mathbf{m}
 Simple monte carlo approximation can be used to sample from the joint posterior density $p(\sigma^2,\boldsymbol\beta|\mathbf{y,X})$ as follows.  Here $g$ is typically set to the size of the data sample. Then:
 
 \begin{enumerate}
-    \item sample $\sigma^2 \sim \text{Inverse Gamma}([\nu_0 + n]/2,[\nu_0\sigma^2_0 + \text{SSR}_g]/2)$
+    \item sample $\sigma^2 \sim \text{Inverse Gamma}([\nu_0 + N]/2,[\nu_0\sigma^2_0 + \text{SSR}_g]/2)$
     \item sample $\boldsymbol\beta \sim \text{Multivariate Normal}\left(\frac{g}{g+1}\hat{\boldsymbol\beta}_{ols},\frac{g}{g+1}\sigma^2[\mathbf{X^TX}]^{-1}\right)$.
 \end{enumerate}
 
