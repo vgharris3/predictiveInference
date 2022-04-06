@@ -37,25 +37,25 @@
 \contentsline {subsubsection}{\numberline {4.2.2}R Implementation (Normal Regression)}{46}{subsubsection.4.2.2}%
 \contentsline {subsubsection}{\numberline {4.2.3}Example (Normal Regression)}{46}{subsubsection.4.2.3}%
 \contentsline {section}{\numberline {5}Conclusion}{48}{section.5}%
-\contentsline {section}{\numberline {6}References}{49}{section.6}%
-\contentsline {section}{\numberline {7}Appendix (R Functions)}{50}{section.7}%
-\contentsline {subsection}{\numberline {7.1}Beta-Binomial R Functions}{50}{subsection.7.1}%
-\contentsline {subsubsection}{\numberline {7.1.1}\texttt {dpredBB()}}{50}{subsubsection.7.1.1}%
-\contentsline {subsubsection}{\numberline {7.1.2}\texttt {ppredBB()}}{50}{subsubsection.7.1.2}%
-\contentsline {subsubsection}{\numberline {7.1.3}\texttt {rpredBB()}}{50}{subsubsection.7.1.3}%
-\contentsline {subsection}{\numberline {7.2}Exponential-Gamma R Functions}{51}{subsection.7.2}%
-\contentsline {subsubsection}{\numberline {7.2.1}\texttt {dpredEG()}}{51}{subsubsection.7.2.1}%
-\contentsline {subsubsection}{\numberline {7.2.2}\texttt {ppredEG()}}{51}{subsubsection.7.2.2}%
-\contentsline {subsubsection}{\numberline {7.2.3}\texttt {rpredEG()}}{52}{subsubsection.7.2.3}%
-\contentsline {subsection}{\numberline {7.3}Poisson-Gamma R Functions}{52}{subsection.7.3}%
-\contentsline {subsubsection}{\numberline {7.3.1}\texttt {dpredPG()}}{52}{subsubsection.7.3.1}%
-\contentsline {subsubsection}{\numberline {7.3.2}\texttt {ppredPG()}}{52}{subsubsection.7.3.2}%
-\contentsline {subsubsection}{\numberline {7.3.3}\texttt {rpredPG()}}{53}{subsubsection.7.3.3}%
-\contentsline {subsection}{\numberline {7.4}Normal-Inverse Gamma R Functions}{54}{subsection.7.4}%
-\contentsline {subsubsection}{\numberline {7.4.1}\texttt {dpredNormIG1()}}{54}{subsubsection.7.4.1}%
-\contentsline {subsubsection}{\numberline {7.4.2}\texttt {ppredNormIG1()}}{56}{subsubsection.7.4.2}%
-\contentsline {subsubsection}{\numberline {7.4.3}\texttt {rpredNormIG1()}}{57}{subsubsection.7.4.3}%
-\contentsline {subsubsection}{\numberline {7.4.4}\texttt {rpredNormIG2()}}{57}{subsubsection.7.4.4}%
-\contentsline {subsubsection}{\numberline {7.4.5}\texttt {rpredNormIGk()}}{58}{subsubsection.7.4.5}%
-\contentsline {subsection}{\numberline {7.5}Normal Regression R Function}{60}{subsection.7.5}%
-\contentsline {subsubsection}{\numberline {7.5.1}\texttt {rpredNormIGkReg()}}{60}{subsubsection.7.5.1}%
+\contentsline {section}{\numberline {6}Appendix - R Functions}{49}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Beta-Binomial R Functions}{49}{subsection.6.1}%
+\contentsline {subsubsection}{\numberline {6.1.1}\texttt {dpredBB()}}{49}{subsubsection.6.1.1}%
+\contentsline {subsubsection}{\numberline {6.1.2}\texttt {ppredBB()}}{49}{subsubsection.6.1.2}%
+\contentsline {subsubsection}{\numberline {6.1.3}\texttt {rpredBB()}}{49}{subsubsection.6.1.3}%
+\contentsline {subsection}{\numberline {6.2}Exponential-Gamma R Functions}{50}{subsection.6.2}%
+\contentsline {subsubsection}{\numberline {6.2.1}\texttt {dpredEG()}}{50}{subsubsection.6.2.1}%
+\contentsline {subsubsection}{\numberline {6.2.2}\texttt {ppredEG()}}{50}{subsubsection.6.2.2}%
+\contentsline {subsubsection}{\numberline {6.2.3}\texttt {rpredEG()}}{51}{subsubsection.6.2.3}%
+\contentsline {subsection}{\numberline {6.3}Poisson-Gamma R Functions}{51}{subsection.6.3}%
+\contentsline {subsubsection}{\numberline {6.3.1}\texttt {dpredPG()}}{51}{subsubsection.6.3.1}%
+\contentsline {subsubsection}{\numberline {6.3.2}\texttt {ppredPG()}}{51}{subsubsection.6.3.2}%
+\contentsline {subsubsection}{\numberline {6.3.3}\texttt {rpredPG()}}{52}{subsubsection.6.3.3}%
+\contentsline {subsection}{\numberline {6.4}Normal-Inverse Gamma R Functions}{53}{subsection.6.4}%
+\contentsline {subsubsection}{\numberline {6.4.1}\texttt {dpredNormIG1()}}{53}{subsubsection.6.4.1}%
+\contentsline {subsubsection}{\numberline {6.4.2}\texttt {ppredNormIG1()}}{55}{subsubsection.6.4.2}%
+\contentsline {subsubsection}{\numberline {6.4.3}\texttt {rpredNormIG1()}}{56}{subsubsection.6.4.3}%
+\contentsline {subsubsection}{\numberline {6.4.4}\texttt {rpredNormIG2()}}{56}{subsubsection.6.4.4}%
+\contentsline {subsubsection}{\numberline {6.4.5}\texttt {rpredNormIGk()}}{57}{subsubsection.6.4.5}%
+\contentsline {subsection}{\numberline {6.5}Normal Regression R Function}{59}{subsection.6.5}%
+\contentsline {subsubsection}{\numberline {6.5.1}\texttt {rpredNormIGkReg()}}{59}{subsubsection.6.5.1}%
+\contentsline {section}{\numberline {7}References}{62}{section.7}%
