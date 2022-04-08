@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  5 APR 2022 17:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  7 APR 2022 15:57
 entering extended mode
 **./Thesis_v4.tex
 (Thesis_v4.tex
@@ -1658,13 +1658,13 @@ to the ex-pected value of $[]$. That is, $\OML/cmm/m/it/12 L \OT1/cmr/m/n/12 =
  []
 
 [22] [23]
-<./Graphics/DistributionPlots/PoissonGamma.png, id=636, 542.77782pt x 534.49687
+<./Graphics/DistributionPlots/PoissonGamma.png, id=636, 537.50812pt x 529.22719
 pt>
 File: ./Graphics/DistributionPlots/PoissonGamma.png Graphic file (type png)
 <use ./Graphics/DistributionPlots/PoissonGamma.png>
 Package pdftex.def Info: ./Graphics/DistributionPlots/PoissonGamma.png  used on
  input line 660.
-(pdftex.def)             Requested size: 430.31812pt x 423.77303pt.
+(pdftex.def)             Requested size: 430.31812pt x 423.68918pt.
  [24
 
 ] [25 <./Graphics/DistributionPlots/PoissonGamma.png>]
@@ -1992,195 +1992,195 @@ Overfull \hbox (34.30043pt too wide) in paragraph at lines 1502--1502
  []
 
 [51]
-Overfull \hbox (9.62862pt too wide) in paragraph at lines 1596--1596
+Overfull \hbox (9.62862pt too wide) in paragraph at lines 1602--1602
 []        \T1/aett/b/n/12 #Then employ Bisection Method, starting with E_x and 
 U as the lower[] 
  []
 
 
-Overfull \hbox (15.79657pt too wide) in paragraph at lines 1596--1596
+Overfull \hbox (15.79657pt too wide) in paragraph at lines 1602--1602
 []        \T1/aett/b/n/12 #Along the way, always round the middle value to the 
 nearest integer[] 
  []
 
 
-Overfull \hbox (9.62862pt too wide) in paragraph at lines 1596--1596
+Overfull \hbox (9.62862pt too wide) in paragraph at lines 1602--1602
 []        \T1/aett/b/n/12 #Reach right to find upper bound of starting interval
  for Bisection[] 
  []
 
 
-Overfull \hbox (15.79657pt too wide) in paragraph at lines 1596--1596
+Overfull \hbox (15.79657pt too wide) in paragraph at lines 1602--1602
 []        \T1/aett/b/n/12 if(fLower <= 0){ stop("Density at Expected Value comp
 uted to be less[] 
  []
 
 [52]
-Overfull \hbox (3.46066pt too wide) in paragraph at lines 1601--1602
+Overfull \hbox (3.46066pt too wide) in paragraph at lines 1607--1608
 [][]\T1/aett/b/n/12 dpredNormIG1[][] <- func-tion(ypred,y,mu0=0,k0=1,sig20=1,nu
 0=1,S = 100000, Jef-
  []
 
 [53]
 LaTeX Font Info:    Trying to load font information for TS1+aett on input line 
-1653.
+1659.
  (C:/PROGRA~1/R/R-41~1.1/share/texmf/tex/latex\ts1aett.fd
 File: ts1aett.fd 
 )
 LaTeX Font Info:    Trying to load font information for TS1+cmtt on input line 
-1653.
+1659.
 
 ("C:\MiKTeX 2.9\tex/latex/base\ts1cmtt.fd"
 File: ts1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `TS1/aett/m/n' in size <12> not available
-(Font)              Font shape `TS1/cmtt/m/n' tried instead on input line 1653.
+(Font)              Font shape `TS1/cmtt/m/n' tried instead on input line 1659.
 
 
-Overfull \hbox (9.63416pt too wide) in paragraph at lines 1653--1653
+Overfull \hbox (9.63416pt too wide) in paragraph at lines 1659--1659
 []          \T1/aett/b/n/12 #Estimating density using R\TS1/cmtt/m/n/12 '\T1/ae
 tt/b/n/12 s density() function on random sample[] 
  []
 
 
-Overfull \hbox (15.79657pt too wide) in paragraph at lines 1653--1653
+Overfull \hbox (15.79657pt too wide) in paragraph at lines 1659--1659
 []          \T1/aett/b/n/12 #(obtained from https://stackoverflow.com/questions
 /28077500/find-
  []
 
 
-Overfull \hbox (21.96452pt too wide) in paragraph at lines 1653--1653
+Overfull \hbox (21.96452pt too wide) in paragraph at lines 1659--1659
 []            \T1/aett/b/n/12 rsmat = t(matrix(replicate(length(tvec),rs),ncol 
 = length(tvec)))[] 
  []
 
 [54]
-Overfull \hbox (3.46066pt too wide) in paragraph at lines 1658--1659
+Overfull \hbox (3.46066pt too wide) in paragraph at lines 1664--1665
 [][]\T1/aett/b/n/12 ppredNormIG1[][] <- func-tion(ypred,y,mu0=0,k0=1,sig20=1,nu
 0=1,S = 100000, Jef-
  []
 
 
-Overfull \hbox (21.96452pt too wide) in paragraph at lines 1697--1697
+Overfull \hbox (21.96452pt too wide) in paragraph at lines 1703--1703
 []        \T1/aett/b/n/12 #return(apply(xrsmat,1,function(x) length(x[x<=x[1]])
 -1)/ncol(rsmat))[] 
  []
 
 [55]
-Overfull \hbox (15.79657pt too wide) in paragraph at lines 1732--1732
+Overfull \hbox (15.79657pt too wide) in paragraph at lines 1738--1738
 []          \T1/aett/b/n/12 sig2n = (nu0*sig20 + (nobs-1)*s2 + k0*nobs*(meanobs
 -mu0)^2/kn)/nun[] 
  []
 
-
-Overfull \hbox (15.79657pt too wide) in paragraph at lines 1768--1768
+[56]
+Overfull \hbox (15.79657pt too wide) in paragraph at lines 1774--1774
 []                         \T1/aett/b/n/12 (nu0*s20+sum((y1-mu-del)^2)+sum((y2-
 mu+del)^2) )/2)[] 
  []
 
 
-Overfull \hbox (28.13248pt too wide) in paragraph at lines 1768--1768
+Overfull \hbox (28.13248pt too wide) in paragraph at lines 1774--1774
 []            \T1/aett/b/n/12 var.mu<-  1/(1/g20+ (n1+n2)/s2 ) #this is gamma^2
 _n -- call it g2n[] 
  []
 
 
-Overfull \hbox (3.46066pt too wide) in paragraph at lines 1768--1768
+Overfull \hbox (3.46066pt too wide) in paragraph at lines 1774--1774
 []            \T1/aett/b/n/12 mean.mu<- var.mu*( mu0/g20 + sum(y1-del)/s2 + sum
 (y2+del)/s2 )[] 
  []
 
-[56]
-Overfull \hbox (40.46838pt too wide) in paragraph at lines 1864--1864
+
+Overfull \hbox (40.46838pt too wide) in paragraph at lines 1870--1870
 []          \T1/aett/b/n/12 #### MCMC approximation to posterior for the hierar
 chical normal model[] 
  []
 
 
-Overfull \hbox (34.30043pt too wide) in paragraph at lines 1864--1864
+Overfull \hbox (34.30043pt too wide) in paragraph at lines 1870--1870
 []          \T1/aett/b/n/12 J<-max(Y[,1]) #col. 1 of Y is an index identifying 
 the data in col. 2[] 
  []
 
 
-Overfull \hbox (34.30043pt too wide) in paragraph at lines 1864--1864
+Overfull \hbox (34.30043pt too wide) in paragraph at lines 1870--1870
 []            \T1/aett/b/n/12 Ylist[[j]]<-Y[ Y[,1]==j,2] #separate out data int
 o separate vectors[] 
  []
 
 
-Overfull \hbox (15.79657pt too wide) in paragraph at lines 1864--1864
+Overfull \hbox (15.79657pt too wide) in paragraph at lines 1870--1870
 []              \T1/aett/b/n/12 by index.  Y is a list of those vectors, which 
 need not be all[] 
  []
 
 
-Overfull \hbox (40.46838pt too wide) in paragraph at lines 1864--1864
+Overfull \hbox (40.46838pt too wide) in paragraph at lines 1870--1870
 []            \T1/aett/b/n/12 n[j]<-length(Ylist[[j]]) #record number data poin
 ts in each data set[] 
  []
 
 [57] [58]
-Overfull \hbox (21.96452pt too wide) in paragraph at lines 1864--1864
+Overfull \hbox (21.96452pt too wide) in paragraph at lines 1870--1870
 []          \T1/aett/b/n/12 #The number of rows is the number of desired predic
 tions (input N).[] 
  []
 
 
-Overfull \hbox (15.79657pt too wide) in paragraph at lines 1864--1864
+Overfull \hbox (15.79657pt too wide) in paragraph at lines 1870--1870
 []          \T1/aett/b/n/12 #The ith column therefore contains all the predicti
 ons for the ith[] 
  []
 
 
-Overfull \hbox (15.79657pt too wide) in paragraph at lines 1864--1864
+Overfull \hbox (15.79657pt too wide) in paragraph at lines 1870--1870
 []          \T1/aett/b/n/12 #YTILDE:  Nxm matrix of predictions (N predictions 
 for each of the[] 
  []
 
 
-Overfull \hbox (40.46838pt too wide) in paragraph at lines 1871--1872
+Overfull \hbox (40.46838pt too wide) in paragraph at lines 1877--1878
 [][]\T1/aett/b/n/12 rpredNormReg[][] <- func-tion(S=1,Xpred,X,y,beta0,Sigma0,nu
 0=1,s20=1, gprior = TRUE){
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1871--1872
+Underfull \hbox (badness 10000) in paragraph at lines 1877--1878
 
  []
 
 [59]
-Overfull \hbox (3.46066pt too wide) in paragraph at lines 1971--1971
+Overfull \hbox (3.46066pt too wide) in paragraph at lines 1977--1977
 []            \T1/aett/b/n/12 beta.post<-matrix(nrow=S,ncol=p)  #storage for S 
 instances for[] 
  []
 
-
-Overfull \hbox (9.62862pt too wide) in paragraph at lines 1971--1971
+[60]
+Overfull \hbox (9.62862pt too wide) in paragraph at lines 1977--1977
 []              \T1/aett/b/n/12 V.beta<- solve(  iSigma.0 + XtX/sig2 )  #Condit
 ional variance[] 
  []
 
-[60]
-Overfull \hbox (15.79657pt too wide) in paragraph at lines 1971--1971
+
+Overfull \hbox (15.79657pt too wide) in paragraph at lines 1977--1977
 []              \T1/aett/b/n/12 sig2<-1/rgamma(1,nu.n/2, ss.n/2)  #Gibbs sample
 r step:  update[] 
  []
 
 
-Overfull \hbox (21.96452pt too wide) in paragraph at lines 1971--1971
+Overfull \hbox (21.96452pt too wide) in paragraph at lines 1977--1977
 []              \T1/aett/b/n/12 beta.post[scan,]<-beta    #Store updated beta i
 n current row of[] 
  []
 
 
-Overfull \hbox (28.13248pt too wide) in paragraph at lines 1971--1971
+Overfull \hbox (28.13248pt too wide) in paragraph at lines 1977--1977
 []            \T1/aett/b/n/12 round( apply(beta.post,2,mean), 3)  #compute mean
  of Gibbs sampled[] 
  []
 
 
-Overfull \hbox (28.13248pt too wide) in paragraph at lines 1971--1971
+Overfull \hbox (28.13248pt too wide) in paragraph at lines 1977--1977
 []              \T1/aett/b/n/12 predictions[i,] = predictions[i,] + rnorm(S,0,s
 qrt(sigma2.post))[] 
  []
@@ -2189,7 +2189,7 @@ qrt(sigma2.post))[]
 
 ] (Thesis_v4.aux)
 Package rerunfilecheck Info: File `Thesis_v4.out' has not changed.
-(rerunfilecheck)             Checksum: 8A5108E0985B9FC4C68F80BAA6569108;5101.
+(rerunfilecheck)             Checksum: BB9B7EABB0DAB7DEA973A233DF025031;5102.
 
 
 LaTeX Font Warning: Size substitutions with differences
@@ -2229,7 +2229,7 @@ s/type1/public/amsfonts/cm/cmti12.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfont
 s/cm/cmtt12.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt8.pfb><C:/MiK
 TeX 2.9/fonts/type1/public/amsfonts/latxfont/line10.pfb><C:/MiKTeX 2.9/fonts/ty
 pe1/public/amsfonts/symbols/msam10.pfb>
-Output written on Thesis_v4.pdf (62 pages, 1587903 bytes).
+Output written on Thesis_v4.pdf (62 pages, 1588112 bytes).
 PDF statistics:
  1016 PDF objects out of 1200 (max. 8388607)
  189 named destinations out of 1000 (max. 500000)

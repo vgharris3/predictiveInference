@@ -569,8 +569,8 @@ This result has been used to create R functions \texttt{dpredEG()}, \texttt{ppre
 \noindent where
 
 \begin{flalign*}
-  \texttt{ypred} &= \tilde{y} \text{, the survival time(s) in future experiments for which prediction is desired}\\
-  \texttt{y} &= \text{a vector of } N \text{ survival times, } d \text{ observed, } N-d \text{ censored}\\
+  \texttt{ypred} &= \tilde{y} \text{, the event time(s) in future experiments for which prediction is desired}\\
+  \texttt{y} &= \text{a vector of } N \text{ event times, } d \text{ observed, } N-d \text{ censored}\\
 \end{flalign*}
 
 \begin{flalign*}
@@ -789,7 +789,7 @@ h = hist(pred_sample,prob = TRUE,main = "Histogram of Predictive Sample",xlim=c(
 
 This result has been used to create R functions \texttt{dpredPG()}, \texttt{ppredPG()}, and \texttt{rpredPG()} for the Poisson-Gamma distribution for density, cumulative probability, and predictive sampling, respectively (see appendix for R code).  These functions are exercised in the example below.\\
 
-\noindent The density function \texttt{dpredPG()} simply makes use of the R function \texttt{dnbinom()}.  The cdf \texttt{ppredPG()} returns a cumulative sum of the results of \texttt{dpredPG()}.  The predictive sampler \texttt{rpredPG()} is a bit more complicated. The difficulty is that the upper bound of the support of the predictive distribution $p(\tilde{y}|y_1,...,y_n)$ is not known.  Since $p(\cdot)$ is negative binomial, we can count on it eventually decreasing toward $0$ asymptotically.  To establish the support, then, a method was employed to find where $p$ comes ``sufficiently close" to $0$.  To accomplish this a modified bisection method was devised as follows:\\
+\noindent The density function \texttt{dpredPG()} simply makes use of the R function \texttt{dnbinom()}.  The cdf \texttt{ppredPG()} returns a cumulative sum of the results of \texttt{dpredPG()} for all integer values from $0$ up to the value of $\tilde{y}$.  The predictive sampler \texttt{rpredPG()} is a bit more complicated. The difficulty is that the upper bound of the support of the predictive distribution $p(\tilde{y}|y_1,...,y_n)$ is not known.  Since $p(\cdot)$ is negative binomial, we can count on it eventually decreasing toward $0$ asymptotically.  To establish the support, then, a method was employed to find where $p$ comes ``sufficiently close" to $0$.  To accomplish this a modified bisection method was devised as follows:\\
 
 % Initially the R function \texttt{uniroot()} was considered, but ultimately a modified bisection method was devised as follows:\\
 
@@ -898,11 +898,11 @@ f_y = dpredPG(ypred, y, alpha, beta)
 
 xlabel = eval(bquote(expression(tilde(y)*" = Possible Number of Hurricanes in the 2020s")))
 
-plot(1:length(f_y),f_y,type = "p", col = "blue", pch = 16, cex = 1, main = "Poisson-Gamma Predictive Probability Mass", xlab = xlabel, ylab = "dpredPG()")
+plot(ypred,f_y,type = "p", col = "blue", pch = 16, cex = 1, main = "Poisson-Gamma Predictive Probability Mass", xlab = xlabel, ylab = "dpredPG()")
 
 #Cumulative predictive probability
 F_y = ppredPG(ypred, y, alpha, beta)
-plot(1:length(F_y),F_y,type = "p", col = "red", pch = 16, main = "Poisson-Gamma Cumulative Predictive Probability", xlab = xlabel, ylab = "ppredPG()")
+plot(ypred,F_y,type = "p", col = "red", pch = 16, main = "Poisson-Gamma Cumulative Predictive Probability", ylim = c(0,1), xlab = xlabel, ylab = "ppredPG()")
 
 #Predictive sample
 S = 1000 #Predictive sample size
@@ -911,7 +911,7 @@ range_Rand = min(pred_sample):max(pred_sample)
 f_Rand = dpredPG(range_Rand,y,alpha,beta)
 breaks = seq(min(pred_sample)-0.5,max(pred_sample)+0.5,1)
 # ylim = c(0,max(f_Rand)*1.1),
-res = hist(pred_sample,prob = TRUE, main = "Histogram of Predictive Sample",xlim = c(0,length(F_y)),breaks = breaks, xlab = xlabel, ylab = "Rel. Freq.")
+res = hist(pred_sample,prob = TRUE, main = "Histogram of Predictive Sample",xlim = c(min(breaks),max(breaks)),breaks = breaks, xlab = xlabel, ylab = "Rel. Freq.")
 # lines(range_Rand,f_Rand)
 # points(range_Rand,f_Rand, col = "blue", pch = 16)
 
@@ -1042,7 +1042,7 @@ Calls to these functions appear as follows:
 \noindent These functions are exercised in the following example.\\
 
 
-      \paragraph{Example(Normal-Inverse Gamma, 1-sample) [5]}
+      \paragraph{Example (Normal-Inverse Gamma, 1-sample) [5]}
 
         \textit{Example (Hoff p. 72ff, using data from Grogan and Wirth (1981)):  Midge wing length}\\
 
@@ -2325,10 +2325,16 @@ The functions below are part of a package of predictive inference tools.  The pa
       \begin{verbatim}
           f_y = dpredPG(ypred,y,alpha,beta)
 
-          F_y = cumsum(f_y)
+            evalVec = 0:max(ypred)
 
-          if(lower){return(F_y)}
-          else {return(1 - F_y)}
+            f_y = dpredPG(0:max(ypred),y,alpha,beta)
+
+            F_y = cumsum(f_y)
+
+            returnVec = F_y[which(evalVec %in% ypred)]
+
+            if(lower){return(returnVec)}
+            else {return(1 - returnVec)}
 
         }
       \end{verbatim}

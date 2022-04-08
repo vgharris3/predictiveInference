@@ -41,11 +41,15 @@ ppredPG = function(ypred, y, alpha = 1, beta=1, lower=TRUE){
     stop("All observations must be non-negative")
   }
 
-  f_y = dpredPG(ypred,y,alpha,beta)
+  evalVec = 0:max(ypred)
+
+  f_y = dpredPG(0:max(ypred),y,alpha,beta)
 
   F_y = cumsum(f_y)
 
-  if(lower){return(F_y)}
-  else {return(1 - F_y)}
+  returnVec = F_y[which(evalVec %in% ypred)]
+
+  if(lower){return(returnVec)}
+  else {return(1 - returnVec)}
 
 }
