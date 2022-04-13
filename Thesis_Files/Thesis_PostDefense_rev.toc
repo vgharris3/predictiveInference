@@ -23,7 +23,7 @@
 \contentsline {subsubsection}{\numberline {3.4.2}Two-sample Normal-Inverse Gamma}{32}{subsubsection.3.4.2}%
 \contentsline {paragraph}{\numberline {3.4.2.1}Derivation (Normal-Inverse Gamma, 2-Sample)}{32}{paragraph.3.4.2.1}%
 \contentsline {paragraph}{\numberline {3.4.2.2}R Implementation (Normal-Inverse Gamma, 2-sample)}{33}{paragraph.3.4.2.2}%
-\contentsline {paragraph}{\numberline {3.4.2.3}Example (Normal-Inverse Gamma, 2-Sample) [5]}{33}{paragraph.3.4.2.3}%
+\contentsline {paragraph}{\numberline {3.4.2.3}Example (Normal-Inverse Gamma, 2-Sample)}{33}{paragraph.3.4.2.3}%
 \contentsline {subsubsection}{\numberline {3.4.3}$k$-sample Normal-Inverse Gamma: Comparing multiple groups}{35}{subsubsection.3.4.3}%
 \contentsline {paragraph}{\numberline {3.4.3.1}Derivation}{36}{paragraph.3.4.3.1}%
 \contentsline {paragraph}{\numberline {3.4.3.2}R Implementation (Normal-Inverse Gamma, k-samples)}{37}{paragraph.3.4.3.2}%
