@@ -1,61 +1,61 @@
-\contentsline {section}{\numberline {1}Abstract}{6}{section.1}%
-\contentsline {section}{\numberline {2}Introduction: Predictive Inference}{6}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Why Predictive Inference?}{6}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}The Bayesian Parametric Prediction Format}{11}{subsection.2.2}%
-\contentsline {section}{\numberline {3}Predictive Problems with Conjugate Priors}{13}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Prediction of Future Successes: Beta-Binomial [3]}{13}{subsection.3.1}%
-\contentsline {subsubsection}{\numberline {3.1.1}Derivation (Beta-Binomial)}{13}{subsubsection.3.1.1}%
-\contentsline {subsubsection}{\numberline {3.1.2}R Implementation (Beta-Binomial)}{14}{subsubsection.3.1.2}%
-\contentsline {subsubsection}{\numberline {3.1.3}Example (Beta-Binomial)}{15}{subsubsection.3.1.3}%
-\contentsline {subsection}{\numberline {3.2}Survival Time: Exponential-Gamma [3]}{16}{subsection.3.2}%
-\contentsline {subsubsection}{\numberline {3.2.1}Derivation (Exponential-Gamma)}{16}{subsubsection.3.2.1}%
-\contentsline {subsubsection}{\numberline {3.2.2}R Implementation (Exponential-Gamma)}{18}{subsubsection.3.2.2}%
-\contentsline {subsubsection}{\numberline {3.2.3}Example (Exponential-Gamma)}{19}{subsubsection.3.2.3}%
-\contentsline {subsection}{\numberline {3.3}Poisson-Gamma Model [5]}{21}{subsection.3.3}%
-\contentsline {subsubsection}{\numberline {3.3.1}Derivation (Poisson-Gamma)}{21}{subsubsection.3.3.1}%
-\contentsline {subsubsection}{\numberline {3.3.2}R Implementation (Poisson-Gamma)}{23}{subsubsection.3.3.2}%
-\contentsline {subsubsection}{\numberline {3.3.3}Example (Poisson-Gamma)}{25}{subsubsection.3.3.3}%
-\contentsline {subsection}{\numberline {3.4}Normal Observation with Normal-Inverse Gamma Prior [5]}{27}{subsection.3.4}%
-\contentsline {subsubsection}{\numberline {3.4.1}One Sample Normal-Inverse Gamma}{27}{subsubsection.3.4.1}%
-\contentsline {paragraph}{\numberline {3.4.1.1}Derivation (Normal-Inverse Gamma, 1-sample)}{27}{paragraph.3.4.1.1}%
-\contentsline {paragraph}{\numberline {3.4.1.2}R Implementation (Normal-Inverse Gamma, 1-sample)}{28}{paragraph.3.4.1.2}%
+\contentsline {section}{\numberline {1}Abstract}{7}{section.1}%
+\contentsline {section}{\numberline {2}Introduction: Predictive Inference}{7}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Why Predictive Inference?}{7}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}The Bayesian Parametric Prediction Format}{12}{subsection.2.2}%
+\contentsline {section}{\numberline {3}Predictive Problems with Conjugate Priors}{14}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Prediction of Future Successes: Beta-Binomial [3]}{14}{subsection.3.1}%
+\contentsline {subsubsection}{\numberline {3.1.1}Derivation (Beta-Binomial)}{14}{subsubsection.3.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.2}R Implementation (Beta-Binomial)}{15}{subsubsection.3.1.2}%
+\contentsline {subsubsection}{\numberline {3.1.3}Example (Beta-Binomial)}{16}{subsubsection.3.1.3}%
+\contentsline {subsection}{\numberline {3.2}Survival Time: Exponential-Gamma [3]}{17}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Derivation (Exponential-Gamma)}{17}{subsubsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2}R Implementation (Exponential-Gamma)}{19}{subsubsection.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.3}Example (Exponential-Gamma)}{20}{subsubsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.3}Poisson-Gamma Model [5]}{22}{subsection.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.1}Derivation (Poisson-Gamma)}{22}{subsubsection.3.3.1}%
+\contentsline {subsubsection}{\numberline {3.3.2}R Implementation (Poisson-Gamma)}{24}{subsubsection.3.3.2}%
+\contentsline {subsubsection}{\numberline {3.3.3}Example (Poisson-Gamma)}{26}{subsubsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.4}Normal Observation with Normal-Inverse Gamma Prior [5]}{28}{subsection.3.4}%
+\contentsline {subsubsection}{\numberline {3.4.1}One Sample Normal-Inverse Gamma}{28}{subsubsection.3.4.1}%
+\contentsline {paragraph}{\numberline {3.4.1.1}Derivation (Normal-Inverse Gamma, 1-sample)}{28}{paragraph.3.4.1.1}%
+\contentsline {paragraph}{\numberline {3.4.1.2}R Implementation (Normal-Inverse Gamma, 1-sample)}{29}{paragraph.3.4.1.2}%
 \contentsline {paragraph}{\numberline {3.4.1.3}Example (Normal-Inverse Gamma, 1-sample) [5]}{30}{paragraph.3.4.1.3}%
-\contentsline {subsubsection}{\numberline {3.4.2}Two-sample Normal-Inverse Gamma}{32}{subsubsection.3.4.2}%
-\contentsline {paragraph}{\numberline {3.4.2.1}Derivation (Normal-Inverse Gamma, 2-Sample)}{32}{paragraph.3.4.2.1}%
-\contentsline {paragraph}{\numberline {3.4.2.2}R Implementation (Normal-Inverse Gamma, 2-sample)}{33}{paragraph.3.4.2.2}%
-\contentsline {paragraph}{\numberline {3.4.2.3}Example (Normal-Inverse Gamma, 2-Sample)}{33}{paragraph.3.4.2.3}%
-\contentsline {subsubsection}{\numberline {3.4.3}$k$-sample Normal-Inverse Gamma: Comparing multiple groups}{35}{subsubsection.3.4.3}%
-\contentsline {paragraph}{\numberline {3.4.3.1}Derivation}{36}{paragraph.3.4.3.1}%
-\contentsline {paragraph}{\numberline {3.4.3.2}R Implementation (Normal-Inverse Gamma, k-samples)}{37}{paragraph.3.4.3.2}%
-\contentsline {paragraph}{\numberline {3.4.3.3}Example}{38}{paragraph.3.4.3.3}%
-\contentsline {section}{\numberline {4}Normal Regression [5]}{41}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Least Squares Estimation Example}{42}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Bayesian Estimation for a Regression Model [5]}{45}{subsection.4.2}%
-\contentsline {subsubsection}{\numberline {4.2.1}Derivation (Normal Regression)}{45}{subsubsection.4.2.1}%
-\contentsline {paragraph}{\numberline {4.2.1.1}A semiconjugate prior distribution}{45}{paragraph.4.2.1.1}%
-\contentsline {paragraph}{\numberline {4.2.1.2}Default and weakly informative prior distributions}{46}{paragraph.4.2.1.2}%
-\contentsline {subsubsection}{\numberline {4.2.2}R Implementation (Normal Regression)}{47}{subsubsection.4.2.2}%
-\contentsline {subsubsection}{\numberline {4.2.3}Example (Normal Regression)}{47}{subsubsection.4.2.3}%
-\contentsline {section}{\numberline {5}Conclusion}{49}{section.5}%
-\contentsline {section}{\numberline {6}Appendix - R Functions}{50}{section.6}%
-\contentsline {subsection}{\numberline {6.1}Beta-Binomial R Functions}{50}{subsection.6.1}%
-\contentsline {subsubsection}{\numberline {6.1.1}\texttt {dpredBB()}}{50}{subsubsection.6.1.1}%
-\contentsline {subsubsection}{\numberline {6.1.2}\texttt {ppredBB()}}{50}{subsubsection.6.1.2}%
-\contentsline {subsubsection}{\numberline {6.1.3}\texttt {rpredBB()}}{50}{subsubsection.6.1.3}%
-\contentsline {subsection}{\numberline {6.2}Exponential-Gamma R Functions}{51}{subsection.6.2}%
-\contentsline {subsubsection}{\numberline {6.2.1}\texttt {dpredEG()}}{51}{subsubsection.6.2.1}%
-\contentsline {subsubsection}{\numberline {6.2.2}\texttt {ppredEG()}}{51}{subsubsection.6.2.2}%
-\contentsline {subsubsection}{\numberline {6.2.3}\texttt {rpredEG()}}{52}{subsubsection.6.2.3}%
-\contentsline {subsection}{\numberline {6.3}Poisson-Gamma R Functions}{52}{subsection.6.3}%
-\contentsline {subsubsection}{\numberline {6.3.1}\texttt {dpredPG()}}{52}{subsubsection.6.3.1}%
-\contentsline {subsubsection}{\numberline {6.3.2}\texttt {ppredPG()}}{52}{subsubsection.6.3.2}%
-\contentsline {subsubsection}{\numberline {6.3.3}\texttt {rpredPG()}}{53}{subsubsection.6.3.3}%
-\contentsline {subsection}{\numberline {6.4}Normal-Inverse Gamma R Functions}{55}{subsection.6.4}%
-\contentsline {subsubsection}{\numberline {6.4.1}\texttt {dpredNormIG1()}}{55}{subsubsection.6.4.1}%
-\contentsline {subsubsection}{\numberline {6.4.2}\texttt {ppredNormIG1()}}{56}{subsubsection.6.4.2}%
-\contentsline {subsubsection}{\numberline {6.4.3}\texttt {rpredNormIG1()}}{57}{subsubsection.6.4.3}%
-\contentsline {subsubsection}{\numberline {6.4.4}\texttt {rpredNormIG2()}}{57}{subsubsection.6.4.4}%
-\contentsline {subsubsection}{\numberline {6.4.5}\texttt {rpredNormIGk()}}{58}{subsubsection.6.4.5}%
-\contentsline {subsection}{\numberline {6.5}Normal Regression R Function}{60}{subsection.6.5}%
-\contentsline {subsubsection}{\numberline {6.5.1}\texttt {rpredNormIGkReg()}}{60}{subsubsection.6.5.1}%
-\contentsline {section}{\numberline {7}References}{63}{section.7}%
+\contentsline {subsubsection}{\numberline {3.4.2}Two-sample Normal-Inverse Gamma}{33}{subsubsection.3.4.2}%
+\contentsline {paragraph}{\numberline {3.4.2.1}Derivation (Normal-Inverse Gamma, 2-Sample)}{33}{paragraph.3.4.2.1}%
+\contentsline {paragraph}{\numberline {3.4.2.2}R Implementation (Normal-Inverse Gamma, 2-sample)}{34}{paragraph.3.4.2.2}%
+\contentsline {paragraph}{\numberline {3.4.2.3}Example (Normal-Inverse Gamma, 2-Sample)}{34}{paragraph.3.4.2.3}%
+\contentsline {subsubsection}{\numberline {3.4.3}$k$-sample Normal-Inverse Gamma: Comparing multiple groups}{37}{subsubsection.3.4.3}%
+\contentsline {paragraph}{\numberline {3.4.3.1}Derivation}{37}{paragraph.3.4.3.1}%
+\contentsline {paragraph}{\numberline {3.4.3.2}R Implementation (Normal-Inverse Gamma, k-samples)}{38}{paragraph.3.4.3.2}%
+\contentsline {paragraph}{\numberline {3.4.3.3}Example}{39}{paragraph.3.4.3.3}%
+\contentsline {section}{\numberline {4}Normal Regression [5]}{43}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Least Squares Estimation Example}{44}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Bayesian Estimation for a Regression Model [5]}{47}{subsection.4.2}%
+\contentsline {subsubsection}{\numberline {4.2.1}Derivation (Normal Regression)}{47}{subsubsection.4.2.1}%
+\contentsline {paragraph}{\numberline {4.2.1.1}A semiconjugate prior distribution}{47}{paragraph.4.2.1.1}%
+\contentsline {paragraph}{\numberline {4.2.1.2}Default and weakly informative prior distributions}{48}{paragraph.4.2.1.2}%
+\contentsline {subsubsection}{\numberline {4.2.2}R Implementation (Normal Regression)}{49}{subsubsection.4.2.2}%
+\contentsline {subsubsection}{\numberline {4.2.3}Example (Normal Regression)}{49}{subsubsection.4.2.3}%
+\contentsline {section}{\numberline {5}Conclusion}{51}{section.5}%
+\contentsline {section}{\numberline {6}Appendix - R Functions}{52}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Beta-Binomial R Functions}{52}{subsection.6.1}%
+\contentsline {subsubsection}{\numberline {6.1.1}\texttt {dpredBB()}}{52}{subsubsection.6.1.1}%
+\contentsline {subsubsection}{\numberline {6.1.2}\texttt {ppredBB()}}{52}{subsubsection.6.1.2}%
+\contentsline {subsubsection}{\numberline {6.1.3}\texttt {rpredBB()}}{52}{subsubsection.6.1.3}%
+\contentsline {subsection}{\numberline {6.2}Exponential-Gamma R Functions}{53}{subsection.6.2}%
+\contentsline {subsubsection}{\numberline {6.2.1}\texttt {dpredEG()}}{53}{subsubsection.6.2.1}%
+\contentsline {subsubsection}{\numberline {6.2.2}\texttt {ppredEG()}}{53}{subsubsection.6.2.2}%
+\contentsline {subsubsection}{\numberline {6.2.3}\texttt {rpredEG()}}{54}{subsubsection.6.2.3}%
+\contentsline {subsection}{\numberline {6.3}Poisson-Gamma R Functions}{54}{subsection.6.3}%
+\contentsline {subsubsection}{\numberline {6.3.1}\texttt {dpredPG()}}{54}{subsubsection.6.3.1}%
+\contentsline {subsubsection}{\numberline {6.3.2}\texttt {ppredPG()}}{54}{subsubsection.6.3.2}%
+\contentsline {subsubsection}{\numberline {6.3.3}\texttt {rpredPG()}}{55}{subsubsection.6.3.3}%
+\contentsline {subsection}{\numberline {6.4}Normal-Inverse Gamma R Functions}{57}{subsection.6.4}%
+\contentsline {subsubsection}{\numberline {6.4.1}\texttt {dpredNormIG1()}}{57}{subsubsection.6.4.1}%
+\contentsline {subsubsection}{\numberline {6.4.2}\texttt {ppredNormIG1()}}{58}{subsubsection.6.4.2}%
+\contentsline {subsubsection}{\numberline {6.4.3}\texttt {rpredNormIG1()}}{59}{subsubsection.6.4.3}%
+\contentsline {subsubsection}{\numberline {6.4.4}\texttt {rpredNormIG2()}}{59}{subsubsection.6.4.4}%
+\contentsline {subsubsection}{\numberline {6.4.5}\texttt {rpredNormIGk()}}{60}{subsubsection.6.4.5}%
+\contentsline {subsection}{\numberline {6.5}Normal Regression R Function}{62}{subsection.6.5}%
+\contentsline {subsubsection}{\numberline {6.5.1}\texttt {rpredNormIGkReg()}}{62}{subsubsection.6.5.1}%
+\contentsline {section}{\numberline {7}References}{65}{section.7}%

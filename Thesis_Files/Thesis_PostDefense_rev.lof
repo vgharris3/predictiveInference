@@ -1,16 +1,16 @@
-\contentsline {figure}{\numberline {1}{\ignorespaces Pass The Pigs\textsuperscript {\text {$\mathsurround \z@ \mathchar "472$}}\relax }}{8}{figure.caption.3}%
-\contentsline {figure}{\numberline {2}{\ignorespaces Razorback\relax }}{8}{figure.caption.4}%
-\contentsline {figure}{\numberline {3}{\ignorespaces Big Pigs\texttrademark to Original (Approximate Scale)\relax }}{9}{figure.caption.5}%
-\contentsline {figure}{\numberline {4}{\ignorespaces Pass the Pigs\textsuperscript {\text {$\mathsurround \z@ \mathchar "472$}} Prediction\relax }}{10}{figure.caption.6}%
-\contentsline {figure}{\numberline {5}{\ignorespaces Beta-Binomial Predictive Distribution\relax }}{16}{figure.caption.7}%
-\contentsline {figure}{\numberline {6}{\ignorespaces Observed Machine Tool Lifetime Data\relax }}{19}{figure.caption.8}%
-\contentsline {figure}{\numberline {7}{\ignorespaces Exponential-Gamma Predictive Distribution\relax }}{20}{figure.caption.9}%
-\contentsline {figure}{\numberline {8}{\ignorespaces Poisson-Gamma Predictive Distribution\relax }}{26}{figure.caption.10}%
-\contentsline {figure}{\numberline {9}{\ignorespaces Normal-Inverse Gamma (One-Sample) Predictive Distribution\relax }}{31}{figure.caption.11}%
-\contentsline {figure}{\numberline {10}{\ignorespaces Observed Math Score Data for Two Schools\relax }}{34}{figure.caption.12}%
-\contentsline {figure}{\numberline {11}{\ignorespaces 2-Sample Densities: Observed vs. Predicted\relax }}{35}{figure.caption.13}%
-\contentsline {figure}{\numberline {12}{\ignorespaces Math Score Data for 100 Schools. Each school's results are represented by a vertical segment, with points plotted at the individual students' math scores. The horizontal line is drawn at the grand mean of the individual school means.\relax }}{38}{figure.caption.14}%
-\contentsline {figure}{\numberline {13}{\ignorespaces $k$-Sample Densities: Observed vs. Predicted\relax }}{40}{figure.caption.15}%
-\contentsline {figure}{\numberline {14}{\ignorespaces Oxygen Uptake Data\relax }}{42}{figure.caption.16}%
-\contentsline {figure}{\numberline {15}{\ignorespaces Regression Model Variations\relax }}{44}{figure.caption.17}%
-\contentsline {figure}{\numberline {16}{\ignorespaces Regression Prediction Comparison\relax }}{48}{figure.caption.18}%
+\contentsline {figure}{\numberline {1}{\ignorespaces Pass The Pigs\textsuperscript {\text {$\mathsurround \z@ \mathchar "472$}}\relax }}{9}{figure.caption.3}%
+\contentsline {figure}{\numberline {2}{\ignorespaces Razorback\relax }}{9}{figure.caption.4}%
+\contentsline {figure}{\numberline {3}{\ignorespaces Big Pigs\texttrademark to Original (Approximate Scale)\relax }}{10}{figure.caption.5}%
+\contentsline {figure}{\numberline {4}{\ignorespaces Pass the Pigs\textsuperscript {\text {$\mathsurround \z@ \mathchar "472$}} Prediction\relax }}{11}{figure.caption.6}%
+\contentsline {figure}{\numberline {5}{\ignorespaces Beta-Binomial Predictive Distribution\relax }}{17}{figure.caption.7}%
+\contentsline {figure}{\numberline {6}{\ignorespaces Observed Machine Tool Lifetime Data\relax }}{20}{figure.caption.8}%
+\contentsline {figure}{\numberline {7}{\ignorespaces Exponential-Gamma Predictive Distribution\relax }}{21}{figure.caption.9}%
+\contentsline {figure}{\numberline {8}{\ignorespaces Poisson-Gamma Predictive Distribution\relax }}{27}{figure.caption.10}%
+\contentsline {figure}{\numberline {9}{\ignorespaces Normal-Inverse Gamma (One-Sample) Predictive Distribution\relax }}{32}{figure.caption.11}%
+\contentsline {figure}{\numberline {10}{\ignorespaces Left-hand plot: School 1 and School 2 math scores, each arranged by rank, least to greatest. Right-hand plot: A box plot of the same data.\relax }}{35}{figure.caption.12}%
+\contentsline {figure}{\numberline {11}{\ignorespaces 2-Sample Comparison. The solid curves show estimated densities based on the observed data. The dashed curves show the estimated sampling densities of the predictive distributions.\relax }}{36}{figure.caption.13}%
+\contentsline {figure}{\numberline {12}{\ignorespaces Math Score Data for 100 Schools. Each school's results are represented by a vertical segment, with points plotted at the individual students' math scores. The horizontal line is drawn at the grand mean of the individual school means.\relax }}{40}{figure.caption.14}%
+\contentsline {figure}{\numberline {13}{\ignorespaces $k$-Sample Densities: Observed vs. Predicted\relax }}{42}{figure.caption.15}%
+\contentsline {figure}{\numberline {14}{\ignorespaces Oxygen Uptake Data\relax }}{44}{figure.caption.16}%
+\contentsline {figure}{\numberline {15}{\ignorespaces Regression Model Variations\relax }}{46}{figure.caption.17}%
+\contentsline {figure}{\numberline {16}{\ignorespaces Regression Prediction Comparison\relax }}{50}{figure.caption.18}%
