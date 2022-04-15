@@ -10,7 +10,7 @@
 \contentsline {figure}{\numberline {10}{\ignorespaces Left-hand plot: School 1 and School 2 math scores, each arranged by rank, least to greatest. Right-hand plot: A box plot of the same data.\relax }}{35}{figure.caption.12}%
 \contentsline {figure}{\numberline {11}{\ignorespaces 2-Sample Comparison. The solid curves show estimated densities based on the observed data. The dashed curves show the estimated sampling densities of the predictive distributions.\relax }}{36}{figure.caption.13}%
 \contentsline {figure}{\numberline {12}{\ignorespaces Math Score Data for 100 Schools. Each school's results are represented by a vertical segment, with points plotted at the individual students' math scores. The horizontal line is drawn at the grand mean of the individual school means.\relax }}{40}{figure.caption.14}%
-\contentsline {figure}{\numberline {13}{\ignorespaces $k$-Sample Densities: Observed vs. Predicted\relax }}{42}{figure.caption.15}%
+\contentsline {figure}{\numberline {13}{\ignorespaces $k$-Sample Comparison. The solid curves show estimated densities based on the observed data. The dashed curves show the estimated sampling densities of the predictive distributions.\relax }}{42}{figure.caption.15}%
 \contentsline {figure}{\numberline {14}{\ignorespaces Oxygen Uptake Data\relax }}{44}{figure.caption.16}%
 \contentsline {figure}{\numberline {15}{\ignorespaces Regression Model Variations\relax }}{46}{figure.caption.17}%
 \contentsline {figure}{\numberline {16}{\ignorespaces Regression Prediction Comparison\relax }}{50}{figure.caption.18}%

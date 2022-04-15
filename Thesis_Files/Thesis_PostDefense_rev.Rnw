@@ -1523,9 +1523,9 @@ $$\tilde{y}_j \sim \text{Normal}(\theta_j, \sigma^2).$$
 \noindent where
 
 \begin{flalign*}
-  \texttt{S} &=S \text{, the number of predictions desired, where a single prediction has } k \text{ elements, one}\\
-  & \text{corresponding to each data group } \mathbf{Y}_1,...,\mathbf{Y_k} \text{. That is, } \mathbf{\tilde{Y}_j} = \tilde{Y}_{1,j},...,\tilde{Y}_{s,j} \text{, for } j \in \{1,...,k\}, \\
-  & s\in\{1,...S\}.\\
+  \texttt{S} &=S \text{, the desired predictive sample size. The sampler returns } S \text{ realizations}\\
+  &\text{from the predictive distribution, each having } k \text{ elements, one corresponding to}\\
+  &\text{each data group } \mathbf{Y}_1,...,\mathbf{Y_k} \text{. That is, } \mathbf{\tilde{Y}_j} = \tilde{Y}_{1,j},...,\tilde{Y}_{s,j} \text{, for } j \in \{1,...,k\}, s\in\{1,...S\}.\\
   \texttt{Y} &= \text{ the } k \text{ sets of observed data (one column of data and one column of}\\ &\text{group indices)}
 \end{flalign*}
 \begin{flalign*}
@@ -1651,8 +1651,9 @@ colnames(school_table) <- c("school index","average")
 
 \begin{figure}[h]
   \centering
+  \captionsetup{width=0.6\textwidth}
   \includegraphics[width=0.8\textwidth]{./Graphics/ExamplePlots/NormIGk_Data_v_Prediction}
-  \caption{$k$-Sample Densities: Observed vs. Predicted}
+  \caption{$k$-Sample Comparison. The solid curves show estimated densities based on the observed data.  The dashed curves show the estimated sampling densities of the predictive distributions.}
   \label{fig:NormIGk_DvP}
 \end{figure}
 
@@ -1663,7 +1664,9 @@ library(profvis)
 
 par(mfrow=c(1,1))
 
-result = rpredNormIGk(S=5000,Y.school.mathscore,nu0=1,s20=100,eta0=1,t20=100,mu0=50,g20=25)
+numSamples = 200000
+
+result = rpredNormIGk(S=numSamples,Y.school.mathscore,nu0=1,s20=100,eta0=1,t20=100,mu0=50,g20=25)
 
 toplot = c(5,92,67)
 
@@ -1676,16 +1679,16 @@ for(pltInd in toplot){
 
   if(which(toplot==pltInd)==1){
 
-    plot(density(Y[[pltInd]]),lwd = 2,col=pltInd,main="Densities of School Data and Predictions",
+    plot(density(Y[[pltInd]]),lwd = 2,col=pltInd,main="School Data and Predictions",
        xlab="Grade",xlim=c(minx,maxx),ylim=c(0,maxy))
 
-    lines(density(result$YTILDE[1001:5000,pltInd]),lwd = 2,lty=2,col=pltInd)
+    lines(density(result$YTILDE[10001:numSamples,pltInd]),lwd = 2,lty=2,col=pltInd)
 
   } else {
 
     lines(density(Y[[pltInd]]),lwd = 2,col=pltInd)
 
-    lines(density(result$YTILDE[1001:5000,pltInd]),lwd = 2,lty=2,col=pltInd)
+    lines(density(result$YTILDE[1001:numSamples,pltInd]),lwd = 2,lty=2,col=pltInd)
 
   }
 
@@ -1843,8 +1846,8 @@ legend(27,0,legend=c("aerobic","running"),pch=c(16,16),col=c("gray","black"))
 \noindent Under this model the conditional expectations of $Y$ for the two different levels of $x_{i,2}$ are
 
 \begin{flalign*}
-    E[Y|\mathbf{x}] &= \beta_1 + \beta_3 \times (age) \text{ if } x_{i,2} = 0 \text{ (running program), and}\\
-    E[Y|\mathbf{x}] &= \left(\beta_1 + \beta_2\right) + \left(\beta_3 + \beta_4\right) \times (age) \text{ if } x_{i,2} = 1 \text{ (aerobic program) }
+    E[Y|\mathbf{x}] &= \beta_1 + \beta_3 \times age \text{ if } x_{i,2} = 0 \text{ (running program), and}\\
+    E[Y|\mathbf{x}] &= \left(\beta_1 + \beta_2\right) + \left(\beta_3 + \beta_4\right) \times age \text{ if } x_{i,2} = 1 \text{ (aerobic program) }
 \end{flalign*}
 
 \noindent In other words, the model assumes that the relationship is linear in age for both exercise groups, with the difference in intercepts given by $\beta_2$ and the difference in slopes given by $\beta_4$.  If we assumed that $\beta_2 = \beta_4 = 0$, then we would have identical lines for both groups.  If we assumed $\beta_2 \ne 0$ and $\beta_4 =  0$ then we would have a different line for each group but they would be parallel.  Allowing all coefficients to be non-zero gives us two unrelated lines.  Some different possibilities are depicted graphically in Figure \ref{fig:RegModVar}:\\
@@ -1898,7 +1901,7 @@ legend("topleft",legend=c("aerobic","running"),pch=c(16,16),col=c("gray","black"
 
 \noindent with the first six elements of each vector corresponding to the subjects in the running group and the latter six corresponding to subjects in the aerobics group.  After constructing the $12 \times 4$ matrix $\mathbf{X} = (\mathbf{x}_1\, \mathbf{x}_2\, \mathbf{x}_3\, \mathbf{x}_4)$, the matrices $\mathbf{X}^T\mathbf{X}$ and $\mathbf{X}^T\mathbf{y}$ can be computed, from which we get $\boldsymbol\beta_{ols} = \left(\mathbf{X}^T\mathbf{X}\right)^{-1}\mathbf{X}^T\mathbf{y} = (-51.29,13.11,2.09,-0.32)^T$:\\
 
-\noindent This means that the estimated linear relationship between uptake and age has an intercept and slope of -51.29 and 2.09 for the running group, and -51.29 + 13.11 = -38.18 and 2.09 - 0.32 = 1.77 for the aerobics group.  These two lines are plotted in the fourth panel of Figure XX.  We obtain unbiased estimate $\sigma^2 = SSR(\hat{\boldsymbol\beta}_{ols})/(n-p) = 8.54$, and use this to compute the standard error of the components of $\hat{\boldsymbol\beta}_{ols}$, which are 12.25, 15.76, 0.53, and 0.65, respectively.  Comparing the values of $\hat{\boldsymbol\beta}_{ols}$ to their standard errors suggests that the evidence for differences between the two exercise regimens is not very strong.
+\noindent This means that the estimated linear relationship between uptake and age has an intercept and slope of -51.29 and 2.09 for the running group, and -51.29 + 13.11 = -38.18 and 2.09 - 0.32 = 1.77 for the aerobics group.  These two lines are plotted in the fourth panel of Figure XX.  We obtain unbiased estimate $\hat\sigma^2 = SSR(\hat{\boldsymbol\beta}_{ols})/(n-p) = 8.54$, and use this to compute the standard error of the components of $\hat{\boldsymbol\beta}_{ols}$, which are 12.25, 15.76, 0.53, and 0.65, respectively.  Comparing the values of $\hat{\boldsymbol\beta}_{ols}$ to their standard errors suggests that the evidence for differences between the two exercise regimens is not very strong.
 
 
 <<echo=FALSE>>=
@@ -1938,7 +1941,7 @@ colnames(betadata) = c("beta.ols","SE.ols","CIL","CIU")
 
 \noindent and for priors we choose $\boldsymbol\beta \sim \text{Multivariate Normal}(\boldsymbol\beta_0,\Sigma_0)$ and $1/\sigma^2 = \gamma\sim \text{Gamma}(\nu_0/2,\nu_0\sigma^2_0/2)$.  \\
 
-\noindent Thus we have posterior for $\boldsymbol\beta$
+\noindent Thus we have conditional posterior for $\boldsymbol\beta$
 
     \begin{flalign*}
         p&(\boldsymbol\beta|\mathbf{y,X},\sigma^2)\\
@@ -1954,7 +1957,7 @@ $$\mathbf{m} = \text{E}[\boldsymbol\beta|\mathbf{y,X},\sigma^2] = \left(\Sigma_0
 
 $$\mathbf{V} = \text{Var}[\boldsymbol\beta|\mathbf{y,X},\sigma^2] = \left(\Sigma_0^{-1} + \mathbf{X}^T\mathbf{X}/\sigma^2\right)^{-1},$$
 
-\noindent and posterior for $\gamma$
+\noindent and conditional posterior for $\gamma$
 
 \begin{flalign*}
     p(\gamma|\mathbf{y,X},\boldsymbol\beta) &\propto p(\gamma)p(\mathbf{y}|\mathbf{X},\boldsymbol\beta,\gamma)\\
@@ -2012,7 +2015,7 @@ $$\mathbf{V} = \frac{g}{g+1}\sigma^2(\mathbf{X^TX})^{-1} \text{ and } \mathbf{m}
 
 \noindent Here $\text{SSR}_g = \mathbf{y^Ty - m^TV^{-1}m = y^T(I - }\frac{g}{g+1}\mathbf{X(X^TX)^{-1}X^T)y}$.\\
 
-Simple Monte Carlo approximation can be used to sample from the joint posterior density $p(\sigma^2,\boldsymbol\beta|\mathbf{y,X})$ as follows.  Here $g$ is typically set to the size of the data sample. Then:
+Simple Monte Carlo approximation can be used to sample from the joint posterior density $p(\sigma^2,\boldsymbol\beta|\mathbf{y,X})$ as follows.  Here $g$ is typically set to the size of the data sample (i.e. $g = N$). Then:
 
 \begin{enumerate}
     \item sample $\sigma^2 \sim \text{Inverse Gamma}([\nu_0 + N]/2,[\nu_0\sigma^2_0 + \text{SSR}_g]/2)$

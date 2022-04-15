@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  14 APR 2022 10:04
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2020.12.28)  15 APR 2022 13:03
 entering extended mode
 **./Thesis_PostDefense_rev.tex
 (Thesis_PostDefense_rev.tex
@@ -1429,7 +1429,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 165--166
 
  []
 
-<./Graphics/PassThePigs/PtPBox.png, id=513, 164.11313pt x 351.56343pt>
+<./Graphics/PassThePigs/PtPBox.png, id=515, 164.11313pt x 351.56343pt>
 File: ./Graphics/PassThePigs/PtPBox.png Graphic file (type png)
 <use ./Graphics/PassThePigs/PtPBox.png>
 Package pdftex.def Info: ./Graphics/PassThePigs/PtPBox.png  used on input line 
@@ -1524,7 +1524,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 187--188
 Package wrapfig Warning: Collision between wrapping environments on input line 
 189.
 
-<./Graphics/PassThePigs/Razorback.png, id=521, 88.07906pt x 64.74188pt>
+<./Graphics/PassThePigs/Razorback.png, id=523, 88.07906pt x 64.74188pt>
 File: ./Graphics/PassThePigs/Razorback.png Graphic file (type png)
 <use ./Graphics/PassThePigs/Razorback.png>
 Package pdftex.def Info: ./Graphics/PassThePigs/Razorback.png  used on input li
@@ -1540,7 +1540,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 196--197
  []
 
 [9 <./Graphics/PassThePigs/PtPBox.png> <./Graphics/PassThePigs/Razorback.png>]
-<./Graphics/PassThePigs/PigSize_wRuler.png, id=532, 341.77687pt x 232.61906pt>
+<./Graphics/PassThePigs/PigSize_wRuler.png, id=534, 341.77687pt x 232.61906pt>
 File: ./Graphics/PassThePigs/PigSize_wRuler.png Graphic file (type png)
 <use ./Graphics/PassThePigs/PigSize_wRuler.png>
 Package pdftex.def Info: ./Graphics/PassThePigs/PigSize_wRuler.png  used on inp
@@ -1548,7 +1548,7 @@ ut line 202.
 (pdftex.def)             Requested size: 407.66833pt x 277.48386pt.
 LaTeX Font Info:    Font shape `TS1/aer/m/n' in size <10.95> not available
 (Font)              Font shape `TS1/cmr/m/n' tried instead on input line 203.
-<./Graphics/PassThePigs/PTP_BBplot.png, id=533, 473.51906pt x 447.17062pt>
+<./Graphics/PassThePigs/PTP_BBplot.png, id=535, 473.51906pt x 447.17062pt>
 File: ./Graphics/PassThePigs/PTP_BBplot.png Graphic file (type png)
 <use ./Graphics/PassThePigs/PTP_BBplot.png>
 Package pdftex.def Info: ./Graphics/PassThePigs/PTP_BBplot.png  used on input l
@@ -1582,7 +1582,7 @@ Package amsmath Warning: Foreign command \atopwithdelims;
 [14
 
 ] [15]
-<./Graphics/DistributionPlots/BetaBinomial.png, id=578, 453.94594pt x 445.665pt
+<./Graphics/DistributionPlots/BetaBinomial.png, id=580, 453.94594pt x 445.665pt
 >
 File: ./Graphics/DistributionPlots/BetaBinomial.png Graphic file (type png)
 <use ./Graphics/DistributionPlots/BetaBinomial.png>
@@ -1620,7 +1620,7 @@ Overfull \hbox (29.25114pt too wide) detected at line 497
  []
 
 [19]
-<./Graphics/ExamplePlots/EG_TimeData.png, id=602, 442.65375pt x 426.84468pt>
+<./Graphics/ExamplePlots/EG_TimeData.png, id=604, 442.65375pt x 426.84468pt>
 File: ./Graphics/ExamplePlots/EG_TimeData.png Graphic file (type png)
 <use ./Graphics/ExamplePlots/EG_TimeData.png>
 Package pdftex.def Info: ./Graphics/ExamplePlots/EG_TimeData.png  used on input
@@ -1632,7 +1632,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 518--519
  []
 
 [20 <./Graphics/ExamplePlots/EG_TimeData.png>]
-<./Graphics/DistributionPlots/ExponentialGamma.png, id=609, 538.26094pt x 533.7
+<./Graphics/DistributionPlots/ExponentialGamma.png, id=611, 538.26094pt x 533.7
 4406pt>
 File: ./Graphics/DistributionPlots/ExponentialGamma.png Graphic file (type png)
 
@@ -1661,7 +1661,7 @@ to the ex-pected value of $[]$. That is, $\OML/cmm/m/it/12 L \OT1/cmr/m/n/12 =
  []
 
 [24] [25]
-<./Graphics/DistributionPlots/PoissonGamma.png, id=651, 449.42906pt x 442.65375
+<./Graphics/DistributionPlots/PoissonGamma.png, id=653, 449.42906pt x 442.65375
 pt>
 File: ./Graphics/DistributionPlots/PoissonGamma.png Graphic file (type png)
 <use ./Graphics/DistributionPlots/PoissonGamma.png>
@@ -1747,7 +1747,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 865--866
 
  []
 
-<./Graphics/DistributionPlots/NormIG1.png, id=679, 457.71pt x 446.41782pt>
+<./Graphics/DistributionPlots/NormIG1.png, id=681, 457.71pt x 446.41782pt>
 File: ./Graphics/DistributionPlots/NormIG1.png Graphic file (type png)
 <use ./Graphics/DistributionPlots/NormIG1.png>
 Package pdftex.def Info: ./Graphics/DistributionPlots/NormIG1.png  used on inpu
@@ -1771,7 +1771,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 959--960
  []
 
 [34]
-<./Graphics/ExamplePlots/NormIG2_SchoolData.png, id=706, 445.665pt x 360.59718p
+<./Graphics/ExamplePlots/NormIG2_SchoolData.png, id=708, 445.665pt x 360.59718p
 t>
 File: ./Graphics/ExamplePlots/NormIG2_SchoolData.png Graphic file (type png)
 <use ./Graphics/ExamplePlots/NormIG2_SchoolData.png>
@@ -1805,7 +1805,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 975--976
 
  []
 
-<./Graphics/ExamplePlots/NormIG2_Data_v_Prediction.png, id=713, 518.6878pt x 50
+<./Graphics/ExamplePlots/NormIG2_Data_v_Prediction.png, id=715, 518.6878pt x 50
 2.12593pt>
 File: ./Graphics/ExamplePlots/NormIG2_Data_v_Prediction.png Graphic file (type 
 png)
@@ -1856,13 +1856,8 @@ Overfull \hbox (10.67146pt too wide) in paragraph at lines 1021--1022
 ][] \T1/aer/m/n/12 The R func-tion \T1/aett/m/n/12 rpred-
  []
 
-
-Overfull \hbox (11.65503pt too wide) detected at line 1061
-[]
- []
-
 [38]
-<./Graphics/ExamplePlots/NormIGk_MathScoreData.png, id=738, 446.41782pt x 444.1
+<./Graphics/ExamplePlots/NormIGk_MathScoreData.png, id=740, 446.41782pt x 444.1
 5938pt>
 File: ./Graphics/ExamplePlots/NormIGk_MathScoreData.png Graphic file (type png)
 
@@ -1873,59 +1868,59 @@ d on input line 1079.
  [39] [40 <./Graphics/ExamplePlots/NormIGk_MathScoreData.png>] [41
 
 ]
-<./Graphics/ExamplePlots/NormIGk_Data_v_Prediction.png, id=753, 693.34032pt x 6
-73.76718pt>
+<./Graphics/ExamplePlots/NormIGk_Data_v_Prediction.png, id=755, 363.60844pt x 3
+47.04657pt>
 File: ./Graphics/ExamplePlots/NormIGk_Data_v_Prediction.png Graphic file (type 
 png)
 <use ./Graphics/ExamplePlots/NormIGk_Data_v_Prediction.png>
 Package pdftex.def Info: ./Graphics/ExamplePlots/NormIGk_Data_v_Prediction.png 
- used on input line 1123.
-(pdftex.def)             Requested size: 362.37569pt x 352.14981pt.
+ used on input line 1124.
+(pdftex.def)             Requested size: 362.37569pt x 345.88069pt.
 
 [42
 
  <./Graphics/ExamplePlots/NormIGk_Data_v_Prediction.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 1198--1199
+Underfull \hbox (badness 10000) in paragraph at lines 1199--1200
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1203--1204
+Underfull \hbox (badness 10000) in paragraph at lines 1204--1205
 
  []
 
 [43
 
 ]
-<./Graphics/ExamplePlots/OxygenUptakeData.png, id=768, 453.94594pt x 446.41782p
+<./Graphics/ExamplePlots/OxygenUptakeData.png, id=770, 453.94594pt x 446.41782p
 t>
 File: ./Graphics/ExamplePlots/OxygenUptakeData.png Graphic file (type png)
 <use ./Graphics/ExamplePlots/OxygenUptakeData.png>
 Package pdftex.def Info: ./Graphics/ExamplePlots/OxygenUptakeData.png  used on 
-input line 1211.
+input line 1212.
 (pdftex.def)             Requested size: 362.37569pt x 356.37181pt.
  [44 <./Graphics/ExamplePlots/OxygenUptakeData.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 1236--1237
+Underfull \hbox (badness 10000) in paragraph at lines 1237--1238
 
  []
 
-<./Graphics/ExamplePlots/RegressionModelVariations.png, id=775, 447.17062pt x 4
+<./Graphics/ExamplePlots/RegressionModelVariations.png, id=777, 447.17062pt x 4
 59.96844pt>
 File: ./Graphics/ExamplePlots/RegressionModelVariations.png Graphic file (type 
 png)
 <use ./Graphics/ExamplePlots/RegressionModelVariations.png>
 Package pdftex.def Info: ./Graphics/ExamplePlots/RegressionModelVariations.png 
- used on input line 1240.
+ used on input line 1241.
 (pdftex.def)             Requested size: 362.37569pt x 372.75488pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1253--1254
+Underfull \hbox (badness 10000) in paragraph at lines 1254--1255
 
  []
 
 [45
 
 ] [46 <./Graphics/ExamplePlots/RegressionModelVariations.png>]
-Overfull \hbox (39.94238pt too wide) in paragraph at lines 1272--1273
+Overfull \hbox (39.94238pt too wide) in paragraph at lines 1273--1274
 \T1/aer/m/n/12 and for pri-ors we choose $\OML/cmm/b/it/12  \OMS/cmsy/m/n/12 
  []\OT1/cmr/m/n/12 (\OML/cmm/b/it/12 []\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 [])
 $ \T1/aer/m/n/12 and $\OT1/cmr/m/n/12 1\OML/cmm/m/it/12 =[] \OT1/cmr/m/n/12 = 
@@ -1934,12 +1929,12 @@ OT1/cmr/m/n/12 2\OML/cmm/m/it/12 ; [][]=\OT1/cmr/m/n/12 2)$\T1/aer/m/n/12 .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1272--1273
+Underfull \hbox (badness 10000) in paragraph at lines 1273--1274
 
  []
 
 
-Overfull \hbox (1.57745pt too wide) in paragraph at lines 1305--1306
+Overfull \hbox (1.57745pt too wide) in paragraph at lines 1306--1307
 \T1/aer/m/n/12 Constructing a Gibbs sam-pler to ap-prox-i-mate the joint pos-te
 -rior dis-tri-bu-tion $\OML/cmm/m/it/12 p\OT1/cmr/m/n/12 (\OML/cmm/b/it/12 \OM
 L/cmm/m/it/12 ; []\OMS/cmsy/m/n/12 j[]\OT1/cmr/m/n/12 )$
@@ -1948,21 +1943,21 @@ L/cmm/m/it/12 ; []\OMS/cmsy/m/n/12 j[]\OT1/cmr/m/n/12 )$
 [47
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 1346--1347
+Underfull \hbox (badness 10000) in paragraph at lines 1347--1348
 
  []
 
 [48] [49]
-<./Graphics/ExamplePlots/RegressionPriorComparison.png, id=816, 439.6425pt x 43
+<./Graphics/ExamplePlots/RegressionPriorComparison.png, id=818, 439.6425pt x 43
 2.11438pt>
 File: ./Graphics/ExamplePlots/RegressionPriorComparison.png Graphic file (type 
 png)
 <use ./Graphics/ExamplePlots/RegressionPriorComparison.png>
 Package pdftex.def Info: ./Graphics/ExamplePlots/RegressionPriorComparison.png 
- used on input line 1411.
+ used on input line 1412.
 (pdftex.def)             Requested size: 362.37569pt x 356.18227pt.
  [50 <./Graphics/ExamplePlots/RegressionPriorComparison.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 1422--1423
+Underfull \hbox (badness 10000) in paragraph at lines 1423--1424
 
  []
 
@@ -1971,10 +1966,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 1422--1423
 ]
 
 LaTeX Font Warning: Font shape `T1/aett/b/n' undefined
-(Font)              using `T1/aett/m/n' instead on input line 1433.
+(Font)              using `T1/aett/m/n' instead on input line 1434.
 
 
-Overfull \hbox (3.46066pt too wide) in paragraph at lines 1451--1451
+Overfull \hbox (3.46066pt too wide) in paragraph at lines 1452--1452
 []        \T1/aett/m/n/12 numerator = lgamma(M+1) + lgamma(N+alpha+beta) + lgam
 ma(r+t+alpha)[] 
  []
@@ -1982,207 +1977,207 @@ ma(r+t+alpha)[]
 [52
 
 ]
-Overfull \hbox (21.96452pt too wide) in paragraph at lines 1529--1529
+Overfull \hbox (21.96452pt too wide) in paragraph at lines 1530--1530
 []            \T1/aett/b/n/12 Freturn[i] = stats::integrate(dpredEG,lower = 0,u
 pper = ypred[i],[] 
  []
 
 [53]
-Overfull \hbox (34.30043pt too wide) in paragraph at lines 1564--1564
+Overfull \hbox (34.30043pt too wide) in paragraph at lines 1565--1565
 []          \T1/aett/b/n/12 f_y = stats::dnbinom(ypred,size = a + sobs, mu = (a
  + sobs)/(b + n));[] 
  []
 
 [54]
-Overfull \hbox (9.62862pt too wide) in paragraph at lines 1664--1664
+Overfull \hbox (9.62862pt too wide) in paragraph at lines 1665--1665
 []        \T1/aett/b/n/12 #Then employ Bisection Method, starting with E_x and 
 U as the lower[] 
  []
 
 
-Overfull \hbox (15.79657pt too wide) in paragraph at lines 1664--1664
+Overfull \hbox (15.79657pt too wide) in paragraph at lines 1665--1665
 []        \T1/aett/b/n/12 #Along the way, always round the middle value to the 
 nearest integer[] 
  []
 
 
-Overfull \hbox (9.62862pt too wide) in paragraph at lines 1664--1664
+Overfull \hbox (9.62862pt too wide) in paragraph at lines 1665--1665
 []        \T1/aett/b/n/12 #Reach right to find upper bound of starting interval
  for Bisection[] 
  []
 
 
-Overfull \hbox (15.79657pt too wide) in paragraph at lines 1664--1664
+Overfull \hbox (15.79657pt too wide) in paragraph at lines 1665--1665
 []        \T1/aett/b/n/12 if(fLower <= 0){ stop("Density at Expected Value comp
 uted to be less[] 
  []
 
 [55]
-Overfull \hbox (3.46066pt too wide) in paragraph at lines 1669--1670
+Overfull \hbox (3.46066pt too wide) in paragraph at lines 1670--1671
 [][]\T1/aett/b/n/12 dpredNormIG1[][] <- func-tion(ypred,y,mu0=0,k0=1,sig20=1,nu
 0=1,S = 100000, Jef-
  []
 
 [56]
 LaTeX Font Info:    Trying to load font information for TS1+aett on input line 
-1721.
+1722.
  (C:/PROGRA~1/R/R-41~1.1/share/texmf/tex/latex\ts1aett.fd
 File: ts1aett.fd 
 )
 LaTeX Font Info:    Trying to load font information for TS1+cmtt on input line 
-1721.
+1722.
 
 ("C:\MiKTeX 2.9\tex/latex/base\ts1cmtt.fd"
 File: ts1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `TS1/aett/m/n' in size <12> not available
-(Font)              Font shape `TS1/cmtt/m/n' tried instead on input line 1721.
+(Font)              Font shape `TS1/cmtt/m/n' tried instead on input line 1722.
 
 
-Overfull \hbox (9.63416pt too wide) in paragraph at lines 1721--1721
+Overfull \hbox (9.63416pt too wide) in paragraph at lines 1722--1722
 []          \T1/aett/b/n/12 #Estimating density using R\TS1/cmtt/m/n/12 '\T1/ae
 tt/b/n/12 s density() function on random sample[] 
  []
 
 
-Overfull \hbox (15.79657pt too wide) in paragraph at lines 1721--1721
+Overfull \hbox (15.79657pt too wide) in paragraph at lines 1722--1722
 []          \T1/aett/b/n/12 #(obtained from https://stackoverflow.com/questions
 /28077500/find-
  []
 
 
-Overfull \hbox (21.96452pt too wide) in paragraph at lines 1721--1721
+Overfull \hbox (21.96452pt too wide) in paragraph at lines 1722--1722
 []            \T1/aett/b/n/12 rsmat = t(matrix(replicate(length(tvec),rs),ncol 
 = length(tvec)))[] 
  []
 
 [57]
-Overfull \hbox (3.46066pt too wide) in paragraph at lines 1726--1727
+Overfull \hbox (3.46066pt too wide) in paragraph at lines 1727--1728
 [][]\T1/aett/b/n/12 ppredNormIG1[][] <- func-tion(ypred,y,mu0=0,k0=1,sig20=1,nu
 0=1,S = 100000, Jef-
  []
 
 
-Overfull \hbox (21.96452pt too wide) in paragraph at lines 1765--1765
+Overfull \hbox (21.96452pt too wide) in paragraph at lines 1766--1766
 []        \T1/aett/b/n/12 #return(apply(xrsmat,1,function(x) length(x[x<=x[1]])
 -1)/ncol(rsmat))[] 
  []
 
 [58]
-Overfull \hbox (15.79657pt too wide) in paragraph at lines 1800--1800
+Overfull \hbox (15.79657pt too wide) in paragraph at lines 1801--1801
 []          \T1/aett/b/n/12 sig2n = (nu0*sig20 + (nobs-1)*s2 + k0*nobs*(meanobs
 -mu0)^2/kn)/nun[] 
  []
 
 [59]
-Overfull \hbox (15.79657pt too wide) in paragraph at lines 1836--1836
+Overfull \hbox (15.79657pt too wide) in paragraph at lines 1837--1837
 []                         \T1/aett/b/n/12 (nu0*s20+sum((y1-mu-del)^2)+sum((y2-
 mu+del)^2) )/2)[] 
  []
 
 
-Overfull \hbox (28.13248pt too wide) in paragraph at lines 1836--1836
+Overfull \hbox (28.13248pt too wide) in paragraph at lines 1837--1837
 []            \T1/aett/b/n/12 var.mu<-  1/(1/g20+ (n1+n2)/s2 ) #this is gamma^2
 _n -- call it g2n[] 
  []
 
 
-Overfull \hbox (3.46066pt too wide) in paragraph at lines 1836--1836
+Overfull \hbox (3.46066pt too wide) in paragraph at lines 1837--1837
 []            \T1/aett/b/n/12 mean.mu<- var.mu*( mu0/g20 + sum(y1-del)/s2 + sum
 (y2+del)/s2 )[] 
  []
 
 
-Overfull \hbox (40.46838pt too wide) in paragraph at lines 1932--1932
+Overfull \hbox (40.46838pt too wide) in paragraph at lines 1933--1933
 []          \T1/aett/b/n/12 #### MCMC approximation to posterior for the hierar
 chical normal model[] 
  []
 
 
-Overfull \hbox (34.30043pt too wide) in paragraph at lines 1932--1932
+Overfull \hbox (34.30043pt too wide) in paragraph at lines 1933--1933
 []          \T1/aett/b/n/12 J<-max(Y[,1]) #col. 1 of Y is an index identifying 
 the data in col. 2[] 
  []
 
 
-Overfull \hbox (34.30043pt too wide) in paragraph at lines 1932--1932
+Overfull \hbox (34.30043pt too wide) in paragraph at lines 1933--1933
 []            \T1/aett/b/n/12 Ylist[[j]]<-Y[ Y[,1]==j,2] #separate out data int
 o separate vectors[] 
  []
 
 
-Overfull \hbox (15.79657pt too wide) in paragraph at lines 1932--1932
+Overfull \hbox (15.79657pt too wide) in paragraph at lines 1933--1933
 []              \T1/aett/b/n/12 by index.  Y is a list of those vectors, which 
 need not be all[] 
  []
 
 
-Overfull \hbox (40.46838pt too wide) in paragraph at lines 1932--1932
+Overfull \hbox (40.46838pt too wide) in paragraph at lines 1933--1933
 []            \T1/aett/b/n/12 n[j]<-length(Ylist[[j]]) #record number data poin
 ts in each data set[] 
  []
 
 [60] [61]
-Overfull \hbox (21.96452pt too wide) in paragraph at lines 1932--1932
+Overfull \hbox (21.96452pt too wide) in paragraph at lines 1933--1933
 []          \T1/aett/b/n/12 #The number of rows is the number of desired predic
 tions (input N).[] 
  []
 
 
-Overfull \hbox (15.79657pt too wide) in paragraph at lines 1932--1932
+Overfull \hbox (15.79657pt too wide) in paragraph at lines 1933--1933
 []          \T1/aett/b/n/12 #The ith column therefore contains all the predicti
 ons for the ith[] 
  []
 
 
-Overfull \hbox (15.79657pt too wide) in paragraph at lines 1932--1932
+Overfull \hbox (15.79657pt too wide) in paragraph at lines 1933--1933
 []          \T1/aett/b/n/12 #YTILDE:  Nxm matrix of predictions (N predictions 
 for each of the[] 
  []
 
 
-Overfull \hbox (40.46838pt too wide) in paragraph at lines 1939--1940
+Overfull \hbox (40.46838pt too wide) in paragraph at lines 1940--1941
 [][]\T1/aett/b/n/12 rpredNormReg[][] <- func-tion(S=1,Xpred,X,y,beta0,Sigma0,nu
 0=1,s20=1, gprior = TRUE){
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1939--1940
+Underfull \hbox (badness 10000) in paragraph at lines 1940--1941
 
  []
 
 [62]
-Overfull \hbox (3.46066pt too wide) in paragraph at lines 2039--2039
+Overfull \hbox (3.46066pt too wide) in paragraph at lines 2040--2040
 []            \T1/aett/b/n/12 beta.post<-matrix(nrow=S,ncol=p)  #storage for S 
 instances for[] 
  []
 
 [63]
-Overfull \hbox (9.62862pt too wide) in paragraph at lines 2039--2039
+Overfull \hbox (9.62862pt too wide) in paragraph at lines 2040--2040
 []              \T1/aett/b/n/12 V.beta<- solve(  iSigma.0 + XtX/sig2 )  #Condit
 ional variance[] 
  []
 
 
-Overfull \hbox (15.79657pt too wide) in paragraph at lines 2039--2039
+Overfull \hbox (15.79657pt too wide) in paragraph at lines 2040--2040
 []              \T1/aett/b/n/12 sig2<-1/rgamma(1,nu.n/2, ss.n/2)  #Gibbs sample
 r step:  update[] 
  []
 
 
-Overfull \hbox (21.96452pt too wide) in paragraph at lines 2039--2039
+Overfull \hbox (21.96452pt too wide) in paragraph at lines 2040--2040
 []              \T1/aett/b/n/12 beta.post[scan,]<-beta    #Store updated beta i
 n current row of[] 
  []
 
 
-Overfull \hbox (28.13248pt too wide) in paragraph at lines 2039--2039
+Overfull \hbox (28.13248pt too wide) in paragraph at lines 2040--2040
 []            \T1/aett/b/n/12 round( apply(beta.post,2,mean), 3)  #compute mean
  of Gibbs sampled[] 
  []
 
 
-Overfull \hbox (28.13248pt too wide) in paragraph at lines 2039--2039
+Overfull \hbox (28.13248pt too wide) in paragraph at lines 2040--2040
 []              \T1/aett/b/n/12 predictions[i,] = predictions[i,] + rnorm(S,0,s
 qrt(sigma2.post))[] 
  []
@@ -2232,9 +2227,9 @@ s/type1/public/amsfonts/cm/cmti12.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfont
 s/cm/cmtt12.pfb><C:/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt8.pfb><C:/MiK
 TeX 2.9/fonts/type1/public/amsfonts/latxfont/line10.pfb><C:/MiKTeX 2.9/fonts/ty
 pe1/public/amsfonts/symbols/msam10.pfb>
-Output written on Thesis_PostDefense_rev.pdf (65 pages, 1596935 bytes).
+Output written on Thesis_PostDefense_rev.pdf (65 pages, 1542258 bytes).
 PDF statistics:
- 1034 PDF objects out of 1200 (max. 8388607)
+ 1036 PDF objects out of 1200 (max. 8388607)
  192 named destinations out of 1000 (max. 500000)
  625 words of extra memory for PDF output out of 10000 (max. 10000000)
 
