@@ -1323,7 +1323,7 @@ legend("bottomright", inset = 0.05, bg="transparent",
         \item Predict $\tilde{y}_1\sim \text{Normal}\left(\mu+\delta,\sigma^2\right)$ and $\tilde{y}_2\sim \text{Normal}\left(\mu-\delta,\sigma^2\right)$
       \end{enumerate}
 
-\noindent The user provides the two samples $\mathbf{y_1}$ and $\mathbf{y_2}$ along with values for $\mu_0, \sigma^2_0, \delta_0, \tau^2_0, \nu_0$, and desired predictive sample size $S$.  The function returns $S$ \sout{predictions for} samples from the predictive distribution for each of the two populations along with the vectors of generated values for $\mu$, $\delta$, and $\sigma^2$.  Calls to this functions appear as follows:
+\noindent The user provides the two samples $\mathbf{y_1}$ and $\mathbf{y_2}$ along with values for $\mu_0, \sigma^2_0, \delta_0, \tau^2_0, \nu_0$, $S$.  The function returns $S$ draws from the predictive distribution for each of the two populations along with the vectors of generated values for $\mu$, $\delta$, and $\sigma^2$.  Calls to this functions appear as follows:
 
 
 \begin{center}
@@ -1333,7 +1333,7 @@ legend("bottomright", inset = 0.05, bg="transparent",
 \noindent where
 
 \begin{flalign*}
-  \texttt{S} &= S \text{, the desired predictive sample size}\\
+  \texttt{S} &= S \text{, the number of draws from the predicitve joint distribution}\\
   \texttt{y1, y2} &= \mathbf{y_1, y_2} \text{, the two sets of observed data}\\
   \texttt{mu0,g20} &= \mu_0,\gamma^2_0 \text{, prior mean and variance for }\mu\\
   \texttt{d0,t20} &= \delta_0,\tau^2_0 \text{, prior mean and variance for }\delta\\
@@ -1523,7 +1523,7 @@ $$\tilde{y}_j \sim \text{Normal}(\theta_j, \sigma^2).$$
 \noindent where
 
 \begin{flalign*}
-  \texttt{S} &=S \text{, the desired predictive sample size. The sampler returns } S \text{ realizations}\\
+  \texttt{S} &=S \text{, the number of draws from the predictive joint. The sampler returns } S \text{ realizations}\\
   &\text{from the predictive distribution, each having } k \text{ elements, one corresponding to}\\
   &\text{each data group } \mathbf{Y}_1,...,\mathbf{Y_k} \text{. That is, } \mathbf{\tilde{Y}_j} = \tilde{Y}_{1,j},...,\tilde{Y}_{s,j} \text{, for } j \in \{1,...,k\}, s\in\{1,...S\}.\\
   \texttt{Y} &= \text{ the } k \text{ sets of observed data (one column of data and one column of}\\ &\text{group indices)}
@@ -1937,9 +1937,14 @@ colnames(betadata) = c("beta.ols","SE.ols","CIL","CIU")
     \paragraph{A semiconjugate prior distribution}\label{normRegSemiconjugatePrior}
     Hoff [5] proposes a semiconjugate prior distribution for $\boldsymbol\beta$ and $\sigma^2$ to be used when there is information available about the parameters.  The sampling density of the data is
 
-    $$p(\mathbf{y}|\mathbf{X},\boldsymbol\beta,\sigma^2) \propto \text{exp}\{-\frac{1}{2\sigma^2}\text{SSR}(\boldsymbol\beta)\} = \text{exp}\{-\frac{1}{2\sigma^2}[\mathbf{y}^T\mathbf{y} - 2\boldsymbol\beta^T\mathbf{X}^T\mathbf{y}+\boldsymbol\beta^T\mathbf{X}^T\mathbf{X}\boldsymbol\beta]\},$$
+    $$p(\mathbf{y}|\mathbf{X},\boldsymbol\beta,\sigma^2) \propto \text{exp}\{-\frac{1}{2\sigma^2}\text{SSR}(\boldsymbol\beta)\} = \text{exp}\{-\frac{1}{2\sigma^2}[\mathbf{y}^T\mathbf{y} - 2\boldsymbol\beta^T\mathbf{X}^T\mathbf{y}+\boldsymbol\beta^T\mathbf{X}^T\mathbf{X}\boldsymbol\beta]\}\text{ (Hoff)},$$
 
-\noindent and for priors we choose $\boldsymbol\beta \sim \text{Multivariate Normal}(\boldsymbol\beta_0,\Sigma_0)$ and $1/\sigma^2 = \gamma\sim \text{Gamma}(\nu_0/2,\nu_0\sigma^2_0/2)$.  \\
+     OR
+
+        $$p(\mathbf{y}|\mathbf{X},\boldsymbol\beta,\sigma^2) \propto \left(\sigma^2\right)^{-0.5(N-p)}\text{exp}\{-\frac{1}{2\sigma^2}\text{SSR}(\boldsymbol\beta)\} = \left(\sigma^2\right)^{-0.5p}\text{exp}\{-\frac{1}{2\sigma^2}[\mathbf{y}^T\mathbf{y} - 2\boldsymbol\beta^T\mathbf{X}^T\mathbf{y}+\boldsymbol\beta^T\mathbf{X}^T\mathbf{X}\boldsymbol\beta]\}\text{ (Bedrick)},$$
+
+
+\noindent and for priors we choose $\boldsymbol\beta \sim \text{Multivariate Normal}(\boldsymbol\beta_0,\Sigma_0)$ and $1/\sigma^2 = \gamma\sim \text{Gamma}(\nu_0/2,\nu_0\sigma^2_0/2)$.  Note, these prior distributions are apriori independent.  \\
 
 \noindent Thus we have conditional posterior for $\boldsymbol\beta$
 
@@ -1987,7 +1992,7 @@ $$\{\sigma^2|\mathbf{y,X},\boldsymbol\beta\} \sim \text{Inverse Gamma}([\nu_0 + 
     \end{enumerate}
 \end{enumerate}
 
-\noindent To create a sample from the predictive distribution of responses:  for each $s\in\{1,...,S\}$, draw $\epsilon^{(s)} \sim \text{Normal}(0,\sigma^{2(s)})$.  Then compute
+\noindent To create a realization from the predictive distribution of responses:  for each $s\in\{1,...,S\}$, draw $\epsilon^{(s)} \sim \text{Normal}(0,\sigma^{2(s)})$.  Then compute
 
 $$y^{(s)} = \boldsymbol\beta^{(s)T}\mathbf{X}_p + \epsilon^{(s)}$$
 
@@ -1995,7 +2000,7 @@ $$y^{(s)} = \boldsymbol\beta^{(s)T}\mathbf{X}_p + \epsilon^{(s)}$$
 
     \paragraph{Default and weakly informative prior distributions}
 
-    In situations where prior information is unavailable or difficult to quantify, an alternative ``default" class of prior distributions is given. Here we will employ Zellner's ``$g$-prior" (Zellner, 1986).  We choose $\boldsymbol\beta_0 = \mathbf{0}$ and $\Sigma_0 = k(\mathbf{X}^T\mathbf{X})^{-1}, k = g\sigma^2, g > 0$, which satisfies a desired condition that the regression parameter estimation be invariant to changes in the scale of the regressors.  Note that this prior conditions on the observed $\mathbf{X}$ matrix.With this, $\mathbf{m}=\text{E}[\boldsymbol\beta|\mathbf{y,X},\sigma^2]$ and $\mathbf{V}=\text{Var}[\boldsymbol\beta|\mathbf{y,X},\sigma^2]$ reduce to
+    In situations where prior information is unavailable or difficult to quantify, an alternative ``default" class of prior distributions is given. Here we will employ Zellner's ``$g$-prior" (Zellner, 1986).  We choose $\boldsymbol\beta_0 = \mathbf{0}$ and $\Sigma_0 = k(\mathbf{X}^T\mathbf{X})^{-1}, k = g\sigma^2, g > 0$, which satisfies a desired condition that the regression parameter estimation be invariant to changes in the scale of the regressors.  For example, a rescaling of the explanatory variables to different units leaves the inference unchanged.  Note that this prior conditions on the observed $\mathbf{X}$ matrix.With this, $\mathbf{m}=\text{E}[\boldsymbol\beta|\mathbf{y,X},\sigma^2]$ and $\mathbf{V}=\text{Var}[\boldsymbol\beta|\mathbf{y,X},\sigma^2]$ reduce to
 
 \begin{flalign}
     \text{E}[\boldsymbol\beta|\mathbf{y,X},\sigma^2] &= [\mathbf{X^TX}/(g\sigma^2) + \mathbf{X^TX}/\sigma^2]^{-1}\mathbf{X^Ty}/\sigma^2 = \frac{g}{g+1}\sigma^2(\mathbf{X^TX})^{-1}\mathbf{X^Ty}.\label{regression_noninf_expec}\\
