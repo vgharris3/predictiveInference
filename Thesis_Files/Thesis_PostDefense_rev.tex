@@ -182,7 +182,7 @@ Making predictions based on our beliefs is the best (and perhaps even the only) 
 
 \noindent To illustrate the potential difference between Bayesian prediction and the use of plug-in estimators, consider the game Pass the Pigs\textsuperscript{\circledR}, a push-your-luck dice game in which the ``dice" are actually rubber pig figures.  Two pig dice are thrown, and points are scored according to the combination of positions in which they come to rest.  Details about the game can be found on Wikipedia here: \url{https://en.wikipedia.org/wiki/Pass_the_Pigs}\\
 
-\noindent For the purpose of this example, consider the probability of a single pig landing in the ``Razorback" position, which occurs when the pig is lying on its back with its legs extended upward.  The irregular shape of the pig makes it difficult to assign probabilities to results other than by means of experimentation.  Such an experiment was conducted at Duquesne University, and an article describing the experiment as well as Bayesian predictive inference performed on the results appeared in the \textit{Journal of Statistics Education} Volume 14, Number 3, in 2006.  The article can be accessed here:  \url{http://jse.amstat.org/v14n3/datasets.kern.html}. Of the $11,954$ recorded results for individual pigs, approximately $22.4\%$ were Razorbacks.\\
+\noindent For the purpose of this example, consider the probability of a single pig landing in the ``Razorback" position, which occurs when the pig is lying on its back with its legs extended upward.  The irregular shape of the pig makes it difficult to assign probabilities to results other than by means of experimentation.  Such an experiment was conducted at Duquesne University, and an article describing the experiment as well as Bayesian predictive inference performed on the results appeared in the \textit{Journal of Statistics Education} Volume 14, Number 3, in 2006 [7].  The article can be accessed here:  \url{http://jse.amstat.org/v14n3/datasets.kern.html}. Of the $11,954$ recorded results for individual pigs, approximately $22.4\%$ were Razorbacks.\\
 
 \noindent Suppose in new data $t=4$ Razorbacks have been observed out of $N=10$ tosses of a single pig die, suggesting a straightforward binomial distribution with $\theta =$ Pr(Razorback) $= t/N = 0.4$. Taking the Duquesne experiment into consideration, we'll perform Bayesian prediction using various Beta prior distributions for $\theta$: $\theta\sim\text{Beta}(2,8)$, $\theta\sim\text{Beta}(22,78)$, and $\theta\sim\text{Beta}(224,776)$, and compare these results to predictions obtained from the plug-in estimator $\theta = 0.4$.   Any number of prior distributions on $\theta$ would satisfy the condition that $E(\theta) \approx 0.224$, suggested by the prior information.  The specific choice of a Beta prior is made largely for computational convenience.\\
 
@@ -224,11 +224,11 @@ Making predictions based on our beliefs is the best (and perhaps even the only) 
   \multicolumn{5}{c}{\large \#Razorbacks Predicted out of 100 Tosses}          \\
   \multicolumn{1}{c}{\textbf{Prediction Method}} & \multicolumn{1}{c}{$\textbf{(}\boldsymbol\alpha,\boldsymbol\beta\textbf{)}$}  & \multicolumn{1}{c}{\textbf{Prior Mean }$\textbf{E(}\boldsymbol\theta\textbf{)}$}  & \multicolumn{1}{c}{\textbf{Prediction Mean}} & \multicolumn{1}{c}{\textbf{SD}}\\
         \midrule
-        Beta-Binomial & (2,8) & 0.2 & 29.35 & 10.96 \\
+        Beta-Binomial & (2,8) & 0.2 & 30.1 & 11.09 \\
         \midrule
-        Beta-Binomial & (22,78) & 0.22 & 23.99 & 5.99\\
+        Beta-Binomial & (22,78) & 0.22 & 23.41 & 5.63\\
         \midrule
-        Beta-Binomial & (224,776) & 0.224 & 22.57 & 4.41 \\
+        Beta-Binomial & (224,776) & 0.224 & 22.65 & 4.35 \\
         \midrule
         Binomial$(100,0.4)$ & -- & -- & 40 & 4.9 \\
   \bottomrule
@@ -315,7 +315,7 @@ Y_1,...,Y_n|\theta \text{ are i.i.d}\\
 \end{itemize}
 
 \noindent Throughout this section, $N$ is used for the observed data sample
-size, and $S$ is the size of the desired predictive sample. The predicted future result
+size, and $S$ is the desired number of draws from the predictive distribution. The predicted future result
 is indicated by surmounting the variable name with a tilde.  For example, when the observed data is represented by $y$, the prediction is designated $\tilde{y}$. Parameter names are clearly indicated as they appear.
 
   \subsection{Prediction of Future Successes:  Beta-Binomial [3]}
@@ -396,7 +396,7 @@ This result has been used to create R functions \texttt{dpredBB()}, \texttt{ppre
   \texttt{M} &= \text{the number of binary observations in a future experiment}\\
   \texttt{a} &= \alpha \text{, the first shape parameter of the Beta prior}\\
   \texttt{b} &= \beta \text{, the second shape parameter of the Beta prior}\\
-  \texttt{S} &= \text{the desired predictive sample size; that is, the number of future experiments }\\
+  \texttt{S} &= \text{the desired number of draws from the predictive distribution; that is, the number of future experiments }\\
   &\text{ of size } M \text{ for which a predicted number of successes is desired}\\
 \end{flalign*}
 
@@ -515,7 +515,7 @@ This result has been used to create R functions \texttt{dpredEG()}, \texttt{ppre
 \vspace{2cm}
 
 
-\noindent We will assume the data are distributed exponentially with respect to some parameter $\theta$.  Suppose prior knowledge suggests that the average survival time is around 80 minutes.  In terms of the exponential distribution then $E(y) = 1/\theta \approx 80$.  For the Gamma$(\delta,\gamma)$ prior, parameter values of $\delta = 0.5$ and $\gamma=50$ were chosen. These values correspond with a median Exponential parameter value of $1/80$ and assign about a 20\% probability to values of $\theta$ less than $1/120$. Figure \ref{fig:EGdist} below illustrates the predictive probability using \texttt{dpredEG()} and \texttt{rpredEG()}, along with a histogram of a predictive sample of size 1000 returned by \texttt{rpredEG()}.\\
+\noindent We will assume the data are distributed exponentially with respect to some parameter $\theta$.  Suppose prior knowledge suggests that the average survival time is around 80 minutes.  In terms of the exponential distribution then $E(y) = 1/\theta \approx 80$.  For the Gamma$(\delta,\gamma)$ prior, parameter values of $\delta = 0.5$ and $\gamma=50$ were chosen. These values correspond with a median Exponential parameter value of $1/80$ and assign about a 20\% probability to values of $\theta$ less than $1/120$. Figure \ref{fig:EGdist} below illustrates the predictive probability using \texttt{dpredEG()} and \texttt{rpredEG()}, along with a histogram of 1000 draws from the predictive distribution returned by \texttt{rpredEG()}.\\
 
 \noindent Under the assumptions of this model the mean of the predictive sample (86.85) is somewhat larger than that of the observed data, and this information will likely influence the factory budget.
 
@@ -708,7 +708,7 @@ The National Hurricane Center lists the number of hurricanes by category that ma
   \end{tabular}
 \end{center}
 
-Suppose we are told by a hurricane expert that the average number per decade can be expected to be around 4.  Based on this information we choose $\alpha = 10$ and $\beta = 2.5$ for the Gamma$(\alpha,\beta)$ prior on $\theta$.  These prior values give about 95\% probability that the Poisson mean is between 1.8 and 6.8  For $\tilde{y} = 1:20$ possible large hurricanes making landfall in the U.S. in the 2020s, Figure \ref{fig:PGdist} below shows the predictive distribution from \texttt{dpredPG()}, the cumulative distribution from \texttt{ppredPG()}, and a histogram of a predictive sample of size 1000 returned by \texttt{rpredPG()}.
+Suppose we are told by a hurricane expert that the average number per decade can be expected to be around 4.  Based on this information we choose $\alpha = 10$ and $\beta = 2.5$ for the Gamma$(\alpha,\beta)$ prior on $\theta$.  These prior values give about 95\% probability that the Poisson mean is between 1.8 and 6.8  For $\tilde{y} = 1:20$ possible large hurricanes making landfall in the U.S. in the 2020s, Figure \ref{fig:PGdist} below shows the predictive distribution from \texttt{dpredPG()}, the cumulative distribution from \texttt{ppredPG()}, and a histogram of 1000 draws from the predictive distribution returned by \texttt{rpredPG()}.
 
 \begin{figure}[ht]
   \centering
@@ -945,7 +945,7 @@ Calls to these functions appear as follows:
 \noindent where
 
 \begin{flalign*}
-  \texttt{S} &= S \text{, the number of draws from the predicitve joint distribution}\\
+  \texttt{S} &= S \text{, the number of draws from the predictive joint distribution}\\
   \texttt{y1, y2} &= \mathbf{y_1, y_2} \text{, the two sets of observed data}\\
   \texttt{mu0,g20} &= \mu_0,\gamma^2_0 \text{, prior mean and variance for }\mu\\
   \texttt{d0,t20} &= \delta_0,\tau^2_0 \text{, prior mean and variance for }\delta\\
@@ -1054,9 +1054,9 @@ $$\tilde{y}_j \sim \text{Normal}(\theta_j, \sigma^2).$$
 \noindent where
 
 \begin{flalign*}
-  \texttt{S} &=S \text{, the number of draws from the predictive joint. The sampler returns } S \text{ realizations}\\
-  &\text{from the predictive distribution, each having } k \text{ elements, one corresponding to}\\
-  &\text{each data group } \mathbf{Y}_1,...,\mathbf{Y_k} \text{. That is, } \mathbf{\tilde{Y}_j} = \tilde{Y}_{1,j},...,\tilde{Y}_{s,j} \text{, for } j \in \{1,...,k\}, s\in\{1,...S\}.\\
+  \texttt{S} &=S \text{, the number of draws from the predictive joint distribution. The sampler returns } S \text{ realizations}\\
+  &\text{from the predictive distribution, each having } k \text{ elements, one corresponding to each}\\
+  &\text{data group } \mathbf{Y}_1,...,\mathbf{Y_k} \text{. That is, } \mathbf{\tilde{Y}_j} = \tilde{Y}_{1,j},...,\tilde{Y}_{s,j} \text{, for } j \in \{1,...,k\}, s\in\{1,...S\}.\\
   \texttt{Y} &= \text{ the } k \text{ sets of observed data (one column of data and one column of}\\ &\text{group indices)}
 \end{flalign*}
 \begin{flalign*}
@@ -1268,16 +1268,25 @@ $$\hat{\sigma}^2_{ols} = \frac{SSR\left(\hat{\boldsymbol\beta}_{ols}\right)}{(N-
     \paragraph{A semiconjugate prior distribution}\label{normRegSemiconjugatePrior}
     Hoff [5] proposes a semiconjugate prior distribution for $\boldsymbol\beta$ and $\sigma^2$ to be used when there is information available about the parameters.  The sampling density of the data is
 
-    $$p(\mathbf{y}|\mathbf{X},\boldsymbol\beta,\sigma^2) \propto \text{exp}\{-\frac{1}{2\sigma^2}\text{SSR}(\boldsymbol\beta)\} = \text{exp}\{-\frac{1}{2\sigma^2}[\mathbf{y}^T\mathbf{y} - 2\boldsymbol\beta^T\mathbf{X}^T\mathbf{y}+\boldsymbol\beta^T\mathbf{X}^T\mathbf{X}\boldsymbol\beta]\}\text{ (Hoff)},$$
+    % $$p(\mathbf{y}|\mathbf{X},\boldsymbol\beta,\sigma^2) \propto \text{exp}\{-\frac{1}{2\sigma^2}\text{SSR}(\boldsymbol\beta)\} = \text{exp}\{-\frac{1}{2\sigma^2}[\mathbf{y}^T\mathbf{y} - 2\boldsymbol\beta^T\mathbf{X}^T\mathbf{y}+\boldsymbol\beta^T\mathbf{X}^T\mathbf{X}\boldsymbol\beta]\}\text{ (Hoff)},$$
+    %
+    %  OR
 
-     OR
+\begin{flalign*}
+  p(\mathbf{y}|\mathbf{X},\boldsymbol\beta,\sigma^2) &\propto \left(\sigma^2\right)^{-0.5(N-p)}\text{exp}\{-\frac{1}{2\sigma^2}\text{SSR}(\boldsymbol\beta)\} \\
+  &= \left(\sigma^2\right)^{-0.5p}\text{exp}\{-\frac{1}{2\sigma^2}[\mathbf{y}^T\mathbf{y} - 2\boldsymbol\beta^T\mathbf{X}^T\mathbf{y}+\boldsymbol\beta^T\mathbf{X}^T\mathbf{X}\boldsymbol\beta]\}\text{ (Bedrick)}
+\end{flalign*}
 
-        $$p(\mathbf{y}|\mathbf{X},\boldsymbol\beta,\sigma^2) \propto \left(\sigma^2\right)^{-0.5(N-p)}\text{exp}\{-\frac{1}{2\sigma^2}\text{SSR}(\boldsymbol\beta)\} = \left(\sigma^2\right)^{-0.5p}\text{exp}\{-\frac{1}{2\sigma^2}[\mathbf{y}^T\mathbf{y} - 2\boldsymbol\beta^T\mathbf{X}^T\mathbf{y}+\boldsymbol\beta^T\mathbf{X}^T\mathbf{X}\boldsymbol\beta]\}\text{ (Bedrick)},$$
 
+\noindent and for priors we choose
 
-\noindent and for priors we choose $\boldsymbol\beta \sim \text{Multivariate Normal}(\boldsymbol\beta_0,\Sigma_0)$ and $1/\sigma^2 = \gamma\sim \text{Gamma}(\nu_0/2,\nu_0\sigma^2_0/2)$.  Note, these prior distributions are apriori independent.  \\
+$$\boldsymbol\beta \sim \text{Multivariate Normal}(\boldsymbol\beta_0,\Sigma_0)$$
 
-\noindent Thus we have conditional posterior for $\boldsymbol\beta$
+and
+
+$$1/\sigma^2 = \gamma\sim \text{Gamma}(\nu_0/2,\nu_0\sigma^2_0/2).$$
+
+\noindent Note that these prior distributions are apriori independent.  We have conditional posterior for $\boldsymbol\beta$
 
     \begin{flalign*}
         p&(\boldsymbol\beta|\mathbf{y,X},\sigma^2)\\
@@ -1373,7 +1382,7 @@ The R function \texttt{rpredNormReg()} returns a sample from the predictive dist
 \noindent where
 
 \begin{flalign*}
-  \texttt{S} &= S \text{, the number of MCMC realizations (the desired predictive sample size)}\\
+  \texttt{S} &= S \text{, the number of MCMC realizations (the desired number of draws from the predictive distribution)}\\
   \texttt{Xpred} &= \text{ the vector or matrix of vectors of explanatory variables upon which to base}\\ &\text{prediction }\\
   \texttt{X} &= \mathbf{X} \text{, the design matrix associated with the observed data}\\
   \texttt{y} &= \mathbf{y} \text{, the observed response vector}\\
@@ -1406,7 +1415,7 @@ In the example below (Hoff data and code found \href{https://pdhoff.github.io/bo
     \text{ (sampling variance of } \hat{\boldsymbol\beta}_{ols}\text{)}\\%\text{WHY TIMES n????}\\
   \nu_0 &= 1 \text{ (prior sample size)}\\
   \sigma^2_0 &= \frac{\sum e_i}{N-p} = 6.21 \text{ (variance of the residuals)}\\
-  S &= 5000 \text{, the predictive sample size}
+  S &= 5000 \text{, the number of draws from the predictive distribution}
 \end{flalign*}
 
 
@@ -2057,6 +2066,7 @@ Cambridge, UK: Cambridge University Press.
 \bibitem{Gelman} Gelman, Andrew, Carlin, John B., Stern, Hal S., Dunson, David B., Vehtari, Aki, Rubin, Donald B. (2013), \textit{Bayesian Data Analysis} Third Edition, Boca Raton, FL, CRC Press, Taylor \& Francis Group.
 \bibitem{Hoff} Hoff, Peter D. (2009), A First Course in Bayesian Statistical Methods, New York, NY: Springer Science+Business Media.
 \bibitem{Silver} Silver, Nate (2015), The Signal and the Noise, New York, NY, Penguin Books.
+\bibitem{Kern} Kern, John (2006), ``Pig Data and Bayesian Inference on Multinomial Probabilities," Journal of Statistics Education, Volume 14, Number 3.
 \end{thebibliography}
 
 \end{document}
